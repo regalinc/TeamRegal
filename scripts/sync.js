@@ -142,6 +142,7 @@ function toPublicJob(job) {
     schedule: job.schedule || null,
     assigned_employee_ids: (job.assigned_employees || []).map((e) => e.id),
     tags: normalizeTags(job.tags),
+    business_unit: job.job_fields?.business_unit?.name || null,
     total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     updated_at: job.updated_at,

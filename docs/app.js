@@ -10,7 +10,7 @@ const COMPLETE_STATUSES = new Set(["complete rated", "complete unrated"]);
 const app = document.getElementById("app");
 const statsEl = document.getElementById("stats");
 const searchInput = document.getElementById("search");
-const departmentFilter = document.getElementById("department-filter");
+const businessUnitFilter = document.getElementById("business-unit-filter");
 const tagFilter = document.getElementById("tag-filter");
 const statusFilter = document.getElementById("status-filter");
 const syncStatusEl = document.getElementById("sync-status");
@@ -73,7 +73,7 @@ function renderJobItem(job) {
       <span class="status-badge ${statusClass(job.work_status)}">${job.work_status || "unknown"}</span>
     </div>
     <div class="job-desc">${escapeHtml(job.description || "(no description)")}</div>
-    <div class="job-sub">${escapeHtml([job.customer_label, location].filter(Boolean).join(" · "))}</div>
+    <div class="job-sub">${escapeHtml([job.customer_label, location, job.business_unit].filter(Boolean).join(" · "))}</div>
   `;
   return li;
 }
@@ -166,13 +166,14 @@ function renderStats(stats) {
 function currentFilters() {
   return {
     text: searchInput.value.trim().toLowerCase(),
-    department: departmentFilter.value,
+    businessUnit: businessUnitFilter.value,
     tag: tagFilter.value,
     status: statusFilter.value,
   };
 }
 
 function jobMatchesFilters(job, filters, techById) {
+  if (filters.businessUnit && job.business_unit !== filters.businessUnit) return false;
   if (filters.tag && !(job.tags || []).includes(filters.tag)) return false;
   if (filters.status && job.work_status !== filters.status) return false;
 
@@ -181,7 +182,7 @@ function jobMatchesFilters(job, filters, techById) {
       .map((id) => techById.get(id)?.name)
       .filter(Boolean)
       .join(" ");
-    const blob = [job.description, job.customer_label, job.city, job.state, ...(job.tags || []), techNames]
+    const blob = [job.description, job.customer_label, job.city, job.state, job.business_unit, ...(job.tags || []), techNames]
       .filter(Boolean)
       .join(" ")
       .toLowerCase();
@@ -194,17 +195,14 @@ function jobMatchesFilters(job, filters, techById) {
 function populateFilterOptions(data) {
   const tags = new Set();
   const statuses = new Set();
+  const businessUnits = new Set();
   for (const job of data.jobs || []) {
     for (const t of job.tags || []) tags.add(t);
     if (job.work_status) statuses.add(job.work_status);
+    if (job.business_unit) businessUnits.add(job.business_unit);
   }
 
-  const departments = new Set();
-  for (const tech of data.technicians || []) {
-    for (const t of tech.tags || []) departments.add(t);
-  }
-
-  fillSelect(departmentFilter, departments, "All departments");
+  fillSelect(businessUnitFilter, businessUnits, "All business units");
   fillSelect(tagFilter, tags, "All job tags");
   fillSelect(statusFilter, statuses, "All statuses");
 }
@@ -222,22 +220,7 @@ function render(data) {
   const filters = currentFilters();
   const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters, techById));
 
-  // Department is a technician-level attribute (employee tags), not a job
-  // attribute, so it scopes which technicians are shown rather than
-  // filtering jobs directly.
-  const visibleTechs = (data.technicians || []).filter(
-    (t) => !filters.department || (t.tags || []).includes(filters.department)
-  );
-  const visibleTechIds = new Set(visibleTechs.map((t) => t.id));
-
-  // When a department is selected, only count jobs belonging to that
-  // department's technicians in the summary stats (unassigned jobs belong
-  // to no department, so they drop out of scope too).
-  const scopedJobs = filters.department
-    ? filteredJobs.filter((j) => (j.assigned_employee_ids || []).some((id) => visibleTechIds.has(id)))
-    : filteredJobs;
-
-  renderStats(computeStats(scopedJobs));
+  renderStats(computeStats(filteredJobs));
 
   app.innerHTML = "";
 
@@ -246,32 +229,25 @@ function render(data) {
     return;
   }
 
-  if (visibleTechs.length === 0) {
-    app.innerHTML = '<p class="empty">No technicians match the selected department.</p>';
-    return;
-  }
-
   const grid = document.createElement("div");
   grid.className = "tech-grid";
-  for (const tech of visibleTechs) {
+  for (const tech of data.technicians) {
     const jobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
     grid.appendChild(renderTechCard(tech, jobs));
   }
   app.appendChild(grid);
 
-  if (!filters.department) {
-    const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
-    if (unassignedJobs.length > 0) {
-      const title = document.createElement("h2");
-      title.className = "section-title";
-      title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
-      app.appendChild(title);
+  const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
+  if (unassignedJobs.length > 0) {
+    const title = document.createElement("h2");
+    title.className = "section-title";
+    title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
+    app.appendChild(title);
 
-      const list = document.createElement("ul");
-      list.className = "job-list";
-      for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
-      app.appendChild(list);
-    }
+    const list = document.createElement("ul");
+    list.className = "job-list";
+    for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
+    app.appendChild(list);
   }
 }
 
@@ -314,7 +290,7 @@ function rerenderFromCache() {
 }
 
 searchInput.addEventListener("input", rerenderFromCache);
-departmentFilter.addEventListener("change", rerenderFromCache);
+businessUnitFilter.addEventListener("change", rerenderFromCache);
 tagFilter.addEventListener("change", rerenderFromCache);
 statusFilter.addEventListener("change", rerenderFromCache);
 

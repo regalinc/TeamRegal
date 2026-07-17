@@ -55,7 +55,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-#search, #department-filter, #tag-filter, #status-filter {
+#search, #business-unit-filter, #tag-filter, #status-filter {
   padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -65,7 +65,7 @@ body {
 }
 
 #search { min-width: 220px; flex: 1 1 220px; }
-#department-filter, #tag-filter, #status-filter { min-width: 160px; }
+#business-unit-filter, #tag-filter, #status-filter { min-width: 160px; }
 
 .stats-row {
   display: grid;
