@@ -35,7 +35,19 @@ jobs:
           git add docs/data
           if git diff --cached --quiet; then
             echo "No data changes."
+            exit 0
+          fi
+
+          # The synced data file is a few MB and changes on every run. A new
+          # commit each time would bloat the repo's git history fast at a
+          # 15-minute cadence, so consecutive bot-only data commits are
+          # collapsed into one via amend + force-push instead of stacking.
+          # Any real (human) commit in between breaks the chain and gets a
+          # fresh data commit on top, never amended.
+          if [ "$(git log -1 --pretty=%s)" = "Sync Housecall Pro data [skip ci]" ]; then
+            git commit --amend -q -m "Sync Housecall Pro data [skip ci]"
+            git push --force-with-lease origin HEAD:main
           else
-            git commit -m "Sync Housecall Pro data [skip ci]"
-            git push
+            git commit -q -m "Sync Housecall Pro data [skip ci]"
+            git push origin HEAD:main
           fi
