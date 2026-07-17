@@ -98,6 +98,18 @@ async function fetchJobsInWindow() {
   );
 }
 
+// Housecall Pro tag entry is free-text, so the same tag can come back with
+// stray whitespace (e.g. "Customer Service Specialist " vs "Customer
+// Service Specialist") and fragment what should be one department/tag.
+function normalizeTags(tags) {
+  const seen = new Set();
+  for (const raw of tags || []) {
+    const t = String(raw).trim();
+    if (t) seen.add(t);
+  }
+  return [...seen];
+}
+
 // Public dashboard data intentionally omits customer PII (phone, email,
 // full street address) and technician contact info — only what a
 // technician needs to see their own schedule at a glance.
@@ -110,7 +122,7 @@ function toPublicTechnician(employee) {
     avatar_url: employee.avatar_url || null,
     // Department membership is modeled as employee tags in Housecall Pro
     // (e.g. "HVAC", "Plumbing") — the dashboard treats these as departments.
-    tags: employee.tags || [],
+    tags: normalizeTags(employee.tags),
   };
 }
 
@@ -129,7 +141,7 @@ function toPublicJob(job) {
     zip: address.zip || null,
     schedule: job.schedule || null,
     assigned_employee_ids: (job.assigned_employees || []).map((e) => e.id),
-    tags: job.tags || [],
+    tags: normalizeTags(job.tags),
     total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     updated_at: job.updated_at,
