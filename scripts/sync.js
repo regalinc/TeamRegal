@@ -108,6 +108,9 @@ function toPublicTechnician(employee) {
     role: employee.role || null,
     color_hex: employee.color_hex || null,
     avatar_url: employee.avatar_url || null,
+    // Department membership is modeled as employee tags in Housecall Pro
+    // (e.g. "HVAC", "Plumbing") — the dashboard treats these as departments.
+    tags: employee.tags || [],
   };
 }
 

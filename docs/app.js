@@ -10,6 +10,7 @@ const COMPLETE_STATUSES = new Set(["complete rated", "complete unrated"]);
 const app = document.getElementById("app");
 const statsEl = document.getElementById("stats");
 const searchInput = document.getElementById("search");
+const departmentFilter = document.getElementById("department-filter");
 const tagFilter = document.getElementById("tag-filter");
 const statusFilter = document.getElementById("status-filter");
 const syncStatusEl = document.getElementById("sync-status");
@@ -99,6 +100,13 @@ function renderTechCard(tech, jobs) {
   `;
   card.appendChild(header);
 
+  if (tech.tags && tech.tags.length > 0) {
+    const tagsRow = document.createElement("div");
+    tagsRow.className = "tech-tags";
+    tagsRow.innerHTML = tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("");
+    card.appendChild(tagsRow);
+  }
+
   if (sortedJobs.length === 0) {
     const empty = document.createElement("div");
     empty.className = "no-jobs";
@@ -158,6 +166,7 @@ function renderStats(stats) {
 function currentFilters() {
   return {
     text: searchInput.value.trim().toLowerCase(),
+    department: departmentFilter.value,
     tag: tagFilter.value,
     status: statusFilter.value,
   };
@@ -190,7 +199,13 @@ function populateFilterOptions(data) {
     if (job.work_status) statuses.add(job.work_status);
   }
 
-  fillSelect(tagFilter, tags, "All tags");
+  const departments = new Set();
+  for (const tech of data.technicians || []) {
+    for (const t of tech.tags || []) departments.add(t);
+  }
+
+  fillSelect(departmentFilter, departments, "All departments");
+  fillSelect(tagFilter, tags, "All job tags");
   fillSelect(statusFilter, statuses, "All statuses");
 }
 
@@ -207,7 +222,22 @@ function render(data) {
   const filters = currentFilters();
   const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters, techById));
 
-  renderStats(computeStats(filteredJobs));
+  // Department is a technician-level attribute (employee tags), not a job
+  // attribute, so it scopes which technicians are shown rather than
+  // filtering jobs directly.
+  const visibleTechs = (data.technicians || []).filter(
+    (t) => !filters.department || (t.tags || []).includes(filters.department)
+  );
+  const visibleTechIds = new Set(visibleTechs.map((t) => t.id));
+
+  // When a department is selected, only count jobs belonging to that
+  // department's technicians in the summary stats (unassigned jobs belong
+  // to no department, so they drop out of scope too).
+  const scopedJobs = filters.department
+    ? filteredJobs.filter((j) => (j.assigned_employee_ids || []).some((id) => visibleTechIds.has(id)))
+    : filteredJobs;
+
+  renderStats(computeStats(scopedJobs));
 
   app.innerHTML = "";
 
@@ -216,25 +246,32 @@ function render(data) {
     return;
   }
 
+  if (visibleTechs.length === 0) {
+    app.innerHTML = '<p class="empty">No technicians match the selected department.</p>';
+    return;
+  }
+
   const grid = document.createElement("div");
   grid.className = "tech-grid";
-  for (const tech of data.technicians) {
+  for (const tech of visibleTechs) {
     const jobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
     grid.appendChild(renderTechCard(tech, jobs));
   }
   app.appendChild(grid);
 
-  const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
-  if (unassignedJobs.length > 0) {
-    const title = document.createElement("h2");
-    title.className = "section-title";
-    title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
-    app.appendChild(title);
+  if (!filters.department) {
+    const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
+    if (unassignedJobs.length > 0) {
+      const title = document.createElement("h2");
+      title.className = "section-title";
+      title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
+      app.appendChild(title);
 
-    const list = document.createElement("ul");
-    list.className = "job-list";
-    for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
-    app.appendChild(list);
+      const list = document.createElement("ul");
+      list.className = "job-list";
+      for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
+      app.appendChild(list);
+    }
   }
 }
 
@@ -277,6 +314,7 @@ function rerenderFromCache() {
 }
 
 searchInput.addEventListener("input", rerenderFromCache);
+departmentFilter.addEventListener("change", rerenderFromCache);
 tagFilter.addEventListener("change", rerenderFromCache);
 statusFilter.addEventListener("change", rerenderFromCache);
 
