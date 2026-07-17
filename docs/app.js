@@ -109,15 +109,17 @@ function renderJobItem(job) {
   return li;
 }
 
+function renderMiniStat(label, value) {
+  return `<div class="tech-mini-stat"><div class="tech-mini-stat-label">${escapeHtml(label)}</div><div class="tech-mini-stat-value">${escapeHtml(value)}</div></div>`;
+}
+
+// A per-technician scorecard: header + 4 mini stat tiles (mirroring the team
+// summary row above, just scoped to this one person), with the underlying
+// job list tucked behind a native <details> toggle instead of shown by
+// default — this is a reporting view, not a live per-job schedule.
 function renderTechCard(tech, jobs) {
   const card = document.createElement("div");
   card.className = "tech-card";
-
-  const sortedJobs = [...jobs].sort((a, b) => {
-    const at = a.schedule?.scheduled_start || "";
-    const bt = b.schedule?.scheduled_start || "";
-    return at.localeCompare(bt);
-  });
 
   const header = document.createElement("div");
   header.className = "tech-card-header";
@@ -127,7 +129,6 @@ function renderTechCard(tech, jobs) {
       <div class="tech-name">${escapeHtml(tech.name || "Unknown")}</div>
       ${tech.role ? `<div class="tech-role">${escapeHtml(tech.role)}</div>` : ""}
     </div>
-    <div class="job-count">${sortedJobs.length} job${sortedJobs.length === 1 ? "" : "s"}</div>
   `;
   card.appendChild(header);
 
@@ -138,17 +139,41 @@ function renderTechCard(tech, jobs) {
     card.appendChild(tagsRow);
   }
 
+  const stats = computeStats(jobs);
+  const statsRow = document.createElement("div");
+  statsRow.className = "tech-mini-stats";
+  statsRow.innerHTML = [
+    renderMiniStat("Jobs", stats.totalJobs.toLocaleString()),
+    renderMiniStat("Revenue", formatMoney(stats.totalRevenue)),
+    renderMiniStat("Avg ticket", formatMoney(stats.avgTicket)),
+    renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`),
+  ].join("");
+  card.appendChild(statsRow);
+
+  const sortedJobs = [...jobs].sort((a, b) => {
+    const at = a.schedule?.scheduled_start || "";
+    const bt = b.schedule?.scheduled_start || "";
+    return at.localeCompare(bt);
+  });
+
+  const details = document.createElement("details");
+  details.className = "tech-job-details";
+  const summary = document.createElement("summary");
+  summary.textContent = `${sortedJobs.length} job${sortedJobs.length === 1 ? "" : "s"} in view`;
+  details.appendChild(summary);
+
   if (sortedJobs.length === 0) {
     const empty = document.createElement("div");
     empty.className = "no-jobs";
     empty.textContent = "No jobs match the current filters.";
-    card.appendChild(empty);
+    details.appendChild(empty);
   } else {
     const list = document.createElement("ul");
     list.className = "job-list";
     for (const job of sortedJobs) list.appendChild(renderJobItem(job));
-    card.appendChild(list);
+    details.appendChild(list);
   }
+  card.appendChild(details);
 
   return card;
 }
@@ -391,13 +416,14 @@ function render(data) {
   const rosterActive = selectedTechIds.size > 0;
   const rosterTechIds = new Set(rosterTechs.map((t) => t.id));
 
-  // The period filter only scopes the summary stats, not which jobs show
-  // under each technician — the cards stay a live "current schedule" view
-  // regardless of the selected reporting period.
-  let statsJobs = filteredJobs.filter((j) => jobInPeriod(j, filters.period));
+  // The period filter now scopes everything on the page consistently — the
+  // team summary, every technician's scorecard, and the unassigned-jobs
+  // list — since this is a reporting view, not a live per-job schedule.
+  const periodJobs = filteredJobs.filter((j) => jobInPeriod(j, filters.period));
 
-  // When a roster is set, scope the summary stats to just that roster's
-  // jobs (unassigned jobs belong to no technician, so they drop out too).
+  // The team summary scopes to just the selected roster's jobs when one is
+  // set (unassigned jobs belong to no technician, so they drop out too).
+  let statsJobs = periodJobs;
   if (rosterActive) {
     statsJobs = statsJobs.filter((j) => (j.assigned_employee_ids || []).some((id) => rosterTechIds.has(id)));
   }
@@ -416,16 +442,21 @@ function render(data) {
     return;
   }
 
+  const scorecardsTitle = document.createElement("h2");
+  scorecardsTitle.className = "section-title";
+  scorecardsTitle.textContent = "Technician scorecards";
+  app.appendChild(scorecardsTitle);
+
   const grid = document.createElement("div");
   grid.className = "tech-grid";
   for (const tech of rosterTechs) {
-    const jobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
+    const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
     grid.appendChild(renderTechCard(tech, jobs));
   }
   app.appendChild(grid);
 
   if (!rosterActive) {
-    const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
+    const unassignedJobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
     if (unassignedJobs.length > 0) {
       const title = document.createElement("h2");
       title.className = "section-title";

@@ -219,7 +219,6 @@ main {
 
 .tech-name { font-weight: 600; }
 .tech-role { font-size: 0.8rem; color: var(--text-muted); }
-.job-count { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); }
 
 .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: -4px 0 10px; }
 .tech-tag-chip {
@@ -267,3 +266,35 @@ main {
   font-size: 1rem;
   color: var(--text-muted);
 }
+
+.stats-title {
+  max-width: 1400px;
+  margin: 16px auto 0;
+  padding: 0 24px;
+}
+
+.tech-mini-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.tech-mini-stat {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 4px;
+  text-align: center;
+}
+.tech-mini-stat-label { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.02em; }
+.tech-mini-stat-value { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 1px; }
+
+.tech-job-details summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  user-select: none;
+}
+.tech-job-details[open] summary { margin-bottom: 8px; }
+.tech-job-details summary:hover { color: var(--text); }
