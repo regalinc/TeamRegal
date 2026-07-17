@@ -63,6 +63,8 @@ The dashboard reads its filter state from the URL on load, so a single link can 
 
 Params combine (e.g. `?techs=...&bu=...`). Spaces need URL-encoding (`%20` or `+`) if you're typing the link by hand — most browsers do this automatically when you paste a link with spaces into the address bar. When `techs` is set, the unassigned-jobs section and per-technician stats scope to just that roster; the viewer can still use the filter bar on top of it unless you don't want that (there's currently no way to hide the filter bar — ask if you want a `kiosk` mode that hides it for an unattended screen).
 
+**Picking technicians from the UI:** the "All technicians" control in the filter bar is a searchable multi-select checklist (sorted alphabetically) — no need to hand-build a `techs=` URL. Selecting/deselecting technicians there updates the address bar's `techs` param live, so once you've picked the set you want, the current URL is already the bookmarkable link for that view.
+
 ## Adjusting the data window
 
 `scripts/sync.js` fetches jobs from 62 days back through 13 days forward (`WINDOW_DAYS_BACK` / `WINDOW_DAYS_FORWARD`). The back side is 62 specifically so "This month" and "Last month" are always fully covered no matter what day of the current month it is (worst case: the last day of a 31-day month needs the full current month plus the full previous month behind it).

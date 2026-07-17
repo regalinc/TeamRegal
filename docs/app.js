@@ -16,13 +16,26 @@ const statusFilter = document.getElementById("status-filter");
 const periodFilter = document.getElementById("period-filter");
 const syncStatusEl = document.getElementById("sync-status");
 
+const techSelectEl = document.getElementById("tech-select");
+const techSelectToggle = document.getElementById("tech-select-toggle");
+const techSelectPanel = document.getElementById("tech-select-panel");
+const techSelectSearch = document.getElementById("tech-select-search");
+const techSelectAllBtn = document.getElementById("tech-select-all");
+const techSelectClearBtn = document.getElementById("tech-select-clear");
+const techSelectList = document.getElementById("tech-select-list");
+
 // Lets a screen be a single bookmarkable link, e.g.
 // ?bu=HVAC or ?techs=Jack%20Tomlinson,Trevor%20McWilliams
 const urlParams = new URLSearchParams(location.search);
-const ROSTER_NEEDLES = (urlParams.get("techs") || "")
+const INITIAL_ROSTER_NEEDLES = (urlParams.get("techs") || "")
   .split(",")
   .map((s) => s.trim().toLowerCase())
   .filter(Boolean);
+
+// The technician multi-select: empty set = "all technicians". Selecting via
+// the dropdown keeps the URL's `techs` param in sync (technician ids) so the
+// resulting view stays a bookmarkable link, same as setting `?techs=` by hand.
+const selectedTechIds = new Set();
 
 let latestData = null;
 let urlFiltersApplied = false;
@@ -281,18 +294,14 @@ function fillSelect(select, values, allLabel) {
   if ([...values].includes(previous)) select.value = previous;
 }
 
-// A "?techs=" URL param scopes the whole dashboard to a hand-picked roster —
-// for a screen showing only certain technicians (e.g. a specific room/kiosk).
-// Matches by technician id or by name (case-insensitive) so the URL can be
-// built by hand without looking up ids.
+// The technician roster: empty selection = everyone. Otherwise only
+// technicians whose id is in selectedTechIds.
 function getRosterTechs(technicians) {
-  if (ROSTER_NEEDLES.length === 0) return technicians;
-  return technicians.filter(
-    (t) => ROSTER_NEEDLES.includes((t.id || "").toLowerCase()) || ROSTER_NEEDLES.includes((t.name || "").toLowerCase())
-  );
+  if (selectedTechIds.size === 0) return technicians;
+  return technicians.filter((t) => selectedTechIds.has(t.id));
 }
 
-function applyUrlFiltersOnce() {
+function applyUrlFiltersOnce(data) {
   if (urlFiltersApplied) return;
   urlFiltersApplied = true;
 
@@ -303,6 +312,16 @@ function applyUrlFiltersOnce() {
   setSelectFromUrlParam(tagFilter, "tag");
   setSelectFromUrlParam(statusFilter, "status");
   setSelectFromUrlParam(periodFilter, "period");
+
+  // Resolve the initial "?techs=" needles (names or ids) against the real
+  // technician list now that it's loaded, seeding the multi-select.
+  if (INITIAL_ROSTER_NEEDLES.length > 0) {
+    for (const tech of data.technicians || []) {
+      if (INITIAL_ROSTER_NEEDLES.includes((tech.id || "").toLowerCase()) || INITIAL_ROSTER_NEEDLES.includes((tech.name || "").toLowerCase())) {
+        selectedTechIds.add(tech.id);
+      }
+    }
+  }
 }
 
 function setSelectFromUrlParam(select, paramName) {
@@ -310,13 +329,66 @@ function setSelectFromUrlParam(select, paramName) {
   if (value && [...select.options].some((o) => o.value === value)) select.value = value;
 }
 
+function updateTechsUrlParam() {
+  const url = new URL(location.href);
+  if (selectedTechIds.size === 0) url.searchParams.delete("techs");
+  else url.searchParams.set("techs", [...selectedTechIds].join(","));
+  history.replaceState(null, "", url);
+}
+
+function updateTechSelectToggleLabel(technicians) {
+  if (selectedTechIds.size === 0) {
+    techSelectToggle.textContent = "All technicians";
+  } else if (selectedTechIds.size === 1) {
+    const tech = technicians.find((t) => selectedTechIds.has(t.id));
+    techSelectToggle.textContent = tech ? tech.name : "1 technician";
+  } else {
+    techSelectToggle.textContent = `${selectedTechIds.size} technicians selected`;
+  }
+}
+
+function populateTechDropdown(data) {
+  const technicians = [...(data.technicians || [])].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+
+  techSelectList.innerHTML = "";
+  if (technicians.length === 0) {
+    techSelectList.innerHTML = '<div class="tech-select-empty">No technicians found.</div>';
+  } else {
+    for (const tech of technicians) {
+      const label = document.createElement("label");
+      label.className = "tech-select-row";
+      label.dataset.name = (tech.name || "").toLowerCase();
+      label.innerHTML = `<input type="checkbox" value="${escapeHtml(tech.id)}" ${selectedTechIds.has(tech.id) ? "checked" : ""}/> <span>${escapeHtml(tech.name || "Unknown")}</span>`;
+      techSelectList.appendChild(label);
+    }
+  }
+
+  updateTechSelectToggleLabel(technicians);
+}
+
+function onTechCheckboxChange(e) {
+  if (e.target.tagName !== "INPUT") return;
+  if (e.target.checked) selectedTechIds.add(e.target.value);
+  else selectedTechIds.delete(e.target.value);
+  updateTechSelectToggleLabel(latestData?.technicians || []);
+  updateTechsUrlParam();
+  rerenderFromCache();
+}
+
+function applyTechSearchFilter() {
+  const q = techSelectSearch.value.trim().toLowerCase();
+  for (const row of techSelectList.querySelectorAll(".tech-select-row")) {
+    row.classList.toggle("hidden-by-search", q.length > 0 && !row.dataset.name.includes(q));
+  }
+}
+
 function render(data) {
   const techById = new Map((data.technicians || []).map((t) => [t.id, t]));
   const filters = currentFilters();
   const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters, techById));
 
-  const rosterTechs = getRosterTechs(data.technicians || []);
-  const rosterActive = ROSTER_NEEDLES.length > 0;
+  const rosterTechs = getRosterTechs(data.technicians || []).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  const rosterActive = selectedTechIds.size > 0;
   const rosterTechIds = new Set(rosterTechs.map((t) => t.id));
 
   // The period filter only scopes the summary stats, not which jobs show
@@ -340,7 +412,7 @@ function render(data) {
   }
 
   if (rosterActive && rosterTechs.length === 0) {
-    app.innerHTML = '<p class="empty">No technicians match the "techs" URL parameter. Check the spelling of the names/ids.</p>';
+    app.innerHTML = '<p class="empty">No technicians match the current selection.</p>';
     return;
   }
 
@@ -390,7 +462,8 @@ async function loadData() {
     const data = await res.json();
     latestData = data;
     populateFilterOptions(data);
-    applyUrlFiltersOnce();
+    applyUrlFiltersOnce(data);
+    populateTechDropdown(data);
     render(data);
     updateSyncStatus(data.meta || {});
   } catch (err) {
@@ -412,6 +485,33 @@ businessUnitFilter.addEventListener("change", rerenderFromCache);
 tagFilter.addEventListener("change", rerenderFromCache);
 statusFilter.addEventListener("change", rerenderFromCache);
 periodFilter.addEventListener("change", rerenderFromCache);
+
+techSelectToggle.addEventListener("click", () => {
+  techSelectPanel.hidden = !techSelectPanel.hidden;
+  if (!techSelectPanel.hidden) techSelectSearch.focus();
+});
+document.addEventListener("click", (e) => {
+  if (!techSelectEl.contains(e.target)) techSelectPanel.hidden = true;
+});
+techSelectList.addEventListener("change", onTechCheckboxChange);
+techSelectSearch.addEventListener("input", applyTechSearchFilter);
+techSelectAllBtn.addEventListener("click", () => {
+  for (const row of techSelectList.querySelectorAll(".tech-select-row:not(.hidden-by-search)")) {
+    const checkbox = row.querySelector("input");
+    checkbox.checked = true;
+    selectedTechIds.add(checkbox.value);
+  }
+  updateTechSelectToggleLabel(latestData?.technicians || []);
+  updateTechsUrlParam();
+  rerenderFromCache();
+});
+techSelectClearBtn.addEventListener("click", () => {
+  selectedTechIds.clear();
+  for (const checkbox of techSelectList.querySelectorAll("input")) checkbox.checked = false;
+  updateTechSelectToggleLabel(latestData?.technicians || []);
+  updateTechsUrlParam();
+  rerenderFromCache();
+});
 
 loadData();
 setInterval(loadData, POLL_INTERVAL_MS);

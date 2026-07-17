@@ -16,6 +16,17 @@
 
   <div class="filter-bar">
     <input id="search" type="search" placeholder="Filter by technician or job..." />
+    <div class="tech-select" id="tech-select">
+      <button type="button" id="tech-select-toggle" class="tech-select-toggle">All technicians</button>
+      <div class="tech-select-panel" id="tech-select-panel" hidden>
+        <input type="search" id="tech-select-search" placeholder="Search technicians..." class="tech-select-search" />
+        <div class="tech-select-actions">
+          <button type="button" id="tech-select-all">Select all</button>
+          <button type="button" id="tech-select-clear">Clear</button>
+        </div>
+        <div class="tech-select-list" id="tech-select-list"></div>
+      </div>
+    </div>
     <select id="business-unit-filter">
       <option value="">All business units</option>
     </select>
