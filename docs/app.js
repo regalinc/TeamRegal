@@ -2,8 +2,16 @@ const DATA_URL = "data/dashboard.json";
 const POLL_INTERVAL_MS = 60_000;
 const STALE_AFTER_MS = 30 * 60_000; // flag sync status if data hasn't refreshed in 30 min
 
+// Housecall Pro's job money fields (total_amount, outstanding_balance) are in cents.
+const CENTS_PER_DOLLAR = 100;
+
+const COMPLETE_STATUSES = new Set(["complete rated", "complete unrated"]);
+
 const app = document.getElementById("app");
+const statsEl = document.getElementById("stats");
 const searchInput = document.getElementById("search");
+const tagFilter = document.getElementById("tag-filter");
+const statusFilter = document.getElementById("status-filter");
 const syncStatusEl = document.getElementById("sync-status");
 
 let latestData = null;
@@ -27,6 +35,31 @@ function jobTimeLabel(job) {
   return end ? `${start} – ${end}` : start;
 }
 
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function initials(name) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0].toUpperCase())
+    .join("");
+}
+
+// Compact money formatting per the stat-tile contract: $1,284 / $12.9K / $4.2M
+function formatMoney(dollars) {
+  const abs = Math.abs(dollars);
+  let out;
+  if (abs >= 1_000_000) out = `$${(dollars / 1_000_000).toFixed(1)}M`;
+  else if (abs >= 10_000) out = `$${(dollars / 1_000).toFixed(1)}K`;
+  else out = `$${Math.round(dollars).toLocaleString()}`;
+  return out;
+}
+
 function renderJobItem(job) {
   const li = document.createElement("li");
   li.className = "job-item";
@@ -44,27 +77,9 @@ function renderJobItem(job) {
   return li;
 }
 
-function escapeHtml(str) {
-  const div = document.createElement("div");
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-function initials(name) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((p) => p[0].toUpperCase())
-    .join("");
-}
-
 function renderTechCard(tech, jobs) {
   const card = document.createElement("div");
   card.className = "tech-card";
-  card.dataset.searchBlob = [tech.name, tech.role, ...jobs.map((j) => j.description), ...jobs.map((j) => j.customer_label)]
-    .join(" ")
-    .toLowerCase();
 
   const sortedJobs = [...jobs].sort((a, b) => {
     const at = a.schedule?.scheduled_start || "";
@@ -87,7 +102,7 @@ function renderTechCard(tech, jobs) {
   if (sortedJobs.length === 0) {
     const empty = document.createElement("div");
     empty.className = "no-jobs";
-    empty.textContent = "No jobs in the current window.";
+    empty.textContent = "No jobs match the current filters.";
     card.appendChild(empty);
   } else {
     const list = document.createElement("ul");
@@ -99,7 +114,101 @@ function renderTechCard(tech, jobs) {
   return card;
 }
 
+function renderStatTile({ label, value, meterPct }) {
+  const tile = document.createElement("div");
+  tile.className = "stat-tile";
+  tile.innerHTML = `
+    <div class="stat-label">${escapeHtml(label)}</div>
+    <div class="stat-value">${escapeHtml(value)}</div>
+    ${meterPct !== undefined ? `<div class="stat-meter-track"><div class="stat-meter-fill" style="width:${meterPct}%"></div></div>` : ""}
+  `;
+  return tile;
+}
+
+function computeStats(jobs) {
+  const totalJobs = jobs.length;
+  const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
+  const billedJobs = jobs.filter((j) => (j.total_amount || 0) > 0);
+  const avgTicketCents = billedJobs.length ? totalRevenueCents / billedJobs.length : 0;
+  const completedJobs = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
+  const completionRate = totalJobs ? (completedJobs.length / totalJobs) * 100 : 0;
+
+  return {
+    totalJobs,
+    totalRevenue: totalRevenueCents / CENTS_PER_DOLLAR,
+    avgTicket: avgTicketCents / CENTS_PER_DOLLAR,
+    completionRate,
+  };
+}
+
+function renderStats(stats) {
+  statsEl.innerHTML = "";
+  statsEl.appendChild(renderStatTile({ label: "Total jobs", value: stats.totalJobs.toLocaleString() }));
+  statsEl.appendChild(renderStatTile({ label: "Total revenue", value: formatMoney(stats.totalRevenue) }));
+  statsEl.appendChild(renderStatTile({ label: "Average ticket", value: formatMoney(stats.avgTicket) }));
+  statsEl.appendChild(
+    renderStatTile({
+      label: "Completion rate",
+      value: `${stats.completionRate.toFixed(0)}%`,
+      meterPct: stats.completionRate,
+    })
+  );
+}
+
+function currentFilters() {
+  return {
+    text: searchInput.value.trim().toLowerCase(),
+    tag: tagFilter.value,
+    status: statusFilter.value,
+  };
+}
+
+function jobMatchesFilters(job, filters, techById) {
+  if (filters.tag && !(job.tags || []).includes(filters.tag)) return false;
+  if (filters.status && job.work_status !== filters.status) return false;
+
+  if (filters.text) {
+    const techNames = (job.assigned_employee_ids || [])
+      .map((id) => techById.get(id)?.name)
+      .filter(Boolean)
+      .join(" ");
+    const blob = [job.description, job.customer_label, job.city, job.state, ...(job.tags || []), techNames]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    if (!blob.includes(filters.text)) return false;
+  }
+
+  return true;
+}
+
+function populateFilterOptions(data) {
+  const tags = new Set();
+  const statuses = new Set();
+  for (const job of data.jobs || []) {
+    for (const t of job.tags || []) tags.add(t);
+    if (job.work_status) statuses.add(job.work_status);
+  }
+
+  fillSelect(tagFilter, tags, "All tags");
+  fillSelect(statusFilter, statuses, "All statuses");
+}
+
+function fillSelect(select, values, allLabel) {
+  const previous = select.value;
+  select.innerHTML = "";
+  select.appendChild(new Option(allLabel, ""));
+  for (const v of [...values].sort()) select.appendChild(new Option(v, v));
+  if ([...values].includes(previous)) select.value = previous;
+}
+
 function render(data) {
+  const techById = new Map((data.technicians || []).map((t) => [t.id, t]));
+  const filters = currentFilters();
+  const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters, techById));
+
+  renderStats(computeStats(filteredJobs));
+
   app.innerHTML = "";
 
   if (!data.technicians || data.technicians.length === 0) {
@@ -110,32 +219,22 @@ function render(data) {
   const grid = document.createElement("div");
   grid.className = "tech-grid";
   for (const tech of data.technicians) {
-    const jobs = data.by_technician[tech.id] || [];
+    const jobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
     grid.appendChild(renderTechCard(tech, jobs));
   }
   app.appendChild(grid);
 
-  if (data.unassigned && data.unassigned.length > 0) {
+  const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
+  if (unassignedJobs.length > 0) {
     const title = document.createElement("h2");
     title.className = "section-title";
-    title.textContent = `Unassigned jobs (${data.unassigned.length})`;
+    title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
     app.appendChild(title);
 
     const list = document.createElement("ul");
     list.className = "job-list";
-    for (const job of data.unassigned) list.appendChild(renderJobItem(job));
+    for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
     app.appendChild(list);
-  }
-
-  applyFilter();
-}
-
-function applyFilter() {
-  const q = searchInput.value.trim().toLowerCase();
-  const cards = document.querySelectorAll(".tech-card");
-  for (const card of cards) {
-    const match = !q || card.dataset.searchBlob.includes(q);
-    card.style.display = match ? "" : "none";
   }
 }
 
@@ -160,6 +259,7 @@ async function loadData() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     latestData = data;
+    populateFilterOptions(data);
     render(data);
     updateSyncStatus(data.meta || {});
   } catch (err) {
@@ -172,7 +272,13 @@ async function loadData() {
   }
 }
 
-searchInput.addEventListener("input", applyFilter);
+function rerenderFromCache() {
+  if (latestData) render(latestData);
+}
+
+searchInput.addEventListener("input", rerenderFromCache);
+tagFilter.addEventListener("change", rerenderFromCache);
+statusFilter.addEventListener("change", rerenderFromCache);
 
 loadData();
 setInterval(loadData, POLL_INTERVAL_MS);

@@ -126,6 +126,9 @@ function toPublicJob(job) {
     zip: address.zip || null,
     schedule: job.schedule || null,
     assigned_employee_ids: (job.assigned_employees || []).map((e) => e.id),
+    tags: job.tags || [],
+    total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
+    outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     updated_at: job.updated_at,
   };
 }
@@ -173,7 +176,10 @@ async function main() {
   fs.writeFileSync(path.join(OUT_DIR, "jobs.json"), JSON.stringify(publicJobs, null, 2));
   fs.writeFileSync(
     path.join(OUT_DIR, "dashboard.json"),
-    JSON.stringify({ meta, technicians, by_technician: byTechnician, unassigned }, null, 2)
+    // `jobs` is the deduped flat list (one entry per job regardless of how many
+    // technicians it's assigned to) — the dashboard uses it for filtering and
+    // metrics so multi-technician jobs aren't double-counted in revenue/totals.
+    JSON.stringify({ meta, technicians, jobs: publicJobs, by_technician: byTechnician, unassigned }, null, 2)
   );
 
   console.log(`Wrote data to ${OUT_DIR}`);

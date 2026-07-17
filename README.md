@@ -4,11 +4,11 @@ Pulls jobs and technicians from the [Housecall Pro Public API](https://docs.hous
 
 ## How it works
 
-- `scripts/sync.js` — calls `GET /employees` and `GET /jobs`, filters out canceled jobs, groups jobs by assigned technician, and writes the result to `docs/data/*.json`.
+- `scripts/sync.js` — calls `GET /employees` and `GET /jobs`, filters out canceled jobs, groups jobs by assigned technician, and writes the result to `docs/data/*.json`. Includes each job's tags and `total_amount`/`outstanding_balance` (Housecall Pro reports these in cents; the dashboard converts to dollars).
 - `.github/workflows/sync.yml` — runs the sync script every 15 minutes (and on manual trigger), then commits any changed data files.
-- `docs/` — static dashboard (plain HTML/CSS/JS, no build step) served by GitHub Pages. Polls `data/dashboard.json` every 60 seconds in the browser.
+- `docs/` — static dashboard (plain HTML/CSS/JS, no build step) served by GitHub Pages. Polls `data/dashboard.json` every 60 seconds in the browser. Includes a filter bar (technician/job text search, tag, status — tag and status options are auto-detected from your data) and a summary row (Total jobs, Total revenue, Average ticket, Completion rate) that recomputes live as filters change.
 
-**Privacy note:** the dashboard data intentionally excludes customer phone/email and full street address (only city/state/zip), and technician contact info, since this repo is public. If you make the repo private (requires a paid GitHub plan for Pages), you can widen `toPublicJob`/`toPublicTechnician` in `scripts/sync.js` to include more fields.
+**Privacy note:** the dashboard data intentionally excludes customer phone/email and full street address (only city/state/zip), and technician contact info, since this repo is public. Revenue figures (total_amount, outstanding_balance) *are* included, by request — if that's no longer wanted, remove those fields in `toPublicJob` in `scripts/sync.js`. If you make the repo private (requires a paid GitHub plan for Pages), you can widen `toPublicJob`/`toPublicTechnician` to include more fields, like full addresses or contact info.
 
 ## One-time setup
 

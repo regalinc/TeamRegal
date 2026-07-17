@@ -10,10 +10,21 @@
   <header class="topbar">
     <h1>Technician Dashboard</h1>
     <div class="topbar-meta">
-      <input id="search" type="search" placeholder="Filter by technician or job..." />
       <span id="sync-status" class="sync-status">Loading...</span>
     </div>
   </header>
+
+  <div class="filter-bar">
+    <input id="search" type="search" placeholder="Filter by technician or job..." />
+    <select id="tag-filter">
+      <option value="">All tags</option>
+    </select>
+    <select id="status-filter">
+      <option value="">All statuses</option>
+    </select>
+  </div>
+
+  <section id="stats" class="stats-row" aria-label="Summary metrics"></section>
 
   <main id="app">
     <p class="loading">Loading schedule data...</p>
