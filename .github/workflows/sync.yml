@@ -18,6 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history, not the default shallow (fetch-depth: 1) clone.
+          # `git commit --amend` on a shallow checkout doesn't see the real
+          # parent commit and silently produces an orphaned (parentless)
+          # commit — force-pushing that discards the entire branch history.
+          # Learned this the hard way; keep this full-depth fetch.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -44,7 +51,9 @@ jobs:
           # collapsed into one via amend + force-push instead of stacking.
           # Any real (human) commit in between breaks the chain and gets a
           # fresh data commit on top, never amended.
-          if [ "$(git log -1 --pretty=%s)" = "Sync Housecall Pro data [skip ci]" ]; then
+          # Belt-and-suspenders: only amend if HEAD actually has a parent.
+          # Amending a parentless HEAD would silently orphan the branch.
+          if [ "$(git log -1 --pretty=%s)" = "Sync Housecall Pro data [skip ci]" ] && git rev-parse -q --verify HEAD^ >/dev/null; then
             git commit --amend -q -m "Sync Housecall Pro data [skip ci]"
             git push --force-with-lease origin HEAD:main
           else
