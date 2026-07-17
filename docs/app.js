@@ -15,7 +15,16 @@ const tagFilter = document.getElementById("tag-filter");
 const statusFilter = document.getElementById("status-filter");
 const syncStatusEl = document.getElementById("sync-status");
 
+// Lets a screen be a single bookmarkable link, e.g.
+// ?bu=HVAC or ?techs=Jack%20Tomlinson,Trevor%20McWilliams
+const urlParams = new URLSearchParams(location.search);
+const ROSTER_NEEDLES = (urlParams.get("techs") || "")
+  .split(",")
+  .map((s) => s.trim().toLowerCase())
+  .filter(Boolean);
+
 let latestData = null;
+let urlFiltersApplied = false;
 
 function statusClass(status) {
   return "status-" + String(status || "").toLowerCase().replace(/\s+/g, "-");
@@ -215,12 +224,50 @@ function fillSelect(select, values, allLabel) {
   if ([...values].includes(previous)) select.value = previous;
 }
 
+// A "?techs=" URL param scopes the whole dashboard to a hand-picked roster —
+// for a screen showing only certain technicians (e.g. a specific room/kiosk).
+// Matches by technician id or by name (case-insensitive) so the URL can be
+// built by hand without looking up ids.
+function getRosterTechs(technicians) {
+  if (ROSTER_NEEDLES.length === 0) return technicians;
+  return technicians.filter(
+    (t) => ROSTER_NEEDLES.includes((t.id || "").toLowerCase()) || ROSTER_NEEDLES.includes((t.name || "").toLowerCase())
+  );
+}
+
+function applyUrlFiltersOnce() {
+  if (urlFiltersApplied) return;
+  urlFiltersApplied = true;
+
+  const q = urlParams.get("q");
+  if (q) searchInput.value = q;
+
+  setSelectFromUrlParam(businessUnitFilter, "bu");
+  setSelectFromUrlParam(tagFilter, "tag");
+  setSelectFromUrlParam(statusFilter, "status");
+}
+
+function setSelectFromUrlParam(select, paramName) {
+  const value = urlParams.get(paramName);
+  if (value && [...select.options].some((o) => o.value === value)) select.value = value;
+}
+
 function render(data) {
   const techById = new Map((data.technicians || []).map((t) => [t.id, t]));
   const filters = currentFilters();
   const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters, techById));
 
-  renderStats(computeStats(filteredJobs));
+  const rosterTechs = getRosterTechs(data.technicians || []);
+  const rosterActive = ROSTER_NEEDLES.length > 0;
+  const rosterTechIds = new Set(rosterTechs.map((t) => t.id));
+
+  // When a roster is set, scope the summary stats to just that roster's
+  // jobs (unassigned jobs belong to no technician, so they drop out too).
+  const scopedJobs = rosterActive
+    ? filteredJobs.filter((j) => (j.assigned_employee_ids || []).some((id) => rosterTechIds.has(id)))
+    : filteredJobs;
+
+  renderStats(computeStats(scopedJobs));
 
   app.innerHTML = "";
 
@@ -229,25 +276,32 @@ function render(data) {
     return;
   }
 
+  if (rosterActive && rosterTechs.length === 0) {
+    app.innerHTML = '<p class="empty">No technicians match the "techs" URL parameter. Check the spelling of the names/ids.</p>';
+    return;
+  }
+
   const grid = document.createElement("div");
   grid.className = "tech-grid";
-  for (const tech of data.technicians) {
+  for (const tech of rosterTechs) {
     const jobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
     grid.appendChild(renderTechCard(tech, jobs));
   }
   app.appendChild(grid);
 
-  const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
-  if (unassignedJobs.length > 0) {
-    const title = document.createElement("h2");
-    title.className = "section-title";
-    title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
-    app.appendChild(title);
+  if (!rosterActive) {
+    const unassignedJobs = filteredJobs.filter((j) => (j.assigned_employee_ids || []).length === 0);
+    if (unassignedJobs.length > 0) {
+      const title = document.createElement("h2");
+      title.className = "section-title";
+      title.textContent = `Unassigned jobs (${unassignedJobs.length})`;
+      app.appendChild(title);
 
-    const list = document.createElement("ul");
-    list.className = "job-list";
-    for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
-    app.appendChild(list);
+      const list = document.createElement("ul");
+      list.className = "job-list";
+      for (const job of unassignedJobs) list.appendChild(renderJobItem(job));
+      app.appendChild(list);
+    }
   }
 }
 
@@ -273,6 +327,7 @@ async function loadData() {
     const data = await res.json();
     latestData = data;
     populateFilterOptions(data);
+    applyUrlFiltersOnce();
     render(data);
     updateSyncStatus(data.meta || {});
   } catch (err) {

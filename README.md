@@ -46,6 +46,20 @@ powershell -ExecutionPolicy Bypass -File _serve.ps1
 
 Then visit http://localhost:8743/index.html.
 
+## Bookmarkable views (e.g. for an external screen/TV)
+
+The dashboard reads its filter state from the URL on load, so a single link can be a fixed view for a lobby or shop-floor screen:
+
+| Param | Effect | Example |
+|---|---|---|
+| `techs` | Show only these technicians (comma-separated names or ids; case-insensitive) | `?techs=Jack Tomlinson,Trevor McWilliams` |
+| `bu` | Pre-select a business unit | `?bu=40 HVAC MAINT` |
+| `tag` | Pre-select a job tag | `?tag=Opportunity` |
+| `status` | Pre-select a status | `?status=in progress` |
+| `q` | Pre-fill the text search | `?q=furnace` |
+
+Params combine (e.g. `?techs=...&bu=...`). Spaces need URL-encoding (`%20` or `+`) if you're typing the link by hand — most browsers do this automatically when you paste a link with spaces into the address bar. When `techs` is set, the unassigned-jobs section and per-technician stats scope to just that roster; the viewer can still use the filter bar on top of it unless you don't want that (there's currently no way to hide the filter bar — ask if you want a `kiosk` mode that hides it for an unattended screen).
+
 ## Adjusting the data window
 
 `scripts/sync.js` fetches jobs from 1 day back through 13 days forward (`WINDOW_DAYS_BACK` / `WINDOW_DAYS_FORWARD`). Change those constants if you want a shorter or longer look-ahead.
