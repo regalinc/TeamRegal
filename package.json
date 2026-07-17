@@ -1,0 +1,12 @@
+{
+  "name": "housecall-pro-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Syncs Housecall Pro jobs/technicians into a static JSON feed for a technician dashboard.",
+  "scripts": {
+    "sync": "node scripts/sync.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
