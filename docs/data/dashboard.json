@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-07-17T16:50:47.862Z",
+    "last_synced_at": "2026-07-17T17:49:57.938Z",
     "window_days_back": 1,
     "window_days_forward": 13,
     "technician_count": 46,
-    "job_count": 386
+    "job_count": 388
   },
   "technicians": [
     {
@@ -12,322 +12,448 @@
       "name": "Jack Tomlinson",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://pro.housecallpro.com/assets/add_image_thumb_web_round.png"
+      "avatar_url": "https://pro.housecallpro.com/assets/add_image_thumb_web_round.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_b5ab5cc9e362414cb376d0a02d64bef8",
       "name": "Trevor McWilliams",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://pro.housecallpro.com/assets/add_image_thumb_web_round.png"
+      "avatar_url": "https://pro.housecallpro.com/assets/add_image_thumb_web_round.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_2e93b52e70a74c05aa466a52df32b9ef",
       "name": "Lisa Eveland",
       "role": "office staff",
       "color_hex": "d91b60",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/679/297/thumb_web_round/avatar_1780326170.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/679/297/thumb_web_round/avatar_1780326170.png",
+      "tags": [
+        "Customer Service Specialist "
+      ]
     },
     {
       "id": "pro_7c54b30de89c4b6ea22a9053f0662f3d",
       "name": "Juan Puello",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/669/105/thumb_web_round/avatar_1780326296.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/669/105/thumb_web_round/avatar_1780326296.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_06aeac3b71a24c60a826c7e11499d8b5",
       "name": "Jaylees Vazquez",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/629/078/thumb_web_round/avatar_1774545108.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/629/078/thumb_web_round/avatar_1774545108.png",
+      "tags": [
+        "Plumbing Installation"
+      ]
     },
     {
       "id": "pro_27fcce8f21bc4186b44abe4d9a87c03f",
       "name": "Nick Webb",
       "role": "office staff",
       "color_hex": "006064",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/607/616/thumb_web_round/avatar_1774545053.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/607/616/thumb_web_round/avatar_1774545053.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_0c24f7fb4b534fde920650a76dc8365f",
       "name": "Hector Rivera",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/598/121/thumb_web_round/avatar_1774544975.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/598/121/thumb_web_round/avatar_1774544975.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_8e95601ea8db4c5193be8f19fb319a44",
       "name": "Pete Lalic",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/590/757/thumb_web_round/avatar_1768144105.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/590/757/thumb_web_round/avatar_1768144105.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_048a0f2df6b2480aaa1a1ae03924fa9e",
       "name": "Mark Zink",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/560/777/thumb_web_round/avatar_1772040678.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/560/777/thumb_web_round/avatar_1772040678.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_6d9b30f8ab864817a118fb9563bb667f",
       "name": "Brandi Landis",
       "role": "office staff",
       "color_hex": "c0370c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/536/705/thumb_web_round/avatar_1772040230.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/536/705/thumb_web_round/avatar_1772040230.png",
+      "tags": [
+        "Customer Service Specialist "
+      ]
     },
     {
       "id": "pro_83a3e6de7d2d4d3396c7c5dfa42482f0",
       "name": "Derick Wilt",
       "role": "office staff",
       "color_hex": "006064",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/522/212/thumb_web_round/avatar_1762193030.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/522/212/thumb_web_round/avatar_1762193030.png",
+      "tags": []
     },
     {
       "id": "pro_8a84b31fc8b64893b17a0ca1bc133778",
       "name": "Damien Cedrone",
       "role": "field tech",
       "color_hex": "1c5e20",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/433/292/thumb_web_round/avatar_1752676903.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/433/292/thumb_web_round/avatar_1752676903.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_ca120cbb55fa40fe9361d492161b101f",
       "name": "Andrew Rouscher",
       "role": "office staff",
       "color_hex": "006064",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/406/117/thumb_web_round/avatar_1752675415.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/406/117/thumb_web_round/avatar_1752675415.png",
+      "tags": [
+        "Plumbing Installation"
+      ]
     },
     {
       "id": "pro_add4ba12688e47c696e827fb91a7d9fd",
       "name": "Josh Miller",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/343/737/thumb_web_round/avatar_1752678459.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/343/737/thumb_web_round/avatar_1752678459.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_4a63b04bb5a64d97b8e1728dd8ea77fb",
       "name": "Roger Renoll",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/242/959/thumb_web_round/avatar_1734636027.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/242/959/thumb_web_round/avatar_1734636027.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_1b87fcb406c9484b84e8fccd6f2c777b",
       "name": "Benjamin Murphy",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/241/308/thumb_web_round/avatar_1734636135.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/241/308/thumb_web_round/avatar_1734636135.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_932c9cd2fe1642e0b5cb3d7a9c0c94a9",
       "name": "Marketing Department",
       "role": "office staff",
       "color_hex": "e63936",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/201/761/thumb_web_round/blob.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/201/761/thumb_web_round/blob.png",
+      "tags": []
     },
     {
       "id": "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68",
       "name": "Jacob Harvey",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/176/780/thumb_web_round/avatar_1724352301.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/176/780/thumb_web_round/avatar_1724352301.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_8fc589c75489437bb66ff45ca0aea7ac",
       "name": "Aidan Shaull",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/159/539/thumb_web_round/avatar_1726507936.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/159/539/thumb_web_round/avatar_1726507936.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_62aa1ba4432340829b0aba02abd1d307",
       "name": "Josh Zieger",
       "role": "office staff",
       "color_hex": "006064",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/132/812/thumb_web_round/avatar_1722612828.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/132/812/thumb_web_round/avatar_1722612828.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_9b6be6b8146547fabe281dac539e3f28",
       "name": "Ben Aston",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/047/095/thumb_web_round/avatar_1718813263.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/047/095/thumb_web_round/avatar_1718813263.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_e328d4cad27249d48750d091fd1faa3b",
       "name": "Max Murog",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/004/914/thumb_web_round/avatar_1709673939.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/001/004/914/thumb_web_round/avatar_1709673939.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_878f7465a7ae48a39312d99aedaa3fd1",
       "name": "Bradley Adams",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/923/120/thumb_web_round/avatar_1699985949.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/923/120/thumb_web_round/avatar_1699985949.png",
+      "tags": [
+        "Plumbing Installation"
+      ]
     },
     {
       "id": "pro_7ccf9b4457bb40ecbb84540d250950e1",
       "name": "Korry Dunkle",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/876/278/thumb_web_round/avatar_1694046846.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/876/278/thumb_web_round/avatar_1694046846.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_275a4180be774faa8606cf065969a962",
       "name": "Urgency Plumbing",
       "role": "office staff",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/805/164/thumb_web_round/avatar_1695729053.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/805/164/thumb_web_round/avatar_1695729053.png",
+      "tags": []
     },
     {
       "id": "pro_a66fbc5ec25d48bb8db8a93609a0654f",
       "name": "Urgency HVAC",
       "role": "office staff",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/805/161/thumb_web_round/avatar_1695729095.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/805/161/thumb_web_round/avatar_1695729095.png",
+      "tags": []
     },
     {
       "id": "pro_8d943eadd54f485b9dba4296c807fb8f",
       "name": "Josh McDonald",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/588/902/thumb_web_round/avatar_1633433533.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/588/902/thumb_web_round/avatar_1633433533.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_79f4ca1c644741dc89563174e5b5d4fa",
       "name": "Jason Smeltzer",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/577/495/thumb_web_round/avatar_1633657505.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/577/495/thumb_web_round/avatar_1633657505.png",
+      "tags": [
+        "Plumbing Installation"
+      ]
     },
     {
       "id": "pro_d67d4e694a8c4bbdaba6801433d3bc20",
       "name": "Kevin Schrum",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/515/765/thumb_web_round/avatar_1620752667.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/515/765/thumb_web_round/avatar_1620752667.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_aab24498cf6e4c46844bddcbc7161f26",
       "name": "Brandon DiPangrazio",
       "role": "field tech",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/515/755/thumb_web_round/avatar_1620751346.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/515/755/thumb_web_round/avatar_1620751346.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_9a3f2249ef464465a1522f4a3ccfef5a",
       "name": "Brandon Soltes",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/513/623/thumb_web_round/avatar_1620211386.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/513/623/thumb_web_round/avatar_1620211386.png",
+      "tags": [
+        "Plumbing Installation"
+      ]
     },
     {
       "id": "pro_a147eea604e04ccfa458813cf1b374f0",
       "name": "Daniel Ahearn",
       "role": "field tech",
       "color_hex": "0d47a2",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/513/622/thumb_web_round/avatar_1633657384.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/513/622/thumb_web_round/avatar_1633657384.png",
+      "tags": [
+        "Plumbing Service"
+      ]
     },
     {
       "id": "pro_1526b39a952147619f19902966416543",
       "name": "Justin Baker",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/513/621/thumb_web_round/avatar_1620211126.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/513/621/thumb_web_round/avatar_1620211126.png",
+      "tags": [
+        "Plumbing Installation"
+      ]
     },
     {
       "id": "pro_5048a923ca8a47a5bd4cc2bbe40c4faa",
       "name": "Stacy Miller",
       "role": "office staff",
       "color_hex": "d91b60",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/847/thumb_web_round/avatar_1620071389.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/847/thumb_web_round/avatar_1620071389.png",
+      "tags": [
+        "Customer Service Specialist "
+      ]
     },
     {
       "id": "pro_a22d9b3f0cce4ad68f0e8d078b53d69a",
       "name": "James Sebright",
       "role": "office staff",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/845/thumb_web_round/avatar_1620070440.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/845/thumb_web_round/avatar_1620070440.png",
+      "tags": [
+        "Warehouse Manager"
+      ]
     },
     {
       "id": "pro_2462c513660b4a00aaca612a9627e6a2",
       "name": "Amanda Cook",
       "role": "office staff",
       "color_hex": "d91b60",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/821/thumb_web_round/avatar_1620068866.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/821/thumb_web_round/avatar_1620068866.png",
+      "tags": [
+        "Customer Service Specialist"
+      ]
     },
     {
       "id": "pro_c3ff6948fe0c4109ad9f1fcb627850cf",
       "name": "Kim McCleary",
       "role": "office staff",
       "color_hex": "d91b60",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/814/thumb_web_round/avatar_1620068201.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/814/thumb_web_round/avatar_1620068201.png",
+      "tags": [
+        "Customer Service Specialist "
+      ]
     },
     {
       "id": "pro_23fac61aafad4b4fa31992b5efaafae9",
       "name": "Kevin Carter",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/531/thumb_web_round/avatar_1620043787.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/531/thumb_web_round/avatar_1620043787.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
       "name": "Dakota Shelley",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/526/thumb_web_round/avatar_1724351586.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/526/thumb_web_round/avatar_1724351586.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_c45a8b2541c64ac4b0f305364c5f5295",
       "name": "Christian Glatfelter",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/520/thumb_web_round/avatar_1620042769.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/520/thumb_web_round/avatar_1620042769.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_eb9324081cb94741812e207380d65695",
       "name": "Ryan Dubbs",
       "role": "field tech",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/513/thumb_web_round/avatar_1620042081.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/513/thumb_web_round/avatar_1620042081.png",
+      "tags": [
+        "HVAC Installation"
+      ]
     },
     {
       "id": "pro_3f2297b66a9742d09eaf20976a20183a",
       "name": "Rodney Glatfelter",
       "role": "office staff",
       "color_hex": "378f3c",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/511/thumb_web_round/avatar_1620041919.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/512/511/thumb_web_round/avatar_1620041919.png",
+      "tags": [
+        "HVAC Installation Manager"
+      ]
     },
     {
       "id": "pro_eb35c4da7a0c4a41bc3936da4d71da20",
       "name": "Devin McNutt",
       "role": "admin",
       "color_hex": "b71d1b",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/507/791/thumb_web_round/avatar_1619011080.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/507/791/thumb_web_round/avatar_1619011080.png",
+      "tags": [
+        "HVAC Service"
+      ]
     },
     {
       "id": "pro_b935c33608ce413b9d6a949760182675",
       "name": "Michael Lohss, Sr",
       "role": "field tech",
       "color_hex": "ffb74d",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/476/988/thumb_web_round/avatar_1619004950.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/476/988/thumb_web_round/avatar_1619004950.png",
+      "tags": []
     },
     {
       "id": "pro_96a68191accc411283feab20135d033d",
       "name": "Tracey Shelley",
       "role": "admin",
       "color_hex": "d91b60",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/474/786/thumb_web_round/avatar_1619006811.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/474/786/thumb_web_round/avatar_1619006811.png",
+      "tags": [
+        "Office Manager"
+      ]
     },
     {
       "id": "pro_5d116b968d0a4e2e85f619f5286a997a",
       "name": "Michael Lohss, Jr.",
       "role": "admin",
       "color_hex": "006064",
-      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/473/155/thumb_web_round/avatar_1619004751.png"
+      "avatar_url": "https://housecall-attachments-production.s3.us-west-1.amazonaws.com/service_pros/avatars/000/473/155/thumb_web_round/avatar_1619004751.png",
+      "tags": []
     }
   ],
   "jobs": [
@@ -996,7 +1122,7 @@
     },
     {
       "id": "job_89593c3cff1e420a98b359b2dcfdf605",
-      "description": "Visit #1",
+      "description": "Contactor Replacement During Tune Up Only",
       "work_status": "in progress",
       "customer_label": "Domenic P.",
       "city": "Wrightsville",
@@ -1015,14 +1141,14 @@
         "40",
         "Opportunity"
       ],
-      "total_amount": 0,
-      "outstanding_balance": 0,
-      "updated_at": "2026-07-17T16:47:46Z"
+      "total_amount": 20446,
+      "outstanding_balance": 20446,
+      "updated_at": "2026-07-17T17:25:36Z"
     },
     {
       "id": "job_bbf3d31527ce4d7da39a21eeeba8592e",
       "description": "Precision A/C System Check (Non-Club Member)",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "New Visions Books and G.",
       "city": "York",
       "state": "PA",
@@ -1041,8 +1167,8 @@
         "Opportunity"
       ],
       "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "updated_at": "2026-07-17T15:13:16Z"
+      "outstanding_balance": 0,
+      "updated_at": "2026-07-17T17:31:18Z"
     },
     {
       "id": "job_b9b615953dcf4ad9ae6b47e1696fc835",
@@ -1985,7 +2111,7 @@
     {
       "id": "job_9ec2f6be0f5641bcb38aceed2cb94b62",
       "description": "Visit #11; Plumbing",
-      "work_status": "scheduled",
+      "work_status": "complete unrated",
       "customer_label": "Chris D.",
       "city": "York",
       "state": "PA",
@@ -2005,7 +2131,7 @@
       ],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-06-22T17:54:09Z"
+      "updated_at": "2026-07-17T17:46:55Z"
     },
     {
       "id": "job_2fec7ae9b66d4bb9a4f78a397e1d5c44",
@@ -2567,12 +2693,11 @@
       ],
       "tags": [
         "80",
-        "Opportunity",
-        "Plumbing Attention"
+        "Opportunity"
       ],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T13:40:33Z"
+      "updated_at": "2026-07-17T17:25:51Z"
     },
     {
       "id": "job_5131240e00da484bba9cf216bec5eca7",
@@ -2841,12 +2966,11 @@
       ],
       "tags": [
         "80",
-        "Opportunity",
-        "HVAC Attention"
+        "Opportunity"
       ],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T12:22:21Z"
+      "updated_at": "2026-07-17T17:06:00Z"
     },
     {
       "id": "job_a0a2d551f74e4181ac159ef265034743",
@@ -3724,7 +3848,7 @@
       ],
       "total_amount": 51942,
       "outstanding_balance": 51942,
-      "updated_at": "2026-07-17T16:44:25Z"
+      "updated_at": "2026-07-17T17:12:46Z"
     },
     {
       "id": "job_5519cf0690b944f4844deffae10b1c54",
@@ -4204,7 +4328,7 @@
     {
       "id": "job_decc7cf78edc4d4f93623fa8355c2c83",
       "description": "Visit #8; Plumbing",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Robert P.",
       "city": "Dover",
       "state": "PA",
@@ -4224,7 +4348,7 @@
       ],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-15T18:58:09Z"
+      "updated_at": "2026-07-17T17:49:04Z"
     },
     {
       "id": "job_e88c49162ff34ce196c159ad9010c7ae",
@@ -5395,54 +5519,6 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "updated_at": "2026-07-14T17:25:52Z"
-    },
-    {
-      "id": "job_4cf06815afd94f8b850e31f980bc264c",
-      "description": "Billing - 10 HVAC AOR",
-      "work_status": "scheduled",
-      "customer_label": "Columbia Gas E.",
-      "city": "Windsor",
-      "state": "PA",
-      "zip": "17366",
-      "schedule": {
-        "scheduled_start": "2026-07-23T11:00:00Z",
-        "scheduled_end": "2026-07-23T19:00:00Z",
-        "arrival_window": 120,
-        "appointments": []
-      },
-      "assigned_employee_ids": [
-        "pro_c45a8b2541c64ac4b0f305364c5f5295",
-        "pro_8a84b31fc8b64893b17a0ca1bc133778"
-      ],
-      "tags": [
-        "OnCall Air"
-      ],
-      "total_amount": 1041900,
-      "outstanding_balance": 1041900,
-      "updated_at": "2026-07-13T15:17:37Z"
-    },
-    {
-      "id": "job_f478f7d1a5964900a4bdd3252a487810",
-      "description": "Billing - 10 HVAC AOR",
-      "work_status": "scheduled",
-      "customer_label": "Columbia Gas E.",
-      "city": "Windsor",
-      "state": "PA",
-      "zip": "17366",
-      "schedule": {
-        "scheduled_start": "2026-07-24T11:00:00Z",
-        "scheduled_end": "2026-07-24T15:00:00Z",
-        "arrival_window": 120,
-        "appointments": []
-      },
-      "assigned_employee_ids": [
-        "pro_c45a8b2541c64ac4b0f305364c5f5295",
-        "pro_8a84b31fc8b64893b17a0ca1bc133778"
-      ],
-      "tags": [],
-      "total_amount": 0,
-      "outstanding_balance": 0,
-      "updated_at": "2026-07-13T16:25:55Z"
     },
     {
       "id": "job_987fc2e34e954e7a8fc0e10345791766",
@@ -6712,7 +6788,7 @@
     {
       "id": "job_2d6b4cdf95ae441f8605033a478b3e76",
       "description": "Billing - 70 - Plumbing Service",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Sean S.",
       "city": "York",
       "state": "PA",
@@ -6726,10 +6802,12 @@
       "assigned_employee_ids": [
         "pro_79f4ca1c644741dc89563174e5b5d4fa"
       ],
-      "tags": [],
+      "tags": [
+        "Plumbing Parts"
+      ],
       "total_amount": 24960,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T16:41:30Z"
+      "updated_at": "2026-07-17T17:26:10Z"
     },
     {
       "id": "job_f00dc6141ed548aba849db0f424f12c4",
@@ -6804,11 +6882,11 @@
         "70",
         "Opportunity",
         "Non-Member",
-        "Plumbing Attention"
+        "IFO"
       ],
       "total_amount": 8900,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T15:38:10Z"
+      "updated_at": "2026-07-17T17:16:58Z"
     },
     {
       "id": "job_b7c6a1832acf49a1b6be5ff00f39f3c4",
@@ -7358,7 +7436,7 @@
     {
       "id": "job_595944e6d9a34fe5aac0bca9d0d68fac",
       "description": "Billing - 70 - Plumbing Service",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Howard & Randy F.",
       "city": "York",
       "state": "PA",
@@ -7377,7 +7455,7 @@
       ],
       "total_amount": 74608,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T15:52:54Z"
+      "updated_at": "2026-07-17T17:11:19Z"
     },
     {
       "id": "job_45a62d2247f445e28ef22bedfe47721d",
@@ -8272,7 +8350,7 @@
       ],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T15:24:16Z"
+      "updated_at": "2026-07-17T16:50:48Z"
     },
     {
       "id": "job_79dce043810b4b6a834565d38d547ae1",
@@ -8700,9 +8778,9 @@
         "Opportunity",
         "Non-Member"
       ],
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "updated_at": "2026-07-17T16:32:02Z"
+      "total_amount": 32700,
+      "outstanding_balance": 0,
+      "updated_at": "2026-07-17T17:38:58Z"
     },
     {
       "id": "job_34ee02936f6b4def97bae371ab12ce0b",
@@ -8733,7 +8811,7 @@
     {
       "id": "job_b105c1e4b9e44365acc9ba0879960095",
       "description": "30 - RCC Whole Home Waived Initial Service Fee",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Gwen M.",
       "city": "York",
       "state": "PA",
@@ -8745,7 +8823,7 @@
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_e328d4cad27249d48750d091fd1faa3b"
+        "pro_8d943eadd54f485b9dba4296c807fb8f"
       ],
       "tags": [
         "30",
@@ -8753,7 +8831,7 @@
       ],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-16T12:23:47Z"
+      "updated_at": "2026-07-17T17:35:07Z"
     },
     {
       "id": "job_14dd2cebffc94e3d800f5eef2db9ef93",
@@ -8987,7 +9065,7 @@
     {
       "id": "job_f18b6f1554ed40b19d9f568c745b919d",
       "description": "",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Travis H.",
       "city": "York",
       "state": "PA",
@@ -9004,7 +9082,7 @@
       "tags": [],
       "total_amount": 0,
       "outstanding_balance": 0,
-      "updated_at": "2026-07-17T12:15:21Z"
+      "updated_at": "2026-07-17T17:27:59Z"
     },
     {
       "id": "job_3ad04686b5f5433c884fb6d920dfba17",
@@ -9183,7 +9261,7 @@
     {
       "id": "job_822294d5d5b147c9af0ec3c7c4957181",
       "description": "30 - Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Rutters C.",
       "city": "York",
       "state": "PA",
@@ -9204,7 +9282,7 @@
       ],
       "total_amount": 38605,
       "outstanding_balance": 38605,
-      "updated_at": "2026-07-16T18:44:18Z"
+      "updated_at": "2026-07-17T17:10:19Z"
     },
     {
       "id": "job_e5184bd5b7954e6f87e55f266e24a146",
@@ -9442,20 +9520,22 @@
       "state": "PA",
       "zip": "17316",
       "schedule": {
-        "scheduled_start": "2026-07-17T10:45:00Z",
-        "scheduled_end": "2026-07-17T11:45:00Z",
+        "scheduled_start": "2026-07-23T11:00:00Z",
+        "scheduled_end": "2026-07-23T19:00:00Z",
         "arrival_window": 120,
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_2462c513660b4a00aaca612a9627e6a2"
+        "pro_eb9324081cb94741812e207380d65695",
+        "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
+        "pro_86c3193093ac454e801f62babb7cf494"
       ],
       "tags": [
         "OnCall Air"
       ],
       "total_amount": 2373313,
       "outstanding_balance": 1186713,
-      "updated_at": "2026-07-17T16:31:14Z"
+      "updated_at": "2026-07-17T17:21:56Z"
     },
     {
       "id": "job_8a86df06675044fc84259905d955a0f1",
@@ -9510,7 +9590,7 @@
     {
       "id": "job_fc453675045f4dfaa15235d2af500085",
       "description": "30 - Initial Service Fee",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Maribel U.",
       "city": "York",
       "state": "PA",
@@ -9522,7 +9602,7 @@
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+        "pro_0c24f7fb4b534fde920650a76dc8365f"
       ],
       "tags": [
         "30",
@@ -9531,7 +9611,7 @@
       ],
       "total_amount": 8900,
       "outstanding_balance": 8900,
-      "updated_at": "2026-07-17T15:04:27Z"
+      "updated_at": "2026-07-17T17:16:02Z"
     },
     {
       "id": "job_81bb20d902b44ae287fb46b96b6b1997",
@@ -9651,12 +9731,11 @@
         "30",
         "Opportunity",
         "Non-Member",
-        "HVAC Attention",
         "HVAC Parts"
       ],
       "total_amount": 7120,
       "outstanding_balance": 7120,
-      "updated_at": "2026-07-17T16:09:59Z"
+      "updated_at": "2026-07-17T17:28:26Z"
     },
     {
       "id": "job_467892f574f443fe871383045e704023",
@@ -9680,9 +9759,9 @@
         "Opportunity",
         "Non-Member"
       ],
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "updated_at": "2026-07-17T15:49:18Z"
+      "total_amount": 18673,
+      "outstanding_balance": 0,
+      "updated_at": "2026-07-17T17:18:42Z"
     },
     {
       "id": "job_429058b2a4f84c8b93edfd96aefcf5d2",
@@ -9743,21 +9822,21 @@
       "state": "PA",
       "zip": "17402",
       "schedule": {
-        "scheduled_start": "2026-07-17T14:15:00Z",
-        "scheduled_end": "2026-07-17T15:15:00Z",
+        "scheduled_start": "2026-07-23T11:00:00Z",
+        "scheduled_end": "2026-07-23T19:00:00Z",
         "arrival_window": 120,
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_2462c513660b4a00aaca612a9627e6a2"
+        "pro_c45a8b2541c64ac4b0f305364c5f5295",
+        "pro_8a84b31fc8b64893b17a0ca1bc133778"
       ],
       "tags": [
-        "OnCall Air",
-        "HVAC Attention"
+        "OnCall Air"
       ],
       "total_amount": 1659100,
       "outstanding_balance": 1659100,
-      "updated_at": "2026-07-17T16:39:18Z"
+      "updated_at": "2026-07-17T17:24:13Z"
     },
     {
       "id": "job_a71c32e38fd2428f82e98f3c9168b252",
@@ -9812,7 +9891,7 @@
     {
       "id": "job_c012791ffeeb4acbaf024a15e6ac7e62",
       "description": "30 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Guy Y.",
       "city": "Jacobus",
       "state": "PA",
@@ -9833,12 +9912,12 @@
       ],
       "total_amount": 8900,
       "outstanding_balance": 8900,
-      "updated_at": "2026-07-17T16:32:02Z"
+      "updated_at": "2026-07-17T17:49:14Z"
     },
     {
       "id": "job_fdf6531c36d041568370800830285dd2",
       "description": "70 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Rutters C.",
       "city": "York",
       "state": "PA",
@@ -9860,7 +9939,7 @@
       ],
       "total_amount": 38235,
       "outstanding_balance": 38235,
-      "updated_at": "2026-07-17T16:04:31Z"
+      "updated_at": "2026-07-17T17:10:19Z"
     },
     {
       "id": "job_63d946b1707e4872b653729120acf97b",
@@ -9960,6 +10039,30 @@
       "updated_at": "2026-07-17T16:12:20Z"
     },
     {
+      "id": "job_90cf3ae7c5d848df963a0fb3b179b3ee",
+      "description": "Billing - 10 HVAC AOR",
+      "work_status": "scheduled",
+      "customer_label": "Alice D.",
+      "city": "Dover",
+      "state": "PA",
+      "zip": "17315",
+      "schedule": {
+        "scheduled_start": "2026-07-17T17:00:00Z",
+        "scheduled_end": "2026-07-17T18:00:00Z",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_2462c513660b4a00aaca612a9627e6a2"
+      ],
+      "tags": [
+        "OnCall Air"
+      ],
+      "total_amount": 1135400,
+      "outstanding_balance": 1135400,
+      "updated_at": "2026-07-17T17:29:49Z"
+    },
+    {
       "id": "job_640f10bbd1da46ef99f4349040d43e1a",
       "description": "Precision Tune Up (Non-Club Members)",
       "work_status": "scheduled",
@@ -9985,6 +10088,77 @@
       "total_amount": 9900,
       "outstanding_balance": 9900,
       "updated_at": "2026-07-17T16:42:53Z"
+    },
+    {
+      "id": "job_1781903a267044cc9cc0533862d17e84",
+      "description": "Billing - 70 - Plumbing Service",
+      "work_status": "scheduled",
+      "customer_label": "Sandy B.",
+      "city": "Dover",
+      "state": "PA",
+      "zip": "17315",
+      "schedule": {
+        "scheduled_start": "2026-07-22T13:00:00Z",
+        "scheduled_end": "2026-07-22T15:00:00Z",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_7ccf9b4457bb40ecbb84540d250950e1"
+      ],
+      "tags": [],
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "updated_at": "2026-07-17T17:08:16Z"
+    },
+    {
+      "id": "job_8b44ed0658c04d338e4b0850fd37bf9d",
+      "description": "70 - RCC Whole Home Initial Service Fee",
+      "work_status": "scheduled",
+      "customer_label": "Veronika M.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17403",
+      "schedule": {
+        "scheduled_start": "2026-07-17T18:45:00Z",
+        "scheduled_end": "2026-07-17T19:45:00Z",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_1526b39a952147619f19902966416543"
+      ],
+      "tags": [
+        "70",
+        "Opportunity"
+      ],
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "updated_at": "2026-07-17T17:49:01Z"
+    },
+    {
+      "id": "job_c4d634c15b064dc488a94f5e95dbaab2",
+      "description": "Billing - 30 - RCC Whole Home Waived Initial Service Fee",
+      "work_status": "scheduled",
+      "customer_label": "Ryan T.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17404",
+      "schedule": {
+        "scheduled_start": "2026-07-23T13:00:00Z",
+        "scheduled_end": "2026-07-23T15:00:00Z",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_e328d4cad27249d48750d091fd1faa3b"
+      ],
+      "tags": [
+        "40"
+      ],
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "updated_at": "2026-07-17T17:38:20Z"
     }
   ],
   "by_technician": {
@@ -10112,6 +10286,32 @@
         "total_amount": 908800,
         "outstanding_balance": 908800,
         "updated_at": "2026-07-15T14:24:35Z"
+      },
+      {
+        "id": "job_dc3a4f2a7c5540b398e812a0d6054c6c",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Paul L.",
+        "city": "East Berlin",
+        "state": "PA",
+        "zip": "17316",
+        "schedule": {
+          "scheduled_start": "2026-07-23T11:00:00Z",
+          "scheduled_end": "2026-07-23T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_eb9324081cb94741812e207380d65695",
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
+          "pro_86c3193093ac454e801f62babb7cf494"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "total_amount": 2373313,
+        "outstanding_balance": 1186713,
+        "updated_at": "2026-07-17T17:21:56Z"
       }
     ],
     "pro_b5ab5cc9e362414cb376d0a02d64bef8": [
@@ -10481,7 +10681,7 @@
       {
         "id": "job_fdf6531c36d041568370800830285dd2",
         "description": "70 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Rutters C.",
         "city": "York",
         "state": "PA",
@@ -10503,7 +10703,7 @@
         ],
         "total_amount": 38235,
         "outstanding_balance": 38235,
-        "updated_at": "2026-07-17T16:04:31Z"
+        "updated_at": "2026-07-17T17:10:19Z"
       }
     ],
     "pro_2e93b52e70a74c05aa466a52df32b9ef": [
@@ -10609,7 +10809,7 @@
       },
       {
         "id": "job_89593c3cff1e420a98b359b2dcfdf605",
-        "description": "Visit #1",
+        "description": "Contactor Replacement During Tune Up Only",
         "work_status": "in progress",
         "customer_label": "Domenic P.",
         "city": "Wrightsville",
@@ -10628,9 +10828,9 @@
           "40",
           "Opportunity"
         ],
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "updated_at": "2026-07-17T16:47:46Z"
+        "total_amount": 20446,
+        "outstanding_balance": 20446,
+        "updated_at": "2026-07-17T17:25:36Z"
       },
       {
         "id": "job_0c7807e24bd643668fbcc8ad803c45b6",
@@ -10888,7 +11088,7 @@
       {
         "id": "job_822294d5d5b147c9af0ec3c7c4957181",
         "description": "30 - Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Rutters C.",
         "city": "York",
         "state": "PA",
@@ -10909,7 +11109,7 @@
         ],
         "total_amount": 38605,
         "outstanding_balance": 38605,
-        "updated_at": "2026-07-16T18:44:18Z"
+        "updated_at": "2026-07-17T17:10:19Z"
       },
       {
         "id": "job_36dbc0f43034481db6ce97739f870ce0",
@@ -10958,12 +11158,11 @@
           "30",
           "Opportunity",
           "Non-Member",
-          "HVAC Attention",
           "HVAC Parts"
         ],
         "total_amount": 7120,
         "outstanding_balance": 7120,
-        "updated_at": "2026-07-17T16:09:59Z"
+        "updated_at": "2026-07-17T17:28:26Z"
       }
     ],
     "pro_06aeac3b71a24c60a826c7e11499d8b5": [
@@ -11242,7 +11441,7 @@
       {
         "id": "job_bbf3d31527ce4d7da39a21eeeba8592e",
         "description": "Precision A/C System Check (Non-Club Member)",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "New Visions Books and G.",
         "city": "York",
         "state": "PA",
@@ -11261,8 +11460,8 @@
           "Opportunity"
         ],
         "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "updated_at": "2026-07-17T15:13:16Z"
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:31:18Z"
       },
       {
         "id": "job_434b1dbbd4ae42f7866658fb38a21341",
@@ -11797,6 +11996,32 @@
         "total_amount": 32700,
         "outstanding_balance": 32700,
         "updated_at": "2026-07-16T19:04:56Z"
+      },
+      {
+        "id": "job_fc453675045f4dfaa15235d2af500085",
+        "description": "30 - Initial Service Fee",
+        "work_status": "in progress",
+        "customer_label": "Maribel U.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-07-17T17:00:00Z",
+          "scheduled_end": "2026-07-17T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_0c24f7fb4b534fde920650a76dc8365f"
+        ],
+        "tags": [
+          "30",
+          "Opportunity",
+          "Non-Member"
+        ],
+        "total_amount": 8900,
+        "outstanding_balance": 8900,
+        "updated_at": "2026-07-17T17:16:02Z"
       }
     ],
     "pro_8e95601ea8db4c5193be8f19fb319a44": [
@@ -12220,54 +12445,6 @@
         "updated_at": "2026-07-17T11:20:21Z"
       },
       {
-        "id": "job_4cf06815afd94f8b850e31f980bc264c",
-        "description": "Billing - 10 HVAC AOR",
-        "work_status": "scheduled",
-        "customer_label": "Columbia Gas E.",
-        "city": "Windsor",
-        "state": "PA",
-        "zip": "17366",
-        "schedule": {
-          "scheduled_start": "2026-07-23T11:00:00Z",
-          "scheduled_end": "2026-07-23T19:00:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_c45a8b2541c64ac4b0f305364c5f5295",
-          "pro_8a84b31fc8b64893b17a0ca1bc133778"
-        ],
-        "tags": [
-          "OnCall Air"
-        ],
-        "total_amount": 1041900,
-        "outstanding_balance": 1041900,
-        "updated_at": "2026-07-13T15:17:37Z"
-      },
-      {
-        "id": "job_f478f7d1a5964900a4bdd3252a487810",
-        "description": "Billing - 10 HVAC AOR",
-        "work_status": "scheduled",
-        "customer_label": "Columbia Gas E.",
-        "city": "Windsor",
-        "state": "PA",
-        "zip": "17366",
-        "schedule": {
-          "scheduled_start": "2026-07-24T11:00:00Z",
-          "scheduled_end": "2026-07-24T15:00:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_c45a8b2541c64ac4b0f305364c5f5295",
-          "pro_8a84b31fc8b64893b17a0ca1bc133778"
-        ],
-        "tags": [],
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "updated_at": "2026-07-13T16:25:55Z"
-      },
-      {
         "id": "job_80e6c5eb3d8044fe92ba41bacbf0c75d",
         "description": "Billing - 10 HVAC AOR",
         "work_status": "scheduled",
@@ -12412,6 +12589,31 @@
         "total_amount": 828900,
         "outstanding_balance": 828900,
         "updated_at": "2026-07-16T18:05:18Z"
+      },
+      {
+        "id": "job_7432d595444c432382f24599a034bb82",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Danita R.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-07-23T11:00:00Z",
+          "scheduled_end": "2026-07-23T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_c45a8b2541c64ac4b0f305364c5f5295",
+          "pro_8a84b31fc8b64893b17a0ca1bc133778"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "total_amount": 1659100,
+        "outstanding_balance": 1659100,
+        "updated_at": "2026-07-17T17:24:13Z"
       }
     ],
     "pro_ca120cbb55fa40fe9361d492161b101f": [],
@@ -12817,7 +13019,7 @@
         ],
         "total_amount": 51942,
         "outstanding_balance": 51942,
-        "updated_at": "2026-07-17T16:44:25Z"
+        "updated_at": "2026-07-17T17:12:46Z"
       },
       {
         "id": "job_f512e706dc954d4eb4984adba64d72a7",
@@ -13079,7 +13281,7 @@
       {
         "id": "job_9ec2f6be0f5641bcb38aceed2cb94b62",
         "description": "Visit #11; Plumbing",
-        "work_status": "scheduled",
+        "work_status": "complete unrated",
         "customer_label": "Chris D.",
         "city": "York",
         "state": "PA",
@@ -13099,7 +13301,7 @@
         ],
         "total_amount": 0,
         "outstanding_balance": 0,
-        "updated_at": "2026-06-22T17:54:09Z"
+        "updated_at": "2026-07-17T17:46:55Z"
       },
       {
         "id": "job_aa310d3e55f548f68f768f856b3f0613",
@@ -14012,7 +14214,7 @@
         ],
         "total_amount": 0,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T15:24:16Z"
+        "updated_at": "2026-07-17T16:50:48Z"
       },
       {
         "id": "job_f7d66535185941daa4101d1242862ea7",
@@ -14089,32 +14291,6 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "updated_at": "2026-07-17T13:23:30Z"
-      },
-      {
-        "id": "job_fc453675045f4dfaa15235d2af500085",
-        "description": "30 - Initial Service Fee",
-        "work_status": "scheduled",
-        "customer_label": "Maribel U.",
-        "city": "York",
-        "state": "PA",
-        "zip": "17403",
-        "schedule": {
-          "scheduled_start": "2026-07-17T17:00:00Z",
-          "scheduled_end": "2026-07-17T19:00:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_1b87fcb406c9484b84e8fccd6f2c777b"
-        ],
-        "tags": [
-          "30",
-          "Opportunity",
-          "Non-Member"
-        ],
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "updated_at": "2026-07-17T15:04:27Z"
       },
       {
         "id": "job_a71c32e38fd2428f82e98f3c9168b252",
@@ -14317,7 +14493,7 @@
       {
         "id": "job_f18b6f1554ed40b19d9f568c745b919d",
         "description": "",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Travis H.",
         "city": "York",
         "state": "PA",
@@ -14334,7 +14510,7 @@
         "tags": [],
         "total_amount": 0,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T12:15:21Z"
+        "updated_at": "2026-07-17T17:27:59Z"
       }
     ],
     "pro_8fc589c75489437bb66ff45ca0aea7ac": [
@@ -14556,12 +14732,11 @@
         ],
         "tags": [
           "80",
-          "Opportunity",
-          "Plumbing Attention"
+          "Opportunity"
         ],
         "total_amount": 0,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T13:40:33Z"
+        "updated_at": "2026-07-17T17:25:51Z"
       },
       {
         "id": "job_08f0384c325c4b17a75374c2bdb2d49b",
@@ -14607,12 +14782,11 @@
         ],
         "tags": [
           "80",
-          "Opportunity",
-          "HVAC Attention"
+          "Opportunity"
         ],
         "total_amount": 0,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T12:22:21Z"
+        "updated_at": "2026-07-17T17:06:00Z"
       },
       {
         "id": "job_a0a2d551f74e4181ac159ef265034743",
@@ -16294,31 +16468,6 @@
         "updated_at": "2026-07-16T18:50:14Z"
       },
       {
-        "id": "job_b105c1e4b9e44365acc9ba0879960095",
-        "description": "30 - RCC Whole Home Waived Initial Service Fee",
-        "work_status": "scheduled",
-        "customer_label": "Gwen M.",
-        "city": "York",
-        "state": "PA",
-        "zip": "17404",
-        "schedule": {
-          "scheduled_start": "2026-07-17T17:00:00Z",
-          "scheduled_end": "2026-07-17T19:00:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_e328d4cad27249d48750d091fd1faa3b"
-        ],
-        "tags": [
-          "30",
-          "Opportunity"
-        ],
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "updated_at": "2026-07-16T12:23:47Z"
-      },
-      {
         "id": "job_b561ee7d7de84f25b7b2694a1f49d943",
         "description": "Billing - 30 - RCC Whole Home Waived Initial Service Fee",
         "work_status": "in progress",
@@ -16345,7 +16494,7 @@
       {
         "id": "job_c012791ffeeb4acbaf024a15e6ac7e62",
         "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Guy Y.",
         "city": "Jacobus",
         "state": "PA",
@@ -16366,7 +16515,7 @@
         ],
         "total_amount": 8900,
         "outstanding_balance": 8900,
-        "updated_at": "2026-07-17T16:32:02Z"
+        "updated_at": "2026-07-17T17:49:14Z"
       },
       {
         "id": "job_640f10bbd1da46ef99f4349040d43e1a",
@@ -16394,6 +16543,30 @@
         "total_amount": 9900,
         "outstanding_balance": 9900,
         "updated_at": "2026-07-17T16:42:53Z"
+      },
+      {
+        "id": "job_c4d634c15b064dc488a94f5e95dbaab2",
+        "description": "Billing - 30 - RCC Whole Home Waived Initial Service Fee",
+        "work_status": "scheduled",
+        "customer_label": "Ryan T.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17404",
+        "schedule": {
+          "scheduled_start": "2026-07-23T13:00:00Z",
+          "scheduled_end": "2026-07-23T15:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_e328d4cad27249d48750d091fd1faa3b"
+        ],
+        "tags": [
+          "40"
+        ],
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:38:20Z"
       }
     ],
     "pro_878f7465a7ae48a39312d99aedaa3fd1": [
@@ -16941,11 +17114,11 @@
           "70",
           "Opportunity",
           "Non-Member",
-          "Plumbing Attention"
+          "IFO"
         ],
         "total_amount": 8900,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T15:38:10Z"
+        "updated_at": "2026-07-17T17:16:58Z"
       },
       {
         "id": "job_02015e4ff65f4ce289c0ae6feac790d0",
@@ -17148,9 +17321,31 @@
           "Opportunity",
           "Non-Member"
         ],
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "updated_at": "2026-07-17T15:49:18Z"
+        "total_amount": 18673,
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:18:42Z"
+      },
+      {
+        "id": "job_1781903a267044cc9cc0533862d17e84",
+        "description": "Billing - 70 - Plumbing Service",
+        "work_status": "scheduled",
+        "customer_label": "Sandy B.",
+        "city": "Dover",
+        "state": "PA",
+        "zip": "17315",
+        "schedule": {
+          "scheduled_start": "2026-07-22T13:00:00Z",
+          "scheduled_end": "2026-07-22T15:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_7ccf9b4457bb40ecbb84540d250950e1"
+        ],
+        "tags": [],
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:08:16Z"
       }
     ],
     "pro_275a4180be774faa8606cf065969a962": [],
@@ -17586,6 +17781,31 @@
         "updated_at": "2026-07-17T13:21:52Z"
       },
       {
+        "id": "job_b105c1e4b9e44365acc9ba0879960095",
+        "description": "30 - RCC Whole Home Waived Initial Service Fee",
+        "work_status": "in progress",
+        "customer_label": "Gwen M.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17404",
+        "schedule": {
+          "scheduled_start": "2026-07-17T17:00:00Z",
+          "scheduled_end": "2026-07-17T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_8d943eadd54f485b9dba4296c807fb8f"
+        ],
+        "tags": [
+          "30",
+          "Opportunity"
+        ],
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:35:07Z"
+      },
+      {
         "id": "job_14dd2cebffc94e3d800f5eef2db9ef93",
         "description": "30 - Initial Service Fee",
         "work_status": "complete rated",
@@ -17759,7 +17979,7 @@
       {
         "id": "job_2d6b4cdf95ae441f8605033a478b3e76",
         "description": "Billing - 70 - Plumbing Service",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Sean S.",
         "city": "York",
         "state": "PA",
@@ -17773,10 +17993,12 @@
         "assigned_employee_ids": [
           "pro_79f4ca1c644741dc89563174e5b5d4fa"
         ],
-        "tags": [],
+        "tags": [
+          "Plumbing Parts"
+        ],
         "total_amount": 24960,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T16:41:30Z"
+        "updated_at": "2026-07-17T17:26:10Z"
       },
       {
         "id": "job_b59d42b467aa4d33a083e7b87964902a",
@@ -18134,7 +18356,7 @@
       {
         "id": "job_decc7cf78edc4d4f93623fa8355c2c83",
         "description": "Visit #8; Plumbing",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Robert P.",
         "city": "Dover",
         "state": "PA",
@@ -18154,7 +18376,7 @@
         ],
         "total_amount": 0,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-15T18:58:09Z"
+        "updated_at": "2026-07-17T17:49:04Z"
       },
       {
         "id": "job_9fb3c2529c534aefa99cf893de54cc54",
@@ -18561,7 +18783,7 @@
       {
         "id": "job_fdf6531c36d041568370800830285dd2",
         "description": "70 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Rutters C.",
         "city": "York",
         "state": "PA",
@@ -18583,7 +18805,7 @@
         ],
         "total_amount": 38235,
         "outstanding_balance": 38235,
-        "updated_at": "2026-07-17T16:04:31Z"
+        "updated_at": "2026-07-17T17:10:19Z"
       }
     ],
     "pro_aab24498cf6e4c46844bddcbc7161f26": [
@@ -19088,9 +19310,9 @@
           "Opportunity",
           "Non-Member"
         ],
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "updated_at": "2026-07-17T16:32:02Z"
+        "total_amount": 32700,
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:38:58Z"
       },
       {
         "id": "job_f101dab06bcb4ecfa63173d166fab88b",
@@ -20331,7 +20553,7 @@
       {
         "id": "job_595944e6d9a34fe5aac0bca9d0d68fac",
         "description": "Billing - 70 - Plumbing Service",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Howard & Randy F.",
         "city": "York",
         "state": "PA",
@@ -20350,7 +20572,7 @@
         ],
         "total_amount": 74608,
         "outstanding_balance": 0,
-        "updated_at": "2026-07-17T15:52:54Z"
+        "updated_at": "2026-07-17T17:11:19Z"
       },
       {
         "id": "job_fd918309c4d54d8a9ed799a8ed81c871",
@@ -20374,6 +20596,31 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "updated_at": "2026-07-17T12:57:55Z"
+      },
+      {
+        "id": "job_8b44ed0658c04d338e4b0850fd37bf9d",
+        "description": "70 - RCC Whole Home Initial Service Fee",
+        "work_status": "scheduled",
+        "customer_label": "Veronika M.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-07-17T18:45:00Z",
+          "scheduled_end": "2026-07-17T19:45:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_1526b39a952147619f19902966416543"
+        ],
+        "tags": [
+          "70",
+          "Opportunity"
+        ],
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "updated_at": "2026-07-17T17:49:01Z"
       }
     ],
     "pro_5048a923ca8a47a5bd4cc2bbe40c4faa": [
@@ -20431,30 +20678,6 @@
         "updated_at": "2026-07-17T11:26:21Z"
       },
       {
-        "id": "job_dc3a4f2a7c5540b398e812a0d6054c6c",
-        "description": "Billing - 10 HVAC AOR",
-        "work_status": "scheduled",
-        "customer_label": "Paul L.",
-        "city": "East Berlin",
-        "state": "PA",
-        "zip": "17316",
-        "schedule": {
-          "scheduled_start": "2026-07-17T10:45:00Z",
-          "scheduled_end": "2026-07-17T11:45:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_2462c513660b4a00aaca612a9627e6a2"
-        ],
-        "tags": [
-          "OnCall Air"
-        ],
-        "total_amount": 2373313,
-        "outstanding_balance": 1186713,
-        "updated_at": "2026-07-17T16:31:14Z"
-      },
-      {
         "id": "job_26a7ebce6bf440429d2947b6e5f3ce02",
         "description": "Damper Motor Replacement Level 3",
         "work_status": "scheduled",
@@ -20480,16 +20703,16 @@
         "updated_at": "2026-07-17T14:34:51Z"
       },
       {
-        "id": "job_7432d595444c432382f24599a034bb82",
+        "id": "job_90cf3ae7c5d848df963a0fb3b179b3ee",
         "description": "Billing - 10 HVAC AOR",
         "work_status": "scheduled",
-        "customer_label": "Danita R.",
-        "city": "York",
+        "customer_label": "Alice D.",
+        "city": "Dover",
         "state": "PA",
-        "zip": "17402",
+        "zip": "17315",
         "schedule": {
-          "scheduled_start": "2026-07-17T14:15:00Z",
-          "scheduled_end": "2026-07-17T15:15:00Z",
+          "scheduled_start": "2026-07-17T17:00:00Z",
+          "scheduled_end": "2026-07-17T18:00:00Z",
           "arrival_window": 120,
           "appointments": []
         },
@@ -20497,12 +20720,11 @@
           "pro_2462c513660b4a00aaca612a9627e6a2"
         ],
         "tags": [
-          "OnCall Air",
-          "HVAC Attention"
+          "OnCall Air"
         ],
-        "total_amount": 1659100,
-        "outstanding_balance": 1659100,
-        "updated_at": "2026-07-17T16:39:18Z"
+        "total_amount": 1135400,
+        "outstanding_balance": 1135400,
+        "updated_at": "2026-07-17T17:29:49Z"
       }
     ],
     "pro_c3ff6948fe0c4109ad9f1fcb627850cf": [],
@@ -20896,6 +21118,32 @@
         "total_amount": 1100200,
         "outstanding_balance": 1100200,
         "updated_at": "2026-07-16T18:32:03Z"
+      },
+      {
+        "id": "job_dc3a4f2a7c5540b398e812a0d6054c6c",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Paul L.",
+        "city": "East Berlin",
+        "state": "PA",
+        "zip": "17316",
+        "schedule": {
+          "scheduled_start": "2026-07-23T11:00:00Z",
+          "scheduled_end": "2026-07-23T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_eb9324081cb94741812e207380d65695",
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
+          "pro_86c3193093ac454e801f62babb7cf494"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "total_amount": 2373313,
+        "outstanding_balance": 1186713,
+        "updated_at": "2026-07-17T17:21:56Z"
       }
     ],
     "pro_c45a8b2541c64ac4b0f305364c5f5295": [
@@ -20924,54 +21172,6 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "updated_at": "2026-07-17T11:20:21Z"
-      },
-      {
-        "id": "job_4cf06815afd94f8b850e31f980bc264c",
-        "description": "Billing - 10 HVAC AOR",
-        "work_status": "scheduled",
-        "customer_label": "Columbia Gas E.",
-        "city": "Windsor",
-        "state": "PA",
-        "zip": "17366",
-        "schedule": {
-          "scheduled_start": "2026-07-23T11:00:00Z",
-          "scheduled_end": "2026-07-23T19:00:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_c45a8b2541c64ac4b0f305364c5f5295",
-          "pro_8a84b31fc8b64893b17a0ca1bc133778"
-        ],
-        "tags": [
-          "OnCall Air"
-        ],
-        "total_amount": 1041900,
-        "outstanding_balance": 1041900,
-        "updated_at": "2026-07-13T15:17:37Z"
-      },
-      {
-        "id": "job_f478f7d1a5964900a4bdd3252a487810",
-        "description": "Billing - 10 HVAC AOR",
-        "work_status": "scheduled",
-        "customer_label": "Columbia Gas E.",
-        "city": "Windsor",
-        "state": "PA",
-        "zip": "17366",
-        "schedule": {
-          "scheduled_start": "2026-07-24T11:00:00Z",
-          "scheduled_end": "2026-07-24T15:00:00Z",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_c45a8b2541c64ac4b0f305364c5f5295",
-          "pro_8a84b31fc8b64893b17a0ca1bc133778"
-        ],
-        "tags": [],
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "updated_at": "2026-07-13T16:25:55Z"
       },
       {
         "id": "job_80e6c5eb3d8044fe92ba41bacbf0c75d",
@@ -21118,6 +21318,31 @@
         "total_amount": 828900,
         "outstanding_balance": 828900,
         "updated_at": "2026-07-16T18:05:18Z"
+      },
+      {
+        "id": "job_7432d595444c432382f24599a034bb82",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Danita R.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-07-23T11:00:00Z",
+          "scheduled_end": "2026-07-23T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_c45a8b2541c64ac4b0f305364c5f5295",
+          "pro_8a84b31fc8b64893b17a0ca1bc133778"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "total_amount": 1659100,
+        "outstanding_balance": 1659100,
+        "updated_at": "2026-07-17T17:24:13Z"
       }
     ],
     "pro_eb9324081cb94741812e207380d65695": [
@@ -21264,6 +21489,32 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "updated_at": "2026-07-17T11:50:18Z"
+      },
+      {
+        "id": "job_dc3a4f2a7c5540b398e812a0d6054c6c",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Paul L.",
+        "city": "East Berlin",
+        "state": "PA",
+        "zip": "17316",
+        "schedule": {
+          "scheduled_start": "2026-07-23T11:00:00Z",
+          "scheduled_end": "2026-07-23T19:00:00Z",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_eb9324081cb94741812e207380d65695",
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
+          "pro_86c3193093ac454e801f62babb7cf494"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "total_amount": 2373313,
+        "outstanding_balance": 1186713,
+        "updated_at": "2026-07-17T17:21:56Z"
       }
     ],
     "pro_3f2297b66a9742d09eaf20976a20183a": [
