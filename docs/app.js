@@ -140,6 +140,11 @@ function applyFilter() {
 }
 
 function updateSyncStatus(meta) {
+  if (!meta.last_synced_at) {
+    syncStatusEl.textContent = "Not synced yet";
+    syncStatusEl.classList.add("stale");
+    return;
+  }
   const syncedAt = new Date(meta.last_synced_at);
   const ageMs = Date.now() - syncedAt.getTime();
   const label = Number.isNaN(syncedAt.getTime())

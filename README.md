@@ -36,7 +36,13 @@ $env:HCP_API_KEY="your_key_here"   # PowerShell
 node scripts/sync.js
 ```
 
-Then open `docs/index.html` directly in a browser (or serve `docs/` with any static file server) to preview.
+Then serve `docs/` with any static file server and open it in a browser — opening `index.html` directly via `file://` won't work because the dashboard fetches `data/dashboard.json` over HTTP. If you don't have Node/Python handy, `_serve.ps1` in this repo is a zero-dependency PowerShell static server:
+
+```
+powershell -ExecutionPolicy Bypass -File _serve.ps1
+```
+
+Then visit http://localhost:8743/index.html.
 
 ## Adjusting the data window
 
