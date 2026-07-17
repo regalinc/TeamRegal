@@ -168,6 +168,7 @@ main {
 .job-time { font-weight: 600; }
 .job-desc { margin: 4px 0 2px; }
 .job-sub { color: var(--text-muted); font-size: 0.8rem; }
+.job-completed { color: var(--text-muted); font-size: 0.78rem; margin-top: 2px; font-style: italic; }
 
 .status-badge {
   display: inline-block;

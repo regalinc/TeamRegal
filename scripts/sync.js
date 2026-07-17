@@ -148,6 +148,7 @@ function toPublicJob(job) {
     business_unit: job.job_fields?.business_unit?.name || null,
     total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
+    completed_at: job.work_timestamps?.completed_at || null,
     updated_at: job.updated_at,
   };
 }

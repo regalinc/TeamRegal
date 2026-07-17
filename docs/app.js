@@ -46,6 +46,13 @@ function jobTimeLabel(job) {
   return end ? `${start} – ${end}` : start;
 }
 
+function formatDate(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
+}
+
 function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str;
@@ -84,6 +91,7 @@ function renderJobItem(job) {
     </div>
     <div class="job-desc">${escapeHtml(job.description || "(no description)")}</div>
     <div class="job-sub">${escapeHtml([job.customer_label, location, job.business_unit].filter(Boolean).join(" · "))}</div>
+    ${job.completed_at ? `<div class="job-completed">Completed ${formatDate(job.completed_at)}</div>` : ""}
   `;
   return li;
 }
