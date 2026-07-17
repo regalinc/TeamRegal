@@ -44,6 +44,15 @@ body {
 
 .topbar h1 { font-size: 1.25rem; margin: 0; }
 
+.topbar-brand { display: flex; align-items: center; gap: 12px; }
+
+.logo { height: 34px; width: auto; }
+.logo-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  .logo-light { display: none; }
+  .logo-dark { display: block; }
+}
+
 .topbar-meta { display: flex; align-items: center; gap: 12px; }
 
 .filter-bar {

@@ -4,7 +4,7 @@ $listener.Prefixes.Add("http://localhost:8743/")
 $listener.Start()
 Write-Host "Serving $root on http://localhost:8743/"
 
-$mime = @{ ".html"="text/html"; ".js"="application/javascript"; ".css"="text/css"; ".json"="application/json" }
+$mime = @{ ".html"="text/html"; ".js"="application/javascript"; ".css"="text/css"; ".json"="application/json"; ".png"="image/png"; ".svg"="image/svg+xml" }
 
 while ($listener.IsListening) {
   $context = $listener.GetContext()
