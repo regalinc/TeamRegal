@@ -6,7 +6,9 @@ Pulls jobs and technicians from the [Housecall Pro Public API](https://docs.hous
 
 - `scripts/sync.js` — calls `GET /employees` and `GET /jobs`, filters out canceled jobs, groups jobs by assigned technician, and writes the result to `docs/data/*.json`. Includes each job's tags and `total_amount`/`outstanding_balance` (Housecall Pro reports these in cents; the dashboard converts to dollars).
 - `.github/workflows/sync.yml` — runs the sync script every 15 minutes (and on manual trigger), then commits any changed data files.
-- `docs/` — static dashboard (plain HTML/CSS/JS, no build step) served by GitHub Pages. Polls `data/dashboard.json` every 60 seconds in the browser. Includes a filter bar (technician/job text search, business unit, tag, status — all auto-detected from your data) and a summary row (Total jobs, Total revenue, Average ticket, Completion rate) that recomputes live as filters change.
+- `docs/` — static dashboard (plain HTML/CSS/JS, no build step) served by GitHub Pages. Polls `data/dashboard.json` every 60 seconds in the browser. Includes a filter bar (technician/job text search, business unit, tag, status, and a reporting period — all auto-detected from your data except the period options, which are fixed) and a summary row (Total jobs, Total revenue, Average ticket, Completion rate) that recomputes live as filters change.
+
+**Period filter:** Today / This week / Last week / This month / Last month scope only the summary stats row — the per-technician job lists always show the live current schedule regardless of the selected period. Period boundaries are computed from each job's `schedule.scheduled_start` (there's no separate completion/invoice date synced yet), in the viewer's local time, with weeks starting Sunday. Only options the synced window can answer accurately are offered — see below.
 
 **Business unit vs. technician tags:** the "Business unit" filter uses Housecall Pro's native `job_fields.business_unit` field on each job (set under Settings → Business Units in Housecall Pro). Technicians also carry their own employee tags (shown as small chips on each card) — useful for role/specialty context, but those aren't currently a filter; business unit is the source of truth for department-style reporting since it's a structured field rather than free-text tags.
 
@@ -56,10 +58,13 @@ The dashboard reads its filter state from the URL on load, so a single link can 
 | `bu` | Pre-select a business unit | `?bu=40 HVAC MAINT` |
 | `tag` | Pre-select a job tag | `?tag=Opportunity` |
 | `status` | Pre-select a status | `?status=in progress` |
+| `period` | Pre-select a reporting period | `?period=month` (values: `today`, `week`, `lastweek`, `month`, `lastmonth`) |
 | `q` | Pre-fill the text search | `?q=furnace` |
 
 Params combine (e.g. `?techs=...&bu=...`). Spaces need URL-encoding (`%20` or `+`) if you're typing the link by hand — most browsers do this automatically when you paste a link with spaces into the address bar. When `techs` is set, the unassigned-jobs section and per-technician stats scope to just that roster; the viewer can still use the filter bar on top of it unless you don't want that (there's currently no way to hide the filter bar — ask if you want a `kiosk` mode that hides it for an unattended screen).
 
 ## Adjusting the data window
 
-`scripts/sync.js` fetches jobs from 1 day back through 13 days forward (`WINDOW_DAYS_BACK` / `WINDOW_DAYS_FORWARD`). Change those constants if you want a shorter or longer look-ahead.
+`scripts/sync.js` fetches jobs from 62 days back through 13 days forward (`WINDOW_DAYS_BACK` / `WINDOW_DAYS_FORWARD`). The back side is 62 specifically so "This month" and "Last month" are always fully covered no matter what day of the current month it is (worst case: the last day of a 31-day month needs the full current month plus the full previous month behind it).
+
+**Going further back (e.g. a "This year" or "Last quarter" option) isn't a small change.** The dashboard currently commits one flat JSON file to git on every sync — fine at a ~2-month window (a few hundred KB), but a year of job-level detail re-committed every 15 minutes would bloat the repo's git history fast. Supporting longer lookback would mean either storing small periodic rollup summaries instead of full job detail for older data, or moving off git-committed JSON to a real database. Ask if you want that built out.

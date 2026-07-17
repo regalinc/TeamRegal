@@ -10,9 +10,12 @@ const API_KEY = process.env.HCP_API_KEY;
 const PAGE_SIZE = 100;
 const MAX_PAGES = 50; // safety cap against runaway pagination
 
-// Job data window: yesterday through 13 days out, so the dashboard covers
-// "what already happened today" through "what's coming up".
-const WINDOW_DAYS_BACK = 1;
+// Job data window: 62 days back through 13 days out. The back side needs to
+// reliably cover "this month" and "last month" for the dashboard's period
+// filter no matter what day of the current month it is — worst case is the
+// last day of a 31-day month needing the full current month (31 days) plus
+// the full previous month (31 days) behind it, hence 62.
+const WINDOW_DAYS_BACK = 62;
 const WINDOW_DAYS_FORWARD = 13;
 
 // Statuses that represent a cancellation, per the `work_status` values

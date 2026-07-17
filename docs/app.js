@@ -13,6 +13,7 @@ const searchInput = document.getElementById("search");
 const businessUnitFilter = document.getElementById("business-unit-filter");
 const tagFilter = document.getElementById("tag-filter");
 const statusFilter = document.getElementById("status-filter");
+const periodFilter = document.getElementById("period-filter");
 const syncStatusEl = document.getElementById("sync-status");
 
 // Lets a screen be a single bookmarkable link, e.g.
@@ -172,12 +173,60 @@ function renderStats(stats) {
   );
 }
 
+// Period boundaries are computed in the viewer's local time, keyed off the
+// job's scheduled_start (the only date field currently synced — not a
+// completion/invoice date). Weeks start on Sunday. Bounds are [start, end).
+function periodRange(period) {
+  const now = new Date();
+  const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+
+  const today = startOfDay(now);
+
+  switch (period) {
+    case "today":
+      return [today, addDays(today, 1)];
+    case "week": {
+      const start = addDays(today, -today.getDay());
+      return [start, addDays(start, 7)];
+    }
+    case "lastweek": {
+      const start = addDays(today, -today.getDay() - 7);
+      return [start, addDays(start, 7)];
+    }
+    case "month": {
+      const start = new Date(now.getFullYear(), now.getMonth(), 1);
+      return [start, new Date(now.getFullYear(), now.getMonth() + 1, 1)];
+    }
+    case "lastmonth": {
+      const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      return [start, new Date(now.getFullYear(), now.getMonth(), 1)];
+    }
+    default:
+      return null;
+  }
+}
+
+function jobInPeriod(job, period) {
+  if (!period) return true;
+  const range = periodRange(period);
+  if (!range) return true;
+
+  const startIso = job.schedule?.scheduled_start;
+  if (!startIso) return false;
+  const d = new Date(startIso);
+  if (Number.isNaN(d.getTime())) return false;
+
+  return d >= range[0] && d < range[1];
+}
+
 function currentFilters() {
   return {
     text: searchInput.value.trim().toLowerCase(),
     businessUnit: businessUnitFilter.value,
     tag: tagFilter.value,
     status: statusFilter.value,
+    period: periodFilter.value,
   };
 }
 
@@ -245,6 +294,7 @@ function applyUrlFiltersOnce() {
   setSelectFromUrlParam(businessUnitFilter, "bu");
   setSelectFromUrlParam(tagFilter, "tag");
   setSelectFromUrlParam(statusFilter, "status");
+  setSelectFromUrlParam(periodFilter, "period");
 }
 
 function setSelectFromUrlParam(select, paramName) {
@@ -261,13 +311,18 @@ function render(data) {
   const rosterActive = ROSTER_NEEDLES.length > 0;
   const rosterTechIds = new Set(rosterTechs.map((t) => t.id));
 
+  // The period filter only scopes the summary stats, not which jobs show
+  // under each technician — the cards stay a live "current schedule" view
+  // regardless of the selected reporting period.
+  let statsJobs = filteredJobs.filter((j) => jobInPeriod(j, filters.period));
+
   // When a roster is set, scope the summary stats to just that roster's
   // jobs (unassigned jobs belong to no technician, so they drop out too).
-  const scopedJobs = rosterActive
-    ? filteredJobs.filter((j) => (j.assigned_employee_ids || []).some((id) => rosterTechIds.has(id)))
-    : filteredJobs;
+  if (rosterActive) {
+    statsJobs = statsJobs.filter((j) => (j.assigned_employee_ids || []).some((id) => rosterTechIds.has(id)));
+  }
 
-  renderStats(computeStats(scopedJobs));
+  renderStats(computeStats(statsJobs));
 
   app.innerHTML = "";
 
@@ -348,6 +403,7 @@ searchInput.addEventListener("input", rerenderFromCache);
 businessUnitFilter.addEventListener("change", rerenderFromCache);
 tagFilter.addEventListener("change", rerenderFromCache);
 statusFilter.addEventListener("change", rerenderFromCache);
+periodFilter.addEventListener("change", rerenderFromCache);
 
 loadData();
 setInterval(loadData, POLL_INTERVAL_MS);
