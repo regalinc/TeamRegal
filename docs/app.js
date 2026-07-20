@@ -175,6 +175,7 @@ function renderTechCard(tech, jobs) {
     renderMiniStat("Leads", stats.leads.toLocaleString()),
     renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
     renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()),
+    renderMiniStat("IFO", stats.ifo.toLocaleString()),
   ].join("");
   card.appendChild(statsRow);
 
@@ -250,6 +251,7 @@ function hasTag(job, tagName) {
 // - RCC sold: jobs tagged "Membership Sold" — Housecall Pro's
 //   membership/service-plan sales report isn't exposed via the public API,
 //   so this tag is the stand-in the business tracks it with instead.
+// - IFO: jobs tagged "IFO".
 function computeScorecardStats(jobs) {
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
 
@@ -265,6 +267,8 @@ function computeScorecardStats(jobs) {
 
   const servicePlansSoldJobs = jobs.filter((j) => hasTag(j, "Membership Sold"));
 
+  const ifoJobs = jobs.filter((j) => hasTag(j, "IFO"));
+
   return {
     totalJobs,
     totalRevenue: totalRevenueCents / CENTS_PER_DOLLAR,
@@ -273,6 +277,7 @@ function computeScorecardStats(jobs) {
     leads: leadJobs.length,
     leadsSold: leadsSoldJobs.length,
     servicePlansSold: servicePlansSoldJobs.length,
+    ifo: ifoJobs.length,
   };
 }
 
