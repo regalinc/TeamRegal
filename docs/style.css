@@ -247,6 +247,7 @@ main {
   flex-shrink: 0;
   background: var(--accent);
 }
+img.avatar { object-fit: cover; }
 
 .tech-name { font-weight: 600; }
 .tech-role { font-size: 0.8rem; color: var(--text-muted); }

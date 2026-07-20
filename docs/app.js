@@ -73,6 +73,30 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// Housecall Pro returns this same URL for every employee who hasn't
+// uploaded a real photo — treat it as "no avatar" rather than showing
+// everyone the same generic silhouette.
+const HCP_PLACEHOLDER_AVATAR = "add_image_thumb_web_round.png";
+
+function hasRealAvatar(tech) {
+  return Boolean(tech.avatar_url) && !tech.avatar_url.includes(HCP_PLACEHOLDER_AVATAR);
+}
+
+// Renders the technician's real photo when Housecall Pro has one on file,
+// falling back to the colored-initials avatar otherwise (including if the
+// photo URL 404s at runtime).
+function renderAvatar(tech) {
+  const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
+  const initialsText = escapeHtml(initials(tech.name || "?"));
+  const fallback = `<div class="avatar" style="background:${bg}">${initialsText}</div>`;
+  if (!hasRealAvatar(tech)) return fallback;
+
+  return `
+    <img class="avatar" src="${escapeHtml(tech.avatar_url)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+    <div class="avatar" style="background:${bg};display:none">${initialsText}</div>
+  `;
+}
+
 function initials(name) {
   return name
     .split(/\s+/)
@@ -125,7 +149,7 @@ function renderTechCard(tech, jobs) {
   const header = document.createElement("div");
   header.className = "tech-card-header";
   header.innerHTML = `
-    <div class="avatar" style="background:${tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : ""}">${initials(tech.name || "?")}</div>
+    ${renderAvatar(tech)}
     <div>
       <div class="tech-name">${escapeHtml(tech.name || "Unknown")}</div>
       ${tech.role ? `<div class="tech-role">${escapeHtml(tech.role)}</div>` : ""}
