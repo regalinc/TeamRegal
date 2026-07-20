@@ -23,6 +23,7 @@ const techSelectSearch = document.getElementById("tech-select-search");
 const techSelectAllBtn = document.getElementById("tech-select-all");
 const techSelectClearBtn = document.getElementById("tech-select-clear");
 const techSelectList = document.getElementById("tech-select-list");
+const techSelectCategories = document.getElementById("tech-select-categories");
 
 // Lets a screen be a single bookmarkable link, e.g.
 // ?bu=HVAC or ?techs=Jack%20Tomlinson,Trevor%20McWilliams
@@ -370,6 +371,39 @@ function updateTechSelectToggleLabel(technicians) {
   } else {
     techSelectToggle.textContent = `${selectedTechIds.size} technicians selected`;
   }
+  syncCategoryButtonsActiveState(technicians);
+}
+
+// Highlights a category button when the current selection exactly matches
+// every technician carrying that employee tag (so the button reflects
+// reality whether it got there via the button itself or manual checkboxes).
+function syncCategoryButtonsActiveState(technicians) {
+  for (const btn of techSelectCategories.querySelectorAll(".tech-category-btn")) {
+    const matchingIds = technicians.filter((t) => (t.tags || []).includes(btn.dataset.tag)).map((t) => t.id);
+    const isActive =
+      matchingIds.length > 0 &&
+      matchingIds.length === selectedTechIds.size &&
+      matchingIds.every((id) => selectedTechIds.has(id));
+    btn.classList.toggle("active", isActive);
+  }
+}
+
+// Clicking a category button selects exactly the technicians carrying that
+// employee tag, replacing any prior selection. Clicking an already-active
+// category again clears back to "All technicians".
+function applyCategoryFilter(tag) {
+  const technicians = latestData?.technicians || [];
+  selectedTechIds.clear();
+  for (const tech of technicians) {
+    if ((tech.tags || []).includes(tag)) selectedTechIds.add(tech.id);
+  }
+  for (const row of techSelectList.querySelectorAll(".tech-select-row")) {
+    const checkbox = row.querySelector("input");
+    checkbox.checked = selectedTechIds.has(checkbox.value);
+  }
+  updateTechSelectToggleLabel(technicians);
+  updateTechsUrlParam();
+  rerenderFromCache();
 }
 
 function populateTechDropdown(data) {
@@ -526,6 +560,11 @@ document.addEventListener("click", (e) => {
 });
 techSelectList.addEventListener("change", onTechCheckboxChange);
 techSelectSearch.addEventListener("input", applyTechSearchFilter);
+techSelectCategories.addEventListener("click", (e) => {
+  const btn = e.target.closest(".tech-category-btn");
+  if (!btn) return;
+  applyCategoryFilter(btn.classList.contains("active") ? "__none__" : btn.dataset.tag);
+});
 techSelectAllBtn.addEventListener("click", () => {
   for (const row of techSelectList.querySelectorAll(".tech-select-row:not(.hidden-by-search)")) {
     const checkbox = row.querySelector("input");

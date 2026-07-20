@@ -115,6 +115,28 @@ body {
   box-sizing: border-box;
 }
 
+.tech-select-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.tech-category-btn {
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.tech-category-btn:hover { border-color: var(--accent); color: var(--text); }
+.tech-category-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
 .tech-select-actions {
   display: flex;
   gap: 10px;
