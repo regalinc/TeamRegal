@@ -307,7 +307,7 @@ img.avatar { object-fit: cover; }
 
 .tech-mini-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 6px;
   margin-bottom: 10px;
 }

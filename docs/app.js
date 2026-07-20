@@ -174,6 +174,7 @@ function renderTechCard(tech, jobs) {
     renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`),
     renderMiniStat("Leads", stats.leads.toLocaleString()),
     renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
+    renderMiniStat("Service plans sold", stats.servicePlansSold.toLocaleString()),
   ].join("");
   card.appendChild(statsRow);
 
@@ -246,6 +247,9 @@ function hasTag(job, tagName) {
 // - Completion: unchanged — still scoped to all jobs in view.
 // - Leads / Leads sold: jobs tagged "TGL", and of those, ones also tagged
 //   "TGL Sold".
+// - Service plans sold: jobs tagged "Membership Sold" — Housecall Pro's
+//   membership/service-plan sales report isn't exposed via the public API,
+//   so this tag is the stand-in the business tracks it with instead.
 function computeScorecardStats(jobs) {
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
 
@@ -259,6 +263,8 @@ function computeScorecardStats(jobs) {
   const leadJobs = jobs.filter((j) => hasTag(j, "TGL"));
   const leadsSoldJobs = leadJobs.filter((j) => hasTag(j, "TGL Sold"));
 
+  const servicePlansSoldJobs = jobs.filter((j) => hasTag(j, "Membership Sold"));
+
   return {
     totalJobs,
     totalRevenue: totalRevenueCents / CENTS_PER_DOLLAR,
@@ -266,6 +272,7 @@ function computeScorecardStats(jobs) {
     completionRate,
     leads: leadJobs.length,
     leadsSold: leadsSoldJobs.length,
+    servicePlansSold: servicePlansSoldJobs.length,
   };
 }
 
