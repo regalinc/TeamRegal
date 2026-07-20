@@ -10,13 +10,21 @@ const API_KEY = process.env.HCP_API_KEY;
 const PAGE_SIZE = 100;
 const MAX_PAGES = 50; // safety cap against runaway pagination
 
-// Job data window: 62 days back through 13 days out. The back side needs to
-// reliably cover "this month" and "last month" for the dashboard's period
-// filter no matter what day of the current month it is — worst case is the
-// last day of a 31-day month needing the full current month (31 days) plus
-// the full previous month (31 days) behind it, hence 62.
-const WINDOW_DAYS_BACK = 62;
+// Job data window: at least 62 days back through 13 days out. The 62-day
+// floor reliably covers "this month" and "last month" for the dashboard's
+// period filter no matter what day of the current month it is — worst case
+// is the last day of a 31-day month needing the full current month (31
+// days) plus the full previous month (31 days) behind it. On top of that
+// floor, the back side always stretches to cover Jan 1 of the current year
+// so "Year to date" is accurate — this grows from ~62 days in January up to
+// ~365 days by December (see daysBackToStartOfYear below).
+const MIN_WINDOW_DAYS_BACK = 62;
 const WINDOW_DAYS_FORWARD = 13;
+
+function daysBackToStartOfYear(date) {
+  const startOfYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  return Math.ceil((date.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
+}
 
 // Statuses that represent a cancellation, per the `work_status` values
 // documented for Job objects (distinct from the query-filter enum).
@@ -82,10 +90,14 @@ async function fetchEmployees() {
   return fetchAllPages("/employees", {}, "employees");
 }
 
+function windowDaysBack(now) {
+  return Math.max(MIN_WINDOW_DAYS_BACK, daysBackToStartOfYear(now));
+}
+
 async function fetchJobsInWindow() {
   const now = new Date();
   const windowStart = new Date(now);
-  windowStart.setUTCDate(windowStart.getUTCDate() - WINDOW_DAYS_BACK);
+  windowStart.setUTCDate(windowStart.getUTCDate() - windowDaysBack(now));
   const windowEnd = new Date(now);
   windowEnd.setUTCDate(windowEnd.getUTCDate() + WINDOW_DAYS_FORWARD);
 
@@ -186,7 +198,7 @@ async function main() {
 
   const meta = {
     last_synced_at: new Date().toISOString(),
-    window_days_back: WINDOW_DAYS_BACK,
+    window_days_back: windowDaysBack(new Date()),
     window_days_forward: WINDOW_DAYS_FORWARD,
     technician_count: technicians.length,
     job_count: publicJobs.length,

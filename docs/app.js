@@ -312,6 +312,10 @@ function periodRange(period) {
       const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
       return [start, new Date(now.getFullYear(), now.getMonth(), 1)];
     }
+    case "ytd": {
+      const start = new Date(now.getFullYear(), 0, 1);
+      return [start, addDays(today, 1)];
+    }
     default:
       return null;
   }
