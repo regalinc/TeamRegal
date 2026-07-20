@@ -146,10 +146,12 @@ function hasTag(job, tagName) {
 
 // Every scorecard's numbers (technician or department) are pulled from tags
 // rather than raw job counts, per how the business actually tracks these:
-// - Jobs: only jobs tagged "Opportunity" count as a "true" job.
+// - Jobs: only jobs tagged "Opportunity" count as a "true" job — except in
+//   business units 10 and 50 (AOR departments), where every job counts like
+//   it used to; see RAW_JOB_COUNT_BU_CODES below.
 // - Revenue: unchanged — still sums every job in view.
-// - Avg ticket: total revenue (all jobs) divided by the Opportunity job
-//   count, not the raw job count.
+// - Avg ticket: total revenue (all jobs) divided by the Jobs count above
+//   (Opportunity-tagged, or raw for BU 10/50), not a separate billed-job count.
 // - Completion: unchanged — still scoped to all jobs in view.
 // - Leads / Leads sold: jobs tagged "TGL", and of those, ones also tagged
 //   "TGL Sold".
@@ -158,11 +160,27 @@ function hasTag(job, tagName) {
 //   so this tag is the stand-in the business tracks it with instead.
 // - IFO: jobs tagged "IFO".
 // - Accessory sold: jobs tagged "Accessory Sold".
+// Business units whose numeric code (the leading token of the business_unit
+// string, e.g. "10" in "10 HVAC AOR") are AOR ("Agreement of Record"?)
+// departments where "Jobs" should count every job like it used to, not just
+// ones tagged "Opportunity" — that tag isn't how those two departments are
+// worked, so filtering by it would undercount them.
+const RAW_JOB_COUNT_BU_CODES = new Set(["10", "50"]);
+
+function businessUnitCode(businessUnit) {
+  return (businessUnit || "").trim().split(" ")[0];
+}
+
+function countsTowardJobs(job) {
+  if (RAW_JOB_COUNT_BU_CODES.has(businessUnitCode(job.business_unit))) return true;
+  return hasTag(job, "Opportunity");
+}
+
 function computeScorecardStats(jobs) {
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
 
-  const opportunityJobs = jobs.filter((j) => hasTag(j, "Opportunity"));
-  const totalJobs = opportunityJobs.length;
+  const countedJobs = jobs.filter(countsTowardJobs);
+  const totalJobs = countedJobs.length;
   const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
 
   const completedJobs = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
