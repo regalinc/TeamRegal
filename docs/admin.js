@@ -86,18 +86,11 @@ function applyUrlFiltersOnce() {
   setSelectFromUrlParam(urlParams, periodFilter, "period");
 }
 
-function renderDeptCard(name, jobs, { hero = false } = {}) {
+function renderDeptCard(name, jobs) {
   const colorVar = deptColorVar(name);
-  const badgeHtml = hero ? `<div class="dept-hero-badge">★ Top department by revenue</div>` : "";
-  const headerHtml = `
-    <div>
-      ${badgeHtml}
-      <div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>
-    </div>
-  `;
+  const headerHtml = `<div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>`;
   const card = renderScorecard({ headerHtml, jobs });
-  card.classList.add("dept-card");
-  if (hero) card.classList.add("dept-hero");
+  card.classList.add("dept-card", "dept-full");
   card.style.setProperty("--dept-accent", `var(${colorVar})`);
   return card;
 }
@@ -129,35 +122,17 @@ function render(data) {
     return a.localeCompare(b);
   });
 
-  // Feature the top real department by revenue as a full-width hero card
-  // above the grid — never the "no business unit" catch-all bucket.
-  let heroName = null;
-  let heroRevenue = -1;
-  for (const name of deptNames) {
-    if (name === UNASSIGNED_BU_LABEL) continue;
-    const revenue = byDept.get(name).reduce((sum, j) => sum + (j.total_amount || 0), 0);
-    if (revenue > heroRevenue) {
-      heroRevenue = revenue;
-      heroName = name;
-    }
-  }
-
-  if (heroName) {
-    app.appendChild(renderDeptCard(heroName, byDept.get(heroName), { hero: true }));
-  }
-
   const title = document.createElement("h2");
   title.className = "section-title";
   title.textContent = "Department scorecards";
   app.appendChild(title);
 
-  const grid = document.createElement("div");
-  grid.className = "tech-grid";
+  const stack = document.createElement("div");
+  stack.className = "dept-stack";
   for (const name of deptNames) {
-    if (name === heroName) continue;
-    grid.appendChild(renderDeptCard(name, byDept.get(name)));
+    stack.appendChild(renderDeptCard(name, byDept.get(name)));
   }
-  app.appendChild(grid);
+  app.appendChild(stack);
 }
 
 async function loadData() {

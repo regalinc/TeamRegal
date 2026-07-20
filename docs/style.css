@@ -295,22 +295,19 @@ img.avatar { object-fit: cover; }
   flex-shrink: 0;
 }
 
-.dept-hero {
+.dept-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dept-full {
   border-top-width: 6px;
   padding: 20px 24px;
-  margin-bottom: 16px;
 }
-.dept-hero .dept-name { font-size: 1.4rem; }
-.dept-hero-badge {
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: var(--dept-accent, var(--text-muted));
-  margin-bottom: 4px;
-}
-.dept-hero .tech-mini-stats { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
-.dept-hero .tech-mini-stat-value { font-size: 1.25rem; }
+.dept-full .dept-name { font-size: 1.4rem; }
+.dept-full .tech-mini-stats { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.dept-full .tech-mini-stat-value { font-size: 1.25rem; }
 
 .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: -4px 0 10px; }
 .tech-tag-chip {
