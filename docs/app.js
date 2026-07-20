@@ -176,6 +176,7 @@ function renderTechCard(tech, jobs) {
     renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
     renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()),
     renderMiniStat("IFO", stats.ifo.toLocaleString()),
+    renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString()),
   ].join("");
   card.appendChild(statsRow);
 
@@ -252,6 +253,7 @@ function hasTag(job, tagName) {
 //   membership/service-plan sales report isn't exposed via the public API,
 //   so this tag is the stand-in the business tracks it with instead.
 // - IFO: jobs tagged "IFO".
+// - Accessory sold: jobs tagged "Accessory Sold".
 function computeScorecardStats(jobs) {
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
 
@@ -269,6 +271,8 @@ function computeScorecardStats(jobs) {
 
   const ifoJobs = jobs.filter((j) => hasTag(j, "IFO"));
 
+  const accessorySoldJobs = jobs.filter((j) => hasTag(j, "Accessory Sold"));
+
   return {
     totalJobs,
     totalRevenue: totalRevenueCents / CENTS_PER_DOLLAR,
@@ -278,6 +282,7 @@ function computeScorecardStats(jobs) {
     leadsSold: leadsSoldJobs.length,
     servicePlansSold: servicePlansSoldJobs.length,
     ifo: ifoJobs.length,
+    accessorySold: accessorySoldJobs.length,
   };
 }
 
