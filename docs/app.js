@@ -164,7 +164,7 @@ function renderTechCard(tech, jobs) {
     card.appendChild(tagsRow);
   }
 
-  const stats = computeStats(jobs);
+  const stats = computeScorecardStats(jobs);
   const statsRow = document.createElement("div");
   statsRow.className = "tech-mini-stats";
   statsRow.innerHTML = [
@@ -172,6 +172,8 @@ function renderTechCard(tech, jobs) {
     renderMiniStat("Revenue", formatMoney(stats.totalRevenue)),
     renderMiniStat("Avg ticket", formatMoney(stats.avgTicket)),
     renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`),
+    renderMiniStat("Leads", stats.leads.toLocaleString()),
+    renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
   ].join("");
   card.appendChild(statsRow);
 
@@ -227,6 +229,43 @@ function computeStats(jobs) {
     totalRevenue: totalRevenueCents / CENTS_PER_DOLLAR,
     avgTicket: avgTicketCents / CENTS_PER_DOLLAR,
     completionRate,
+  };
+}
+
+function hasTag(job, tagName) {
+  const target = tagName.toLowerCase();
+  return (job.tags || []).some((t) => t.toLowerCase() === target);
+}
+
+// The per-technician scorecard's numbers are pulled from tags rather than
+// raw job counts, per how the business actually tracks these:
+// - Jobs: only jobs tagged "Opportunity" count as a "true" job.
+// - Revenue: unchanged — still sums every job in view.
+// - Avg ticket: total revenue (all jobs) divided by the Opportunity job
+//   count, not the raw job count.
+// - Completion: unchanged — still scoped to all jobs in view.
+// - Leads / Leads sold: jobs tagged "TGL", and of those, ones also tagged
+//   "TGL Sold".
+function computeScorecardStats(jobs) {
+  const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
+
+  const opportunityJobs = jobs.filter((j) => hasTag(j, "Opportunity"));
+  const totalJobs = opportunityJobs.length;
+  const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
+
+  const completedJobs = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
+  const completionRate = jobs.length ? (completedJobs.length / jobs.length) * 100 : 0;
+
+  const leadJobs = jobs.filter((j) => hasTag(j, "TGL"));
+  const leadsSoldJobs = leadJobs.filter((j) => hasTag(j, "TGL Sold"));
+
+  return {
+    totalJobs,
+    totalRevenue: totalRevenueCents / CENTS_PER_DOLLAR,
+    avgTicket: avgTicketCents / CENTS_PER_DOLLAR,
+    completionRate,
+    leads: leadJobs.length,
+    leadsSold: leadsSoldJobs.length,
   };
 }
 
