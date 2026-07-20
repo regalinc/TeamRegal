@@ -146,12 +146,14 @@ function hasTag(job, tagName) {
 
 // Every scorecard's numbers (technician or department) are pulled from tags
 // rather than raw job counts, per how the business actually tracks these:
-// - Jobs: only jobs tagged "Opportunity" count as a "true" job — except in
-//   business units 10 and 50 (AOR departments), where every job counts like
-//   it used to; see RAW_JOB_COUNT_BU_CODES below.
+// - Jobs: only jobs tagged "Opportunity" count as a "true" job — except:
+//   business unit 10 (HVAC AOR) counts only jobs tagged "Oncall Air" instead,
+//   and business unit 50 (Plumbing AOR) counts every job, raw. Neither of
+//   those departments is worked off the "Opportunity" tag, so filtering by
+//   it would miscount them. See countsTowardJobs below.
 // - Revenue: unchanged — still sums every job in view.
-// - Avg ticket: total revenue (all jobs) divided by the Jobs count above
-//   (Opportunity-tagged, or raw for BU 10/50), not a separate billed-job count.
+// - Avg ticket: total revenue (all jobs) divided by the Jobs count above,
+//   not a separate billed-job count.
 // - Completion: unchanged — still scoped to all jobs in view.
 // - Leads / Leads sold: jobs tagged "TGL", and of those, ones also tagged
 //   "TGL Sold".
@@ -160,19 +162,16 @@ function hasTag(job, tagName) {
 //   so this tag is the stand-in the business tracks it with instead.
 // - IFO: jobs tagged "IFO".
 // - Accessory sold: jobs tagged "Accessory Sold".
-// Business units whose numeric code (the leading token of the business_unit
-// string, e.g. "10" in "10 HVAC AOR") are AOR ("Agreement of Record"?)
-// departments where "Jobs" should count every job like it used to, not just
-// ones tagged "Opportunity" — that tag isn't how those two departments are
-// worked, so filtering by it would undercount them.
-const RAW_JOB_COUNT_BU_CODES = new Set(["10", "50"]);
+const RAW_JOB_COUNT_BU_CODES = new Set(["50"]);
 
 function businessUnitCode(businessUnit) {
   return (businessUnit || "").trim().split(" ")[0];
 }
 
 function countsTowardJobs(job) {
-  if (RAW_JOB_COUNT_BU_CODES.has(businessUnitCode(job.business_unit))) return true;
+  const code = businessUnitCode(job.business_unit);
+  if (code === "10") return hasTag(job, "Oncall Air");
+  if (RAW_JOB_COUNT_BU_CODES.has(code)) return true;
   return hasTag(job, "Opportunity");
 }
 
