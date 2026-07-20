@@ -1,11 +1,11 @@
 # Housecall Pro Technician Dashboard
 
-Pulls jobs and technicians from the [Housecall Pro Public API](https://docs.housecallpro.com/) every 15 minutes via GitHub Actions, and shows a live per-technician job dashboard as a static site on GitHub Pages.
+Pulls jobs and technicians from the [Housecall Pro Public API](https://docs.housecallpro.com/) hourly via GitHub Actions, and shows a live per-technician job dashboard as a static site on GitHub Pages.
 
 ## How it works
 
 - `scripts/sync.js` — calls `GET /employees` and `GET /jobs`, filters out canceled jobs, groups jobs by assigned technician, and writes the result to `docs/data/*.json`. Includes each job's tags and `total_amount`/`outstanding_balance` (Housecall Pro reports these in cents; the dashboard converts to dollars).
-- `.github/workflows/sync.yml` — runs the sync script every 15 minutes (and on manual trigger), then commits any changed data files. At the 62-day window, the data file is several MB, so consecutive bot-only syncs **amend and force-push over the previous data commit** rather than stacking a new commit each time — otherwise a 15-minute cadence would bloat the repo's git history within days. A real (human) commit always breaks the chain and gets a fresh data commit stacked after it, never amended. This means the data-commit history isn't preserved — only the latest sync is ever visible in `git log`, by design.
+- `.github/workflows/sync.yml` — runs the sync script hourly (and on manual trigger), then commits any changed data files. At the 62-day window, the data file is several MB, so consecutive bot-only syncs **amend and force-push over the previous data commit** rather than stacking a new commit each time — otherwise a frequent cadence would bloat the repo's git history within days. A real (human) commit always breaks the chain and gets a fresh data commit stacked after it, never amended. This means the data-commit history isn't preserved — only the latest sync is ever visible in `git log`, by design. Note: GitHub Actions' `schedule` trigger is best-effort and gets deprioritized under load, so even an hourly cron can land later than expected — check the Actions tab for actual run times if the dashboard's "Last synced" looks stale.
 - `docs/` — static dashboard (plain HTML/CSS/JS, no build step) served by GitHub Pages. Polls `data/dashboard.json` every 60 seconds in the browser. It's a reporting view: a **Team summary** row (Total jobs, Total revenue, Average ticket, Completion rate) at the top, then a **Technician scorecard** per person — same 4 metrics, scoped to just their jobs — with the underlying job list tucked behind a "N jobs in view" toggle rather than shown by default. Filter bar covers technician/job text search, a multi-select technician picker, business unit, tag, status, and a reporting period (all auto-detected from your data except the period options, which are fixed).
 
 **Period filter:** Today / This week / Last week / This month / Last month scope the team summary *and* every technician's scorecard consistently — pick "This month" and both the top numbers and each person's tiles reflect only that month's jobs. Period boundaries are computed from each job's `schedule.scheduled_start` (there's no separate completion/invoice date synced yet), in the viewer's local time, with weeks starting Sunday. Only options the synced window can answer accurately are offered — see below.
@@ -31,7 +31,7 @@ Pulls jobs and technicians from the [Housecall Pro Public API](https://docs.hous
 5. **Run the sync once manually**: repo → Actions → "Sync Housecall Pro data" → Run workflow. This populates `docs/data/` for the first time.
 6. Visit the Pages URL (shown in Settings → Pages once it's live, usually `https://<you>.github.io/<repo>/`).
 
-After that, the workflow refreshes data every 15 minutes on its own — no machine or Claude session needs to be running.
+After that, the workflow refreshes data hourly on its own — no machine or Claude session needs to be running.
 
 ## Local testing
 

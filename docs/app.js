@@ -1,6 +1,6 @@
 const DATA_URL = "data/dashboard.json";
 const POLL_INTERVAL_MS = 60_000;
-const STALE_AFTER_MS = 30 * 60_000; // flag sync status if data hasn't refreshed in 30 min
+const STALE_AFTER_MS = 90 * 60_000; // flag sync status if data hasn't refreshed in 90 min (sync is hourly, plus buffer for GitHub's scheduling jitter)
 
 // Housecall Pro's job money fields (total_amount, outstanding_balance) are in cents.
 const CENTS_PER_DOLLAR = 100;

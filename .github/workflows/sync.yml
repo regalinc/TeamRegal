@@ -2,8 +2,11 @@ name: Sync Housecall Pro data
 
 on:
   schedule:
-    # Every 15 minutes. GitHub Actions cron can lag by a few minutes under load.
-    - cron: "*/15 * * * *"
+    # Hourly. GitHub Actions cron for high-frequency schedules (e.g. every
+    # 15 min) gets silently deprioritized under load, so actual runs were
+    # landing hours apart anyway — hourly is closer to what GitHub was
+    # already delivering, at no cost difference (public repo = free minutes).
+    - cron: "0 * * * *"
   workflow_dispatch: {}
 
 permissions:
