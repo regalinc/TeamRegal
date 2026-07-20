@@ -53,7 +53,15 @@ body {
   .logo-dark { display: block; }
 }
 
-.topbar-meta { display: flex; align-items: center; gap: 12px; }
+.topbar-meta { display: flex; align-items: center; gap: 16px; }
+
+.nav-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.nav-link:hover { text-decoration: underline; }
 
 .filter-bar {
   display: flex;
@@ -250,6 +258,7 @@ main {
 img.avatar { object-fit: cover; }
 
 .tech-name { font-weight: 600; }
+.dept-name { font-size: 1.05rem; }
 .tech-role { font-size: 0.8rem; color: var(--text-muted); }
 
 .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: -4px 0 10px; }

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Company Metrics — Departments</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="assets/logo-color.png" alt="Regal Inc" class="logo logo-light" />
+      <img src="assets/logo-white.png" alt="Regal Inc" class="logo logo-dark" />
+      <h1>Department Metrics</h1>
+    </div>
+    <div class="topbar-meta">
+      <a href="index.html" class="nav-link">← Technician view</a>
+      <span id="sync-status" class="sync-status">Loading...</span>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <input id="search" type="search" placeholder="Filter by job..." />
+    <select id="tag-filter">
+      <option value="">All job tags</option>
+    </select>
+    <select id="status-filter">
+      <option value="">All statuses</option>
+    </select>
+    <select id="period-filter">
+      <option value="">All synced time</option>
+      <option value="today">Today</option>
+      <option value="week">This week</option>
+      <option value="lastweek">Last week</option>
+      <option value="month">This month</option>
+      <option value="lastmonth">Last month</option>
+      <option value="ytd">Year to date</option>
+    </select>
+  </div>
+
+  <h2 class="section-title stats-title">Company summary</h2>
+  <section id="stats" class="stats-row" aria-label="Summary metrics"></section>
+
+  <main id="app">
+    <p class="loading">Loading data...</p>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
