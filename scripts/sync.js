@@ -94,6 +94,18 @@ function windowDaysBack(now) {
   return Math.max(MIN_WINDOW_DAYS_BACK, daysBackToStartOfYear(now));
 }
 
+// Jobs are fetched in date-range chunks rather than one long paginated
+// crawl over the whole window. A single crawl needs ~1 page per ~10 days
+// (~29 pages at the old fixed 62-day window, up to ~47 pages once the
+// window grows to a full year for "Year to date") — HCP's page-number
+// pagination isn't a stable cursor, and against a live, constantly-updated
+// dataset, a crawl that long can silently drop records as jobs are created
+// mid-crawl and shift what page existing jobs land on (classic
+// offset-pagination drift). Keeping each chunk short (and thus its page
+// count low, typically 1-3 pages) keeps each individual crawl fast enough
+// that this drift isn't a real risk, at the cost of more total requests.
+const JOB_FETCH_CHUNK_DAYS = 14;
+
 async function fetchJobsInWindow() {
   const now = new Date();
   const windowStart = new Date(now);
@@ -101,16 +113,39 @@ async function fetchJobsInWindow() {
   const windowEnd = new Date(now);
   windowEnd.setUTCDate(windowEnd.getUTCDate() + WINDOW_DAYS_FORWARD);
 
-  return fetchAllPages(
-    "/jobs",
-    {
-      scheduled_start_min: isoStartOfDay(windowStart),
-      scheduled_start_max: isoStartOfDay(windowEnd),
-      sort_by: "created_at",
-      sort_direction: "asc",
-    },
-    "jobs"
-  );
+  const jobs = [];
+  const seenIds = new Set();
+  let chunkStart = windowStart;
+
+  while (chunkStart < windowEnd) {
+    const chunkEnd = new Date(chunkStart);
+    chunkEnd.setUTCDate(chunkEnd.getUTCDate() + JOB_FETCH_CHUNK_DAYS);
+    if (chunkEnd > windowEnd) chunkEnd.setTime(windowEnd.getTime());
+
+    const chunkJobs = await fetchAllPages(
+      "/jobs",
+      {
+        scheduled_start_min: isoStartOfDay(chunkStart),
+        scheduled_start_max: isoStartOfDay(chunkEnd),
+        sort_by: "created_at",
+        sort_direction: "asc",
+      },
+      "jobs"
+    );
+
+    // Chunk boundaries are date-only (start-of-day), so a job scheduled
+    // exactly at a boundary could in principle appear in two adjacent
+    // chunks — de-dupe defensively by id.
+    for (const job of chunkJobs) {
+      if (seenIds.has(job.id)) continue;
+      seenIds.add(job.id);
+      jobs.push(job);
+    }
+
+    chunkStart = chunkEnd;
+  }
+
+  return jobs;
 }
 
 // Housecall Pro tag entry is free-text, so the same tag can come back with
