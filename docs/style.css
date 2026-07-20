@@ -7,6 +7,18 @@
   --text-muted: #6b7280;
   --accent: #2563eb;
   --radius: 10px;
+
+  /* Fixed categorical palette (validated order — see dataviz skill) used to
+     give each department a stable color identity. Never reassigned by rank
+     or filter state, only by which department it is. */
+  --series-blue: #2a78d6;
+  --series-green: #008300;
+  --series-magenta: #e87ba4;
+  --series-yellow: #eda100;
+  --series-aqua: #1baf7a;
+  --series-orange: #eb6834;
+  --series-violet: #4a3aa7;
+  --series-muted: #898781;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +28,15 @@
     --border: #2c2f36;
     --text: #edeef0;
     --text-muted: #9aa0a8;
+
+    --series-blue: #3987e5;
+    --series-green: #008300;
+    --series-magenta: #d55181;
+    --series-yellow: #c98500;
+    --series-aqua: #199e70;
+    --series-orange: #d95926;
+    --series-violet: #9085e9;
+    --series-muted: #898781;
   }
 }
 
@@ -258,8 +279,38 @@ main {
 img.avatar { object-fit: cover; }
 
 .tech-name { font-weight: 600; }
-.dept-name { font-size: 1.05rem; }
+.dept-name { font-size: 1.05rem; display: flex; align-items: center; gap: 8px; }
 .tech-role { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Fixed per-department color identity: a top border on the card (a mark,
+   not colored text) plus a matching dot beside the name. --dept-accent is
+   set inline per card from the fixed categorical assignment in admin.js. */
+.dept-card { border-top: 4px solid var(--dept-accent, var(--border)); }
+.dept-color-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dept-accent, var(--text-muted));
+  flex-shrink: 0;
+}
+
+.dept-hero {
+  border-top-width: 6px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.dept-hero .dept-name { font-size: 1.4rem; }
+.dept-hero-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--dept-accent, var(--text-muted));
+  margin-bottom: 4px;
+}
+.dept-hero .tech-mini-stats { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.dept-hero .tech-mini-stat-value { font-size: 1.25rem; }
 
 .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: -4px 0 10px; }
 .tech-tag-chip {

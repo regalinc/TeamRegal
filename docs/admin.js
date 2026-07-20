@@ -16,6 +16,28 @@ let urlFiltersApplied = false;
 
 const UNASSIGNED_BU_LABEL = "No business unit set";
 
+// Fixed categorical color per department, keyed by its business-unit numeric
+// code (the leading token, e.g. "10" in "10 HVAC AOR") so a department's
+// color never changes as filters narrow which cards are visible — color
+// follows the department's identity, not its rank on screen. Values are the
+// CSS custom properties defined in style.css (theme-aware, already
+// validated for CVD-safe contrast in that fixed order).
+const DEPT_COLOR_VARS = {
+  "10": "--series-blue",
+  "30": "--series-green",
+  "40": "--series-magenta",
+  "50": "--series-yellow",
+  "70": "--series-aqua",
+  "80": "--series-orange",
+};
+const DEPT_COLOR_FALLBACK = "--series-violet"; // any department code not in the map above
+
+function deptColorVar(name) {
+  if (name === UNASSIGNED_BU_LABEL) return "--series-muted";
+  const code = (name || "").trim().split(" ")[0];
+  return DEPT_COLOR_VARS[code] || DEPT_COLOR_FALLBACK;
+}
+
 function currentFilters() {
   return {
     text: searchInput.value.trim().toLowerCase(),
@@ -64,9 +86,20 @@ function applyUrlFiltersOnce() {
   setSelectFromUrlParam(urlParams, periodFilter, "period");
 }
 
-function renderDeptCard(name, jobs) {
-  const headerHtml = `<div class="tech-name dept-name">${escapeHtml(name)}</div>`;
-  return renderScorecard({ headerHtml, jobs });
+function renderDeptCard(name, jobs, { hero = false } = {}) {
+  const colorVar = deptColorVar(name);
+  const badgeHtml = hero ? `<div class="dept-hero-badge">★ Top department by revenue</div>` : "";
+  const headerHtml = `
+    <div>
+      ${badgeHtml}
+      <div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>
+    </div>
+  `;
+  const card = renderScorecard({ headerHtml, jobs });
+  card.classList.add("dept-card");
+  if (hero) card.classList.add("dept-hero");
+  card.style.setProperty("--dept-accent", `var(${colorVar})`);
+  return card;
 }
 
 function render(data) {
@@ -96,6 +129,23 @@ function render(data) {
     return a.localeCompare(b);
   });
 
+  // Feature the top real department by revenue as a full-width hero card
+  // above the grid — never the "no business unit" catch-all bucket.
+  let heroName = null;
+  let heroRevenue = -1;
+  for (const name of deptNames) {
+    if (name === UNASSIGNED_BU_LABEL) continue;
+    const revenue = byDept.get(name).reduce((sum, j) => sum + (j.total_amount || 0), 0);
+    if (revenue > heroRevenue) {
+      heroRevenue = revenue;
+      heroName = name;
+    }
+  }
+
+  if (heroName) {
+    app.appendChild(renderDeptCard(heroName, byDept.get(heroName), { hero: true }));
+  }
+
   const title = document.createElement("h2");
   title.className = "section-title";
   title.textContent = "Department scorecards";
@@ -104,6 +154,7 @@ function render(data) {
   const grid = document.createElement("div");
   grid.className = "tech-grid";
   for (const name of deptNames) {
+    if (name === heroName) continue;
     grid.appendChild(renderDeptCard(name, byDept.get(name)));
   }
   app.appendChild(grid);
