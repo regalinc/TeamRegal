@@ -73,6 +73,8 @@ Params combine (e.g. `?techs=...&bu=...`). Spaces need URL-encoding (`%20` or `+
 
 `admin.html` groups the same synced jobs by `job_fields.business_unit` instead of by technician, so management can see department-level totals (HVAC Service, Plumbing Installation, etc.) without individual technician names. It shares the filter bar (search/tag/status/period) and scorecard styling with the technician view, minus the business-unit filter itself (redundant — that's now the grouping) and the technician picker. Jobs with no business unit set land in a trailing "No business unit set" card rather than being dropped.
 
+Each department has a **fixed color identity** (a top border + dot on its card) assigned by business-unit code, not by rank or filter state, so a department's color never changes as you filter — see `DEPT_COLOR_VARS` in `admin.js` and the `--series-*` custom properties in `style.css` (theme-aware, validated CVD-safe order). The department with the highest revenue in the current filtered view is pulled out as a **full-width hero card** above the rest of the grid.
+
 **This is not real access control.** The whole site is public with no login (same as the technician view), so `admin.html` is just a different, unadvertised-beyond-the-nav-link page — anyone with the URL can view it. If you actually need to restrict who can see it, the realistic path on this architecture is making the GitHub repo private and upgrading to a paid GitHub plan (Pro/Team/Enterprise) — GitHub Pages on a private repo then requires being a logged-in collaborator, which is real auth tied to GitHub identity rather than obscurity. Ask if you want that set up.
 
 ## Adjusting the data window
