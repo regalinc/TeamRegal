@@ -11,6 +11,11 @@ const CENTS_PER_DOLLAR = 100;
 
 const COMPLETE_STATUSES = new Set(["complete rated", "complete unrated"]);
 
+// Canceled jobs are synced (not dropped) so the Company Metrics page can
+// report a cancellation rate, but every other metric below excludes them —
+// same behavior as when the sync script dropped them entirely.
+const CANCELED_STATUSES = new Set(["user canceled", "pro canceled"]);
+
 const syncStatusEl = document.getElementById("sync-status");
 
 function statusClass(status) {
@@ -123,7 +128,8 @@ function renderStatTile({ label, value, meterPct }) {
 
 // Raw totals — used for the page-level summary row (Team/Company summary),
 // as opposed to computeScorecardStats' tag-based numbers used on each card.
-function computeStats(jobs) {
+function computeStats(allJobs) {
+  const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
   const totalJobs = jobs.length;
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
   const billedJobs = jobs.filter((j) => (j.total_amount || 0) > 0);
@@ -137,6 +143,15 @@ function computeStats(jobs) {
     avgTicket: avgTicketCents / CENTS_PER_DOLLAR,
     completionRate,
   };
+}
+
+// Unlike computeStats/computeScorecardStats, this looks AT the canceled jobs
+// rather than excluding them — pass it the same raw (unfiltered-by-cancellation)
+// job list used elsewhere so the rate is "canceled ÷ everything in view."
+function computeCancellationStats(allJobs) {
+  const canceledJobs = allJobs.filter((j) => CANCELED_STATUSES.has(j.work_status));
+  const rate = allJobs.length ? (canceledJobs.length / allJobs.length) * 100 : 0;
+  return { canceledCount: canceledJobs.length, totalCount: allJobs.length, rate };
 }
 
 function hasTag(job, tagName) {
@@ -175,7 +190,8 @@ function countsTowardJobs(job) {
   return hasTag(job, "Opportunity");
 }
 
-function computeScorecardStats(jobs) {
+function computeScorecardStats(allJobs) {
+  const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
 
   const countedJobs = jobs.filter(countsTowardJobs);
@@ -285,6 +301,14 @@ function fillSelect(select, values, allLabel) {
 function setSelectFromUrlParam(urlParams, select, paramName) {
   const value = urlParams.get(paramName);
   if (value && [...select.options].some((o) => o.value === value)) select.value = value;
+}
+
+// Both pages default to "This month" on a fresh load, but an explicit
+// "?period=" URL param (e.g. a bookmarked kiosk link asking for "All synced
+// time") always wins.
+function applyDefaultPeriod(urlParams, periodFilter, defaultValue) {
+  if (urlParams.has("period")) setSelectFromUrlParam(urlParams, periodFilter, "period");
+  else periodFilter.value = defaultValue;
 }
 
 function updateSyncStatus(meta) {

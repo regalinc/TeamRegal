@@ -111,7 +111,7 @@ function applyUrlFiltersOnce(data) {
   setSelectFromUrlParam(urlParams, businessUnitFilter, "bu");
   setSelectFromUrlParam(urlParams, tagFilter, "tag");
   setSelectFromUrlParam(urlParams, statusFilter, "status");
-  setSelectFromUrlParam(urlParams, periodFilter, "period");
+  applyDefaultPeriod(urlParams, periodFilter, "month");
 
   // Resolve the initial "?techs=" needles (names or ids) against the real
   // technician list now that it's loaded, seeding the multi-select.

@@ -26,10 +26,6 @@ function daysBackToStartOfYear(date) {
   return Math.ceil((date.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-// Statuses that represent a cancellation, per the `work_status` values
-// documented for Job objects (distinct from the query-filter enum).
-const CANCELED_STATUSES = new Set(["user canceled", "pro canceled"]);
-
 const OUT_DIR = path.join(__dirname, "..", "docs", "data");
 
 function assertApiKey() {
@@ -193,6 +189,7 @@ function toPublicJob(job) {
     assigned_employee_ids: (job.assigned_employees || []).map((e) => e.id),
     tags: normalizeTags(job.tags),
     business_unit: job.job_fields?.business_unit?.name || null,
+    lead_source: job.lead_source || null,
     total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     completed_at: job.work_timestamps?.completed_at || null,
@@ -209,12 +206,14 @@ async function main() {
   console.log(`  ${employees.length} employees`);
 
   console.log("Fetching jobs...");
+  // Canceled jobs are kept (not dropped) so the dashboard can report a
+  // cancellation rate — the client-side stat computations exclude them from
+  // every other metric, same as before.
   const rawJobs = await fetchJobsInWindow();
-  const jobs = rawJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
-  console.log(`  ${rawJobs.length} jobs fetched, ${jobs.length} after dropping canceled`);
+  console.log(`  ${rawJobs.length} jobs fetched`);
 
   const technicians = employees.map(toPublicTechnician);
-  const publicJobs = jobs.map(toPublicJob);
+  const publicJobs = rawJobs.map(toPublicJob);
 
   const byTechnician = {};
   for (const tech of technicians) byTechnician[tech.id] = [];

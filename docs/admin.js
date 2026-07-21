@@ -38,6 +38,33 @@ function deptColorVar(name) {
   return DEPT_COLOR_VARS[code] || DEPT_COLOR_FALLBACK;
 }
 
+const UNKNOWN_LEAD_SOURCE_LABEL = "Unknown source";
+const LEAD_SOURCE_FEATURED_COUNT = 6;
+// Lead source values are open-ended (not a fixed known list like business
+// units), so color is assigned by a stable hash of the name instead of a
+// hardcoded map — the same source string always lands on the same color,
+// without needing to know every possible source in advance.
+const LEAD_SOURCE_COLOR_VARS = [
+  "--series-blue",
+  "--series-green",
+  "--series-magenta",
+  "--series-yellow",
+  "--series-aqua",
+  "--series-orange",
+  "--series-violet",
+];
+
+function hashString(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+function leadSourceColorVar(name) {
+  if (name === UNKNOWN_LEAD_SOURCE_LABEL) return "--series-muted";
+  return LEAD_SOURCE_COLOR_VARS[hashString(name) % LEAD_SOURCE_COLOR_VARS.length];
+}
+
 function currentFilters() {
   return {
     text: searchInput.value.trim().toLowerCase(),
@@ -83,24 +110,39 @@ function applyUrlFiltersOnce() {
 
   setSelectFromUrlParam(urlParams, tagFilter, "tag");
   setSelectFromUrlParam(urlParams, statusFilter, "status");
-  setSelectFromUrlParam(urlParams, periodFilter, "period");
+  applyDefaultPeriod(urlParams, periodFilter, "month");
+}
+
+function renderNamedCard(name, jobs, colorVar, { full = true } = {}) {
+  const headerHtml = `<div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>`;
+  const card = renderScorecard({ headerHtml, jobs });
+  card.classList.add("dept-card");
+  if (full) card.classList.add("dept-full");
+  card.style.setProperty("--dept-accent", `var(${colorVar})`);
+  return card;
 }
 
 function renderDeptCard(name, jobs) {
-  const colorVar = deptColorVar(name);
-  const headerHtml = `<div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>`;
-  const card = renderScorecard({ headerHtml, jobs });
-  card.classList.add("dept-card", "dept-full");
-  card.style.setProperty("--dept-accent", `var(${colorVar})`);
-  return card;
+  return renderNamedCard(name, jobs, deptColorVar(name));
 }
 
 function render(data) {
   const filters = currentFilters();
   const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters));
+  // Includes canceled jobs (jobMatchesFilters doesn't exclude them) — every
+  // stat computation below filters them out itself except the cancellation
+  // stat, which needs them to compute a rate.
   const periodJobs = filteredJobs.filter((j) => jobInPeriod(j, filters.period));
 
   renderStatsInto(statsEl, computeStats(periodJobs));
+  const cancelStats = computeCancellationStats(periodJobs);
+  statsEl.appendChild(
+    renderStatTile({
+      label: "Cancelled calls",
+      value: `${cancelStats.canceledCount.toLocaleString()} (${cancelStats.rate.toFixed(1)}%)`,
+      meterPct: cancelStats.rate,
+    })
+  );
 
   app.innerHTML = "";
 
@@ -133,6 +175,57 @@ function render(data) {
     stack.appendChild(renderDeptCard(name, byDept.get(name)));
   }
   app.appendChild(stack);
+
+  renderLeadSourceSection(periodJobs);
+}
+
+function renderLeadSourceSection(periodJobs) {
+  const byLeadSource = new Map();
+  for (const job of periodJobs) {
+    const key = job.lead_source || UNKNOWN_LEAD_SOURCE_LABEL;
+    if (!byLeadSource.has(key)) byLeadSource.set(key, []);
+    byLeadSource.get(key).push(job);
+  }
+
+  // Rank by revenue (computeStats already excludes canceled jobs) and drop
+  // sources with $0 — a source nobody converted from isn't useful to show.
+  const ranked = [...byLeadSource.entries()]
+    .map(([name, jobs]) => ({ name, jobs, revenue: computeStats(jobs).totalRevenue }))
+    .filter((entry) => entry.revenue > 0)
+    .sort((a, b) => b.revenue - a.revenue);
+
+  if (ranked.length === 0) return;
+
+  const title = document.createElement("h2");
+  title.className = "section-title";
+  title.textContent = "Lead source performance";
+  app.appendChild(title);
+
+  const featured = ranked.slice(0, LEAD_SOURCE_FEATURED_COUNT);
+  const overflow = ranked.slice(LEAD_SOURCE_FEATURED_COUNT);
+
+  const stack = document.createElement("div");
+  stack.className = "dept-stack";
+  for (const entry of featured) {
+    stack.appendChild(renderNamedCard(entry.name, entry.jobs, leadSourceColorVar(entry.name)));
+  }
+  app.appendChild(stack);
+
+  if (overflow.length > 0) {
+    const details = document.createElement("details");
+    details.className = "tech-job-details";
+    const summary = document.createElement("summary");
+    summary.textContent = `+${overflow.length} more lead source${overflow.length === 1 ? "" : "s"}`;
+    details.appendChild(summary);
+
+    const grid = document.createElement("div");
+    grid.className = "tech-grid";
+    for (const entry of overflow) {
+      grid.appendChild(renderNamedCard(entry.name, entry.jobs, leadSourceColorVar(entry.name), { full: false }));
+    }
+    details.appendChild(grid);
+    app.appendChild(details);
+  }
 }
 
 async function loadData() {
