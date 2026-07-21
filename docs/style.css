@@ -309,6 +309,34 @@ img.avatar { object-fit: cover; }
 .dept-full .tech-mini-stats { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
 .dept-full .tech-mini-stat-value { font-size: 1.25rem; }
 
+/* Equal-width segmented bar — see renderLeadSourceBar in admin.js for why
+   segments aren't sized proportionally to revenue. */
+.lead-bar {
+  display: flex;
+  gap: 2px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.lead-bar-segment {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 14px 12px;
+  color: #fff;
+}
+.lead-bar-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lead-bar-stat {
+  font-size: 0.75rem;
+  opacity: 0.92;
+  margin-top: 2px;
+}
+
 .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: -4px 0 10px; }
 .tech-tag-chip {
   font-size: 0.7rem;

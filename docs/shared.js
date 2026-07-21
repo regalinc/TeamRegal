@@ -332,7 +332,7 @@ function updateSyncStatus(meta) {
 // <details> toggle instead of shown by default. Used for both per-technician
 // (index.html) and per-department (admin.html) cards so the numbers speak
 // the same language at both altitudes.
-function renderScorecard({ headerHtml, tagsHtml, jobs }) {
+function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [] }) {
   const card = document.createElement("div");
   card.className = "tech-card";
 
@@ -363,6 +363,7 @@ function renderScorecard({ headerHtml, tagsHtml, jobs }) {
     renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()),
     renderMiniStat("IFO", stats.ifo.toLocaleString()),
     renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString()),
+    ...extraStats.map((s) => renderMiniStat(s.label, s.value)),
   ].join("");
   card.appendChild(statsRow);
 

@@ -113,9 +113,9 @@ function applyUrlFiltersOnce() {
   applyDefaultPeriod(urlParams, periodFilter, "month");
 }
 
-function renderNamedCard(name, jobs, colorVar, { full = true } = {}) {
+function renderNamedCard(name, jobs, colorVar, { full = true, extraStats = [] } = {}) {
   const headerHtml = `<div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>`;
-  const card = renderScorecard({ headerHtml, jobs });
+  const card = renderScorecard({ headerHtml, jobs, extraStats });
   card.classList.add("dept-card");
   if (full) card.classList.add("dept-full");
   card.style.setProperty("--dept-accent", `var(${colorVar})`);
@@ -123,7 +123,14 @@ function renderNamedCard(name, jobs, colorVar, { full = true } = {}) {
 }
 
 function renderDeptCard(name, jobs) {
-  return renderNamedCard(name, jobs, deptColorVar(name));
+  // Cancellation breakdown per department, alongside the company-wide total
+  // in the summary row above — jobs here already includes canceled ones
+  // (see render()), so this is scoped correctly without any extra filtering.
+  const cancelStats = computeCancellationStats(jobs);
+  const extraStats = [
+    { label: "Cancelled", value: `${cancelStats.canceledCount.toLocaleString()} (${cancelStats.rate.toFixed(1)}%)` },
+  ];
+  return renderNamedCard(name, jobs, deptColorVar(name), { extraStats });
 }
 
 function render(data) {
@@ -204,12 +211,7 @@ function renderLeadSourceSection(periodJobs) {
   const featured = ranked.slice(0, LEAD_SOURCE_FEATURED_COUNT);
   const overflow = ranked.slice(LEAD_SOURCE_FEATURED_COUNT);
 
-  const stack = document.createElement("div");
-  stack.className = "dept-stack";
-  for (const entry of featured) {
-    stack.appendChild(renderNamedCard(entry.name, entry.jobs, leadSourceColorVar(entry.name)));
-  }
-  app.appendChild(stack);
+  app.appendChild(renderLeadSourceBar(featured));
 
   if (overflow.length > 0) {
     const details = document.createElement("details");
@@ -226,6 +228,31 @@ function renderLeadSourceSection(periodJobs) {
     details.appendChild(grid);
     app.appendChild(details);
   }
+}
+
+// A single horizontal bar split into equal-width segments, one per featured
+// lead source, each showing its own name/count/$ value. Segments are equal
+// width rather than sized by revenue share — lead source revenue is
+// typically very skewed (one channel can outweigh another 1000:1), and a
+// strictly proportional segment for the smaller ones would be too thin to
+// hold a legible label. Equal width keeps all of them readable; the ranking
+// (highest revenue first, left to right) still conveys relative importance.
+function renderLeadSourceBar(entries) {
+  const wrap = document.createElement("div");
+  wrap.className = "lead-bar";
+  for (const entry of entries) {
+    const stats = computeStats(entry.jobs);
+    const colorVar = leadSourceColorVar(entry.name);
+    const seg = document.createElement("div");
+    seg.className = "lead-bar-segment";
+    seg.style.background = `var(${colorVar})`;
+    seg.innerHTML = `
+      <div class="lead-bar-name">${escapeHtml(entry.name)}</div>
+      <div class="lead-bar-stat">${stats.totalJobs.toLocaleString()} job${stats.totalJobs === 1 ? "" : "s"} · ${formatMoney(stats.totalRevenue)}</div>
+    `;
+    wrap.appendChild(seg);
+  }
+  return wrap;
 }
 
 async function loadData() {
