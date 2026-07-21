@@ -2,11 +2,14 @@ name: Sync Housecall Pro data
 
 on:
   schedule:
-    # Hourly. GitHub Actions cron for high-frequency schedules (e.g. every
-    # 15 min) gets silently deprioritized under load, so actual runs were
-    # landing hours apart anyway — hourly is closer to what GitHub was
-    # already delivering, at no cost difference (public repo = free minutes).
-    - cron: "0 * * * *"
+    # Hourly, at :17 rather than :00. GitHub's own docs warn that `:00` (and
+    # `:30`) are the most congested minutes for the schedule trigger, since
+    # that's when everyone else's cron jobs also fire — confirmed here too:
+    # actual runs were landing 2.5-11 hours apart on "0 * * * *" despite the
+    # hourly setting. An off-the-hour minute avoids that congestion peak;
+    # it won't guarantee exact hourly delivery (schedule stays best-effort),
+    # but should land far closer to it than :00 did.
+    - cron: "17 * * * *"
   workflow_dispatch: {}
 
 permissions:
