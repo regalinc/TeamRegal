@@ -277,17 +277,20 @@ function periodRange(period) {
   }
 }
 
-function jobInPeriod(job, period) {
+function dateInPeriod(isoString, period) {
   if (!period) return true;
   const range = periodRange(period);
   if (!range) return true;
 
-  const startIso = job.schedule?.scheduled_start;
-  if (!startIso) return false;
-  const d = new Date(startIso);
+  if (!isoString) return false;
+  const d = new Date(isoString);
   if (Number.isNaN(d.getTime())) return false;
 
   return d >= range[0] && d < range[1];
+}
+
+function jobInPeriod(job, period) {
+  return dateInPeriod(job.schedule?.scheduled_start, period);
 }
 
 function fillSelect(select, values, allLabel) {

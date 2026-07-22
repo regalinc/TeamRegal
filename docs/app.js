@@ -35,7 +35,7 @@ const selectedTechIds = new Set();
 let latestData = null;
 let urlFiltersApplied = false;
 
-function renderTechCard(tech, jobs) {
+function renderTechCard(tech, jobs, extraStats) {
   const headerHtml = `
     ${renderAvatar(tech)}
     <div>
@@ -46,7 +46,16 @@ function renderTechCard(tech, jobs) {
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
 
-  return renderScorecard({ headerHtml, tagsHtml, jobs });
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats });
+}
+
+// Estimates given/approved use the estimate's created_at, same as
+// Housecall Pro's own reporting — kept for that direct comparison. Approved
+// stays a subset of "given," matching how the other paired scorecard
+// metrics (Leads/Leads sold, etc.) work.
+function computeEstimateStats(estimatesGiven) {
+  const approved = estimatesGiven.filter((e) => e.approved).length;
+  return { given: estimatesGiven.length, approved };
 }
 
 function currentFilters() {
@@ -224,6 +233,16 @@ function render(data) {
   // list — since this is a reporting view, not a live per-job schedule.
   const periodJobs = filteredJobs.filter((j) => jobInPeriod(j, filters.period));
 
+  // Estimates given/approved (creation-date scoped, like Housecall Pro's
+  // own reporting) vs. approved-this-period (approval-date scoped) are two
+  // different slices of the same data — see computeEstimateStats and the
+  // "Approved this period" tile below. Neither is filtered by the
+  // job-specific filters above (tag/status/business unit/search); only by
+  // period and technician.
+  const allEstimates = data.estimates || [];
+  const periodEstimates = allEstimates.filter((e) => dateInPeriod(e.created_at, filters.period));
+  const approvedThisPeriod = allEstimates.filter((e) => e.approved && dateInPeriod(e.approved_at, filters.period));
+
   // The team summary scopes to just the selected roster's jobs when one is
   // set (unassigned jobs belong to no technician, so they drop out too).
   let statsJobs = periodJobs;
@@ -254,7 +273,17 @@ function render(data) {
   grid.className = "tech-grid";
   for (const tech of rosterTechs) {
     const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
-    grid.appendChild(renderTechCard(tech, jobs));
+
+    const techEstimatesGiven = periodEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
+    const estimateStats = computeEstimateStats(techEstimatesGiven);
+    const techApprovedThisPeriod = approvedThisPeriod.filter((e) => (e.assigned_employee_ids || []).includes(tech.id)).length;
+    const extraStats = [
+      { label: "Estimates given", value: estimateStats.given.toLocaleString() },
+      { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
+      { label: "Approved this period", value: techApprovedThisPeriod.toLocaleString() },
+    ];
+
+    grid.appendChild(renderTechCard(tech, jobs, extraStats));
   }
   app.appendChild(grid);
 

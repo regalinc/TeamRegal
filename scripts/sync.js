@@ -144,6 +144,60 @@ async function fetchJobsInWindow() {
   return jobs;
 }
 
+const ESTIMATE_WORK_STATUSES = ["unscheduled", "scheduled", "in_progress", "completed", "canceled"];
+
+// Estimates have no creation-date range filter (only scheduled_start/end,
+// the on-site visit time — many estimates never have one), so this can't be
+// chunked by date the way fetchJobsInWindow is. As a partial mitigation
+// against the same offset-pagination drift that silently dropped job
+// records (see fetchJobsInWindow's comment), each work_status is fetched
+// separately — a real, disjoint filter that shortens each individual crawl
+// — and within each, paging stops as soon as an estimate's created_at falls
+// before the sync window, since results are sorted newest-first and nothing
+// after that point can still be in range. A defensive id de-dupe guards
+// against the same estimate turning up in more than one status bucket if
+// its status changes mid-sync.
+async function fetchEstimatesInWindow() {
+  const now = new Date();
+  const cutoff = new Date(now);
+  cutoff.setUTCDate(cutoff.getUTCDate() - windowDaysBack(now));
+
+  const estimates = [];
+  const seenIds = new Set();
+
+  for (const workStatus of ESTIMATE_WORK_STATUSES) {
+    let page = 1;
+    let totalPages = 1;
+
+    do {
+      const data = await hcpGet("/estimates", {
+        work_status: workStatus,
+        sort_by: "created_at",
+        sort_direction: "desc",
+        page,
+        page_size: PAGE_SIZE,
+      });
+
+      let reachedCutoff = false;
+      for (const est of data.estimates || []) {
+        if (new Date(est.created_at) < cutoff) {
+          reachedCutoff = true;
+          continue;
+        }
+        if (seenIds.has(est.id)) continue;
+        seenIds.add(est.id);
+        estimates.push(est);
+      }
+
+      totalPages = data.total_pages || 1;
+      page += 1;
+      if (reachedCutoff) break;
+    } while (page <= totalPages && page <= MAX_PAGES);
+  }
+
+  return estimates;
+}
+
 // Housecall Pro tag entry is free-text, so the same tag can come back with
 // stray whitespace (e.g. "Customer Service Specialist " vs "Customer
 // Service Specialist") and fragment what should be one department/tag.
@@ -217,6 +271,34 @@ function toPublicJob(job) {
   };
 }
 
+// "Approved" counts an option the customer approved themselves or one a
+// pro marked approved on their behalf (e.g. after a phone call) — both
+// represent a real conversion. There's no dedicated "approved at" field on
+// an estimate; the closest available signal is the approved option's own
+// updated_at, used here as a best-effort proxy (see fetchEstimatesInWindow
+// for why a better one isn't available).
+const APPROVED_OPTION_STATUSES = new Set(["approved", "pro approved"]);
+
+function toPublicEstimate(estimate) {
+  const approvedOptions = (estimate.options || []).filter((o) =>
+    APPROVED_OPTION_STATUSES.has((o.approval_status || "").toLowerCase())
+  );
+  const approved = approvedOptions.length > 0;
+  // If more than one option is somehow marked approved, use whichever was
+  // marked most recently as the best-guess approval date.
+  const approvedAt = approved
+    ? approvedOptions.reduce((latest, o) => (!latest || new Date(o.updated_at) > new Date(latest) ? o.updated_at : latest), null)
+    : null;
+
+  return {
+    id: estimate.id,
+    created_at: estimate.created_at,
+    assigned_employee_ids: (estimate.assigned_employees || []).map((e) => e.id),
+    approved,
+    approved_at: approvedAt,
+  };
+}
+
 async function main() {
   assertApiKey();
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -232,8 +314,13 @@ async function main() {
   const rawJobs = await fetchJobsInWindow();
   console.log(`  ${rawJobs.length} jobs fetched`);
 
+  console.log("Fetching estimates...");
+  const rawEstimates = await fetchEstimatesInWindow();
+  console.log(`  ${rawEstimates.length} estimates fetched`);
+
   const technicians = employees.map(toPublicTechnician);
   const publicJobs = rawJobs.map(toPublicJob);
+  const publicEstimates = rawEstimates.map(toPublicEstimate);
 
   const byTechnician = {};
   for (const tech of technicians) byTechnician[tech.id] = [];
@@ -256,16 +343,22 @@ async function main() {
     window_days_forward: WINDOW_DAYS_FORWARD,
     technician_count: technicians.length,
     job_count: publicJobs.length,
+    estimate_count: publicEstimates.length,
   };
 
   fs.writeFileSync(path.join(OUT_DIR, "technicians.json"), JSON.stringify(technicians, null, 2));
   fs.writeFileSync(path.join(OUT_DIR, "jobs.json"), JSON.stringify(publicJobs, null, 2));
+  fs.writeFileSync(path.join(OUT_DIR, "estimates.json"), JSON.stringify(publicEstimates, null, 2));
   fs.writeFileSync(
     path.join(OUT_DIR, "dashboard.json"),
     // `jobs` is the deduped flat list (one entry per job regardless of how many
     // technicians it's assigned to) — the dashboard uses it for filtering and
     // metrics so multi-technician jobs aren't double-counted in revenue/totals.
-    JSON.stringify({ meta, technicians, jobs: publicJobs, by_technician: byTechnician, unassigned }, null, 2)
+    JSON.stringify(
+      { meta, technicians, jobs: publicJobs, estimates: publicEstimates, by_technician: byTechnician, unassigned },
+      null,
+      2
+    )
   );
 
   console.log(`Wrote data to ${OUT_DIR}`);
