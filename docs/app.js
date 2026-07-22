@@ -90,14 +90,23 @@ function renderEstimateItem(estimate) {
   const li = document.createElement("li");
   li.className = "job-item";
 
+  // The list can now include estimates given in an earlier period than the
+  // one currently selected (see renderEstimatorCard), so both dates are
+  // explicitly labeled rather than showing a bare date — otherwise which
+  // date is which would be ambiguous once given/approved fall in different
+  // periods.
   li.innerHTML = `
     <div class="job-item-top">
-      <span class="job-time">${formatDate(estimate.created_at)}</span>
+      <span class="job-time">Given ${formatDate(estimate.created_at)}</span>
       <span class="status-badge ${estimate.approved ? "status-complete-rated" : "status-scheduled"}">${estimate.approved ? "Approved" : "Pending"}</span>
     </div>
     <div class="job-desc">${escapeHtml(estimate.estimate_number ? `Estimate #${estimate.estimate_number}` : "Estimate")}</div>
     <div class="job-sub">${escapeHtml(
-      [estimate.customer_label, estimate.approved ? formatMoney((estimate.approved_amount || 0) / CENTS_PER_DOLLAR) : null]
+      [
+        estimate.customer_label,
+        estimate.approved ? `Approved ${formatDate(estimate.approved_at)}` : null,
+        estimate.approved ? formatMoney((estimate.approved_amount || 0) / CENTS_PER_DOLLAR) : null,
+      ]
         .filter(Boolean)
         .join(" · ")
     )}</div>
