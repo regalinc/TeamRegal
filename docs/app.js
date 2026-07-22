@@ -69,16 +69,19 @@ function isEstimator(tech) {
   return (tech.tags || []).includes(ESTIMATOR_TAG);
 }
 
-// Closing % and revenue are both scoped to the same creation-date-scoped
-// "given" set as Estimates given/approved (i.e. the currently selected
-// period/date range), not the separate approval-date "approved this
-// period" number — a closing rate mixing two different date scopes for its
-// numerator and denominator wouldn't mean anything.
+// Closing % is deliberately a mixed-scope ratio: approvals landing in this
+// period (approval-date scoped, same count as the "Approved this period"
+// tile) over estimates given in this period (creation-date scoped). That
+// lets an estimator's rate credit them for closing older proposals this
+// period, rather than only ever measuring what they gave this exact
+// period. Revenue accepted stays scoped to this period's given-and-approved
+// estimates specifically (not the same set the closing rate's numerator
+// draws from).
 function computeEstimatorStats(estimatesGiven, approvedThisPeriod) {
   const given = estimatesGiven.length;
   const approvedEstimates = estimatesGiven.filter((e) => e.approved);
   const approved = approvedEstimates.length;
-  const closingRate = given ? (approved / given) * 100 : 0;
+  const closingRate = given ? (approvedThisPeriod / given) * 100 : 0;
   const revenueCents = approvedEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
   return { given, approved, approvedThisPeriod, closingRate, revenue: revenueCents / CENTS_PER_DOLLAR };
 }
