@@ -189,7 +189,11 @@ function toPublicJob(job) {
     assigned_employee_ids: (job.assigned_employees || []).map((e) => e.id),
     tags: normalizeTags(job.tags),
     business_unit: job.job_fields?.business_unit?.name || null,
-    lead_source: job.lead_source || null,
+    // The customer's lead source (set once on the customer record — how they
+    // originally found the company), not the job-level lead_source field,
+    // which is usually unset since HCP treats lead source as a customer
+    // attribute rather than something logged per job.
+    lead_source: customer.lead_source || null,
     total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     completed_at: job.work_timestamps?.completed_at || null,
