@@ -187,12 +187,17 @@ function render(data) {
 }
 
 function renderLeadSourceSection(periodJobs) {
-  // Lead source performance counts every job from that source, with or
-  // without tags — a job also tagged for another tracked program (Opportunity,
-  // TGL, IFO, Membership Sold, Accessory Sold, ...) still originated from this
-  // lead source and should count here too.
+  // Lead source performance only counts completed jobs within the period —
+  // a scheduled or in-progress job hasn't actually converted into revenue
+  // yet, and counting it here would inflate both the job count and the
+  // revenue figure (which drives bar height and ranking) ahead of that.
+  // Tags don't matter here: a job also tagged for another tracked program
+  // (Opportunity, TGL, IFO, Membership Sold, Accessory Sold, ...) still
+  // originated from this lead source and should count here too.
+  const completedJobs = periodJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
+
   const byLeadSource = new Map();
-  for (const job of periodJobs) {
+  for (const job of completedJobs) {
     const key = job.lead_source || UNKNOWN_LEAD_SOURCE_LABEL;
     if (!byLeadSource.has(key)) byLeadSource.set(key, []);
     byLeadSource.get(key).push(job);
