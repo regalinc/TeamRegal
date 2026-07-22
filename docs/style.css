@@ -309,31 +309,56 @@ img.avatar { object-fit: cover; }
 .dept-full .tech-mini-stats { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
 .dept-full .tech-mini-stat-value { font-size: 1.25rem; }
 
-/* Equal-width segmented bar — see renderLeadSourceBar in admin.js for why
-   segments aren't sized proportionally to revenue. */
-.lead-bar {
+/* Column chart — bar height proportional to revenue (see renderLeadSourceChart
+   in admin.js). The bar lives in its own fixed-height zone (.lead-chart-bar-zone)
+   so a long, wrapped label below it can never compress the bar and distort the
+   proportional encoding — every column's bar-zone bottom sits on the same
+   baseline regardless of label length. Labels wrap onto multiple lines rather
+   than truncating, so a name is never clipped. */
+.lead-chart {
   display: flex;
-  gap: 2px;
-  border-radius: var(--radius);
-  overflow: hidden;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0 4px 4px;
   margin-bottom: 16px;
+  overflow-x: auto;
 }
-.lead-bar-segment {
+.lead-chart-col {
   flex: 1 1 0;
-  min-width: 0;
-  padding: 14px 12px;
-  color: #fff;
+  min-width: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
-.lead-bar-name {
+.lead-chart-bar-zone {
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+}
+.lead-chart-bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  min-height: 6px;
+}
+.lead-chart-label {
+  margin-top: 10px;
+  text-align: center;
+}
+.lead-chart-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
   font-weight: 600;
-  font-size: 0.85rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 0.8rem;
 }
-.lead-bar-stat {
+.lead-chart-name-text {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.lead-chart-stat {
   font-size: 0.75rem;
-  opacity: 0.92;
+  color: var(--text-muted);
   margin-top: 2px;
 }
 

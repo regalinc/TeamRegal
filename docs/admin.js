@@ -187,8 +187,16 @@ function render(data) {
 }
 
 function renderLeadSourceSection(periodJobs) {
+  // Lead source performance is meant to reflect plain, straight jobs from
+  // that source — jobs also tagged for another tracked program (Opportunity,
+  // TGL, IFO, Membership Sold, Accessory Sold, ...) are already counted in
+  // the department/technician scorecards, and including them here too would
+  // inflate this section's totals with jobs that aren't "just" a lead-source
+  // conversion.
+  const untaggedJobs = periodJobs.filter((j) => (j.tags || []).length === 0);
+
   const byLeadSource = new Map();
-  for (const job of periodJobs) {
+  for (const job of untaggedJobs) {
     const key = job.lead_source || UNKNOWN_LEAD_SOURCE_LABEL;
     if (!byLeadSource.has(key)) byLeadSource.set(key, []);
     byLeadSource.get(key).push(job);
@@ -211,7 +219,7 @@ function renderLeadSourceSection(periodJobs) {
   const featured = ranked.slice(0, LEAD_SOURCE_FEATURED_COUNT);
   const overflow = ranked.slice(LEAD_SOURCE_FEATURED_COUNT);
 
-  app.appendChild(renderLeadSourceBar(featured));
+  app.appendChild(renderLeadSourceChart(featured));
 
   if (overflow.length > 0) {
     const details = document.createElement("details");
@@ -230,29 +238,38 @@ function renderLeadSourceSection(periodJobs) {
   }
 }
 
-// A single horizontal bar split into equal-width segments, one per featured
-// lead source, each showing its own name/count/$ value. Segments are equal
-// width rather than sized by revenue share — lead source revenue is
-// typically very skewed (one channel can outweigh another 1000:1), and a
-// strictly proportional segment for the smaller ones would be too thin to
-// hold a legible label. Equal width keeps all of them readable; the ranking
-// (highest revenue first, left to right) still conveys relative importance.
-function renderLeadSourceBar(entries) {
-  const wrap = document.createElement("div");
-  wrap.className = "lead-bar";
-  for (const entry of entries) {
-    const stats = computeStats(entry.jobs);
+// A column chart — bar height proportional to revenue, so relative size is
+// honest at a glance (equal-width segments looked like equal amounts, which
+// they weren't). Labels sit below each bar rather than inside it, so even a
+// short bar for a small source keeps a fully legible name/count/$ value —
+// the height can shrink toward zero without ever clipping text. A 6% floor
+// keeps every bar at least visible as a color swatch.
+const LEAD_CHART_MIN_HEIGHT_PCT = 6;
+
+function renderLeadSourceChart(entries) {
+  const withStats = entries.map((entry) => ({ ...entry, stats: computeStats(entry.jobs) }));
+  const maxRevenue = Math.max(...withStats.map((e) => e.stats.totalRevenue), 0);
+
+  const chart = document.createElement("div");
+  chart.className = "lead-chart";
+  for (const entry of withStats) {
     const colorVar = leadSourceColorVar(entry.name);
-    const seg = document.createElement("div");
-    seg.className = "lead-bar-segment";
-    seg.style.background = `var(${colorVar})`;
-    seg.innerHTML = `
-      <div class="lead-bar-name">${escapeHtml(entry.name)}</div>
-      <div class="lead-bar-stat">${stats.totalJobs.toLocaleString()} job${stats.totalJobs === 1 ? "" : "s"} · ${formatMoney(stats.totalRevenue)}</div>
+    const heightPct = maxRevenue > 0 ? Math.max(LEAD_CHART_MIN_HEIGHT_PCT, (entry.stats.totalRevenue / maxRevenue) * 100) : LEAD_CHART_MIN_HEIGHT_PCT;
+
+    const col = document.createElement("div");
+    col.className = "lead-chart-col";
+    col.innerHTML = `
+      <div class="lead-chart-bar-zone">
+        <div class="lead-chart-bar" style="height:${heightPct}%; background: var(${colorVar})"></div>
+      </div>
+      <div class="lead-chart-label">
+        <div class="lead-chart-name"><span class="dept-color-dot" style="background:var(${colorVar})"></span><span class="lead-chart-name-text">${escapeHtml(entry.name)}</span></div>
+        <div class="lead-chart-stat">${entry.stats.totalJobs.toLocaleString()} job${entry.stats.totalJobs === 1 ? "" : "s"} · ${formatMoney(entry.stats.totalRevenue)}</div>
+      </div>
     `;
-    wrap.appendChild(seg);
+    chart.appendChild(col);
   }
-  return wrap;
+  return chart;
 }
 
 async function loadData() {
