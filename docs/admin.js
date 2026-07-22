@@ -187,16 +187,12 @@ function render(data) {
 }
 
 function renderLeadSourceSection(periodJobs) {
-  // Lead source performance is meant to reflect plain, straight jobs from
-  // that source — jobs also tagged for another tracked program (Opportunity,
-  // TGL, IFO, Membership Sold, Accessory Sold, ...) are already counted in
-  // the department/technician scorecards, and including them here too would
-  // inflate this section's totals with jobs that aren't "just" a lead-source
-  // conversion.
-  const untaggedJobs = periodJobs.filter((j) => (j.tags || []).length === 0);
-
+  // Lead source performance counts every job from that source, with or
+  // without tags — a job also tagged for another tracked program (Opportunity,
+  // TGL, IFO, Membership Sold, Accessory Sold, ...) still originated from this
+  // lead source and should count here too.
   const byLeadSource = new Map();
-  for (const job of untaggedJobs) {
+  for (const job of periodJobs) {
     const key = job.lead_source || UNKNOWN_LEAD_SOURCE_LABEL;
     if (!byLeadSource.has(key)) byLeadSource.set(key, []);
     byLeadSource.get(key).push(job);
