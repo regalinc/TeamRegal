@@ -69,20 +69,20 @@ function isEstimator(tech) {
   return (tech.tags || []).includes(ESTIMATOR_TAG);
 }
 
-// Closing % is deliberately a mixed-scope ratio: approvals landing in this
-// period (approval-date scoped, same count as the "Approved this period"
-// tile) over estimates given in this period (creation-date scoped). That
-// lets an estimator's rate credit them for closing older proposals this
+// Closing % and Revenue accepted are both deliberately mixed-scope:
+// approvals landing in this period (approval-date scoped — same set as the
+// "Approved this period" tile) over/summed against estimates given in this
+// period (creation-date scoped) only for the denominator of the rate. That
+// lets an estimator's numbers credit them for closing older proposals this
 // period, rather than only ever measuring what they gave this exact
-// period. Revenue accepted stays scoped to this period's given-and-approved
-// estimates specifically (not the same set the closing rate's numerator
-// draws from).
-function computeEstimatorStats(estimatesGiven, approvedThisPeriod) {
+// period — an estimate given last month but approved this month now counts
+// toward both Closing % and Revenue accepted this month.
+function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates) {
   const given = estimatesGiven.length;
-  const approvedEstimates = estimatesGiven.filter((e) => e.approved);
-  const approved = approvedEstimates.length;
+  const approved = estimatesGiven.filter((e) => e.approved).length;
+  const approvedThisPeriod = approvedThisPeriodEstimates.length;
   const closingRate = given ? (approvedThisPeriod / given) * 100 : 0;
-  const revenueCents = approvedEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
+  const revenueCents = approvedThisPeriodEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
   return { given, approved, approvedThisPeriod, closingRate, revenue: revenueCents / CENTS_PER_DOLLAR };
 }
 
@@ -105,7 +105,7 @@ function renderEstimateItem(estimate) {
   return li;
 }
 
-function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriod) {
+function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) {
   const headerHtml = `
     ${renderAvatar(tech)}
     <div>
@@ -131,7 +131,7 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriod) {
     card.appendChild(tagsRow);
   }
 
-  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriod);
+  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates);
   const statsRow = document.createElement("div");
   statsRow.className = "tech-mini-stats";
   statsRow.innerHTML = [
@@ -143,7 +143,18 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriod) {
   ].join("");
   card.appendChild(statsRow);
 
-  const sortedEstimates = [...estimatesGiven].sort((a, b) => (a.created_at || "").localeCompare(b.created_at || ""));
+  // Shows every estimate feeding any tile above, not just this period's
+  // given estimates — an estimate given last period but approved this one
+  // (counted in Approved this period / Closing % / Revenue accepted) would
+  // otherwise contribute to those numbers while never appearing in the list.
+  const seenIds = new Set();
+  const combinedEstimates = [];
+  for (const est of [...estimatesGiven, ...approvedThisPeriodEstimates]) {
+    if (seenIds.has(est.id)) continue;
+    seenIds.add(est.id);
+    combinedEstimates.push(est);
+  }
+  const sortedEstimates = combinedEstimates.sort((a, b) => (a.created_at || "").localeCompare(b.created_at || ""));
 
   const details = document.createElement("details");
   details.className = "tech-job-details";
@@ -382,10 +393,10 @@ function render(data) {
   grid.className = "tech-grid";
   for (const tech of rosterTechs) {
     const techEstimatesGiven = periodEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
-    const techApprovedThisPeriod = approvedThisPeriod.filter((e) => (e.assigned_employee_ids || []).includes(tech.id)).length;
+    const techApprovedThisPeriodEstimates = approvedThisPeriod.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
 
     if (isEstimator(tech)) {
-      grid.appendChild(renderEstimatorCard(tech, techEstimatesGiven, techApprovedThisPeriod));
+      grid.appendChild(renderEstimatorCard(tech, techEstimatesGiven, techApprovedThisPeriodEstimates));
       continue;
     }
 
@@ -394,7 +405,7 @@ function render(data) {
     const extraStats = [
       { label: "Estimates given", value: estimateStats.given.toLocaleString() },
       { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
-      { label: "Approved this period", value: techApprovedThisPeriod.toLocaleString() },
+      { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
     ];
 
     grid.appendChild(renderTechCard(tech, jobs, extraStats));
