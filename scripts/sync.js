@@ -273,23 +273,47 @@ function toPublicJob(job) {
 
 // "Approved" counts an option the customer approved themselves or one a
 // pro marked approved on their behalf (e.g. after a phone call) — both
-// represent a real conversion. There's no dedicated "approved at" field on
-// an estimate; the closest available signal is the approved option's own
-// updated_at, used here as a best-effort proxy (see fetchEstimatesInWindow
-// for why a better one isn't available).
+// represent a real conversion.
 const APPROVED_OPTION_STATUSES = new Set(["approved", "pro approved"]);
 
-function toPublicEstimate(estimate) {
+// There's no dedicated "approved at" field on an estimate, and the obvious
+// stand-in — the approved option's own updated_at — turned out to be
+// unreliable: it bumps on *any* change to the option, including the
+// resulting job's status progressing (scheduled -> started -> completed)
+// long after the actual approval decision. In practice this meant ~13% of
+// approved estimates showed an approval date weeks or months later than
+// when they were really approved.
+//
+// Instead, approved_at is derived by diffing against the *previous* sync's
+// output (passed in as `previousRecord`): the first time we observe an
+// estimate's approved flag flip from false to true (or see it approved
+// with no prior record at all — nothing to diff against) is recorded as
+// its approved_at, using this sync run's own timestamp. That's accurate to
+// within one sync interval, which beats trusting a field that can silently
+// drift by months.
+//
+// The unavoidable gap: an estimate that was *already* approved as of the
+// last sync just carries forward whatever approved_at that sync recorded —
+// including null, if it was already approved before this diffing approach
+// shipped (or first entered the sync window already approved) and we
+// therefore never observed the actual transition. Those stay null (and so
+// drop out of every approval-date-scoped stat) unless Housecall Pro's
+// approval status genuinely changes again later. There's no way to
+// retroactively recover a timestamp we never observed; only a real-time
+// webhook integration (a bigger project — see README) would close this gap
+// for good.
+function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
   const customer = estimate.customer || {};
   const approvedOptions = (estimate.options || []).filter((o) =>
     APPROVED_OPTION_STATUSES.has((o.approval_status || "").toLowerCase())
   );
   const approved = approvedOptions.length > 0;
-  // If more than one option is somehow marked approved, use whichever was
-  // marked most recently as the best-guess approval date.
-  const approvedAt = approved
-    ? approvedOptions.reduce((latest, o) => (!latest || new Date(o.updated_at) > new Date(latest) ? o.updated_at : latest), null)
-    : null;
+
+  let approvedAt = null;
+  if (approved) {
+    approvedAt = previousRecord && previousRecord.approved ? previousRecord.approved_at : syncedAtIso;
+  }
+
   // Revenue an estimator actually closed — sum of the approved option(s)'
   // total_amount, same cents-based money field convention as jobs.
   const approvedAmount = approvedOptions.reduce((sum, o) => sum + (typeof o.total_amount === "number" ? o.total_amount : 0), 0);
@@ -306,9 +330,28 @@ function toPublicEstimate(estimate) {
   };
 }
 
+// Reads the previous sync's estimates.json, if any (there won't be one on
+// the very first-ever run), so toPublicEstimate can diff against it to
+// derive approved_at. Missing/unparseable file -> empty map, same as
+// "we have no prior observation for any of these."
+function loadPreviousEstimatesById() {
+  const previousPath = path.join(OUT_DIR, "estimates.json");
+  try {
+    const raw = JSON.parse(fs.readFileSync(previousPath, "utf8"));
+    return new Map(raw.map((e) => [e.id, e]));
+  } catch {
+    return new Map();
+  }
+}
+
 async function main() {
   assertApiKey();
   fs.mkdirSync(OUT_DIR, { recursive: true });
+
+  const syncedAt = new Date();
+  const syncedAtIso = syncedAt.toISOString();
+
+  const previousEstimatesById = loadPreviousEstimatesById();
 
   console.log("Fetching employees...");
   const employees = await fetchEmployees();
@@ -327,7 +370,7 @@ async function main() {
 
   const technicians = employees.map(toPublicTechnician);
   const publicJobs = rawJobs.map(toPublicJob);
-  const publicEstimates = rawEstimates.map(toPublicEstimate);
+  const publicEstimates = rawEstimates.map((e) => toPublicEstimate(e, previousEstimatesById.get(e.id), syncedAtIso));
 
   const byTechnician = {};
   for (const tech of technicians) byTechnician[tech.id] = [];
@@ -345,8 +388,8 @@ async function main() {
   }
 
   const meta = {
-    last_synced_at: new Date().toISOString(),
-    window_days_back: windowDaysBack(new Date()),
+    last_synced_at: syncedAtIso,
+    window_days_back: windowDaysBack(syncedAt),
     window_days_forward: WINDOW_DAYS_FORWARD,
     technician_count: technicians.length,
     job_count: publicJobs.length,
