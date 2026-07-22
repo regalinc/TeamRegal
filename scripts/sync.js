@@ -156,6 +156,22 @@ function normalizeTags(tags) {
   return [...seen];
 }
 
+// Lead source is also free text on the customer record, so the same
+// real-world source can end up spelled more than one way (e.g. a dropped
+// apostrophe) and get split into separate entries on the lead source
+// chart. Known variants are canonicalized to one name here; add to this
+// map as new duplicates turn up rather than fixing them in HCP itself,
+// since re-typed history wouldn't retroactively fix already-synced jobs.
+const LEAD_SOURCE_ALIASES = {
+  lowes: "Lowe's",
+};
+
+function normalizeLeadSource(raw) {
+  const trimmed = String(raw || "").trim();
+  if (!trimmed) return null;
+  return LEAD_SOURCE_ALIASES[trimmed.toLowerCase()] || trimmed;
+}
+
 // Public dashboard data intentionally omits customer PII (phone, email,
 // full street address) and technician contact info — only what a
 // technician needs to see their own schedule at a glance.
@@ -193,7 +209,7 @@ function toPublicJob(job) {
     // originally found the company), not the job-level lead_source field,
     // which is usually unset since HCP treats lead source as a customer
     // attribute rather than something logged per job.
-    lead_source: customer.lead_source || null,
+    lead_source: normalizeLeadSource(customer.lead_source),
     total_amount: typeof job.total_amount === "number" ? job.total_amount : 0,
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     completed_at: job.work_timestamps?.completed_at || null,
