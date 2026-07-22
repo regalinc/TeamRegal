@@ -280,6 +280,7 @@ function toPublicJob(job) {
 const APPROVED_OPTION_STATUSES = new Set(["approved", "pro approved"]);
 
 function toPublicEstimate(estimate) {
+  const customer = estimate.customer || {};
   const approvedOptions = (estimate.options || []).filter((o) =>
     APPROVED_OPTION_STATUSES.has((o.approval_status || "").toLowerCase())
   );
@@ -289,13 +290,19 @@ function toPublicEstimate(estimate) {
   const approvedAt = approved
     ? approvedOptions.reduce((latest, o) => (!latest || new Date(o.updated_at) > new Date(latest) ? o.updated_at : latest), null)
     : null;
+  // Revenue an estimator actually closed — sum of the approved option(s)'
+  // total_amount, same cents-based money field convention as jobs.
+  const approvedAmount = approvedOptions.reduce((sum, o) => sum + (typeof o.total_amount === "number" ? o.total_amount : 0), 0);
 
   return {
     id: estimate.id,
+    estimate_number: estimate.estimate_number || null,
+    customer_label: [customer.first_name, customer.last_name ? customer.last_name[0] + "." : null].filter(Boolean).join(" "),
     created_at: estimate.created_at,
     assigned_employee_ids: (estimate.assigned_employees || []).map((e) => e.id),
     approved,
     approved_at: approvedAt,
+    approved_amount: approvedAmount,
   };
 }
 

@@ -58,6 +58,112 @@ function computeEstimateStats(estimatesGiven) {
   return { given: estimatesGiven.length, approved };
 }
 
+// Technicians tagged "Estimator" (office staff who write estimates rather
+// than do field work) get a different card entirely — the usual field-tech
+// tiles (Jobs, Revenue, Leads, RCC sold, IFO, Accessory sold, ...) would
+// all read zero for them, since those are all derived from jobs they were
+// never assigned to.
+const ESTIMATOR_TAG = "Estimator";
+
+function isEstimator(tech) {
+  return (tech.tags || []).includes(ESTIMATOR_TAG);
+}
+
+// Closing % and revenue are both scoped to the same creation-date-scoped
+// "given" set as Estimates given/approved (i.e. the currently selected
+// period/date range), not the separate approval-date "approved this
+// period" number — a closing rate mixing two different date scopes for its
+// numerator and denominator wouldn't mean anything.
+function computeEstimatorStats(estimatesGiven, approvedThisPeriod) {
+  const given = estimatesGiven.length;
+  const approvedEstimates = estimatesGiven.filter((e) => e.approved);
+  const approved = approvedEstimates.length;
+  const closingRate = given ? (approved / given) * 100 : 0;
+  const revenueCents = approvedEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
+  return { given, approved, approvedThisPeriod, closingRate, revenue: revenueCents / CENTS_PER_DOLLAR };
+}
+
+function renderEstimateItem(estimate) {
+  const li = document.createElement("li");
+  li.className = "job-item";
+
+  li.innerHTML = `
+    <div class="job-item-top">
+      <span class="job-time">${formatDate(estimate.created_at)}</span>
+      <span class="status-badge ${estimate.approved ? "status-complete-rated" : "status-scheduled"}">${estimate.approved ? "Approved" : "Pending"}</span>
+    </div>
+    <div class="job-desc">${escapeHtml(estimate.estimate_number ? `Estimate #${estimate.estimate_number}` : "Estimate")}</div>
+    <div class="job-sub">${escapeHtml(
+      [estimate.customer_label, estimate.approved ? formatMoney((estimate.approved_amount || 0) / CENTS_PER_DOLLAR) : null]
+        .filter(Boolean)
+        .join(" · ")
+    )}</div>
+  `;
+  return li;
+}
+
+function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriod) {
+  const headerHtml = `
+    ${renderAvatar(tech)}
+    <div>
+      <div class="tech-name">${escapeHtml(tech.name || "Unknown")}</div>
+      ${tech.role ? `<div class="tech-role">${escapeHtml(tech.role)}</div>` : ""}
+    </div>
+  `;
+  const tagsHtml =
+    tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
+
+  const card = document.createElement("div");
+  card.className = "tech-card";
+
+  const header = document.createElement("div");
+  header.className = "tech-card-header";
+  header.innerHTML = headerHtml;
+  card.appendChild(header);
+
+  if (tagsHtml) {
+    const tagsRow = document.createElement("div");
+    tagsRow.className = "tech-tags";
+    tagsRow.innerHTML = tagsHtml;
+    card.appendChild(tagsRow);
+  }
+
+  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriod);
+  const statsRow = document.createElement("div");
+  statsRow.className = "tech-mini-stats";
+  statsRow.innerHTML = [
+    renderMiniStat("Estimates given", stats.given.toLocaleString()),
+    renderMiniStat("Estimates approved", stats.approved.toLocaleString()),
+    renderMiniStat("Approved this period", stats.approvedThisPeriod.toLocaleString()),
+    renderMiniStat("Closing %", `${stats.closingRate.toFixed(0)}%`),
+    renderMiniStat("Revenue accepted", formatMoney(stats.revenue)),
+  ].join("");
+  card.appendChild(statsRow);
+
+  const sortedEstimates = [...estimatesGiven].sort((a, b) => (a.created_at || "").localeCompare(b.created_at || ""));
+
+  const details = document.createElement("details");
+  details.className = "tech-job-details";
+  const summary = document.createElement("summary");
+  summary.textContent = `${sortedEstimates.length} estimate${sortedEstimates.length === 1 ? "" : "s"} in view`;
+  details.appendChild(summary);
+
+  if (sortedEstimates.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "no-jobs";
+    empty.textContent = "No estimates match the current filters.";
+    details.appendChild(empty);
+  } else {
+    const list = document.createElement("ul");
+    list.className = "job-list";
+    for (const est of sortedEstimates) list.appendChild(renderEstimateItem(est));
+    details.appendChild(list);
+  }
+  card.appendChild(details);
+
+  return card;
+}
+
 function currentFilters() {
   return {
     text: searchInput.value.trim().toLowerCase(),
@@ -272,11 +378,16 @@ function render(data) {
   const grid = document.createElement("div");
   grid.className = "tech-grid";
   for (const tech of rosterTechs) {
-    const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
-
     const techEstimatesGiven = periodEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
-    const estimateStats = computeEstimateStats(techEstimatesGiven);
     const techApprovedThisPeriod = approvedThisPeriod.filter((e) => (e.assigned_employee_ids || []).includes(tech.id)).length;
+
+    if (isEstimator(tech)) {
+      grid.appendChild(renderEstimatorCard(tech, techEstimatesGiven, techApprovedThisPeriod));
+      continue;
+    }
+
+    const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
+    const estimateStats = computeEstimateStats(techEstimatesGiven);
     const extraStats = [
       { label: "Estimates given", value: estimateStats.given.toLocaleString() },
       { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
