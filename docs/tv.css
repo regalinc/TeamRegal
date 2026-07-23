@@ -1,0 +1,152 @@
+/* Standalone palette for the TV kiosk view — forced dark regardless of the
+   display's OS/browser theme setting, since smart TV browsers are
+   inconsistent about reporting a light/dark preference and this is a fixed
+   always-on display, not something a person toggles. Values match the main
+   dashboard's existing dark mode (style.css) for consistency.
+
+   Sizing is viewport-relative (vw/vh/clamp), not fixed px — a browser
+   renders CSS pixels at a fixed reference size regardless of whether the
+   display is a 13" laptop or a 60"+ TV, so fixed-px sizing that looks right
+   in a normal browser window ends up as a small block in the corner of a
+   1920x1080 (or 4K) screen. Scaling off the viewport instead means the
+   layout actually fills whatever screen it's opened on. */
+:root {
+  --bg: #14161a;
+  --card-bg: #1e2126;
+  --tile-bg: #262a31;
+  --border: #2c2f36;
+  --text: #edeef0;
+  --text-muted: #9aa0a8;
+  --accent: #2563eb;
+  --good-bg: #008300;
+  --good-text: #eaf3de;
+  --bad-bg: #a32d2d;
+  --bad-text: #fcebeb;
+  --radius: 1vw;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tv-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vh 2.5vw 1.5vh;
+}
+.tv-header .logo { height: clamp(28px, 4vh, 56px); width: auto; }
+.tv-dept-name { font-size: clamp(20px, 3.2vh, 48px); font-weight: 600; }
+.tv-sync-status { font-size: clamp(12px, 1.3vh, 20px); color: var(--text-muted); }
+.tv-sync-status.stale { color: #d95926; }
+
+.tv-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  gap: 2vw;
+  padding: 0 2.5vw 2.5vh;
+  align-items: stretch;
+}
+
+.tv-featured {
+  flex: 0 0 32vw;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5vh 2vw;
+  display: flex;
+  flex-direction: column;
+}
+.tv-featured-photo-wrap { text-align: center; margin-bottom: 1.5vh; }
+.tv-featured-photo, .tv-featured-photo-fallback {
+  width: min(24vh, 16vw);
+  height: min(24vh, 16vw);
+  border-radius: 50%;
+  object-fit: cover;
+}
+.tv-featured-photo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: clamp(28px, 7vh, 80px);
+  margin: 0 auto;
+}
+.tv-featured-name { text-align: center; font-size: clamp(20px, 3vh, 42px); font-weight: 600; }
+.tv-featured-rank { text-align: center; font-size: clamp(14px, 1.8vh, 26px); color: var(--text-muted); margin-bottom: 2vh; }
+
+.tv-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1vh;
+  flex: 1;
+  align-content: center;
+}
+.tv-tile {
+  background: var(--tile-bg);
+  border-radius: calc(var(--radius) * 0.7);
+  padding: 2vh 0.5vw;
+  text-align: center;
+}
+.tv-tile.tv-good { background: var(--good-bg); }
+.tv-tile.tv-bad { background: var(--bad-bg); }
+.tv-tile-label { font-size: clamp(11px, 1.3vh, 19px); text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); }
+.tv-tile.tv-good .tv-tile-label, .tv-tile.tv-good .tv-tile-value { color: var(--good-text); }
+.tv-tile.tv-bad .tv-tile-label, .tv-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
+.tv-tile-value { font-size: clamp(16px, 2.6vh, 38px); font-weight: 600; margin-top: 0.5vh; }
+
+.tv-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  min-width: 0;
+}
+.tv-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1vh 1.5vw;
+  min-height: 0;
+}
+.tv-row.tv-row-active { border-color: var(--accent); border-width: 2px; }
+.tv-row-photo, .tv-row-photo-fallback {
+  width: min(7vh, 5vw);
+  height: min(7vh, 5vw);
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.tv-row-photo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: clamp(14px, 2vh, 26px);
+}
+.tv-row-rank { font-size: clamp(16px, 2.2vh, 30px); font-weight: 600; color: var(--text-muted); width: 3vw; text-align: center; flex-shrink: 0; }
+.tv-row-name { font-weight: 600; font-size: clamp(15px, 2.1vh, 28px); }
+.tv-row-meta { font-size: clamp(11px, 1.4vh, 19px); color: var(--text-muted); }
+.tv-row-revenue { margin-left: auto; font-size: clamp(16px, 2.4vh, 32px); font-weight: 600; white-space: nowrap; }
+
+.tv-empty { padding: 8vh 2.5vw; text-align: center; color: var(--text-muted); font-size: clamp(16px, 2.5vh, 32px); }
