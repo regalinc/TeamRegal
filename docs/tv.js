@@ -62,11 +62,18 @@ function kpiClass(_metricKey, _value) {
   return null;
 }
 
-function renderAvatarBlock(tech, sizeClass, fallbackClass) {
+function renderAvatarBlock(tech, sizeClass, fallbackClass, { large = false } = {}) {
   const initialsText = escapeHtml(initials(tech.name || "?"));
   const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
   if (!hasRealAvatar(tech)) {
     return `<div class="${fallbackClass}" style="background:${bg}">${initialsText}</div>`;
+  }
+  const bigUrl = large ? largeAvatarUrl(tech.avatar_url) : null;
+  if (bigUrl) {
+    return `
+      <img class="${sizeClass}" src="${escapeHtml(bigUrl)}" data-thumb-src="${escapeHtml(tech.avatar_url)}" alt="" onerror="handleLargeAvatarError(this)" />
+      <div class="${fallbackClass}" style="background:${bg};display:none">${initialsText}</div>
+    `;
   }
   return `
     <img class="${sizeClass}" src="${escapeHtml(tech.avatar_url)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
@@ -79,7 +86,7 @@ function renderFeatured(entry) {
   return `
     <div class="tv-featured">
       <div class="tv-featured-photo-wrap">
-        ${renderAvatarBlock(tech, "tv-featured-photo", "tv-featured-photo-fallback")}
+        ${renderAvatarBlock(tech, "tv-featured-photo", "tv-featured-photo-fallback", { large: true })}
       </div>
       <div class="tv-featured-name">${escapeHtml(tech.name || "Unknown")}</div>
       <div class="tv-featured-rank">#${rank} · ${escapeHtml(DEPT)}</div>

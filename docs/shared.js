@@ -68,6 +68,37 @@ function hasRealAvatar(tech) {
   return Boolean(tech.avatar_url) && !tech.avatar_url.includes(HCP_PLACEHOLDER_AVATAR);
 }
 
+// Housecall Pro's avatar CDN stores an employee's photo at several sizes
+// under sibling folders that share the same filename — the API only ever
+// returns the "thumb_web_round" (40x40) one, but an "original" (full
+// upload resolution, confirmed 1000px+ on the accounts checked) sits right
+// next to it. Small on-screen avatars (~36-40px, e.g. every scorecard) are
+// already native resolution with the thumb, so this is only worth using
+// where a photo renders large — currently just the TV kiosk's featured
+// card, which was upscaling the 40px thumb 6-13x on a real TV and looked
+// accordingly blurry. Not every employee has an "original" (older/re-synced
+// accounts may only have the thumb), so callers must fall back gracefully
+// — see handleLargeAvatarError.
+function largeAvatarUrl(url) {
+  if (!url || !url.includes("/thumb_web_round/")) return null;
+  return url.replace("/thumb_web_round/", "/original/");
+}
+
+// <img onerror> handler for an avatar requested via largeAvatarUrl. First
+// failure means this employee has no "original" variant — fall back to the
+// known-good thumb URL stashed in data-thumb-src. A second failure (thumb
+// itself 404s, or there's no photo at all) falls back to the colored-
+// initials sibling element, same as renderAvatar's single-stage handler.
+function handleLargeAvatarError(img) {
+  if (img.dataset.fallbackStage !== "thumb" && img.dataset.thumbSrc) {
+    img.dataset.fallbackStage = "thumb";
+    img.src = img.dataset.thumbSrc;
+    return;
+  }
+  img.style.display = "none";
+  img.nextElementSibling.style.display = "flex";
+}
+
 // Renders the technician's real photo when Housecall Pro has one on file,
 // falling back to the colored-initials avatar otherwise (including if the
 // photo URL 404s at runtime).
