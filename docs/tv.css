@@ -62,6 +62,30 @@ body {
   align-items: stretch;
 }
 
+/* HVAC Service / Plumbing Service: two business-unit sections stacked
+   vertically instead of the featured-card + list layout (see DEPT_BU_SPLIT
+   in tv.js) — each section is its own compact ranked list, so there's no
+   room for a second giant featured photo without cramping the screen. */
+.tv-main-split {
+  flex-direction: column;
+  gap: 2vh;
+}
+.tv-bu-section {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+.tv-bu-header {
+  flex: 0 0 auto;
+  font-size: clamp(16px, 2.4vh, 32px);
+  font-weight: 600;
+  color: var(--text-muted);
+  padding-left: 0.3vw;
+}
+.tv-bu-section .tv-list { flex: 1; min-height: 0; }
+
 .tv-featured {
   flex: 0 0 32vw;
   background: var(--card-bg);
@@ -168,5 +192,19 @@ body {
 .tv-row-tile .tv-tile-value { font-size: clamp(13px, 1.7vh, 24px); margin-top: 0.2vh; }
 .tv-row-tile.tv-good .tv-tile-label, .tv-row-tile.tv-good .tv-tile-value { color: var(--good-text); }
 .tv-row-tile.tv-bad .tv-tile-label, .tv-row-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
+
+/* The aggregate row at the bottom of a BU section (see renderTotalsRow) —
+   an accent border plus a bolder, uppercase label is enough to read as "the
+   sum," not another ranked person, without a whole separate color scheme. */
+.tv-totals-row {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+.tv-totals-row .tv-row-name {
+  color: var(--text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 
 .tv-empty { padding: 8vh 2.5vw; text-align: center; color: var(--text-muted); font-size: clamp(16px, 2.5vh, 32px); }
