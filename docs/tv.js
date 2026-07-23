@@ -79,11 +79,31 @@ function departmentOf(tech) {
   return OFFICE_LABEL;
 }
 
-// Placeholder until real KPI thresholds are wired in — every tile renders
-// neutral for now. Once thresholds exist, this returns "tv-good"/"tv-bad"
-// per metric instead of null, and nothing else about the layout changes.
-function kpiClass(_metricKey, _value) {
-  return null;
+// Regal's KPI targets — currently only defined for the "30" (HVAC Service)
+// screen; every other screen's tiles stay neutral (kpiClass falls through to
+// the DEPT !== "30" check below) until thresholds are defined for them too.
+// Each entry gets the full stats object (not just its own tile's value)
+// since three of these four are ratios against totalJobs ("calls"), not raw
+// counts. A tech/section with zero jobs in the period returns neutral for
+// every ratio-based KPI rather than a misleading pass or fail on no data.
+const BU_30_KPI_THRESHOLDS = {
+  // IFO ("in front of, no sale") should be under 5% of jobs — lower is better.
+  ifo: (stats) => (stats.totalJobs ? stats.ifo / stats.totalJobs < 0.05 : null),
+  // Avg ticket should be at least $450 — higher is better, not a ratio.
+  avgTicket: (stats) => (stats.totalJobs ? stats.avgTicket >= 450 : null),
+  // Lead turnover: at least 1 lead (TGL-tagged job) per 12 calls.
+  leads: (stats) => (stats.totalJobs ? stats.leads / stats.totalJobs >= 1 / 12 : null),
+  // Accessory sales: at least 1 sale per 8 calls.
+  accessorySold: (stats) => (stats.totalJobs ? stats.accessorySold / stats.totalJobs >= 1 / 8 : null),
+};
+
+function kpiClass(metricKey, stats) {
+  if (DEPT !== "30") return null;
+  const check = BU_30_KPI_THRESHOLDS[metricKey];
+  if (!check) return null;
+  const pass = check(stats);
+  if (pass === null) return null;
+  return pass ? "tv-good" : "tv-bad";
 }
 
 function renderAvatarBlock(tech, sizeClass, fallbackClass, { large = false } = {}) {
@@ -114,14 +134,14 @@ function tvTile(label, value, cls, sizeClass) {
 // for a compact list row).
 function metricTiles(stats, sizeClass) {
   return [
-    tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats.totalRevenue), sizeClass),
-    tvTile("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats.avgTicket), sizeClass),
-    tvTile("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats.completionRate), sizeClass),
-    tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats.totalJobs), sizeClass),
-    tvTile("Leads", stats.leads.toLocaleString(), kpiClass("leads", stats.leads), sizeClass),
-    tvTile("Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats.leadsSold), sizeClass),
-    tvTile("IFO", stats.ifo.toLocaleString(), kpiClass("ifo", stats.ifo), sizeClass),
-    tvTile("Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats.accessorySold), sizeClass),
+    tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats), sizeClass),
+    tvTile("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats), sizeClass),
+    tvTile("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats), sizeClass),
+    tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats), sizeClass),
+    tvTile("Leads", stats.leads.toLocaleString(), kpiClass("leads", stats), sizeClass),
+    tvTile("Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats), sizeClass),
+    tvTile("IFO", stats.ifo.toLocaleString(), kpiClass("ifo", stats), sizeClass),
+    tvTile("Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats), sizeClass),
   ].join("");
 }
 

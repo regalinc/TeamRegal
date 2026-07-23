@@ -108,7 +108,13 @@ Each department has a **fixed color identity** (a top border + dot on its card) 
 
 A BU screen's header and featured-card rank subtitle both show the business unit's exact name as synced from Housecall Pro (e.g. "30 HVAC SERVICE"), read live off a matching job rather than hardcoded, so it always matches what `admin.html` shows for the same BU (`businessUnitLabelForCode` in `tv.js`).
 
-**KPI tiles aren't colored yet.** `kpiClass()` in `tv.js` is a placeholder that always returns neutral — the styling (`.tv-good`/`.tv-bad` classes, solid-fill treatment) is built and ready, but there are no real pass/fail thresholds wired in yet. Once real KPI values exist, `kpiClass` is the only thing that needs to change.
+**KPI tiles are colored on the "30" screen only, per Regal's own targets** (`BU_30_KPI_THRESHOLDS`/`kpiClass` in `tv.js`) — solid green (`.tv-good`) or red (`.tv-bad`) fill on the tile, not just the number, so it reads at a glance from across a room:
+- **IFO** under 5% of jobs — lower is better (`stats.ifo / stats.totalJobs < 0.05`)
+- **Avg ticket** $450 or more
+- **Leads** (lead turnover) at least 1 per 12 jobs (`stats.leads / stats.totalJobs >= 1/12`)
+- **Accessory sold** at least 1 per 8 jobs (`stats.accessorySold / stats.totalJobs >= 1/8`)
+
+Revenue, Completion, Jobs, and Leads sold have no target yet and stay neutral. A tech/section with zero jobs in the period renders every ratio-based KPI neutral too, rather than a misleading pass or fail with no underlying data. Every other screen's tiles stay fully neutral (`kpiClass` short-circuits unless the screen is `"30"`) — extend `BU_30_KPI_THRESHOLDS`-style logic (a new `{screen}_KPI_THRESHOLDS` map, checked in `kpiClass`) once targets exist for another screen.
 
 **Forced dark mode, not theme-adaptive.** Unlike the rest of the site (`prefers-color-scheme`-based), `tv.css` hardcodes the dark palette unconditionally — smart TV browsers are inconsistent about reporting an OS-level light/dark preference, and this is a fixed always-on display rather than something a person toggles, so relying on auto-detection risked an unpredictable result per device.
 
