@@ -109,9 +109,9 @@ function tvTile(label, value, cls, sizeClass) {
   return `<div class="${sizeClass || "tv-tile"} ${cls || ""}"><div class="tv-tile-label">${escapeHtml(label)}</div><div class="tv-tile-value">${escapeHtml(value)}</div></div>`;
 }
 
-// The full metric set shown per technician/totals row, in display order.
-// sizeClass picks the tile styling ("tv-tile" for the big featured card,
-// "tv-row-tile" for the compact list/totals rows).
+// The full metric set shown per technician, in display order. sizeClass
+// picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
+// for a compact list row).
 function metricTiles(stats, sizeClass) {
   return [
     tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats.totalRevenue), sizeClass),
@@ -158,24 +158,6 @@ function renderRow(entry) {
   `;
 }
 
-// One aggregate row at the bottom of a business-unit screen's list — same
-// tile set as an individual row, but summed across the whole roster's jobs
-// in that BU (see buildBuTotals) rather than any one person's numbers.
-// Single-tag screens (Office, the Installation departments) don't have an
-// equivalent single business unit to total, so they don't get this row.
-function renderTotalsRow(stats) {
-  return `
-    <div class="tv-row tv-totals-row">
-      <div class="tv-row-name-block">
-        <div class="tv-row-name">Total</div>
-      </div>
-      <div class="tv-row-metrics">
-        ${metricTiles(stats, "tv-row-tile")}
-      </div>
-    </div>
-  `;
-}
-
 // Ranks every tech in the roster by revenue for the selected period —
 // including $0 techs, ranked last, so the full roster is always visible
 // rather than only whoever has activity.
@@ -210,21 +192,6 @@ function buildBuRanked(deptTechs, jobs, code) {
   return entries;
 }
 
-// Aggregate stats for a BU screen's totals row — computed directly from
-// that BU's jobs (not summed from the individual rows above), same
-// unsplit-revenue convention admin.html's department cards use: a job
-// belongs to the total once regardless of how many techs worked it.
-function buildBuTotals(deptTechs, jobs, code) {
-  const techIds = new Set(deptTechs.map((t) => t.id));
-  const buJobs = jobs.filter(
-    (j) =>
-      businessUnitCode(j.business_unit) === code &&
-      jobInPeriod(j, PERIOD) &&
-      (j.assigned_employee_ids || []).some((id) => techIds.has(id))
-  );
-  return computeScorecardStats(buJobs, { splitRevenue: false });
-}
-
 // A BU screen's header/rank-subtitle text: the business unit's actual name
 // as synced from Housecall Pro (e.g. "30 HVAC SERVICE"), read live off any
 // matching job in view rather than hardcoded, so it always matches what
@@ -238,14 +205,14 @@ function businessUnitLabelForCode(jobs, code, fallbackLabel) {
 
 let latestData = null;
 
-function renderRoster(entries, screenLabel, totalsStats) {
+function renderRoster(entries, screenLabel) {
   const featured = entries[0];
   const rest = entries.slice(1);
 
   mainEl.innerHTML = renderFeatured(featured, screenLabel);
   const list = document.createElement("div");
   list.className = "tv-list";
-  list.innerHTML = rest.map((entry) => renderRow(entry)).join("") + (totalsStats ? renderTotalsRow(totalsStats) : "");
+  list.innerHTML = rest.map((entry) => renderRow(entry)).join("");
   mainEl.appendChild(list);
 }
 
@@ -281,13 +248,12 @@ function render() {
   // every data refresh; render() just always reads the current #1.
   if (buConfig) {
     const entries = buildBuRanked(deptTechs, jobs, DEPT);
-    const totals = buildBuTotals(deptTechs, jobs, DEPT);
-    renderRoster(entries, screenLabel, totals);
+    renderRoster(entries, screenLabel);
     return;
   }
 
   const entries = buildRanked(deptTechs, jobs);
-  renderRoster(entries, screenLabel, null);
+  renderRoster(entries, screenLabel);
 }
 
 async function loadData() {

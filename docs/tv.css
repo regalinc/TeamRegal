@@ -169,18 +169,4 @@ body {
 .tv-row-tile.tv-good .tv-tile-label, .tv-row-tile.tv-good .tv-tile-value { color: var(--good-text); }
 .tv-row-tile.tv-bad .tv-tile-label, .tv-row-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
 
-/* The aggregate row at the bottom of a BU section (see renderTotalsRow) —
-   an accent border plus a bolder, uppercase label is enough to read as "the
-   sum," not another ranked person, without a whole separate color scheme. */
-.tv-totals-row {
-  border-color: var(--accent);
-  border-width: 2px;
-}
-.tv-totals-row .tv-row-name {
-  color: var(--text);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
 .tv-empty { padding: 8vh 2.5vw; text-align: center; color: var(--text-muted); font-size: clamp(16px, 2.5vh, 32px); }
