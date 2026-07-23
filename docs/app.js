@@ -46,7 +46,7 @@ function renderTechCard(tech, jobs, extraStats) {
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
 
-  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats });
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true });
 }
 
 // Estimates given/approved use the estimate's created_at, same as

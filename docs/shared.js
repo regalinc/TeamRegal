@@ -190,9 +190,25 @@ function countsTowardJobs(job) {
   return hasTag(job, "Opportunity");
 }
 
-function computeScorecardStats(allJobs) {
+// Housecall Pro splits a job's revenue evenly across however many
+// technicians are on site for it (a $100 job splits $50/$50 for two techs,
+// $33.33 each for three, ...) rather than crediting each one the full
+// amount — so a technician's own revenue figure should reflect just their
+// share of a shared job, not the whole thing. This only makes sense at the
+// individual level: a job belongs to one department regardless of how many
+// people worked it, so department cards and the page-level raw totals
+// (computeStats) keep summing full job amounts — only computeScorecardStats
+// takes a splitRevenue flag, passed by the technician view specifically.
+function jobRevenueCents(job, splitRevenue) {
+  const amount = job.total_amount || 0;
+  if (!splitRevenue) return amount;
+  const assigneeCount = (job.assigned_employee_ids || []).length || 1;
+  return amount / assigneeCount;
+}
+
+function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
-  const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
+  const totalRevenueCents = jobs.reduce((sum, j) => sum + jobRevenueCents(j, splitRevenue), 0);
 
   const countedJobs = jobs.filter(countsTowardJobs);
   const totalJobs = countedJobs.length;
@@ -335,7 +351,7 @@ function updateSyncStatus(meta) {
 // <details> toggle instead of shown by default. Used for both per-technician
 // (index.html) and per-department (admin.html) cards so the numbers speak
 // the same language at both altitudes.
-function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [] }) {
+function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRevenue = false }) {
   const card = document.createElement("div");
   card.className = "tech-card";
 
@@ -353,12 +369,12 @@ function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [] }) {
     card.appendChild(tagsRow);
   }
 
-  const stats = computeScorecardStats(jobs);
+  const stats = computeScorecardStats(jobs, { splitRevenue });
   const statsRow = document.createElement("div");
   statsRow.className = "tech-mini-stats";
   statsRow.innerHTML = [
     renderMiniStat("Jobs", stats.totalJobs.toLocaleString()),
-    renderMiniStat("Revenue", formatMoney(stats.totalRevenue)),
+    renderMiniStat(splitRevenue ? "Revenue (split)" : "Revenue", formatMoney(stats.totalRevenue)),
     renderMiniStat("Avg ticket", formatMoney(stats.avgTicket)),
     renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`),
     renderMiniStat("Leads", stats.leads.toLocaleString()),
