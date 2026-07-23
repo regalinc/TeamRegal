@@ -16,6 +16,14 @@ const COMPLETE_STATUSES = new Set(["complete rated", "complete unrated"]);
 // same behavior as when the sync script dropped them entirely.
 const CANCELED_STATUSES = new Set(["user canceled", "pro canceled"]);
 
+// A job merely scheduled for later (or not yet scheduled at all) hasn't had
+// any chance to be completed — counting it against completion rate makes a
+// tech/department/BU look worse for having a full week ahead of them rather
+// than for anything they've actually done. Completion rate's denominator
+// excludes these; a job only enters the calculation once real work has
+// begun (in progress or complete).
+const NOT_YET_STARTED_STATUSES = new Set(["needs scheduling", "scheduled"]);
+
 const syncStatusEl = document.getElementById("sync-status");
 
 function statusClass(status) {
@@ -165,8 +173,9 @@ function computeStats(allJobs) {
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
   const billedJobs = jobs.filter((j) => (j.total_amount || 0) > 0);
   const avgTicketCents = billedJobs.length ? totalRevenueCents / billedJobs.length : 0;
-  const completedJobs = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
-  const completionRate = totalJobs ? (completedJobs.length / totalJobs) * 100 : 0;
+  const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
+  const completedJobs = startedJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
+  const completionRate = startedJobs.length ? (completedJobs.length / startedJobs.length) * 100 : 0;
 
   return {
     totalJobs,
@@ -245,8 +254,9 @@ function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
   const totalJobs = countedJobs.length;
   const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
 
-  const completedJobs = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
-  const completionRate = jobs.length ? (completedJobs.length / jobs.length) * 100 : 0;
+  const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
+  const completedJobs = startedJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
+  const completionRate = startedJobs.length ? (completedJobs.length / startedJobs.length) * 100 : 0;
 
   const leadJobs = jobs.filter((j) => hasTag(j, "TGL"));
   const leadsSoldJobs = leadJobs.filter((j) => hasTag(j, "TGL Sold"));
