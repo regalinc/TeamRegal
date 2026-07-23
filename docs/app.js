@@ -69,21 +69,39 @@ function isEstimator(tech) {
   return (tech.tags || []).includes(ESTIMATOR_TAG);
 }
 
-// Closing % and Revenue accepted are both deliberately mixed-scope:
-// approvals landing in this period (approval-date scoped — same set as the
-// "Approved this period" tile) over/summed against estimates given in this
-// period (creation-date scoped) only for the denominator of the rate. That
-// lets an estimator's numbers credit them for closing older proposals this
-// period, rather than only ever measuring what they gave this exact
-// period — an estimate given last month but approved this month now counts
-// toward both Closing % and Revenue accepted this month.
+// De-dupes estimates (by id) that may appear in more than one of the given
+// lists — used to combine "given this period" and "approved this period"
+// into a single set without double-counting an estimate that's in both.
+function unionById(...lists) {
+  const seenIds = new Set();
+  const combined = [];
+  for (const list of lists) {
+    for (const item of list) {
+      if (seenIds.has(item.id)) continue;
+      seenIds.add(item.id);
+      combined.push(item);
+    }
+  }
+  return combined;
+}
+
+// "Estimates approved" is a single number covering two different things —
+// estimates given this period that are currently approved, plus estimates
+// (given whenever) whose approval landed in this period — de-duplicated so
+// an estimate given *and* approved in the same period isn't counted twice.
+// That deliberately mixes scopes: an estimate given last period but
+// approved this one still counts, crediting the estimator for closing
+// older proposals rather than only ever measuring what they gave this
+// exact period. Closing % and Revenue accepted are both derived from this
+// same combined set, so every number on the card stays consistent with
+// what "Estimates approved" actually counts.
 function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates) {
   const given = estimatesGiven.length;
-  const approved = estimatesGiven.filter((e) => e.approved).length;
-  const approvedThisPeriod = approvedThisPeriodEstimates.length;
-  const closingRate = given ? (approvedThisPeriod / given) * 100 : 0;
-  const revenueCents = approvedThisPeriodEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
-  return { given, approved, approvedThisPeriod, closingRate, revenue: revenueCents / CENTS_PER_DOLLAR };
+  const approvedEstimates = unionById(estimatesGiven.filter((e) => e.approved), approvedThisPeriodEstimates);
+  const approved = approvedEstimates.length;
+  const closingRate = given ? (approved / given) * 100 : 0;
+  const revenueCents = approvedEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
+  return { given, approved, closingRate, revenue: revenueCents / CENTS_PER_DOLLAR };
 }
 
 function renderEstimateItem(estimate) {
@@ -146,24 +164,18 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) 
   statsRow.innerHTML = [
     renderMiniStat("Estimates given", stats.given.toLocaleString()),
     renderMiniStat("Estimates approved", stats.approved.toLocaleString()),
-    renderMiniStat("Approved this period", stats.approvedThisPeriod.toLocaleString()),
     renderMiniStat("Closing %", `${stats.closingRate.toFixed(0)}%`),
     renderMiniStat("Revenue accepted", formatMoney(stats.revenue)),
   ].join("");
   card.appendChild(statsRow);
 
-  // Shows every estimate feeding any tile above, not just this period's
+  // Shows every estimate feeding the tiles above, not just this period's
   // given estimates — an estimate given last period but approved this one
-  // (counted in Approved this period / Closing % / Revenue accepted) would
+  // (counted in Estimates approved / Closing % / Revenue accepted) would
   // otherwise contribute to those numbers while never appearing in the list.
-  const seenIds = new Set();
-  const combinedEstimates = [];
-  for (const est of [...estimatesGiven, ...approvedThisPeriodEstimates]) {
-    if (seenIds.has(est.id)) continue;
-    seenIds.add(est.id);
-    combinedEstimates.push(est);
-  }
-  const sortedEstimates = combinedEstimates.sort((a, b) => (a.created_at || "").localeCompare(b.created_at || ""));
+  const sortedEstimates = unionById(estimatesGiven, approvedThisPeriodEstimates).sort((a, b) =>
+    (a.created_at || "").localeCompare(b.created_at || "")
+  );
 
   const details = document.createElement("details");
   details.className = "tech-job-details";
