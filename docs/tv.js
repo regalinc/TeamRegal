@@ -20,7 +20,27 @@ const EXCLUDED_TECH_IDS = new Set([
   "pro_a66fbc5ec25d48bb8db8a93609a0654f", // Urgency HVAC
 ]);
 
-const DEPT = urlParams.get("dept");
+// The dept param has to survive being typed on a TV remote's on-screen
+// keyboard, which is slow and error-prone for spaces/capitalization/exact
+// punctuation — so matching is forgiving rather than an exact string
+// comparison: case-insensitive, and treats -, _, and + the same as a space
+// (so "plumbing-service" or "PLUMBING_SERVICE" both resolve the same as
+// "Plumbing Service"). Every valid URL from before this change still works
+// unchanged; this only widens what else also works.
+function normalizeDeptKey(s) {
+  return String(s || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[-_+]+/g, " ")
+    .replace(/\s+/g, " ");
+}
+
+function resolveDept(raw) {
+  const key = normalizeDeptKey(raw);
+  return VALID_DEPTS.find((d) => normalizeDeptKey(d) === key) || null;
+}
+
+const DEPT = resolveDept(urlParams.get("dept"));
 const PERIOD = urlParams.has("period") ? urlParams.get("period") : "month";
 const ROTATE_MS = (Number(urlParams.get("rotate")) || 8) * 1000;
 
@@ -118,7 +138,9 @@ function buildRanked(data) {
 function render() {
   if (!VALID_DEPTS.includes(DEPT)) {
     deptNameEl.textContent = "Unknown department";
-    mainEl.innerHTML = `<p class="tv-empty">No such department. Use ?dept= with one of: ${VALID_DEPTS.map(escapeHtml).join(", ")}</p>`;
+    mainEl.innerHTML = `<p class="tv-empty">No such department. Use ?dept= with one of: ${VALID_DEPTS.map(escapeHtml).join(
+      ", "
+    )}<br>(spaces, hyphens, underscores, and capitalization are all fine — e.g. plumbing-service works too)</p>`;
     return;
   }
 
