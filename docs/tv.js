@@ -1,6 +1,6 @@
-// TV kiosk view — one department per screen, driven entirely by the `dept`
-// URL param so the same page serves all five TVs (e.g.
-// tv.html?dept=Plumbing%20Service). Shared data/compute helpers
+// TV kiosk view — one screen per department/business-unit, driven entirely
+// by the `dept` URL param so the same page serves every physical TV (e.g.
+// tv.html?dept=Office or tv.html?dept=30). Shared data/compute helpers
 // (formatMoney, computeScorecardStats, periodRange, jobInPeriod,
 // businessUnitCode, etc.) come from shared.js, loaded before this;
 // rendering here is TV-specific since the scale and layout are nothing like
@@ -14,34 +14,35 @@ const urlParams = new URLSearchParams(location.search);
 // tags, minus a few system/dispatch accounts that aren't real people.
 const FIELD_DEPT_TAGS = ["Plumbing Service", "Plumbing Installation", "HVAC Service", "HVAC Installation"];
 const OFFICE_LABEL = "Office";
-const VALID_DEPTS = [...FIELD_DEPT_TAGS, OFFICE_LABEL];
 const EXCLUDED_TECH_IDS = new Set([
   "pro_932c9cd2fe1642e0b5cb3d7a9c0c94a9", // Marketing Department
   "pro_275a4180be774faa8606cf065969a962", // Urgency Plumbing
   "pro_a66fbc5ec25d48bb8db8a93609a0654f", // Urgency HVAC
 ]);
 
+// Screens that show one tag-roster's full leaderboard, unscoped to any one
+// business unit — unchanged from the original design.
+const SINGLE_DEPTS = ["Plumbing Installation", "HVAC Installation", OFFICE_LABEL];
+
 // HVAC Service and Plumbing Service each cover two business units in
 // practice (e.g. an "HVAC Service" tech's jobs land under either the "30"
-// service BU or the "40" maintenance BU) — rather than one blended
-// leaderboard, these two departments' screens split into one section per
-// BU, each with its own ranked list and totals row. The other three
-// screens (the two Installation departments and Office) aren't tied to a
-// specific pair of business units, so they keep the single blended
-// leaderboard. `fallbackLabel` only shows if no job in view happens to
-// carry that BU's exact string (label is otherwise read live off the data
-// — see businessUnitLabelForCode — so it always matches what admin.html
-// shows for the same BU rather than risking drift from a hardcoded name).
-const DEPT_BU_SPLIT = {
-  "HVAC Service": [
-    { code: "30", fallbackLabel: "30 HVAC Service" },
-    { code: "40", fallbackLabel: "40 HVAC Maintenance" },
-  ],
-  "Plumbing Service": [
-    { code: "70", fallbackLabel: "70 Plumbing Service" },
-    { code: "80", fallbackLabel: "80 Plumbing Maintenance" },
-  ],
+// service BU or the "40" maintenance BU). Showing both BUs on one screen
+// (two stacked sections) was too dense, so each BU now gets its own
+// dedicated screen instead — same roster (rosterTag), same featured-card +
+// list layout as the single-tag screens, just scoped to that one BU's jobs.
+// `fallbackLabel` only shows if no job in view happens to carry that BU's
+// exact string (the header/rank subtitle otherwise read it live off the
+// data — see businessUnitLabelForCode — so it always matches what
+// admin.html shows for the same BU rather than risking drift from a
+// hardcoded name).
+const BU_DEPTS = {
+  30: { rosterTag: "HVAC Service", fallbackLabel: "30 HVAC Service" },
+  40: { rosterTag: "HVAC Service", fallbackLabel: "40 HVAC Maintenance" },
+  70: { rosterTag: "Plumbing Service", fallbackLabel: "70 Plumbing Service" },
+  80: { rosterTag: "Plumbing Service", fallbackLabel: "80 Plumbing Maintenance" },
 };
+
+const VALID_DEPTS = [...SINGLE_DEPTS, ...Object.keys(BU_DEPTS)];
 
 // The dept param has to survive being typed on a TV remote's on-screen
 // keyboard, which is slow and error-prone for spaces/capitalization/exact
@@ -108,7 +109,7 @@ function tvTile(label, value, cls, sizeClass) {
   return `<div class="${sizeClass || "tv-tile"} ${cls || ""}"><div class="tv-tile-label">${escapeHtml(label)}</div><div class="tv-tile-value">${escapeHtml(value)}</div></div>`;
 }
 
-// The full metric set shown per technician/section, in display order.
+// The full metric set shown per technician/totals row, in display order.
 // sizeClass picks the tile styling ("tv-tile" for the big featured card,
 // "tv-row-tile" for the compact list/totals rows).
 function metricTiles(stats, sizeClass) {
@@ -124,7 +125,7 @@ function metricTiles(stats, sizeClass) {
   ].join("");
 }
 
-function renderFeatured(entry) {
+function renderFeatured(entry, screenLabel) {
   const { tech, stats, rank } = entry;
   return `
     <div class="tv-featured">
@@ -132,7 +133,7 @@ function renderFeatured(entry) {
         ${renderAvatarBlock(tech, "tv-featured-photo", "tv-featured-photo-fallback", { large: true })}
       </div>
       <div class="tv-featured-name">${escapeHtml(tech.name || "Unknown")}</div>
-      <div class="tv-featured-rank">#${rank} · ${escapeHtml(DEPT)}</div>
+      <div class="tv-featured-rank">#${rank} · ${escapeHtml(screenLabel)}</div>
       <div class="tv-tile-grid">
         ${metricTiles(stats)}
       </div>
@@ -157,9 +158,11 @@ function renderRow(entry) {
   `;
 }
 
-// One aggregate row at the bottom of a BU section — same tile set as an
-// individual row, but summed across every tech in that section (see
-// buildBuTotals) rather than any one person's numbers.
+// One aggregate row at the bottom of a business-unit screen's list — same
+// tile set as an individual row, but summed across the whole roster's jobs
+// in that BU (see buildBuTotals) rather than any one person's numbers.
+// Single-tag screens (Office, the Installation departments) don't have an
+// equivalent single business unit to total, so they don't get this row.
 function renderTotalsRow(stats) {
   return `
     <div class="tv-row tv-totals-row">
@@ -173,19 +176,7 @@ function renderTotalsRow(stats) {
   `;
 }
 
-function renderBuSection(label, entries, totalsStats) {
-  return `
-    <div class="tv-bu-section">
-      <div class="tv-bu-header">${escapeHtml(label)}</div>
-      <div class="tv-list">
-        ${entries.map((entry) => renderRow(entry)).join("")}
-        ${renderTotalsRow(totalsStats)}
-      </div>
-    </div>
-  `;
-}
-
-// Ranks every tech in the department by revenue for the selected period —
+// Ranks every tech in the roster by revenue for the selected period —
 // including $0 techs, ranked last, so the full roster is always visible
 // rather than only whoever has activity.
 function buildRanked(deptTechs, jobs) {
@@ -200,11 +191,9 @@ function buildRanked(deptTechs, jobs) {
 }
 
 // Same idea as buildRanked, but each tech's jobs are additionally filtered
-// to just the given business-unit code — so e.g. an HVAC Service tech who
-// works both the "30" and "40" business units gets a separate ranked entry
-// (and separate revenue figure) in each BU's section, scoped to only that
-// BU's jobs. Every department tech still appears in every BU section, even
-// at $0, for the same "full roster always visible" reason as buildRanked.
+// to just the given business-unit code — so an HVAC Service tech's BU-30
+// screen ranking and BU-40 screen ranking can (and often do) differ, since
+// each is scoped to only that BU's jobs.
 function buildBuRanked(deptTechs, jobs, code) {
   const entries = deptTechs.map((tech) => {
     const techJobs = jobs.filter(
@@ -221,7 +210,7 @@ function buildBuRanked(deptTechs, jobs, code) {
   return entries;
 }
 
-// Aggregate stats for a BU section's totals row — computed directly from
+// Aggregate stats for a BU screen's totals row — computed directly from
 // that BU's jobs (not summed from the individual rows above), same
 // unsplit-revenue convention admin.html's department cards use: a job
 // belongs to the total once regardless of how many techs worked it.
@@ -236,12 +225,12 @@ function buildBuTotals(deptTechs, jobs, code) {
   return computeScorecardStats(buJobs, { splitRevenue: false });
 }
 
-// The section header shows the business unit's actual name as synced from
-// Housecall Pro (e.g. "30 HVAC SERVICE"), read live off any matching job in
-// view rather than hardcoded, so it always matches what admin.html shows
-// for the same BU. Falls back to the config's fallbackLabel only if no job
-// in the current period happens to carry that BU (e.g. an unusually quiet
-// period) — rare, but avoids an empty header.
+// A BU screen's header/rank-subtitle text: the business unit's actual name
+// as synced from Housecall Pro (e.g. "30 HVAC SERVICE"), read live off any
+// matching job in view rather than hardcoded, so it always matches what
+// admin.html shows for the same BU. Falls back to the config's
+// fallbackLabel only if no job in the current period happens to carry that
+// BU (e.g. an unusually quiet period) — rare, but avoids an empty header.
 function businessUnitLabelForCode(jobs, code, fallbackLabel) {
   const job = jobs.find((j) => businessUnitCode(j.business_unit) === code);
   return job ? job.business_unit : fallbackLabel;
@@ -249,59 +238,56 @@ function businessUnitLabelForCode(jobs, code, fallbackLabel) {
 
 let latestData = null;
 
+function renderRoster(entries, screenLabel, totalsStats) {
+  const featured = entries[0];
+  const rest = entries.slice(1);
+
+  mainEl.innerHTML = renderFeatured(featured, screenLabel);
+  const list = document.createElement("div");
+  list.className = "tv-list";
+  list.innerHTML = rest.map((entry) => renderRow(entry)).join("") + (totalsStats ? renderTotalsRow(totalsStats) : "");
+  mainEl.appendChild(list);
+}
+
 function render() {
+  mainEl.className = "tv-main";
+
   if (!VALID_DEPTS.includes(DEPT)) {
     deptNameEl.textContent = "Unknown department";
-    mainEl.className = "tv-main";
     mainEl.innerHTML = `<p class="tv-empty">No such department. Use ?dept= with one of: ${VALID_DEPTS.map(escapeHtml).join(
       ", "
-    )}<br>(spaces, hyphens, underscores, and capitalization are all fine — e.g. plumbing-service works too)</p>`;
+    )}<br>(spaces, hyphens, underscores, and capitalization are all fine — e.g. hvac-installation works too)</p>`;
     return;
   }
-
-  deptNameEl.textContent = DEPT;
 
   if (!latestData) return;
 
-  const deptTechs = latestData.technicians.filter((t) => departmentOf(t) === DEPT);
   const jobs = latestData.jobs || [];
+  const buConfig = BU_DEPTS[DEPT];
+  const rosterTag = buConfig ? buConfig.rosterTag : DEPT;
+  const deptTechs = latestData.technicians.filter((t) => departmentOf(t) === rosterTag);
+
+  const screenLabel = buConfig ? businessUnitLabelForCode(jobs, DEPT, buConfig.fallbackLabel) : DEPT;
+  deptNameEl.textContent = screenLabel;
 
   if (deptTechs.length === 0) {
-    mainEl.className = "tv-main";
-    mainEl.innerHTML = `<p class="tv-empty">No technicians found for ${escapeHtml(DEPT)}.</p>`;
-    return;
-  }
-
-  const split = DEPT_BU_SPLIT[DEPT];
-
-  if (split) {
-    mainEl.className = "tv-main tv-main-split";
-    mainEl.innerHTML = split
-      .map(({ code, fallbackLabel }) => {
-        const label = businessUnitLabelForCode(jobs, code, fallbackLabel);
-        const entries = buildBuRanked(deptTechs, jobs, code);
-        const totals = buildBuTotals(deptTechs, jobs, code);
-        return renderBuSection(label, entries, totals);
-      })
-      .join("");
+    mainEl.innerHTML = `<p class="tv-empty">No technicians found for ${escapeHtml(screenLabel)}.</p>`;
     return;
   }
 
   // #1 by revenue always holds the featured spot — no timer, no forced
   // cycling. The only way someone else gets featured is by actually
-  // overtaking #1 in revenue, which buildRanked's sort already handles on
+  // overtaking #1 in revenue, which the ranking's sort already handles on
   // every data refresh; render() just always reads the current #1.
+  if (buConfig) {
+    const entries = buildBuRanked(deptTechs, jobs, DEPT);
+    const totals = buildBuTotals(deptTechs, jobs, DEPT);
+    renderRoster(entries, screenLabel, totals);
+    return;
+  }
+
   const entries = buildRanked(deptTechs, jobs);
-  const featured = entries[0];
-  const rest = entries.slice(1);
-
-  mainEl.className = "tv-main";
-  const list = document.createElement("div");
-  list.className = "tv-list";
-  list.innerHTML = rest.map((entry) => renderRow(entry)).join("");
-
-  mainEl.innerHTML = renderFeatured(featured);
-  mainEl.appendChild(list);
+  renderRoster(entries, screenLabel, null);
 }
 
 async function loadData() {

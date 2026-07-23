@@ -62,30 +62,6 @@ body {
   align-items: stretch;
 }
 
-/* HVAC Service / Plumbing Service: two business-unit sections stacked
-   vertically instead of the featured-card + list layout (see DEPT_BU_SPLIT
-   in tv.js) — each section is its own compact ranked list, so there's no
-   room for a second giant featured photo without cramping the screen. */
-.tv-main-split {
-  flex-direction: column;
-  gap: 2vh;
-}
-.tv-bu-section {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1vh;
-}
-.tv-bu-header {
-  flex: 0 0 auto;
-  font-size: clamp(16px, 2.4vh, 32px);
-  font-weight: 600;
-  color: var(--text-muted);
-  padding-left: 0.3vw;
-}
-.tv-bu-section .tv-list { flex: 1; min-height: 0; }
-
 .tv-featured {
   flex: 0 0 32vw;
   background: var(--card-bg);
