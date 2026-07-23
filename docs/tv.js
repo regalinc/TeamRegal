@@ -42,7 +42,6 @@ function resolveDept(raw) {
 
 const DEPT = resolveDept(urlParams.get("dept"));
 const PERIOD = urlParams.has("period") ? urlParams.get("period") : "month";
-const ROTATE_MS = (Number(urlParams.get("rotate")) || 8) * 1000;
 
 const deptNameEl = document.getElementById("tv-dept-name");
 const mainEl = document.getElementById("tv-main");
@@ -94,29 +93,32 @@ function renderFeatured(entry) {
   `;
 }
 
-function tvTile(label, value, cls) {
-  return `<div class="tv-tile ${cls || ""}"><div class="tv-tile-label">${escapeHtml(label)}</div><div class="tv-tile-value">${escapeHtml(value)}</div></div>`;
+function tvTile(label, value, cls, sizeClass) {
+  return `<div class="${sizeClass || "tv-tile"} ${cls || ""}"><div class="tv-tile-label">${escapeHtml(label)}</div><div class="tv-tile-value">${escapeHtml(value)}</div></div>`;
 }
 
-function renderRow(entry, isActive) {
+function renderRow(entry) {
   const { tech, stats, rank } = entry;
   return `
-    <div class="tv-row ${isActive ? "tv-row-active" : ""}">
+    <div class="tv-row">
       <div class="tv-row-rank">#${rank}</div>
       ${renderAvatarBlock(tech, "tv-row-photo", "tv-row-photo-fallback")}
-      <div>
+      <div class="tv-row-name-block">
         <div class="tv-row-name">${escapeHtml(tech.name || "Unknown")}</div>
         <div class="tv-row-meta">${escapeHtml(tech.role || "")}</div>
       </div>
-      <div class="tv-row-revenue">${formatMoney(stats.totalRevenue)}</div>
+      <div class="tv-row-metrics">
+        ${tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats.totalRevenue), "tv-row-tile")}
+        ${tvTile("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats.avgTicket), "tv-row-tile")}
+        ${tvTile("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats.completionRate), "tv-row-tile")}
+        ${tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats.totalJobs), "tv-row-tile")}
+      </div>
     </div>
   `;
 }
 
 let latestData = null;
 let ranked = [];
-let featuredIndex = 0;
-let rotateTimer = null;
 
 function buildRanked(data) {
   const techById = new Map((data.technicians || []).map((t) => [t.id, t]));
@@ -151,24 +153,19 @@ function render() {
     return;
   }
 
-  if (featuredIndex >= ranked.length) featuredIndex = 0;
-  const featured = ranked[featuredIndex];
+  // #1 by revenue always holds the featured spot — no timer, no forced
+  // cycling. The only way someone else gets featured is by actually
+  // overtaking #1 in revenue, which buildRanked's sort already handles on
+  // every data refresh; render() just always reads the current #1.
+  const featured = ranked[0];
+  const rest = ranked.slice(1);
 
   const list = document.createElement("div");
   list.className = "tv-list";
-  list.innerHTML = ranked.map((entry) => renderRow(entry, entry === featured)).join("");
+  list.innerHTML = rest.map((entry) => renderRow(entry)).join("");
 
   mainEl.innerHTML = renderFeatured(featured);
   mainEl.appendChild(list);
-}
-
-function startRotation() {
-  if (rotateTimer) clearInterval(rotateTimer);
-  if (ranked.length <= 1) return;
-  rotateTimer = setInterval(() => {
-    featuredIndex = (featuredIndex + 1) % ranked.length;
-    render();
-  }, ROTATE_MS);
 }
 
 async function loadData() {
@@ -179,7 +176,6 @@ async function loadData() {
     latestData = data;
     ranked = buildRanked(data);
     render();
-    startRotation();
     updateSyncStatus(data.meta || {});
   } catch (err) {
     syncStatusEl.textContent = "Failed to load data";
