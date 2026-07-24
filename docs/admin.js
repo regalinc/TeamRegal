@@ -113,9 +113,9 @@ function applyUrlFiltersOnce() {
   applyDefaultPeriod(urlParams, periodFilter, "month");
 }
 
-function renderNamedCard(name, jobs, colorVar, { full = true, extraStats = [] } = {}) {
+function renderNamedCard(name, jobs, colorVar, { full = true, extraStats = [], kpiBuCode = null } = {}) {
   const headerHtml = `<div class="tech-name dept-name"><span class="dept-color-dot"></span>${escapeHtml(name)}</div>`;
-  const card = renderScorecard({ headerHtml, jobs, extraStats });
+  const card = renderScorecard({ headerHtml, jobs, extraStats, kpiBuCode });
   card.classList.add("dept-card");
   if (full) card.classList.add("dept-full");
   card.style.setProperty("--dept-accent", `var(${colorVar})`);
@@ -130,7 +130,12 @@ function renderDeptCard(name, jobs) {
   const extraStats = [
     { label: "Cancelled", value: `${cancelStats.canceledCount.toLocaleString()} (${cancelStats.rate.toFixed(1)}%)` },
   ];
-  return renderNamedCard(name, jobs, deptColorVar(name), { extraStats });
+  // Every department card is already scoped to one business unit, so KPI
+  // coloring can apply unconditionally here (unlike the technician view,
+  // which only grades when a single BU filter narrows a tech's jobs to
+  // one BU's worth). Names with no BU target (Office, installation, "No
+  // business unit set") just render neutral — kpiTier returns null for them.
+  return renderNamedCard(name, jobs, deptColorVar(name), { extraStats, kpiBuCode: name });
 }
 
 function render(data) {

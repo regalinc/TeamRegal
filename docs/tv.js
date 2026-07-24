@@ -79,59 +79,17 @@ function departmentOf(tech) {
   return OFFICE_LABEL;
 }
 
-// Three-tier grading for one metric against its goal: "good" if the goal is
-// met, "bad" if it's missed by more than `buffer` (15%, confirmed against
-// Regal's own example — IFO's 5% goal gives a 5-5.75% amber band), "warn" in
-// between. `direction: "min"` is a floor (higher is better, e.g. Avg
-// ticket); `direction: "max"` is a ceiling (lower is better, e.g. IFO) and
-// the buffer band sits above the goal instead of below it.
-function tier(value, { goal, direction, buffer = 0.15 }) {
-  if (direction === "min") {
-    if (value >= goal) return "good";
-    return value >= goal * (1 - buffer) ? "warn" : "bad";
-  }
-  if (value < goal) return "good";
-  return value < goal * (1 + buffer) ? "warn" : "bad";
-}
-
-// Regal's KPI targets, one map per screen — every screen not listed here
-// stays fully neutral (kpiClass falls through the lookup below to null).
-// Each check function gets the full stats object (not just its own tile's
-// value) since most of these are ratios against totalJobs ("calls"), not raw
-// counts. A tech/section with zero jobs in the period returns neutral for
-// every ratio-based KPI rather than a misleading pass or fail on no data.
-// Deliberately duplicated rather than shared between screens even where two
-// screens' rules happen to match today (e.g. IFO/Leads/Accessory sold are
-// currently identical between 30 and 40) — editing one screen's target
-// should never silently change another's.
-const KPI_THRESHOLDS_BY_SCREEN = {
-  30: {
-    // IFO ("in front of, no sale"): under 5% good, 5-5.75% amber, above that red.
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
-    // Avg ticket: $450+ good, down to $382.50 amber, below that red.
-    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 450, direction: "min" }) : null),
-    // Lead turnover: 1 per 12 calls or better is good, down to 1 per ~14 is amber.
-    leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
-    // Accessory sales: 1 per 8 calls or better is good, down to 1 per ~9.4 is amber.
-    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
-  },
-  40: {
-    // Same shape as BU 30, but a lower Avg ticket bar ($250 vs $450).
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
-    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 250, direction: "min" }) : null),
-    leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
-    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
-  },
-};
-
+// KPI targets (KPI_THRESHOLDS_BY_BU, tier(), kpiTier()) live in shared.js —
+// admin.html's department cards and index.html's technician cards (when a
+// single BU is selected) grade against the exact same numbers, so they're
+// defined once rather than duplicated per page. For a BU screen (DEPT is
+// "30"/"40"/"70"/"80"), kpiTier(DEPT, ...) finds that BU's targets directly;
+// for a tag-only screen (Office, installation) it returns null for every
+// metric since those aren't in KPI_THRESHOLDS_BY_BU, so the tile stays neutral.
 const TIER_CLASS = { good: "tv-good", warn: "tv-warn", bad: "tv-bad" };
 
 function kpiClass(metricKey, stats) {
-  const thresholds = KPI_THRESHOLDS_BY_SCREEN[DEPT];
-  if (!thresholds) return null;
-  const check = thresholds[metricKey];
-  if (!check) return null;
-  const result = check(stats);
+  const result = kpiTier(DEPT, metricKey, stats);
   return result ? TIER_CLASS[result] : null;
 }
 

@@ -19,6 +19,19 @@
   --series-orange: #eb6834;
   --series-violet: #4a3aa7;
   --series-muted: #898781;
+
+  /* KPI tile fills — same values in light and dark mode (like --series-green
+     above), since these replace the tile's own background with a solid
+     color rather than tinting the page background. Amber pairs with dark
+     text (--warn-text); green/red pair with light text, matching the TV
+     kiosk's tv-good/tv-warn/tv-bad so a metric reads the same color on
+     every screen it appears on. */
+  --good-bg: #008300;
+  --good-text: #eaf3de;
+  --warn-bg: #e0a52c;
+  --warn-text: #3a2a05;
+  --bad-bg: #a32d2d;
+  --bad-text: #fcebeb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -431,6 +444,13 @@ img.avatar { object-fit: cover; }
 }
 .tech-mini-stat-label { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.02em; }
 .tech-mini-stat-value { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 1px; }
+
+.tech-mini-stat.kpi-good { background: var(--good-bg); border-color: var(--good-bg); }
+.tech-mini-stat.kpi-warn { background: var(--warn-bg); border-color: var(--warn-bg); }
+.tech-mini-stat.kpi-bad { background: var(--bad-bg); border-color: var(--bad-bg); }
+.tech-mini-stat.kpi-good .tech-mini-stat-label, .tech-mini-stat.kpi-good .tech-mini-stat-value { color: var(--good-text); }
+.tech-mini-stat.kpi-warn .tech-mini-stat-label, .tech-mini-stat.kpi-warn .tech-mini-stat-value { color: var(--warn-text); }
+.tech-mini-stat.kpi-bad .tech-mini-stat-label, .tech-mini-stat.kpi-bad .tech-mini-stat-value { color: var(--bad-text); }
 
 .tech-job-details summary {
   cursor: pointer;

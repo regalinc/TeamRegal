@@ -35,7 +35,7 @@ const selectedTechIds = new Set();
 let latestData = null;
 let urlFiltersApplied = false;
 
-function renderTechCard(tech, jobs, extraStats) {
+function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   const headerHtml = `
     ${renderAvatar(tech)}
     <div>
@@ -46,7 +46,7 @@ function renderTechCard(tech, jobs, extraStats) {
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
 
-  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true });
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode });
 }
 
 // Estimates given/approved use the estimate's created_at, same as
@@ -410,6 +410,13 @@ function render(data) {
   scorecardsTitle.textContent = "Technician scorecards";
   app.appendChild(scorecardsTitle);
 
+  // KPI coloring on tech cards only applies when a single business unit is
+  // selected — an unfiltered tech's jobs can span two BUs with different
+  // goals (e.g. HVAC Service works both BU 30 and BU 40), so there'd be no
+  // one goal to grade against. Narrowing to one BU via the filter makes the
+  // tech's stats actually scoped to that BU's jobs, same as a department card.
+  const kpiBuCode = filters.businessUnit || null;
+
   const grid = document.createElement("div");
   grid.className = "tech-grid";
   for (const tech of rosterTechs) {
@@ -429,7 +436,7 @@ function render(data) {
       { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
     ];
 
-    grid.appendChild(renderTechCard(tech, jobs, extraStats));
+    grid.appendChild(renderTechCard(tech, jobs, extraStats, kpiBuCode));
   }
   app.appendChild(grid);
 

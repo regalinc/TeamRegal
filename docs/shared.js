@@ -174,8 +174,11 @@ function renderJobItem(job) {
   return li;
 }
 
-function renderMiniStat(label, value) {
-  return `<div class="tech-mini-stat"><div class="tech-mini-stat-label">${escapeHtml(label)}</div><div class="tech-mini-stat-value">${escapeHtml(value)}</div></div>`;
+const KPI_MINI_CLASS = { good: "kpi-good", warn: "kpi-warn", bad: "kpi-bad" };
+
+function renderMiniStat(label, value, tierResult) {
+  const cls = tierResult ? KPI_MINI_CLASS[tierResult] : "";
+  return `<div class="tech-mini-stat ${cls}"><div class="tech-mini-stat-label">${escapeHtml(label)}</div><div class="tech-mini-stat-value">${escapeHtml(value)}</div></div>`;
 }
 
 function renderStatTile({ label, value, meterPct }) {
@@ -245,6 +248,74 @@ const RAW_JOB_COUNT_BU_CODES = new Set(["50"]);
 
 function businessUnitCode(businessUnit) {
   return (businessUnit || "").trim().split(" ")[0];
+}
+
+// Regal's KPI targets, keyed by business-unit code — the single source of
+// truth shared by the TV kiosk (every screen), admin.html's department
+// cards (always, since each card is already scoped to one BU), and
+// index.html's technician cards (only when a single business unit is
+// selected in the filter bar, since an unfiltered tech's jobs can span two
+// BUs with different goals and there'd be no one goal to grade against).
+// Three-tier grading per metric: "good" if the goal is met, "bad" if missed
+// by more than `buffer` (15%, confirmed against Regal's own example — IFO's
+// 5% goal gives a 5-5.75% amber band), "warn" in between. `direction: "min"`
+// is a floor (higher is better, e.g. Avg ticket); `direction: "max"` is a
+// ceiling (lower is better, e.g. IFO) and the buffer band sits above the
+// goal instead of below it.
+function tier(value, { goal, direction, buffer = 0.15 }) {
+  if (direction === "min") {
+    if (value >= goal) return "good";
+    return value >= goal * (1 - buffer) ? "warn" : "bad";
+  }
+  if (value < goal) return "good";
+  return value < goal * (1 + buffer) ? "warn" : "bad";
+}
+
+// A tech/section with zero jobs in the period returns null (neutral) for
+// every ratio-based KPI here rather than a misleading pass or fail on no
+// data. Deliberately duplicated per BU even where two happen to match today
+// (IFO/Accessory sold are currently identical across all four) — editing
+// one BU's target should never silently change another's.
+const KPI_THRESHOLDS_BY_BU = {
+  30: {
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 450, direction: "min" }) : null),
+    leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
+    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
+  },
+  40: {
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 250, direction: "min" }) : null),
+    leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
+    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
+  },
+  // BU 70/80 (Plumbing Service): same IFO/Accessory sold bars as HVAC
+  // Service, no Leads target given yet, and their own Avg ticket bars.
+  70: {
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 500, direction: "min" }) : null),
+    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
+  },
+  80: {
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 300, direction: "min" }) : null),
+    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
+  },
+};
+
+// Looks up the "good"/"warn"/"bad" tier for one metric under one BU's
+// targets, or null if that BU has no targets defined (e.g. Office,
+// installation, BU 10/50) or no target for that particular metric (e.g.
+// Leads on BU 70/80). `buCode` accepts either a bare code ("30") or a full
+// business_unit string ("30 HVAC SERVICE") — callers don't need to know
+// which they have on hand.
+function kpiTier(buCode, metricKey, stats) {
+  const code = businessUnitCode(String(buCode || ""));
+  const thresholds = KPI_THRESHOLDS_BY_BU[code];
+  if (!thresholds) return null;
+  const check = thresholds[metricKey];
+  if (!check) return null;
+  return check(stats);
 }
 
 function countsTowardJobs(job) {
@@ -416,7 +487,7 @@ function updateSyncStatus(meta) {
 // <details> toggle instead of shown by default. Used for both per-technician
 // (index.html) and per-department (admin.html) cards so the numbers speak
 // the same language at both altitudes.
-function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRevenue = false }) {
+function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRevenue = false, kpiBuCode = null }) {
   const card = document.createElement("div");
   card.className = "tech-card";
 
@@ -440,13 +511,13 @@ function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRev
   statsRow.innerHTML = [
     renderMiniStat("Jobs", stats.totalJobs.toLocaleString()),
     renderMiniStat(splitRevenue ? "Revenue (split)" : "Revenue", formatMoney(stats.totalRevenue)),
-    renderMiniStat("Avg ticket", formatMoney(stats.avgTicket)),
+    renderMiniStat("Avg ticket", formatMoney(stats.avgTicket), kpiTier(kpiBuCode, "avgTicket", stats)),
     renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`),
-    renderMiniStat("Leads", stats.leads.toLocaleString()),
+    renderMiniStat("Leads", stats.leads.toLocaleString(), kpiTier(kpiBuCode, "leads", stats)),
     renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
     renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()),
-    renderMiniStat("IFO", stats.ifo.toLocaleString()),
-    renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString()),
+    renderMiniStat("IFO", stats.ifo.toLocaleString(), kpiTier(kpiBuCode, "ifo", stats)),
+    renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString(), kpiTier(kpiBuCode, "accessorySold", stats)),
     ...extraStats.map((s) => renderMiniStat(s.label, s.value)),
   ].join("");
   card.appendChild(statsRow);
