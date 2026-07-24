@@ -20,6 +20,8 @@
   --accent: #2563eb;
   --good-bg: #008300;
   --good-text: #eaf3de;
+  --warn-bg: #e0a52c;
+  --warn-text: #3a2a05;
   --bad-bg: #a32d2d;
   --bad-text: #fcebeb;
   --radius: 1vw;
@@ -104,9 +106,11 @@ body {
   text-align: center;
 }
 .tv-tile.tv-good { background: var(--good-bg); }
+.tv-tile.tv-warn { background: var(--warn-bg); }
 .tv-tile.tv-bad { background: var(--bad-bg); }
 .tv-tile-label { font-size: clamp(11px, 1.3vh, 19px); text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); }
 .tv-tile.tv-good .tv-tile-label, .tv-tile.tv-good .tv-tile-value { color: var(--good-text); }
+.tv-tile.tv-warn .tv-tile-label, .tv-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
 .tv-tile.tv-bad .tv-tile-label, .tv-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
 .tv-tile-value { font-size: clamp(16px, 2.6vh, 38px); font-weight: 600; margin-top: 0.5vh; }
 
@@ -163,10 +167,12 @@ body {
   text-align: center;
 }
 .tv-row-tile.tv-good { background: var(--good-bg); }
+.tv-row-tile.tv-warn { background: var(--warn-bg); }
 .tv-row-tile.tv-bad { background: var(--bad-bg); }
 .tv-row-tile .tv-tile-label { font-size: clamp(9px, 1vh, 14px); }
 .tv-row-tile .tv-tile-value { font-size: clamp(13px, 1.7vh, 24px); margin-top: 0.2vh; }
 .tv-row-tile.tv-good .tv-tile-label, .tv-row-tile.tv-good .tv-tile-value { color: var(--good-text); }
+.tv-row-tile.tv-warn .tv-tile-label, .tv-row-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
 .tv-row-tile.tv-bad .tv-tile-label, .tv-row-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
 
 .tv-empty { padding: 8vh 2.5vw; text-align: center; color: var(--text-muted); font-size: clamp(16px, 2.5vh, 32px); }
