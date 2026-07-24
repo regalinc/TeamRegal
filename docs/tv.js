@@ -71,7 +71,11 @@ const deptNameEl = document.getElementById("tv-dept-name");
 const mainEl = document.getElementById("tv-main");
 
 function departmentOf(tech) {
-  if (EXCLUDED_TECH_IDS.has(tech.id)) return null;
+  // Apprentices don't get their own TV row yet, same reason they don't get
+  // their own scorecard on index.html — see APPRENTICE_TECH_IDS in
+  // shared.js. Distinct from EXCLUDED_TECH_IDS below (those are
+  // dispatch/system accounts that aren't real people at all).
+  if (EXCLUDED_TECH_IDS.has(tech.id) || isApprentice(tech)) return null;
   const tags = tech.tags || [];
   for (const dept of FIELD_DEPT_TAGS) {
     if (tags.includes(dept)) return dept;

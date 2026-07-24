@@ -245,10 +245,15 @@ function populateFilterOptions(data) {
 }
 
 // The technician roster: empty selection = everyone. Otherwise only
-// technicians whose id is in selectedTechIds.
+// technicians whose id is in selectedTechIds. Apprentices never get their
+// own card regardless of selection — see APPRENTICE_TECH_IDS in shared.js —
+// this is the one choke point every card-rendering path goes through, so
+// filtering here is enough even if an apprentice's id somehow ends up in
+// selectedTechIds (e.g. a hand-crafted ?techs= URL).
 function getRosterTechs(technicians) {
-  if (selectedTechIds.size === 0) return technicians;
-  return technicians.filter((t) => selectedTechIds.has(t.id));
+  const eligible = technicians.filter((t) => !isApprentice(t));
+  if (selectedTechIds.size === 0) return eligible;
+  return eligible.filter((t) => selectedTechIds.has(t.id));
 }
 
 function applyUrlFiltersOnce(data) {
@@ -298,7 +303,9 @@ function updateTechSelectToggleLabel(technicians) {
 // reality whether it got there via the button itself or manual checkboxes).
 function syncCategoryButtonsActiveState(technicians) {
   for (const btn of techSelectCategories.querySelectorAll(".tech-category-btn")) {
-    const matchingIds = technicians.filter((t) => (t.tags || []).includes(btn.dataset.tag)).map((t) => t.id);
+    const matchingIds = technicians
+      .filter((t) => !isApprentice(t) && (t.tags || []).includes(btn.dataset.tag))
+      .map((t) => t.id);
     const isActive =
       matchingIds.length > 0 &&
       matchingIds.length === selectedTechIds.size &&
@@ -314,7 +321,7 @@ function applyCategoryFilter(tag) {
   const technicians = latestData?.technicians || [];
   selectedTechIds.clear();
   for (const tech of technicians) {
-    if ((tech.tags || []).includes(tag)) selectedTechIds.add(tech.id);
+    if (!isApprentice(tech) && (tech.tags || []).includes(tag)) selectedTechIds.add(tech.id);
   }
   for (const row of techSelectList.querySelectorAll(".tech-select-row")) {
     const checkbox = row.querySelector("input");
@@ -326,7 +333,7 @@ function applyCategoryFilter(tag) {
 }
 
 function populateTechDropdown(data) {
-  const technicians = [...(data.technicians || [])].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  const technicians = [...(data.technicians || [])].filter((t) => !isApprentice(t)).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
   techSelectList.innerHTML = "";
   if (technicians.length === 0) {

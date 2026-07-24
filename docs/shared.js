@@ -95,6 +95,26 @@ const MANUAL_AVATAR_OVERRIDES = {
   "pro_1b87fcb406c9484b84e8fccd6f2c777b": "assets/tech-photos/benjamin-murphy.jpg", // Benjamin Murphy
 };
 
+// Apprentices — currently training/riding along with a real technician, not
+// yet working (or being scored) independently. Two things follow from that:
+// they don't get their own scorecard/TV row (departmentOf in tv.js and
+// getRosterTechs in app.js both exclude them from the roster entirely), and
+// they don't count toward a job's revenue split (jobRevenueCents below) — a
+// 2-assignee job that's really "one tech plus a trainee" should split as if
+// it were a 1-person job, not 50/50, since the apprentice isn't the one
+// whose numbers that revenue is meant to represent. No dedicated Housecall
+// Pro tag exists for this yet, so it's a manual id list, same pattern as
+// MANUAL_AVATAR_OVERRIDES above — remove an entry once that person is no
+// longer an apprentice.
+const APPRENTICE_TECH_IDS = new Set([
+  "pro_b5ab5cc9e362414cb376d0a02d64bef8", // Trevor McWilliams
+  "pro_06aeac3b71a24c60a826c7e11499d8b5", // Jaylees Vazquez
+]);
+
+function isApprentice(tech) {
+  return APPRENTICE_TECH_IDS.has(tech.id);
+}
+
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full
@@ -343,7 +363,14 @@ function countsTowardJobs(job) {
 function jobRevenueCents(job, splitRevenue) {
   const amount = job.total_amount || 0;
   if (!splitRevenue) return amount;
-  const assigneeCount = (job.assigned_employee_ids || []).length || 1;
+  // Apprentices don't count toward the split — a job with one real tech and
+  // one apprentice splits as if it were a 1-person job (the real tech gets
+  // full credit), not 50/50. See APPRENTICE_TECH_IDS above. Floors at 1 even
+  // if every assignee happens to be an apprentice, to avoid a divide-by-zero;
+  // that job won't be attributed to anyone's card anyway since apprentices
+  // don't get one.
+  const realAssignees = (job.assigned_employee_ids || []).filter((id) => !APPRENTICE_TECH_IDS.has(id));
+  const assigneeCount = realAssignees.length || 1;
   return amount / assigneeCount;
 }
 
