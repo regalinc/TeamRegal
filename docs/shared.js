@@ -76,6 +76,25 @@ function hasRealAvatar(tech) {
   return Boolean(tech.avatar_url) && !tech.avatar_url.includes(HCP_PLACEHOLDER_AVATAR);
 }
 
+// A handful of employees' Housecall Pro accounts don't have a resolvable
+// "original" even after a fresh re-upload (confirmed by directly probing the
+// CDN, re-checked hours later — not a one-off processing delay). Manual
+// override maps a technician id straight to a locally-hosted high-res file
+// (docs/assets/tech-photos/) so the TV kiosk isn't stuck upscaling their
+// 40px Housecall Pro thumb. Keyed by id, not name, so a name change or
+// duplicate name never accidentally mismatches. This is a standing
+// workaround, not a permanent fix — remove an entry if Housecall Pro's own
+// "original" ever becomes available for that person; nothing here checks
+// that automatically.
+const MANUAL_AVATAR_OVERRIDES = {
+  "pro_7c54b30de89c4b6ea22a9053f0662f3d": "assets/tech-photos/juan-puello.jpg", // Juan Puello
+  "pro_8fc589c75489437bb66ff45ca0aea7ac": "assets/tech-photos/aidan-shaull.jpg", // Aidan Shaull
+  "pro_4a63b04bb5a64d97b8e1728dd8ea77fb": "assets/tech-photos/roger-renoll.jpg", // Roger Renoll
+  "pro_0c24f7fb4b534fde920650a76dc8365f": "assets/tech-photos/hector-rivera.jpg", // Hector Rivera
+  "pro_add4ba12688e47c696e827fb91a7d9fd": "assets/tech-photos/josh-miller.jpg", // Josh Miller
+  "pro_1b87fcb406c9484b84e8fccd6f2c777b": "assets/tech-photos/benjamin-murphy.jpg", // Benjamin Murphy
+};
+
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full
@@ -88,9 +107,11 @@ function hasRealAvatar(tech) {
 // row photo that looks native-res in a browser tab renders well past 40px on
 // a real TV and needs this same swap — not just the bigger featured photo.
 // Not every employee has an "original" (older/re-synced accounts may only
-// have the thumb), so callers must fall back gracefully — see
-// handleLargeAvatarError.
-function largeAvatarUrl(url) {
+// have the thumb, or see MANUAL_AVATAR_OVERRIDES above), so callers must
+// fall back gracefully — see handleLargeAvatarError.
+function largeAvatarUrl(tech) {
+  if (MANUAL_AVATAR_OVERRIDES[tech.id]) return MANUAL_AVATAR_OVERRIDES[tech.id];
+  const url = tech.avatar_url;
   if (!url || !url.includes("/thumb_web_round/")) return null;
   return url.replace("/thumb_web_round/", "/original/");
 }

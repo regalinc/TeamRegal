@@ -125,7 +125,7 @@ function renderAvatarBlock(tech, sizeClass, fallbackClass, { large = false } = {
   if (!hasRealAvatar(tech)) {
     return `<div class="${fallbackClass}" style="background:${bg}">${initialsText}</div>`;
   }
-  const bigUrl = large ? largeAvatarUrl(tech.avatar_url) : null;
+  const bigUrl = large ? largeAvatarUrl(tech) : null;
   if (bigUrl) {
     return `
       <img class="${sizeClass}" src="${escapeHtml(bigUrl)}" data-thumb-src="${escapeHtml(tech.avatar_url)}" alt="" onerror="handleLargeAvatarError(this)" />
