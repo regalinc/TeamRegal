@@ -159,9 +159,15 @@ body {
   font-size: clamp(14px, 2vh, 26px);
 }
 .tv-row-rank { font-size: clamp(16px, 2.2vh, 30px); font-weight: 600; color: var(--text-muted); width: 3vw; text-align: center; flex-shrink: 0; }
-.tv-row-name-block { flex: 0 0 auto; min-width: 0; }
+/* Fixed width, not content-sized (was flex: 0 0 auto) — a longer name used
+   to widen this block, which pushed .tv-row-metrics (positioned by
+   margin-left: auto) further right on that row than on rows with shorter
+   names, so the tile columns never lined up between rows. A longer name
+   now truncates with an ellipsis (already handled by .tv-row-name below)
+   instead of shifting anything else. */
+.tv-row-name-block { flex: 0 0 16vw; min-width: 0; overflow: hidden; }
 .tv-row-name { font-weight: 600; font-size: clamp(15px, 2.1vh, 28px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tv-row-meta { font-size: clamp(11px, 1.4vh, 19px); color: var(--text-muted); white-space: nowrap; }
+.tv-row-meta { font-size: clamp(11px, 1.4vh, 19px); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .tv-row-metrics {
   margin-left: auto;
