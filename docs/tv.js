@@ -166,7 +166,7 @@ function renderRow(entry) {
   return `
     <div class="tv-row">
       <div class="tv-row-rank">#${rank}</div>
-      ${renderAvatarBlock(tech, "tv-row-photo", "tv-row-photo-fallback")}
+      ${renderAvatarBlock(tech, "tv-row-photo", "tv-row-photo-fallback", { large: true })}
       <div class="tv-row-name-block">
         <div class="tv-row-name">${escapeHtml(tech.name || "Unknown")}</div>
         <div class="tv-row-meta">${escapeHtml(tech.role || "")}</div>

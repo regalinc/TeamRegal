@@ -80,13 +80,16 @@ function hasRealAvatar(tech) {
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full
 // upload resolution, confirmed 1000px+ on the accounts checked) sits right
-// next to it. Small on-screen avatars (~36-40px, e.g. every scorecard) are
-// already native resolution with the thumb, so this is only worth using
-// where a photo renders large — currently just the TV kiosk's featured
-// card, which was upscaling the 40px thumb 6-13x on a real TV and looked
-// accordingly blurry. Not every employee has an "original" (older/re-synced
-// accounts may only have the thumb), so callers must fall back gracefully
-// — see handleLargeAvatarError.
+// next to it. The desktop dashboard's avatars are a genuinely fixed ~36px
+// (style.css), so the native thumb is already the right resolution there and
+// this swap isn't used. The TV kiosk is a different story even for its
+// "small" row photos: everything on that page is sized in vw/vh specifically
+// so it scales UP to fill whatever screen it's opened on (see tv.css), so a
+// row photo that looks native-res in a browser tab renders well past 40px on
+// a real TV and needs this same swap — not just the bigger featured photo.
+// Not every employee has an "original" (older/re-synced accounts may only
+// have the thumb), so callers must fall back gracefully — see
+// handleLargeAvatarError.
 function largeAvatarUrl(url) {
   if (!url || !url.includes("/thumb_web_round/")) return null;
   return url.replace("/thumb_web_round/", "/original/");
