@@ -196,11 +196,17 @@ function renderStatTile({ label, value, meterPct }) {
 // as opposed to computeScorecardStats' tag-based numbers used on each card.
 function computeStats(allJobs) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
-  const totalJobs = jobs.length;
+  // "Total jobs" only counts jobs that have actually started (in progress or
+  // complete) — same NOT_YET_STARTED_STATUSES exclusion completion rate
+  // already used below, now applied to the job count too, so a tech/BU with
+  // a full week scheduled ahead doesn't look busier than one who's already
+  // done the same amount of real work. Revenue/Avg ticket are untouched —
+  // those still reflect every non-canceled job, same as always.
+  const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
+  const totalJobs = startedJobs.length;
   const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
   const billedJobs = jobs.filter((j) => (j.total_amount || 0) > 0);
   const avgTicketCents = billedJobs.length ? totalRevenueCents / billedJobs.length : 0;
-  const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
   const completedJobs = startedJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
   const completionRate = startedJobs.length ? (completedJobs.length / startedJobs.length) * 100 : 0;
 
@@ -345,7 +351,13 @@ function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
   const totalRevenueCents = jobs.reduce((sum, j) => sum + jobRevenueCents(j, splitRevenue), 0);
 
-  const countedJobs = jobs.filter(countsTowardJobs);
+  // "Jobs" only counts jobs that have actually started (in progress or
+  // complete), same as completion rate's denominator below — a job merely
+  // scheduled for later in the period hasn't happened yet, so it shouldn't
+  // count toward Jobs (or, by extension, Avg ticket's denominator) any more
+  // than it counts toward Completion. This is on top of the existing
+  // tag-based countsTowardJobs filter, not a replacement for it.
+  const countedJobs = jobs.filter((j) => countsTowardJobs(j) && !NOT_YET_STARTED_STATUSES.has(j.work_status));
   const totalJobs = countedJobs.length;
   const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
 
