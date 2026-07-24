@@ -127,7 +127,7 @@ function metricTiles(stats, sizeClass) {
     tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats), sizeClass),
     tvTile("Leads", stats.leads.toLocaleString(), kpiClass("leads", stats), sizeClass),
     tvTile("Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats), sizeClass),
-    tvTile("IFO", stats.ifo.toLocaleString(), kpiClass("ifo", stats), sizeClass),
+    tvTile("$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats), sizeClass),
     tvTile("Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats), sizeClass),
   ].join("");
 }

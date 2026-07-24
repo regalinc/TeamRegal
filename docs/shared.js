@@ -358,6 +358,9 @@ function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
 
   const servicePlansSoldJobs = jobs.filter((j) => hasTag(j, "Membership Sold"));
 
+  // Housecall Pro's tag is "IFO" and stays that way here (stats.ifo) since
+  // it has to match the real tag on synced jobs — only the on-screen tile
+  // label reads "$0 Call" instead (renderMiniStat/tvTile call sites).
   const ifoJobs = jobs.filter((j) => hasTag(j, "IFO"));
 
   const accessorySoldJobs = jobs.filter((j) => hasTag(j, "Accessory Sold"));
@@ -516,7 +519,7 @@ function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRev
     renderMiniStat("Leads", stats.leads.toLocaleString(), kpiTier(kpiBuCode, "leads", stats)),
     renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
     renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()),
-    renderMiniStat("IFO", stats.ifo.toLocaleString(), kpiTier(kpiBuCode, "ifo", stats)),
+    renderMiniStat("$0 Call", stats.ifo.toLocaleString(), kpiTier(kpiBuCode, "ifo", stats)),
     renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString(), kpiTier(kpiBuCode, "accessorySold", stats)),
     ...extraStats.map((s) => renderMiniStat(s.label, s.value)),
   ].join("");
