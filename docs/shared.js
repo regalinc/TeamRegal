@@ -283,11 +283,12 @@ function businessUnitCode(businessUnit) {
 // selected in the filter bar, since an unfiltered tech's jobs can span two
 // BUs with different goals and there'd be no one goal to grade against).
 // Three-tier grading per metric: "good" if the goal is met, "bad" if missed
-// by more than `buffer` (15%, confirmed against Regal's own example — IFO's
-// 5% goal gives a 5-5.75% amber band), "warn" in between. `direction: "min"`
-// is a floor (higher is better, e.g. Avg ticket); `direction: "max"` is a
-// ceiling (lower is better, e.g. IFO) and the buffer band sits above the
-// goal instead of below it.
+// by more than `buffer` (15% by default), "warn" in between. `direction:
+// "min"` is a floor (higher is better, e.g. Avg ticket); `direction: "max"`
+// is a ceiling (lower is better, e.g. IFO) and the buffer band sits above
+// the goal instead of below it. `buffer` can be overridden per metric when
+// the amber band isn't the default 15% — see IFO below (green under 7.5%,
+// amber 7.5-10%, a wider band than 15% of 7.5% would give).
 function tier(value, { goal, direction, buffer = 0.15 }) {
   if (direction === "min") {
     if (value >= goal) return "good";
@@ -304,13 +305,19 @@ function tier(value, { goal, direction, buffer = 0.15 }) {
 // one BU's target should never silently change another's.
 const KPI_THRESHOLDS_BY_BU = {
   30: {
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
+    // than the default 15% buffer would give, so it's spelled out explicitly
+    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
     avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 450, direction: "min" }) : null),
     leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
     accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
   },
   40: {
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
+    // than the default 15% buffer would give, so it's spelled out explicitly
+    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
     avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 250, direction: "min" }) : null),
     leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
     accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
@@ -318,12 +325,18 @@ const KPI_THRESHOLDS_BY_BU = {
   // BU 70/80 (Plumbing Service): same IFO/Accessory sold bars as HVAC
   // Service, no Leads target given yet, and their own Avg ticket bars.
   70: {
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
+    // than the default 15% buffer would give, so it's spelled out explicitly
+    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
     avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 500, direction: "min" }) : null),
     accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
   },
   80: {
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.05, direction: "max" }) : null),
+    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
+    // than the default 15% buffer would give, so it's spelled out explicitly
+    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
+    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
     avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 300, direction: "min" }) : null),
     accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
   },
