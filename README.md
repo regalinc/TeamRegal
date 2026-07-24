@@ -110,13 +110,11 @@ Each department has a **fixed color identity** (a top border + dot on its card) 
 
 A BU screen's header and featured-card rank subtitle both show the business unit's exact name as synced from Housecall Pro (e.g. "30 HVAC SERVICE"), read live off a matching job rather than hardcoded, so it always matches what `admin.html` shows for the same BU (`businessUnitLabelForCode` in `tv.js`).
 
-**KPI tiles are colored on the "30" screen only, per Regal's own targets** (`BU_30_KPI_THRESHOLDS`/`kpiClass` in `tv.js`) — solid green (`.tv-good`) or red (`.tv-bad`) fill on the tile, not just the number, so it reads at a glance from across a room:
-- **IFO** under 5% of jobs — lower is better (`stats.ifo / stats.totalJobs < 0.05`)
-- **Avg ticket** $450 or more
-- **Leads** (lead turnover) at least 1 per 12 jobs (`stats.leads / stats.totalJobs >= 1/12`)
-- **Accessory sold** at least 1 per 8 jobs (`stats.accessorySold / stats.totalJobs >= 1/8`)
+**KPI tiles are colored per screen, per Regal's own targets** (`KPI_THRESHOLDS_BY_SCREEN`/`kpiClass` in `tv.js`, one config object per screen keyed by `dept`) — solid green (`.tv-good`) or red (`.tv-bad`) fill on the tile, not just the number, so it reads at a glance from across a room. Defined so far:
+- **30** — IFO under 5% of jobs (`stats.ifo / stats.totalJobs < 0.05`), Avg ticket $450 or more, Leads (lead turnover) at least 1 per 12 jobs, Accessory sold at least 1 per 8 jobs
+- **40** — same four metrics as 30, except Avg ticket's bar is $250 or more instead of $450
 
-Revenue, Completion, Jobs, and Leads sold have no target yet and stay neutral. A tech/section with zero jobs in the period renders every ratio-based KPI neutral too, rather than a misleading pass or fail with no underlying data. Every other screen's tiles stay fully neutral (`kpiClass` short-circuits unless the screen is `"30"`) — extend `BU_30_KPI_THRESHOLDS`-style logic (a new `{screen}_KPI_THRESHOLDS` map, checked in `kpiClass`) once targets exist for another screen.
+Each screen's thresholds are written out in full even where two screens' rules happen to match today (IFO/Leads/Accessory sold are currently identical between 30 and 40) — editing one screen's target should never silently change another's. Revenue, Completion, Jobs, and Leads sold have no target yet and stay neutral on every screen. A tech/section with zero jobs in the period renders every ratio-based KPI neutral too, rather than a misleading pass or fail with no underlying data. Every screen not listed in `KPI_THRESHOLDS_BY_SCREEN` stays fully neutral — add a new entry (keyed by that screen's `dept` value) once targets exist for it.
 
 **Forced dark mode, not theme-adaptive.** Unlike the rest of the site (`prefers-color-scheme`-based), `tv.css` hardcodes the dark palette unconditionally — smart TV browsers are inconsistent about reporting an OS-level light/dark preference, and this is a fixed always-on display rather than something a person toggles, so relying on auto-detection risked an unpredictable result per device.
 

@@ -79,27 +79,40 @@ function departmentOf(tech) {
   return OFFICE_LABEL;
 }
 
-// Regal's KPI targets — currently only defined for the "30" (HVAC Service)
-// screen; every other screen's tiles stay neutral (kpiClass falls through to
-// the DEPT !== "30" check below) until thresholds are defined for them too.
-// Each entry gets the full stats object (not just its own tile's value)
-// since three of these four are ratios against totalJobs ("calls"), not raw
+// Regal's KPI targets, one map per screen — every screen not listed here
+// stays fully neutral (kpiClass falls through the lookup below to null).
+// Each check function gets the full stats object (not just its own tile's
+// value) since most of these are ratios against totalJobs ("calls"), not raw
 // counts. A tech/section with zero jobs in the period returns neutral for
 // every ratio-based KPI rather than a misleading pass or fail on no data.
-const BU_30_KPI_THRESHOLDS = {
-  // IFO ("in front of, no sale") should be under 5% of jobs — lower is better.
-  ifo: (stats) => (stats.totalJobs ? stats.ifo / stats.totalJobs < 0.05 : null),
-  // Avg ticket should be at least $450 — higher is better, not a ratio.
-  avgTicket: (stats) => (stats.totalJobs ? stats.avgTicket >= 450 : null),
-  // Lead turnover: at least 1 lead (TGL-tagged job) per 12 calls.
-  leads: (stats) => (stats.totalJobs ? stats.leads / stats.totalJobs >= 1 / 12 : null),
-  // Accessory sales: at least 1 sale per 8 calls.
-  accessorySold: (stats) => (stats.totalJobs ? stats.accessorySold / stats.totalJobs >= 1 / 8 : null),
+// Deliberately duplicated rather than shared between screens even where two
+// screens' rules happen to match today (e.g. IFO/Leads/Accessory sold are
+// currently identical between 30 and 40) — editing one screen's target
+// should never silently change another's.
+const KPI_THRESHOLDS_BY_SCREEN = {
+  30: {
+    // IFO ("in front of, no sale") should be under 5% of jobs — lower is better.
+    ifo: (stats) => (stats.totalJobs ? stats.ifo / stats.totalJobs < 0.05 : null),
+    // Avg ticket should be at least $450 — higher is better, not a ratio.
+    avgTicket: (stats) => (stats.totalJobs ? stats.avgTicket >= 450 : null),
+    // Lead turnover: at least 1 lead (TGL-tagged job) per 12 calls.
+    leads: (stats) => (stats.totalJobs ? stats.leads / stats.totalJobs >= 1 / 12 : null),
+    // Accessory sales: at least 1 sale per 8 calls.
+    accessorySold: (stats) => (stats.totalJobs ? stats.accessorySold / stats.totalJobs >= 1 / 8 : null),
+  },
+  40: {
+    // Same shape as BU 30, but a lower Avg ticket bar ($250 vs $450).
+    ifo: (stats) => (stats.totalJobs ? stats.ifo / stats.totalJobs < 0.05 : null),
+    avgTicket: (stats) => (stats.totalJobs ? stats.avgTicket >= 250 : null),
+    leads: (stats) => (stats.totalJobs ? stats.leads / stats.totalJobs >= 1 / 12 : null),
+    accessorySold: (stats) => (stats.totalJobs ? stats.accessorySold / stats.totalJobs >= 1 / 8 : null),
+  },
 };
 
 function kpiClass(metricKey, stats) {
-  if (DEPT !== "30") return null;
-  const check = BU_30_KPI_THRESHOLDS[metricKey];
+  const thresholds = KPI_THRESHOLDS_BY_SCREEN[DEPT];
+  if (!thresholds) return null;
+  const check = thresholds[metricKey];
   if (!check) return null;
   const pass = check(stats);
   if (pass === null) return null;
