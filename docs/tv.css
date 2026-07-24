@@ -121,6 +121,17 @@ body {
   gap: 1vh;
   min-width: 0;
 }
+/* --row-count (set per-screen in renderRoster, tv.js) is the number of list
+   rows this screen needs to fit — flexbox already shrinks each .tv-row to
+   fit however many there are, but the metric tiles inside a row were sized
+   off a flat vh percentage that assumed a specific row count, so a screen
+   with more rows than that got shorter rows without the tile content inside
+   them shrinking to match, overflowing/overlapping. Every vh-based size
+   below that contributes to a row's vertical footprint is expressed as
+   (5-row value * 5 / row-count) — anchored to 5 because that's the one
+   confirmed-working case (Plumbing Service, after excluding apprentices):
+   row-count 5 renders identically to before, row-count 6+ (HVAC Service)
+   now gets a real reduction instead of none. */
 .tv-row {
   flex: 1;
   display: flex;
@@ -129,7 +140,7 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1vh 1.5vw;
+  padding: calc(5vh / var(--row-count, 5)) 1.5vw;
   min-height: 0;
 }
 .tv-row-photo, .tv-row-photo-fallback {
@@ -163,14 +174,14 @@ body {
 .tv-row-tile {
   background: var(--tile-bg);
   border-radius: calc(var(--radius) * 0.6);
-  padding: 0.8vh 0.4vw;
+  padding: calc(4vh / var(--row-count, 5)) 0.4vw;
   text-align: center;
 }
 .tv-row-tile.tv-good { background: var(--good-bg); }
 .tv-row-tile.tv-warn { background: var(--warn-bg); }
 .tv-row-tile.tv-bad { background: var(--bad-bg); }
-.tv-row-tile .tv-tile-label { font-size: clamp(9px, 1vh, 14px); }
-.tv-row-tile .tv-tile-value { font-size: clamp(13px, 1.7vh, 24px); margin-top: 0.2vh; }
+.tv-row-tile .tv-tile-label { font-size: clamp(8px, calc(5vh / var(--row-count, 5)), 14px); }
+.tv-row-tile .tv-tile-value { font-size: clamp(10px, calc(8.5vh / var(--row-count, 5)), 24px); margin-top: 0.2vh; }
 .tv-row-tile.tv-good .tv-tile-label, .tv-row-tile.tv-good .tv-tile-value { color: var(--good-text); }
 .tv-row-tile.tv-warn .tv-tile-label, .tv-row-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
 .tv-row-tile.tv-bad .tv-tile-label, .tv-row-tile.tv-bad .tv-tile-value { color: var(--bad-text); }

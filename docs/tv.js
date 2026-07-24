@@ -223,6 +223,9 @@ function renderRoster(entries, screenLabel) {
   mainEl.innerHTML = renderFeatured(featured, screenLabel);
   const list = document.createElement("div");
   list.className = "tv-list";
+  // Row/tile sizing in tv.css reads this to scale down as more people need
+  // to fit — see the comment on .tv-row there for why that's necessary.
+  list.style.setProperty("--row-count", Math.max(rest.length, 1));
   list.innerHTML = rest.map((entry) => renderRow(entry)).join("");
   mainEl.appendChild(list);
 }
