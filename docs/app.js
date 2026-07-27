@@ -69,6 +69,25 @@ function isEstimator(tech) {
   return (tech.tags || []).includes(ESTIMATOR_TAG);
 }
 
+// Estimates given normally counts by the estimate's created_at (record
+// creation date) — but for Andrew (Andy) Rouscher specifically, created_at
+// didn't match his actual calendar (a created_at-scoped count of 30 vs. 19
+// scheduled site visits, both for the same date range), so his card scopes
+// by the estimate's scheduled visit date instead. This is a narrow, id-
+// scoped exception, not a change to the metric's default definition — every
+// other estimator keeps using created_at. An estimate with no scheduled
+// visit (phone/remote estimates don't have one) drops out of Andy's count
+// entirely for a given period rather than falling back to created_at, since
+// there's no visit to attribute to a period.
+const SCHEDULE_SCOPED_ESTIMATOR_IDS = new Set([
+  "pro_ca120cbb55fa40fe9361d492161b101f", // Andrew Rouscher
+]);
+
+function estimateGivenDate(estimate, tech) {
+  if (SCHEDULE_SCOPED_ESTIMATOR_IDS.has(tech.id)) return estimate.schedule?.scheduled_start || null;
+  return estimate.created_at;
+}
+
 // De-dupes estimates (by id) that may appear in more than one of the given
 // lists — used to combine "given this period" and "approved this period"
 // into a single set without double-counting an estimate that's in both.
@@ -388,7 +407,6 @@ function render(data) {
   // job-specific filters above (tag/status/business unit/search); only by
   // period and technician.
   const allEstimates = data.estimates || [];
-  const periodEstimates = allEstimates.filter((e) => dateInPeriod(e.created_at, filters.period));
   const approvedThisPeriod = allEstimates.filter((e) => e.approved && dateInPeriod(e.approved_at, filters.period));
 
   // The team summary scopes to just the selected roster's jobs when one is
@@ -427,7 +445,9 @@ function render(data) {
   const grid = document.createElement("div");
   grid.className = "tech-grid";
   for (const tech of rosterTechs) {
-    const techEstimatesGiven = periodEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
+    const techEstimatesGiven = allEstimates.filter(
+      (e) => (e.assigned_employee_ids || []).includes(tech.id) && dateInPeriod(estimateGivenDate(e, tech), filters.period)
+    );
     const techApprovedThisPeriodEstimates = approvedThisPeriod.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
 
     if (isEstimator(tech)) {

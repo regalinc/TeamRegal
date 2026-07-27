@@ -323,6 +323,10 @@ function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
     estimate_number: estimate.estimate_number || null,
     customer_label: [customer.first_name, customer.last_name ? customer.last_name[0] + "." : null].filter(Boolean).join(" "),
     created_at: estimate.created_at,
+    // Not every estimate has a scheduled site visit (phone/remote estimates
+    // don't), so this is often null — see SCHEDULE_SCOPED_ESTIMATOR_IDS in
+    // app.js for the one place that reads it instead of created_at.
+    schedule: estimate.schedule || null,
     assigned_employee_ids: (estimate.assigned_employees || []).map((e) => e.id),
     approved,
     approved_at: approvedAt,
