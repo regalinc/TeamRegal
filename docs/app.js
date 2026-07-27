@@ -132,7 +132,7 @@ function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates) {
   return { given, approved, closingRate, revenue: revenueCents / CENTS_PER_DOLLAR };
 }
 
-function renderEstimateItem(estimate) {
+function renderEstimateItem(estimate, tech) {
   const li = document.createElement("li");
   li.className = "job-item";
 
@@ -140,10 +140,17 @@ function renderEstimateItem(estimate) {
   // one currently selected (see renderEstimatorCard), so both dates are
   // explicitly labeled rather than showing a bare date — otherwise which
   // date is which would be ambiguous once given/approved fall in different
-  // periods.
+  // periods. Uses estimateGivenDate so this matches whichever date field
+  // actually determined this estimate's "given" attribution for this tech
+  // (schedule.scheduled_start for Andy, created_at for everyone else) —
+  // falls back to created_at only when there's no scheduled date to show at
+  // all (e.g. an estimate that reached this list purely via the
+  // approved-this-period path, never counted as "given" in any period).
+  const givenDate = estimateGivenDate(estimate, tech) || estimate.created_at;
+
   li.innerHTML = `
     <div class="job-item-top">
-      <span class="job-time">Given ${formatDate(estimate.created_at)}</span>
+      <span class="job-time">Given ${formatDate(givenDate)}</span>
       <span class="status-badge ${estimate.approved ? "status-complete-rated" : "status-scheduled"}">${estimate.approved ? "Approved" : "Pending"}</span>
     </div>
     <div class="job-desc">${escapeHtml(estimate.estimate_number ? `Estimate #${estimate.estimate_number}` : "Estimate")}</div>
@@ -201,9 +208,14 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) 
   // given estimates — an estimate given last period but approved this one
   // (counted in Estimates approved / Closing % / Revenue accepted) would
   // otherwise contribute to those numbers while never appearing in the list.
-  const sortedEstimates = unionById(estimatesGiven, approvedThisPeriodEstimates).sort((a, b) =>
-    (a.created_at || "").localeCompare(b.created_at || "")
-  );
+  // Sorted by the same date each item displays (see renderEstimateItem)
+  // rather than always created_at, so the list stays chronological by
+  // whatever "Given" date is actually showing.
+  const sortedEstimates = unionById(estimatesGiven, approvedThisPeriodEstimates).sort((a, b) => {
+    const aDate = estimateGivenDate(a, tech) || a.created_at || "";
+    const bDate = estimateGivenDate(b, tech) || b.created_at || "";
+    return aDate.localeCompare(bDate);
+  });
 
   const details = document.createElement("details");
   details.className = "tech-job-details";
@@ -219,7 +231,7 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) 
   } else {
     const list = document.createElement("ul");
     list.className = "job-list";
-    for (const est of sortedEstimates) list.appendChild(renderEstimateItem(est));
+    for (const est of sortedEstimates) list.appendChild(renderEstimateItem(est, tech));
     details.appendChild(list);
   }
   card.appendChild(details);
