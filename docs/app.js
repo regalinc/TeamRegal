@@ -84,8 +84,17 @@ const SCHEDULE_SCOPED_ESTIMATOR_IDS = new Set([
 ]);
 
 function estimateGivenDate(estimate, tech) {
-  if (SCHEDULE_SCOPED_ESTIMATOR_IDS.has(tech.id)) return estimate.schedule?.scheduled_start || null;
-  return estimate.created_at;
+  if (!SCHEDULE_SCOPED_ESTIMATOR_IDS.has(tech.id)) return estimate.created_at;
+
+  const scheduledStart = estimate.schedule?.scheduled_start;
+  if (!scheduledStart) return null;
+  // A visit scheduled for later (e.g. "This month" includes the rest of the
+  // month, not just up to today) hasn't happened yet — he hasn't had the
+  // chance to present it, so it shouldn't count as "given" and drag down
+  // Closing % as an unclosed estimate before its appointment even occurs.
+  // It'll start counting once its scheduled date actually passes.
+  if (new Date(scheduledStart) > new Date()) return null;
+  return scheduledStart;
 }
 
 // De-dupes estimates (by id) that may appear in more than one of the given
