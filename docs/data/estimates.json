@@ -1,5 +1,1513 @@
 [
   {
+    "id": "csr_9f6c20ef31b149b8b9dc00a56e78e403",
+    "estimate_number": "12878",
+    "customer_label": "Josh C.",
+    "created_at": "2026-08-03T12:55:36Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_8a8bc797b7c947b289603daa6717a1ca",
+    "estimate_number": "12877",
+    "customer_label": "Ed B.",
+    "created_at": "2026-08-03T12:22:41Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_35392339fc8a4c37ab16014adc0badec",
+    "estimate_number": "12876",
+    "customer_label": "June A.",
+    "created_at": "2026-08-03T11:56:29Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_45096718a6414c4d8e7a098b7581722a",
+    "estimate_number": "12875",
+    "customer_label": "Carol B.",
+    "created_at": "2026-08-03T11:36:20Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+    ],
+    "approved": true,
+    "approved_at": "2026-08-03T13:32:04.435Z",
+    "approved_amount": 191830
+  },
+  {
+    "id": "csr_fa8e4d72dcbe4c869d3ca6dd4ab97bd0",
+    "estimate_number": "12874",
+    "customer_label": "Giorgio B.",
+    "created_at": "2026-07-31T18:19:06Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_0f6b3bc7032743a49dbb37cbc5d48446",
+    "estimate_number": "12873",
+    "customer_label": "John M.",
+    "created_at": "2026-07-31T18:18:54Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_3d4736dd8d154795a07faec8c51dbc19",
+    "estimate_number": "12872",
+    "customer_label": "Peter L.",
+    "created_at": "2026-07-31T16:13:33Z",
+    "schedule": {
+      "scheduled_start": "2026-07-31T16:15:00Z",
+      "scheduled_end": "2026-07-31T17:15:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_83a3e6de7d2d4d3396c7c5dfa42482f0"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_2927360bde9c49a182351d1ef9dceb80",
+    "estimate_number": "12871",
+    "customer_label": "Amanda C.",
+    "created_at": "2026-07-31T15:54:57Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_add4ba12688e47c696e827fb91a7d9fd"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_5d7a91a7ce4443c1972e0ea0e218e42d",
+    "estimate_number": "12870",
+    "customer_label": "Modern L.",
+    "created_at": "2026-07-31T14:54:06Z",
+    "schedule": {
+      "scheduled_start": "2026-08-05T13:00:00Z",
+      "scheduled_end": "2026-08-05T16:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_40260fd2d3704be9aeabdabe38647568",
+    "estimate_number": "12869",
+    "customer_label": "Andrew P.",
+    "created_at": "2026-07-31T14:47:40Z",
+    "schedule": {
+      "scheduled_start": "2026-07-31T17:00:00Z",
+      "scheduled_end": "2026-07-31T19:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_5d4fa6ac190f45259ff53a2d3e041813",
+    "estimate_number": "12868",
+    "customer_label": "Megan M.",
+    "created_at": "2026-07-31T12:30:20Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_b887c57ccdb543088bd53f4c3daf34f6",
+    "estimate_number": "12867",
+    "customer_label": "Robert M.",
+    "created_at": "2026-07-30T18:53:32Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_a147eea604e04ccfa458813cf1b374f0"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_6a10acea59f649809eca72c03d3abe5b",
+    "estimate_number": "12866",
+    "customer_label": "Dennis M.",
+    "created_at": "2026-07-30T18:35:15Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_8f0871794b1a49bc8ea819cedc0be1b8",
+    "estimate_number": "12865",
+    "customer_label": "Cathy H.",
+    "created_at": "2026-07-30T17:20:48Z",
+    "schedule": {
+      "scheduled_start": "2026-07-31T13:30:00Z",
+      "scheduled_end": "2026-07-31T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_863242bc3383465a8d270dbc98e70be7",
+    "estimate_number": "12864",
+    "customer_label": "Scott S.",
+    "created_at": "2026-07-30T17:19:16Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "approved": true,
+    "approved_at": "2026-08-01T16:33:38.994Z",
+    "approved_amount": 97538
+  },
+  {
+    "id": "csr_f94095a495cc419d930e0c4253843779",
+    "estimate_number": "12863",
+    "customer_label": "Micahel G.",
+    "created_at": "2026-07-30T16:43:52Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_1836b88e8318422abe6b2d35f5390f35",
+    "estimate_number": "12862",
+    "customer_label": "Kimberly S.",
+    "created_at": "2026-07-30T16:13:10Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_4e75bb9b1bde44b6acc78f3a65d30f89",
+    "estimate_number": "12861",
+    "customer_label": "Mark S.",
+    "created_at": "2026-07-30T16:05:32Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-31T08:12:02.573Z",
+    "approved_amount": 111937
+  },
+  {
+    "id": "csr_47637aa311b145b1ad961490254d7fa3",
+    "estimate_number": "12860",
+    "customer_label": "Dan F.",
+    "created_at": "2026-07-30T15:59:13Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_654676a3c836486d9f7939767c3f0d0b",
+    "estimate_number": "12859",
+    "customer_label": "Lauren S.",
+    "created_at": "2026-07-30T15:33:52Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_e589c65e2ec04029babf5b4929558e25",
+    "estimate_number": "12858",
+    "customer_label": "Penny C.",
+    "created_at": "2026-07-30T15:28:03Z",
+    "schedule": {
+      "scheduled_start": "2026-08-04T16:00:00Z",
+      "scheduled_end": "2026-08-04T17:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_2331545d14664ceea48ea19c6634c6bd",
+    "estimate_number": "12857",
+    "customer_label": "Elizabeth O.",
+    "created_at": "2026-07-30T15:06:17Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_a9dd723349d44e57a2e7128c542ba9db",
+    "estimate_number": "12856",
+    "customer_label": "Chris D.",
+    "created_at": "2026-07-30T15:03:19Z",
+    "schedule": {
+      "scheduled_start": "2026-07-30T15:00:00Z",
+      "scheduled_end": "2026-07-30T17:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_84328c3c7d3e48469ed124613747d437",
+    "estimate_number": "12855",
+    "customer_label": "Allan S.",
+    "created_at": "2026-07-30T14:59:19Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7ccf9b4457bb40ecbb84540d250950e1"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_1787e5b0b9e34bd3a3148393ec62db79",
+    "estimate_number": "12854",
+    "customer_label": "",
+    "created_at": "2026-07-30T14:59:06Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_a147eea604e04ccfa458813cf1b374f0"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_6877b3a97f424abfb114fcf6909a4474",
+    "estimate_number": "12853",
+    "customer_label": "Kim T.",
+    "created_at": "2026-07-30T14:13:17Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_71215eb508954c6289330ce33a059096",
+    "estimate_number": "12852",
+    "customer_label": "Kim T.",
+    "created_at": "2026-07-30T14:13:03Z",
+    "schedule": {
+      "scheduled_start": "2026-08-04T13:00:00Z",
+      "scheduled_end": "2026-08-04T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_27fcce8f21bc4186b44abe4d9a87c03f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_2d87ecf08d4f48c49a64e7cdce5e6171",
+    "estimate_number": "12851",
+    "customer_label": "Columbia Gas E.",
+    "created_at": "2026-07-30T14:04:37Z",
+    "schedule": {
+      "scheduled_start": "2026-07-31T15:00:00Z",
+      "scheduled_end": "2026-07-31T17:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_07decd54076d4009a0b1f786acc87b8e",
+    "estimate_number": "12850",
+    "customer_label": "Vincent C.",
+    "created_at": "2026-07-30T14:01:31Z",
+    "schedule": {
+      "scheduled_start": "2026-08-04T13:00:00Z",
+      "scheduled_end": "2026-08-04T16:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_e942e816c0a149a1baca463f318197bd",
+    "estimate_number": "12849",
+    "customer_label": "Ralph M.",
+    "created_at": "2026-07-30T13:50:18Z",
+    "schedule": {
+      "scheduled_start": "2026-08-03T13:00:00Z",
+      "scheduled_end": "2026-08-03T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_0297867834114f30b148f46793aab0aa",
+    "estimate_number": "12848",
+    "customer_label": "Cathy D.",
+    "created_at": "2026-07-30T13:05:31Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_c7222d620d6e4a6388f1bcffe29c468b",
+    "estimate_number": "12847",
+    "customer_label": "Darrell S.",
+    "created_at": "2026-07-30T13:04:09Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_4e5c01373a664d9789a634b696cc7414",
+    "estimate_number": "12846",
+    "customer_label": "Cathy D.",
+    "created_at": "2026-07-30T13:03:52Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_59ea0589170e4115b60f34b53f1b3100",
+    "estimate_number": "12845",
+    "customer_label": "Brian B.",
+    "created_at": "2026-07-30T12:35:34Z",
+    "schedule": {
+      "scheduled_start": "2026-08-07T18:00:00Z",
+      "scheduled_end": "2026-08-07T20:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_9642232408b14e369f7b8497bbf128f5",
+    "estimate_number": "12844",
+    "customer_label": "Walt C.",
+    "created_at": "2026-07-30T12:13:39Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_56ac0e9f7e2d4b17b920d58d7048049f",
+    "estimate_number": "12843",
+    "customer_label": "Lisa G.",
+    "created_at": "2026-07-30T11:14:51Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-30T16:10:13.388Z",
+    "approved_amount": 259525
+  },
+  {
+    "id": "csr_42c55705650a4a1cab9ecb36d61439f3",
+    "estimate_number": "12842",
+    "customer_label": "Out House S.",
+    "created_at": "2026-07-29T18:57:39Z",
+    "schedule": {
+      "scheduled_start": "2026-08-06T13:00:00Z",
+      "scheduled_end": "2026-08-06T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_a4d2bfca8e604b56aeb90dd2ae4adb47",
+    "estimate_number": "12841",
+    "customer_label": "Elizabeth G.",
+    "created_at": "2026-07-29T17:40:43Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_0d1b8e655f304fc2bd85171587f91b7c",
+    "estimate_number": "12840",
+    "customer_label": "Thomas B.",
+    "created_at": "2026-07-29T17:23:00Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_34f3b0445d2249d88c00c0ce4fde0d69",
+    "estimate_number": "12839",
+    "customer_label": "Frankie G.",
+    "created_at": "2026-07-29T16:33:07Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_b6acf6537432439ebfeb25cd985c61b8",
+    "estimate_number": "12838",
+    "customer_label": "Scott D.",
+    "created_at": "2026-07-29T16:12:43Z",
+    "schedule": {
+      "scheduled_start": "2026-08-14T13:00:00Z",
+      "scheduled_end": "2026-08-14T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_1a6c63b57b6a4c5eb26a35196662a045",
+    "estimate_number": "12837",
+    "customer_label": "Scott D.",
+    "created_at": "2026-07-29T16:10:34Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_a31934f45e69438fafc5311aee987fc0",
+    "estimate_number": "12836",
+    "customer_label": "Kishun P.",
+    "created_at": "2026-07-29T16:02:40Z",
+    "schedule": {
+      "scheduled_start": "2026-08-06T13:00:00Z",
+      "scheduled_end": "2026-08-06T16:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_f1a5ddd8186147fba18082921e053d45",
+    "estimate_number": "12835",
+    "customer_label": "Kadriya C.",
+    "created_at": "2026-07-29T15:35:59Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T20:16:37.945Z",
+    "approved_amount": 75949
+  },
+  {
+    "id": "csr_ab9b4989733c4a5ca9cc979283bcfa34",
+    "estimate_number": "12834",
+    "customer_label": "Clair M.",
+    "created_at": "2026-07-29T15:32:28Z",
+    "schedule": {
+      "scheduled_start": "2026-08-04T13:00:00Z",
+      "scheduled_end": "2026-08-04T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_1a708b7299f84f22bebd90381dcb89c7",
+    "estimate_number": "12833",
+    "customer_label": "Peter L.",
+    "created_at": "2026-07-29T15:05:38Z",
+    "schedule": {
+      "scheduled_start": "2026-07-30T14:00:00Z",
+      "scheduled_end": "2026-07-30T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_f5a81ce77f574761ab7d123ddf16d000",
+    "estimate_number": "12832",
+    "customer_label": "Devoid W.",
+    "created_at": "2026-07-29T14:50:32Z",
+    "schedule": {
+      "scheduled_start": "2026-08-03T13:00:00Z",
+      "scheduled_end": "2026-08-03T16:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_82d604e81fc64cf897eb1572ee285c4a",
+    "estimate_number": "12831",
+    "customer_label": "Jennifer F.",
+    "created_at": "2026-07-29T14:37:27Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_4711ef8757d640098e008d9c7dcd1b58",
+    "estimate_number": "12830",
+    "customer_label": "Patrick B.",
+    "created_at": "2026-07-29T14:03:05Z",
+    "schedule": {
+      "scheduled_start": "2026-07-31T13:00:00Z",
+      "scheduled_end": "2026-07-31T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_ef9ffbdffe794b56aaff3e0a4ae456ee",
+    "estimate_number": "12829",
+    "customer_label": "Linda P.",
+    "created_at": "2026-07-29T13:52:22Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_70daefcb17a647329720263261a3fc90",
+    "estimate_number": "12828",
+    "customer_label": "Linda P.",
+    "created_at": "2026-07-29T13:31:17Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_c88ee86318c14a739e81a9c49aaab15e",
+    "estimate_number": "12827",
+    "customer_label": "Paul M.",
+    "created_at": "2026-07-29T13:14:53Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 125145
+  },
+  {
+    "id": "csr_2831d1c06e1d4259bfb86873dc8e9edf",
+    "estimate_number": "12826",
+    "customer_label": "Linda P.",
+    "created_at": "2026-07-29T13:12:09Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_19d12a1ae91040e79db6b44facf8b15b",
+    "estimate_number": "12825",
+    "customer_label": "Manchester T.",
+    "created_at": "2026-07-29T12:39:01Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_8db491fb6c8043f2b7be90d08dfd5658",
+    "estimate_number": "12824",
+    "customer_label": "Kathleen B.",
+    "created_at": "2026-07-29T12:38:30Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 24580
+  },
+  {
+    "id": "csr_8a7e5262269041488e28a474da58ce99",
+    "estimate_number": "12823",
+    "customer_label": "Scott K.",
+    "created_at": "2026-07-29T12:38:21Z",
+    "schedule": {
+      "scheduled_start": "2026-07-30T20:00:00Z",
+      "scheduled_end": "2026-07-30T20:30:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_81a146f9403f4f12a0d825c2bb86394f",
+    "estimate_number": "12822",
+    "customer_label": "Robin S.",
+    "created_at": "2026-07-29T12:26:19Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_add4ba12688e47c696e827fb91a7d9fd"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_d68b953fa9074f4997c1d6cabed6df3a",
+    "estimate_number": "12821",
+    "customer_label": "Sean S.",
+    "created_at": "2026-07-29T12:21:51Z",
+    "schedule": {
+      "scheduled_start": "2026-08-10T13:00:00Z",
+      "scheduled_end": "2026-08-10T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_02efec58e8d5467d85b93b906117d40e",
+    "estimate_number": "12820",
+    "customer_label": "Pat L.",
+    "created_at": "2026-07-29T12:19:07Z",
+    "schedule": {
+      "scheduled_start": "2026-08-06T13:00:00Z",
+      "scheduled_end": "2026-08-06T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_27fcce8f21bc4186b44abe4d9a87c03f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_cb67a732cb244537b51e4ac87d7ad811",
+    "estimate_number": "12819",
+    "customer_label": "Suzanne B.",
+    "created_at": "2026-07-29T12:04:53Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 436479
+  },
+  {
+    "id": "csr_db337ae074864bebbf6ab3e221bb1bf4",
+    "estimate_number": "12818",
+    "customer_label": "Paul M.",
+    "created_at": "2026-07-29T12:04:36Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 37459
+  },
+  {
+    "id": "csr_82512142caba424f88ce4f5f5e92f502",
+    "estimate_number": "12817",
+    "customer_label": "Carol V.",
+    "created_at": "2026-07-29T11:58:54Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 22404
+  },
+  {
+    "id": "csr_c27a3cbffd82418e81735cf90704614c",
+    "estimate_number": "12816",
+    "customer_label": "Helena D.",
+    "created_at": "2026-07-28T19:47:19Z",
+    "schedule": {
+      "scheduled_start": "2026-07-29T16:00:00Z",
+      "scheduled_end": "2026-07-29T17:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_6afe66cc95de4de387a67459001289ff",
+    "estimate_number": "12815",
+    "customer_label": "Mt. Washington C.",
+    "created_at": "2026-07-28T19:08:58Z",
+    "schedule": {
+      "scheduled_start": "2026-07-30T13:00:00Z",
+      "scheduled_end": "2026-07-30T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_a502809a86c2498fb38b30d007ecf369",
+    "estimate_number": "12814",
+    "customer_label": "Elizabeth G.",
+    "created_at": "2026-07-28T18:28:36Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-28T20:45:46.858Z",
+    "approved_amount": 142979
+  },
+  {
+    "id": "csr_c120312db61a471bbb7ae891ce88d1c6",
+    "estimate_number": "12813",
+    "customer_label": "Typical Life C.",
+    "created_at": "2026-07-28T18:20:56Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_a147eea604e04ccfa458813cf1b374f0"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 80560
+  },
+  {
+    "id": "csr_e36d3b3baea54fc3a208a8a192bf4858",
+    "estimate_number": "12812",
+    "customer_label": "Jason H.",
+    "created_at": "2026-07-28T17:57:38Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-28T20:45:46.858Z",
+    "approved_amount": 300115
+  },
+  {
+    "id": "csr_ebb83a102e4649babb0c1e0c507bdd4d",
+    "estimate_number": "12811",
+    "customer_label": "Rafeal R.",
+    "created_at": "2026-07-28T17:56:19Z",
+    "schedule": {
+      "scheduled_start": "2026-08-05T13:00:00Z",
+      "scheduled_end": "2026-08-05T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_27fcce8f21bc4186b44abe4d9a87c03f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_73916496004e4be6aeb3be393b87a834",
+    "estimate_number": "12810",
+    "customer_label": "Louise M.",
+    "created_at": "2026-07-28T17:45:57Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "approved": true,
+    "approved_at": "2026-07-28T20:45:46.858Z",
+    "approved_amount": 146510
+  },
+  {
+    "id": "csr_eb45c99389c64ed8a5d73a8414506dfc",
+    "estimate_number": "12809",
+    "customer_label": "Azure W.",
+    "created_at": "2026-07-28T17:41:59Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_6ef56d6d845647f0a2a408242272f381",
+    "estimate_number": "12808",
+    "customer_label": "Scott H.",
+    "created_at": "2026-07-28T16:41:07Z",
+    "schedule": {
+      "scheduled_start": "2026-08-03T17:00:00Z",
+      "scheduled_end": "2026-08-03T19:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_3f2297b66a9742d09eaf20976a20183a"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_c11fe0ec96f542edbe63a340603cabbc",
+    "estimate_number": "12807",
+    "customer_label": "George P.",
+    "created_at": "2026-07-28T16:29:53Z",
+    "schedule": {
+      "scheduled_start": "2026-07-31T13:00:00Z",
+      "scheduled_end": "2026-07-31T15:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_40685d354dcd487b8e3b706bcb8b25bb",
+    "estimate_number": "12806",
+    "customer_label": "George P.",
+    "created_at": "2026-07-28T16:28:23Z",
+    "schedule": {
+      "scheduled_start": "2026-08-03T17:00:00Z",
+      "scheduled_end": "2026-08-03T19:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_1afba230306d42e58ee2f509533dbc93",
+    "estimate_number": "12805",
+    "customer_label": "Jane W.",
+    "created_at": "2026-07-28T16:07:23Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_fd3cba4afdf049569305ece5b4da66bd",
+    "estimate_number": "12804",
+    "customer_label": "Hector C.",
+    "created_at": "2026-07-28T15:59:14Z",
+    "schedule": {
+      "scheduled_start": "2026-07-29T13:00:00Z",
+      "scheduled_end": "2026-07-29T16:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_b65b805e04be442eb3938e20059ebbfd",
+    "estimate_number": "12803",
+    "customer_label": "Rafeal R.",
+    "created_at": "2026-07-28T15:08:31Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_ea7e2537eeb149419df22d70dc877541",
+    "estimate_number": "12802",
+    "customer_label": "Justin H.",
+    "created_at": "2026-07-28T13:54:07Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7ccf9b4457bb40ecbb84540d250950e1"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_0a8bbd121e3f4b47a63558cc7fbfa317",
+    "estimate_number": "12801",
+    "customer_label": "Linda M.",
+    "created_at": "2026-07-28T13:36:28Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "approved": true,
+    "approved_at": "2026-08-03T13:32:04.435Z",
+    "approved_amount": 23468
+  },
+  {
+    "id": "csr_e8fd5338dad442f594b9ea9b5325b795",
+    "estimate_number": "12800",
+    "customer_label": "Barbara B.",
+    "created_at": "2026-07-28T13:27:12Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_e99749cef97a4b79b11f81df26bec7d8",
+    "estimate_number": "12799",
+    "customer_label": "James S.",
+    "created_at": "2026-07-28T13:25:53Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_043b4057c0ee4a9e938b9a84cbb5b495",
+    "estimate_number": "12798",
+    "customer_label": "Ryan B.",
+    "created_at": "2026-07-28T13:20:43Z",
+    "schedule": {
+      "scheduled_start": "2026-08-03T17:00:00Z",
+      "scheduled_end": "2026-08-03T19:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_27fcce8f21bc4186b44abe4d9a87c03f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_343903b4add441cd934b92c64cca6c21",
+    "estimate_number": "12797",
+    "customer_label": "Matt C.",
+    "created_at": "2026-07-28T12:33:05Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_3c3cd02790b145e0ad33dbaae77330d6",
+    "estimate_number": "12796",
+    "customer_label": "Brenda B.",
+    "created_at": "2026-07-28T12:21:50Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_25aa8953c0e64cab954e50b655df76b0",
+    "estimate_number": "12795",
+    "customer_label": "SHADOWFAX C.",
+    "created_at": "2026-07-28T12:10:20Z",
+    "schedule": {
+      "scheduled_start": "2026-07-30T15:00:00Z",
+      "scheduled_end": "2026-07-30T17:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_5da2bf47c64941229dd6d50585bc6ed2",
     "estimate_number": "12794",
     "customer_label": "Sage G.",
@@ -103,9 +1611,9 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-28T16:09:55.849Z",
+    "approved_amount": 797700
   },
   {
     "id": "csr_5b06a317542b49bebeb639133907656d",
@@ -157,9 +1665,9 @@
     "assigned_employee_ids": [
       "pro_0c24f7fb4b534fde920650a76dc8365f"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-28T07:57:57.074Z",
+    "approved_amount": 15689
   },
   {
     "id": "csr_f1cda3e8243d463787288be12940c9db",
@@ -425,7 +1933,7 @@
       "appointments": []
     },
     "assigned_employee_ids": [
-      "pro_3f2297b66a9742d09eaf20976a20183a"
+      "pro_2e93b52e70a74c05aa466a52df32b9ef"
     ],
     "approved": false,
     "approved_at": null,
@@ -455,8 +1963,8 @@
     "customer_label": "York HG P.",
     "created_at": "2026-07-24T18:21:48Z",
     "schedule": {
-      "scheduled_start": "2026-07-28T16:30:00Z",
-      "scheduled_end": "2026-07-28T18:00:00Z",
+      "scheduled_start": "2026-07-28T17:30:00Z",
+      "scheduled_end": "2026-07-28T19:30:00Z",
       "arrival_window": 120,
       "appointments": []
     },
@@ -625,9 +2133,9 @@
     "assigned_employee_ids": [
       "pro_83a3e6de7d2d4d3396c7c5dfa42482f0"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 133175
   },
   {
     "id": "csr_6d18fcfab71146718b56e8cf76dedd84",
@@ -697,9 +2205,9 @@
     "assigned_employee_ids": [
       "pro_8fc589c75489437bb66ff45ca0aea7ac"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-28T16:09:55.849Z",
+    "approved_amount": 122771
   },
   {
     "id": "csr_6a11b39746c34b80ad94576dbb23cf5d",
@@ -1039,9 +2547,9 @@
     "assigned_employee_ids": [
       "pro_83a3e6de7d2d4d3396c7c5dfa42482f0"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-28T20:45:46.858Z",
+    "approved_amount": 79500
   },
   {
     "id": "csr_2ee2b185fa4841c595935c90a9f3db95",
@@ -1363,9 +2871,9 @@
     "assigned_employee_ids": [
       "pro_9b6be6b8146547fabe281dac539e3f28"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-08-03T13:32:04.435Z",
+    "approved_amount": 39695
   },
   {
     "id": "csr_b58b24844e3c45ff9fd275e76036fdaf",
@@ -1381,9 +2889,9 @@
     "assigned_employee_ids": [
       "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-28T16:09:55.849Z",
+    "approved_amount": 93320
   },
   {
     "id": "csr_fcf03a7235c0450c911d01a0a1702eff",
@@ -1415,8 +2923,7 @@
       "appointments": []
     },
     "assigned_employee_ids": [
-      "pro_ca120cbb55fa40fe9361d492161b101f",
-      "pro_6d9b30f8ab864817a118fb9563bb667f"
+      "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
     "approved": false,
     "approved_at": null,
@@ -2049,9 +3556,9 @@
     "assigned_employee_ids": [
       "pro_add4ba12688e47c696e827fb91a7d9fd"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-30T16:10:13.388Z",
+    "approved_amount": 111937
   },
   {
     "id": "csr_da54f958727845669b8b081c6c59b994",
@@ -2625,9 +4132,9 @@
     "assigned_employee_ids": [
       "pro_8fc589c75489437bb66ff45ca0aea7ac"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-31T20:43:44.075Z",
+    "approved_amount": 238440
   },
   {
     "id": "csr_31449de6771d49379586fe363239aeea",
@@ -4267,9 +5774,9 @@
     "assigned_employee_ids": [
       "pro_9b6be6b8146547fabe281dac539e3f28"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 358416
   },
   {
     "id": "csr_798ce25a45d34873a88cd622bbabeb6a",
@@ -4697,9 +6204,9 @@
     "assigned_employee_ids": [
       "pro_9b6be6b8146547fabe281dac539e3f28"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-29T16:02:18.382Z",
+    "approved_amount": 50880
   },
   {
     "id": "csr_62ae3e105727409db147f83fd08af939",
@@ -18197,9 +19704,9 @@
     "assigned_employee_ids": [
       "pro_eb35c4da7a0c4a41bc3936da4d71da20"
     ],
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-07-27T21:53:33.238Z",
+    "approved_amount": 320338
   },
   {
     "id": "csr_1593d00e32b44209bb178e562c84fc0e",
@@ -41373,7 +42880,7 @@
   {
     "id": "csr_6965d99002924f4295bef30f87570edf",
     "estimate_number": "10497",
-    "customer_label": "Douglas R.",
+    "customer_label": "Brian B.",
     "created_at": "2026-01-27T17:05:07Z",
     "schedule": {
       "scheduled_start": null,
@@ -46230,6 +47737,96 @@
     },
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_56ca2300f8944b978bdd98859b7dd8a7",
+    "estimate_number": "10226",
+    "customer_label": "Dylon J.",
+    "created_at": "2025-12-31T16:57:45Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "approved": true,
+    "approved_at": "2026-08-03T12:42:23.010Z",
+    "approved_amount": 745000
+  },
+  {
+    "id": "csr_0baf3993710d4dafb8682499ae628284",
+    "estimate_number": "10225",
+    "customer_label": "First Capitol P.",
+    "created_at": "2025-12-31T16:28:29Z",
+    "schedule": {
+      "scheduled_start": "2025-12-31T16:30:00Z",
+      "scheduled_end": "2025-12-31T17:30:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_a147eea604e04ccfa458813cf1b374f0"
+    ],
+    "approved": true,
+    "approved_at": "2026-08-03T12:42:23.010Z",
+    "approved_amount": 49577
+  },
+  {
+    "id": "csr_ea5e60fe30dd4fd3a9d6678aaecc5da3",
+    "estimate_number": "10224",
+    "customer_label": "Sterling S.",
+    "created_at": "2025-12-31T15:57:39Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_6e334ed481b84edfab66eac860258325"
+    ],
+    "approved": true,
+    "approved_at": "2026-08-03T12:42:23.010Z",
+    "approved_amount": 108888
+  },
+  {
+    "id": "csr_912694ba8308462c89e0b740ba51f92a",
+    "estimate_number": "10223",
+    "customer_label": "Basketball W.",
+    "created_at": "2025-12-31T15:03:18Z",
+    "schedule": {
+      "scheduled_start": "2025-12-31T15:15:00Z",
+      "scheduled_end": "2025-12-31T16:15:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_dad9fb430936450aae7df911fe977887",
+    "estimate_number": "10222",
+    "customer_label": "Gage T.",
+    "created_at": "2025-12-31T14:53:28Z",
+    "schedule": {
+      "scheduled_start": "2026-01-06T16:00:00Z",
+      "scheduled_end": "2026-01-06T18:00:00Z",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
     "approved": false,
     "approved_at": null,
