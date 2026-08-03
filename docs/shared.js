@@ -216,19 +216,23 @@ function renderStatTile({ label, value, meterPct }) {
 // as opposed to computeScorecardStats' tag-based numbers used on each card.
 function computeStats(allJobs) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
-  // "Total jobs" only counts jobs that have actually started (in progress or
-  // complete) — same NOT_YET_STARTED_STATUSES exclusion completion rate
-  // already used below, now applied to the job count too, so a tech/BU with
-  // a full week scheduled ahead doesn't look busier than one who's already
-  // done the same amount of real work. Revenue/Avg ticket are untouched —
-  // those still reflect every non-canceled job, same as always.
   const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
-  const totalJobs = startedJobs.length;
-  const totalRevenueCents = jobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
-  const billedJobs = jobs.filter((j) => (j.total_amount || 0) > 0);
-  const avgTicketCents = billedJobs.length ? totalRevenueCents / billedJobs.length : 0;
   const completedJobs = startedJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
   const completionRate = startedJobs.length ? (completedJobs.length / startedJobs.length) * 100 : 0;
+
+  // Every total below — Jobs, Revenue, Avg ticket — only counts completed
+  // work. A `scheduled` or `in progress` job's total_amount is very often a
+  // pre-set quote for a visit that hasn't happened yet, not real revenue; on
+  // the first day of a new month, with most of the month's work still
+  // scheduled ahead, that inflated a BU/tech's numbers well past anything
+  // actually done (confirmed: a $0-billed month showed thousands of dollars
+  // from scheduled/in-progress jobs alone). Completion rate above is
+  // unaffected — it's deliberately a ratio of started vs. completed, not a
+  // "total."
+  const totalJobs = completedJobs.length;
+  const totalRevenueCents = completedJobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
+  const billedJobs = completedJobs.filter((j) => (j.total_amount || 0) > 0);
+  const avgTicketCents = billedJobs.length ? totalRevenueCents / billedJobs.length : 0;
 
   return {
     totalJobs,
@@ -389,33 +393,39 @@ function jobRevenueCents(job, splitRevenue) {
 
 function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
-  const totalRevenueCents = jobs.reduce((sum, j) => sum + jobRevenueCents(j, splitRevenue), 0);
-
-  // "Jobs" only counts jobs that have actually started (in progress or
-  // complete), same as completion rate's denominator below — a job merely
-  // scheduled for later in the period hasn't happened yet, so it shouldn't
-  // count toward Jobs (or, by extension, Avg ticket's denominator) any more
-  // than it counts toward Completion. This is on top of the existing
-  // tag-based countsTowardJobs filter, not a replacement for it.
-  const countedJobs = jobs.filter((j) => countsTowardJobs(j) && !NOT_YET_STARTED_STATUSES.has(j.work_status));
-  const totalJobs = countedJobs.length;
-  const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
 
   const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
   const completedJobs = startedJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
   const completionRate = startedJobs.length ? (completedJobs.length / startedJobs.length) * 100 : 0;
 
-  const leadJobs = jobs.filter((j) => hasTag(j, "TGL"));
+  // Every total below — Jobs, Revenue, Avg ticket, Leads, Leads sold, RCC
+  // sold, $0 Call, Accessory sold — only counts completed jobs, not
+  // scheduled or in-progress ones. Two reasons, same root cause: a
+  // scheduled/in-progress job's total_amount is often a pre-set quote for
+  // work that hasn't happened yet (confirmed inflating a BU/tech's Revenue
+  // by thousands of dollars on the first day of a new month, before almost
+  // anything was actually done), and every one of these tags represents an
+  // outcome decided during the visit itself (IFO, Accessory sold, a lead
+  // converting) — not yet knowable for a job that hasn't happened yet
+  // either. Completion rate above is unaffected — it's deliberately a ratio
+  // of started vs. completed, not a "total."
+  const totalRevenueCents = completedJobs.reduce((sum, j) => sum + jobRevenueCents(j, splitRevenue), 0);
+
+  const countedJobs = completedJobs.filter(countsTowardJobs);
+  const totalJobs = countedJobs.length;
+  const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
+
+  const leadJobs = completedJobs.filter((j) => hasTag(j, "TGL"));
   const leadsSoldJobs = leadJobs.filter((j) => hasTag(j, "TGL Sold"));
 
-  const servicePlansSoldJobs = jobs.filter((j) => hasTag(j, "Membership Sold"));
+  const servicePlansSoldJobs = completedJobs.filter((j) => hasTag(j, "Membership Sold"));
 
   // Housecall Pro's tag is "IFO" and stays that way here (stats.ifo) since
   // it has to match the real tag on synced jobs — only the on-screen tile
   // label reads "$0 Call" instead (renderMiniStat/tvTile call sites).
-  const ifoJobs = jobs.filter((j) => hasTag(j, "IFO"));
+  const ifoJobs = completedJobs.filter((j) => hasTag(j, "IFO"));
 
-  const accessorySoldJobs = jobs.filter((j) => hasTag(j, "Accessory Sold"));
+  const accessorySoldJobs = completedJobs.filter((j) => hasTag(j, "Accessory Sold"));
 
   return {
     totalJobs,
