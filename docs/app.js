@@ -199,6 +199,14 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) 
   statsRow.innerHTML = [
     renderMiniStat("Estimates given", stats.given.toLocaleString()),
     renderMiniStat("Estimates approved", stats.approved.toLocaleString()),
+    // Same tile field tech cards show (techApprovedThisPeriodEstimates in
+    // render()) — purely additional context alongside the headline "Estimates
+    // approved" above, which already de-dupes this same list against
+    // estimatesGiven's own approved ones (see computeEstimatorStats/unionById)
+    // so it never double-counts. This tile can be a subset of that number
+    // (an estimate given last period but approved this one shows here too,
+    // without being given this period) — that's expected, not an error.
+    renderMiniStat("Approved this period", approvedThisPeriodEstimates.length.toLocaleString()),
     renderMiniStat("Closing %", `${stats.closingRate.toFixed(0)}%`),
     renderMiniStat("Revenue accepted", formatMoney(stats.revenue)),
   ].join("");
