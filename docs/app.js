@@ -67,9 +67,16 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   `;
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
-  const hiddenTiles = SIMPLIFIED_SCORECARD_TECH_IDS.has(tech.id) ? SIMPLIFIED_SCORECARD_HIDDEN_TILES : new Set();
+  const isSimplified = SIMPLIFIED_SCORECARD_TECH_IDS.has(tech.id);
+  const hiddenTiles = isSimplified ? SIMPLIFIED_SCORECARD_HIDDEN_TILES : new Set();
 
-  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode, hiddenTiles });
+  // HVAC Installation jobs aren't reliably tagged Opportunity (or Oncall
+  // Air, the BU-10 job-level rule countsTowardJobs would otherwise apply) —
+  // Jobs goes back to a raw count for these techs specifically, same
+  // convention BU 50 already uses company-wide. Scoped to just these techs'
+  // cards, not countsTowardJobs itself, so admin.html's BU 10 department
+  // card is unaffected and keeps the tag-based count.
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode, hiddenTiles, rawJobCount: isSimplified });
 }
 
 // Estimates given/approved use the estimate's created_at, same as

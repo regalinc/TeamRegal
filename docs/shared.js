@@ -391,7 +391,7 @@ function jobRevenueCents(job, splitRevenue) {
   return amount / assigneeCount;
 }
 
-function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
+function computeScorecardStats(allJobs, { splitRevenue = false, rawJobCount = false } = {}) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
 
   const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
@@ -411,7 +411,12 @@ function computeScorecardStats(allJobs, { splitRevenue = false } = {}) {
   // of started vs. completed, not a "total."
   const totalRevenueCents = completedJobs.reduce((sum, j) => sum + jobRevenueCents(j, splitRevenue), 0);
 
-  const countedJobs = completedJobs.filter(countsTowardJobs);
+  // rawJobCount skips the tag-based countsTowardJobs filter entirely — see
+  // SIMPLIFIED_SCORECARD_TECH_IDS in app.js, currently the only caller that
+  // passes it. A completed job still has to be a completed job either way
+  // (that filter already ran above); this only changes whether a specific
+  // tag is additionally required.
+  const countedJobs = completedJobs.filter((j) => rawJobCount || countsTowardJobs(j));
   const totalJobs = countedJobs.length;
   const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
 
@@ -552,7 +557,16 @@ function updateSyncStatus(meta) {
 // <details> toggle instead of shown by default. Used for both per-technician
 // (index.html) and per-department (admin.html) cards so the numbers speak
 // the same language at both altitudes.
-function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRevenue = false, kpiBuCode = null, hiddenTiles = new Set() }) {
+function renderScorecard({
+  headerHtml,
+  tagsHtml,
+  jobs,
+  extraStats = [],
+  splitRevenue = false,
+  kpiBuCode = null,
+  hiddenTiles = new Set(),
+  rawJobCount = false,
+}) {
   const card = document.createElement("div");
   card.className = "tech-card";
 
@@ -570,7 +584,7 @@ function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRev
     card.appendChild(tagsRow);
   }
 
-  const stats = computeScorecardStats(jobs, { splitRevenue });
+  const stats = computeScorecardStats(jobs, { splitRevenue, rawJobCount });
   // Keyed so a caller can omit specific tiles (hiddenTiles) for techs whose
   // department doesn't use that tag/workflow at all — see
   // SIMPLIFIED_SCORECARD_TECH_IDS in app.js. admin.html's department cards
