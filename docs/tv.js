@@ -211,11 +211,35 @@ function renderInstallationGoal(monthRevenue, goal) {
 function installationTiles(stats) {
   return [
     tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats), "tv-team-tile"),
-    tvTile("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats), "tv-team-tile"),
     tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats), "tv-team-tile"),
     tvTile("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats), "tv-team-tile"),
     tvTile("Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats), "tv-team-tile"),
   ].join("");
+}
+
+// The whole roster's faces, laid out in a row — the point of this screen is
+// "team performance", not any one person's, so it shows every member up
+// front rather than making it feel like a data table with no one in it.
+// Sorted alphabetically (there's no ranking here to sort by) and reuses the
+// same renderAvatarBlock/hasRealAvatar/largeAvatarUrl helpers the ranked
+// screens use for their featured/row photos, so a missing avatar falls back
+// to the same colored-initials treatment everywhere on the TV.
+function renderInstallationTeamPhotos(techs) {
+  const sorted = [...techs].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  return `
+    <div class="tv-team-photos">
+      ${sorted
+        .map(
+          (tech) => `
+            <div class="tv-team-photo-item">
+              ${renderAvatarBlock(tech, "tv-team-photo", "tv-team-photo-fallback", { large: true })}
+              <div class="tv-team-photo-name">${escapeHtml(tech.name || "Unknown")}</div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
 }
 
 // HVAC Installation doesn't rank individual techs at all — see
@@ -245,8 +269,11 @@ function renderInstallationTeamScreen() {
 
   const screenStats = computeScorecardStats(teamJobsInPeriod(PERIOD), { splitRevenue: false, rawJobCount: true });
 
+  const teamTechs = (latestData.technicians || []).filter((t) => INSTALLATION_TEAM_TECH_IDS.has(t.id));
+
   mainEl.innerHTML = `
     <div class="tv-team">
+      ${renderInstallationTeamPhotos(teamTechs)}
       ${renderInstallationGoal(monthRevenue, goal)}
       <div class="tv-team-tiles">
         ${installationTiles(screenStats)}
