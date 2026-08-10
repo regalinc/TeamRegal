@@ -35,16 +35,21 @@ const selectedTechIds = new Set();
 let latestData = null;
 let urlFiltersApplied = false;
 
-// HVAC Installation techs don't work off Leads (TGL)/RCC (Membership
-// Sold)/$0 Call (IFO) tagging, and don't write estimates either — those
-// tags/workflows belong to other departments. Their cards hide those tiles
-// (plus the three estimate tiles, skipped separately below) rather than show
-// a wall of always-zero numbers that don't reflect how this department
-// actually works. This is the complete HVAC Installation roster as of
-// writing — a new hire in that department needs adding here too, same as
-// the other manual id-list exceptions in this file (SCHEDULE_SCOPED_
-// ESTIMATOR_IDS) and shared.js (APPRENTICE_TECH_IDS, MANUAL_AVATAR_OVERRIDES).
-const SIMPLIFIED_SCORECARD_TECH_IDS = new Set([
+// HVAC Installation techs don't control their own job pipeline — work gets
+// sold and handed to them, so individual Revenue/Jobs/Avg ticket mostly
+// reflects what landed on their schedule, not their own performance. They
+// don't get an individual scorecard at all; instead the whole roster rolls
+// into one team card (renderInstallationTeamCard below), scoped to their
+// BU 10 work specifically — the occasional job they pick up in another
+// business unit (helping out when Installation's own queue is light) isn't
+// really "their" work, so it's deliberately excluded rather than counted.
+// This is the complete HVAC Installation roster as of writing — a new hire
+// in that department needs adding here too, same as the other manual
+// id-list exceptions in this file (SCHEDULE_SCOPED_ESTIMATOR_IDS) and
+// shared.js (APPRENTICE_TECH_IDS, MANUAL_AVATAR_OVERRIDES). Unlike
+// apprentices, these are real techs — they stay selectable in the
+// technician picker/quick-filters, they just never get their own card.
+const INSTALLATION_TEAM_TECH_IDS = new Set([
   "pro_8a84b31fc8b64893b17a0ca1bc133778", // Damien Cedrone
   "pro_86c3193093ac454e801f62babb7cf494", // Jack Tomlinson
   "pro_eb9324081cb94741812e207380d65695", // Ryan Dubbs
@@ -55,7 +60,10 @@ const SIMPLIFIED_SCORECARD_TECH_IDS = new Set([
   "pro_048a0f2df6b2480aaa1a1ae03924fa9e", // Mark Zink
   "pro_23fac61aafad4b4fa31992b5efaafae9", // Kevin Carter
 ]);
-const SIMPLIFIED_SCORECARD_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold", "ifo"]);
+// Same tiles hidden as before (Leads/RCC/$0 Call tagging and estimates
+// don't apply to this department), now on the one team card instead of
+// nine individual ones.
+const INSTALLATION_TEAM_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold", "ifo"]);
 
 function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   const headerHtml = `
@@ -67,16 +75,38 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   `;
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
-  const isSimplified = SIMPLIFIED_SCORECARD_TECH_IDS.has(tech.id);
-  const hiddenTiles = isSimplified ? SIMPLIFIED_SCORECARD_HIDDEN_TILES : new Set();
 
-  // HVAC Installation jobs aren't reliably tagged Opportunity (or Oncall
-  // Air, the BU-10 job-level rule countsTowardJobs would otherwise apply) —
-  // Jobs goes back to a raw count for these techs specifically, same
-  // convention BU 50 already uses company-wide. Scoped to just these techs'
-  // cards, not countsTowardJobs itself, so admin.html's BU 10 department
-  // card is unaffected and keeps the tag-based count.
-  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode, hiddenTiles, rawJobCount: isSimplified });
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode });
+}
+
+// One card for the whole HVAC Installation roster instead of nine
+// individual ones — see INSTALLATION_TEAM_TECH_IDS above for why. Revenue
+// is unsplit (full job amounts, not divided by assignee count) since this
+// is a team total, not a personal attribution — same convention
+// admin.html's department cards use. Jobs is a raw count (rawJobCount),
+// same reasoning as the department's own BU 10 card would need if it
+// weren't already using the Oncall Air tag: these jobs aren't reliably
+// tagged Opportunity.
+function renderInstallationTeamCard(periodJobs) {
+  const teamJobs = periodJobs.filter(
+    (j) => (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_TECH_IDS.has(id)) && businessUnitCode(j.business_unit) === "10"
+  );
+  const headerHtml = `
+    <div class="avatar" style="background:var(--series-blue)">HI</div>
+    <div>
+      <div class="tech-name">HVAC Installation</div>
+      <div class="tech-role">Team scorecard · BU 10 work only</div>
+    </div>
+  `;
+  const card = renderScorecard({
+    headerHtml,
+    jobs: teamJobs,
+    splitRevenue: false,
+    hiddenTiles: INSTALLATION_TEAM_HIDDEN_TILES,
+    rawJobCount: true,
+  });
+  card.classList.add("installation-team-card");
+  return card;
 }
 
 // Estimates given/approved use the estimate's created_at, same as
@@ -503,7 +533,21 @@ function render(data) {
 
   const grid = document.createElement("div");
   grid.className = "tech-grid";
+
+  // One team card up front if the current roster includes any HVAC
+  // Installation tech — before the individual cards, so it reads as the
+  // department-level number it is rather than getting lost among personal
+  // scorecards. Always aggregates the full 9-person roster's BU 10 work
+  // regardless of which of the 9 (if any specific ones) are selected —
+  // there's no per-installer number to show instead, see
+  // INSTALLATION_TEAM_TECH_IDS above.
+  if (rosterTechs.some((t) => INSTALLATION_TEAM_TECH_IDS.has(t.id))) {
+    grid.appendChild(renderInstallationTeamCard(periodJobs));
+  }
+
   for (const tech of rosterTechs) {
+    if (INSTALLATION_TEAM_TECH_IDS.has(tech.id)) continue;
+
     const techEstimatesGiven = allEstimates.filter(
       (e) => (e.assigned_employee_ids || []).includes(tech.id) && dateInPeriod(estimateGivenDate(e, tech), filters.period)
     );
@@ -515,18 +559,12 @@ function render(data) {
     }
 
     const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
-    // HVAC Installation techs don't write estimates either — see
-    // SIMPLIFIED_SCORECARD_TECH_IDS above — so their cards skip these three
-    // tiles entirely rather than show them always at zero.
-    let extraStats = [];
-    if (!SIMPLIFIED_SCORECARD_TECH_IDS.has(tech.id)) {
-      const estimateStats = computeEstimateStats(techEstimatesGiven);
-      extraStats = [
-        { label: "Estimates given", value: estimateStats.given.toLocaleString() },
-        { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
-        { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
-      ];
-    }
+    const estimateStats = computeEstimateStats(techEstimatesGiven);
+    const extraStats = [
+      { label: "Estimates given", value: estimateStats.given.toLocaleString() },
+      { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
+      { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
+    ];
 
     grid.appendChild(renderTechCard(tech, jobs, extraStats, kpiBuCode));
   }

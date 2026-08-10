@@ -269,6 +269,11 @@ main {
   padding: 16px;
 }
 
+/* The HVAC Installation team card (see renderInstallationTeamCard, app.js)
+   — a top border in the same blue admin.html uses for BU 10 elsewhere, so
+   it reads as a department total at a glance rather than another person. */
+.installation-team-card { border-top: 4px solid var(--series-blue); }
+
 .tech-card-header {
   display: flex;
   align-items: center;
