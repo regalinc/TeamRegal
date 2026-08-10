@@ -97,6 +97,28 @@ function kpiClass(metricKey, stats) {
   return result ? TIER_CLASS[result] : null;
 }
 
+// The HVAC Installation team's monthly revenue goal — given by the
+// business, not derived from data. Needs manually adding to at the start of
+// each month (ask for the new number rather than guessing or carrying last
+// month's forward). Keyed by "YYYY-MM" so a month with no entry shows "no
+// goal set" instead of silently reusing a stale number forever.
+const INSTALLATION_MONTHLY_GOALS = {
+  "2026-08": 475000,
+};
+
+function currentMonthKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+}
+
+function currentMonthGoal() {
+  return INSTALLATION_MONTHLY_GOALS[currentMonthKey()] ?? null;
+}
+
+function currentMonthName() {
+  return new Date().toLocaleString([], { month: "long" });
+}
+
 function renderAvatarBlock(tech, sizeClass, fallbackClass, { large = false } = {}) {
   const initialsText = escapeHtml(initials(tech.name || "?"));
   const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
@@ -164,6 +186,70 @@ function renderRow(entry) {
       </div>
       <div class="tv-row-metrics">
         ${metricTiles(stats, "tv-row-tile")}
+      </div>
+    </div>
+  `;
+}
+
+function renderInstallationGoal(monthRevenue, goal) {
+  if (goal === null) {
+    return `<div class="tv-goal-missing">No revenue goal set for ${escapeHtml(currentMonthName())} yet.</div>`;
+  }
+  const pct = goal > 0 ? Math.min(100, (monthRevenue / goal) * 100) : 0;
+  return `
+    <div class="tv-goal">
+      <div class="tv-goal-label">${escapeHtml(currentMonthName())} Revenue Goal</div>
+      <div class="tv-goal-value">${escapeHtml(formatMoney(monthRevenue))} <span class="tv-goal-of">of ${escapeHtml(
+    formatMoney(goal)
+  )}</span></div>
+      <div class="tv-goal-track"><div class="tv-goal-fill" style="width:${pct}%"></div></div>
+      <div class="tv-goal-pct">${pct.toFixed(0)}% of goal</div>
+    </div>
+  `;
+}
+
+function installationTiles(stats) {
+  return [
+    tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats), "tv-team-tile"),
+    tvTile("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats), "tv-team-tile"),
+    tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats), "tv-team-tile"),
+    tvTile("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats), "tv-team-tile"),
+    tvTile("Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats), "tv-team-tile"),
+  ].join("");
+}
+
+// HVAC Installation doesn't rank individual techs at all — see
+// INSTALLATION_TEAM_TECH_IDS in shared.js for why — so this screen is a
+// single large team card instead of the featured-card + list layout every
+// other screen uses. The 5-tile set matches what the technician view's
+// team card shows (INSTALLATION_TEAM_HIDDEN_TILES): no Leads/RCC/$0 Call,
+// this department doesn't work off those tags. Revenue is unsplit — a team
+// total, not a personal attribution — same as the technician-view card.
+function renderInstallationTeamScreen() {
+  const jobs = latestData.jobs || [];
+
+  function teamJobsInPeriod(period) {
+    return jobs.filter(
+      (j) =>
+        (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_TECH_IDS.has(id)) &&
+        businessUnitCode(j.business_unit) === "10" &&
+        jobInPeriod(j, period)
+    );
+  }
+
+  // The goal is always this calendar month's revenue, regardless of
+  // whatever ?period= this screen's own tiles are showing — a monthly goal
+  // doesn't mean anything scoped to "this week" or "YTD".
+  const monthRevenue = computeScorecardStats(teamJobsInPeriod("month"), { splitRevenue: false, rawJobCount: true }).totalRevenue;
+  const goal = currentMonthGoal();
+
+  const screenStats = computeScorecardStats(teamJobsInPeriod(PERIOD), { splitRevenue: false, rawJobCount: true });
+
+  mainEl.innerHTML = `
+    <div class="tv-team">
+      ${renderInstallationGoal(monthRevenue, goal)}
+      <div class="tv-team-tiles">
+        ${installationTiles(screenStats)}
       </div>
     </div>
   `;
@@ -242,6 +328,16 @@ function render() {
   }
 
   if (!latestData) return;
+
+  // HVAC Installation doesn't rank individual techs — see
+  // renderInstallationTeamScreen for why — so it skips the standard
+  // roster/ranking path entirely and renders its own single team card.
+  if (DEPT === "HVAC Installation") {
+    deptNameEl.textContent = "HVAC Installation";
+    mainEl.className = "tv-main";
+    renderInstallationTeamScreen();
+    return;
+  }
 
   const jobs = latestData.jobs || [];
   const buConfig = BU_DEPTS[DEPT];

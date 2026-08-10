@@ -115,6 +115,35 @@ function isApprentice(tech) {
   return APPRENTICE_TECH_IDS.has(tech.id);
 }
 
+// HVAC Installation techs don't control their own job pipeline — work gets
+// sold and handed to them, so an individual's Revenue/Jobs/Avg ticket mostly
+// reflects what landed on their schedule, not their own performance. There's
+// no meaningful individual number to show, so the whole roster rolls into
+// one team card instead of individual scorecards — on the technician view
+// (renderInstallationTeamCard, app.js) and the TV kiosk (tv.js) both, hence
+// living here rather than in just one of those files. Scoped to their BU 10
+// work specifically wherever it's used — the occasional job they pick up in
+// another business unit (helping out when Installation's own queue is
+// light) isn't really "their" work. This is the complete HVAC Installation
+// roster as of writing — a new hire in that department needs adding here
+// too, same as APPRENTICE_TECH_IDS/MANUAL_AVATAR_OVERRIDES above. Unlike
+// apprentices, these are real techs — they stay selectable in the
+// technician-view picker/quick-filters; only the per-tech card is skipped.
+const INSTALLATION_TEAM_TECH_IDS = new Set([
+  "pro_8a84b31fc8b64893b17a0ca1bc133778", // Damien Cedrone
+  "pro_86c3193093ac454e801f62babb7cf494", // Jack Tomlinson
+  "pro_eb9324081cb94741812e207380d65695", // Ryan Dubbs
+  "pro_5c675ceab86d44cfbe75a1bfe6ecb25d", // Dakota Shelley
+  "pro_c45a8b2541c64ac4b0f305364c5f5295", // Christian Glatfelter
+  "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68", // Jacob Harvey
+  "pro_8e95601ea8db4c5193be8f19fb319a44", // Pete Lalic
+  "pro_048a0f2df6b2480aaa1a1ae03924fa9e", // Mark Zink
+  "pro_23fac61aafad4b4fa31992b5efaafae9", // Kevin Carter
+]);
+// Same tiles hidden wherever the team's numbers show — that department
+// doesn't work off Leads (TGL)/RCC (Membership Sold)/$0 Call (IFO) tagging.
+const INSTALLATION_TEAM_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold", "ifo"]);
+
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full

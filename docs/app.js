@@ -35,35 +35,9 @@ const selectedTechIds = new Set();
 let latestData = null;
 let urlFiltersApplied = false;
 
-// HVAC Installation techs don't control their own job pipeline — work gets
-// sold and handed to them, so individual Revenue/Jobs/Avg ticket mostly
-// reflects what landed on their schedule, not their own performance. They
-// don't get an individual scorecard at all; instead the whole roster rolls
-// into one team card (renderInstallationTeamCard below), scoped to their
-// BU 10 work specifically — the occasional job they pick up in another
-// business unit (helping out when Installation's own queue is light) isn't
-// really "their" work, so it's deliberately excluded rather than counted.
-// This is the complete HVAC Installation roster as of writing — a new hire
-// in that department needs adding here too, same as the other manual
-// id-list exceptions in this file (SCHEDULE_SCOPED_ESTIMATOR_IDS) and
-// shared.js (APPRENTICE_TECH_IDS, MANUAL_AVATAR_OVERRIDES). Unlike
-// apprentices, these are real techs — they stay selectable in the
-// technician picker/quick-filters, they just never get their own card.
-const INSTALLATION_TEAM_TECH_IDS = new Set([
-  "pro_8a84b31fc8b64893b17a0ca1bc133778", // Damien Cedrone
-  "pro_86c3193093ac454e801f62babb7cf494", // Jack Tomlinson
-  "pro_eb9324081cb94741812e207380d65695", // Ryan Dubbs
-  "pro_5c675ceab86d44cfbe75a1bfe6ecb25d", // Dakota Shelley
-  "pro_c45a8b2541c64ac4b0f305364c5f5295", // Christian Glatfelter
-  "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68", // Jacob Harvey
-  "pro_8e95601ea8db4c5193be8f19fb319a44", // Pete Lalic
-  "pro_048a0f2df6b2480aaa1a1ae03924fa9e", // Mark Zink
-  "pro_23fac61aafad4b4fa31992b5efaafae9", // Kevin Carter
-]);
-// Same tiles hidden as before (Leads/RCC/$0 Call tagging and estimates
-// don't apply to this department), now on the one team card instead of
-// nine individual ones.
-const INSTALLATION_TEAM_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold", "ifo"]);
+// INSTALLATION_TEAM_TECH_IDS/INSTALLATION_TEAM_HIDDEN_TILES live in
+// shared.js — the TV kiosk (tv.js) needs the same roster for its own
+// version of this team card.
 
 function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   const headerHtml = `
@@ -80,7 +54,7 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
 }
 
 // One card for the whole HVAC Installation roster instead of nine
-// individual ones — see INSTALLATION_TEAM_TECH_IDS above for why. Revenue
+// individual ones — see INSTALLATION_TEAM_TECH_IDS in shared.js for why. Revenue
 // is unsplit (full job amounts, not divided by assignee count) since this
 // is a team total, not a personal attribution — same convention
 // admin.html's department cards use. Jobs is a raw count (rawJobCount),

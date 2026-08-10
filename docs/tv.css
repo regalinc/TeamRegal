@@ -193,3 +193,41 @@ body {
 .tv-row-tile.tv-bad .tv-tile-label, .tv-row-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
 
 .tv-empty { padding: 8vh 2.5vw; text-align: center; color: var(--text-muted); font-size: clamp(16px, 2.5vh, 32px); }
+
+/* HVAC Installation's team screen (renderInstallationTeamScreen, tv.js) —
+   no individual ranking, so this is one large centered block filling
+   .tv-main instead of the featured-card + list split every other screen
+   uses. Sized generously since there's a lot less to show on one screen. */
+.tv-team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6vh;
+}
+.tv-goal { text-align: center; width: 100%; max-width: 1100px; }
+.tv-goal-label { font-size: clamp(20px, 3.2vh, 44px); font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.tv-goal-value { font-size: clamp(56px, 11vh, 150px); font-weight: 700; margin: 1.5vh 0; }
+.tv-goal-of { font-size: 0.4em; font-weight: 500; color: var(--text-muted); }
+.tv-goal-track { height: 4vh; border-radius: 999px; background: var(--tile-bg); overflow: hidden; margin: 0 1vw; }
+.tv-goal-fill { height: 100%; background: var(--accent); border-radius: 999px; }
+.tv-goal-pct { font-size: clamp(18px, 2.6vh, 34px); color: var(--text-muted); margin-top: 1.5vh; }
+.tv-goal-missing { font-size: clamp(20px, 3vh, 40px); color: var(--text-muted); }
+
+.tv-team-tiles {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2vw;
+  width: 100%;
+  max-width: 1600px;
+}
+.tv-team-tile { background: var(--tile-bg); border-radius: var(--radius); padding: 4vh 1vw; text-align: center; }
+.tv-team-tile.tv-good { background: var(--good-bg); }
+.tv-team-tile.tv-warn { background: var(--warn-bg); }
+.tv-team-tile.tv-bad { background: var(--bad-bg); }
+.tv-team-tile .tv-tile-label { font-size: clamp(16px, 2.2vh, 30px); text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); }
+.tv-team-tile .tv-tile-value { font-size: clamp(32px, 6vh, 80px); font-weight: 600; margin-top: 1vh; }
+.tv-team-tile.tv-good .tv-tile-label, .tv-team-tile.tv-good .tv-tile-value { color: var(--good-text); }
+.tv-team-tile.tv-warn .tv-tile-label, .tv-team-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
+.tv-team-tile.tv-bad .tv-tile-label, .tv-team-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
