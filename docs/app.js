@@ -63,7 +63,9 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
 // tagged Opportunity.
 function renderInstallationTeamCard(periodJobs) {
   const teamJobs = periodJobs.filter(
-    (j) => (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_TECH_IDS.has(id)) && businessUnitCode(j.business_unit) === "10"
+    (j) =>
+      (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_REVENUE_TECH_IDS.has(id)) &&
+      businessUnitCode(j.business_unit) === "10"
   );
   const headerHtml = `
     <div class="avatar" style="background:var(--series-blue)">HI</div>

@@ -255,7 +255,7 @@ function renderInstallationTeamScreen() {
   function teamJobsInPeriod(period) {
     return jobs.filter(
       (j) =>
-        (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_TECH_IDS.has(id)) &&
+        (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_REVENUE_TECH_IDS.has(id)) &&
         businessUnitCode(j.business_unit) === "10" &&
         jobInPeriod(j, period)
     );

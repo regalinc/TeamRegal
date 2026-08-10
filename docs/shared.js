@@ -144,6 +144,19 @@ const INSTALLATION_TEAM_TECH_IDS = new Set([
 // doesn't work off Leads (TGL)/RCC (Membership Sold)/$0 Call (IFO) tagging.
 const INSTALLATION_TEAM_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold", "ifo"]);
 
+// Rodney Glatfelter manages the Installation team and occasionally takes an
+// odd BU 10 job himself — that revenue should land in the team's total the
+// same as everyone else's. He's office staff, not an installation tech
+// though: he keeps his own individual scorecard elsewhere (deliberately NOT
+// added to INSTALLATION_TEAM_TECH_IDS, which is what suppresses the
+// individual card) and doesn't get a tile in the team photo strip
+// (renderInstallationTeamPhotos, tv.js filters on INSTALLATION_TEAM_TECH_IDS
+// directly, not this set). This set is for revenue/job-total attribution
+// only — team card/screen job filters use this instead of
+// INSTALLATION_TEAM_TECH_IDS so his jobs count without his face showing up.
+const INSTALLATION_TEAM_MANAGER_ID = "pro_3f2297b66a9742d09eaf20976a20183a"; // Rodney Glatfelter
+const INSTALLATION_TEAM_REVENUE_TECH_IDS = new Set([...INSTALLATION_TEAM_TECH_IDS, INSTALLATION_TEAM_MANAGER_ID]);
+
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full
