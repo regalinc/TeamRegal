@@ -552,7 +552,7 @@ function updateSyncStatus(meta) {
 // <details> toggle instead of shown by default. Used for both per-technician
 // (index.html) and per-department (admin.html) cards so the numbers speak
 // the same language at both altitudes.
-function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRevenue = false, kpiBuCode = null }) {
+function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRevenue = false, kpiBuCode = null, hiddenTiles = new Set() }) {
   const card = document.createElement("div");
   card.className = "tech-card";
 
@@ -571,20 +571,28 @@ function renderScorecard({ headerHtml, tagsHtml, jobs, extraStats = [], splitRev
   }
 
   const stats = computeScorecardStats(jobs, { splitRevenue });
+  // Keyed so a caller can omit specific tiles (hiddenTiles) for techs whose
+  // department doesn't use that tag/workflow at all — see
+  // SIMPLIFIED_SCORECARD_TECH_IDS in app.js. admin.html's department cards
+  // never pass hiddenTiles, so this is a no-op there.
+  const tiles = [
+    { key: "jobs", html: renderMiniStat("Jobs", stats.totalJobs.toLocaleString()) },
+    { key: "revenue", html: renderMiniStat(splitRevenue ? "Revenue (split)" : "Revenue", formatMoney(stats.totalRevenue)) },
+    { key: "avgTicket", html: renderMiniStat("Avg ticket", formatMoney(stats.avgTicket), kpiTier(kpiBuCode, "avgTicket", stats)) },
+    { key: "completion", html: renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`) },
+    { key: "leads", html: renderMiniStat("Leads", stats.leads.toLocaleString(), kpiTier(kpiBuCode, "leads", stats)) },
+    { key: "leadsSold", html: renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()) },
+    { key: "rccSold", html: renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()) },
+    { key: "ifo", html: renderMiniStat("$0 Call", stats.ifo.toLocaleString(), kpiTier(kpiBuCode, "ifo", stats)) },
+    { key: "accessorySold", html: renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString(), kpiTier(kpiBuCode, "accessorySold", stats)) },
+  ];
   const statsRow = document.createElement("div");
   statsRow.className = "tech-mini-stats";
-  statsRow.innerHTML = [
-    renderMiniStat("Jobs", stats.totalJobs.toLocaleString()),
-    renderMiniStat(splitRevenue ? "Revenue (split)" : "Revenue", formatMoney(stats.totalRevenue)),
-    renderMiniStat("Avg ticket", formatMoney(stats.avgTicket), kpiTier(kpiBuCode, "avgTicket", stats)),
-    renderMiniStat("Completion", `${stats.completionRate.toFixed(0)}%`),
-    renderMiniStat("Leads", stats.leads.toLocaleString(), kpiTier(kpiBuCode, "leads", stats)),
-    renderMiniStat("Leads sold", stats.leadsSold.toLocaleString()),
-    renderMiniStat("RCC sold", stats.servicePlansSold.toLocaleString()),
-    renderMiniStat("$0 Call", stats.ifo.toLocaleString(), kpiTier(kpiBuCode, "ifo", stats)),
-    renderMiniStat("Accessory sold", stats.accessorySold.toLocaleString(), kpiTier(kpiBuCode, "accessorySold", stats)),
-    ...extraStats.map((s) => renderMiniStat(s.label, s.value)),
-  ].join("");
+  statsRow.innerHTML =
+    tiles
+      .filter((t) => !hiddenTiles.has(t.key))
+      .map((t) => t.html)
+      .join("") + extraStats.map((s) => renderMiniStat(s.label, s.value)).join("");
   card.appendChild(statsRow);
 
   const sortedJobs = [...jobs].sort((a, b) => {

@@ -35,6 +35,28 @@ const selectedTechIds = new Set();
 let latestData = null;
 let urlFiltersApplied = false;
 
+// HVAC Installation techs don't work off Leads (TGL)/RCC (Membership
+// Sold)/$0 Call (IFO) tagging, and don't write estimates either — those
+// tags/workflows belong to other departments. Their cards hide those tiles
+// (plus the three estimate tiles, skipped separately below) rather than show
+// a wall of always-zero numbers that don't reflect how this department
+// actually works. This is the complete HVAC Installation roster as of
+// writing — a new hire in that department needs adding here too, same as
+// the other manual id-list exceptions in this file (SCHEDULE_SCOPED_
+// ESTIMATOR_IDS) and shared.js (APPRENTICE_TECH_IDS, MANUAL_AVATAR_OVERRIDES).
+const SIMPLIFIED_SCORECARD_TECH_IDS = new Set([
+  "pro_8a84b31fc8b64893b17a0ca1bc133778", // Damien Cedrone
+  "pro_86c3193093ac454e801f62babb7cf494", // Jack Tomlinson
+  "pro_eb9324081cb94741812e207380d65695", // Ryan Dubbs
+  "pro_5c675ceab86d44cfbe75a1bfe6ecb25d", // Dakota Shelley
+  "pro_c45a8b2541c64ac4b0f305364c5f5295", // Christian Glatfelter
+  "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68", // Jacob Harvey
+  "pro_8e95601ea8db4c5193be8f19fb319a44", // Pete Lalic
+  "pro_048a0f2df6b2480aaa1a1ae03924fa9e", // Mark Zink
+  "pro_23fac61aafad4b4fa31992b5efaafae9", // Kevin Carter
+]);
+const SIMPLIFIED_SCORECARD_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold", "ifo"]);
+
 function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   const headerHtml = `
     ${renderAvatar(tech)}
@@ -45,8 +67,9 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   `;
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
+  const hiddenTiles = SIMPLIFIED_SCORECARD_TECH_IDS.has(tech.id) ? SIMPLIFIED_SCORECARD_HIDDEN_TILES : new Set();
 
-  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode });
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode, hiddenTiles });
 }
 
 // Estimates given/approved use the estimate's created_at, same as
@@ -485,12 +508,18 @@ function render(data) {
     }
 
     const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
-    const estimateStats = computeEstimateStats(techEstimatesGiven);
-    const extraStats = [
-      { label: "Estimates given", value: estimateStats.given.toLocaleString() },
-      { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
-      { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
-    ];
+    // HVAC Installation techs don't write estimates either — see
+    // SIMPLIFIED_SCORECARD_TECH_IDS above — so their cards skip these three
+    // tiles entirely rather than show them always at zero.
+    let extraStats = [];
+    if (!SIMPLIFIED_SCORECARD_TECH_IDS.has(tech.id)) {
+      const estimateStats = computeEstimateStats(techEstimatesGiven);
+      extraStats = [
+        { label: "Estimates given", value: estimateStats.given.toLocaleString() },
+        { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
+        { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
+      ];
+    }
 
     grid.appendChild(renderTechCard(tech, jobs, extraStats, kpiBuCode));
   }
