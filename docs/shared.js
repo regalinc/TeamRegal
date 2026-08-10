@@ -553,8 +553,22 @@ function dateInPeriod(isoString, period) {
   return d >= range[0] && d < range[1];
 }
 
+// A completed job is placed in whichever period it was actually FINISHED
+// in, not whichever period it was originally scheduled for — a job booked
+// in June but not actually completed until August (a reschedule, a delay,
+// a multi-visit job that dragged on) should count toward August's numbers,
+// not June's, since that's when the revenue was actually realized. This
+// matches how Housecall Pro's own "completed this month" reports work —
+// confirmed by reconciling a $15,966 gap between this dashboard's BU 10
+// Installation-team revenue and HCP's own monthly report down to exactly
+// one job that was scheduled in June but completed in August. A job that
+// ISN'T complete yet (scheduled, in progress, canceled, needs scheduling)
+// has no completed_at, so it still falls back to its scheduled date — that
+// stays the only date those statuses have, and it's still the right one
+// for showing e.g. an upcoming job under the week it's booked for.
 function jobInPeriod(job, period) {
-  return dateInPeriod(job.schedule?.scheduled_start, period);
+  const dateStr = COMPLETE_STATUSES.has(job.work_status) && job.completed_at ? job.completed_at : job.schedule?.scheduled_start;
+  return dateInPeriod(dateStr, period);
 }
 
 function fillSelect(select, values, allLabel) {
