@@ -492,6 +492,98 @@ function computeScorecardStats(allJobs, { splitRevenue = false, rawJobCount = fa
   };
 }
 
+// Technicians tagged "Estimator" (office staff who write estimates rather
+// than do field work) get a different card entirely — the usual field-tech
+// tiles (Jobs, Revenue, Leads, RCC sold, IFO, Accessory sold, ...) would all
+// read zero for them, since those are all derived from jobs they were never
+// assigned to. Lives in shared.js (not just app.js) since andrew.js — a
+// dedicated page for one estimator — needs the exact same math, not a
+// second implementation that could quietly drift from this one.
+const ESTIMATOR_TAG = "Estimator";
+
+function isEstimator(tech) {
+  return (tech.tags || []).includes(ESTIMATOR_TAG);
+}
+
+// Estimates given normally counts by the estimate's created_at (record
+// creation date) — but for Andrew (Andy) Rouscher specifically, created_at
+// didn't match his actual calendar (a created_at-scoped count of 30 vs. 19
+// scheduled site visits, both for the same date range), so his card scopes
+// by the estimate's scheduled visit date instead. This is a narrow, id-
+// scoped exception, not a change to the metric's default definition — every
+// other estimator keeps using created_at. An estimate with no scheduled
+// visit (phone/remote estimates don't have one) drops out of Andy's count
+// entirely for a given period rather than falling back to created_at, since
+// there's no visit to attribute to a period.
+const SCHEDULE_SCOPED_ESTIMATOR_IDS = new Set([
+  "pro_ca120cbb55fa40fe9361d492161b101f", // Andrew Rouscher
+]);
+
+function estimateGivenDate(estimate, tech) {
+  if (!SCHEDULE_SCOPED_ESTIMATOR_IDS.has(tech.id)) return estimate.created_at;
+
+  const scheduledStart = estimate.schedule?.scheduled_start;
+  if (!scheduledStart) return null;
+  // A visit scheduled for later (e.g. "This month" includes the rest of the
+  // month, not just up to today) hasn't happened yet — he hasn't had the
+  // chance to present it, so it shouldn't count as "given" and drag down
+  // Closing % as an unclosed estimate before its appointment even occurs.
+  // It'll start counting once its scheduled date actually passes.
+  if (new Date(scheduledStart) > new Date()) return null;
+  return scheduledStart;
+}
+
+// De-dupes estimates (by id) that may appear in more than one of the given
+// lists — used to combine "given this period" and "approved this period"
+// into a single set without double-counting an estimate that's in both.
+function unionById(...lists) {
+  const seenIds = new Set();
+  const combined = [];
+  for (const list of lists) {
+    for (const item of list) {
+      if (seenIds.has(item.id)) continue;
+      seenIds.add(item.id);
+      combined.push(item);
+    }
+  }
+  return combined;
+}
+
+// Estimates given/approved use the estimate's created_at, same as Housecall
+// Pro's own reporting — kept for that direct comparison. Approved stays a
+// subset of "given," matching how the other paired scorecard metrics
+// (Leads/Leads sold, etc.) work. Used for the three estimate tiles a
+// non-estimator field tech's card also carries (extraStats in app.js).
+function computeEstimateStats(estimatesGiven) {
+  const approved = estimatesGiven.filter((e) => e.approved).length;
+  return { given: estimatesGiven.length, approved };
+}
+
+// "Estimates approved" is a single number covering two different things —
+// estimates given this period that are currently approved, plus estimates
+// (given whenever) whose approval landed in this period — de-duplicated so
+// an estimate given *and* approved in the same period isn't counted twice.
+// That deliberately mixes scopes: an estimate given last period but
+// approved this one still counts, crediting the estimator for closing
+// older proposals rather than only ever measuring what they gave this
+// exact period. Closing %, Revenue accepted, and Avg ticket are all
+// derived from this same combined set, so every number on the card stays
+// consistent with what "Estimates approved" actually counts. Avg ticket
+// answers "how big is a typical deal once it closes" — revenue accepted
+// divided by that same approved count, not by estimates given (most of
+// which never close), so it isn't dragged down by pending estimates the
+// way a naive revenue-over-given ratio would be.
+function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates) {
+  const given = estimatesGiven.length;
+  const approvedEstimates = unionById(estimatesGiven.filter((e) => e.approved), approvedThisPeriodEstimates);
+  const approved = approvedEstimates.length;
+  const closingRate = given ? (approved / given) * 100 : 0;
+  const revenueCents = approvedEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
+  const revenue = revenueCents / CENTS_PER_DOLLAR;
+  const avgTicket = approved ? revenue / approved : 0;
+  return { given, approved, closingRate, revenue, avgTicket };
+}
+
 // Renders the 4-tile raw-totals row into any container element (the page's
 // top-level summary).
 function renderStatsInto(el, stats) {

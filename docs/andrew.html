@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Andrew's Scorecard</title>
+  <link rel="stylesheet" href="andrew.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="assets/logo-color.png" alt="Regal Inc" class="logo logo-light" />
+      <img src="assets/logo-white.png" alt="Regal Inc" class="logo logo-dark" />
+    </div>
+    <span id="sync-status" class="sync-status">Loading…</span>
+  </header>
+
+  <main class="page">
+    <div class="identity" id="identity">
+      <div class="avatar-slot" id="avatar-slot"></div>
+      <div class="identity-text">
+        <div class="identity-name" id="identity-name">Loading…</div>
+        <div class="identity-meta">
+          <span class="role-chip">Estimator</span>
+        </div>
+      </div>
+      <div class="period-controls" role="group" aria-label="Reporting period">
+        <button class="period-btn" type="button" data-period="lastmonth">Last month</button>
+        <button class="period-btn active" type="button" data-period="month" aria-pressed="true">MTD</button>
+        <button class="period-btn" type="button" data-period="ytd">YTD</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 148 148">
+          <circle class="ring-track" cx="74" cy="74" r="60"></circle>
+          <circle class="ring-fill" id="ring-fill" cx="74" cy="74" r="60" stroke-dasharray="376.99" stroke-dashoffset="376.99"></circle>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-number" id="ring-number">—</div>
+          <div class="ring-label">Closing</div>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <p class="hero-eyebrow" id="hero-eyebrow">Loading…</p>
+        <p class="hero-line" id="hero-line"></p>
+      </div>
+    </div>
+
+    <div class="goal-card" id="goal-card">
+      <div class="goal-head">
+        <span class="goal-title" id="goal-title">Revenue goal</span>
+        <span class="goal-figures" id="goal-figures"></span>
+      </div>
+      <div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%"></div></div>
+      <div class="goal-empty" id="goal-empty" hidden></div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Given</div>
+        <div class="tile-value" id="tile-given">—</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Approved</div>
+        <div class="tile-value" id="tile-approved">—</div>
+      </div>
+      <div class="tile">
+        <div class="tile-label">Approved this period</div>
+        <div class="tile-value" id="tile-approved-period">—</div>
+        <div class="tile-sub" id="tile-approved-sub"></div>
+      </div>
+      <div class="tile featured">
+        <div class="tile-label">Revenue accepted</div>
+        <div class="tile-value" id="tile-revenue">—</div>
+      </div>
+      <div class="tile featured">
+        <div class="tile-label">Avg ticket</div>
+        <div class="tile-value" id="tile-avg-ticket">—</div>
+      </div>
+    </div>
+
+    <details class="list-card" id="estimate-list-card">
+      <summary id="estimate-list-summary">Loading estimates…</summary>
+      <div id="estimate-list-body"></div>
+    </details>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="andrew.js"></script>
+</body>
+</html>
