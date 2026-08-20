@@ -50,7 +50,12 @@ function monthLabel(monthsAgo) {
 
 function periodMeta(period) {
   if (period === "lastmonth") {
-    return { goal: ANDREW_MONTHLY_GOAL, goalLabel: monthLabel(1), eyebrow: `${monthLabel(1)} · full month` };
+    return {
+      goal: ANDREW_MONTHLY_GOAL,
+      goalLabel: monthLabel(1),
+      eyebrow: `${monthLabel(1)} · full month`,
+      givenPhrase: `given in ${monthLabel(1)}`,
+    };
   }
   if (period === "ytd") {
     const year = new Date().getFullYear();
@@ -60,6 +65,7 @@ function periodMeta(period) {
       goal: ANDREW_YTD_GOAL,
       goalLabel: String(year),
       eyebrow: `${start.toLocaleDateString([], { month: "short", day: "numeric" })} – ${today.toLocaleDateString([], { month: "short", day: "numeric" })}`,
+      givenPhrase: "given this year",
     };
   }
   const [start, end] = periodRange("month");
@@ -69,6 +75,7 @@ function periodMeta(period) {
     goal: ANDREW_MONTHLY_GOAL,
     goalLabel: monthLabel(0),
     eyebrow: `${monthLabel(0)} · day ${dayOfMonth} of ${daysInMonth}`,
+    givenPhrase: "given this month",
   };
 }
 
@@ -124,14 +131,16 @@ function render() {
   ringNumber.textContent = `${stats.closingRate.toFixed(0)}%`;
   ringFill.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - Math.min(100, stats.closingRate) / 100));
 
-  const earlierClause =
-    givenEarlierCount === 0
-      ? "all of them given this same period"
-      : `${givenEarlierCount} of ${givenEarlierCount === 1 ? "them was" : "them were"} given earlier and closed now`;
+  // Kept to just the headline facts — given/closed counts, revenue, avg
+  // ticket — with no "so far" (wrong on a closed period that's already
+  // over) and no given-earlier/no-date-on-record provenance clause (that
+  // nuance already has its own note directly under the Approved/Approved
+  // this period tiles below; repeating it here as a dangling sentence
+  // fragment just competed with the headline number for attention).
   heroLine.innerHTML = `
-    <b>${stats.given.toLocaleString()} estimates</b> given, <b>${stats.approved.toLocaleString()} closed</b> so far &mdash;
-    ${earlierClause}. <span class="gold-num">${formatMoney(stats.revenue)}</span> accepted, averaging
-    <span class="gold-num">${formatMoney(stats.avgTicket)}</span> per closed deal.
+    <b>${stats.given.toLocaleString()} estimates</b> ${meta.givenPhrase}, <b>${stats.approved.toLocaleString()} closed</b> &mdash;
+    <span class="gold-num">${formatMoney(stats.revenue)}</span> accepted, averaging
+    <span class="gold-num">${formatMoney(stats.avgTicket)}</span> per deal.
   `;
 
   tileGiven.textContent = stats.given.toLocaleString();
