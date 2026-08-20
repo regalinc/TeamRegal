@@ -471,10 +471,13 @@ function render(data) {
 
     const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
     const estimateStats = computeEstimateStats(techEstimatesGiven);
+    // Dropped "Approved this period" here too, same reasoning as the
+    // Estimator card above: it's scoped by approval date rather than given
+    // date, so it can disagree with "Estimates approved" (given-date scoped)
+    // in a way that looks like an error rather than two different questions.
     const extraStats = [
       { label: "Estimates given", value: estimateStats.given.toLocaleString() },
       { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
-      { label: "Approved this period", value: techApprovedThisPeriodEstimates.length.toLocaleString() },
     ];
 
     grid.appendChild(renderTechCard(tech, jobs, extraStats, kpiBuCode));
