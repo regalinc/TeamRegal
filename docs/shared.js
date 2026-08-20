@@ -559,23 +559,47 @@ function computeEstimateStats(estimatesGiven) {
   return { given: estimatesGiven.length, approved };
 }
 
-// "Estimates approved" is a single number covering two different things —
-// estimates given this period that are currently approved, plus estimates
-// (given whenever) whose approval landed in this period — de-duplicated so
-// an estimate given *and* approved in the same period isn't counted twice.
-// That deliberately mixes scopes: an estimate given last period but
-// approved this one still counts, crediting the estimator for closing
-// older proposals rather than only ever measuring what they gave this
-// exact period. Closing %, Revenue accepted, and Avg ticket are all
-// derived from this same combined set, so every number on the card stays
+// A "closed" period is one that's entirely over and can't gain new activity
+// — lastweek/lastmonth are done, so an approval landing after the fact
+// shouldn't retroactively move that period's own numbers every time someone
+// checks back. today/week/month/ytd all include the present moment, so
+// they stay "live" (see the union below). Confirmed real, not theoretical:
+// an estimate given July 30 and approved August 4 was showing as "approved"
+// in BOTH July's and August's totals — its $ amount double-counted across
+// the two periods, and July's own "Approved"/Revenue would have kept
+// creeping up indefinitely as more July-given estimates eventually closed,
+// even though July itself was long over.
+const CLOSED_PERIODS = new Set(["lastweek", "lastmonth"]);
+
+// For an open (still-current) period, "Estimates approved" is a single
+// number covering two different things — estimates given this period that
+// are currently approved, plus estimates (given whenever) whose approval
+// landed in this period — de-duplicated so an estimate given *and* approved
+// in the same period isn't counted twice. That deliberately mixes scopes:
+// an estimate given last period but approved this one still counts,
+// crediting the estimator for closing older proposals rather than only
+// ever measuring what they gave this exact period.
+//
+// For a closed period, that same carry-over logic is exactly what causes
+// the double-count above — so "approved" there is scoped ONLY to
+// approvedThisPeriodEstimates (approval actually landed in that period),
+// full stop, regardless of when the estimate was given. An estimate given
+// in a closed period but approved later belongs entirely to whichever
+// period it was actually approved in, not this one — it still shows up in
+// the "given" count/list here, just not in "approved."
+//
+// Closing %, Revenue accepted, and Avg ticket are all derived from
+// whichever "approved" set applies, so every number on the card stays
 // consistent with what "Estimates approved" actually counts. Avg ticket
 // answers "how big is a typical deal once it closes" — revenue accepted
 // divided by that same approved count, not by estimates given (most of
 // which never close), so it isn't dragged down by pending estimates the
 // way a naive revenue-over-given ratio would be.
-function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates) {
+function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates, period) {
   const given = estimatesGiven.length;
-  const approvedEstimates = unionById(estimatesGiven.filter((e) => e.approved), approvedThisPeriodEstimates);
+  const approvedEstimates = CLOSED_PERIODS.has(period)
+    ? approvedThisPeriodEstimates
+    : unionById(estimatesGiven.filter((e) => e.approved), approvedThisPeriodEstimates);
   const approved = approvedEstimates.length;
   const closingRate = given ? (approved / given) * 100 : 0;
   const revenueCents = approvedEstimates.reduce((sum, e) => sum + (e.approved_amount || 0), 0);

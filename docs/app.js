@@ -135,7 +135,7 @@ function renderEstimateItem(estimate, tech) {
   return li;
 }
 
-function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) {
+function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates, period) {
   const headerHtml = `
     ${renderAvatar(tech)}
     <div>
@@ -161,7 +161,7 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates) 
     card.appendChild(tagsRow);
   }
 
-  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates);
+  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates, period);
   const statsRow = document.createElement("div");
   statsRow.className = "tech-mini-stats";
   statsRow.innerHTML = [
@@ -463,7 +463,7 @@ function render(data) {
     const techApprovedThisPeriodEstimates = approvedThisPeriod.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
 
     if (isEstimator(tech)) {
-      grid.appendChild(renderEstimatorCard(tech, techEstimatesGiven, techApprovedThisPeriodEstimates));
+      grid.appendChild(renderEstimatorCard(tech, techEstimatesGiven, techApprovedThisPeriodEstimates, filters.period));
       continue;
     }
 

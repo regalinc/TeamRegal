@@ -105,7 +105,7 @@ function render() {
 
   const estimatesGiven = mine.filter((e) => dateInPeriod(estimateGivenDate(e, tech), currentPeriod));
   const approvedThisPeriod = mine.filter((e) => e.approved && dateInPeriod(e.approved_at, currentPeriod));
-  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriod);
+  const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriod, currentPeriod);
 
   const givenInPeriodIds = new Set(estimatesGiven.map((e) => e.id));
   const givenEarlierCount = approvedThisPeriod.filter((e) => !givenInPeriodIds.has(e.id)).length;
