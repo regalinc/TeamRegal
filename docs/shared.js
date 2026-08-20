@@ -98,6 +98,7 @@ const MANUAL_AVATAR_OVERRIDES = {
   "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68": "assets/tech-photos/jacob-harvey.jpg", // Jacob Harvey
   "pro_048a0f2df6b2480aaa1a1ae03924fa9e": "assets/tech-photos/mark-zink.jpg", // Mark Zink
   "pro_8e95601ea8db4c5193be8f19fb319a44": "assets/tech-photos/pete-lalic.jpg", // Pete Lalic
+  "pro_ca120cbb55fa40fe9361d492161b101f": "assets/tech-photos/andrew-rouscher.jpg", // Andrew Rouscher — his own largeAvatarUrl() 403s (see andrew.js), same gap as the rest of this list
 };
 
 // Apprentices — currently training/riding along with a real technician, not
