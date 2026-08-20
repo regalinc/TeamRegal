@@ -94,6 +94,30 @@ function renderEstimateRow(estimate, tech) {
   `;
 }
 
+// renderAvatar (shared.js) always uses tech.avatar_url — Housecall Pro's
+// API only ever returns a 40x40 thumbnail, fine for the ~36px avatars
+// style.css uses elsewhere but visibly blurry at this page's much larger
+// 76px identity photo. largeAvatarUrl/handleLargeAvatarError (shared.js)
+// swap in the "original" full-res photo where one resolves, with the same
+// two-stage fallback (original -> thumb -> colored initials) the TV
+// kiosk's featured/row photos already use for the same reason — see
+// renderAvatarBlock in tv.js for the pattern this mirrors. Falls back to
+// the plain thumb via renderAvatar when there's no largeAvatarUrl at all
+// (MANUAL_AVATAR_OVERRIDES not set and tech.avatar_url isn't a
+// thumb_web_round path).
+function renderLargeAvatar(tech) {
+  if (!hasRealAvatar(tech)) return renderAvatar(tech);
+  const bigUrl = largeAvatarUrl(tech);
+  if (!bigUrl) return renderAvatar(tech);
+
+  const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
+  const initialsText = escapeHtml(initials(tech.name || "?"));
+  return `
+    <img class="avatar" src="${escapeHtml(bigUrl)}" data-thumb-src="${escapeHtml(tech.avatar_url)}" alt="" onerror="handleLargeAvatarError(this)" />
+    <div class="avatar" style="background:${bg};display:none">${initialsText}</div>
+  `;
+}
+
 function render() {
   if (!latestData) return;
 
@@ -104,7 +128,7 @@ function render() {
   }
 
   identityName.textContent = tech.name || "Andrew Rouscher";
-  avatarSlot.innerHTML = renderAvatar(tech);
+  avatarSlot.innerHTML = renderLargeAvatar(tech);
 
   const allEstimates = latestData.estimates || [];
   const mine = allEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
