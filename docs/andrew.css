@@ -104,7 +104,13 @@ body {
   color: #fff;
   overflow: hidden;
 }
-.avatar-slot img.avatar { object-fit: cover; }
+/* The manual override photo is 800x1200 (2:3) squeezed into a 1:1 circle —
+   object-fit's default centered crop removes ~17% off both top and bottom,
+   which cuts into the hair on a headshot with this much headroom above the
+   subject. Anchoring to the top instead crops entirely from the
+   chest/shoulders below, which loses nothing that matters in a face-focused
+   avatar. Checked by rendering the actual crop, not eyeballed. */
+.avatar-slot img.avatar { object-fit: cover; object-position: center top; }
 
 .identity-text { min-width: 0; }
 
