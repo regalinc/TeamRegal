@@ -27,6 +27,7 @@ const goalFill = document.getElementById("goal-fill");
 const goalEmpty = document.getElementById("goal-empty");
 const tileGiven = document.getElementById("tile-given");
 const tileApproved = document.getElementById("tile-approved");
+const tileApprovedNote = document.getElementById("tile-approved-note");
 const tileApprovedPeriod = document.getElementById("tile-approved-period");
 const tileApprovedSub = document.getElementById("tile-approved-sub");
 const tileRevenue = document.getElementById("tile-revenue");
@@ -110,6 +111,13 @@ function render() {
   const givenInPeriodIds = new Set(estimatesGiven.map((e) => e.id));
   const givenEarlierCount = approvedThisPeriod.filter((e) => !givenInPeriodIds.has(e.id)).length;
 
+  // Closed-period "Approved" folds in estimates with no recorded approval
+  // date (see missingApprovedAtEstimates/CLOSED_PERIODS in shared.js) — they
+  // never show up in approvedThisPeriod (nothing to date-match), so without
+  // this note the headline "Approved" tile can read higher than "Approved
+  // this period" with no visible explanation for the gap.
+  const undatedCount = CLOSED_PERIODS.has(currentPeriod) ? missingApprovedAtEstimates(estimatesGiven).length : 0;
+
   const meta = periodMeta(currentPeriod);
 
   heroEyebrow.textContent = meta.eyebrow;
@@ -128,6 +136,8 @@ function render() {
 
   tileGiven.textContent = stats.given.toLocaleString();
   tileApproved.textContent = stats.approved.toLocaleString();
+  tileApprovedNote.textContent =
+    undatedCount > 0 ? `incl. ${undatedCount} with no exact approval date on record` : "";
   tileApprovedPeriod.textContent = approvedThisPeriod.length.toLocaleString();
   tileApprovedSub.textContent = givenEarlierCount === 0 ? "all given this period" : `${givenEarlierCount} given earlier, closed now`;
   tileRevenue.textContent = formatMoney(stats.revenue);

@@ -581,12 +581,28 @@ const CLOSED_PERIODS = new Set(["lastweek", "lastmonth"]);
 // ever measuring what they gave this exact period.
 //
 // For a closed period, that same carry-over logic is exactly what causes
-// the double-count above — so "approved" there is scoped ONLY to
+// the double-count above — so "approved" there is scoped to
 // approvedThisPeriodEstimates (approval actually landed in that period),
-// full stop, regardless of when the estimate was given. An estimate given
-// in a closed period but approved later belongs entirely to whichever
-// period it was actually approved in, not this one — it still shows up in
-// the "given" count/list here, just not in "approved."
+// regardless of when the estimate was given. An estimate given in a closed
+// period but approved later (with a real approved_at) belongs entirely to
+// whichever period it was actually approved in, not this one — it still
+// shows up in the "given" count/list here, just not in "approved."
+//
+// One exception: a small number of estimates were already approved before
+// sync.js started diffing approval status to derive approved_at (see the
+// "Estimates" section of the README) — there's no way to recover a
+// timestamp that was never observed, so approved_at is null for them
+// forever, not just temporarily. dateInPeriod(null, ...) is false for
+// every period, so approvedThisPeriodEstimates alone would make one of
+// these silently vanish from every period's "Approved" count, even though
+// it's genuinely closed. The only date on record for one is when it was
+// given, so — closed-period only, and gated on approved_at truly being
+// missing rather than "currently approved" in general — it's counted in
+// whichever period it was given, the same way the old carry-over logic
+// would have credited it. This can't reintroduce the double-count above:
+// an estimate with a real approved_at (like the July 30/August 4 case)
+// never enters this fallback at all.
+const missingApprovedAtEstimates = (estimatesGiven) => estimatesGiven.filter((e) => e.approved && !e.approved_at);
 //
 // Closing %, Revenue accepted, and Avg ticket are all derived from
 // whichever "approved" set applies, so every number on the card stays
@@ -598,7 +614,7 @@ const CLOSED_PERIODS = new Set(["lastweek", "lastmonth"]);
 function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates, period) {
   const given = estimatesGiven.length;
   const approvedEstimates = CLOSED_PERIODS.has(period)
-    ? approvedThisPeriodEstimates
+    ? unionById(approvedThisPeriodEstimates, missingApprovedAtEstimates(estimatesGiven))
     : unionById(estimatesGiven.filter((e) => e.approved), approvedThisPeriodEstimates);
   const approved = approvedEstimates.length;
   const closingRate = given ? (approved / given) * 100 : 0;
