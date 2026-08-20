@@ -28,8 +28,6 @@ const goalEmpty = document.getElementById("goal-empty");
 const tileGiven = document.getElementById("tile-given");
 const tileApproved = document.getElementById("tile-approved");
 const tileApprovedNote = document.getElementById("tile-approved-note");
-const tileApprovedPeriod = document.getElementById("tile-approved-period");
-const tileApprovedSub = document.getElementById("tile-approved-sub");
 const tileRevenue = document.getElementById("tile-revenue");
 const tileAvgTicket = document.getElementById("tile-avg-ticket");
 const estimateListCard = document.getElementById("estimate-list-card");
@@ -115,15 +113,17 @@ function render() {
   const approvedThisPeriod = mine.filter((e) => e.approved && dateInPeriod(e.approved_at, currentPeriod));
   const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriod, currentPeriod);
 
+  // Two subsets of "Approved" worth calling out — neither overlaps the
+  // other, so they can just be listed together: estimates approved this
+  // period that were given in an earlier one (the ones that make Approved
+  // ≠ "given and closed within this period"), and estimates given this
+  // period that are approved but have no recorded approval date at all
+  // (see missingApprovedAtEstimates in shared.js — a real Housecall Pro
+  // gap, not a bug) so they can't match any period by date and would
+  // otherwise need a fallback to land in "Approved" anywhere at all.
   const givenInPeriodIds = new Set(estimatesGiven.map((e) => e.id));
   const givenEarlierCount = approvedThisPeriod.filter((e) => !givenInPeriodIds.has(e.id)).length;
-
-  // Closed-period "Approved" folds in estimates with no recorded approval
-  // date (see missingApprovedAtEstimates/CLOSED_PERIODS in shared.js) — they
-  // never show up in approvedThisPeriod (nothing to date-match), so without
-  // this note the headline "Approved" tile can read higher than "Approved
-  // this period" with no visible explanation for the gap.
-  const undatedCount = CLOSED_PERIODS.has(currentPeriod) ? missingApprovedAtEstimates(estimatesGiven).length : 0;
+  const undatedCount = missingApprovedAtEstimates(estimatesGiven).length;
 
   const meta = periodMeta(currentPeriod);
 
@@ -145,10 +145,10 @@ function render() {
 
   tileGiven.textContent = stats.given.toLocaleString();
   tileApproved.textContent = stats.approved.toLocaleString();
-  tileApprovedNote.textContent =
-    undatedCount > 0 ? `incl. ${undatedCount} with no exact approval date on record` : "";
-  tileApprovedPeriod.textContent = approvedThisPeriod.length.toLocaleString();
-  tileApprovedSub.textContent = givenEarlierCount === 0 ? "all given this period" : `${givenEarlierCount} given earlier, closed now`;
+  const approvedNoteParts = [];
+  if (givenEarlierCount > 0) approvedNoteParts.push(`${givenEarlierCount} given earlier`);
+  if (undatedCount > 0) approvedNoteParts.push(`${undatedCount} with no exact date on record`);
+  tileApprovedNote.textContent = approvedNoteParts.length ? `incl. ${approvedNoteParts.join(" · ")}` : "";
   tileRevenue.textContent = formatMoney(stats.revenue);
   tileAvgTicket.textContent = formatMoney(stats.avgTicket);
 

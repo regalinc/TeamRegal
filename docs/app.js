@@ -164,17 +164,19 @@ function renderEstimatorCard(tech, estimatesGiven, approvedThisPeriodEstimates, 
   const stats = computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates, period);
   const statsRow = document.createElement("div");
   statsRow.className = "tech-mini-stats";
+  // Used to also show "Approved this period" as its own tile alongside
+  // "Estimates approved," but the two numbers looked like they should agree
+  // and usually didn't (a given-earlier-but-approved-now estimate is
+  // already folded into the headline via computeEstimatorStats/unionById,
+  // and a closed period like Last month can add a further gap for
+  // estimates with no recorded approval date — see missingApprovedAtEstimates
+  // in shared.js). Dropped as a compact-card tile rather than explained
+  // with a sub-note — see andrew.js's richer "Approved" tile note for that
+  // treatment on Andrew Rouscher's own dedicated page. The full estimate
+  // list below (date given/approved per item) still has the detail.
   statsRow.innerHTML = [
     renderMiniStat("Estimates given", stats.given.toLocaleString()),
     renderMiniStat("Estimates approved", stats.approved.toLocaleString()),
-    // Same tile field tech cards show (techApprovedThisPeriodEstimates in
-    // render()) — purely additional context alongside the headline "Estimates
-    // approved" above, which already de-dupes this same list against
-    // estimatesGiven's own approved ones (see computeEstimatorStats/unionById)
-    // so it never double-counts. This tile can be a subset of that number
-    // (an estimate given last period but approved this one shows here too,
-    // without being given this period) — that's expected, not an error.
-    renderMiniStat("Approved this period", approvedThisPeriodEstimates.length.toLocaleString()),
     renderMiniStat("Closing %", `${stats.closingRate.toFixed(0)}%`),
     renderMiniStat("Revenue accepted", formatMoney(stats.revenue)),
     renderMiniStat("Avg ticket", formatMoney(stats.avgTicket)),
