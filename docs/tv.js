@@ -418,3 +418,22 @@ async function loadData() {
 
 loadData();
 setInterval(loadData, POLL_INTERVAL_MS);
+
+// loadData's 60s poll only ever re-fetches data/dashboard.json (already
+// cache-busted with a timestamp above) — it never re-requests tv.html,
+// tv.css, shared.js, or tv.js themselves, so a code change (like this
+// comment) never reaches a TV that's simply been left running since before
+// the change shipped. GitHub Pages caches those four files for 10 minutes
+// (Cache-Control: max-age=600) each, so even someone physically pressing
+// refresh on the TV isn't guaranteed to see a change — the browser can
+// still be within that window and serve the old cached copies with no
+// network request at all. A real page reload is the only thing that
+// re-requests tv.html and therefore re-reads its (versioned, see
+// ASSET_VERSION in tv.html) <script>/<link> tags — so this does one
+// automatically, on a schedule, without needing anyone to visit the
+// physical TV in person. Six hours balances "picks up a change same-day"
+// against "don't reload a shop-floor screen so often the brief loading
+// flash becomes annoying" — there's no user input state on this page to
+// lose, so a reload is always safe here.
+const RELOAD_INTERVAL_MS = 6 * 60 * 60 * 1000;
+setInterval(() => location.reload(), RELOAD_INTERVAL_MS);

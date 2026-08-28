@@ -4,7 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Company Metrics — TV</title>
-  <link rel="stylesheet" href="tv.css" />
+  <!-- ASSET_VERSION: GitHub Pages serves tv.html/tv.css/shared.js/tv.js with
+       Cache-Control: max-age=600 (10 min) each. A TV that's been sitting on
+       this page for a while won't necessarily pick up a code change just
+       because someone hits refresh — the browser can still be within that
+       10-minute window and serve the old cached tv.js/tv.css straight from
+       disk without a network request at all. Query-string-versioning these
+       three references means a bumped version is a genuinely different URL,
+       which forces a real fetch regardless of how fresh the old cached copy
+       still looks — bump this string (any change works; "YYYYMMDD-n" by
+       convention) any time tv.css/shared.js/tv.js changes. Paired with the
+       periodic self-reload in tv.js (RELOAD_INTERVAL_MS) so an unattended
+       TV eventually re-requests this HTML — and therefore these versioned
+       URLs — on its own, without anyone needing to visit it in person. -->
+  <link rel="stylesheet" href="tv.css?v=20260828-1" />
 </head>
 <body>
   <header class="tv-header">
@@ -17,7 +30,7 @@
     <p class="tv-empty">Loading...</p>
   </main>
 
-  <script src="shared.js"></script>
-  <script src="tv.js"></script>
+  <script src="shared.js?v=20260828-1"></script>
+  <script src="tv.js?v=20260828-1"></script>
 </body>
 </html>
