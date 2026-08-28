@@ -50,7 +50,7 @@ body {
   justify-content: space-between;
   padding: 2vh 2.5vw 1.5vh;
 }
-.tv-header .logo { height: clamp(28px, 4vh, 56px); width: auto; }
+.tv-header .logo { height: clamp(32px, 5.5vh, 72px); width: auto; }
 .tv-dept-name { font-size: clamp(20px, 3.2vh, 48px); font-weight: 600; }
 .tv-sync-status { font-size: clamp(12px, 1.3vh, 20px); color: var(--text-muted); }
 .tv-sync-status.stale { color: #d95926; }
