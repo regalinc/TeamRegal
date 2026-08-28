@@ -204,7 +204,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4vh;
+  gap: 2vh;
 }
 .tv-team-photos {
   display: flex;
@@ -212,11 +212,16 @@ body {
   justify-content: center;
   gap: 2vw;
   max-width: 1600px;
+  /* .tv-team centers its whole stack vertically in .tv-main, so with this
+     much content the photo row ends up sitting almost flush under the
+     header title with no breathing room — this margin guarantees a gap
+     regardless of how tall the rest of the stack is. */
+  margin-top: 2.5vh;
 }
 .tv-team-photo-item { text-align: center; width: 11vw; max-width: 140px; }
 .tv-team-photo, .tv-team-photo-fallback {
-  width: min(11vh, 8vw);
-  height: min(11vh, 8vw);
+  width: min(13vh, 9.5vw);
+  height: min(13vh, 9.5vw);
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto;
@@ -233,9 +238,9 @@ body {
 
 .tv-goal { text-align: center; width: 100%; max-width: 1100px; }
 .tv-goal-label { font-size: clamp(20px, 3.2vh, 44px); font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-.tv-goal-value { font-size: clamp(56px, 11vh, 150px); font-weight: 700; margin: 1.5vh 0; }
+.tv-goal-value { font-size: clamp(56px, 11vh, 150px); font-weight: 700; margin: 1vh 0; }
 .tv-goal-of { font-size: 0.4em; font-weight: 500; color: var(--text-muted); }
-.tv-goal-track { height: 4vh; border-radius: 999px; background: var(--tile-bg); overflow: hidden; margin: 0 1vw; }
+.tv-goal-track { height: 3vh; border-radius: 999px; background: var(--tile-bg); overflow: hidden; margin: 0 1vw; }
 .tv-goal-fill { height: 100%; background: var(--accent); border-radius: 999px; }
 .tv-goal-pct { font-size: clamp(18px, 2.6vh, 34px); color: var(--text-muted); margin-top: 1.5vh; }
 .tv-goal-missing { font-size: clamp(20px, 3vh, 40px); color: var(--text-muted); }
@@ -247,7 +252,7 @@ body {
   width: 100%;
   max-width: 1600px;
 }
-.tv-team-tile { background: var(--tile-bg); border-radius: var(--radius); padding: 4vh 1vw; text-align: center; }
+.tv-team-tile { background: var(--tile-bg); border-radius: var(--radius); padding: 2vh 1vw; text-align: center; }
 .tv-team-tile.tv-good { background: var(--good-bg); }
 .tv-team-tile.tv-warn { background: var(--warn-bg); }
 .tv-team-tile.tv-bad { background: var(--bad-bg); }

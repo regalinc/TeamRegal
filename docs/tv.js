@@ -360,7 +360,12 @@ function render() {
   // renderInstallationTeamScreen for why — so it skips the standard
   // roster/ranking path entirely and renders its own single team card.
   if (DEPT === "HVAC Installation") {
-    deptNameEl.textContent = "HVAC Installation";
+    // "10" prefixed to match how every other screen's header reads (e.g.
+    // "30 HVAC SERVICE", read live off a job's business_unit) — this screen
+    // has no such job to read it off of (it's the one tag-only screen with a
+    // single-BU identity), so it's spelled out by hand instead. Display text
+    // only; DEPT itself (matched against SINGLE_DEPTS above) is unchanged.
+    deptNameEl.textContent = "10 HVAC Installation";
     mainEl.className = "tv-main";
     renderInstallationTeamScreen();
     return;
