@@ -524,7 +524,16 @@ function estimateGivenDate(estimate, tech) {
   if (!SCHEDULE_SCOPED_ESTIMATOR_IDS.has(tech.id)) return estimate.created_at;
 
   const scheduledStart = estimate.schedule?.scheduled_start;
-  if (!scheduledStart) return null;
+  // No scheduled visit at all (phone/remote estimate) — falls back to
+  // created_at instead of dropping out of every period. Previously returned
+  // null here, which silently excluded these from "given" in any period at
+  // all; found via a real ~$164K gap between this site's YTD revenue and
+  // Housecall Pro's own report — every one of the missing estimates had no
+  // scheduled_start, so they never counted as "given" anywhere, which also
+  // made them invisible to "Estimates approved"/Revenue accepted since
+  // those are built on top of "given." A visit that IS scheduled still
+  // takes priority when present, per the comment below.
+  if (!scheduledStart) return estimate.created_at;
   // A visit scheduled for later (e.g. "This month" includes the rest of the
   // month, not just up to today) hasn't happened yet — he hasn't had the
   // chance to present it, so it shouldn't count as "given" and drag down
