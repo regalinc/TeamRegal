@@ -286,9 +286,8 @@ const APPROVED_OPTION_STATUSES = new Set(["approved", "pro approved"]);
 //
 // Instead, approved_at is derived by diffing against the *previous* sync's
 // output (passed in as `previousRecord`): the first time we observe an
-// estimate's approved flag flip from false to true (or see it approved
-// with no prior record at all — nothing to diff against) is recorded as
-// its approved_at, using this sync run's own timestamp. That's accurate to
+// estimate's approved flag flip from false to true is recorded as its
+// approved_at, using this sync run's own timestamp. That's accurate to
 // within one sync interval, which beats trusting a field that can silently
 // drift by months.
 //
@@ -302,6 +301,13 @@ const APPROVED_OPTION_STATUSES = new Set(["approved", "pro approved"]);
 // retroactively recover a timestamp we never observed; only a real-time
 // webhook integration (a bigger project — see README) would close this gap
 // for good.
+//
+// Critically, "no previous record at all" must fall into that same unknown
+// bucket (null), NOT be treated as a fresh transition — a bug caught via a
+// real example (an estimate genuinely approved back in January showing an
+// "Approved" date of today, the first day it happened to sync with no prior
+// record to diff against). Only an explicit previousRecord showing
+// approved: false is a real observed transition worth stamping.
 function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
   const customer = estimate.customer || {};
   const approvedOptions = (estimate.options || []).filter((o) =>
@@ -310,8 +316,8 @@ function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
   const approved = approvedOptions.length > 0;
 
   let approvedAt = null;
-  if (approved) {
-    approvedAt = previousRecord && previousRecord.approved ? previousRecord.approved_at : syncedAtIso;
+  if (approved && previousRecord) {
+    approvedAt = previousRecord.approved ? previousRecord.approved_at : syncedAtIso;
   }
 
   // Revenue an estimator actually closed — sum of the approved option(s)'
