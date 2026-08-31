@@ -105,6 +105,9 @@ function kpiClass(metricKey, stats) {
 const INSTALLATION_MONTHLY_GOALS = {
   "2026-08": 475000,
   "2026-09": 450000,
+  "2026-10": 415000,
+  "2026-11": 415000,
+  "2026-12": 415000,
 };
 
 function currentMonthKey() {
