@@ -104,6 +104,7 @@ function kpiClass(metricKey, stats) {
 // goal set" instead of silently reusing a stale number forever.
 const INSTALLATION_MONTHLY_GOALS = {
   "2026-08": 475000,
+  "2026-09": 450000,
 };
 
 function currentMonthKey() {
