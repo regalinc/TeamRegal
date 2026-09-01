@@ -253,7 +253,10 @@ function customerLabel(customer) {
   const personName = [customer.first_name, customer.last_name ? customer.last_name[0] + "." : null]
     .filter(Boolean)
     .join(" ");
-  return personName || customer.company_name || "";
+  // Confirmed by hand: company_name (first guess) actually returned Regal's
+  // own business name, not the customer's — wrong field. The customer
+  // profile's "Company" field is company instead.
+  return personName || customer.company || "";
 }
 
 function toPublicJob(job) {
