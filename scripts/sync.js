@@ -334,15 +334,17 @@ function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
     // app.js for the one place that reads it instead of created_at.
     schedule: estimate.schedule || null,
     assigned_employee_ids: (estimate.assigned_employees || []).map((e) => e.id),
-    // Kept (unlike jobs' work_status, which drives visible status badges)
-    // specifically so the dashboard can exclude canceled estimates from
-    // Given/Approved/Revenue counts — same shape as jobs' CANCELED_STATUSES
-    // filtering, added after a real example: a customer called in and
-    // canceled before the estimate was ever presented, but with no
-    // work_status synced there was no way to tell that apart from a
-    // legitimately given one still sitting there open. See
-    // ESTIMATE_WORK_STATUSES above for the full set of values Housecall Pro
-    // uses (this is fetched in that same shape, not normalized here).
+    // Kept specifically so the dashboard can exclude canceled estimates from
+    // Given/Approved/Revenue counts (CANCELED_ESTIMATE_STATUSES/
+    // isCanceledEstimate in shared.js) — added after a real example: a
+    // customer called in and canceled before the estimate was ever
+    // presented, but with no work_status synced there was no way to tell
+    // that apart from a legitimately given one still sitting there open.
+    // Note this returned value ("user canceled"/"pro canceled", confirmed
+    // against real synced data) doesn't match ESTIMATE_WORK_STATUSES above
+    // ("canceled") — that array is only the *query filter* values used to
+    // fetch estimates by bucket, not what the API returns on the object
+    // itself. Not normalized here; shared.js compares against the raw value.
     work_status: estimate.work_status || null,
     approved,
     approved_at: approvedAt,

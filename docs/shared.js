@@ -30,7 +30,12 @@ const NOT_YET_STARTED_STATUSES = new Set(["needs scheduling", "scheduled"]);
 // (see ESTIMATE_WORK_STATUSES in sync.js) instead of jobs' string. Found via
 // a real example: 5 canceled estimates were still counting as "given" on
 // Andrew's card with no way to tell them apart from ones still open.
-const CANCELED_ESTIMATE_STATUSES = new Set(["canceled"]);
+// Confirmed against real synced data: Housecall Pro's estimate work_status
+// values are "user canceled"/"pro canceled" (matching jobs' exact
+// CANCELED_STATUSES above), not the plain "canceled" ESTIMATE_WORK_STATUSES
+// (sync.js) uses to *query* the API — a returned field can use different
+// wording than the filter parameter that fetched it, apparently.
+const CANCELED_ESTIMATE_STATUSES = new Set(["user canceled", "pro canceled"]);
 
 function isCanceledEstimate(estimate) {
   return CANCELED_ESTIMATE_STATUSES.has(estimate.work_status);
