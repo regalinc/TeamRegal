@@ -406,7 +406,11 @@ function render(data) {
   // "Approved this period" tile below. Neither is filtered by the
   // job-specific filters above (tag/status/business unit/search); only by
   // period and technician.
-  const allEstimates = data.estimates || [];
+  // Excludes canceled estimates (customer called in and canceled before it
+  // was ever presented) — see isCanceledEstimate/CANCELED_ESTIMATE_STATUSES
+  // in shared.js. Filtered once here so every estimate-derived number below
+  // (field-tech tiles, estimator cards) is automatically consistent.
+  const allEstimates = (data.estimates || []).filter((e) => !isCanceledEstimate(e));
   const approvedThisPeriod = allEstimates.filter((e) => e.approved && dateInPeriod(e.approved_at, filters.period));
 
   // The team summary scopes to just the selected roster's jobs when one is

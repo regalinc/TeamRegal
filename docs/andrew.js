@@ -130,7 +130,10 @@ function render() {
   identityName.textContent = tech.name || "Andrew Rouscher";
   avatarSlot.innerHTML = renderLargeAvatar(tech);
 
-  const allEstimates = latestData.estimates || [];
+  // Excludes canceled estimates (customer called in and canceled before it
+  // was ever presented) — see isCanceledEstimate/CANCELED_ESTIMATE_STATUSES
+  // in shared.js.
+  const allEstimates = (latestData.estimates || []).filter((e) => !isCanceledEstimate(e));
   const mine = allEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
 
   const estimatesGiven = mine.filter((e) => dateInPeriod(estimateGivenDate(e, tech), currentPeriod));

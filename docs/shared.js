@@ -24,6 +24,18 @@ const CANCELED_STATUSES = new Set(["user canceled", "pro canceled"]);
 // begun (in progress or complete).
 const NOT_YET_STARTED_STATUSES = new Set(["needs scheduling", "scheduled"]);
 
+// A canceled estimate (customer called in and canceled before it was ever
+// presented) shouldn't count as "given" anywhere — same idea as
+// CANCELED_STATUSES for jobs above, just estimates' own work_status value
+// (see ESTIMATE_WORK_STATUSES in sync.js) instead of jobs' string. Found via
+// a real example: 5 canceled estimates were still counting as "given" on
+// Andrew's card with no way to tell them apart from ones still open.
+const CANCELED_ESTIMATE_STATUSES = new Set(["canceled"]);
+
+function isCanceledEstimate(estimate) {
+  return CANCELED_ESTIMATE_STATUSES.has(estimate.work_status);
+}
+
 const syncStatusEl = document.getElementById("sync-status");
 
 function statusClass(status) {
