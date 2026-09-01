@@ -86,6 +86,7 @@ function renderEstimateRow(estimate, tech) {
     <div class="estimate-row">
       <div class="estimate-left">
         <span class="estimate-customer">${escapeHtml(estimate.customer_label || "Unknown")}</span>
+        ${estimate.estimate_number ? `<span class="estimate-number">#${escapeHtml(estimate.estimate_number)}</span>` : ""}
         <span class="estimate-date">${parts.join(" · ")}</span>
       </div>
       <span class="estimate-status ${won ? "won" : "open"}">${won ? "Approved" : "Pending"}</span>
