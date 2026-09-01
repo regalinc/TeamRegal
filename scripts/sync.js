@@ -242,6 +242,20 @@ function toPublicTechnician(employee) {
   };
 }
 
+// Most customers are a person (first_name + last_name), but a commercial
+// account is stored with those blank and the business name in company_name
+// instead — first/last-name-only logic left those showing as "Unknown"
+// (both toPublicJob and toPublicEstimate render an empty customer_label
+// that way). Falls back to company_name only when there's truly no
+// person name to build from, so it never overrides a real name a
+// commercial account might also have on file.
+function customerLabel(customer) {
+  const personName = [customer.first_name, customer.last_name ? customer.last_name[0] + "." : null]
+    .filter(Boolean)
+    .join(" ");
+  return personName || customer.company_name || "";
+}
+
 function toPublicJob(job) {
   const customer = job.customer || {};
   const address = job.address || {};
@@ -249,9 +263,7 @@ function toPublicJob(job) {
     id: job.id,
     description: job.description || "",
     work_status: job.work_status,
-    customer_label: [customer.first_name, customer.last_name ? customer.last_name[0] + "." : null]
-      .filter(Boolean)
-      .join(" "),
+    customer_label: customerLabel(customer),
     city: address.city || null,
     state: address.state || null,
     zip: address.zip || null,
@@ -327,7 +339,7 @@ function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
   return {
     id: estimate.id,
     estimate_number: estimate.estimate_number || null,
-    customer_label: [customer.first_name, customer.last_name ? customer.last_name[0] + "." : null].filter(Boolean).join(" "),
+    customer_label: customerLabel(customer),
     created_at: estimate.created_at,
     // Not every estimate has a scheduled site visit (phone/remote estimates
     // don't), so this is often null — see SCHEDULE_SCOPED_ESTIMATOR_IDS in
