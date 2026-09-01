@@ -1,5 +1,137 @@
 [
   {
+    "id": "csr_ac4710a69ee14c078c22492da1787015",
+    "estimate_number": "13268",
+    "customer_label": "Bruce S.",
+    "created_at": "2026-09-02T13:10:14Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_42234051b438493198af460c74820298",
+    "estimate_number": "13267",
+    "customer_label": "Ina C.",
+    "created_at": "2026-09-02T12:59:50Z",
+    "schedule": {
+      "scheduled_start": "2026-09-11T13:00:00Z",
+      "scheduled_end": "2026-09-11T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-11T09:00:00-04:00",
+      "scheduled_end_local": "2026-09-11T12:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_f81c1c8445d04b5281992bbec4ff877e",
+    "estimate_number": "13266",
+    "customer_label": "Jane R.",
+    "created_at": "2026-09-02T12:09:56Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_add4ba12688e47c696e827fb91a7d9fd"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_ce06e471835e4f5286a20d13c24a5493",
+    "estimate_number": "13265",
+    "customer_label": "Pete W.",
+    "created_at": "2026-09-02T12:09:17Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 32888
+  },
+  {
+    "id": "csr_ac10a2ee487742018a16947d7a2e974e",
+    "estimate_number": "13264",
+    "customer_label": "HS Premier Construction Services, LLC",
+    "created_at": "2026-09-02T11:01:49Z",
+    "schedule": {
+      "scheduled_start": "2026-09-02T12:00:00Z",
+      "scheduled_end": "2026-09-02T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-02T08:00:00-04:00",
+      "scheduled_end_local": "2026-09-02T10:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "work_status": "in progress",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_a6641c41b5594b2389362ad25026da0a",
+    "estimate_number": "13263",
+    "customer_label": "Mike A.",
+    "created_at": "2026-09-01T19:36:41Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_534d0121f01549d680959825bd4301a5",
     "estimate_number": "13262",
     "customer_label": "Jolene T.",
@@ -104,7 +236,7 @@
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
     ],
-    "work_status": "needs scheduling",
+    "work_status": "created job from estimate",
     "approved": true,
     "approved_at": null,
     "approved_amount": 93683
@@ -269,11 +401,11 @@
     "customer_label": "Samy A.",
     "created_at": "2026-09-01T13:47:03Z",
     "schedule": {
-      "scheduled_start": "2026-09-02T13:00:00Z",
-      "scheduled_end": "2026-09-02T16:00:00Z",
+      "scheduled_start": "2026-09-02T14:00:00Z",
+      "scheduled_end": "2026-09-02T17:00:00Z",
       "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-09-02T09:00:00-04:00",
-      "scheduled_end_local": "2026-09-02T12:00:00-04:00",
+      "scheduled_start_local": "2026-09-02T10:00:00-04:00",
+      "scheduled_end_local": "2026-09-02T13:00:00-04:00",
       "arrival_window": 120,
       "appointments": []
     },
@@ -324,7 +456,7 @@
     "assigned_employee_ids": [
       "pro_27fcce8f21bc4186b44abe4d9a87c03f"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -368,7 +500,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -610,10 +742,10 @@
     "assigned_employee_ids": [
       "pro_e328d4cad27249d48750d091fd1faa3b"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-09-01T19:12:21.481Z",
+    "approved_amount": 146510
   },
   {
     "id": "csr_c76d4ba81f1d403bafe0b8792eff1c16",
@@ -643,11 +775,11 @@
     "customer_label": "Kathy B.",
     "created_at": "2026-08-31T14:05:31Z",
     "schedule": {
-      "scheduled_start": "2026-09-01T19:00:00Z",
-      "scheduled_end": "2026-09-01T21:00:00Z",
+      "scheduled_start": "2026-09-04T12:30:00Z",
+      "scheduled_end": "2026-09-04T13:30:00Z",
       "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-09-01T15:00:00-04:00",
-      "scheduled_end_local": "2026-09-01T17:00:00-04:00",
+      "scheduled_start_local": "2026-09-04T08:30:00-04:00",
+      "scheduled_end_local": "2026-09-04T09:30:00-04:00",
       "arrival_window": 120,
       "appointments": []
     },
@@ -676,7 +808,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -698,7 +830,7 @@
     "assigned_employee_ids": [
       "pro_e328d4cad27249d48750d091fd1faa3b"
     ],
-    "work_status": "needs scheduling",
+    "work_status": "created job from estimate",
     "approved": true,
     "approved_at": null,
     "approved_amount": 40721
@@ -1653,7 +1785,7 @@
   {
     "id": "csr_0c0c68ffe0ed463092ff4d8e21da483d",
     "estimate_number": "13187",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "York Water Co.",
     "created_at": "2026-08-27T14:07:17Z",
     "schedule": {
       "scheduled_start": null,
@@ -1775,7 +1907,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -1863,7 +1995,7 @@
     "assigned_employee_ids": [
       "pro_3f2297b66a9742d09eaf20976a20183a"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -2288,7 +2420,7 @@
   {
     "id": "csr_60ad8bab09be4b77870d5e6a099837ab",
     "estimate_number": "13158",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Emmanuel Church of Christ",
     "created_at": "2026-08-25T15:40:37Z",
     "schedule": {
       "scheduled_start": null,
@@ -2398,7 +2530,7 @@
   {
     "id": "csr_6fc06b7da6ca4da4bfed66067f6bb5cd",
     "estimate_number": "13153",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Susquehanna Micro Inc. ",
     "created_at": "2026-08-25T12:47:45Z",
     "schedule": {
       "scheduled_start": null,
@@ -2837,7 +2969,7 @@
   {
     "id": "csr_0af0b7bdee904e36bd0d9d0f10e4843b",
     "estimate_number": "13133",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Anstine & Sparler",
     "created_at": "2026-08-21T17:02:52Z",
     "schedule": {
       "scheduled_start": "2026-08-21T12:45:00Z",
@@ -3123,7 +3255,7 @@
   {
     "id": "csr_2731af06e0a3416b8bbc711ab719f44a",
     "estimate_number": "13125",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Anstine & Sparler",
     "created_at": "2026-08-21T11:44:03Z",
     "schedule": {
       "scheduled_start": "2026-08-21T11:45:00Z",
@@ -3998,7 +4130,7 @@
   {
     "id": "csr_03afbe346bbc4b3a92a1e2aba3f862ef",
     "estimate_number": "13079",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Integrity Facility Services",
     "created_at": "2026-08-18T13:18:43Z",
     "schedule": {
       "scheduled_start": null,
@@ -4989,7 +5121,7 @@
   {
     "id": "csr_68d3a8f0236142febdf15edebe5a7360",
     "estimate_number": "13034",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "York Water Co.",
     "created_at": "2026-08-13T17:27:35Z",
     "schedule": {
       "scheduled_start": "2026-08-14T15:00:00Z",
@@ -5802,7 +5934,7 @@
   {
     "id": "csr_e3131a22e49147efa5d1cba085ffde14",
     "estimate_number": "12997",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "O'Hanlon Kitchens",
     "created_at": "2026-08-12T12:53:53Z",
     "schedule": {
       "scheduled_start": "2026-08-12T12:00:00Z",
@@ -8970,7 +9102,7 @@
   {
     "id": "csr_1787e5b0b9e34bd3a3148393ec62db79",
     "estimate_number": "12854",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-07-30T14:59:06Z",
     "schedule": {
       "scheduled_start": null,
@@ -11034,7 +11166,7 @@
   {
     "id": "csr_f1a016d6a84747ee8aa19b79a68f3f30",
     "estimate_number": "12760",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-07-24T12:36:18Z",
     "schedule": {
       "scheduled_start": null,
@@ -13719,7 +13851,7 @@
   {
     "id": "csr_7d0b10d43f1e4264abfa420e4533d92a",
     "estimate_number": "12637",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Military & Commercial Fasteners",
     "created_at": "2026-07-15T17:38:13Z",
     "schedule": {
       "scheduled_start": "2026-07-27T13:00:00Z",
@@ -13786,7 +13918,7 @@
   {
     "id": "csr_06ab2de338244ea1a59a27f219098c11",
     "estimate_number": "12634",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "On All Floors LLC",
     "created_at": "2026-07-15T16:50:20Z",
     "schedule": {
       "scheduled_start": "2026-07-16T13:45:00Z",
@@ -15703,7 +15835,7 @@
   {
     "id": "csr_6db3be0559fa48edb60e4e2ce5cc4c34",
     "estimate_number": "12547",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Shoffner Construction",
     "created_at": "2026-07-10T10:18:48Z",
     "schedule": {
       "scheduled_start": null,
@@ -16910,7 +17042,7 @@
   {
     "id": "csr_586d883361b64330a58de9b0a8e4891c",
     "estimate_number": "12492",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "RSB & Assoc",
     "created_at": "2026-07-07T17:31:18Z",
     "schedule": {
       "scheduled_start": null,
@@ -16976,7 +17108,7 @@
   {
     "id": "csr_eb4c4690d84044e3b9893e8bbad6a1dc",
     "estimate_number": "12489",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "RSB & Assoc",
     "created_at": "2026-07-07T16:37:48Z",
     "schedule": {
       "scheduled_start": null,
@@ -17699,7 +17831,7 @@
   {
     "id": "csr_f806fb6b6cd847f2ac083999d1b28cd6",
     "estimate_number": "12458",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "White Rose Settlement Services",
     "created_at": "2026-07-06T13:43:21Z",
     "schedule": {
       "scheduled_start": "2026-07-06T15:00:00Z",
@@ -19128,7 +19260,7 @@
   {
     "id": "csr_cb5e5340b2a14a4b819e2357af94208c",
     "estimate_number": "12390",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-06-30T16:21:06Z",
     "schedule": {
       "scheduled_start": null,
@@ -19918,7 +20050,7 @@
   {
     "id": "csr_13bd0c4ee7b64a8c9540cc674f943ba3",
     "estimate_number": "12354",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Vito's Pizza",
     "created_at": "2026-06-26T16:40:23Z",
     "schedule": {
       "scheduled_start": null,
@@ -21063,7 +21195,7 @@
   {
     "id": "csr_3713afd92d1945178e80fa4e43e8995d",
     "estimate_number": "12302",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-06-23T17:57:31Z",
     "schedule": {
       "scheduled_start": null,
@@ -21919,7 +22051,7 @@
   {
     "id": "csr_9cf440f2166c4e3e950ba41f587bd165",
     "estimate_number": "12265",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Manchester Heights",
     "created_at": "2026-06-19T14:31:20Z",
     "schedule": {
       "scheduled_start": "2026-06-19T14:45:00Z",
@@ -22141,7 +22273,7 @@
   {
     "id": "csr_84ac6dd404e740a5a00acb56844276d1",
     "estimate_number": "12254",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Manchester Heights",
     "created_at": "2026-06-18T18:39:22Z",
     "schedule": {
       "scheduled_start": "2026-06-19T15:00:00Z",
@@ -22911,7 +23043,7 @@
   {
     "id": "csr_e8f0ebf7501e49f0bc039e984ad24127",
     "estimate_number": "12219",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-06-16T16:51:35Z",
     "schedule": {
       "scheduled_start": null,
@@ -23395,7 +23527,7 @@
   {
     "id": "csr_3ed7984dc2df49a9a47848067e65f3dd",
     "estimate_number": "12197",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "MoMo Shack",
     "created_at": "2026-06-15T16:39:16Z",
     "schedule": {
       "scheduled_start": null,
@@ -26964,7 +27096,7 @@
   {
     "id": "csr_8c2096eadefd4cff8d362373eabbce52",
     "estimate_number": "12035",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "AMZ Boxwood",
     "created_at": "2026-06-04T17:51:32Z",
     "schedule": {
       "scheduled_start": null,
@@ -27826,7 +27958,7 @@
   {
     "id": "csr_0f630e77b3fd4670a4540c34c942c722",
     "estimate_number": "11997",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Children's Dental Centre of York",
     "created_at": "2026-06-02T19:39:51Z",
     "schedule": {
       "scheduled_start": null,
@@ -27849,7 +27981,7 @@
   {
     "id": "csr_eecca251091449ab8d5589fd1dfcbaaf",
     "estimate_number": "11996",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Smoothie King",
     "created_at": "2026-06-02T19:32:30Z",
     "schedule": {
       "scheduled_start": null,
@@ -31234,7 +31366,7 @@
   {
     "id": "csr_e65b7d6acc5b4db7acaf6a2e622e2e25",
     "estimate_number": "11842",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Indulge Salon",
     "created_at": "2026-05-20T15:15:29Z",
     "schedule": {
       "scheduled_start": null,
@@ -32005,7 +32137,7 @@
   {
     "id": "csr_1c8386e6921046a98816833d89b16469",
     "estimate_number": "11807",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "York Water Co.",
     "created_at": "2026-05-18T16:33:39Z",
     "schedule": {
       "scheduled_start": null,
@@ -32509,7 +32641,7 @@
   {
     "id": "csr_62f95b553f7646ffaca46f434445ea58",
     "estimate_number": "11784",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Emmanuel Church of Christ",
     "created_at": "2026-05-15T12:33:37Z",
     "schedule": {
       "scheduled_start": null,
@@ -33236,7 +33368,7 @@
   {
     "id": "csr_68639215b23c4d05a78d5c9f133a42f8",
     "estimate_number": "11749",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "O'Hanlon Kitchens",
     "created_at": "2026-05-13T11:56:26Z",
     "schedule": {
       "scheduled_start": "2026-07-17T13:30:00Z",
@@ -33456,7 +33588,7 @@
   {
     "id": "csr_fd32c76fda0e4fb684b1511d0951888e",
     "estimate_number": "11751",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "O'Hanlon Kitchens",
     "created_at": "2026-05-12T17:46:29Z",
     "schedule": {
       "scheduled_start": "2026-05-19T13:00:00Z",
@@ -33896,7 +34028,7 @@
   {
     "id": "csr_9684bff091a743dea508eff987f36e9f",
     "estimate_number": "11757",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "O'Hanlon Kitchens",
     "created_at": "2026-05-11T18:17:24Z",
     "schedule": {
       "scheduled_start": "2026-05-14T13:00:00Z",
@@ -34336,7 +34468,7 @@
   {
     "id": "csr_54c2f1a2704d446baceada6628b62489",
     "estimate_number": "11701",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Henry Realty",
     "created_at": "2026-05-11T12:48:36Z",
     "schedule": {
       "scheduled_start": "2026-05-12T14:00:00Z",
@@ -36181,7 +36313,7 @@
   {
     "id": "csr_fb28e1a6f3404c80ae7b60dce04ee324",
     "estimate_number": "11616",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Shiloh Baptist Church",
     "created_at": "2026-05-01T18:32:52Z",
     "schedule": {
       "scheduled_start": "2026-05-01T18:45:00Z",
@@ -37130,7 +37262,7 @@
   {
     "id": "csr_fc53e70f4a0e4760883101cfaaaf96db",
     "estimate_number": "11578",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "John Fox",
     "created_at": "2026-04-29T12:21:01Z",
     "schedule": {
       "scheduled_start": "2026-04-29T14:00:00Z",
@@ -37240,7 +37372,7 @@
   {
     "id": "csr_127020f76d734f7480f0f152518eea28",
     "estimate_number": "11568",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Mothership",
     "created_at": "2026-04-28T18:36:33Z",
     "schedule": {
       "scheduled_start": "2026-04-30T14:30:00Z",
@@ -37262,7 +37394,7 @@
   {
     "id": "csr_ffce64ac34b845d29846a2da399c438d",
     "estimate_number": "11646",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Shiloh Baptist Church",
     "created_at": "2026-04-28T17:09:16Z",
     "schedule": {
       "scheduled_start": "2026-05-05T17:00:00Z",
@@ -37570,7 +37702,7 @@
   {
     "id": "csr_a3f82b8ec09348de99db36c91f798c23",
     "estimate_number": "11554",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Note Bistro and Wine Bar",
     "created_at": "2026-04-28T14:21:51Z",
     "schedule": {
       "scheduled_start": "2026-04-29T16:00:00Z",
@@ -37988,7 +38120,7 @@
   {
     "id": "csr_44fdad7efa6e4182ac12bf119f853e74",
     "estimate_number": "11535",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Indulge Salon",
     "created_at": "2026-04-27T16:48:45Z",
     "schedule": {
       "scheduled_start": null,
@@ -38186,7 +38318,7 @@
   {
     "id": "csr_eab77f3f2de94ce48104017d34c33229",
     "estimate_number": "11526",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "On All Floors LLC",
     "created_at": "2026-04-27T11:28:23Z",
     "schedule": {
       "scheduled_start": "2026-04-27T16:00:00Z",
@@ -38803,7 +38935,7 @@
   {
     "id": "csr_213ee885403d42d5838c256aec9e9df8",
     "estimate_number": "11498",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "1651 Investment Group LLC.",
     "created_at": "2026-04-22T19:09:26Z",
     "schedule": {
       "scheduled_start": null,
@@ -39244,7 +39376,7 @@
   {
     "id": "csr_3eaada9b4fd5424a932e6e64a8b06336",
     "estimate_number": "11477",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "1651 Investment Group LLC.",
     "created_at": "2026-04-21T18:41:39Z",
     "schedule": {
       "scheduled_start": "2026-04-28T13:00:00Z",
@@ -39354,7 +39486,7 @@
   {
     "id": "csr_865aa697e6514d5db38cdf5c7d0f7ec1",
     "estimate_number": "11472",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "HHHS Properties",
     "created_at": "2026-04-21T16:03:45Z",
     "schedule": {
       "scheduled_start": "2026-04-23T13:00:00Z",
@@ -40389,7 +40521,7 @@
   {
     "id": "csr_5e605268679d472abefbfd3c3bbe422b",
     "estimate_number": "11425",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Traffic Management inc.",
     "created_at": "2026-04-17T11:50:24Z",
     "schedule": {
       "scheduled_start": "2026-04-17T15:00:00Z",
@@ -40521,7 +40653,7 @@
   {
     "id": "csr_eef127a3be614ab8ba1178b3f3246d66",
     "estimate_number": "11419",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Moonlight Meadows",
     "created_at": "2026-04-16T16:57:21Z",
     "schedule": {
       "scheduled_start": null,
@@ -40741,7 +40873,7 @@
   {
     "id": "csr_27ea378f8f6e4564a367168879cd3b4f",
     "estimate_number": "11409",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-04-16T13:07:34Z",
     "schedule": {
       "scheduled_start": "2026-04-16T16:30:00Z",
@@ -42345,7 +42477,7 @@
   {
     "id": "csr_0c4e2704cb61498aa96b9abac6cae952",
     "estimate_number": "11336",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-04-10T10:23:48Z",
     "schedule": {
       "scheduled_start": null,
@@ -42983,7 +43115,7 @@
   {
     "id": "csr_47ed3448ec9a4230aa05ad649e46f523",
     "estimate_number": "11307",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Shoffner Construction",
     "created_at": "2026-04-08T12:18:51Z",
     "schedule": {
       "scheduled_start": "2026-04-13T13:00:00Z",
@@ -45323,7 +45455,7 @@
   {
     "id": "csr_c1e8ccfb44c245df885de256405f3ad3",
     "estimate_number": "11200",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-03-30T00:40:20Z",
     "schedule": {
       "scheduled_start": null,
@@ -45455,7 +45587,7 @@
   {
     "id": "csr_2bd70c61ebed4887bfbc366562eec38d",
     "estimate_number": "11194",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-03-27T17:43:11Z",
     "schedule": {
       "scheduled_start": null,
@@ -46204,7 +46336,7 @@
   {
     "id": "csr_6c612fd412854130afba39db1ad5d149",
     "estimate_number": "11161",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Major Facility Solutions",
     "created_at": "2026-03-25T18:22:51Z",
     "schedule": {
       "scheduled_start": null,
@@ -46976,7 +47108,7 @@
   {
     "id": "csr_ac9e7b75be464d75b3efaeaf71440104",
     "estimate_number": "11126",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Blackstone Mechanical",
     "created_at": "2026-03-24T13:22:34Z",
     "schedule": {
       "scheduled_start": null,
@@ -47835,7 +47967,7 @@
   {
     "id": "csr_9d640bac277a48fc8dccf1f9224129bf",
     "estimate_number": "11087",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "York Water Co.",
     "created_at": "2026-03-19T17:57:46Z",
     "schedule": {
       "scheduled_start": null,
@@ -48914,7 +49046,7 @@
   {
     "id": "csr_65a392e8205a4322ba21bb4285b7f591",
     "estimate_number": "11038",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Longstown Village Condo Assoc.",
     "created_at": "2026-03-16T14:57:20Z",
     "schedule": {
       "scheduled_start": null,
@@ -49090,7 +49222,7 @@
   {
     "id": "csr_0ede94eea9694a0e86573eef4cdce6ad",
     "estimate_number": "11030",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "El Rodeo Mexican Restaurant",
     "created_at": "2026-03-16T12:13:12Z",
     "schedule": {
       "scheduled_start": null,
@@ -50406,7 +50538,7 @@
   {
     "id": "csr_4d4d920f0ef24bc08434f008e05fae08",
     "estimate_number": "10970",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "TJ and M Services",
     "created_at": "2026-03-10T19:28:32Z",
     "schedule": {
       "scheduled_start": "2026-03-11T13:00:00Z",
@@ -50758,7 +50890,7 @@
   {
     "id": "csr_58aac6da95d64684911b15608b97818f",
     "estimate_number": "11487",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Emmanuel Church of Christ",
     "created_at": "2026-03-10T13:40:43Z",
     "schedule": {
       "scheduled_start": "2026-04-24T17:00:00Z",
@@ -50912,7 +51044,7 @@
   {
     "id": "csr_4e460d02f8e74cb0aca49f22f6dc6caa",
     "estimate_number": "10948",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "First Saint Johns Lutheran Church",
     "created_at": "2026-03-09T17:27:54Z",
     "schedule": {
       "scheduled_start": "2026-03-09T18:00:00Z",
@@ -51753,7 +51885,7 @@
   {
     "id": "csr_116b365af7a24c08a61cc42324131292",
     "estimate_number": "10910",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Blackstone Mechanical",
     "created_at": "2026-03-05T15:44:41Z",
     "schedule": {
       "scheduled_start": null,
@@ -51775,7 +51907,7 @@
   {
     "id": "csr_1410888a224d452f8696f7678347cc87",
     "estimate_number": "10909",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-03-05T15:38:26Z",
     "schedule": {
       "scheduled_start": null,
@@ -51930,7 +52062,7 @@
   {
     "id": "csr_6dcbafcda931422b9e6bf2000748df0b",
     "estimate_number": "10902",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Apex Property Maintenance",
     "created_at": "2026-03-04T16:15:09Z",
     "schedule": {
       "scheduled_start": null,
@@ -52152,7 +52284,7 @@
   {
     "id": "csr_888442286aed4e8a86df6d319b5eb19a",
     "estimate_number": "10892",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-03-03T19:16:06Z",
     "schedule": {
       "scheduled_start": "2026-02-27T16:00:00Z",
@@ -52524,7 +52656,7 @@
   {
     "id": "csr_e78e7fd9c8654ac2baf538f2c0ce2b8d",
     "estimate_number": "10874",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "O'Hanlon Kitchens",
     "created_at": "2026-03-02T23:34:31Z",
     "schedule": {
       "scheduled_start": "2026-03-10T12:15:00Z",
@@ -52546,7 +52678,7 @@
   {
     "id": "csr_8a35a07182664bc780b6eefdc2163b69",
     "estimate_number": "10873",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "O'Hanlon Kitchens",
     "created_at": "2026-03-02T23:33:10Z",
     "schedule": {
       "scheduled_start": null,
@@ -52892,7 +53024,7 @@
   {
     "id": "csr_52ab126431a744eaabfdd8ab8a98f2e5",
     "estimate_number": "10858",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Lehman Volvo",
     "created_at": "2026-02-27T17:00:20Z",
     "schedule": {
       "scheduled_start": null,
@@ -53135,7 +53267,7 @@
   {
     "id": "csr_4703d4e80fb44d90b876baaadf6da25f",
     "estimate_number": "10847",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Festive Board ",
     "created_at": "2026-02-26T17:09:36Z",
     "schedule": {
       "scheduled_start": null,
@@ -53663,7 +53795,7 @@
   {
     "id": "csr_c573f66c33834b36ab934387db5df65b",
     "estimate_number": "10823",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "The Brickhouse Inn",
     "created_at": "2026-02-24T19:53:36Z",
     "schedule": {
       "scheduled_start": null,
@@ -53752,7 +53884,7 @@
   {
     "id": "csr_4c1fbe13e396417fb025bfd13d62027c",
     "estimate_number": "10819",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Weiglestown Child Care",
     "created_at": "2026-02-24T17:40:28Z",
     "schedule": {
       "scheduled_start": null,
@@ -57008,7 +57140,7 @@
   {
     "id": "csr_6a33e2656c0c4b46baadbb38dc7fee48",
     "estimate_number": "10670",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Catholic Harvest Food Pantry",
     "created_at": "2026-02-11T17:03:04Z",
     "schedule": {
       "scheduled_start": "2026-02-12T16:00:00Z",
@@ -57252,7 +57384,7 @@
   {
     "id": "csr_86ea94f2620c44a5874f57676d1ddebd",
     "estimate_number": "10659",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Emmanuel Church of Christ",
     "created_at": "2026-02-10T18:44:10Z",
     "schedule": {
       "scheduled_start": null,
@@ -57737,7 +57869,7 @@
   {
     "id": "csr_0b3d88e24e084a6fb3b91acf8a1f1621",
     "estimate_number": "10637",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Salvation Army Citadel Corps.",
     "created_at": "2026-02-09T19:05:29Z",
     "schedule": {
       "scheduled_start": "2026-02-10T14:00:00Z",
@@ -58223,7 +58355,7 @@
   {
     "id": "csr_89221e5b13604f09aaae37da2f00f587",
     "estimate_number": "10615",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Weiglestown Child Care",
     "created_at": "2026-02-07T13:28:09Z",
     "schedule": {
       "scheduled_start": null,
@@ -59149,7 +59281,7 @@
   {
     "id": "csr_03661369f83241bbb04bf9982c38707e",
     "estimate_number": "10574",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "CBF Bakery Systems",
     "created_at": "2026-02-04T13:42:31Z",
     "schedule": {
       "scheduled_start": "2026-02-04T17:00:00Z",
@@ -60139,7 +60271,7 @@
   {
     "id": "csr_3837cc9d1d13420e92f52529dd163b22",
     "estimate_number": "10529",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Longstown Village Condo Assoc.",
     "created_at": "2026-01-30T16:58:44Z",
     "schedule": {
       "scheduled_start": "2026-01-30T18:00:00Z",
@@ -60910,7 +61042,7 @@
   {
     "id": "csr_cb6e1a45a7b140b7809ee6b9606c56b1",
     "estimate_number": "10494",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "City View Community Church",
     "created_at": "2026-01-27T16:41:36Z",
     "schedule": {
       "scheduled_start": "2026-01-28T15:00:00Z",
@@ -61721,7 +61853,7 @@
   {
     "id": "csr_9ff04c412b8741a2ab8c382bc4d7eeba",
     "estimate_number": "10457",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-01-22T20:26:00Z",
     "schedule": {
       "scheduled_start": "2026-02-02T14:00:00Z",
@@ -62950,7 +63082,7 @@
   {
     "id": "csr_d3a29e429c1e433c9afa4f12295bb074",
     "estimate_number": "10401",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Salon Fifth Avenue",
     "created_at": "2026-01-19T15:00:30Z",
     "schedule": {
       "scheduled_start": null,
@@ -63038,7 +63170,7 @@
   {
     "id": "csr_154ea34ce9f34a75834f452c75691f25",
     "estimate_number": "10397",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "KGV Ruell Rentals LLC",
     "created_at": "2026-01-16T19:15:14Z",
     "schedule": {
       "scheduled_start": "2026-01-16T19:30:00Z",
@@ -63654,7 +63786,7 @@
   {
     "id": "csr_55cc5688a7d54a1692d0bf9221a2ae2b",
     "estimate_number": "10369",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Indulge Salon",
     "created_at": "2026-01-14T15:10:10Z",
     "schedule": {
       "scheduled_start": null,
@@ -64577,7 +64709,7 @@
   {
     "id": "csr_b44d4552f433498cb4312ed2ddb53e4c",
     "estimate_number": "10326",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "",
     "created_at": "2026-01-12T13:25:40Z",
     "schedule": {
       "scheduled_start": "2026-01-15T14:00:00Z",
@@ -65213,7 +65345,7 @@
   {
     "id": "csr_3d96232259ff48cca6b036a1bde6f5dd",
     "estimate_number": "10298",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "James Markey III Excavating",
     "created_at": "2026-01-08T17:42:06Z",
     "schedule": {
       "scheduled_start": null,
@@ -65477,7 +65609,7 @@
   {
     "id": "csr_19ad7420dc5d403280b0426903687de7",
     "estimate_number": "10286",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Divisions Maintenance Group",
     "created_at": "2026-01-07T20:12:56Z",
     "schedule": {
       "scheduled_start": null,
@@ -65565,7 +65697,7 @@
   {
     "id": "csr_3f38c63129824df6bd2a05832c593db7",
     "estimate_number": "10282",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "MoMo Shack",
     "created_at": "2026-01-07T19:02:35Z",
     "schedule": {
       "scheduled_start": null,
@@ -65739,7 +65871,7 @@
   {
     "id": "csr_39cce144ffed4f159db2b5186e256b17",
     "estimate_number": "10274",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Best Western Plus",
     "created_at": "2026-01-07T12:30:46Z",
     "schedule": {
       "scheduled_start": "2026-01-08T14:00:00Z",
@@ -65849,7 +65981,7 @@
   {
     "id": "csr_8e968da89e3b45d19fe7e460397d963b",
     "estimate_number": "10269",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Madison Ave. Church of the Brethren",
     "created_at": "2026-01-06T16:03:15Z",
     "schedule": {
       "scheduled_start": "2026-01-06T16:30:00Z",
@@ -66595,7 +66727,7 @@
   {
     "id": "csr_4ac6850bd3b54df79855d90d8388b6c6",
     "estimate_number": "10234",
-    "customer_label": "Regal, Inc. Plumbing, Heating and Air Conditioning",
+    "customer_label": "Colony Park COA c/o York HG Properties, LLC.",
     "created_at": "2026-01-02T16:13:07Z",
     "schedule": {
       "scheduled_start": "2026-01-05T14:15:00Z",
@@ -66786,6 +66918,116 @@
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
     ],
     "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_56ca2300f8944b978bdd98859b7dd8a7",
+    "estimate_number": "10226",
+    "customer_label": "Dylon J.",
+    "created_at": "2025-12-31T16:57:45Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 745000
+  },
+  {
+    "id": "csr_0baf3993710d4dafb8682499ae628284",
+    "estimate_number": "10225",
+    "customer_label": "First Capitol P.",
+    "created_at": "2025-12-31T16:28:29Z",
+    "schedule": {
+      "scheduled_start": "2025-12-31T16:30:00Z",
+      "scheduled_end": "2025-12-31T17:30:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2025-12-31T11:30:00-05:00",
+      "scheduled_end_local": "2025-12-31T12:30:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_a147eea604e04ccfa458813cf1b374f0"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 49577
+  },
+  {
+    "id": "csr_ea5e60fe30dd4fd3a9d6678aaecc5da3",
+    "estimate_number": "10224",
+    "customer_label": "Sterling S.",
+    "created_at": "2025-12-31T15:57:39Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_6e334ed481b84edfab66eac860258325"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 108888
+  },
+  {
+    "id": "csr_912694ba8308462c89e0b740ba51f92a",
+    "estimate_number": "10223",
+    "customer_label": "Basketball W.",
+    "created_at": "2025-12-31T15:03:18Z",
+    "schedule": {
+      "scheduled_start": "2025-12-31T15:15:00Z",
+      "scheduled_end": "2025-12-31T16:15:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2025-12-31T10:15:00-05:00",
+      "scheduled_end_local": "2025-12-31T11:15:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "work_status": "complete unrated",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_dad9fb430936450aae7df911fe977887",
+    "estimate_number": "10222",
+    "customer_label": "Gage T.",
+    "created_at": "2025-12-31T14:53:28Z",
+    "schedule": {
+      "scheduled_start": "2026-01-06T16:00:00Z",
+      "scheduled_end": "2026-01-06T18:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-01-06T11:00:00-05:00",
+      "scheduled_end_local": "2026-01-06T13:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
