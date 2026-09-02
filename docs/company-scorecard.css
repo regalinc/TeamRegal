@@ -1,0 +1,40 @@
+/* Page-specific additions on top of style.css's shared tokens/topbar. */
+
+.topbar h1 { font-size: 1.05rem; margin: 0 0 0 4px; color: var(--text-muted); font-weight: 500; }
+
+#dept-select, #month-select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.scorecard-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+}
+
+.scorecard-head { margin-bottom: 8px; }
+.dept-name { font-size: 1.4rem; margin: 0; }
+.dept-sub { color: var(--text-muted); margin: 2px 0 0; font-size: 0.9rem; }
+
+.scorecard-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-top: 18px;
+}
+
+.section-title { font-size: 0.95rem; margin: 0 0 4px; }
+.section-note { color: var(--text-muted); font-size: 0.8rem; margin: 0 0 12px; }
+
+.scorecard-tiles {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-bottom: 0;
+}
+.scorecard-tiles .tech-mini-stat { padding: 10px 6px; }
+.scorecard-tiles .tech-mini-stat-value { font-size: 1.05rem; }

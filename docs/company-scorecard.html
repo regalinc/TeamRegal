@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Department Scorecard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="company-scorecard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="assets/logo-color.png" alt="Regal Inc" class="logo logo-light" />
+      <img src="assets/logo-white.png" alt="Regal Inc" class="logo logo-dark" />
+      <h1>Department Scorecard</h1>
+    </div>
+    <div class="topbar-meta">
+      <a class="nav-link" href="index.html">Technician view</a>
+      <a class="nav-link" href="admin.html">Company view</a>
+      <select id="dept-select" aria-label="Department"></select>
+      <select id="month-select" aria-label="Month"></select>
+      <span id="sync-status" class="sync-status">Loading…</span>
+    </div>
+  </header>
+
+  <main id="app" class="scorecard-page">
+    <p class="loading">Loading…</p>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="company-scorecard.js"></script>
+</body>
+</html>
