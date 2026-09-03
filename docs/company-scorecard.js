@@ -175,6 +175,44 @@ const DEPARTMENTS = {
       { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
     ],
   },
+  10: {
+    name: "HVAC Installation",
+    buLabel: "10 HVAC Installation",
+    hcp: [
+      // No explicit $ target for Install's Avg ticket in the source chart
+      // (unlike every Service/Maintenance department) — tracked, neutral.
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: null },
+      { key: "sameDayCompletion", label: "Same day completion", type: "pct", target: null },
+      // "Sales conversion ratio" (Estimate Closure %, scoped to this BU) is
+      // skipped here, same as BU 70/80 — estimates don't carry a
+      // business_unit field the way jobs do, so there's no clean way to
+      // scope Closing % to one department yet. Needs a sync.js change, not
+      // just a config entry.
+    ],
+    pnl: [
+      { key: "laborCost", label: "Labor to sales", target: { goal: 0.09, direction: "max" } },
+      // Install's chart combines Parts (5001) *and* Equipment (5002) into
+      // one "Parts and materials" ratio — unlike BU 30/70's Materials/parts
+      // tile, which is 5001 alone. Installs sell a lot of big-ticket
+      // equipment, so lumping the two together here (not elsewhere) matches
+      // the source chart, not an inconsistency.
+      { key: "partsAndMaterials", label: "Parts and materials", target: { goal: 0.09, direction: "max" }, compute: (pnl) => pnl.partsCost + pnl.equipmentCost },
+      { key: "grossProfit", label: "Gross margin", target: null },
+      { key: "subcontractCost", label: "Subcontracts", target: null },
+      { key: "commissionCost", label: "Commissions", target: null },
+      { key: "fringeCost", label: "Fringe benefits", target: null },
+      ...OVERHEAD_PNL_METRICS,
+    ],
+    manual: [
+      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      // No confirmed target for GP per crew day on Install's own chart
+      // (unlike the BU 30-detail chart's per-tech-per-day number, which was
+      // never confirmed as applying here either) — tracked, neutral.
+      { key: "gpPerCrewDay", label: "GP per crew day", type: "money", target: null, compute: (m, s, pnl) => (m.crewDays && pnl ? pnl.grossProfit / m.crewDays : null) },
+      { key: "customerSatisfactionIndex", label: "Customer satisfaction", type: "count", target: null },
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.01, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+    ],
+  },
 };
 
 const deptSelect = document.getElementById("dept-select");
@@ -242,9 +280,29 @@ function sectionHtml(title, note, tilesHtml) {
   `;
 }
 
+// A job completed the same calendar day it was scheduled for — Install's
+// "Same day completion %" (no confirmed target given, so its tile renders
+// neutral for now, but the number itself is real). Needs the raw completed
+// jobs, not just computeScorecardStats' aggregated totals, so this takes
+// `jobs` directly rather than going through hcpValue's stats-only signature.
+function sameDayCompletionRatio(jobs) {
+  const completed = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status) && j.schedule?.scheduled_start && j.completed_at);
+  if (!completed.length) return null;
+  const sameDay = completed.filter((j) => {
+    const scheduled = new Date(j.schedule.scheduled_start);
+    const done = new Date(j.completed_at);
+    return (
+      scheduled.getFullYear() === done.getFullYear() &&
+      scheduled.getMonth() === done.getMonth() &&
+      scheduled.getDate() === done.getDate()
+    );
+  });
+  return sameDay.length / completed.length;
+}
+
 // Raw (unformatted) value for each known HCP metric key — everything else
 // (formatting, coloring) is generic once this returns a plain number.
-function hcpValue(key, stats) {
+function hcpValue(key, stats, jobs) {
   switch (key) {
     case "avgTicket":
       return stats.avgTicket;
@@ -260,13 +318,15 @@ function hcpValue(key, stats) {
     }
     case "totalClubAgreements":
       return stats.servicePlansSold;
+    case "sameDayCompletion":
+      return sameDayCompletionRatio(jobs);
     default:
       return null;
   }
 }
 
-function renderHcpSection(dept, stats) {
-  const tiles = dept.hcp.map((m) => tileFor(m.label, m.type, hcpValue(m.key, stats), m.target)).join("");
+function renderHcpSection(dept, stats, jobs) {
+  const tiles = dept.hcp.map((m) => tileFor(m.label, m.type, hcpValue(m.key, stats, jobs), m.target)).join("");
   return sectionHtml("From Housecall Pro", "Live — same data as the rest of the site, scoped to this department and this calendar month.", tiles);
 }
 
@@ -274,7 +334,10 @@ function renderPnlSection(dept, pnl) {
   if (!pnl) return sectionHtml("From the P&L", "No P&L uploaded for this month yet.", "");
   const inc = pnl.totalIncome || 0;
   const tiles = dept.pnl
-    .map((m) => tileFor(m.label, "pct", inc ? pnl[m.key] / inc : null, m.target))
+    .map((m) => {
+      const raw = m.compute ? m.compute(pnl) : pnl[m.key];
+      return tileFor(m.label, "pct", inc && raw !== null ? raw / inc : null, m.target);
+    })
     .join("");
   return sectionHtml("From the P&L", `Total income this month: ${escapeHtml(formatMoney(inc))}.`, tiles);
 }
@@ -308,7 +371,7 @@ function render() {
       <h2 class="dept-name">${escapeHtml(dept.buLabel)}</h2>
       <p class="dept-sub">${escapeHtml(monthLabel(currentMonth))}</p>
     </div>
-    ${renderHcpSection(dept, stats)}
+    ${renderHcpSection(dept, stats, jobs)}
     ${renderPnlSection(dept, pnlMonth[currentDept])}
     ${renderManualSection(dept, manualMonth[currentDept], stats, pnlMonth[currentDept])}
   `;
