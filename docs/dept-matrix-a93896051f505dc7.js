@@ -13,13 +13,13 @@
 
 const DEPT_META = {
   10: { name: "HVAC Installation", accent: "--dept-10" },
-  50: { name: "Plumbing Installation", accent: "--dept-50" },
   30: { name: "HVAC Service", accent: "--dept-30" },
-  70: { name: "Plumbing Service", accent: "--dept-70" },
   40: { name: "HVAC Maintenance", accent: "--dept-40" },
+  50: { name: "Plumbing Installation", accent: "--dept-50" },
+  70: { name: "Plumbing Service", accent: "--dept-70" },
   80: { name: "Plumbing Maintenance", accent: "--dept-80" },
 };
-const DEPT_ORDER = ["10", "50", "30", "70", "40", "80"];
+const DEPT_ORDER = ["10", "30", "40", "50", "70", "80"];
 
 // Canonical row label + group + order for every pnl-array key seen across
 // DEPARTMENTS — a department's own label/type/target still drives each of
