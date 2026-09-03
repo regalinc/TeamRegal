@@ -163,6 +163,9 @@ const DEPARTMENTS = {
     name: "HVAC Maintenance",
     buLabel: "40 HVAC Maintenance",
     hcp: [
+      // "Average Sale per service invoice, with sales of techs included" —
+      // $250, confirmed against a detailed BU 40 chart: matches the
+      // existing target exactly, no change.
       { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 250, direction: "min" } },
       // BU 40's chart frames this as new-vs-renewal, not a flat conversion
       // rate — Housecall Pro's new-vs-renewal distinction isn't confirmed
@@ -171,15 +174,29 @@ const DEPARTMENTS = {
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: null },
       { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
     ],
+    // Combined with a detailed BU 40-specific financial KPI list — additive,
+    // not a replacement, same treatment as BU 70. The 6 shared overhead
+    // ratios (Marketing/Employee related/Vehicle/Plant & equipment/
+    // Administrative/Total SG&A) plus Pretax weren't mentioned on this
+    // chart at all, so OVERHEAD_PNL_METRICS' company-wide defaults stay as
+    // they were — Pretax's 10% there already matches this chart's own
+    // "10% or greater" exactly.
     pnl: [
-      // No BU 40-specific Gross margin/Labor/Materials target was given —
-      // shown for visibility, colored once one is confirmed.
+      // No BU 40-specific Gross margin target was given — shown for
+      // visibility, colored once one is confirmed.
       { key: "grossProfit", label: "Gross margin", target: null },
-      { key: "laborCost", label: "Labor to sales", target: null },
-      { key: "partsCost", label: "Materials/parts", target: null },
+      { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.34, direction: "max" } },
+      // "None" on this chart — read the same as BU 70's hard 0% (a
+      // Maintenance department doesn't sell equipment; Install does).
+      { key: "equipmentCost", label: "Equipment to sales", target: { goal: 0, direction: "max" } },
+      { key: "partsCost", label: "Materials/parts", target: { goal: 0.06, direction: "max" } },
       { key: "subcontractCost", label: "Subcontracts", target: null },
       { key: "commissionCost", label: "Commissions", target: null },
       { key: "fringeCost", label: "Fringe benefits", target: null },
+      // Not a % of sales — a same-P&L dollar comparison ($1 labor for
+      // every $1 of parts). Same "ratio" tile type as BU 70's Labor-to-
+      // parts, a tighter confirmed ratio here (1.0, not 2.0).
+      { key: "laborToPartsRatio", label: "Labor to parts ratio", type: "ratio", target: { goal: 1, direction: "min" }, compute: (pnl) => (pnl.partsCost ? pnl.laborCost / pnl.partsCost : null) },
       ...OVERHEAD_PNL_METRICS,
     ],
     manual: [
@@ -188,6 +205,46 @@ const DEPARTMENTS = {
       // whenever that year's campaign wraps, may sit unchanged most months.
       { key: "ptuConversionPct", label: "PTU conversion", type: "pct", target: { goal: 0.6, direction: "min" } },
       { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
+      // Only a "no sales" Efficiency variant given for this department
+      // (paid÷billed) — unlike BU 70's two variants, which turned out to
+      // be one metric read two ways, this is the only one on this chart.
+      // Needs its own paidHours/billedHours, not yet collected for BU 40.
+      { key: "paidHours", label: "Paid hours", type: "count", target: null },
+      { key: "billedHours", label: "Billed hours", type: "count", target: null },
+      { key: "efficiencyNoSales", label: "Service efficiency (no sales)", type: "pct", target: { goal: 0.8, direction: "min" }, compute: (m) => (m.paidHours && m.billedHours ? m.paidHours / m.billedHours : null) },
+      // GP $ per PTU specialist per day — a distinct metric from Service's
+      // GP/hr Productivity tile (which this department doesn't have at
+      // all), not a units-confused duplicate like BU 70's per-day figure
+      // turned out to be. Needs a new "PTU tech-days" input, not yet
+      // collected.
+      { key: "ptuTechDays", label: "PTU specialist tech-days", type: "count", target: null },
+      { key: "gpPerPtuTechDay", label: "GP per PTU specialist tech-day", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.ptuTechDays && pnl ? pnl.grossProfit / m.ptuTechDays : null) },
+      // Revenue per employee is explicitly a Service+Maintenance *combined*
+      // figure on this chart ("Service & maint together") — needs BU 30's
+      // P&L too, not just this department's own, via resolvePnlForDept()
+      // (company-scorecard.js). One shared headcount number entered here,
+      // not split per department, since techs work both service and
+      // maintenance calls.
+      { key: "employeeCount", label: "Service employees (Svc + Maint combined)", type: "count", target: null },
+      {
+        key: "revenuePerEmployee",
+        label: "Revenue per employee (Svc + Maint combined)",
+        type: "money",
+        target: { goal: 100000, direction: "min" },
+        compute: (m, s, pnl) => {
+          if (!m.employeeCount || !pnl) return null;
+          const svcPnl = resolvePnlForDept("30");
+          return svcPnl ? (pnl.totalIncome + svcPnl.totalIncome) / m.employeeCount : null;
+        },
+      },
+      { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: { goal: 80000, direction: "min" }, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
+      { key: "supportCount", label: "Support staff", type: "count", target: null },
+      { key: "productionCount", label: "Field/production staff", type: "count", target: null },
+      // "1 to 3 ratio (.33 or less)" — same direction as BU 70's
+      // Production-to-support ratio (production ÷ support), a different
+      // confirmed number (3, not 2): 1:3 support:production is the same
+      // statement as production:support >= 3.
+      { key: "productionToSupportRatio", label: "Production to support ratio", type: "ratio", target: { goal: 3, direction: "min" }, compute: (m) => (m.supportCount ? m.productionCount / m.supportCount : null) },
     ],
   },
   70: {

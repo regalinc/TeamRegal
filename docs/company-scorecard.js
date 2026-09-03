@@ -198,11 +198,29 @@ function renderManualSection(dept, manual, stats, pnl) {
   return sectionHtml("Entered by hand", note, tiles);
 }
 
+// Resolves ANY department's P&L for whichever period is currently selected
+// (a single month, or summed across the year for YTD) — the same logic
+// render() uses for the selected department, generalized so a manual
+// metric's compute() can reach across departments too. BU 40's Revenue per
+// employee is a confirmed Service+Maintenance *combined* figure — its
+// compute() calls resolvePnlForDept("30") to pull BU 30's income alongside
+// its own, rather than this page only ever being able to see one
+// department's P&L at a time.
+function resolvePnlForDept(code) {
+  if (isYtd(currentMonth)) {
+    const yearPrefix = `${ytdYear(currentMonth)}-`;
+    const months = Object.keys(pnlData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
+    return sumPnl(months.map((mk) => pnlData[mk]?.[code]).filter(Boolean));
+  }
+  return (pnlData && pnlData[currentMonth] && pnlData[currentMonth][code]) || null;
+}
+
 function render() {
   if (!latestData || !currentMonth) return;
 
   const dept = DEPARTMENTS[currentDept];
-  let jobs, pnlForDept, manualForDept;
+  const pnlForDept = resolvePnlForDept(currentDept);
+  let jobs, manualForDept;
 
   if (isYtd(currentMonth)) {
     const year = ytdYear(currentMonth);
@@ -212,7 +230,6 @@ function render() {
     jobs = (latestData.jobs || []).filter(
       (j) => businessUnitCode(j.business_unit) === currentDept && jobInRange(j, [start, end])
     );
-    pnlForDept = sumPnl(pnlMonthKeys.map((mk) => pnlData[mk]?.[currentDept]).filter(Boolean));
     const manualMonthKeys = Object.keys(manualData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
     const deptManualData = Object.fromEntries(manualMonthKeys.map((mk) => [mk, manualData[mk]?.[currentDept]]));
     manualForDept = aggregateManualYtd(manualMonthKeys, deptManualData);
@@ -220,7 +237,6 @@ function render() {
     jobs = (latestData.jobs || []).filter(
       (j) => businessUnitCode(j.business_unit) === currentDept && jobInMonth(j, currentMonth)
     );
-    pnlForDept = (pnlData && pnlData[currentMonth] && pnlData[currentMonth][currentDept]) || null;
     manualForDept = (manualData && manualData[currentMonth] && manualData[currentMonth][currentDept]) || null;
   }
 
