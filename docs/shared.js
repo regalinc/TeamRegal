@@ -405,6 +405,31 @@ function sumPnl(pnlMonthsForDept) {
   return sums;
 }
 
+// Flow-type manual fields (activity across the period: hours, review/
+// callback counts) are summed for YTD. Everything else — headcount
+// snapshots (employeeCount, vehicleCount, crewCount, supportCount,
+// productionCount) and attendance/PTU-style percentages — is a
+// point-in-time reading, not something that should be added up across
+// months, so YTD shows the most recently entered non-null value instead.
+// Extend this set if a future summed field gets added to a department's
+// manual config.
+const YTD_SUM_KEYS = new Set(["paidHours", "billedHours", "reviewsGenerated", "callbackCount"]);
+
+function aggregateManualYtd(monthKeysAscending, deptManualData) {
+  const result = {};
+  let any = false;
+  for (const mk of monthKeysAscending) {
+    const m = deptManualData[mk];
+    if (!m) continue;
+    any = true;
+    for (const [k, v] of Object.entries(m)) {
+      if (v === null || v === undefined) continue;
+      result[k] = YTD_SUM_KEYS.has(k) ? (result[k] || 0) + v : v;
+    }
+  }
+  return any ? result : null;
+}
+
 // The value each department's P&L tile actually displays: most metrics are
 // "this account ÷ Total Income," but a metric with an explicit non-"pct"
 // `type` (e.g. a same-P&L dollar ratio like BU 70's Labor-to-parts) skips

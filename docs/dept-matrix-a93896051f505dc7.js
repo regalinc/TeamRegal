@@ -50,7 +50,24 @@ const ROW_LABELS = {
   totalExpense: "Total SG&A", netOrdinaryIncome: "Pretax",
 };
 
+// A second, much narrower row set sourced from each department's `manual`
+// list (data/manual-metrics.json) instead of `pnl` — deliberately curated,
+// not a "every manual key" union like ROW_ORDER: most manual fields
+// (attendance, reviews generated, paid hours...) are single-department
+// tracking with no cross-department comparison value. Revenue-per-X figures
+// are the exception — genuinely comparable dollars-per-headcount-unit
+// across departments, which is exactly what this page is for.
+const MANUAL_ROW_ORDER = [
+  { group: "Revenue efficiency", keys: ["revenuePerEmployee", "revenuePerVehicle", "revenuePerCrew"] },
+];
+const MANUAL_ROW_LABELS = {
+  revenuePerEmployee: "Revenue per employee",
+  revenuePerVehicle: "Revenue per tech/vehicle",
+  revenuePerCrew: "Revenue per install crew",
+};
+
 let pnlData = null;
+let manualData = null;
 let currentMonth = null;
 
 function buildRowList() {
@@ -63,6 +80,17 @@ function buildRowList() {
   const leftover = [...seenKeys].filter((k) => !orderedKeys.has(k));
   if (leftover.length) groups.push({ group: "Other", keys: leftover });
   return groups;
+}
+
+// Same idea as buildRowList(), scoped to MANUAL_ROW_ORDER's curated keys
+// only — no "Other" catch-all here, since most manual keys are
+// intentionally excluded, not accidentally missing.
+function buildManualRowList() {
+  const seenKeys = new Set();
+  for (const code of DEPT_ORDER) {
+    for (const m of DEPARTMENTS[code].manual) seenKeys.add(m.key);
+  }
+  return MANUAL_ROW_ORDER.map((g) => ({ ...g, keys: g.keys.filter((k) => seenKeys.has(k)) })).filter((g) => g.keys.length);
 }
 
 function populateMonthSelect() {
@@ -88,6 +116,28 @@ function pnlForDept(deptCode) {
     return sumPnl(months.map((mk) => pnlData[mk]?.[deptCode]).filter(Boolean));
   }
   return (pnlData && pnlData[currentMonth] && pnlData[currentMonth][deptCode]) || null;
+}
+// Some departments' compute() functions (from departments-config.js) call
+// resolvePnlForDept() by that exact global name to reach another
+// department's P&L — e.g. BU 40's Revenue per employee, a confirmed
+// Service+Maintenance combined figure. That function is defined in
+// company-scorecard.js, which this page doesn't load — this alias gives
+// the same name the same meaning here too, so the identical compute()
+// closure works unmodified on both pages.
+const resolvePnlForDept = pnlForDept;
+
+// Same idea as pnlForDept(), for a department's `manual` data
+// (data/manual-metrics.json) — single month as-is, or YTD-aggregated via
+// shared.js's aggregateManualYtd() (sums flow-type fields, takes the most
+// recent value for headcount/attendance-style ones).
+function manualForDept(deptCode) {
+  if (isYtd(currentMonth)) {
+    const yearPrefix = `${ytdYear(currentMonth)}-`;
+    const monthKeys = Object.keys(manualData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
+    const deptManualData = Object.fromEntries(monthKeys.map((mk) => [mk, manualData[mk]?.[deptCode]]));
+    return aggregateManualYtd(monthKeys, deptManualData);
+  }
+  return (manualData && manualData[currentMonth] && manualData[currentMonth][deptCode]) || null;
 }
 
 function formatTargetCaption(type, target) {
@@ -125,6 +175,23 @@ function cellFor(rowKey, deptCode, pnl) {
   return { tier: t, valueStr: formatValue(type, value), captionStr: caption };
 }
 
+// Same shape as cellFor(), for a manual-list metric — the value is
+// whatever that metric's own compute(manual, stats, pnl) returns directly
+// (no stats section on this page, so `null` in that slot; every
+// Revenue-per-X compute() ignores it anyway), not a ÷ income ratio.
+function cellForManual(rowKey, deptCode, manual, pnl) {
+  const metric = DEPARTMENTS[deptCode].manual.find((m) => m.key === rowKey);
+  if (!metric) return { tier: "neutral", valueStr: "—", captionStr: "Not tracked" };
+  const type = metric.type || "count";
+  const value = metric.compute ? metric.compute(manual || {}, null, pnl) : (manual || {})[rowKey];
+  const caption = formatTargetCaption(type, metric.target) || "No target set";
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return { tier: "neutral", valueStr: "—", captionStr: caption };
+  }
+  const t = metric.target ? tier(value, metric.target) : "neutral";
+  return { tier: t, valueStr: formatValue(type, value), captionStr: caption };
+}
+
 function renderHeader() {
   const row = document.getElementById("header-row");
   row.innerHTML = '<th class="row-label">KPI</th>';
@@ -144,11 +211,10 @@ function renderHeader() {
   }
 }
 
-function renderBody(rowGroups) {
-  const body = document.getElementById("matrix-body");
-  body.innerHTML = "";
-  const pnlByDept = Object.fromEntries(DEPT_ORDER.map((c) => [c, pnlForDept(c)]));
-
+// Appends one section's group-divider + data rows into #matrix-body.
+// `label`/`cellOf` abstract over the two row kinds (pnl-sourced vs.
+// manual-sourced) so the actual DOM-building code is written once.
+function appendRowGroups(body, rowGroups, labelOf, cellOf) {
   for (const group of rowGroups) {
     const groupTr = document.createElement("tr");
     groupTr.className = "group-row";
@@ -159,11 +225,11 @@ function renderBody(rowGroups) {
       const tr = document.createElement("tr");
       const labelTd = document.createElement("td");
       labelTd.className = "row-label";
-      labelTd.textContent = ROW_LABELS[key] || key;
+      labelTd.textContent = labelOf(key);
       tr.appendChild(labelTd);
 
       for (const code of DEPT_ORDER) {
-        const c = cellFor(key, code, pnlByDept[code]);
+        const c = cellOf(key, code);
         const td = document.createElement("td");
         td.className = `cell tier-${c.tier}`;
         td.innerHTML = `<div class="cell-inner"><span class="cell-value num">${escapeHtml(c.valueStr)}</span><span class="cell-target num">${escapeHtml(c.captionStr)}</span></div>`;
@@ -174,16 +240,34 @@ function renderBody(rowGroups) {
   }
 }
 
-function renderSummary(rowGroups) {
+function renderBody(pnlRowGroups, manualRowGroups) {
+  const body = document.getElementById("matrix-body");
+  body.innerHTML = "";
+  const pnlByDept = Object.fromEntries(DEPT_ORDER.map((c) => [c, pnlForDept(c)]));
+  const manualByDept = Object.fromEntries(DEPT_ORDER.map((c) => [c, manualForDept(c)]));
+
+  appendRowGroups(body, pnlRowGroups, (key) => ROW_LABELS[key] || key, (key, code) => cellFor(key, code, pnlByDept[code]));
+  appendRowGroups(
+    body,
+    manualRowGroups,
+    (key) => MANUAL_ROW_LABELS[key] || key,
+    (key, code) => cellForManual(key, code, manualByDept[code], pnlByDept[code])
+  );
+}
+
+function renderSummary(pnlRowGroups, manualRowGroups) {
   const strip = document.getElementById("summary-strip");
   strip.innerHTML = "";
   const pnlByDept = Object.fromEntries(DEPT_ORDER.map((c) => [c, pnlForDept(c)]));
-  const allKeys = rowGroups.flatMap((g) => g.keys);
+  const manualByDept = Object.fromEntries(DEPT_ORDER.map((c) => [c, manualForDept(c)]));
+  const pnlKeys = pnlRowGroups.flatMap((g) => g.keys);
+  const manualKeys = manualRowGroups.flatMap((g) => g.keys);
   const summaries = {};
 
   for (const code of DEPT_ORDER) {
     const tallies = { good: 0, warn: 0, bad: 0, neutral: 0 };
-    for (const key of allKeys) tallies[cellFor(key, code, pnlByDept[code]).tier]++;
+    for (const key of pnlKeys) tallies[cellFor(key, code, pnlByDept[code]).tier]++;
+    for (const key of manualKeys) tallies[cellForManual(key, code, manualByDept[code], pnlByDept[code]).tier]++;
     const scored = tallies.good + tallies.warn + tallies.bad;
     const total = scored + tallies.neutral;
     summaries[code] = { tallies, total };
@@ -233,21 +317,27 @@ function renderCallout(summaries) {
 }
 
 function render() {
-  const rowGroups = buildRowList();
+  const pnlRowGroups = buildRowList();
+  const manualRowGroups = buildManualRowList();
   renderHeader();
-  renderBody(rowGroups);
-  const summaries = renderSummary(rowGroups);
+  renderBody(pnlRowGroups, manualRowGroups);
+  const summaries = renderSummary(pnlRowGroups, manualRowGroups);
   renderCallout(summaries);
 
-  document.getElementById("page-meta").textContent = `Period: ${monthLabel(currentMonth)}. Source: data/pnl-monthly.json.`;
+  document.getElementById("page-meta").textContent =
+    `Period: ${monthLabel(currentMonth)}. Sources: data/pnl-monthly.json, data/manual-metrics.json.`;
   document.getElementById("page-foot").textContent =
     "Same targets and coloring as the per-department scorecard (company-scorecard.html) — this is a different layout on identical data, not a separate source of truth.";
 }
 
 async function loadData() {
   try {
-    const res = await fetch(`data/pnl-monthly.json?_=${Date.now()}`, { cache: "no-store" });
-    pnlData = res.ok ? await res.json() : {};
+    const [pnlRes, manualRes] = await Promise.all([
+      fetch(`data/pnl-monthly.json?_=${Date.now()}`, { cache: "no-store" }),
+      fetch(`data/manual-metrics.json?_=${Date.now()}`, { cache: "no-store" }),
+    ]);
+    pnlData = pnlRes.ok ? await pnlRes.json() : {};
+    manualData = manualRes.ok ? await manualRes.json() : {};
     if (!Object.keys(pnlData).length) {
       document.querySelector(".matrix-wrap").innerHTML = '<p class="empty">No P&L data uploaded yet.</p>';
       return;
