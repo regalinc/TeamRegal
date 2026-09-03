@@ -97,6 +97,12 @@ function installDept(name, buLabel) {
       { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.04, direction: "max" } },
       { key: "administrative", label: "Administration", target: { goal: 0.03, direction: "max" } },
       { key: "totalExpense", label: "Total SG&A", target: { goal: 0.3, direction: "max" } },
+      // Given as "BU10 - Pretax" — added here in the shared factory rather
+      // than only on BU 10's own entry, consistent with how everything
+      // else in installDept() already mirrors to BU 50 (no separate
+      // Plumbing Installation chart exists). Flag if BU 50 shouldn't
+      // actually carry this target.
+      { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.15, direction: "min" } },
     ],
     manual: [
       // Headcount inputs — not yet in manual-metrics.json (null until
@@ -138,6 +144,7 @@ const DEPARTMENTS = {
       { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.005, direction: "max" } },
       { key: "commissionCost", label: "Commissions", target: { goal: 0.04, direction: "max" } },
       { key: "fringeCost", label: "Fringe benefits", target: { goal: 0.07, direction: "max" } },
+      { key: "warrantyLabor", label: "Warranty parts-labor", target: { goal: 0.04, direction: "max" } },
       ...OVERHEAD_PNL_METRICS,
     ],
     manual: [
@@ -157,6 +164,8 @@ const DEPARTMENTS = {
       // this with a Revenue-per-vehicle target — shown here as a plain
       // count, same as Reviews generated, rather than inventing a ratio.
       { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
+      { key: "employeeCount", label: "Service employees", type: "count", target: null },
+      { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 80000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
     ],
   },
   40: {
@@ -182,9 +191,14 @@ const DEPARTMENTS = {
     // they were — Pretax's 10% there already matches this chart's own
     // "10% or greater" exactly.
     pnl: [
-      // No BU 40-specific Gross margin target was given — shown for
-      // visibility, colored once one is confirmed.
-      { key: "grossProfit", label: "Gross margin", target: null },
+      // "Margin % w/out support wages" — same relabel logic as BU 10/50/70
+      // (support wages sit below Gross Profit on the P&L, not in COGS, so
+      // it's the same number as every other "Gross margin" tile). Given as
+      // two numbers — "35% Breakeven, 50% profit motive" — graded against
+      // the lower one (35%, the actual floor), same floor-only convention
+      // used for every other two-number target on this page; 50% is the
+      // stretch, not wired in.
+      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.35, direction: "min" } },
       { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.34, direction: "max" } },
       // "None" on this chart — read the same as BU 70's hard 0% (a
       // Maintenance department doesn't sell equipment; Install does).
@@ -192,7 +206,7 @@ const DEPARTMENTS = {
       { key: "partsCost", label: "Materials/parts", target: { goal: 0.06, direction: "max" } },
       { key: "subcontractCost", label: "Subcontracts", target: null },
       { key: "commissionCost", label: "Commissions", target: null },
-      { key: "fringeCost", label: "Fringe benefits", target: null },
+      { key: "fringeCost", label: "Fringe benefits", target: { goal: 0.07, direction: "max" } },
       // Not a % of sales — a same-P&L dollar comparison ($1 labor for
       // every $1 of parts). Same "ratio" tile type as BU 70's Labor-to-
       // parts, a tighter confirmed ratio here (1.0, not 2.0).
@@ -284,10 +298,7 @@ const DEPARTMENTS = {
       { key: "commissionCost", label: "Commissions", target: { goal: 0.08, direction: "max" } },
       { key: "fringeCost", label: "Allocated fringe benefits", target: { goal: 0.07, direction: "max" } },
       { key: "warranty", label: "Warranty", target: { goal: 0.005, direction: "max" } },
-      // Buydowns' target is explicitly "N/A" on this chart — tracked (the
-      // account is real and BU 70 posts to it some months) but shown
-      // neutral rather than invented a threshold.
-      { key: "buydowns", label: "Buydowns (financing)", target: null },
+      { key: "buydowns", label: "Buydowns (financing)", target: { goal: 0.005, direction: "max" } },
       // Not a % of sales — a same-P&L dollar comparison ($2 labor for every
       // $1 of parts). Uses the new "ratio" tile type, which skips the
       // ÷ income step renderPnlSection normally does.
@@ -352,10 +363,14 @@ const DEPARTMENTS = {
       { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
     ],
     pnl: [
-      // 2B's chart has no P&L line items at all (no Gross margin, Labor,
-      // etc.) — every non-overhead ratio here is neutral until a target's
-      // actually given for this department.
-      { key: "grossProfit", label: "Gross margin", target: null },
+      // "Margin % w/out support wages" — same relabel logic as BU 10/50/
+      // 40/70. Given as "35% Breakeven, 50% profit motive" — graded
+      // against the lower one (35%, the actual floor), same convention as
+      // every other two-number target on this page; 50% is the stretch,
+      // not wired in.
+      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.35, direction: "min" } },
+      // No other BU 80-specific P&L line items given — every remaining
+      // non-overhead ratio here stays neutral until a target's confirmed.
       { key: "laborCost", label: "Labor to sales", target: null },
       { key: "partsCost", label: "Materials/parts", target: null },
       { key: "subcontractCost", label: "Subcontracts", target: null },
