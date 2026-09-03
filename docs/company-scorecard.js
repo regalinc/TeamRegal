@@ -156,6 +156,10 @@ const DEPARTMENTS = {
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
       { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+      // Tracked for the whole company, but only BU 10/50's KPI chart pairs
+      // this with a Revenue-per-vehicle target — shown here as a plain
+      // count, same as Reviews generated, rather than inventing a ratio.
+      { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
     ],
   },
   40: {
@@ -186,6 +190,7 @@ const DEPARTMENTS = {
       // Yearly direct-mail campaign, not a monthly number — filled in
       // whenever that year's campaign wraps, may sit unchanged most months.
       { key: "ptuConversionPct", label: "PTU conversion", type: "pct", target: { goal: 0.6, direction: "min" } },
+      { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
     ],
   },
   70: {
@@ -221,6 +226,7 @@ const DEPARTMENTS = {
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
       { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.015, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+      { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
     ],
   },
   80: {
@@ -254,6 +260,7 @@ const DEPARTMENTS = {
       // No explicit callback target for 2B (unlike Plumbing Service's
       // confirmed <1.5%) — tracked, not yet colored.
       { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+      { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
     ],
   },
   10: installDept("HVAC Installation", "10 HVAC Installation"),
