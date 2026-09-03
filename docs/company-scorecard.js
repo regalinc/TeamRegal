@@ -203,30 +203,94 @@ const DEPARTMENTS = {
       // No Lead turnover/Accessory sold on Plumbing Service's own KPI chart
       // — those are HVAC Service-specific, not carried over here.
     ],
+    // Confirmed against a detailed BU 70-specific financial KPI list —
+    // dropped the shared OVERHEAD_PNL_METRICS spread here since several of
+    // its 7 ratios now have BU 70-specific numbers that differ from the
+    // company-wide default (Marketing 5% not 3%, Vehicle 6% not 4%,
+    // Plant & equipment 5% not 4%, Administration 4% not 3%, Total SG&A
+    // 30-35% not 45%) — all 7 given explicitly so nothing is silently
+    // half-overridden. Employee related (15%) and Pretax (10%) happen to
+    // match the shared default anyway.
     pnl: [
-      // Plumbing's chart gives Gross margin its own bar (50%, lower than
-      // HVAC Service's 60%) but no Plumbing-specific Labor/Materials/
-      // Subcontract/Commission/Fringe numbers — those stay neutral here
-      // until confirmed, same treatment as BU 40's unconfirmed ones.
-      { key: "grossProfit", label: "Gross margin", target: { goal: 0.5, direction: "min" } },
-      { key: "laborCost", label: "Labor to sales", target: null },
-      { key: "partsCost", label: "Materials/parts", target: null },
-      { key: "subcontractCost", label: "Subcontracts", target: null },
-      { key: "commissionCost", label: "Commissions", target: null },
-      { key: "fringeCost", label: "Fringe benefits", target: null },
-      ...OVERHEAD_PNL_METRICS,
+      // "Margin % w/out support wages" — changes the existing Gross margin
+      // target from a flat 50% to this chart's 48-50% band (floor: 48%),
+      // same relabel/treatment as BU 10/50 (support wages already sit below
+      // Gross Profit on the P&L, not in COGS, so it's the same number).
+      // Flagging this as a real target change, not just an addition.
+      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.48, direction: "min" } },
+      { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.21, direction: "max" } },
+      // Service department — a hard 0% target (installs/replacements sell
+      // the equipment, not Service), unlike BU 10/50's 35% ceiling.
+      { key: "equipmentCost", label: "Equipment to sales", target: { goal: 0, direction: "max" } },
+      { key: "partsCost", label: "Materials/parts to sales", target: { goal: 0.13, direction: "max" } },
+      { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.01, direction: "max" } },
+      { key: "commissionCost", label: "Commissions", target: { goal: 0.08, direction: "max" } },
+      { key: "fringeCost", label: "Allocated fringe benefits", target: { goal: 0.07, direction: "max" } },
+      { key: "warranty", label: "Warranty", target: { goal: 0.005, direction: "max" } },
+      // Buydowns' target is explicitly "N/A" on this chart — tracked (the
+      // account is real and BU 70 posts to it some months) but shown
+      // neutral rather than invented a threshold.
+      { key: "buydowns", label: "Buydowns (financing)", target: null },
+      // Not a % of sales — a same-P&L dollar comparison ($2 labor for every
+      // $1 of parts). Uses the new "ratio" tile type, which skips the
+      // ÷ income step renderPnlSection normally does.
+      { key: "laborToPartsRatio", label: "Labor to parts ratio", type: "ratio", target: { goal: 2, direction: "min" }, compute: (pnl) => (pnl.partsCost ? pnl.laborCost / pnl.partsCost : null) },
+      { key: "marketing", label: "Marketing", target: { goal: 0.05, direction: "max" } },
+      { key: "employeeRelated", label: "Employee related (incl. support wages)", target: { goal: 0.15, direction: "max" } },
+      { key: "vehicle", label: "Vehicle", target: { goal: 0.06, direction: "max" } },
+      { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.05, direction: "max" } },
+      { key: "administrative", label: "Administration", target: { goal: 0.04, direction: "max" } },
+      { key: "totalExpense", label: "Total SG&A", target: { goal: 0.35, direction: "max" } },
+      { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.1, direction: "min" } },
     ],
     manual: [
-      // Service efficiency's 80% target came from the BU 30-detail chart
-      // framed generically as "Svc Dept," not confirmed as applying to
-      // Plumbing specifically — left neutral rather than assumed.
-      { key: "efficiency", label: "Service efficiency", type: "pct", target: null, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
+      // Efficiency — this chart gives two variants off the same paid/
+      // billed pair already collected: "with sales" (billed÷paid, the
+      // existing tile) and "no sales" (paid÷billed, new). Assumed to be
+      // two ways of reading one pair of numbers, not two separately
+      // tracked hour buckets — flag if Plumbing Service actually splits
+      // sales-included vs. sales-excluded hours in payroll.
+      { key: "efficiency", label: "Service efficiency (with sales)", type: "pct", target: { goal: 0.75, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
+      { key: "efficiencyNoSales", label: "Service efficiency (no sales)", type: "pct", target: { goal: 0.8, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.paidHours / m.billedHours : null) },
+      // Productivity — kept the existing GP/hr tile as-is (an earlier fix
+      // deliberately corrected this from revenue to Gross Profit) and added
+      // this chart's Revenue/hr figure as its own separate tile rather than
+      // reverting GP/hr back to revenue.
       { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
+      { key: "productivityRevenue", label: "Productivity (Revenue/hr, with sales)", type: "money", target: { goal: 60, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
+      // GP $ per day per tech — needs a new "tech-days worked" input
+      // (whole days, not hours; not yet collected). NOTE: this target
+      // ($150/day/tech) is the same number as Productivity (GP/hr) above
+      // but a different unit (day, not hour) — worth confirming that's not
+      // a units mix-up in the source chart rather than assuming either
+      // number is wrong.
+      { key: "techDays", label: "Tech-days worked", type: "count", target: null },
+      { key: "gpPerTechDay", label: "GP per tech-day", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.techDays && pnl ? pnl.grossProfit / m.techDays : null) },
       { key: "attendancePct", label: "Attendance", type: "pct", target: null },
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
       { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.015, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
       { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
+      // Headcount inputs — not yet collected for BU 70 (null until
+      // payroll/fleet data is filled in, same "build it, leave it blank"
+      // treatment as BU 10/50's headcount tiles).
+      { key: "employeeCount", label: "Service employees", type: "count", target: null },
+      { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 100000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
+      // vehicleCount already exists above. Two numbers given here too
+      // ("Min 100,000, target 120,000") — graded against the floor, same
+      // convention as every other two-number target on this page.
+      { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: { goal: 100000, direction: "min" }, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
+      { key: "supportCount", label: "Support staff", type: "count", target: null },
+      { key: "productionCount", label: "Field/production staff", type: "count", target: null },
+      // "1 support to 2 field production or greater" — read as production
+      // staff should be at least 2x support staff, and labeled by that more
+      // intuitive direction rather than the source's support:production
+      // phrasing. Not confirmed who counts as "support" (dispatch/CSR?)
+      // vs. "production" (apprentices included?) for Plumbing Service
+      // specifically — the tile computes correctly either way once the
+      // two counts above are filled in, but worth confirming the
+      // definition before anyone starts entering numbers.
+      { key: "productionToSupportRatio", label: "Production to support ratio", type: "ratio", target: { goal: 2, direction: "min" }, compute: (m) => (m.supportCount ? m.productionCount / m.supportCount : null) },
     ],
   },
   80: {
@@ -328,6 +392,10 @@ function formatTargetCaption(type, target) {
   let goalStr;
   if (type === "pct") goalStr = `${(target.goal * 100).toFixed(1)}%`;
   else if (type === "money") goalStr = formatMoney(target.goal);
+  // A same-P&L dollar-to-dollar comparison (e.g. Labor $2 : Parts $1),
+  // not a % of sales — formatted as "2.0:1" to match how the source chart
+  // states the target, distinct from a plain count.
+  else if (type === "ratio") goalStr = `${target.goal.toFixed(1)}:1`;
   else goalStr = Number(target.goal).toLocaleString();
   return `Target ${symbol} ${goalStr}`;
 }
@@ -340,6 +408,7 @@ function tileFor(label, type, value, target) {
   const t = target ? tier(value, target) : null;
   if (type === "pct") return renderMiniStat(label, `${(value * 100).toFixed(1)}%`, t, sub);
   if (type === "money") return renderMiniStat(label, formatMoney(value), t, sub);
+  if (type === "ratio") return renderMiniStat(label, `${value.toFixed(1)}:1`, t, sub);
   return renderMiniStat(label, Number(value).toLocaleString(), t, sub);
 }
 
@@ -386,8 +455,17 @@ function renderPnlSection(dept, pnl) {
   const inc = pnl.totalIncome || 0;
   const tiles = dept.pnl
     .map((m) => {
+      // Most P&L tiles are "this account ÷ Total Income." A metric with an
+      // explicit non-"pct" type (e.g. BU 70's Labor-to-parts $ ratio) is a
+      // same-P&L comparison between two accounts, not a share of sales —
+      // its compute() returns the finished value directly, skipping the
+      // ÷ income step entirely.
+      if (m.type && m.type !== "pct") {
+        const value = m.compute ? m.compute(pnl) : pnl[m.key];
+        return tileFor(m.label, m.type, value, m.target);
+      }
       const raw = m.compute ? m.compute(pnl) : pnl[m.key];
-      return tileFor(m.label, "pct", inc && raw !== null ? raw / inc : null, m.target);
+      return tileFor(m.label, "pct", inc && raw !== null && raw !== undefined ? raw / inc : null, m.target);
     })
     .join("");
   return sectionHtml("From the P&L", `Total income this month: ${escapeHtml(formatMoney(inc))}.`, tiles);
