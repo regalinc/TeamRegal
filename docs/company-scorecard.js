@@ -42,6 +42,87 @@ const OVERHEAD_PNL_METRICS = [
   { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.1, direction: "min" } },
 ];
 
+// BU 10 (HVAC Installation) has its own detailed financial scorecard —
+// confirmed account-by-account, replacing the earlier placeholder build that
+// mirrored the generic Install pattern used by BU 30/70's "Parts and
+// materials" combined tile. It no longer uses OVERHEAD_PNL_METRICS: 5 of its
+// 6 shared ratios happen to match the company-wide defaults, but Marketing
+// (4% here, not 3%) and Total SG&A (30%, not 45%) don't, and Pretax isn't on
+// this department's chart at all — so all 6 are given explicitly below
+// rather than half-spread/half-overridden. BU 50 has no chart of its own and
+// mirrors this one exactly (see call site), same as before.
+//
+// A few items from the source list are deliberately left out rather than
+// approximated:
+//  - "All Forms of Unapplied Labor Expenses" — target is "None - in labor",
+//    i.e. already folded into Labor to sales above; not a separate line.
+//  - "Job Start-up Costs" and "Equipment Rentals" — confirmed not tracked as
+//    their own accounts in QuickBooks; skipped rather than guessing at a
+//    Chart of Accounts mapping.
+//
+// Every range target ("4-8%", "3-4%", "42-45%", etc.) is graded one-sided —
+// green once you're under the ceiling (or, for the one margin figure, over
+// the floor) — the same convention used everywhere else on this page, not
+// true two-sided banding. A metric with zero activity this month (e.g. Sales
+// salaries, if the account genuinely has nothing posted to it) will read as
+// "green" under this convention even though $0 may not really be the goal.
+function installDept(name, buLabel) {
+  return {
+    name,
+    buLabel,
+    hcp: [
+      // "Average Sale per Job/Ticket (No Service Sales)" — assumes every job
+      // tagged to this BU is already an install/replacement job, not a
+      // service call, so no extra filtering beyond the existing per-BU scope
+      // is needed. Flag if this BU's job data actually mixes the two.
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 15000, direction: "min" } },
+    ],
+    pnl: [
+      { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.09, direction: "max" } },
+      // Unlike BU 30/70's combined "Parts and materials" tile, this chart
+      // gives Equipment (5002) and Materials/parts (5001) separate targets —
+      // built as two tiles, not the old combined partsAndMaterials one.
+      { key: "equipmentCost", label: "Equipment to sales", target: { goal: 0.35, direction: "max" } },
+      { key: "partsCost", label: "Materials/parts to sales", target: { goal: 0.09, direction: "max" } },
+      { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.01, direction: "max" } },
+      { key: "salesSalary", label: "Sales salaries", target: { goal: 0.04, direction: "max" } },
+      { key: "commissionCost", label: "Commissions", target: { goal: 0.08, direction: "max" } },
+      { key: "fringeCost", label: "Allocated fringe benefits", target: { goal: 0.04, direction: "max" } },
+      { key: "warranty", label: "Warranty", target: { goal: 0.005, direction: "max" } },
+      { key: "permits", label: "Permits", target: { goal: 0.005, direction: "max" } },
+      { key: "buydowns", label: "Buydowns (financing)", target: { goal: 0.02, direction: "max" } },
+      { key: "warrantyLabor", label: "Warranty parts-labor", target: { goal: 0.02, direction: "max" } },
+      // "Margin % w/out support wages" — support/admin wages (6022) sit in
+      // Expenses, below Gross Profit, not in COGS, so the P&L's existing
+      // Gross Profit figure already excludes them. Treated as the same
+      // number as every other department's "Gross margin" tile, just
+      // relabeled and given this chart's tighter 42-45% band (floor: 42%).
+      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.42, direction: "min" } },
+      { key: "marketing", label: "Marketing", target: { goal: 0.04, direction: "max" } },
+      { key: "employeeRelated", label: "Employee related", target: { goal: 0.15, direction: "max" } },
+      { key: "vehicle", label: "Vehicle", target: { goal: 0.04, direction: "max" } },
+      { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.04, direction: "max" } },
+      { key: "administrative", label: "Administration", target: { goal: 0.03, direction: "max" } },
+      { key: "totalExpense", label: "Total SG&A", target: { goal: 0.3, direction: "max" } },
+    ],
+    manual: [
+      // Headcount inputs — not yet in manual-metrics.json (null until
+      // payroll/fleet data is filled in). Shown as their own count tiles too
+      // so it's clear what denominator each Revenue-per-X figure is using,
+      // not just the derived dollar amount.
+      { key: "employeeCount", label: "Service employees", type: "count", target: null },
+      { key: "vehicleCount", label: "Techs / vehicles", type: "count", target: null },
+      { key: "crewCount", label: "Install crews (2-man)", type: "count", target: null },
+      { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
+      // Source gives two numbers here — "Min 400,000, target 600,000" — a
+      // floor and a stretch goal. Graded against the floor, same convention
+      // as every other range on this chart; 600k is the stretch, not wired in.
+      { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
+      { key: "revenuePerCrew", label: "Revenue per install crew", type: "money", target: { goal: 2500000, direction: "min" }, compute: (m, s, pnl) => (m.crewCount && pnl ? pnl.totalIncome / m.crewCount : null) },
+    ],
+  };
+}
+
 const DEPARTMENTS = {
   30: {
     name: "HVAC Service",
@@ -175,44 +256,14 @@ const DEPARTMENTS = {
       { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
     ],
   },
-  10: {
-    name: "HVAC Installation",
-    buLabel: "10 HVAC Installation",
-    hcp: [
-      // No explicit $ target for Install's Avg ticket in the source chart
-      // (unlike every Service/Maintenance department) — tracked, neutral.
-      { key: "avgTicket", label: "Avg ticket", type: "money", target: null },
-      { key: "sameDayCompletion", label: "Same day completion", type: "pct", target: null },
-      // "Sales conversion ratio" (Estimate Closure %, scoped to this BU) is
-      // skipped here, same as BU 70/80 — estimates don't carry a
-      // business_unit field the way jobs do, so there's no clean way to
-      // scope Closing % to one department yet. Needs a sync.js change, not
-      // just a config entry.
-    ],
-    pnl: [
-      { key: "laborCost", label: "Labor to sales", target: { goal: 0.09, direction: "max" } },
-      // Install's chart combines Parts (5001) *and* Equipment (5002) into
-      // one "Parts and materials" ratio — unlike BU 30/70's Materials/parts
-      // tile, which is 5001 alone. Installs sell a lot of big-ticket
-      // equipment, so lumping the two together here (not elsewhere) matches
-      // the source chart, not an inconsistency.
-      { key: "partsAndMaterials", label: "Parts and materials", target: { goal: 0.09, direction: "max" }, compute: (pnl) => pnl.partsCost + pnl.equipmentCost },
-      { key: "grossProfit", label: "Gross margin", target: null },
-      { key: "subcontractCost", label: "Subcontracts", target: null },
-      { key: "commissionCost", label: "Commissions", target: null },
-      { key: "fringeCost", label: "Fringe benefits", target: null },
-      ...OVERHEAD_PNL_METRICS,
-    ],
-    manual: [
-      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
-      // No confirmed target for GP per crew day on Install's own chart
-      // (unlike the BU 30-detail chart's per-tech-per-day number, which was
-      // never confirmed as applying here either) — tracked, neutral.
-      { key: "gpPerCrewDay", label: "GP per crew day", type: "money", target: null, compute: (m, s, pnl) => (m.crewDays && pnl ? pnl.grossProfit / m.crewDays : null) },
-      { key: "customerSatisfactionIndex", label: "Customer satisfaction", type: "count", target: null },
-      { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.01, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
-    ],
-  },
+  10: installDept("HVAC Installation", "10 HVAC Installation"),
+  // There's no separate Plumbing Installation KPI chart — the source for
+  // this detailed set was confirmed as BU 10 (HVAC) specifically. This
+  // mirrors BU 10's config exactly (same metric shapes and targets, applied
+  // to the other install department, each against its own P&L and its own
+  // manual headcount entries) rather than inventing different numbers —
+  // flag if Plumbing Installation should actually have its own.
+  50: installDept("Plumbing Installation", "50 Plumbing Installation"),
 };
 
 const deptSelect = document.getElementById("dept-select");
@@ -280,26 +331,6 @@ function sectionHtml(title, note, tilesHtml) {
   `;
 }
 
-// A job completed the same calendar day it was scheduled for — Install's
-// "Same day completion %" (no confirmed target given, so its tile renders
-// neutral for now, but the number itself is real). Needs the raw completed
-// jobs, not just computeScorecardStats' aggregated totals, so this takes
-// `jobs` directly rather than going through hcpValue's stats-only signature.
-function sameDayCompletionRatio(jobs) {
-  const completed = jobs.filter((j) => COMPLETE_STATUSES.has(j.work_status) && j.schedule?.scheduled_start && j.completed_at);
-  if (!completed.length) return null;
-  const sameDay = completed.filter((j) => {
-    const scheduled = new Date(j.schedule.scheduled_start);
-    const done = new Date(j.completed_at);
-    return (
-      scheduled.getFullYear() === done.getFullYear() &&
-      scheduled.getMonth() === done.getMonth() &&
-      scheduled.getDate() === done.getDate()
-    );
-  });
-  return sameDay.length / completed.length;
-}
-
 // Raw (unformatted) value for each known HCP metric key — everything else
 // (formatting, coloring) is generic once this returns a plain number.
 function hcpValue(key, stats, jobs) {
@@ -318,8 +349,6 @@ function hcpValue(key, stats, jobs) {
     }
     case "totalClubAgreements":
       return stats.servicePlansSold;
-    case "sameDayCompletion":
-      return sameDayCompletionRatio(jobs);
     default:
       return null;
   }

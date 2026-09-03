@@ -57,6 +57,7 @@ foreach ($bu in $buColMap.Keys) {
     totalIncome = 0; grossProfit = 0; totalExpense = 0; netOrdinaryIncome = 0; netIncome = 0
     laborCost = 0; partsCost = 0; equipmentCost = 0; subcontractCost = 0; commissionCost = 0; fringeCost = 0
     marketing = 0; employeeRelated = 0; plantEquipment = 0; vehicle = 0; administrative = 0
+    permits = 0; warranty = 0; buydowns = 0; warrantyLabor = 0; salesSalary = 0
   }
 }
 
@@ -90,6 +91,11 @@ for ($r = 1; $r -le $rows; $r++) {
   elseif ($acct -eq "5002") { $bucket = "equipmentCost" }
   elseif ($acct -eq "5005") { $bucket = "subcontractCost" }
   elseif ($acct -eq "5011") { $bucket = "commissionCost" }
+  elseif ($acct -eq "5006") { $bucket = "permits" }
+  elseif ($acct -eq "5007") { $bucket = "warranty" }
+  elseif ($acct -eq "5008") { $bucket = "buydowns" }
+  elseif ($acct -eq "5010") { $bucket = "warrantyLabor" }
+  elseif ($acct -eq "5012") { $bucket = "salesSalary" }
   elseif ($label -match '^Total 5004') { $bucket = "fringeCost" }
   elseif ($acct -and $MARKETING -contains $acct) { $bucket = "marketing" }
   elseif ($acct -and $EMPLOYEE_RELATED -contains $acct) { $bucket = "employeeRelated" }
