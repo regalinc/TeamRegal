@@ -344,14 +344,33 @@ function populateDeptSelect() {
     .join("");
 }
 
+// "YTD-2026" is a synthetic month-select value (never a real key in
+// pnl-monthly.json/manual-metrics.json) meaning "every month uploaded for
+// 2026 so far" — one such option is offered per year that actually has at
+// least one month of P&L data, newest year first.
+function isYtd(monthStr) {
+  return typeof monthStr === "string" && monthStr.startsWith("YTD-");
+}
+function ytdYear(monthStr) {
+  return Number(monthStr.slice(4));
+}
+
 function populateMonthSelect() {
   const months = Object.keys(pnlData || {}).sort().reverse();
-  monthSelect.innerHTML = months.map((m) => `<option value="${m}">${escapeHtml(monthLabel(m))}</option>`).join("");
+  const years = [...new Set(months.map((m) => m.slice(0, 4)))]; // already newest-first, since months is
+  const options = years.flatMap((year) => [
+    { value: `YTD-${year}`, label: `${year} Year to date` },
+    ...months.filter((m) => m.startsWith(year)).map((m) => ({ value: m, label: monthLabel(m) })),
+  ]);
+  monthSelect.innerHTML = options.map((o) => `<option value="${o.value}">${escapeHtml(o.label)}</option>`).join("");
+  // Default stays the latest real month, not YTD — least surprise for
+  // existing behavior; YTD is an explicit extra choice, not the default.
   currentMonth = months[0] || null;
   if (currentMonth) monthSelect.value = currentMonth;
 }
 
 function monthLabel(monthStr) {
+  if (isYtd(monthStr)) return `${ytdYear(monthStr)} year to date`;
   const [y, m] = monthStr.split("-").map(Number);
   return new Date(y, m - 1, 1).toLocaleDateString([], { month: "long", year: "numeric" });
 }
@@ -364,13 +383,65 @@ function monthRange(monthStr) {
   return [new Date(y, m - 1, 1), new Date(y, m, 1)];
 }
 
-function jobInMonth(job, monthStr) {
+function jobInRange(job, [start, end]) {
   const sched = job.schedule?.scheduled_start;
   if (!sched) return false;
   const d = new Date(sched);
   if (Number.isNaN(d.getTime())) return false;
-  const [start, end] = monthRange(monthStr);
   return d >= start && d < end;
+}
+
+function jobInMonth(job, monthStr) {
+  return jobInRange(job, monthRange(monthStr));
+}
+
+// Jan 1 of `year` through the day after the last day of the latest month
+// actually present in the P&L data for that year — not "through today" —
+// so YTD job stats line up with exactly the P&L months being summed, even
+// once this is used to look back at a completed prior year.
+function ytdRange(year, monthKeysInYear) {
+  const months = monthKeysInYear.length ? monthKeysInYear : [`${year}-01`];
+  const maxMonthNum = Math.max(...months.map((mk) => Number(mk.split("-")[1])));
+  return [new Date(year, 0, 1), new Date(year, maxMonthNum, 1)];
+}
+
+// Adds every numeric field across a year's worth of monthly P&L objects —
+// the resulting dollar sums flow through the exact same ÷ Total Income
+// tile logic a single month uses, so no separate YTD-ratio math is needed.
+function sumPnl(pnlMonthsForDept) {
+  if (!pnlMonthsForDept.length) return null;
+  const sums = {};
+  for (const pnl of pnlMonthsForDept) {
+    for (const [k, v] of Object.entries(pnl)) {
+      if (typeof v === "number") sums[k] = (sums[k] || 0) + v;
+    }
+  }
+  return sums;
+}
+
+// Flow-type manual fields (activity across the period: hours, review/
+// callback counts) are summed for YTD. Everything else — headcount
+// snapshots (employeeCount, vehicleCount, crewCount, supportCount,
+// productionCount) and attendance/PTU-style percentages — is a
+// point-in-time reading, not something that should be added up across
+// months, so YTD shows the most recently entered non-null value instead.
+// Extend this set if a future summed field gets added to a department's
+// manual config.
+const YTD_SUM_KEYS = new Set(["paidHours", "billedHours", "reviewsGenerated", "callbackCount"]);
+
+function aggregateManualYtd(monthKeysAscending, deptManualData) {
+  const result = {};
+  let any = false;
+  for (const mk of monthKeysAscending) {
+    const m = deptManualData[mk];
+    if (!m) continue;
+    any = true;
+    for (const [k, v] of Object.entries(m)) {
+      if (v === null || v === undefined) continue;
+      result[k] = YTD_SUM_KEYS.has(k) ? (result[k] || 0) + v : v;
+    }
+  }
+  return any ? result : null;
 }
 
 // Formats a target as a short caption ("Target ≤ 9.0%", "Target ≥ $450") in
@@ -438,11 +509,17 @@ function hcpValue(key, stats, jobs) {
 
 function renderHcpSection(dept, stats, jobs) {
   const tiles = dept.hcp.map((m) => tileFor(m.label, m.type, hcpValue(m.key, stats, jobs), m.target)).join("");
-  return sectionHtml("From Housecall Pro", "Live — same data as the rest of the site, scoped to this department and this calendar month.", tiles);
+  const scope = isYtd(currentMonth)
+    ? `every job from Jan 1 through the latest month with a P&L uploaded, ${ytdYear(currentMonth)}`
+    : monthLabel(currentMonth);
+  return sectionHtml("From Housecall Pro", `Live — same data as the rest of the site, scoped to this department and ${escapeHtml(scope)}.`, tiles);
 }
 
 function renderPnlSection(dept, pnl) {
-  if (!pnl) return sectionHtml("From the P&L", "No P&L uploaded for this month yet.", "");
+  if (!pnl) {
+    const msg = isYtd(currentMonth) ? "No P&L uploaded yet this year." : "No P&L uploaded for this month yet.";
+    return sectionHtml("From the P&L", msg, "");
+  }
   const inc = pnl.totalIncome || 0;
   const tiles = dept.pnl
     .map((m) => {
@@ -459,7 +536,8 @@ function renderPnlSection(dept, pnl) {
       return tileFor(m.label, "pct", inc && raw !== null && raw !== undefined ? raw / inc : null, m.target);
     })
     .join("");
-  return sectionHtml("From the P&L", `Total income this month: ${escapeHtml(formatMoney(inc))}.`, tiles);
+  const totalLabel = isYtd(currentMonth) ? "Total income year to date" : "Total income this month";
+  return sectionHtml("From the P&L", `${totalLabel}: ${escapeHtml(formatMoney(inc))}.`, tiles);
 }
 
 function renderManualSection(dept, manual, stats, pnl) {
@@ -470,21 +548,40 @@ function renderManualSection(dept, manual, stats, pnl) {
       return tileFor(f.label, f.type, value === undefined ? null : value, f.target);
     })
     .join("");
-  return sectionHtml("Entered by hand", "From payroll and the department's own tracking — filled in monthly, not synced automatically.", tiles);
+  const note = isYtd(currentMonth)
+    ? "From payroll and the department's own tracking. Hours/reviews/callbacks are summed across the months uploaded so far this year; headcount and attendance-style figures show the most recently entered month instead of a sum."
+    : "From payroll and the department's own tracking — filled in monthly, not synced automatically.";
+  return sectionHtml("Entered by hand", note, tiles);
 }
 
 function render() {
   if (!latestData || !currentMonth) return;
 
   const dept = DEPARTMENTS[currentDept];
-  const jobs = (latestData.jobs || []).filter(
-    (j) => businessUnitCode(j.business_unit) === currentDept && jobInMonth(j, currentMonth)
-  );
+  let jobs, pnlForDept, manualForDept;
+
+  if (isYtd(currentMonth)) {
+    const year = ytdYear(currentMonth);
+    const yearPrefix = `${year}-`;
+    const pnlMonthKeys = Object.keys(pnlData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
+    const [start, end] = ytdRange(year, pnlMonthKeys);
+    jobs = (latestData.jobs || []).filter(
+      (j) => businessUnitCode(j.business_unit) === currentDept && jobInRange(j, [start, end])
+    );
+    pnlForDept = sumPnl(pnlMonthKeys.map((mk) => pnlData[mk]?.[currentDept]).filter(Boolean));
+    const manualMonthKeys = Object.keys(manualData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
+    const deptManualData = Object.fromEntries(manualMonthKeys.map((mk) => [mk, manualData[mk]?.[currentDept]]));
+    manualForDept = aggregateManualYtd(manualMonthKeys, deptManualData);
+  } else {
+    jobs = (latestData.jobs || []).filter(
+      (j) => businessUnitCode(j.business_unit) === currentDept && jobInMonth(j, currentMonth)
+    );
+    pnlForDept = (pnlData && pnlData[currentMonth] && pnlData[currentMonth][currentDept]) || null;
+    manualForDept = (manualData && manualData[currentMonth] && manualData[currentMonth][currentDept]) || null;
+  }
+
   const stats = computeScorecardStats(jobs, { splitRevenue: false });
   stats.nonMemberCount = jobs.filter((j) => !CANCELED_STATUSES.has(j.work_status) && hasTag(j, "Non-Member")).length;
-
-  const pnlMonth = (pnlData && pnlData[currentMonth]) || {};
-  const manualMonth = (manualData && manualData[currentMonth]) || {};
 
   appEl.innerHTML = `
     <div class="scorecard-head">
@@ -492,8 +589,8 @@ function render() {
       <p class="dept-sub">${escapeHtml(monthLabel(currentMonth))}</p>
     </div>
     ${renderHcpSection(dept, stats, jobs)}
-    ${renderPnlSection(dept, pnlMonth[currentDept])}
-    ${renderManualSection(dept, manualMonth[currentDept], stats, pnlMonth[currentDept])}
+    ${renderPnlSection(dept, pnlForDept)}
+    ${renderManualSection(dept, manualForDept, stats, pnlForDept)}
   `;
 }
 
