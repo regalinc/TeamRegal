@@ -318,14 +318,29 @@ function jobInMonth(job, monthStr) {
   return d >= start && d < end;
 }
 
+// Formats a target as a short caption ("Target ≤ 9.0%", "Target ≥ $450") in
+// the same units the tile itself uses, so a red/amber tile reads as
+// self-explanatory from across a room, not just "here's a number and a
+// color." Returns null for an untargeted (neutral) metric — nothing to show.
+function formatTargetCaption(type, target) {
+  if (!target) return null;
+  const symbol = target.direction === "min" ? "≥" : "≤";
+  let goalStr;
+  if (type === "pct") goalStr = `${(target.goal * 100).toFixed(1)}%`;
+  else if (type === "money") goalStr = formatMoney(target.goal);
+  else goalStr = Number(target.goal).toLocaleString();
+  return `Target ${symbol} ${goalStr}`;
+}
+
 function tileFor(label, type, value, target) {
+  const sub = formatTargetCaption(type, target);
   if (value === null || value === undefined || Number.isNaN(value)) {
-    return renderMiniStat(label, "—", null);
+    return renderMiniStat(label, "—", null, sub);
   }
   const t = target ? tier(value, target) : null;
-  if (type === "pct") return renderMiniStat(label, `${(value * 100).toFixed(1)}%`, t);
-  if (type === "money") return renderMiniStat(label, formatMoney(value), t);
-  return renderMiniStat(label, Number(value).toLocaleString(), t);
+  if (type === "pct") return renderMiniStat(label, `${(value * 100).toFixed(1)}%`, t, sub);
+  if (type === "money") return renderMiniStat(label, formatMoney(value), t, sub);
+  return renderMiniStat(label, Number(value).toLocaleString(), t, sub);
 }
 
 function sectionHtml(title, note, tilesHtml) {

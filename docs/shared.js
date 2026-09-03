@@ -261,9 +261,13 @@ function renderJobItem(job) {
 
 const KPI_MINI_CLASS = { good: "kpi-good", warn: "kpi-warn", bad: "kpi-bad" };
 
-function renderMiniStat(label, value, tierResult) {
+// `sub` is an optional caption line under the value — e.g. "Target ≤ 9.0%"
+// — so a tile that's red/amber is self-explanatory at a glance (screen
+// distance, no hover, no digging into the config) instead of just showing
+// the number and its color. Every existing caller omits it and is unaffected.
+function renderMiniStat(label, value, tierResult, sub) {
   const cls = tierResult ? KPI_MINI_CLASS[tierResult] : "";
-  return `<div class="tech-mini-stat ${cls}"><div class="tech-mini-stat-label">${escapeHtml(label)}</div><div class="tech-mini-stat-value">${escapeHtml(value)}</div></div>`;
+  return `<div class="tech-mini-stat ${cls}"><div class="tech-mini-stat-label">${escapeHtml(label)}</div><div class="tech-mini-stat-value">${escapeHtml(value)}</div>${sub ? `<div class="tech-mini-stat-sub">${escapeHtml(sub)}</div>` : ""}</div>`;
 }
 
 function renderStatTile({ label, value, meterPct }) {
