@@ -63,8 +63,14 @@ const DEPARTMENTS = {
       ...OVERHEAD_PNL_METRICS,
     ],
     manual: [
-      { key: "efficiency", label: "Service efficiency", type: "pct", target: { goal: 0.8, direction: "min" }, compute: (m, s) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
-      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
+      { key: "efficiency", label: "Service efficiency", type: "pct", target: { goal: 0.8, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
+      // Gross Profit ÷ paid hours — was wrongly using Housecall Pro revenue
+      // here instead of the P&L's actual Gross Profit; revenue and gross
+      // profit are not the same number (revenue minus COGS), and the target
+      // ($150/hr) was set against GP, not raw revenue. pnl is undefined for
+      // a month with no P&L uploaded yet, same "no data" neutral tile as
+      // every other P&L-sourced value.
+      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
       { key: "attendancePct", label: "Attendance", type: "pct", target: null },
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
@@ -99,6 +105,41 @@ const DEPARTMENTS = {
       // Yearly direct-mail campaign, not a monthly number — filled in
       // whenever that year's campaign wraps, may sit unchanged most months.
       { key: "ptuConversionPct", label: "PTU conversion", type: "pct", target: { goal: 0.6, direction: "min" } },
+    ],
+  },
+  70: {
+    name: "Plumbing Service",
+    buLabel: "70 Plumbing Service",
+    hcp: [
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 850, direction: "min" } },
+      { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.05, direction: "max", buffer: 1 / 3 } },
+      { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
+      // No Lead turnover/Accessory sold on Plumbing Service's own KPI chart
+      // — those are HVAC Service-specific, not carried over here.
+    ],
+    pnl: [
+      // Plumbing's chart gives Gross margin its own bar (50%, lower than
+      // HVAC Service's 60%) but no Plumbing-specific Labor/Materials/
+      // Subcontract/Commission/Fringe numbers — those stay neutral here
+      // until confirmed, same treatment as BU 40's unconfirmed ones.
+      { key: "grossProfit", label: "Gross margin", target: { goal: 0.5, direction: "min" } },
+      { key: "laborCost", label: "Labor to sales", target: null },
+      { key: "partsCost", label: "Materials/parts", target: null },
+      { key: "subcontractCost", label: "Subcontracts", target: null },
+      { key: "commissionCost", label: "Commissions", target: null },
+      { key: "fringeCost", label: "Fringe benefits", target: null },
+      ...OVERHEAD_PNL_METRICS,
+    ],
+    manual: [
+      // Service efficiency's 80% target came from the BU 30-detail chart
+      // framed generically as "Svc Dept," not confirmed as applying to
+      // Plumbing specifically — left neutral rather than assumed.
+      { key: "efficiency", label: "Service efficiency", type: "pct", target: null, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
+      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
+      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
+      { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.015, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
     ],
   },
 };
@@ -205,11 +246,11 @@ function renderPnlSection(dept, pnl) {
   return sectionHtml("From the P&L", `Total income this month: ${escapeHtml(formatMoney(inc))}.`, tiles);
 }
 
-function renderManualSection(dept, manual, stats) {
+function renderManualSection(dept, manual, stats, pnl) {
   const m = manual || {};
   const tiles = dept.manual
     .map((f) => {
-      const value = f.compute ? f.compute(m, stats) : m[f.key];
+      const value = f.compute ? f.compute(m, stats, pnl) : m[f.key];
       return tileFor(f.label, f.type, value === undefined ? null : value, f.target);
     })
     .join("");
@@ -236,7 +277,7 @@ function render() {
     </div>
     ${renderHcpSection(dept, stats)}
     ${renderPnlSection(dept, pnlMonth[currentDept])}
-    ${renderManualSection(dept, manualMonth[currentDept], stats)}
+    ${renderManualSection(dept, manualMonth[currentDept], stats, pnlMonth[currentDept])}
   `;
 }
 
