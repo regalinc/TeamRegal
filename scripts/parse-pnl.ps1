@@ -20,10 +20,28 @@ param(
   [string]$OutJson = "$env:TEMP\pnl_parsed.json"
 )
 
+# Track which EXCEL.EXE PID this run spawns, so cleanup at the end can force-
+# kill exactly that process rather than trusting Quit() alone. A prior run
+# left an orphaned background Excel process holding a workbook open in
+# Protected View; a later run's Workbooks.Open() silently returned that
+# stale, already-open workbook instead of the new file, producing a second
+# month's output that was actually a byte-for-byte copy of the first. Never
+# touches any Excel window the user already had open — only the PID this
+# script itself creates.
+$excelPidsBefore = @(Get-Process EXCEL -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Id)
+
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
 $excel.DisplayAlerts = $false
+$excel.AskToUpdateLinks = $false
+
+Start-Sleep -Milliseconds 300
+$spawnedPid = Get-Process EXCEL -ErrorAction SilentlyContinue |
+  Where-Object { $excelPidsBefore -notcontains $_.Id } |
+  Select-Object -First 1 -ExpandProperty Id
+
 $wb = $excel.Workbooks.Open($Path, [Type]::Missing, $true)
+Write-Host "Opened workbook: $($wb.Name)"
 $ws = $wb.Worksheets.Item("Sheet1")
 $used = $ws.UsedRange
 $rows = $used.Rows.Count
@@ -119,6 +137,17 @@ $wb.Close($false)
 $excel.Quit()
 [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
 [GC]::Collect()
+[GC]::WaitForPendingFinalizers()
+
+# Fail-safe: Quit() can leave the process alive if Excel thinks a dialog is
+# still pending (e.g. a Protected View file). Force-kill the exact PID this
+# run spawned so the next invocation always starts from a clean process.
+if ($spawnedPid) {
+  Start-Sleep -Milliseconds 500
+  if (Get-Process -Id $spawnedPid -ErrorAction SilentlyContinue) {
+    Stop-Process -Id $spawnedPid -Force -ErrorAction SilentlyContinue
+  }
+}
 
 $result | ConvertTo-Json -Depth 5 | Out-File -FilePath $OutJson -Encoding utf8
 Write-Host "Wrote $OutJson"
