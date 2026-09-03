@@ -142,6 +142,39 @@ const DEPARTMENTS = {
       { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.015, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
     ],
   },
+  80: {
+    name: "Plumbing Maintenance",
+    buLabel: "80 Plumbing Maintenance",
+    hcp: [
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 250, direction: "min" } },
+      // 2B's chart asks for the raw count only ("overall"), not a
+      // conversion rate — unlike BU 40's new-vs-renewal framing, there's no
+      // synthetic conversion tile to approximate here.
+      { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
+    ],
+    pnl: [
+      // 2B's chart has no P&L line items at all (no Gross margin, Labor,
+      // etc.) — every non-overhead ratio here is neutral until a target's
+      // actually given for this department.
+      { key: "grossProfit", label: "Gross margin", target: null },
+      { key: "laborCost", label: "Labor to sales", target: null },
+      { key: "partsCost", label: "Materials/parts", target: null },
+      { key: "subcontractCost", label: "Subcontracts", target: null },
+      { key: "commissionCost", label: "Commissions", target: null },
+      { key: "fringeCost", label: "Fringe benefits", target: null },
+      ...OVERHEAD_PNL_METRICS,
+    ],
+    manual: [
+      // No Service efficiency/Productivity on 2B's chart at all — same
+      // "Maintenance" pattern as BU 40, which also skips the hours-based
+      // metrics that only the "Service" departments (30, 70) have.
+      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
+      // No explicit callback target for 2B (unlike Plumbing Service's
+      // confirmed <1.5%) — tracked, not yet colored.
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+    ],
+  },
 };
 
 const deptSelect = document.getElementById("dept-select");
