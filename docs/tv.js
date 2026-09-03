@@ -83,13 +83,15 @@ function departmentOf(tech) {
   return OFFICE_LABEL;
 }
 
-// KPI targets (KPI_THRESHOLDS_BY_BU, tier(), kpiTier()) live in shared.js —
-// admin.html's department cards and index.html's technician cards (when a
-// single BU is selected) grade against the exact same numbers, so they're
-// defined once rather than duplicated per page. For a BU screen (DEPT is
-// "30"/"40"/"70"/"80"), kpiTier(DEPT, ...) finds that BU's targets directly;
-// for a tag-only screen (Office, installation) it returns null for every
-// metric since those aren't in KPI_THRESHOLDS_BY_BU, so the tile stays neutral.
+// KPI targets (tier(), kpiTier()) live in shared.js and read DEPARTMENTS
+// from departments-config.js — the same confirmed per-department targets
+// the department scorecard/matrix pages use, not a separate copy. admin.html's
+// department cards and index.html's technician cards (when a single BU is
+// selected) grade against those exact same numbers too. For a BU screen
+// (DEPT is "10"/"30"/"40"/"50"/"70"/"80"), kpiTier(DEPT, ...) finds that
+// department's targets directly; for a tag-only screen (Office,
+// installation) it returns null for every metric since DEPARTMENTS has no
+// entry for those, so the tile stays neutral.
 const TIER_CLASS = { good: "tv-good", warn: "tv-warn", bad: "tv-bad" };
 
 function kpiClass(metricKey, stats) {

@@ -419,63 +419,65 @@ function pnlMetricValue(metric, pnl) {
   return inc && raw !== null && raw !== undefined ? raw / inc : null;
 }
 
-// A tech/section with zero jobs in the period returns null (neutral) for
-// every ratio-based KPI here rather than a misleading pass or fail on no
-// data. Deliberately duplicated per BU even where two happen to match today
-// (IFO/Accessory sold are currently identical across all four) — editing
-// one BU's target should never silently change another's.
-const KPI_THRESHOLDS_BY_BU = {
-  30: {
-    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
-    // than the default 15% buffer would give, so it's spelled out explicitly
-    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
-    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 450, direction: "min" }) : null),
-    leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
-    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
-  },
-  40: {
-    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
-    // than the default 15% buffer would give, so it's spelled out explicitly
-    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
-    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 250, direction: "min" }) : null),
-    leads: (stats) => (stats.totalJobs ? tier(stats.leads / stats.totalJobs, { goal: 1 / 12, direction: "min" }) : null),
-    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
-  },
-  // BU 70/80 (Plumbing Service): same IFO/Accessory sold bars as HVAC
-  // Service, no Leads target given yet, and their own Avg ticket bars.
-  70: {
-    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
-    // than the default 15% buffer would give, so it's spelled out explicitly
-    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
-    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 500, direction: "min" }) : null),
-    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
-  },
-  80: {
-    // Green under 7.5%, amber 7.5-10%, red past 10% — a wider amber band
-    // than the default 15% buffer would give, so it's spelled out explicitly
-    // (buffer: 1/3 makes goal*(1+buffer) land exactly on 10%).
-    ifo: (stats) => (stats.totalJobs ? tier(stats.ifo / stats.totalJobs, { goal: 0.075, direction: "max", buffer: 1 / 3 }) : null),
-    avgTicket: (stats) => (stats.totalJobs ? tier(stats.avgTicket, { goal: 300, direction: "min" }) : null),
-    accessorySold: (stats) => (stats.totalJobs ? tier(stats.accessorySold / stats.totalJobs, { goal: 1 / 8, direction: "min" }) : null),
-  },
-};
+// Raw (unformatted) value for a known Housecall Pro-sourced metric key —
+// shared by the department scorecard's "From Housecall Pro" tiles and
+// kpiTier()'s BU-card coloring below, so e.g. "Avg ticket" means the exact
+// same computed number everywhere it's shown on the site.
+function hcpMetricValue(key, stats) {
+  switch (key) {
+    case "avgTicket":
+      return stats.avgTicket;
+    case "zeroCall":
+      return stats.totalJobs ? stats.ifo / stats.totalJobs : null;
+    case "leadTurnover":
+      return stats.totalJobs ? stats.leads / stats.totalJobs : null;
+    case "accessorySold":
+      return stats.totalJobs ? stats.accessorySold / stats.totalJobs : null;
+    case "clubConversion": {
+      const pool = (stats.servicePlansSold || 0) + (stats.nonMemberCount || 0);
+      return pool ? stats.servicePlansSold / pool : null;
+    }
+    case "totalClubAgreements":
+      return stats.servicePlansSold;
+    default:
+      return null;
+  }
+}
 
-// Looks up the "good"/"warn"/"bad" tier for one metric under one BU's
-// targets, or null if that BU has no targets defined (e.g. Office,
-// installation, BU 10/50) or no target for that particular metric (e.g.
-// Leads on BU 70/80). `buCode` accepts either a bare code ("30") or a full
-// business_unit string ("30 HVAC SERVICE") — callers don't need to know
-// which they have on hand.
+// Maps the "wire" name callers below use to the matching key in a
+// department's `hcp` metric list (DEPARTMENTS, departments-config.js) —
+// same concept, different names in two cases: "ifo" is $0 Call's
+// underlying tag/key (zeroCall), "leads" is Lead turnover's raw ratio
+// (leadTurnover). Metrics with no department ever giving them a target
+// (revenue, completion, jobs, leadsSold) fall through to a lookup miss and
+// stay neutral, same as before.
+const KPI_METRIC_KEY_ALIASES = { ifo: "zeroCall", leads: "leadTurnover" };
+
+// Looks up the "good"/"warn"/"bad" tier for one metric under one
+// department's confirmed target — reads DEPARTMENTS (departments-config.js)
+// directly, the exact same config the department scorecard/matrix pages
+// use, rather than a second, separately maintained copy. A prior version of
+// this function had its own KPI_THRESHOLDS_BY_BU table that had quietly
+// drifted from the confirmed targets: BU 30 $0 Call graded at 7.5% here vs.
+// 5% on the scorecard, BU 70 Avg ticket at $500 vs. $850, and BU 10/50
+// getting no coloring at all since they had no entry there. Both numbers
+// have since been reconciled in departments-config.js itself, so this is
+// now the only place either is defined. Returns null (neutral) when the
+// department has no hcp entry for this metric, has no target set for it
+// yet, or the value can't be computed (e.g. zero jobs) — same
+// "untracked/no data stays neutral" behavior the old lookup had. `buCode`
+// accepts either a bare code ("30") or a full business_unit string
+// ("30 HVAC SERVICE") — callers don't need to know which they have on hand.
 function kpiTier(buCode, metricKey, stats) {
   const code = businessUnitCode(String(buCode || ""));
-  const thresholds = KPI_THRESHOLDS_BY_BU[code];
-  if (!thresholds) return null;
-  const check = thresholds[metricKey];
-  if (!check) return null;
-  return check(stats);
+  const dept = DEPARTMENTS[code];
+  if (!dept) return null;
+  const key = KPI_METRIC_KEY_ALIASES[metricKey] || metricKey;
+  const metric = dept.hcp.find((m) => m.key === key);
+  if (!metric || !metric.target) return null;
+  const value = hcpMetricValue(key, stats);
+  if (value === null || value === undefined || Number.isNaN(value)) return null;
+  return tier(value, metric.target);
 }
 
 function countsTowardJobs(job) {

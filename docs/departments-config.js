@@ -122,7 +122,11 @@ const DEPARTMENTS = {
     buLabel: "30 HVAC Service",
     hcp: [
       { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 450, direction: "min" } },
-      { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.05, direction: "max", buffer: 1 / 3 } },
+      // Reconciled against admin.html's separate (and until now, stale)
+      // kpiTier coloring, which had this at 7.5% while this chart still said
+      // 5% — 7.5% confirmed as the real target; both pages now grade off
+      // this one number instead of two different ones.
+      { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.075, direction: "max", buffer: 1 / 3 } },
       { key: "leadTurnover", label: "Lead turnover", type: "pct", target: { goal: 1 / 12, direction: "min" } },
       { key: "accessorySold", label: "Accessory sold", type: "pct", target: { goal: 1 / 8, direction: "min" } },
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
@@ -190,7 +194,10 @@ const DEPARTMENTS = {
     name: "Plumbing Service",
     buLabel: "70 Plumbing Service",
     hcp: [
-      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 850, direction: "min" } },
+      // Reconciled against admin.html's separate (and until now, stale)
+      // kpiTier coloring, which had this at $500 while this chart still
+      // said $850 — $500 confirmed as the real target.
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 500, direction: "min" } },
       { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.05, direction: "max", buffer: 1 / 3 } },
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
       // No Lead turnover/Accessory sold on Plumbing Service's own KPI chart

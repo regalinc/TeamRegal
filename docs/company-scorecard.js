@@ -159,31 +159,11 @@ function sectionHtml(title, note, tilesHtml) {
   `;
 }
 
-// Raw (unformatted) value for each known HCP metric key — everything else
-// (formatting, coloring) is generic once this returns a plain number.
-function hcpValue(key, stats, jobs) {
-  switch (key) {
-    case "avgTicket":
-      return stats.avgTicket;
-    case "zeroCall":
-      return stats.totalJobs ? stats.ifo / stats.totalJobs : null;
-    case "leadTurnover":
-      return stats.totalJobs ? stats.leads / stats.totalJobs : null;
-    case "accessorySold":
-      return stats.totalJobs ? stats.accessorySold / stats.totalJobs : null;
-    case "clubConversion": {
-      const pool = stats.servicePlansSold + stats.nonMemberCount;
-      return pool ? stats.servicePlansSold / pool : null;
-    }
-    case "totalClubAgreements":
-      return stats.servicePlansSold;
-    default:
-      return null;
-  }
-}
-
-function renderHcpSection(dept, stats, jobs) {
-  const tiles = dept.hcp.map((m) => tileFor(m.label, m.type, hcpValue(m.key, stats, jobs), m.target)).join("");
+function renderHcpSection(dept, stats) {
+  // hcpMetricValue() lives in shared.js now — kpiTier() (admin.html's/
+  // index.html's/tv.html's card coloring) needs the exact same raw-value
+  // computation, so it's one function instead of two copies.
+  const tiles = dept.hcp.map((m) => tileFor(m.label, m.type, hcpMetricValue(m.key, stats), m.target)).join("");
   const scope = isYtd(currentMonth)
     ? `every job from Jan 1 through the latest month with a P&L uploaded, ${ytdYear(currentMonth)}`
     : monthLabel(currentMonth);
@@ -252,7 +232,7 @@ function render() {
       <h2 class="dept-name">${escapeHtml(dept.buLabel)}</h2>
       <p class="dept-sub">${escapeHtml(monthLabel(currentMonth))}</p>
     </div>
-    ${renderHcpSection(dept, stats, jobs)}
+    ${renderHcpSection(dept, stats)}
     ${renderPnlSection(dept, pnlForDept)}
     ${renderManualSection(dept, manualForDept, stats, pnlForDept)}
   `;
