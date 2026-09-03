@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Department Matrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="dept-matrix-a93896051f505dc7.css" />
+</head>
+<body>
+  <div class="page-head">
+    <div class="page-head-top">
+      <span class="eyebrow">Internal — not linked from the site nav</span>
+      <select id="month-select" aria-label="Month"></select>
+    </div>
+    <h1>Department Scorecard — matrix view</h1>
+    <p class="page-sub">Every department as a column, every shared P&amp;L ratio as a row — scan across a line to compare departments, or down a column for one department's full picture. Live data, same targets as the per-department scorecard.</p>
+    <p class="page-meta" id="page-meta"></p>
+  </div>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span class="legend-item"><span class="swatch good"></span>On target</span>
+      <span class="legend-item"><span class="swatch warn"></span>Close — watch it</span>
+      <span class="legend-item"><span class="swatch bad"></span>Under target</span>
+      <span class="legend-item"><span class="swatch neutral"></span>No target / not tracked</span>
+    </div>
+    <div class="read-hints">
+      <span class="read-hint"><span class="arrow">→</span> Row: same ratio, every department</span>
+      <span class="read-hint"><span class="arrow">↓</span> Column: one department, every ratio</span>
+    </div>
+  </div>
+
+  <div id="summary-strip" class="summary-strip"></div>
+
+  <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr id="header-row">
+          <th class="row-label">KPI</th>
+        </tr>
+      </thead>
+      <tbody id="matrix-body"></tbody>
+    </table>
+  </div>
+
+  <div class="callout" id="callout"></div>
+  <p class="page-foot" id="page-foot"></p>
+
+  <script src="shared.js"></script>
+  <script src="departments-config.js"></script>
+  <script src="dept-matrix-a93896051f505dc7.js"></script>
+</body>
+</html>

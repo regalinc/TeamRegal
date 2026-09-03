@@ -371,6 +371,54 @@ function tier(value, { goal, direction, buffer = 0.15 }) {
   return value < goal * (1 + buffer) ? "warn" : "bad";
 }
 
+// P&L-month helpers — shared by company-scorecard.js and any other page
+// working off data/pnl-monthly.json's "YYYY-MM" keys, so "YTD" and month
+// formatting mean exactly the same thing everywhere they're used.
+
+// "YTD-2026" is a synthetic month value (never a real key in
+// pnl-monthly.json/manual-metrics.json) meaning "every month uploaded for
+// 2026 so far."
+function isYtd(monthStr) {
+  return typeof monthStr === "string" && monthStr.startsWith("YTD-");
+}
+function ytdYear(monthStr) {
+  return Number(monthStr.slice(4));
+}
+
+function monthLabel(monthStr) {
+  if (isYtd(monthStr)) return `${ytdYear(monthStr)} year to date`;
+  const [y, m] = monthStr.split("-").map(Number);
+  return new Date(y, m - 1, 1).toLocaleDateString([], { month: "long", year: "numeric" });
+}
+
+// Adds every numeric field across a year's worth of monthly P&L objects —
+// the resulting dollar sums flow through the exact same ÷ Total Income
+// tile logic a single month uses, so no separate YTD-ratio math is needed.
+function sumPnl(pnlMonthsForDept) {
+  if (!pnlMonthsForDept.length) return null;
+  const sums = {};
+  for (const pnl of pnlMonthsForDept) {
+    for (const [k, v] of Object.entries(pnl)) {
+      if (typeof v === "number") sums[k] = (sums[k] || 0) + v;
+    }
+  }
+  return sums;
+}
+
+// The value each department's P&L tile actually displays: most metrics are
+// "this account ÷ Total Income," but a metric with an explicit non-"pct"
+// `type` (e.g. a same-P&L dollar ratio like BU 70's Labor-to-parts) skips
+// that ÷ income step and uses its own compute(pnl) result directly.
+function pnlMetricValue(metric, pnl) {
+  if (!pnl) return null;
+  if (metric.type && metric.type !== "pct") {
+    return metric.compute ? metric.compute(pnl) : pnl[metric.key];
+  }
+  const inc = pnl.totalIncome || 0;
+  const raw = metric.compute ? metric.compute(pnl) : pnl[metric.key];
+  return inc && raw !== null && raw !== undefined ? raw / inc : null;
+}
+
 // A tech/section with zero jobs in the period returns null (neutral) for
 // every ratio-based KPI here rather than a misleading pass or fail on no
 // data. Deliberately duplicated per BU even where two happen to match today
