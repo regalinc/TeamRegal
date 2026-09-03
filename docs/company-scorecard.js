@@ -244,28 +244,19 @@ const DEPARTMENTS = {
       { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.1, direction: "min" } },
     ],
     manual: [
-      // Efficiency — this chart gives two variants off the same paid/
-      // billed pair already collected: "with sales" (billed÷paid, the
-      // existing tile) and "no sales" (paid÷billed, new). Assumed to be
-      // two ways of reading one pair of numbers, not two separately
-      // tracked hour buckets — flag if Plumbing Service actually splits
-      // sales-included vs. sales-excluded hours in payroll.
-      { key: "efficiency", label: "Service efficiency (with sales)", type: "pct", target: { goal: 0.75, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
-      { key: "efficiencyNoSales", label: "Service efficiency (no sales)", type: "pct", target: { goal: 0.8, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.paidHours / m.billedHours : null) },
-      // Productivity — kept the existing GP/hr tile as-is (an earlier fix
-      // deliberately corrected this from revenue to Gross Profit) and added
-      // this chart's Revenue/hr figure as its own separate tile rather than
-      // reverting GP/hr back to revenue.
+      // Efficiency — the source chart's "with sales"/"without sales" split
+      // turned out to be one metric, not two; collapsed back to a single
+      // tile (billed÷paid) at the "with sales" target, which is the
+      // formula/target pairing that was actually confirmed.
+      { key: "efficiency", label: "Service efficiency", type: "pct", target: { goal: 0.75, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
+      // Productivity — GP/hr is the one confirmed target ($150/hr); the
+      // "$150/day/tech" figure from the source chart turned out to be the
+      // same target restated, not a second one, so no separate per-day
+      // tile/input. Revenue/hr stays as its own tile (a different formula,
+      // not a duplicate of GP/hr) — an earlier fix deliberately corrected
+      // GP/hr away from revenue, so that one keeps Gross Profit specifically.
       { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
       { key: "productivityRevenue", label: "Productivity (Revenue/hr, with sales)", type: "money", target: { goal: 60, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
-      // GP $ per day per tech — needs a new "tech-days worked" input
-      // (whole days, not hours; not yet collected). NOTE: this target
-      // ($150/day/tech) is the same number as Productivity (GP/hr) above
-      // but a different unit (day, not hour) — worth confirming that's not
-      // a units mix-up in the source chart rather than assuming either
-      // number is wrong.
-      { key: "techDays", label: "Tech-days worked", type: "count", target: null },
-      { key: "gpPerTechDay", label: "GP per tech-day", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.techDays && pnl ? pnl.grossProfit / m.techDays : null) },
       { key: "attendancePct", label: "Attendance", type: "pct", target: null },
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
