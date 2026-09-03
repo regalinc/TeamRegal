@@ -10,18 +10,97 @@
 // Three data sources, one page:
 //  - Housecall Pro (data/dashboard.json) — live, same as every other page.
 //  - The monthly P&L (data/pnl-monthly.json) — parsed by hand each month
-//    from the actual P&L export (see scripts/ — no automated sync exists
-//    for this yet; a human uploads it and the numbers get committed).
+//    from the actual P&L export (scripts/parse-pnl.ps1) — no automated sync
+//    exists for this yet; a human uploads it and the numbers get committed.
 //  - Manual entries (data/manual-metrics.json) — paid hours, attendance,
 //    callbacks, etc.: things that live in payroll or other spreadsheets
 //    Housecall Pro has no way to know about. null until filled in.
+//
+// Each department's metric set is genuinely different — BU 40's original
+// KPI chart has no $0 Call/Lead turnover/Accessory sold at all, and frames
+// club agreements as new-vs-renewal rather than BU 30's flat conversion
+// rate — so DEPARTMENTS below is config-driven (a list of metric
+// descriptors per section) rather than one hardcoded tile set applied to
+// every BU. A target of `null` renders the tile with a real number but no
+// color, for a metric that's tracked but doesn't have a confirmed target
+// yet (see README for which ones and why).
 
-// V1 is HVAC Service (BU 30) only — every other department's P&L data is
-// already being captured (see pnl-monthly.json), but their KPI targets
-// haven't been confirmed yet. Extending DEPARTMENTS below is the whole job
-// once they are; nothing else about this page is BU-30-specific.
+// The 5 overhead ratios (Marketing/Employee Related/Plant & Equipment/
+// Vehicle/Administrative) plus Total SG&A and Pretax come from the Chart of
+// Accounts as company-wide policy targets, not a department-specific chart
+// — applied identically to every department's P&L section rather than
+// repeated per department below. Assumption flagged in the README: applying
+// BU 30's overhead targets to every other BU hasn't been explicitly
+// confirmed for those departments individually.
+const OVERHEAD_PNL_METRICS = [
+  { key: "marketing", label: "Marketing", target: { goal: 0.03, direction: "max" } },
+  { key: "employeeRelated", label: "Employee related", target: { goal: 0.15, direction: "max" } },
+  { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.04, direction: "max" } },
+  { key: "vehicle", label: "Vehicle", target: { goal: 0.04, direction: "max" } },
+  { key: "administrative", label: "Administrative", target: { goal: 0.03, direction: "max" } },
+  { key: "totalExpense", label: "Total SG&A", target: { goal: 0.45, direction: "max" } },
+  { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.1, direction: "min" } },
+];
+
 const DEPARTMENTS = {
-  30: { name: "HVAC Service", buLabel: "30 HVAC Service" },
+  30: {
+    name: "HVAC Service",
+    buLabel: "30 HVAC Service",
+    hcp: [
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 450, direction: "min" } },
+      { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.05, direction: "max", buffer: 1 / 3 } },
+      { key: "leadTurnover", label: "Lead turnover", type: "pct", target: { goal: 1 / 12, direction: "min" } },
+      { key: "accessorySold", label: "Accessory sold", type: "pct", target: { goal: 1 / 8, direction: "min" } },
+      { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
+    ],
+    pnl: [
+      { key: "grossProfit", label: "Gross margin", target: { goal: 0.6, direction: "min" } },
+      { key: "laborCost", label: "Labor to sales", target: { goal: 0.22, direction: "max" } },
+      { key: "partsCost", label: "Materials/parts", target: { goal: 0.13, direction: "max" } },
+      { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.005, direction: "max" } },
+      { key: "commissionCost", label: "Commissions", target: { goal: 0.04, direction: "max" } },
+      { key: "fringeCost", label: "Fringe benefits", target: { goal: 0.07, direction: "max" } },
+      ...OVERHEAD_PNL_METRICS,
+    ],
+    manual: [
+      { key: "efficiency", label: "Service efficiency", type: "pct", target: { goal: 0.8, direction: "min" }, compute: (m, s) => (m.paidHours && m.billedHours ? m.billedHours / m.paidHours : null) },
+      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
+      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
+      { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+    ],
+  },
+  40: {
+    name: "HVAC Maintenance",
+    buLabel: "40 HVAC Maintenance",
+    hcp: [
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 250, direction: "min" } },
+      // BU 40's chart frames this as new-vs-renewal, not a flat conversion
+      // rate — Housecall Pro's new-vs-renewal distinction isn't confirmed
+      // yet (see README), so this is the same conversion math as BU 30's
+      // shown with no target until that's resolved, as a placeholder.
+      { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: null },
+      { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
+    ],
+    pnl: [
+      // No BU 40-specific Gross margin/Labor/Materials target was given —
+      // shown for visibility, colored once one is confirmed.
+      { key: "grossProfit", label: "Gross margin", target: null },
+      { key: "laborCost", label: "Labor to sales", target: null },
+      { key: "partsCost", label: "Materials/parts", target: null },
+      { key: "subcontractCost", label: "Subcontracts", target: null },
+      { key: "commissionCost", label: "Commissions", target: null },
+      { key: "fringeCost", label: "Fringe benefits", target: null },
+      ...OVERHEAD_PNL_METRICS,
+    ],
+    manual: [
+      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      // Yearly direct-mail campaign, not a monthly number — filled in
+      // whenever that year's campaign wraps, may sit unchanged most months.
+      { key: "ptuConversionPct", label: "PTU conversion", type: "pct", target: { goal: 0.6, direction: "min" } },
+    ],
+  },
 };
 
 const deptSelect = document.getElementById("dept-select");
@@ -69,25 +148,14 @@ function jobInMonth(job, monthStr) {
   return d >= start && d < end;
 }
 
-// Same 15%-buffer three-tier grading every other page uses (tier() in
-// shared.js) — a metric here reads the same way a job-tracking KPI does
-// elsewhere on the site.
-function pctTile(label, value, opts) {
-  const pct = value === null || Number.isNaN(value) ? null : value * 100;
-  const display = pct === null ? "—" : `${pct.toFixed(1)}%`;
-  const t = pct === null || !opts ? null : tier(value, opts);
-  return renderMiniStat(label, display, t);
-}
-
-function moneyTile(label, value, opts) {
-  const display = value === null || value === undefined ? "—" : formatMoney(value);
-  const t = value === null || value === undefined || !opts ? null : tier(value, opts);
-  return renderMiniStat(label, display, t);
-}
-
-function countTile(label, value) {
-  const display = value === null || value === undefined ? "—" : Number(value).toLocaleString();
-  return renderMiniStat(label, display, null);
+function tileFor(label, type, value, target) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return renderMiniStat(label, "—", null);
+  }
+  const t = target ? tier(value, target) : null;
+  if (type === "pct") return renderMiniStat(label, `${(value * 100).toFixed(1)}%`, t);
+  if (type === "money") return renderMiniStat(label, formatMoney(value), t);
+  return renderMiniStat(label, Number(value).toLocaleString(), t);
 }
 
 function sectionHtml(title, note, tilesHtml) {
@@ -100,73 +168,52 @@ function sectionHtml(title, note, tilesHtml) {
   `;
 }
 
-function renderHcpSection(jobs) {
-  const stats = computeScorecardStats(jobs, { splitRevenue: false });
-  const nonMemberJobs = jobs.filter((j) => !CANCELED_STATUSES.has(j.work_status) && hasTag(j, "Non-Member"));
-  const clubPool = stats.servicePlansSold + nonMemberJobs.length;
-  const clubConversion = clubPool ? stats.servicePlansSold / clubPool : null;
-
-  return sectionHtml(
-    "From Housecall Pro",
-    "Live — same data as the rest of the site, scoped to this department and this calendar month.",
-    [
-      moneyTile("Avg ticket", stats.avgTicket, { goal: 450, direction: "min" }),
-      pctTile("$0 Call", stats.totalJobs ? stats.ifo / stats.totalJobs : null, { goal: 0.05, direction: "max", buffer: 1 / 3 }),
-      pctTile("Lead turnover", stats.totalJobs ? stats.leads / stats.totalJobs : null, { goal: 1 / 12, direction: "min" }),
-      pctTile("Accessory sold", stats.totalJobs ? stats.accessorySold / stats.totalJobs : null, { goal: 1 / 8, direction: "min" }),
-      pctTile("Club agreement conversion", clubConversion, { goal: 0.5, direction: "min" }),
-    ].join("")
-  );
-}
-
-function renderPnlSection(pnl) {
-  if (!pnl) {
-    return sectionHtml("From the P&L", "No P&L uploaded for this month yet.", "");
+// Raw (unformatted) value for each known HCP metric key — everything else
+// (formatting, coloring) is generic once this returns a plain number.
+function hcpValue(key, stats) {
+  switch (key) {
+    case "avgTicket":
+      return stats.avgTicket;
+    case "zeroCall":
+      return stats.totalJobs ? stats.ifo / stats.totalJobs : null;
+    case "leadTurnover":
+      return stats.totalJobs ? stats.leads / stats.totalJobs : null;
+    case "accessorySold":
+      return stats.totalJobs ? stats.accessorySold / stats.totalJobs : null;
+    case "clubConversion": {
+      const pool = stats.servicePlansSold + stats.nonMemberCount;
+      return pool ? stats.servicePlansSold / pool : null;
+    }
+    case "totalClubAgreements":
+      return stats.servicePlansSold;
+    default:
+      return null;
   }
-  const inc = pnl.totalIncome || 0;
-  const ratio = (n) => (inc ? n / inc : null);
-
-  return sectionHtml(
-    "From the P&L",
-    `Total income this month: ${escapeHtml(formatMoney(inc))}.`,
-    [
-      pctTile("Gross margin", ratio(pnl.grossProfit), { goal: 0.6, direction: "min" }),
-      pctTile("Labor to sales", ratio(pnl.laborCost), { goal: 0.22, direction: "max" }),
-      pctTile("Materials/parts", ratio(pnl.partsCost), { goal: 0.13, direction: "max" }),
-      pctTile("Subcontracts", ratio(pnl.subcontractCost), { goal: 0.005, direction: "max" }),
-      pctTile("Commissions", ratio(pnl.commissionCost), { goal: 0.04, direction: "max" }),
-      pctTile("Fringe benefits", ratio(pnl.fringeCost), { goal: 0.07, direction: "max" }),
-      pctTile("Marketing", ratio(pnl.marketing), { goal: 0.03, direction: "max" }),
-      pctTile("Employee related", ratio(pnl.employeeRelated), { goal: 0.15, direction: "max" }),
-      pctTile("Plant & equipment", ratio(pnl.plantEquipment), { goal: 0.04, direction: "max" }),
-      pctTile("Vehicle", ratio(pnl.vehicle), { goal: 0.04, direction: "max" }),
-      pctTile("Administrative", ratio(pnl.administrative), { goal: 0.03, direction: "max" }),
-      pctTile("Total SG&A", ratio(pnl.totalExpense), { goal: 0.45, direction: "max" }),
-      pctTile("Pretax", ratio(pnl.netOrdinaryIncome), { goal: 0.1, direction: "min" }),
-    ].join("")
-  );
 }
 
-function renderManualSection(manual, jobStats) {
-  const m = manual || {};
-  const paidHours = m.paidHours || null;
-  const billedHours = m.billedHours || null;
-  const efficiency = paidHours && billedHours ? billedHours / paidHours : null;
-  const productivity = paidHours ? jobStats.totalRevenue / paidHours : null;
-  const callbackPct = m.callbackCount != null && jobStats.totalJobs ? m.callbackCount / jobStats.totalJobs : null;
+function renderHcpSection(dept, stats) {
+  const tiles = dept.hcp.map((m) => tileFor(m.label, m.type, hcpValue(m.key, stats), m.target)).join("");
+  return sectionHtml("From Housecall Pro", "Live — same data as the rest of the site, scoped to this department and this calendar month.", tiles);
+}
 
-  return sectionHtml(
-    "Entered by hand",
-    "From payroll and the department's own tracking — filled in monthly, not synced automatically.",
-    [
-      pctTile("Service efficiency", efficiency, { goal: 0.8, direction: "min" }),
-      moneyTile("Productivity (GP/hr)", productivity, { goal: 150, direction: "min" }),
-      pctTile("Attendance", m.attendancePct != null ? m.attendancePct : null, null),
-      pctTile("Truck inventory accuracy", m.truckInventoryAccuracyPct != null ? m.truckInventoryAccuracyPct : null, null),
-      countTile("Reviews generated", m.reviewsGenerated),
-      pctTile("Callback rate", callbackPct, null),
-    ].join("")
-  );
+function renderPnlSection(dept, pnl) {
+  if (!pnl) return sectionHtml("From the P&L", "No P&L uploaded for this month yet.", "");
+  const inc = pnl.totalIncome || 0;
+  const tiles = dept.pnl
+    .map((m) => tileFor(m.label, "pct", inc ? pnl[m.key] / inc : null, m.target))
+    .join("");
+  return sectionHtml("From the P&L", `Total income this month: ${escapeHtml(formatMoney(inc))}.`, tiles);
+}
+
+function renderManualSection(dept, manual, stats) {
+  const m = manual || {};
+  const tiles = dept.manual
+    .map((f) => {
+      const value = f.compute ? f.compute(m, stats) : m[f.key];
+      return tileFor(f.label, f.type, value === undefined ? null : value, f.target);
+    })
+    .join("");
+  return sectionHtml("Entered by hand", "From payroll and the department's own tracking — filled in monthly, not synced automatically.", tiles);
 }
 
 function render() {
@@ -177,6 +224,7 @@ function render() {
     (j) => businessUnitCode(j.business_unit) === currentDept && jobInMonth(j, currentMonth)
   );
   const stats = computeScorecardStats(jobs, { splitRevenue: false });
+  stats.nonMemberCount = jobs.filter((j) => !CANCELED_STATUSES.has(j.work_status) && hasTag(j, "Non-Member")).length;
 
   const pnlMonth = (pnlData && pnlData[currentMonth]) || {};
   const manualMonth = (manualData && manualData[currentMonth]) || {};
@@ -186,9 +234,9 @@ function render() {
       <h2 class="dept-name">${escapeHtml(dept.buLabel)}</h2>
       <p class="dept-sub">${escapeHtml(monthLabel(currentMonth))}</p>
     </div>
-    ${renderHcpSection(jobs)}
-    ${renderPnlSection(pnlMonth[currentDept])}
-    ${renderManualSection(manualMonth[currentDept], stats)}
+    ${renderHcpSection(dept, stats)}
+    ${renderPnlSection(dept, pnlMonth[currentDept])}
+    ${renderManualSection(dept, manualMonth[currentDept], stats)}
   `;
 }
 
