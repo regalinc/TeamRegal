@@ -1,0 +1,27 @@
+/* Fleet Scorecard page — reuses .topbar/.stats-row/.tech-grid/.tech-card/
+   .tech-mini-stats etc. from style.css directly (same visual language as
+   the technician view); this file only covers what's specific to this
+   page. */
+
+.fleet-data-note {
+  margin: 0;
+  padding: 10px 24px;
+  background: var(--card-bg);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.fleet-page {
+  padding: 20px 24px;
+}
+
+/* Shared/spare vehicles aren't one driver's numbers, so they get one card
+   listing every such vehicle as its own row rather than a tech-card grid
+   slot each — keeps them visibly present (not silently dropped, same
+   "Unknown source"/"No business unit set" convention used elsewhere in this
+   app) without implying they're driver scorecards. */
+.fleet-shared-card { grid-column: 1 / -1; }
+.fleet-shared-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.fleet-shared-row { display: flex; flex-direction: column; gap: 4px; }
+.fleet-shared-name { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }

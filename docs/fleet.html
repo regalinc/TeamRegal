@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleet Scorecard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="fleet.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="assets/logo-color.png" alt="Regal Inc" class="logo logo-light" />
+      <img src="assets/logo-white.png" alt="Regal Inc" class="logo logo-dark" />
+      <h1>Fleet Scorecard</h1>
+    </div>
+    <div class="topbar-meta">
+      <a class="nav-link" href="index.html">Technician view</a>
+      <a class="nav-link" href="admin.html">Company view</a>
+      <select id="period-filter" aria-label="Period">
+        <option value="today">Today</option>
+        <option value="week">This week</option>
+        <option value="lastweek">Last week</option>
+        <option value="month">This month</option>
+        <option value="lastmonth">Last month</option>
+        <option value="ytd">Year to date</option>
+      </select>
+      <span id="sync-status" class="sync-status">Loading…</span>
+    </div>
+  </header>
+
+  <p class="fleet-data-note">
+    Driving data comes from Bouncie (vehicle GPS/OBD trackers), synced separately from Housecall Pro — see the README
+    for details. This feed is new: history builds up gradually from when syncing started rather than being available
+    for older periods right away.
+  </p>
+
+  <main id="app" class="fleet-page">
+    <p class="loading">Loading…</p>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="fleet.js"></script>
+</body>
+</html>

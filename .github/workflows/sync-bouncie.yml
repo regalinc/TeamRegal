@@ -1,0 +1,84 @@
+name: Sync Bouncie fleet data
+
+on:
+  schedule:
+    # Hourly, at :37 — offset from the Housecall Pro sync's :17 (see
+    # sync.yml) so the two hourly bot jobs don't both land in the same
+    # narrow window and contend for the same congested cron minutes GitHub's
+    # own docs warn about (see sync.yml's comment for the full context).
+    - cron: "37 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bouncie-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history, not the default shallow (fetch-depth: 1) clone —
+          # `git commit --amend` on a shallow checkout doesn't see the real
+          # parent commit and silently produces an orphaned (parentless)
+          # commit, which force-pushing would turn into a discarded branch
+          # history. Same reasoning as sync.yml.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run sync
+        env:
+          BOUNCIE_CLIENT_ID: ${{ secrets.BOUNCIE_CLIENT_ID }}
+          BOUNCIE_CLIENT_SECRET: ${{ secrets.BOUNCIE_CLIENT_SECRET }}
+          BOUNCIE_REFRESH_TOKEN: ${{ secrets.BOUNCIE_REFRESH_TOKEN }}
+        run: node scripts/sync-bouncie.js
+
+      # Bouncie's refresh token fully rotates (the old value stops working)
+      # every time it's used — unlike Housecall Pro's single static API key,
+      # there's no fixed secret to just reuse forever. scripts/sync-bouncie.js
+      # writes the brand new refresh token it got this run to
+      # $RUNNER_TEMP/bouncie-refresh-token.txt (never to a git-tracked
+      # path); this step immediately writes that value back to the
+      # BOUNCIE_REFRESH_TOKEN secret via the GitHub CLI (which handles the
+      # required encryption itself — no extra dependency needed for that)
+      # so the NEXT run has a valid token. If this step doesn't run, the
+      # next sync fails outright (an already-used refresh token is dead) —
+      # that's intentional fail-loud behavior rather than silently drifting
+      # onto a stale, invalid credential.
+      - name: Rotate BOUNCIE_REFRESH_TOKEN secret
+        env:
+          GH_TOKEN: ${{ secrets.SECRETS_ROTATE_PAT }}
+        run: gh secret set BOUNCIE_REFRESH_TOKEN --repo "${{ github.repository }}" < "$RUNNER_TEMP/bouncie-refresh-token.txt"
+
+      - name: Commit updated data
+        run: |
+          git config user.name "bouncie-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/data/bouncie.json
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+
+          # Same amend-vs-fresh-commit convention as sync.yml, generalized:
+          # only amend if HEAD is EXACTLY this workflow's own prior commit
+          # (matched by its exact message) — a real commit, or the other
+          # bot's commit, always gets a fresh commit stacked on top instead
+          # of being clobbered. --force-with-lease (not --force) means a
+          # push that races with the other bot's sync landing in between
+          # fails safely rather than overwriting it; the next scheduled run
+          # just tries again against the new tip.
+          if [ "$(git log -1 --pretty=%s)" = "Sync Bouncie data [skip ci]" ] && git rev-parse -q --verify HEAD^ >/dev/null; then
+            git commit --amend -q -m "Sync Bouncie data [skip ci]"
+            git push --force-with-lease origin HEAD:main
+          else
+            git commit -q -m "Sync Bouncie data [skip ci]"
+            git push origin HEAD:main
+          fi

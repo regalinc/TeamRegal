@@ -180,6 +180,62 @@ const INSTALLATION_TEAM_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold",
 const INSTALLATION_TEAM_MANAGER_ID = "pro_3f2297b66a9742d09eaf20976a20183a"; // Rodney Glatfelter
 const INSTALLATION_TEAM_REVENUE_TECH_IDS = new Set([...INSTALLATION_TEAM_TECH_IDS, INSTALLATION_TEAM_MANAGER_ID]);
 
+// Maps a Bouncie-tracked vehicle (by IMEI) to the Housecall Pro technician
+// who drives it, so fleet.js can show driving-behavior stats grouped by
+// tech instead of by vehicle. Bouncie has no concept of "employee" at all —
+// it only knows vehicles — so this is a plain manual list, same pattern as
+// MANUAL_AVATAR_OVERRIDES/INSTALLATION_TEAM_TECH_IDS above. Built by
+// matching each vehicle's Bouncie nickName against the Housecall Pro
+// roster — most vehicles are already literally nicknamed with the driver's
+// name in Bouncie's own system, which made this a name-match rather than a
+// guess (one exception: Bouncie's "Pete Lilac" is a typo for Pete Lalic,
+// confirmed by matching his vehicle's assignment rather than the name
+// string). A handful of shared/utility vehicles (Spare 16, Spare #24, Jet
+// Truck, Liner Truck, Box Delivery, Liftgate Truck) aren't driven by one
+// person and are deliberately mapped to null rather than omitted, so a
+// lookup miss reads as "confirmed shared vehicle" rather than "not
+// mapped yet." A reassigned or newly-added vehicle needs an entry
+// added/updated here by hand — nothing here checks that automatically.
+const BOUNCIE_VEHICLE_TECH_IDS = {
+  "352602114569103": "pro_eb9324081cb94741812e207380d65695", // Ryan Dubbs
+  "352602114569707": "pro_9a3f2249ef464465a1522f4a3ccfef5a", // Brandon Soltes
+  "352602114574376": "pro_0c24f7fb4b534fde920650a76dc8365f", // Hector Rivera
+  "862255068857876": "pro_eb35c4da7a0c4a41bc3936da4d71da20", // Devin McNutt
+  "862255068864591": "pro_83a3e6de7d2d4d3396c7c5dfa42482f0", // Derick Wilt
+  "862255068902755": "pro_8fc589c75489437bb66ff45ca0aea7ac", // Aidan Shaull
+  "862255068923033": "pro_ca120cbb55fa40fe9361d492161b101f", // Andrew Rouscher
+  "864486066508249": "pro_e328d4cad27249d48750d091fd1faa3b", // Max Murog
+  "864486066579554": "pro_a147eea604e04ccfa458813cf1b374f0", // Daniel Ahearn
+  "864486067218087": "pro_8d943eadd54f485b9dba4296c807fb8f", // Josh McDonald
+  "864486067735866": "pro_3f2297b66a9742d09eaf20976a20183a", // Rodney Glatfelter
+  "864486067935557": "pro_79f4ca1c644741dc89563174e5b5d4fa", // Jason Smeltzer
+  "864486068446786": null, // Spare 16
+  "865612071528497": null, // Jet Truck
+  "865612072067248": "pro_23fac61aafad4b4fa31992b5efaafae9", // Kevin Carter
+  "865612072443787": "pro_7c54b30de89c4b6ea22a9053f0662f3d", // Juan Puello
+  "865612072508498": "pro_1b87fcb406c9484b84e8fccd6f2c777b", // Benjamin Murphy
+  "866016061240825": "pro_62aa1ba4432340829b0aba02abd1d307", // Josh Zieger
+  "868199050009993": "pro_c45a8b2541c64ac4b0f305364c5f5295", // Christian Glatfelter
+  "868199050010215": "pro_d67d4e694a8c4bbdaba6801433d3bc20", // Kevin Schrum
+  "868199050011171": "pro_aab24498cf6e4c46844bddcbc7161f26", // Brandon DiPangrazio
+  "868199050012070": "pro_8e95601ea8db4c5193be8f19fb319a44", // Pete Lalic (Bouncie nickname: "Pete Lilac")
+  "868199050016543": "pro_27fcce8f21bc4186b44abe4d9a87c03f", // Nick Webb
+  "868199050019885": null, // Spare #24
+  "868199050020511": "pro_add4ba12688e47c696e827fb91a7d9fd", // Josh Miller
+  "868199050033175": "pro_8a84b31fc8b64893b17a0ca1bc133778", // Damien Cedrone
+  "868199050038745": "pro_5c675ceab86d44cfbe75a1bfe6ecb25d", // Dakota Shelley
+  "868199050058552": null, // Liner Truck
+  "868199050091579": "pro_048a0f2df6b2480aaa1a1ae03924fa9e", // Mark Zink
+  "868199050091991": null, // Box Delivery
+  "868199050092429": "pro_1526b39a952147619f19902966416543", // Justin Baker
+  "868199050092544": "pro_878f7465a7ae48a39312d99aedaa3fd1", // Bradley Adams
+  "868199050179739": "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68", // Jacob Harvey
+  "868199050185405": "pro_4a63b04bb5a64d97b8e1728dd8ea77fb", // Roger Renoll
+  "868923055376903": null, // Liftgate Truck
+  "868923055438364": "pro_7ccf9b4457bb40ecbb84540d250950e1", // Korry Dunkle
+  "868923055442135": "pro_9b6be6b8146547fabe281dac539e3f28", // Ben Aston
+};
+
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full
