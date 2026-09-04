@@ -1,5 +1,49 @@
 [
   {
+    "id": "csr_5a2dba5b66f54ed9af0dae3f8a39f67e",
+    "estimate_number": "13301",
+    "customer_label": "Michael R.",
+    "created_at": "2026-09-04T19:06:11Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_49be2e7a2cb042798da602b63da74f98",
+    "estimate_number": "13300",
+    "customer_label": "Eastside Assembly O.",
+    "created_at": "2026-09-04T18:47:12Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_925cc0dfc3f64a7b9a150ba434303f4e",
     "estimate_number": "13299",
     "customer_label": "Ernestine A.",
