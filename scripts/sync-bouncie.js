@@ -27,12 +27,6 @@ const CLIENT_ID = process.env.BOUNCIE_CLIENT_ID;
 const CLIENT_SECRET = process.env.BOUNCIE_CLIENT_SECRET;
 const REFRESH_TOKEN = process.env.BOUNCIE_REFRESH_TOKEN;
 
-// Bouncie validates this against the app's registered Redirect URI on a
-// refresh_token grant too (even though, per Bouncie's own docs, no actual
-// redirect happens for this grant type) — must exactly match what's set on
-// the Bouncie Developer Portal for the "regal-vehicle-matrix" app.
-const REDIRECT_URI = "www.regalofyork.com";
-
 const OUT_DIR = path.join(__dirname, "..", "docs", "data");
 const OUT_FILE = path.join(OUT_DIR, "bouncie.json");
 
@@ -70,7 +64,6 @@ async function refreshAccessToken() {
       client_secret: CLIENT_SECRET,
       grant_type: "refresh_token",
       refresh_token: REFRESH_TOKEN,
-      redirect_uri: REDIRECT_URI,
     }),
   });
   if (!res.ok) {
