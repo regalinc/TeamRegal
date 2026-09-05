@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-05T20:40:34.804Z",
+    "last_synced_at": "2026-09-05T23:12:58.381Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 732
+    "trip_count": 733
   },
   "vehicles": [
     {
@@ -71,7 +71,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 70071.59999999977
+      "odometer": 70094.79999999977
     },
     {
       "imei": "862255068923033",
@@ -416,6 +416,18 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "862255068902755-3999-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-05T21:58:34.000Z",
+      "endTime": "2026-09-05T22:36:33.000Z",
+      "distance": 23.2,
+      "averageSpeed": 42.2,
+      "maxSpeed": 71.457665,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 302
+    },
     {
       "transactionId": "868199050011171-11433-202609",
       "imei": "868199050011171",
