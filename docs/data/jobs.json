@@ -298248,6 +298248,34 @@
     "updated_at": "2026-09-04T17:41:23Z"
   },
   {
+    "id": "job_f5ebdd3a92c64b4595e93b4bfbc5c2c7",
+    "description": "30 - Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Teresa W.",
+    "city": "Dover",
+    "state": "PA",
+    "zip": "17315",
+    "schedule": {
+      "scheduled_start": "2026-09-05T12:00:00Z",
+      "scheduled_end": "2026-09-05T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-05T08:00:00-04:00",
+      "scheduled_end_local": "2026-09-05T10:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "tags": [],
+    "business_unit": null,
+    "lead_source": "FF Kling",
+    "total_amount": 20315,
+    "outstanding_balance": 20315,
+    "completed_at": null,
+    "updated_at": "2026-09-05T12:28:52Z"
+  },
+  {
     "id": "job_ca427f347adf4b1988cc8f91ef8d95f8",
     "description": "Visit #2",
     "work_status": "scheduled",
