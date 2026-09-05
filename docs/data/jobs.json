@@ -298334,6 +298334,34 @@
     "updated_at": "2026-09-05T18:59:37Z"
   },
   {
+    "id": "job_4271fd817e1542eebb649e871a55941b",
+    "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Diane G.",
+    "city": "Manchester",
+    "state": "PA",
+    "zip": "17345",
+    "schedule": {
+      "scheduled_start": "2026-09-05T22:00:00Z",
+      "scheduled_end": "2026-09-06T00:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-05T18:00:00-04:00",
+      "scheduled_end_local": "2026-09-05T20:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "tags": [],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 53037,
+    "outstanding_balance": 53037,
+    "completed_at": null,
+    "updated_at": "2026-09-05T22:39:48Z"
+  },
+  {
     "id": "job_ca427f347adf4b1988cc8f91ef8d95f8",
     "description": "Visit #2",
     "work_status": "scheduled",
