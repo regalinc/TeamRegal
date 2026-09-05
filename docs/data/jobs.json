@@ -104944,7 +104944,7 @@
   {
     "id": "job_822b2e39ed514e2da32ea81ba736ebdc",
     "description": "Visit #1",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Teresa W.",
     "city": "Dover",
     "state": "PA",
@@ -104967,7 +104967,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-04-16T14:30:01Z",
-    "updated_at": "2026-04-16T16:00:23Z"
+    "updated_at": "2026-09-05T13:17:00Z"
   },
   {
     "id": "job_9e5a81929c704d02b3bf7fbb3d74814f",
@@ -291636,7 +291636,7 @@
   {
     "id": "job_436c49d356214be5b41a0117012cba88",
     "description": "30 - RCC Whole Home Waived Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Johanna P.",
     "city": "York",
     "state": "PA",
@@ -291663,7 +291663,7 @@
     "total_amount": 51942,
     "outstanding_balance": 0,
     "completed_at": "2026-08-27T14:37:47Z",
-    "updated_at": "2026-08-28T13:05:07Z"
+    "updated_at": "2026-09-05T16:10:33Z"
   },
   {
     "id": "job_cb971586f1c840c1a24d803a4d3beb0f",
@@ -298250,7 +298250,7 @@
   {
     "id": "job_f5ebdd3a92c64b4595e93b4bfbc5c2c7",
     "description": "30 - Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Teresa W.",
     "city": "Dover",
     "state": "PA",
@@ -298268,12 +298268,68 @@
       "pro_aab24498cf6e4c46844bddcbc7161f26"
     ],
     "tags": [],
-    "business_unit": null,
+    "business_unit": "30 HVAC SERVICE",
     "lead_source": "FF Kling",
-    "total_amount": 20315,
-    "outstanding_balance": 20315,
+    "total_amount": 49989,
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-05T13:17:00Z",
+    "updated_at": "2026-09-05T13:17:14Z"
+  },
+  {
+    "id": "job_6733bdc7a7664dfd9bf1e11eb5c621e3",
+    "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Johanna P.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17406",
+    "schedule": {
+      "scheduled_start": "2026-09-05T15:00:00Z",
+      "scheduled_end": "2026-09-05T17:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-05T11:00:00-04:00",
+      "scheduled_end_local": "2026-09-05T13:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "tags": [],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 37800,
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-05T16:10:33Z",
+    "updated_at": "2026-09-05T16:10:33Z"
+  },
+  {
+    "id": "job_a0da427e1b2f4c14b259c61b610405cf",
+    "description": "70 - Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Steve B.",
+    "city": "Manchester",
+    "state": "PA",
+    "zip": "17345",
+    "schedule": {
+      "scheduled_start": "2026-09-05T16:00:00Z",
+      "scheduled_end": "2026-09-05T18:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-05T12:00:00-04:00",
+      "scheduled_end_local": "2026-09-05T14:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "tags": [],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": "FF Kling",
+    "total_amount": 70355,
+    "outstanding_balance": 70355,
     "completed_at": null,
-    "updated_at": "2026-09-05T12:28:52Z"
+    "updated_at": "2026-09-05T16:58:44Z"
   },
   {
     "id": "job_ca427f347adf4b1988cc8f91ef8d95f8",
