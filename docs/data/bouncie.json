@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-05T16:14:01.584Z",
+    "last_synced_at": "2026-09-05T18:32:34.546Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 725
+    "trip_count": 728
   },
   "vehicles": [
     {
@@ -71,7 +71,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 70042.19999999978
+      "odometer": 70047.69999999978
     },
     {
       "imei": "862255068923033",
@@ -417,11 +417,52 @@
   ],
   "trips": [
     {
+      "transactionId": "862255068857876-3448-202609",
+      "imei": "862255068857876",
+      "startTime": "2026-09-05T17:29:36.000Z",
+      "endTime": "2026-09-05T17:29:54.000Z",
+      "distance": 0,
+      "averageSpeed": 1.2,
+      "maxSpeed": 1.242742,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 5
+    },
+    {
+      "transactionId": "862255068857876-3447-202609",
+      "imei": "862255068857876",
+      "startTime": "2026-09-05T16:31:33.000Z",
+      "endTime": "2026-09-05T16:36:57.000Z",
+      "distance": 0,
+      "averageSpeed": 1.2,
+      "maxSpeed": 3.106855,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 314
+    },
+    {
+      "transactionId": "862255068864591-4815-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-05T16:15:08.000Z",
+      "endTime": "2026-09-05T16:15:42.000Z",
+      "distance": 0,
+      "averageSpeed": 3.1,
+      "maxSpeed": 4.349597,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 5
+    },
+    {
       "transactionId": "862255068902755-3996-202609",
       "imei": "862255068902755",
       "startTime": "2026-09-05T16:06:03.000Z",
+      "endTime": "2026-09-05T16:35:11.000Z",
+      "distance": 5.5,
+      "averageSpeed": 32.9,
+      "maxSpeed": 49.70968,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1146
     },
     {
       "transactionId": "862255068857876-3446-202609",
