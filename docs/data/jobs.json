@@ -283730,9 +283730,9 @@
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 72813,
-    "outstanding_balance": 72813,
+    "outstanding_balance": 0,
     "completed_at": "2026-09-04T18:58:49Z",
-    "updated_at": "2026-09-04T19:07:29Z"
+    "updated_at": "2026-09-05T18:33:08Z"
   },
   {
     "id": "job_44d9b97a95ee4413a1b624e005c6478f",
@@ -298306,7 +298306,7 @@
   {
     "id": "job_a0da427e1b2f4c14b259c61b610405cf",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Steve B.",
     "city": "Manchester",
     "state": "PA",
@@ -298323,13 +298323,15 @@
     "assigned_employee_ids": [
       "pro_8fc589c75489437bb66ff45ca0aea7ac"
     ],
-    "tags": [],
+    "tags": [
+      "HVAC Installation"
+    ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": "FF Kling",
     "total_amount": 70355,
-    "outstanding_balance": 70355,
-    "completed_at": null,
-    "updated_at": "2026-09-05T16:58:44Z"
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-05T18:59:37Z",
+    "updated_at": "2026-09-05T18:59:37Z"
   },
   {
     "id": "job_ca427f347adf4b1988cc8f91ef8d95f8",
