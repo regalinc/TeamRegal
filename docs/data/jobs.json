@@ -178390,7 +178390,7 @@
   {
     "id": "job_8d534a6512384c73ab8da231eda33c92",
     "description": "Visit #4",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Sharon B.",
     "city": "York",
     "state": "PA",
@@ -178416,7 +178416,7 @@
     "total_amount": 19830,
     "outstanding_balance": 0,
     "completed_at": "2026-06-10T16:52:05Z",
-    "updated_at": "2026-06-12T00:38:13Z"
+    "updated_at": "2026-09-05T00:55:44Z"
   },
   {
     "id": "job_3b9c0f1bec1348f3b98ecd95e483e805",
@@ -288050,9 +288050,9 @@
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 110958,
-    "outstanding_balance": 55479,
+    "outstanding_balance": 0,
     "completed_at": "2026-08-28T19:25:30Z",
-    "updated_at": "2026-09-04T19:31:59Z"
+    "updated_at": "2026-09-05T00:24:47Z"
   },
   {
     "id": "job_c3665dd845494d4787227468dfb04a85",
@@ -297732,14 +297732,15 @@
     "tags": [
       "70",
       "Opportunity",
-      "Non-Member"
+      "Non-Member",
+      "Plumbing Attention"
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 42855,
     "outstanding_balance": 42855,
     "completed_at": "2026-09-04T15:50:25Z",
-    "updated_at": "2026-09-04T18:05:31Z"
+    "updated_at": "2026-09-05T00:53:27Z"
   },
   {
     "id": "job_504ece29464747db97f418ce8ec3e6d7",
@@ -298090,7 +298091,7 @@
   {
     "id": "job_a10c647db5bd4556ba19ab69593cb48f",
     "description": "70 - RCC Initial Service Fee",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Sharon B.",
     "city": "York",
     "state": "PA",
@@ -298111,14 +298112,16 @@
     ],
     "tags": [
       "70",
-      "Opportunity"
+      "Opportunity",
+      "Plumbing Attention",
+      "Plumbing Parts"
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": "Word of Mouth - Neighbor/Friend",
-    "total_amount": 94765,
-    "outstanding_balance": 94765,
-    "completed_at": null,
-    "updated_at": "2026-09-04T22:41:16Z"
+    "total_amount": 85734,
+    "outstanding_balance": 85734,
+    "completed_at": "2026-09-05T00:55:44Z",
+    "updated_at": "2026-09-05T00:55:44Z"
   },
   {
     "id": "job_e61b011cfb3d45d798b191b1f940a6aa",
