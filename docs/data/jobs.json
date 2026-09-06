@@ -298362,6 +298362,34 @@
     "updated_at": "2026-09-06T00:06:49Z"
   },
   {
+    "id": "job_604c00b5a5d84a23a0c5437897d5cab5",
+    "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "David T.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17401",
+    "schedule": {
+      "scheduled_start": "2026-09-06T13:30:00Z",
+      "scheduled_end": "2026-09-06T15:30:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-06T09:30:00-04:00",
+      "scheduled_end_local": "2026-09-06T11:30:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "tags": [],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 27600,
+    "outstanding_balance": 27600,
+    "completed_at": null,
+    "updated_at": "2026-09-06T16:08:02Z"
+  },
+  {
     "id": "job_ca427f347adf4b1988cc8f91ef8d95f8",
     "description": "Visit #2",
     "work_status": "scheduled",
