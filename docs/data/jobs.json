@@ -264963,7 +264963,7 @@
   {
     "id": "job_a72c04c58e784a198e4d4100863f8c26",
     "description": "Billing - 30 HVAC Service",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Larry H.",
     "city": "York",
     "state": "PA",
@@ -264990,7 +264990,7 @@
     "total_amount": 0,
     "outstanding_balance": -8900,
     "completed_at": "2026-08-10T20:46:41Z",
-    "updated_at": "2026-08-11T11:49:53Z"
+    "updated_at": "2026-09-06T18:45:27Z"
   },
   {
     "id": "job_50fcb6d77203478ca1f7d4e87ac744d4",
@@ -298364,7 +298364,7 @@
   {
     "id": "job_604c00b5a5d84a23a0c5437897d5cab5",
     "description": "70 - RCC Whole Home Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "David T.",
     "city": "York",
     "state": "PA",
@@ -298381,13 +298381,43 @@
     "assigned_employee_ids": [
       "pro_8fc589c75489437bb66ff45ca0aea7ac"
     ],
-    "tags": [],
+    "tags": [
+      "Plumbing Attention"
+    ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 27600,
-    "outstanding_balance": 27600,
-    "completed_at": null,
-    "updated_at": "2026-09-06T16:08:02Z"
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-06T17:18:48Z",
+    "updated_at": "2026-09-06T17:18:48Z"
+  },
+  {
+    "id": "job_49b47edabee945b1b58df39e7ea58923",
+    "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Larry H.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17404",
+    "schedule": {
+      "scheduled_start": "2026-09-06T18:00:00Z",
+      "scheduled_end": "2026-09-06T20:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-06T14:00:00-04:00",
+      "scheduled_end_local": "2026-09-06T16:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "tags": [],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
+    "total_amount": 8900,
+    "outstanding_balance": 8900,
+    "completed_at": "2026-09-06T18:45:27Z",
+    "updated_at": "2026-09-06T18:45:27Z"
   },
   {
     "id": "job_ca427f347adf4b1988cc8f91ef8d95f8",
