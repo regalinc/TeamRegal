@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-06T14:22:11.675Z",
+    "last_synced_at": "2026-09-06T17:19:05.401Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 737
+    "trip_count": 740
   },
   "vehicles": [
     {
@@ -71,7 +71,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 70130.29999999977
+      "odometer": 70135.99999999977
     },
     {
       "imei": "862255068923033",
@@ -416,6 +416,37 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "862255068902755-4005-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-06T17:14:43.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "862255068902755-4004-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-06T15:51:53.000Z",
+      "endTime": "2026-09-06T15:59:39.000Z",
+      "distance": 2.2,
+      "averageSpeed": 19.2,
+      "maxSpeed": 35.4,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 53
+    },
+    {
+      "transactionId": "862255068902755-4003-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-06T15:31:22.000Z",
+      "endTime": "2026-09-06T15:43:04.000Z",
+      "distance": 3.5,
+      "averageSpeed": 24.2,
+      "maxSpeed": 46.602825,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 172
+    },
     {
       "transactionId": "862255068902755-4002-202609",
       "imei": "862255068902755",
