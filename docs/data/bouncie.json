@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-08T05:07:26.721Z",
+    "last_synced_at": "2026-09-08T10:02:54.808Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 750
+    "trip_count": 754
   },
   "vehicles": [
     {
@@ -126,7 +126,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 14998
+      "odometer": 15006.7
     },
     {
       "imei": "864486067935557",
@@ -416,6 +416,44 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "352602114569103-7491-202609",
+      "imei": "352602114569103",
+      "startTime": "2026-09-08T09:56:56.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "862255068864591-4816-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-08T09:41:01.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "864486067735866-1916-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-08T09:07:48.000Z",
+      "endTime": "2026-09-08T09:20:44.000Z",
+      "distance": 6.6,
+      "averageSpeed": 34.1,
+      "maxSpeed": 55.302019,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 84
+    },
+    {
+      "transactionId": "864486067735866-1915-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-08T08:53:44.000Z",
+      "endTime": "2026-09-08T08:58:50.000Z",
+      "distance": 1.9,
+      "averageSpeed": 24.2,
+      "maxSpeed": 46.602825,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 25
+    },
     {
       "transactionId": "864486066579554-3783-202609",
       "imei": "864486066579554",
