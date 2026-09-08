@@ -87,15 +87,31 @@ body {
   .logo-dark { display: block; }
 }
 
-.topbar-meta { display: flex; align-items: center; gap: 16px; }
+/* flex-wrap so nav buttons + the page's own selects/status reflow onto a
+   second line on a narrow window instead of overflowing the topbar and
+   getting clipped out of view — the earlier plain-text-link version had no
+   wrap here, so which links were actually visible could depend on window
+   width as much as which page you were on. */
+.topbar-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 
+/* Nav "buttons" — bordered chips matching the site's existing
+   .tech-select-toggle button styling, not just colored text, so cross-page
+   navigation reads as clickable controls at a glance. */
 .nav-link {
-  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
   text-decoration: none;
   font-size: 0.85rem;
+  font-weight: 500;
   white-space: nowrap;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
-.nav-link:hover { text-decoration: underline; }
+.nav-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 
 .filter-bar {
   display: flex;
