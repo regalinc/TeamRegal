@@ -42,6 +42,7 @@ const ringNumber = document.getElementById("ring-number");
 const ringFill = document.getElementById("ring-fill");
 const tileRan = document.getElementById("tile-ran");
 const tileSold = document.getElementById("tile-sold");
+const tileSoldNote = document.getElementById("tile-sold-note");
 const recordListCard = document.getElementById("record-list-card");
 const recordListSummary = document.getElementById("record-list-summary");
 const recordListBody = document.getElementById("record-list-body");
@@ -97,34 +98,64 @@ function renderLargeAvatar(tech) {
   `;
 }
 
-// {ran, sold, rate} per distinct value of `field` among the given records —
-// used for the Club Member / Lead / Customer Type breakdowns. A record with
-// no value for that field (the two "not sold" rows in the source data that
-// never got a System Type/lead filled in) is grouped under "Unknown" rather
-// than dropped, same "never silently drop data" convention the rest of this
-// app uses (e.g. "Unknown source"/"No business unit set").
-function closingRateBreakdown(records, field) {
-  const groups = new Map();
-  for (const r of records) {
-    const key = r[field] || "Unknown";
-    if (!groups.has(key)) groups.set(key, { ran: 0, sold: 0 });
-    const g = groups.get(key);
-    g.ran++;
-    if (r.sold) g.sold++;
+// Housecall Pro's "Job #" (invoice_number, synced by scripts/sync.js) is
+// the same number staff already type into the spreadsheet's "Job" column
+// once something sells — an exact join key, unlike matching by customer
+// name (privacy-masked in synced data, see the README's "HVAC Sales
+// scorecard" section for the fuller story on why that path was rejected).
+function buildJobsByInvoiceNumber(jobs) {
+  const map = new Map();
+  for (const j of jobs) {
+    if (j.invoice_number) map.set(String(j.invoice_number).trim(), j);
   }
+  return map;
+}
+
+// A job created via the OnCall Air integration is created the moment the
+// proposal is accepted — so a matched job's created_at is effectively "the
+// day it actually sold," which can land in a different month than the
+// original consultation (schedule.scheduled_start on that job is the
+// *install* date, not the sale date, and isn't used here). Falls back to
+// the row's own consultation date when there's no Job number yet to join
+// on (not sold, or sold but not typed in yet) — same period for both ran
+// and sold in that case, matching this page's original behavior exactly
+// rather than silently losing the record from either count.
+function resolveSoldDate(record, jobsByInvoiceNumber) {
+  if (!record.sold) return null;
+  const job = record.job ? jobsByInvoiceNumber.get(String(record.job).trim()) : null;
+  return (job && job.created_at) || record.date;
+}
+
+// {ran, sold, rate} per distinct value of `field` — ran and sold are two
+// independently-dated sets now (see resolveSoldDate above), not one set
+// counted two ways, so a sold job that ran in an earlier period still
+// counts toward this period's "sold" even though it's absent from this
+// period's "ran". Same convention as Andrew Rouscher's page: rate is a
+// simple sold-count ÷ ran-count ratio of two independent counts, not a
+// strict per-record cohort conversion rate. A record with no value for
+// `field` (the "not sold" rows that never got a System Type/lead filled
+// in) is grouped under "Unknown" rather than dropped, same "never silently
+// drop data" convention the rest of this app uses.
+function closingRateBreakdown(ranRecords, soldRecords, field) {
+  const groups = new Map();
+  const bump = (key, which) => {
+    if (!groups.has(key)) groups.set(key, { ran: 0, sold: 0 });
+    groups.get(key)[which]++;
+  };
+  for (const r of ranRecords) bump(r[field] || "Unknown", "ran");
+  for (const r of soldRecords) bump(r[field] || "Unknown", "sold");
   return [...groups.entries()]
     .map(([label, g]) => ({ label, ran: g.ran, sold: g.sold, rate: g.ran ? (g.sold / g.ran) * 100 : 0 }))
     .sort((a, b) => b.ran - a.ran);
 }
 
-// Sold-job counts per System Type — a count, not a rate (System Type is
-// only meaningfully known once a job is sold; most "not sold" rows never
-// got one filled in at all, so a "ran" denominator here wouldn't mean the
-// same thing it does for the other three breakdowns).
-function systemTypeBreakdown(records) {
+// Sold-job counts per System Type, from the sold-this-period set (see
+// resolveSoldDate above) — a count, not a rate (System Type is only
+// meaningfully known once a job sells, so a "ran" denominator wouldn't
+// mean the same thing it does for the other three breakdowns).
+function systemTypeBreakdown(soldRecords) {
   const counts = new Map();
-  for (const r of records) {
-    if (!r.sold) continue;
+  for (const r of soldRecords) {
     const key = r.systemType || "Unknown";
     counts.set(key, (counts.get(key) || 0) + 1);
   }
@@ -171,7 +202,15 @@ function renderSystemTypeBreakdown(rows) {
 }
 
 function renderRecordRow(r) {
-  const meta = [formatDate(r.date), r.lead, r.systemType].filter(Boolean).join(" · ");
+  // Both dates explicitly labeled once they can actually differ (a sold
+  // job whose Job # matched a Housecall Pro job created on a later date
+  // than the consultation) — a bare date would be ambiguous about which
+  // one it is, same reasoning as andrew.js's estimate rows.
+  const dateParts = [`Ran ${formatDate(r.date)}`];
+  if (r.sold && r.soldDateResolved && r.soldDateResolved !== r.date) {
+    dateParts.push(`Sold ${formatDate(r.soldDateResolved)}`);
+  }
+  const meta = [dateParts.join(" · "), r.lead, r.systemType].filter(Boolean).join(" · ");
   return `
     <div class="record-row">
       <div class="record-left">
@@ -208,11 +247,18 @@ function render() {
   identityName.textContent = tech.name || CA;
   avatarSlot.innerHTML = renderLargeAvatar(tech);
 
-  const mine = (latestSales.records || []).filter((r) => r.ca === CA);
-  const inPeriod = mine.filter((r) => dateInPeriod(r.date, currentPeriod));
+  const jobsByInvoiceNumber = buildJobsByInvoiceNumber(latestDashboard.jobs || []);
+  const mine = (latestSales.records || []).map((r) => ({ ...r, soldDateResolved: resolveSoldDate(r, jobsByInvoiceNumber) })).filter((r) => r.ca === CA);
 
-  const ran = inPeriod.length;
-  const sold = inPeriod.filter((r) => r.sold).length;
+  // Two independently-dated views of the same roster (see resolveSoldDate):
+  // "ran" by the consultation date, "sold" by the resolved sold date — a
+  // job sold this period can be present in one set and absent from the
+  // other, same as Andrew Rouscher's given/approved split.
+  const ranInPeriod = mine.filter((r) => dateInPeriod(r.date, currentPeriod));
+  const soldInPeriod = mine.filter((r) => r.sold && dateInPeriod(r.soldDateResolved, currentPeriod));
+
+  const ran = ranInPeriod.length;
+  const sold = soldInPeriod.length;
   const closingRate = ran ? (sold / ran) * 100 : 0;
 
   const meta = periodMeta(currentPeriod);
@@ -227,13 +273,25 @@ function render() {
 
   tileRan.textContent = ran.toLocaleString();
   tileSold.textContent = sold.toLocaleString();
+  // Of this period's sold count, however many actually ran in some other
+  // period — the same "given earlier" transparency Andrew Rouscher's page
+  // surfaces for the identical situation, so the number never looks like
+  // it disagrees with the record list below it.
+  const soldFromEarlierCount = soldInPeriod.filter((r) => !dateInPeriod(r.date, currentPeriod)).length;
+  tileSoldNote.textContent = soldFromEarlierCount > 0 ? `incl. ${soldFromEarlierCount} from an earlier period` : "";
 
-  renderRateBreakdown("breakdown-club-member", closingRateBreakdown(inPeriod, "clubMember"));
-  renderRateBreakdown("breakdown-lead", closingRateBreakdown(inPeriod, "lead"));
-  renderRateBreakdown("breakdown-customer-type", closingRateBreakdown(inPeriod, "customerType"));
-  renderSystemTypeBreakdown(systemTypeBreakdown(inPeriod));
+  renderRateBreakdown("breakdown-club-member", closingRateBreakdown(ranInPeriod, soldInPeriod, "clubMember"));
+  renderRateBreakdown("breakdown-lead", closingRateBreakdown(ranInPeriod, soldInPeriod, "lead"));
+  renderRateBreakdown("breakdown-customer-type", closingRateBreakdown(ranInPeriod, soldInPeriod, "customerType"));
+  renderSystemTypeBreakdown(systemTypeBreakdown(soldInPeriod));
 
-  const sorted = [...inPeriod].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  // Union, not just "ran this period" — a job sold this period but run
+  // earlier belongs in the list too, or the record list would silently
+  // disagree with the Sold tile/note above it. Records are unique object
+  // references (one per source row, freshly mapped above), so a plain Set
+  // dedupes a row present in both sets without needing a synthetic id.
+  const listRecords = [...new Set([...ranInPeriod, ...soldInPeriod])];
+  const sorted = listRecords.sort((a, b) => (b.soldDateResolved || b.date || "").localeCompare(a.soldDateResolved || a.date || ""));
   recordListSummary.textContent = `${sorted.length} opportunit${sorted.length === 1 ? "y" : "ies"} in view`;
   recordListBody.innerHTML = sorted.length ? sorted.map(renderRecordRow).join("") : '<div class="no-records">No opportunities match this period.</div>';
 }

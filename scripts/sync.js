@@ -283,6 +283,20 @@ function toPublicJob(job) {
     outstanding_balance: typeof job.outstanding_balance === "number" ? job.outstanding_balance : 0,
     completed_at: job.work_timestamps?.completed_at || null,
     updated_at: job.updated_at,
+    // The human-facing "Job #" shown in Housecall Pro's own UI (same number
+    // as QuickBooks' invoice number) — distinct from the opaque internal
+    // `id` above. Lets hvac-sales.js join a spreadsheet row's manually-typed
+    // "Job" number back to this exact job, rather than guessing off a
+    // privacy-masked customer name. String, not number — seen as e.g.
+    // "51731" but not guaranteed to stay purely numeric forever.
+    invoice_number: job.invoice_number || null,
+    // When this job record was actually created in Housecall Pro — for a
+    // job created via the OnCall Air integration, this is effectively "the
+    // day the proposal was accepted," which can be well after the original
+    // sales-call date (schedule.scheduled_start here is the *install* date,
+    // not the sale date). hvac-sales.js uses this, not scheduled_start, to
+    // attribute a sold job to the month it actually sold in.
+    created_at: job.created_at || null,
   };
 }
 
