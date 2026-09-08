@@ -194,6 +194,36 @@ body {
 
 .tv-empty { padding: 8vh 2.5vw; text-align: center; color: var(--text-muted); font-size: clamp(16px, 2.5vh, 32px); }
 
+/* Fleet Safety TV's Top 5 Safest / Needs Attention split (fleet-tv.js) —
+   two of these dropped straight into the existing .tv-main flex row (same
+   container tv.js's featured-card + list layout uses), each reusing
+   .tv-row/.tv-row-photo/.tv-row-rank wholesale — just a single Safety Score
+   number per row (.tv-fleet-score) instead of a tile grid, since this
+   screen is deliberately just the at-a-glance highlight; full per-metric
+   detail lives on fleet.html. --row-count is fixed at 5 (not the actual
+   entry count) so row height stays consistent between the two columns even
+   when one side has fewer than 5 people (common while Bouncie's trip
+   history is still building up). */
+.tv-fleet-column { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.tv-fleet-column-title {
+  font-size: clamp(18px, 2.6vh, 36px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-bottom: 1.5vh;
+}
+.tv-fleet-best .tv-fleet-column-title { color: var(--good-bg); }
+.tv-fleet-worst .tv-fleet-column-title { color: var(--bad-bg); }
+.tv-fleet-score {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: clamp(20px, calc(9vh / var(--row-count, 5)), 48px);
+  flex-shrink: 0;
+}
+.tv-fleet-best .tv-fleet-score { color: var(--good-bg); }
+.tv-fleet-worst .tv-fleet-score { color: var(--bad-bg); }
+
 /* HVAC Installation's team screen (renderInstallationTeamScreen, tv.js) —
    no individual ranking, so this is one large centered block filling
    .tv-main instead of the featured-card + list split every other screen

@@ -1,9 +1,14 @@
 // Fleet Safety TV kiosk — a "best driver / worst driver" leaderboard built
-// from Bouncie driving-behavior data (docs/data/bouncie.json), same overall
-// shape as tv.js's technician screens (featured #1 card + ranked list,
-// reusing renderAvatarBlock/tvTile from shared.js and tv.css's classes
-// wholesale) but scoped to drivers across every department rather than one
-// business unit, since a fleet doesn't map onto tv.js's per-BU screens.
+// from Bouncie driving-behavior data (docs/data/bouncie.json). Started as a
+// single featured-card-plus-ranked-list screen (tv.js's technician-screen
+// shape) covering the whole ~30-driver roster, but that read as too dense/
+// jumbled at a glance — narrowed to a Top 5 Safest / Needs Attention split
+// instead (two .tv-fleet-column panels dropped into the same .tv-main flex
+// row tv.js's featured+list layout already uses). Full per-driver detail —
+// the individual idle/speeding/braking/accel numbers behind each score —
+// lives on fleet.html for anyone who wants to review it; this screen is
+// deliberately just the at-a-glance highlight now, not a data table.
+// Reuses renderAvatarBlock() from shared.js and tv.css's classes.
 //
 // Every metric here is graded RELATIVE TO THE REST OF THE ROSTER this
 // period (top third = green, middle = amber, bottom third = red), not
@@ -21,8 +26,6 @@ const SPEEDING_THRESHOLD_MPH = 75;
 // weighted for this first pass — no weighting was specified, and there's
 // no basis yet to prefer one over another.
 const SAFETY_METRIC_KEYS = ["idlePct", "brakingRate", "accelRate", "speedingRate"];
-
-const PERIOD_LABELS = { today: "Today", week: "This week", lastweek: "Last week", month: "This month", lastmonth: "Last month", ytd: "Year to date" };
 
 const urlParams = new URLSearchParams(location.search);
 const PERIOD = urlParams.get("period") || "week";
@@ -133,53 +136,34 @@ function rankRoster(entries) {
   return entries;
 }
 
-function scoreClass(score) {
-  if (score === null) return null;
-  if (score >= 67) return "tv-good";
-  if (score >= 34) return "tv-warn";
-  return "tv-bad";
+// Showing all ~30 drivers at once (the original design, one long ranked
+// list) read as too dense/jumbled on an actual screen — management can
+// already review any individual driver's full numbers on fleet.html, so
+// this kiosk's job narrowed to just the at-a-glance highlight: who's doing
+// great, who needs attention. Just the composite Safety Score per person
+// now, not the 4 component tiles — full detail lives on the web page, not
+// repeated 10 times here.
+const SPLIT_SIZE = 5;
+
+// Splits a best-to-worst-sorted, already-scored list into a Top N / Bottom
+// N pair with no overlap — with fewer than 2*N scored drivers (the common
+// case right now, since Bouncie's history is still building up), showing a
+// straight top-N/bottom-N would put some people in both lists. Splits the
+// scored pool roughly in half instead so every scored driver appears
+// exactly once, capped at N per side. The "worst" list is reversed so its
+// own #1 is the single worst-scored driver, not the best-of-the-worst.
+function splitBestWorst(scoredEntries) {
+  const n = scoredEntries.length;
+  const bestCount = Math.min(SPLIT_SIZE, Math.ceil(n / 2));
+  const worstCount = Math.min(SPLIT_SIZE, n - bestCount);
+  return {
+    best: scoredEntries.slice(0, bestCount),
+    worst: scoredEntries.slice(n - worstCount).reverse(),
+  };
 }
 
-function fmtPct(v) {
-  return v === null ? "—" : `${v.toFixed(0)}%`;
-}
-function fmtRate(v) {
-  return v === null ? "—" : v.toFixed(1);
-}
-
-function metricTiles(entry, sizeClass) {
-  const { stats, tierByMetric, safetyScore } = entry;
-  const cls = { good: "tv-good", warn: "tv-warn", bad: "tv-bad" };
-  return [
-    tvTile("Safety score", safetyScore === null ? "—" : String(safetyScore), scoreClass(safetyScore), sizeClass),
-    tvTile("Idle time", fmtPct(stats.idlePct), tierByMetric.idlePct ? cls[tierByMetric.idlePct] : null, sizeClass),
-    tvTile("Speeding (75+)", fmtPct(stats.speedingRate), tierByMetric.speedingRate ? cls[tierByMetric.speedingRate] : null, sizeClass),
-    tvTile("Hard braking /100mi", fmtRate(stats.brakingRate), tierByMetric.brakingRate ? cls[tierByMetric.brakingRate] : null, sizeClass),
-    tvTile("Hard accel. /100mi", fmtRate(stats.accelRate), tierByMetric.accelRate ? cls[tierByMetric.accelRate] : null, sizeClass),
-    tvTile("Max speed", `${stats.maxSpeed.toFixed(0)} mph`, null, sizeClass),
-    tvTile("Miles", stats.miles.toFixed(0), null, sizeClass),
-    tvTile("Trips", stats.tripCount.toLocaleString(), null, sizeClass),
-  ].join("");
-}
-
-function renderFeatured(entry, periodLabel) {
-  const { tech, rank } = entry;
-  return `
-    <div class="tv-featured">
-      <div class="tv-featured-photo-wrap">
-        ${renderAvatarBlock(tech, "tv-featured-photo", "tv-featured-photo-fallback", { large: true })}
-      </div>
-      <div class="tv-featured-name">${escapeHtml(tech.name || "Unknown")}</div>
-      <div class="tv-featured-rank">#${rank} · ${escapeHtml(periodLabel)}</div>
-      <div class="tv-tile-grid">
-        ${metricTiles(entry)}
-      </div>
-    </div>
-  `;
-}
-
-function renderRow(entry) {
-  const { tech, rank } = entry;
+function renderFleetRow(entry, rank) {
+  const { tech, safetyScore } = entry;
   return `
     <div class="tv-row">
       <div class="tv-row-rank">#${rank}</div>
@@ -188,8 +172,17 @@ function renderRow(entry) {
         <div class="tv-row-name">${escapeHtml(tech.name || "Unknown")}</div>
         <div class="tv-row-meta">${escapeHtml(tech.role || "")}</div>
       </div>
-      <div class="tv-row-metrics">
-        ${metricTiles(entry, "tv-row-tile")}
+      <div class="tv-fleet-score">${safetyScore}</div>
+    </div>
+  `;
+}
+
+function renderColumn(title, side, entries) {
+  return `
+    <div class="tv-fleet-column tv-fleet-${side}">
+      <div class="tv-fleet-column-title">${escapeHtml(title)}</div>
+      <div class="tv-list" style="--row-count:${SPLIT_SIZE}">
+        ${entries.map((e, i) => renderFleetRow(e, i + 1)).join("")}
       </div>
     </div>
   `;
@@ -207,10 +200,9 @@ function render() {
     (tripsByImei[trip.imei] ||= []).push(trip);
   }
 
-  // Every vehicle mapped to a real driver gets a roster spot, even with
-  // zero trips this period — same "full roster always visible" convention
-  // fleet.js and the rest of the site use. Shared/spare vehicles (mapped to
-  // null) are deliberately excluded — there's no one person to rank.
+  // Every vehicle mapped to a real driver is a scoring candidate, even with
+  // zero trips this period. Shared/spare vehicles (mapped to null) are
+  // excluded — there's no one person to rank.
   const entries = Object.entries(BOUNCIE_VEHICLE_TECH_IDS)
     .filter(([, techId]) => techId !== null)
     .map(([imei, techId]) => ({ tech: techsById[techId], stats: computeSafetyStats(tripsByImei[imei] || []) }))
@@ -222,17 +214,19 @@ function render() {
   }
 
   rankRoster(entries);
+  // rankRoster() already sorts best-to-worst; only drivers with a complete,
+  // real score (see rankRoster's own comment on why) are eligible for
+  // either list — someone with no data yet isn't "worst," they're unranked.
+  const scored = entries.filter((e) => e.safetyScore !== null);
 
-  const periodLabel = PERIOD_LABELS[PERIOD] || PERIOD;
-  const featured = entries[0];
-  const rest = entries.slice(1);
+  if (scored.length === 0) {
+    mainEl.innerHTML = `<p class="tv-empty">Not enough driving data yet this period to rank drivers — check back as more trips sync.</p>`;
+    return;
+  }
 
-  mainEl.innerHTML = renderFeatured(featured, periodLabel);
-  const list = document.createElement("div");
-  list.className = "tv-list";
-  list.style.setProperty("--row-count", Math.max(rest.length, 1));
-  list.innerHTML = rest.map((entry) => renderRow(entry)).join("");
-  mainEl.appendChild(list);
+  const { best, worst } = splitBestWorst(scored);
+  mainEl.innerHTML =
+    renderColumn("Top 5 Safest", "best", best) + (worst.length ? renderColumn("Needs Attention", "worst", worst) : "");
 }
 
 async function loadData() {
