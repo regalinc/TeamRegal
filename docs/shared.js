@@ -236,6 +236,19 @@ const BOUNCIE_VEHICLE_TECH_IDS = {
   "868923055442135": "pro_9b6be6b8146547fabe281dac539e3f28", // Ben Aston
 };
 
+// Maps the "CA" (consultant) first name used in the hand-maintained HVAC
+// Sales workbook (docs/data/hvac-sales.json, scripts/parse-hvac-sales.ps1)
+// to the matching Housecall Pro technician, so hvac-sales.js can show a real
+// name/avatar instead of a bare first name — same manual-mapping pattern as
+// BOUNCIE_VEHICLE_TECH_IDS/MANUAL_AVATAR_OVERRIDES above. The workbook only
+// ever uses a first name (no last name, no employee id), so this is
+// matched by hand rather than derived; a new consultant added to the sheet
+// needs an entry added here too.
+const HVAC_SALES_CA_TECH_IDS = {
+  Josh: "pro_62aa1ba4432340829b0aba02abd1d307", // Josh Zieger
+  Nick: "pro_27fcce8f21bc4186b44abe4d9a87c03f", // Nick Webb
+};
+
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes
 // under sibling folders that share the same filename — the API only ever
 // returns the "thumb_web_round" (40x40) one, but an "original" (full

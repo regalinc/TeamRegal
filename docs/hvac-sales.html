@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HVAC Sales Scorecard</title>
+  <link rel="stylesheet" href="hvac-sales.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="assets/logo-color.png" alt="Regal Inc" class="logo logo-light" />
+      <img src="assets/logo-white.png" alt="Regal Inc" class="logo logo-dark" />
+    </div>
+    <span id="sync-status" class="sync-status">Loading…</span>
+  </header>
+
+  <main class="page">
+    <div class="identity" id="identity">
+      <div class="avatar-slot" id="avatar-slot"></div>
+      <div class="identity-text">
+        <div class="greeting" id="greeting"></div>
+        <div class="identity-name" id="identity-name">Loading…</div>
+        <div class="identity-meta">
+          <span class="role-chip">Sales Consultant</span>
+        </div>
+      </div>
+      <div class="period-controls" role="group" aria-label="Reporting period">
+        <button class="period-btn" type="button" data-period="lastmonth">Last month</button>
+        <button class="period-btn active" type="button" data-period="month" aria-pressed="true">MTD</button>
+        <button class="period-btn" type="button" data-period="ytd">YTD</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 148 148">
+          <circle class="ring-track" cx="74" cy="74" r="60"></circle>
+          <circle class="ring-fill" id="ring-fill" cx="74" cy="74" r="60" stroke-dasharray="376.99" stroke-dashoffset="376.99"></circle>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-number" id="ring-number">—</div>
+          <div class="ring-label">Closing</div>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <p class="hero-eyebrow" id="hero-eyebrow">Loading…</p>
+        <p class="hero-line" id="hero-line"></p>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile">
+        <div class="tile-label">Opportunities ran</div>
+        <div class="tile-value" id="tile-ran">—</div>
+      </div>
+      <div class="tile featured">
+        <div class="tile-label">Sold</div>
+        <div class="tile-value" id="tile-sold">—</div>
+      </div>
+    </div>
+
+    <div class="breakdown-grid">
+      <div class="breakdown-card">
+        <div class="breakdown-title">Closing rate by Club Member</div>
+        <div class="breakdown-rows" id="breakdown-club-member"></div>
+      </div>
+      <div class="breakdown-card">
+        <div class="breakdown-title">Closing rate by Lead source</div>
+        <div class="breakdown-rows" id="breakdown-lead"></div>
+      </div>
+      <div class="breakdown-card">
+        <div class="breakdown-title">Closing rate by Customer Type</div>
+        <div class="breakdown-rows" id="breakdown-customer-type"></div>
+      </div>
+      <div class="breakdown-card">
+        <div class="breakdown-title">Sold jobs by System Type</div>
+        <div class="breakdown-rows" id="breakdown-system-type"></div>
+      </div>
+    </div>
+
+    <details class="list-card" id="record-list-card">
+      <summary id="record-list-summary">Loading opportunities…</summary>
+      <div id="record-list-body"></div>
+    </details>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="hvac-sales.js"></script>
+</body>
+</html>
