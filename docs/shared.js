@@ -272,6 +272,33 @@ function handleLargeAvatarError(img) {
   img.nextElementSibling.style.display = "flex";
 }
 
+// TV-kiosk-scale avatar + tile renderers — shared by tv.js (per-technician
+// screens) and fleet-tv.js (the driving-behavior leaderboard), so both
+// large-format kiosk pages render a face/tile the same way instead of two
+// near-identical copies.
+function renderAvatarBlock(tech, sizeClass, fallbackClass, { large = false } = {}) {
+  const initialsText = escapeHtml(initials(tech.name || "?"));
+  const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
+  if (!hasRealAvatar(tech)) {
+    return `<div class="${fallbackClass}" style="background:${bg}">${initialsText}</div>`;
+  }
+  const bigUrl = large ? largeAvatarUrl(tech) : null;
+  if (bigUrl) {
+    return `
+      <img class="${sizeClass}" src="${escapeHtml(bigUrl)}" data-thumb-src="${escapeHtml(tech.avatar_url)}" alt="" onerror="handleLargeAvatarError(this)" />
+      <div class="${fallbackClass}" style="background:${bg};display:none">${initialsText}</div>
+    `;
+  }
+  return `
+    <img class="${sizeClass}" src="${escapeHtml(tech.avatar_url)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+    <div class="${fallbackClass}" style="background:${bg};display:none">${initialsText}</div>
+  `;
+}
+
+function tvTile(label, value, cls, sizeClass) {
+  return `<div class="${sizeClass || "tv-tile"} ${cls || ""}"><div class="tv-tile-label">${escapeHtml(label)}</div><div class="tv-tile-value">${escapeHtml(value)}</div></div>`;
+}
+
 // Renders the technician's real photo when Housecall Pro has one on file,
 // falling back to the colored-initials avatar otherwise (including if the
 // photo URL 404s at runtime).

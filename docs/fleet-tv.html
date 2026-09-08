@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fleet Safety — TV</title>
+  <!-- ASSET_VERSION: see the matching comment in tv.html — GitHub Pages
+       caches tv.css/shared.js/fleet-tv.js for 10 min each, so a TV sitting
+       on this page won't necessarily pick up a code change on refresh alone.
+       Bump this string (any change; "YYYYMMDD-n" by convention) whenever
+       tv.css/shared.js/fleet-tv.js changes. Paired with fleet-tv.js's own
+       periodic self-reload, same as tv.js's. -->
+  <link rel="stylesheet" href="tv.css?v=20260908-1" />
+</head>
+<body>
+  <header class="tv-header">
+    <img src="assets/logo-white.png" alt="Regal Inc" class="logo" />
+    <div class="tv-dept-name">Fleet Safety Scorecard</div>
+    <div class="tv-sync-status" id="sync-status">Loading...</div>
+  </header>
+
+  <main id="tv-main" class="tv-main">
+    <p class="tv-empty">Loading...</p>
+  </main>
+
+  <script src="shared.js?v=20260908-1"></script>
+  <script src="fleet-tv.js?v=20260908-1"></script>
+</body>
+</html>

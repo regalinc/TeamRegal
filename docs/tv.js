@@ -125,28 +125,8 @@ function currentMonthName() {
   return new Date().toLocaleString([], { month: "long" });
 }
 
-function renderAvatarBlock(tech, sizeClass, fallbackClass, { large = false } = {}) {
-  const initialsText = escapeHtml(initials(tech.name || "?"));
-  const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
-  if (!hasRealAvatar(tech)) {
-    return `<div class="${fallbackClass}" style="background:${bg}">${initialsText}</div>`;
-  }
-  const bigUrl = large ? largeAvatarUrl(tech) : null;
-  if (bigUrl) {
-    return `
-      <img class="${sizeClass}" src="${escapeHtml(bigUrl)}" data-thumb-src="${escapeHtml(tech.avatar_url)}" alt="" onerror="handleLargeAvatarError(this)" />
-      <div class="${fallbackClass}" style="background:${bg};display:none">${initialsText}</div>
-    `;
-  }
-  return `
-    <img class="${sizeClass}" src="${escapeHtml(tech.avatar_url)}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
-    <div class="${fallbackClass}" style="background:${bg};display:none">${initialsText}</div>
-  `;
-}
-
-function tvTile(label, value, cls, sizeClass) {
-  return `<div class="${sizeClass || "tv-tile"} ${cls || ""}"><div class="tv-tile-label">${escapeHtml(label)}</div><div class="tv-tile-value">${escapeHtml(value)}</div></div>`;
-}
+// renderAvatarBlock()/tvTile() live in shared.js now — fleet-tv.js (the
+// driving-behavior kiosk) reuses both.
 
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
