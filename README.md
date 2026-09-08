@@ -185,6 +185,12 @@ The unavoidable gap: for an estimate that was already approved before this diffi
 
 **Period support is intentionally narrower than `index.html`'s six options.** Only `lastmonth`, `month` (labeled "MTD"), and `ytd` — no `today`/`week`/`lastweek` — since this is a daily-glance page checked once a day, not a live filter bar; those three cover "how did last month land," "how am I tracking now," and "how's the year going." All three reuse `periodRange`/`dateInPeriod` from `shared.js`, so period boundaries match the rest of the site exactly.
 
+**Visual/engagement pass.** This page was already using adaptive `prefers-color-scheme` theming (light on a bright office monitor, dark otherwise) — not `tv.css`'s forced-dark kiosk styling, despite it being reviewed once a day much like a TV screen would be. A few changes made it feel more like a page worth opening daily rather than a plain data table:
+- **Greeting** (`greetingPrefix()`/`firstName()` in `andrew.js`) — "Good morning/afternoon/evening, Andrew" above his name, based on local hour.
+- **"Approved today" strip** — a dismissed-by-default gold banner that only renders when at least one estimate was approved *today specifically* (`isSameCalendarDay`), independent of whatever period tab is selected. Deliberately absent (not "0 today") when nothing's closed yet — a zero-count version of this would read as calling out a slow morning rather than encouraging one.
+- **Pace badge** (`paceInfo()` in `andrew.js`) — for the `month`/`ytd` views only (not `lastmonth`, which is already final), compares revenue-to-date against the goal prorated by the fraction of the period elapsed, and shows "$X ahead of pace" / "$X behind an even pace." When the goal is already hit for the period, this is replaced by a "🎉 Goal hit" badge instead, and `.goal-card` itself picks up a gold glow (`.goal-card.hit` in `andrew.css`).
+- Bigger logo (30px → 48px) and avatar (96px → 112px, with a gold ring), a subtle warm gradient on the hero card, and soft card shadows throughout — same gold accent already established on this page (`--gold`), no new colors introduced.
+
 ## Department Scorecard (company-scorecard.html)
 
 `company-scorecard.html` / `company-scorecard.js` / `company-scorecard.css` are a fifth, separate page — a P&L- and payroll-driven KPI scorecard per department, distinct from everything else on the site (job-tracking metrics off `computeScorecardStats`). Linked from `index.html`/`admin.html`'s nav.

@@ -60,12 +60,19 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 24px;
+  padding: 18px 28px;
   border-bottom: 1px solid var(--border);
   background: var(--card-bg);
+  /* A hairline gold wash under the header, this page's one signature
+     touch of color at the very top — matches the gold accent used
+     everywhere else here rather than introducing a new one. */
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--gold) 55%, transparent);
 }
 .topbar-brand { display: flex; align-items: center; gap: 12px; }
-.logo { height: 30px; width: auto; }
+/* Bigger than the shared site header's 30px — this page gets its own
+   identity, and it's opened once a day rather than glanced at, so a more
+   confident logo presence earns its keep here specifically. */
+.logo { height: 48px; width: auto; }
 .logo-dark { display: none; }
 @media (prefers-color-scheme: dark) {
   .logo-light { display: none; }
@@ -92,17 +99,21 @@ body {
 
 .avatar-slot { flex-shrink: 0; }
 .avatar-slot .avatar {
-  width: 96px;
-  height: 96px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--mono);
   font-weight: 600;
-  font-size: 1.9rem;
+  font-size: 2.1rem;
   color: #fff;
   overflow: hidden;
+  /* A soft gold ring around the photo itself, not just a plain circle —
+     ties the one personal touch on the page (his face) to the same accent
+     color as everything else, rather than sitting visually apart from it. */
+  box-shadow: 0 0 0 3px var(--card-bg), 0 0 0 5px color-mix(in srgb, var(--gold) 45%, transparent);
 }
 /* The manual override photo is 800x1200 (2:3) squeezed into a 1:1 circle —
    object-fit's default centered crop removes ~17% off both top and bottom,
@@ -114,8 +125,15 @@ body {
 
 .identity-text { min-width: 0; }
 
+.greeting {
+  font-size: 0.86rem;
+  font-weight: 550;
+  color: var(--text-muted);
+  margin-bottom: 0.1rem;
+}
+
 .identity-name {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 650;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -168,9 +186,32 @@ body {
   border-color: var(--text);
 }
 
+/* ---------- today strip ---------- */
+/* Only rendered when there's something to show (see andrew.js) — a "0
+   today" version of this would read as a scoreboard calling out a slow
+   morning rather than encouragement, so it's absent entirely instead. */
+.today-strip {
+  background: var(--gold-soft);
+  border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  animation: today-strip-in 0.4s ease;
+}
+.today-strip b { color: var(--gold); }
+@keyframes today-strip-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ---------- hero ---------- */
 .hero {
-  background: var(--card-bg);
+  /* A faint warm wash rather than flat white/near-black — subtle enough
+     that it doesn't read as "colored," just gives the page's one big
+     feature card a touch more depth than a plain fill. */
+  background: linear-gradient(135deg, var(--card-bg) 55%, color-mix(in srgb, var(--gold) 6%, var(--card-bg)));
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 1.9rem 2rem;
@@ -178,6 +219,7 @@ body {
   align-items: center;
   gap: 2.25rem;
   margin-bottom: 1.1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.05);
 }
 
 .ring-wrap { position: relative; width: 148px; height: 148px; flex-shrink: 0; }
@@ -239,6 +281,16 @@ body {
   border-radius: 10px;
   padding: 1.1rem 1.3rem 1.25rem;
   margin-bottom: 1.1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+/* The one moment this page actively celebrates — hitting the revenue goal
+   for whatever period is selected. A warm glow around the same card
+   rather than a separate banner, so the "why" (the goal card itself) and
+   the "yes, you did it" are the same visual object. */
+.goal-card.hit {
+  border-color: color-mix(in srgb, var(--gold) 55%, var(--border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 35%, transparent), 0 8px 28px color-mix(in srgb, var(--gold) 18%, transparent);
 }
 .goal-head {
   display: flex;
@@ -276,6 +328,34 @@ body {
 }
 .goal-card.unset { border-style: dashed; }
 .goal-empty { font-size: 0.82rem; color: var(--text-faint); margin-top: 0.5rem; }
+
+/* ---------- pace badge ---------- */
+/* Sits under the goal track: "hit" reuses the gold accent (same moment as
+   .goal-card.hit's glow), "ahead" borrows --good so it reads as positive
+   without introducing a third accent color, "behind" stays neutral/muted
+   rather than red — this is a daily nudge, not a warning. */
+.pace-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+.pace-badge.hit {
+  color: var(--gold);
+  background: var(--gold-soft);
+}
+.pace-badge.ahead {
+  color: var(--good);
+  background: color-mix(in srgb, var(--good) 14%, transparent);
+}
+.pace-badge.behind {
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--text-muted) 12%, transparent);
+}
 
 /* ---------- tile grid ---------- */
 .tiles {

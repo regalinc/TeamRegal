@@ -14,8 +14,10 @@ const ANDREW_ID = "pro_ca120cbb55fa40fe9361d492161b101f";
 const ANDREW_MONTHLY_GOAL = 2_500_000 / 12;
 const ANDREW_YTD_GOAL = 2_500_000;
 
+const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
 const avatarSlot = document.getElementById("avatar-slot");
+const todayStrip = document.getElementById("today-strip");
 const heroEyebrow = document.getElementById("hero-eyebrow");
 const heroLine = document.getElementById("hero-line");
 const ringNumber = document.getElementById("ring-number");
@@ -25,6 +27,7 @@ const goalTitle = document.getElementById("goal-title");
 const goalFigures = document.getElementById("goal-figures");
 const goalFill = document.getElementById("goal-fill");
 const goalEmpty = document.getElementById("goal-empty");
+const paceBadge = document.getElementById("pace-badge");
 const tileGiven = document.getElementById("tile-given");
 const tileApproved = document.getElementById("tile-approved");
 const tileApprovedNote = document.getElementById("tile-approved-note");
@@ -44,6 +47,39 @@ function monthLabel(monthsAgo) {
   d.setDate(1); // avoid end-of-month rollover surprises when subtracting months
   d.setMonth(d.getMonth() - monthsAgo);
   return d.toLocaleDateString([], { month: "long" });
+}
+
+function greetingPrefix() {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning";
+  if (hour < 17) return "Good afternoon";
+  return "Good evening";
+}
+
+function firstName(fullName) {
+  return (fullName || "").trim().split(/\s+/)[0] || "there";
+}
+
+function isSameCalendarDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+// How far ahead of (or behind) a flat, evenly-paced march toward the goal
+// Andrew's actual revenue is right now — e.g. on day 10 of a 30-day month,
+// "on pace" means a third of the goal. Only meaningful for an open period
+// with a real goal: "lastmonth" is already over (nothing left to pace
+// against), and periodMeta's own periodRange("ytd") spans Jan 1 through
+// *today*, not the full year, so the full-year boundaries are computed
+// here instead rather than reusing that (different purpose: that range is
+// for filtering estimates, this one is for measuring how much of the full
+// year has elapsed).
+function paceInfo(period, revenue, goal) {
+  if (period === "lastmonth" || !goal) return null;
+  const now = new Date();
+  const [start, end] =
+    period === "ytd" ? [new Date(now.getFullYear(), 0, 1), new Date(now.getFullYear() + 1, 0, 1)] : periodRange("month");
+  const fracElapsed = Math.min(1, Math.max(0, (now - start) / (end - start)));
+  return { diff: revenue - goal * fracElapsed };
 }
 
 function periodMeta(period) {
@@ -128,6 +164,7 @@ function render() {
     return;
   }
 
+  greetingEl.textContent = `${greetingPrefix()}, ${firstName(tech.name)} 👋`;
   identityName.textContent = tech.name || "Andrew Rouscher";
   avatarSlot.innerHTML = renderLargeAvatar(tech);
 
@@ -136,6 +173,21 @@ function render() {
   // in shared.js.
   const allEstimates = (latestData.estimates || []).filter((e) => !isCanceledEstimate(e));
   const mine = allEstimates.filter((e) => (e.assigned_employee_ids || []).includes(tech.id));
+
+  // Today's wins, independent of whichever period tab is selected — a
+  // daily-use page deserves a "here's what's fresh today" moment. Only
+  // shown when there's actually something to celebrate; an empty "0 today"
+  // banner would just read as a scoreboard calling out a slow morning, not
+  // as encouragement.
+  const now = new Date();
+  const approvedToday = mine.filter((e) => e.approved && e.approved_at && isSameCalendarDay(new Date(e.approved_at), now));
+  if (approvedToday.length > 0) {
+    const todayRevenue = approvedToday.reduce((sum, e) => sum + (e.approved_amount || 0) / CENTS_PER_DOLLAR, 0);
+    todayStrip.hidden = false;
+    todayStrip.innerHTML = `🎉 <b>${approvedToday.length} approved today</b> — ${escapeHtml(formatMoney(todayRevenue))} in the books.`;
+  } else {
+    todayStrip.hidden = true;
+  }
 
   const estimatesGiven = mine.filter((e) => dateInPeriod(estimateGivenDate(e, tech), currentPeriod));
   const approvedThisPeriod = mine.filter((e) => e.approved && dateInPeriod(e.approved_at, currentPeriod));
@@ -187,12 +239,34 @@ function render() {
     goalFigures.innerHTML = `${formatMoney(stats.revenue)} <span class="of">of ${formatMoney(meta.goal)}</span> · ${pct}%`;
     goalFill.style.width = `${pct}%`;
     goalEmpty.hidden = true;
+
+    const goalHit = stats.revenue >= meta.goal;
+    goalCard.classList.toggle("hit", goalHit);
+    if (goalHit) {
+      paceBadge.hidden = false;
+      paceBadge.className = "pace-badge hit";
+      paceBadge.textContent = "🎉 Goal hit — nice work!";
+    } else {
+      const pace = paceInfo(currentPeriod, stats.revenue, meta.goal);
+      if (pace) {
+        paceBadge.hidden = false;
+        paceBadge.className = `pace-badge ${pace.diff >= 0 ? "ahead" : "behind"}`;
+        paceBadge.textContent =
+          pace.diff >= 0
+            ? `↑ ${formatMoney(pace.diff)} ahead of pace`
+            : `${formatMoney(Math.abs(pace.diff))} behind an even pace`;
+      } else {
+        paceBadge.hidden = true;
+      }
+    }
   } else {
+    goalCard.classList.remove("hit");
     goalCard.classList.add("unset");
     goalFigures.textContent = "";
     goalFill.style.width = "0%";
     goalEmpty.hidden = false;
     goalEmpty.textContent = `No goal set for ${meta.goalLabel} yet.`;
+    paceBadge.hidden = true;
   }
 
   const sorted = unionById(estimatesGiven, approvedThisPeriod).sort((a, b) => {
