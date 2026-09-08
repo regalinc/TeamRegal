@@ -174,17 +174,45 @@ function splitBestWorst(scoredEntries) {
   };
 }
 
+function fmtPct(v) {
+  return v === null ? "—" : `${v.toFixed(0)}%`;
+}
+function fmtRate(v) {
+  return v === null ? "—" : v.toFixed(1);
+}
+
+// The 4 components behind a driver's Safety Score, shown per-row now that
+// there are only 10 people on screen total (5 per column) instead of the
+// original ~30 — the "why" a score is what it is, not just the number.
+// Colored by the same relativeTier() result rankRoster() already computed
+// (top/middle/bottom third of the roster this period), so a tile's color
+// here always matches the logic that actually produced the Safety Score.
+function metricTiles(entry) {
+  const { stats, tierByMetric } = entry;
+  const cls = { good: "tv-good", warn: "tv-warn", bad: "tv-bad" };
+  const tileCls = (key) => (tierByMetric[key] ? cls[tierByMetric[key]] : null);
+  return [
+    tvTile("Idle time", fmtPct(stats.idlePct), tileCls("idlePct"), "tv-row-tile"),
+    tvTile("Speeding (75+)", fmtPct(stats.speedingRate), tileCls("speedingRate"), "tv-row-tile"),
+    tvTile("Hard braking /100mi", fmtRate(stats.brakingRate), tileCls("brakingRate"), "tv-row-tile"),
+    tvTile("Hard accel. /100mi", fmtRate(stats.accelRate), tileCls("accelRate"), "tv-row-tile"),
+  ].join("");
+}
+
 function renderFleetRow(entry, rank) {
   const { tech, safetyScore } = entry;
   return `
-    <div class="tv-row">
-      <div class="tv-row-rank">#${rank}</div>
-      ${renderAvatarBlock(tech, "tv-row-photo", "tv-row-photo-fallback", { large: true })}
-      <div class="tv-row-name-block">
-        <div class="tv-row-name">${escapeHtml(tech.name || "Unknown")}</div>
-        <div class="tv-row-meta">${escapeHtml(tech.role || "")}</div>
+    <div class="tv-row tv-fleet-row">
+      <div class="tv-fleet-row-top">
+        <div class="tv-row-rank">#${rank}</div>
+        ${renderAvatarBlock(tech, "tv-row-photo", "tv-row-photo-fallback", { large: true })}
+        <div class="tv-row-name-block">
+          <div class="tv-row-name">${escapeHtml(tech.name || "Unknown")}</div>
+          <div class="tv-row-meta">${escapeHtml(tech.role || "")}</div>
+        </div>
+        <div class="tv-fleet-score">${safetyScore}</div>
       </div>
-      <div class="tv-fleet-score">${safetyScore}</div>
+      <div class="tv-row-metrics">${metricTiles(entry)}</div>
     </div>
   `;
 }

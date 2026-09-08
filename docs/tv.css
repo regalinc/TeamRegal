@@ -203,14 +203,10 @@ body {
 
 /* Fleet Safety TV's Top 5 Safest / Needs Attention split (fleet-tv.js) —
    two of these dropped straight into the existing .tv-main flex row (same
-   container tv.js's featured-card + list layout uses), each reusing
-   .tv-row/.tv-row-photo/.tv-row-rank wholesale — just a single Safety Score
-   number per row (.tv-fleet-score) instead of a tile grid, since this
-   screen is deliberately just the at-a-glance highlight; full per-metric
-   detail lives on fleet.html. --row-count is fixed at 5 (not the actual
-   entry count) so row height stays consistent between the two columns even
-   when one side has fewer than 5 people (common while Bouncie's trip
-   history is still building up). */
+   container tv.js's featured-card + list layout uses). --row-count is
+   fixed at 5 (not the actual entry count) so row height stays consistent
+   between the two columns even when one side has fewer than 5 people
+   (common while Bouncie's trip history is still building up). */
 .tv-fleet-column { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .tv-fleet-column-title {
   font-size: clamp(18px, 2.6vh, 36px);
@@ -228,6 +224,21 @@ body {
   font-size: clamp(20px, calc(9vh / var(--row-count, 5)), 48px);
   flex-shrink: 0;
 }
+/* Each row is a name/score line (.tv-fleet-row-top, laid out exactly like
+   tv.js's plain .tv-row) plus a 4-tile strip underneath showing what's
+   actually behind that score — .tv-row itself stays a single horizontal
+   line everywhere else on the site (tv.js's technician rows), so this
+   column-direction override is scoped to .tv-fleet-row specifically rather
+   than changing .tv-row's own behavior. .tv-row-metrics is reused as-is
+   (same tiles tv.js's technician rows use) but reset to sit full-width
+   below the top line instead of pinned to the right of it. */
+.tv-fleet-row.tv-row {
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(1vh / var(--row-count, 5) * 5);
+}
+.tv-fleet-row-top { display: flex; align-items: center; gap: 1.5vw; }
+.tv-fleet-row .tv-row-metrics { margin-left: 0; max-width: 100%; flex: 0 0 auto; }
 .tv-fleet-best .tv-fleet-score { color: var(--good-bg); }
 .tv-fleet-worst .tv-fleet-score { color: var(--bad-bg); }
 
