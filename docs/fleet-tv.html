@@ -10,12 +10,15 @@
        Bump this string (any change; "YYYYMMDD-n" by convention) whenever
        tv.css/shared.js/fleet-tv.js changes. Paired with fleet-tv.js's own
        periodic self-reload, same as tv.js's. -->
-  <link rel="stylesheet" href="tv.css?v=20260908-2" />
+  <link rel="stylesheet" href="tv.css?v=20260908-3" />
 </head>
 <body>
   <header class="tv-header">
     <img src="assets/logo-white.png" alt="Regal Inc" class="logo" />
-    <div class="tv-dept-name">Fleet Safety Scorecard</div>
+    <div class="tv-dept-name-wrap">
+      <div class="tv-dept-name">Fleet Safety Scorecard</div>
+      <div class="tv-fleet-period" id="fleet-period"></div>
+    </div>
     <div class="tv-sync-status" id="sync-status">Loading...</div>
   </header>
 
@@ -23,7 +26,7 @@
     <p class="tv-empty">Loading...</p>
   </main>
 
-  <script src="shared.js?v=20260908-2"></script>
-  <script src="fleet-tv.js?v=20260908-2"></script>
+  <script src="shared.js?v=20260908-3"></script>
+  <script src="fleet-tv.js?v=20260908-3"></script>
 </body>
 </html>

@@ -27,10 +27,22 @@ const SPEEDING_THRESHOLD_MPH = 75;
 // no basis yet to prefer one over another.
 const SAFETY_METRIC_KEYS = ["idlePct", "brakingRate", "accelRate", "speedingRate"];
 
+// Defaults to the current calendar month (month-to-date in practice — a
+// trip can't have a future startTime, so periodRange("month")'s upper
+// bound past "today" never actually matches anything) rather than
+// tv.js's own "week"/"month" convention varying by page — this screen had
+// no on-screen indication of its period at all before, so picking a
+// sensible default and then labeling it (see periodLabelText below)
+// mattered more than matching another page's choice.
+const PERIOD_LABELS = { today: "Today", week: "This week", lastweek: "Last week", month: "This month (MTD)", lastmonth: "Last month", ytd: "Year to date" };
+
 const urlParams = new URLSearchParams(location.search);
-const PERIOD = urlParams.get("period") || "week";
+const PERIOD = urlParams.get("period") || "month";
 
 const mainEl = document.getElementById("tv-main");
+const periodEl = document.getElementById("fleet-period");
+periodEl.textContent = PERIOD_LABELS[PERIOD] || PERIOD;
+
 let latestBouncie = null;
 let latestTechs = null;
 
