@@ -35,93 +35,31 @@ const OVERHEAD_PNL_METRICS = [
   { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.1, direction: "min" } },
 ];
 
-// BU 10 (HVAC Installation) has its own detailed financial scorecard —
-// confirmed account-by-account, replacing the earlier placeholder build that
-// mirrored the generic Install pattern used by BU 30/70's "Parts and
-// materials" combined tile. It no longer uses OVERHEAD_PNL_METRICS: 5 of its
-// 6 shared ratios happen to match the company-wide defaults, but Marketing
-// (4% here, not 3%) and Total SG&A (30%, not 45%) don't, and Pretax isn't on
-// this department's chart at all — so all 6 are given explicitly below
-// rather than half-spread/half-overridden. BU 50 has no chart of its own and
-// mirrors this one exactly (see call site), same as before.
+// BU 10 (HVAC Installation) and BU 50 (Plumbing Installation) each have
+// their own detailed, confirmed financial scorecard now — BU 50 used to
+// mirror BU 10's exactly (installDept() was a shared factory) because no
+// separate Plumbing Installation chart existed yet; one does now, and the
+// two departments turned out to differ on almost every ratio (BU 50's
+// Labor/Materials/Fringe/Marketing/Vehicle/Plant/Administration/SG&A/Pretax
+// numbers mostly match BU 70/Plumbing Service's instead of BU 10/HVAC
+// Install's — overhead policy looks like it's set per trade, not per
+// install-vs-service). No factory anymore; each is its own plain entry.
 //
-// A few items from the source list are deliberately left out rather than
-// approximated:
+// A few items from both departments' source lists are deliberately left out
+// rather than approximated (confirmed with the user for BU 10, carried over
+// to BU 50 on the same reasoning):
 //  - "All Forms of Unapplied Labor Expenses" — target is "None - in labor",
 //    i.e. already folded into Labor to sales above; not a separate line.
 //  - "Job Start-up Costs" and "Equipment Rentals" — confirmed not tracked as
 //    their own accounts in QuickBooks; skipped rather than guessing at a
 //    Chart of Accounts mapping.
 //
-// Every range target ("4-8%", "3-4%", "42-45%", etc.) is graded one-sided —
-// green once you're under the ceiling (or, for the one margin figure, over
-// the floor) — the same convention used everywhere else on this page, not
-// true two-sided banding. A metric with zero activity this month (e.g. Sales
+// Every range target ("7-8%", "48-50%", etc.) is graded one-sided — green
+// once you're under the ceiling (or, for a margin figure, over the floor) —
+// the same convention used everywhere else on this page, not true
+// two-sided banding. A metric with zero activity this month (e.g. Sales
 // salaries, if the account genuinely has nothing posted to it) will read as
 // "green" under this convention even though $0 may not really be the goal.
-function installDept(name, buLabel) {
-  return {
-    name,
-    buLabel,
-    hcp: [
-      // "Average Sale per Job/Ticket (No Service Sales)" — assumes every job
-      // tagged to this BU is already an install/replacement job, not a
-      // service call, so no extra filtering beyond the existing per-BU scope
-      // is needed. Flag if this BU's job data actually mixes the two.
-      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 15000, direction: "min" } },
-    ],
-    pnl: [
-      { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.09, direction: "max" } },
-      // Unlike BU 30/70's combined "Parts and materials" tile, this chart
-      // gives Equipment (5002) and Materials/parts (5001) separate targets —
-      // built as two tiles, not the old combined partsAndMaterials one.
-      { key: "equipmentCost", label: "Equipment to sales", target: { goal: 0.35, direction: "max" } },
-      { key: "partsCost", label: "Materials/parts to sales", target: { goal: 0.09, direction: "max" } },
-      { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.01, direction: "max" } },
-      { key: "salesSalary", label: "Sales salaries", target: { goal: 0.04, direction: "max" } },
-      { key: "commissionCost", label: "Commissions", target: { goal: 0.08, direction: "max" } },
-      { key: "fringeCost", label: "Allocated fringe benefits", target: { goal: 0.04, direction: "max" } },
-      { key: "warranty", label: "Warranty", target: { goal: 0.005, direction: "max" } },
-      { key: "permits", label: "Permits", target: { goal: 0.005, direction: "max" } },
-      { key: "buydowns", label: "Buydowns (financing)", target: { goal: 0.02, direction: "max" } },
-      { key: "warrantyLabor", label: "Warranty parts-labor", target: { goal: 0.02, direction: "max" } },
-      // "Margin % w/out support wages" — support/admin wages (6022) sit in
-      // Expenses, below Gross Profit, not in COGS, so the P&L's existing
-      // Gross Profit figure already excludes them. Treated as the same
-      // number as every other department's "Gross margin" tile, just
-      // relabeled and given this chart's tighter 42-45% band (floor: 42%).
-      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.42, direction: "min" } },
-      { key: "marketing", label: "Marketing", target: { goal: 0.04, direction: "max" } },
-      { key: "employeeRelated", label: "Employee related", target: { goal: 0.15, direction: "max" } },
-      { key: "vehicle", label: "Vehicle", target: { goal: 0.04, direction: "max" } },
-      { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.04, direction: "max" } },
-      { key: "administrative", label: "Administration", target: { goal: 0.03, direction: "max" } },
-      { key: "totalExpense", label: "Total SG&A", target: { goal: 0.3, direction: "max" } },
-      // Given as "BU10 - Pretax" — added here in the shared factory rather
-      // than only on BU 10's own entry, consistent with how everything
-      // else in installDept() already mirrors to BU 50 (no separate
-      // Plumbing Installation chart exists). Flag if BU 50 shouldn't
-      // actually carry this target.
-      { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.15, direction: "min" } },
-    ],
-    manual: [
-      // Headcount inputs — not yet in manual-metrics.json (null until
-      // payroll/fleet data is filled in). Shown as their own count tiles too
-      // so it's clear what denominator each Revenue-per-X figure is using,
-      // not just the derived dollar amount.
-      { key: "employeeCount", label: "Service employees", type: "count", target: null },
-      { key: "vehicleCount", label: "Techs / vehicles", type: "count", target: null },
-      { key: "crewCount", label: "Install crews (2-man)", type: "count", target: null },
-      { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
-      // Source gives two numbers here — "Min 400,000, target 600,000" — a
-      // floor and a stretch goal. Graded against the floor, same convention
-      // as every other range on this chart; 600k is the stretch, not wired in.
-      { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
-      { key: "revenuePerCrew", label: "Revenue per install crew", type: "money", target: { goal: 2500000, direction: "min" }, compute: (m, s, pnl) => (m.crewCount && pnl ? pnl.totalIncome / m.crewCount : null) },
-    ],
-  };
-}
-
 const DEPARTMENTS = {
   30: {
     name: "HVAC Service",
@@ -390,12 +328,117 @@ const DEPARTMENTS = {
       { key: "vehicleCount", label: "Vehicles", type: "count", target: null },
     ],
   },
-  10: installDept("HVAC Installation", "10 HVAC Installation"),
-  // There's no separate Plumbing Installation KPI chart — the source for
-  // this detailed set was confirmed as BU 10 (HVAC) specifically. This
-  // mirrors BU 10's config exactly (same metric shapes and targets, applied
-  // to the other install department, each against its own P&L and its own
-  // manual headcount entries) rather than inventing different numbers —
-  // flag if Plumbing Installation should actually have its own.
-  50: installDept("Plumbing Installation", "50 Plumbing Installation"),
+  10: {
+    name: "HVAC Installation",
+    buLabel: "10 HVAC Installation",
+    hcp: [
+      // "Average Sale per Job/Ticket (No Service Sales)" — assumes every job
+      // tagged to this BU is already an install/replacement job, not a
+      // service call, so no extra filtering beyond the existing per-BU scope
+      // is needed. Flag if this BU's job data actually mixes the two.
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 15000, direction: "min" } },
+    ],
+    pnl: [
+      { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.09, direction: "max" } },
+      // Unlike BU 30/70's combined "Parts and materials" tile, this chart
+      // gives Equipment (5002) and Materials/parts (5001) separate targets —
+      // built as two tiles, not a combined one.
+      { key: "equipmentCost", label: "Equipment to sales", target: { goal: 0.35, direction: "max" } },
+      { key: "partsCost", label: "Materials/parts to sales", target: { goal: 0.09, direction: "max" } },
+      { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.01, direction: "max" } },
+      { key: "salesSalary", label: "Sales salaries", target: { goal: 0.04, direction: "max" } },
+      { key: "commissionCost", label: "Commissions", target: { goal: 0.08, direction: "max" } },
+      { key: "fringeCost", label: "Allocated fringe benefits", target: { goal: 0.04, direction: "max" } },
+      { key: "warranty", label: "Warranty", target: { goal: 0.005, direction: "max" } },
+      { key: "permits", label: "Permits", target: { goal: 0.005, direction: "max" } },
+      { key: "buydowns", label: "Buydowns (financing)", target: { goal: 0.02, direction: "max" } },
+      { key: "warrantyLabor", label: "Warranty parts-labor", target: { goal: 0.02, direction: "max" } },
+      // "Margin % w/out support wages" — support/admin wages (6022) sit in
+      // Expenses, below Gross Profit, not in COGS, so the P&L's existing
+      // Gross Profit figure already excludes them. Treated as the same
+      // number as every other department's "Gross margin" tile, just
+      // relabeled and given this chart's 42-45% band (floor: 42%).
+      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.42, direction: "min" } },
+      { key: "marketing", label: "Marketing", target: { goal: 0.04, direction: "max" } },
+      { key: "employeeRelated", label: "Employee related", target: { goal: 0.15, direction: "max" } },
+      { key: "vehicle", label: "Vehicle", target: { goal: 0.04, direction: "max" } },
+      { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.04, direction: "max" } },
+      { key: "administrative", label: "Administration", target: { goal: 0.03, direction: "max" } },
+      { key: "totalExpense", label: "Total SG&A", target: { goal: 0.3, direction: "max" } },
+      { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.15, direction: "min" } },
+    ],
+    manual: [
+      // Headcount inputs — shown as their own count tiles too so it's clear
+      // what denominator each Revenue-per-X figure is using, not just the
+      // derived dollar amount.
+      { key: "employeeCount", label: "Service employees", type: "count", target: null },
+      { key: "vehicleCount", label: "Techs / vehicles", type: "count", target: null },
+      { key: "crewCount", label: "Install crews (2-man)", type: "count", target: null },
+      { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
+      // Source gives two numbers here — "Min 400,000, target 600,000" — a
+      // floor and a stretch goal. Graded against the floor, same convention
+      // as every other range on this chart; 600k is the stretch, not wired in.
+      { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
+      { key: "revenuePerCrew", label: "Revenue per install crew", type: "money", target: { goal: 2500000, direction: "min" }, compute: (m, s, pnl) => (m.crewCount && pnl ? pnl.totalIncome / m.crewCount : null) },
+    ],
+  },
+  // Confirmed against BU 50's own detailed financial KPI list — replaced the
+  // earlier build that mirrored BU 10's numbers exactly (no separate
+  // Plumbing Installation chart existed at the time). Almost every ratio
+  // differs from BU 10's; several match BU 70/Plumbing Service's instead
+  // (Marketing, Vehicle, Plant & equipment, Administration, Total SG&A,
+  // Pretax, and the Margin figure all line up with BU 70's exact numbers) —
+  // overhead policy looks like it's set per trade (Plumbing vs. HVAC), not
+  // per install-vs-service, though that's inferred from the numbers
+  // matching, not stated outright.
+  50: {
+    name: "Plumbing Installation",
+    buLabel: "50 Plumbing Installation",
+    hcp: [
+      { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 15000, direction: "min" } },
+    ],
+    pnl: [
+      { key: "laborCost", label: "Labor to sales (non-burdened)", target: { goal: 0.21, direction: "max" } },
+      // "0" on this chart, same hard-ceiling treatment as BU 70's Equipment
+      // target — worth double-checking, since it's surprising for an
+      // *Installation* department specifically (BU 10's equivalent target is
+      // 35%, reflecting how much of an install job's cost is equipment).
+      // Possible this trade books installed equipment under Materials/parts
+      // instead of the Equipment account — flagging rather than guessing.
+      { key: "equipmentCost", label: "Equipment to sales", target: { goal: 0, direction: "max" } },
+      { key: "partsCost", label: "Materials/parts to sales", target: { goal: 0.13, direction: "max" } },
+      { key: "subcontractCost", label: "Subcontracts", target: { goal: 0.01, direction: "max" } },
+      { key: "salesSalary", label: "Sales salaries", target: { goal: 0, direction: "max" } },
+      { key: "commissionCost", label: "Commissions", target: { goal: 0.08, direction: "max" } },
+      { key: "fringeCost", label: "Allocated fringe benefits", target: { goal: 0.07, direction: "max" } },
+      { key: "warranty", label: "Warranty", target: { goal: 0.005, direction: "max" } },
+      { key: "permits", label: "Permits", target: { goal: 0.005, direction: "max" } },
+      // "N/A" on this chart — tracked (the account is real) but shown
+      // neutral rather than invented a threshold, same treatment as BU 70's
+      // Buydowns originally got before that one was later confirmed.
+      { key: "buydowns", label: "Buydowns (financing)", target: null },
+      { key: "warrantyLabor", label: "Warranty parts-labor", target: { goal: 0, direction: "max" } },
+      { key: "grossProfit", label: "Margin % w/out support wages", target: { goal: 0.48, direction: "min" } },
+      { key: "marketing", label: "Marketing", target: { goal: 0.05, direction: "max" } },
+      { key: "employeeRelated", label: "Employee related (incl. support wages)", target: { goal: 0.15, direction: "max" } },
+      { key: "vehicle", label: "Vehicle", target: { goal: 0.06, direction: "max" } },
+      { key: "plantEquipment", label: "Plant & equipment", target: { goal: 0.05, direction: "max" } },
+      { key: "administrative", label: "Administration", target: { goal: 0.04, direction: "max" } },
+      { key: "totalExpense", label: "Total SG&A", target: { goal: 0.35, direction: "max" } },
+      { key: "netOrdinaryIncome", label: "Pretax", target: { goal: 0.1, direction: "min" } },
+    ],
+    manual: [
+      { key: "employeeCount", label: "Service employees", type: "count", target: null },
+      { key: "vehicleCount", label: "Techs / vehicles", type: "count", target: null },
+      { key: "crewCount", label: "Install crews (2-man)", type: "count", target: null },
+      { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 100000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
+      // Revenue per vehicle/crew weren't given confirmed numbers on this
+      // chart (unlike BU 10's, which has both) — kept as tracked tiles
+      // (still useful once headcount is filled in) but left neutral rather
+      // than carrying over BU 10's $400,000/$2,500,000 targets, which were
+      // never actually confirmed for this department.
+      { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: null, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
+      { key: "revenuePerCrew", label: "Revenue per install crew", type: "money", target: null, compute: (m, s, pnl) => (m.crewCount && pnl ? pnl.totalIncome / m.crewCount : null) },
+    ],
+  },
 };

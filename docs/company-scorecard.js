@@ -19,9 +19,9 @@
 // Each department's metric set is genuinely different — BU 40's original
 // KPI chart has no $0 Call/Lead turnover/Accessory sold at all, and frames
 // club agreements as new-vs-renewal rather than BU 30's flat conversion
-// rate — so DEPARTMENTS (and the OVERHEAD_PNL_METRICS/installDept() it's
-// built from) is config-driven rather than one hardcoded tile set applied
-// to every BU. Lives in departments-config.js now, not this file — a
+// rate — so DEPARTMENTS (and the shared OVERHEAD_PNL_METRICS spread some
+// departments use) is config-driven rather than one hardcoded tile set
+// applied to every BU. Lives in departments-config.js now, not this file — a
 // second page (an internal matrix/comparison view) reads the exact same
 // targets from there, so there's one source of truth instead of two copies
 // that could quietly drift apart. Loaded via <script> before this file in
