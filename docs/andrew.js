@@ -14,6 +14,15 @@ const ANDREW_ID = "pro_ca120cbb55fa40fe9361d492161b101f";
 const ANDREW_MONTHLY_GOAL = 2_500_000 / 12;
 const ANDREW_YTD_GOAL = 2_500_000;
 
+// A closing-rate target, not a revenue one — a ratio rather than a
+// cumulative dollar figure, so unlike the two goals above it doesn't need
+// prorating by how much of the period has elapsed and applies the same way
+// to all three period tabs (last month's closing rate, this month's
+// so-far rate, and the year's blended rate are all just "approved ÷
+// given"). Shown as a tick mark on the closing ring plus a "Target N%"
+// caption — see the ring-target-tick math in render().
+const ANDREW_CLOSING_GOAL_PCT = 50;
+
 const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
 const avatarSlot = document.getElementById("avatar-slot");
@@ -22,6 +31,8 @@ const heroEyebrow = document.getElementById("hero-eyebrow");
 const heroLine = document.getElementById("hero-line");
 const ringNumber = document.getElementById("ring-number");
 const ringFill = document.getElementById("ring-fill");
+const ringTarget = document.getElementById("ring-target");
+const ringTargetTick = document.getElementById("ring-target-tick");
 const goalCard = document.getElementById("goal-card");
 const goalTitle = document.getElementById("goal-title");
 const goalFigures = document.getElementById("goal-figures");
@@ -38,6 +49,31 @@ const estimateListSummary = document.getElementById("estimate-list-summary");
 const estimateListBody = document.getElementById("estimate-list-body");
 
 const CIRCUMFERENCE = 2 * Math.PI * 60;
+
+// Where the target tick sits on the ring, in the SVG's own (pre-rotation)
+// coordinate space. The ring-fill circle's stroke-dasharray/dashoffset
+// trick (see render()) starts drawing from this same circle's local angle
+// 0 and, combined with the ring's `transform: rotate(-90deg)` in CSS,
+// ends up sweeping clockwise on screen starting from the top — the same
+// convention every "progress ring" built this way uses. Parametrizing the
+// tick with the identical (cx + r·cos θ, cy + r·sin θ) formula, θ = pct/100
+// of a full turn, guarantees it lands exactly where the fill's leading
+// edge would be at that percentage, without having to separately reason
+// about the CSS rotation. Verified visually (screenshot) once, not just
+// derived — see the andrew.html/andrew.css comments for the ring markup.
+function ringTickPoints(pct, innerR, outerR) {
+  const cx = 74;
+  const cy = 74;
+  const theta = (pct / 100) * 2 * Math.PI;
+  const cos = Math.cos(theta);
+  const sin = Math.sin(theta);
+  return {
+    x1: cx + innerR * cos,
+    y1: cy + innerR * sin,
+    x2: cx + outerR * cos,
+    y2: cy + outerR * sin,
+  };
+}
 
 let latestData = null;
 let currentPeriod = "month";
@@ -210,6 +246,15 @@ function render() {
   heroEyebrow.textContent = meta.eyebrow;
   ringNumber.textContent = `${stats.closingRate.toFixed(0)}%`;
   ringFill.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - Math.min(100, stats.closingRate) / 100));
+
+  const closingHit = stats.given > 0 && stats.closingRate >= ANDREW_CLOSING_GOAL_PCT;
+  ringNumber.classList.toggle("hit", closingHit);
+  ringTarget.textContent = `Target ${ANDREW_CLOSING_GOAL_PCT}%`;
+  const tick = ringTickPoints(ANDREW_CLOSING_GOAL_PCT, 50, 74);
+  ringTargetTick.setAttribute("x1", tick.x1.toFixed(2));
+  ringTargetTick.setAttribute("y1", tick.y1.toFixed(2));
+  ringTargetTick.setAttribute("x2", tick.x2.toFixed(2));
+  ringTargetTick.setAttribute("y2", tick.y2.toFixed(2));
 
   // Kept to just the headline facts — given/closed counts, revenue, avg
   // ticket — with no "so far" (wrong on a closed period that's already

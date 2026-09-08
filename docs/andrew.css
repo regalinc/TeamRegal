@@ -246,13 +246,35 @@ body {
   font-weight: 600;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease;
 }
+/* At or above the closing-rate target — reuses --good rather than gold so
+   it doesn't compete with gold's existing meaning ("money") elsewhere on
+   this page; a closing-rate win is a different kind of good news. */
+.ring-number.hit { color: var(--good); }
 .ring-label {
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-top: 1px;
+}
+.ring-target {
+  font-size: 0.56rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 2px;
+}
+/* A small radial notch on the ring marking the 50% target itself, so the
+   number can be read against a fixed reference point at a glance rather
+   than only via the caption text. Drawn after ring-fill in the SVG source
+   so it stays visible on top of the gold arc once closing rate passes the
+   target, instead of being visually swallowed by it. */
+.ring-target-tick {
+  stroke: var(--text-muted);
+  stroke-width: 3;
+  stroke-linecap: round;
 }
 
 .hero-copy { min-width: 0; }
