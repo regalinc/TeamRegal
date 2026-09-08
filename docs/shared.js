@@ -116,6 +116,8 @@ const MANUAL_AVATAR_OVERRIDES = {
   "pro_048a0f2df6b2480aaa1a1ae03924fa9e": "assets/tech-photos/mark-zink.jpg", // Mark Zink
   "pro_8e95601ea8db4c5193be8f19fb319a44": "assets/tech-photos/pete-lalic.jpg", // Pete Lalic
   "pro_ca120cbb55fa40fe9361d492161b101f": "assets/tech-photos/andrew-rouscher.jpg", // Andrew Rouscher — his own largeAvatarUrl() 403s (see andrew.js), same gap as the rest of this list
+  "pro_62aa1ba4432340829b0aba02abd1d307": "assets/tech-photos/josh-zieger.jpg", // Josh Zieger — same gap, blurry on hvac-sales.html at the 112px identity-photo size
+  "pro_27fcce8f21bc4186b44abe4d9a87c03f": "assets/tech-photos/nick-webb.jpg", // Nick Webb — same gap, blurry on hvac-sales.html at the 112px identity-photo size
 };
 
 // Apprentices — currently training/riding along with a real technician, not
