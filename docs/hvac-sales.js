@@ -19,7 +19,19 @@
 // wasn't worth touching andrew.js's already-shipped, daily-used code for.
 
 const urlParams = new URLSearchParams(location.search);
-const CA = urlParams.get("ca");
+
+// Case/whitespace-forgiving, same reasoning as tv.js's normalizeDeptKey/
+// resolveDept for its own ?dept= param: a bookmarked or hand-typed URL
+// ("?ca=nick") shouldn't 404-style fail just because the exact case of
+// HVAC_SALES_CA_TECH_IDS's keys (shared.js) didn't match — confirmed real
+// via a user bookmarking a lowercase ?ca=nick and getting the "no such CA"
+// empty state despite the page otherwise working fine.
+function resolveCa(raw) {
+  const key = String(raw || "").trim().toLowerCase();
+  return Object.keys(HVAC_SALES_CA_TECH_IDS).find((ca) => ca.toLowerCase() === key) || null;
+}
+
+const CA = resolveCa(urlParams.get("ca"));
 
 const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
