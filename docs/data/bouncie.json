@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-08T14:44:48.453Z",
+    "last_synced_at": "2026-09-08T18:56:36.232Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 837
+    "trip_count": 917
   },
   "vehicles": [
     {
@@ -16,7 +16,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 33178.1
+      "odometer": 33198.6
     },
     {
       "imei": "352602114569707",
@@ -38,7 +38,7 @@
         "name": "Express",
         "year": 2023
       },
-      "odometer": 21390.1
+      "odometer": 21404.4
     },
     {
       "imei": "862255068857876",
@@ -60,7 +60,7 @@
         "name": "Maverick",
         "year": 2024
       },
-      "odometer": 33972.60000000011
+      "odometer": 33976.10000000011
     },
     {
       "imei": "862255068902755",
@@ -71,7 +71,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 70172.69999999976
+      "odometer": 70185.29999999977
     },
     {
       "imei": "862255068923033",
@@ -82,7 +82,7 @@
         "name": "Maverick",
         "year": 2024
       },
-      "odometer": 27296.29999999995
+      "odometer": 27300.59999999995
     },
     {
       "imei": "864486066508249",
@@ -104,7 +104,7 @@
         "name": "ProMaster 2500",
         "year": 2024
       },
-      "odometer": 26084.5
+      "odometer": 26116.2
     },
     {
       "imei": "864486067218087",
@@ -115,7 +115,7 @@
         "name": "ProMaster 2500",
         "year": 2025
       },
-      "odometer": 11369.500000000015
+      "odometer": 11389.900000000014
     },
     {
       "imei": "864486067735866",
@@ -126,7 +126,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 15021
+      "odometer": 15034.7
     },
     {
       "imei": "864486067935557",
@@ -137,7 +137,7 @@
         "name": "ProMaster 3500",
         "year": 2024
       },
-      "odometer": 10517.3
+      "odometer": 10521.1
     },
     {
       "imei": "864486068446786",
@@ -181,7 +181,7 @@
         "name": "ProMaster 2500",
         "year": 2026
       },
-      "odometer": 4049.5
+      "odometer": 4066.3
     },
     {
       "imei": "865612072508498",
@@ -192,7 +192,7 @@
         "name": "ProMaster 2500",
         "year": 2026
       },
-      "odometer": 12545.900000000007
+      "odometer": 12551.600000000008
     },
     {
       "imei": "866016061240825",
@@ -214,7 +214,7 @@
         "name": "Express",
         "year": 2017
       },
-      "odometer": 2001.4
+      "odometer": 2019.5
     },
     {
       "imei": "868199050010215",
@@ -236,7 +236,7 @@
         "name": "Promaster 2500",
         "year": 2022
       },
-      "odometer": 44009.8
+      "odometer": 44069.4
     },
     {
       "imei": "868199050012070",
@@ -258,7 +258,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 8367.4
+      "odometer": 8370.5
     },
     {
       "imei": "868199050019885",
@@ -335,7 +335,7 @@
         "name": "Express Van 3500",
         "year": 2012
       },
-      "odometer": 118377.70000000017
+      "odometer": 118392.90000000017
     },
     {
       "imei": "868199050092429",
@@ -346,7 +346,7 @@
         "name": "Promaster 2500",
         "year": 2022
       },
-      "odometer": 50824.4
+      "odometer": 50854.2
     },
     {
       "imei": "868199050092544",
@@ -390,7 +390,7 @@
         "name": "Sierra",
         "year": 2021
       },
-      "odometer": 75408.3
+      "odometer": 75438.8
     },
     {
       "imei": "868923055438364",
@@ -401,7 +401,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 48086.003404399686
+      "odometer": 48104.30340439968
     },
     {
       "imei": "868923055442135",
@@ -412,23 +412,963 @@
         "name": "Promaster 2500",
         "year": 2022
       },
-      "odometer": 59734
+      "odometer": 59752.3
     }
   ],
   "trips": [
     {
+      "transactionId": "868199050092429-11132-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T18:49:41.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "868923055442135-13357-202609",
+      "imei": "868923055442135",
+      "startTime": "2026-09-08T18:45:18.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "868923055438364-10000-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T18:43:59.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "865612072508498-940-202609",
+      "imei": "865612072508498",
+      "startTime": "2026-09-08T18:39:00.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "864486067735866-1922-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-08T18:32:41.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "864486066579554-3794-202609",
+      "imei": "864486066579554",
+      "startTime": "2026-09-08T18:30:45.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "865612072443787-810-202609",
+      "imei": "865612072443787",
+      "startTime": "2026-09-08T18:27:35.000Z",
+      "endTime": "2026-09-08T18:53:44.000Z",
+      "distance": 6,
+      "averageSpeed": 19.8,
+      "maxSpeed": 39.146373,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 490
+    },
+    {
+      "transactionId": "862255068923033-4835-202609",
+      "imei": "862255068923033",
+      "startTime": "2026-09-08T18:18:37.000Z",
+      "endTime": "2026-09-08T18:53:54.000Z",
+      "distance": 1.7,
+      "averageSpeed": 19.8,
+      "maxSpeed": 40.389115000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1804
+    },
+    {
+      "transactionId": "868199050020511-10358-202609",
+      "imei": "868199050020511",
+      "startTime": "2026-09-08T18:17:01.000Z",
+      "endTime": "2026-09-08T18:29:34.000Z",
+      "distance": 4.3,
+      "averageSpeed": 25.4,
+      "maxSpeed": 41.631857000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 139
+    },
+    {
+      "transactionId": "864486067218087-1728-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-08T18:13:40.000Z",
+      "endTime": "2026-09-08T18:41:37.000Z",
+      "distance": 10.9,
+      "averageSpeed": 34.1,
+      "maxSpeed": 46,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 533
+    },
+    {
+      "transactionId": "868199050011171-11446-202609",
+      "imei": "868199050011171",
+      "startTime": "2026-09-08T18:06:39.000Z",
+      "endTime": "2026-09-08T18:48:38.000Z",
+      "distance": 19.4,
+      "averageSpeed": 33.5,
+      "maxSpeed": 55.92339,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 406
+    },
+    {
+      "transactionId": "352602114569103-7497-202609",
+      "imei": "352602114569103",
+      "startTime": "2026-09-08T18:04:07.000Z",
+      "endTime": "2026-09-08T18:20:05.000Z",
+      "distance": 6.5,
+      "averageSpeed": 27.9,
+      "maxSpeed": 47.8,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 118
+    },
+    {
+      "transactionId": "864486067218087-1727-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-08T18:01:21.000Z",
+      "endTime": "2026-09-08T18:09:48.000Z",
+      "distance": 4,
+      "averageSpeed": 33.5,
+      "maxSpeed": 48.5,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 73
+    },
+    {
+      "transactionId": "862255068923033-4834-202609",
+      "imei": "862255068923033",
+      "startTime": "2026-09-08T18:00:58.000Z",
+      "endTime": "2026-09-08T18:13:41.000Z",
+      "distance": 1.9,
+      "averageSpeed": 20.5,
+      "maxSpeed": 43.49597,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 424
+    },
+    {
+      "transactionId": "868199050092429-11131-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T18:00:36.000Z",
+      "endTime": "2026-09-08T18:13:56.000Z",
+      "distance": 6.6,
+      "averageSpeed": 34.7,
+      "maxSpeed": 80.77823000000001,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 103
+    },
+    {
+      "transactionId": "868923055438364-9999-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T17:54:33.000Z",
+      "endTime": "2026-09-08T18:13:22.000Z",
+      "distance": 10.9,
+      "averageSpeed": 49,
+      "maxSpeed": 78.914117,
+      "hardBrakingCount": 3,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 31
+    },
+    {
+      "transactionId": "865612072443787-809-202609",
+      "imei": "865612072443787",
+      "startTime": "2026-09-08T17:51:39.000Z",
+      "endTime": "2026-09-08T18:07:53.000Z",
+      "distance": 0.9,
+      "averageSpeed": 16.1,
+      "maxSpeed": 32.311292,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 768
+    },
+    {
+      "transactionId": "868199050011171-11445-202609",
+      "imei": "868199050011171",
+      "startTime": "2026-09-08T17:37:51.000Z",
+      "endTime": "2026-09-08T18:03:01.000Z",
+      "distance": 1.5,
+      "averageSpeed": 22.3,
+      "maxSpeed": 32.932663,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1263
+    },
+    {
+      "transactionId": "864486067735866-1921-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-08T17:37:33.000Z",
+      "endTime": "2026-09-08T17:57:06.000Z",
+      "distance": 9.1,
+      "averageSpeed": 30.4,
+      "maxSpeed": 64.622584,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 93
+    },
+    {
+      "transactionId": "868923055438364-9998-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T17:35:55.000Z",
+      "endTime": "2026-09-08T17:50:17.000Z",
+      "distance": 4.1,
+      "averageSpeed": 27.9,
+      "maxSpeed": 64.001213,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 36
+    },
+    {
+      "transactionId": "352602114569103-7496-202609",
+      "imei": "352602114569103",
+      "startTime": "2026-09-08T17:35:13.000Z",
+      "endTime": "2026-09-08T17:50:17.000Z",
+      "distance": 6.4,
+      "averageSpeed": 27.9,
+      "maxSpeed": 46,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 82
+    },
+    {
+      "transactionId": "868199050009993-7547-202609",
+      "imei": "868199050009993",
+      "startTime": "2026-09-08T17:35:08.000Z",
+      "endTime": "2026-09-08T18:01:38.000Z",
+      "distance": 11.4,
+      "averageSpeed": 30.4,
+      "maxSpeed": 60.272987,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 225
+    },
+    {
+      "transactionId": "868199050092429-11130-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T17:34:30.000Z",
+      "endTime": "2026-09-08T17:34:58.000Z",
+      "distance": 0,
+      "averageSpeed": 7.4,
+      "maxSpeed": 12.42742,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 10
+    },
+    {
+      "transactionId": "868199050020511-10357-202609",
+      "imei": "868199050020511",
+      "startTime": "2026-09-08T17:24:58.000Z",
+      "endTime": "2026-09-08T17:40:00.000Z",
+      "distance": 2.8,
+      "averageSpeed": 16.7,
+      "maxSpeed": 32.932663,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 271
+    },
+    {
+      "transactionId": "868199050092429-11129-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T17:23:03.000Z",
+      "endTime": "2026-09-08T17:32:26.000Z",
+      "distance": 6.5,
+      "averageSpeed": 47.8,
+      "maxSpeed": 82.642343,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 60
+    },
+    {
+      "transactionId": "862255068864591-4819-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-08T17:16:51.000Z",
+      "endTime": "2026-09-08T17:18:48.000Z",
+      "distance": 0.4,
+      "averageSpeed": 13,
+      "maxSpeed": 25.476211,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 2
+    },
+    {
+      "transactionId": "865612072443787-808-202609",
+      "imei": "865612072443787",
+      "startTime": "2026-09-08T17:08:02.000Z",
+      "endTime": "2026-09-08T17:39:46.000Z",
+      "distance": 5.4,
+      "averageSpeed": 22.3,
+      "maxSpeed": 46.602825,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1030
+    },
+    {
+      "transactionId": "868923055442135-13356-202609",
+      "imei": "868923055442135",
+      "startTime": "2026-09-08T17:08:02.000Z",
+      "endTime": "2026-09-08T17:29:46.000Z",
+      "distance": 6.8,
+      "averageSpeed": 27.9,
+      "maxSpeed": 55.92339,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 411
+    },
+    {
+      "transactionId": "862255068923033-4833-202609",
+      "imei": "862255068923033",
+      "startTime": "2026-09-08T17:04:50.000Z",
+      "endTime": "2026-09-08T17:31:19.000Z",
+      "distance": 0.7,
+      "averageSpeed": 14.2,
+      "maxSpeed": 24.85484,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1388
+    },
+    {
+      "transactionId": "868199050092429-11128-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T17:01:30.000Z",
+      "endTime": "2026-09-08T17:19:33.000Z",
+      "distance": 7.1,
+      "averageSpeed": 38.5,
+      "maxSpeed": 78.914117,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 408
+    },
+    {
+      "transactionId": "862255068902755-4010-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-08T16:58:20.000Z",
+      "endTime": "2026-09-08T17:29:31.000Z",
+      "distance": 12.6,
+      "averageSpeed": 30.4,
+      "maxSpeed": 52.195164,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 363
+    },
+    {
+      "transactionId": "352602114574376-7328-202609",
+      "imei": "352602114574376",
+      "startTime": "2026-09-08T16:57:53.000Z",
+      "endTime": "2026-09-08T17:27:32.000Z",
+      "distance": 6.9,
+      "averageSpeed": 21.7,
+      "maxSpeed": 51,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 662
+    },
+    {
+      "transactionId": "868923055442135-13355-202609",
+      "imei": "868923055442135",
+      "startTime": "2026-09-08T16:53:04.000Z",
+      "endTime": "2026-09-08T17:02:18.000Z",
+      "distance": 2.7,
+      "averageSpeed": 26.7,
+      "maxSpeed": 45.360083,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 186
+    },
+    {
+      "transactionId": "868923055438364-9997-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T16:52:15.000Z",
+      "endTime": "2026-09-08T16:55:34.000Z",
+      "distance": 0,
+      "averageSpeed": 4.9,
+      "maxSpeed": 6.21371,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 0
+    },
+    {
+      "transactionId": "864486066579554-3793-202609",
+      "imei": "864486066579554",
+      "startTime": "2026-09-08T16:48:49.000Z",
+      "endTime": "2026-09-08T17:20:14.000Z",
+      "distance": 14.2,
+      "averageSpeed": 34.7,
+      "maxSpeed": 51.6,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 419
+    },
+    {
+      "transactionId": "864486067218087-1726-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-08T16:42:19.000Z",
+      "endTime": "2026-09-08T16:55:01.000Z",
+      "distance": 5.5,
+      "averageSpeed": 27.9,
+      "maxSpeed": 41.631857000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 56
+    },
+    {
+      "transactionId": "868923055438364-9996-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T16:40:52.000Z",
+      "endTime": "2026-09-08T16:47:11.000Z",
+      "distance": 0.1,
+      "averageSpeed": 10.5,
+      "maxSpeed": 16.155646,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 35
+    },
+    {
+      "transactionId": "868199050091991-5032-202609",
+      "imei": "868199050091991",
+      "startTime": "2026-09-08T16:39:25.000Z",
+      "endTime": "2026-09-08T16:40:45.000Z",
+      "distance": 0,
+      "averageSpeed": 1.8,
+      "maxSpeed": 1.8641130000000001,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 58
+    },
+    {
+      "transactionId": "868923055376903-17793-202609",
+      "imei": "868923055376903",
+      "startTime": "2026-09-08T16:35:24.000Z",
+      "endTime": "2026-09-08T17:06:08.000Z",
+      "distance": 9.7,
+      "averageSpeed": 27.3,
+      "maxSpeed": 48.466938,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 546
+    },
+    {
+      "transactionId": "352602114574376-7327-202609",
+      "imei": "352602114574376",
+      "startTime": "2026-09-08T16:33:06.000Z",
+      "endTime": "2026-09-08T16:52:01.000Z",
+      "distance": 3,
+      "averageSpeed": 18,
+      "maxSpeed": 40.4,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 544
+    },
+    {
+      "transactionId": "868923055442135-13354-202609",
+      "imei": "868923055442135",
+      "startTime": "2026-09-08T16:28:33.000Z",
+      "endTime": "2026-09-08T16:40:16.000Z",
+      "distance": 4.1,
+      "averageSpeed": 25.4,
+      "maxSpeed": 46.602825,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 119
+    },
+    {
+      "transactionId": "868199050092429-11127-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T16:26:30.000Z",
+      "endTime": "2026-09-08T16:36:23.000Z",
+      "distance": 3.5,
+      "averageSpeed": 29.8,
+      "maxSpeed": 49.70968,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 160
+    },
+    {
+      "transactionId": "868199050009993-7546-202609",
+      "imei": "868199050009993",
+      "startTime": "2026-09-08T16:25:58.000Z",
+      "endTime": "2026-09-08T16:35:05.000Z",
+      "distance": 2.6,
+      "averageSpeed": 19.8,
+      "maxSpeed": 44.738712,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 65
+    },
+    {
+      "transactionId": "864486067735866-1920-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-08T16:24:28.000Z",
+      "endTime": "2026-09-08T16:38:03.000Z",
+      "distance": 4.5,
+      "averageSpeed": 26,
+      "maxSpeed": 45.360083,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 189
+    },
+    {
+      "transactionId": "352602114569103-7495-202609",
+      "imei": "352602114569103",
+      "startTime": "2026-09-08T16:22:47.000Z",
+      "endTime": "2026-09-08T16:34:19.000Z",
+      "distance": 3.9,
+      "averageSpeed": 31.6,
+      "maxSpeed": 57.166132,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 252
+    },
+    {
+      "transactionId": "868923055376903-17792-202609",
+      "imei": "868923055376903",
+      "startTime": "2026-09-08T16:16:15.000Z",
+      "endTime": "2026-09-08T16:29:34.000Z",
+      "distance": 4.6,
+      "averageSpeed": 29.8,
+      "maxSpeed": 49.70968,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 226
+    },
+    {
+      "transactionId": "868199050020511-10356-202609",
+      "imei": "868199050020511",
+      "startTime": "2026-09-08T16:12:02.000Z",
+      "endTime": "2026-09-08T16:31:06.000Z",
+      "distance": 3.5,
+      "averageSpeed": 22.9,
+      "maxSpeed": 41.631857000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 600
+    },
+    {
+      "transactionId": "868199050091991-5031-202609",
+      "imei": "868199050091991",
+      "startTime": "2026-09-08T16:11:21.000Z",
+      "endTime": "2026-09-08T16:26:29.000Z",
+      "distance": 4.3,
+      "averageSpeed": 22.9,
+      "maxSpeed": 49.70968,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 221
+    },
+    {
+      "transactionId": "864486067935557-2073-202609",
+      "imei": "864486067935557",
+      "startTime": "2026-09-08T16:10:47.000Z",
+      "endTime": "2026-09-08T16:28:38.000Z",
+      "distance": 0,
+      "averageSpeed": 0,
+      "maxSpeed": 0,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1061
+    },
+    {
+      "transactionId": "352602114569103-7494-202609",
+      "imei": "352602114569103",
+      "startTime": "2026-09-08T16:07:59.000Z",
+      "endTime": "2026-09-08T16:19:20.000Z",
+      "distance": 3.5,
+      "averageSpeed": 21.7,
+      "maxSpeed": 43.5,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 103
+    },
+    {
+      "transactionId": "868199050009993-7545-202609",
+      "imei": "868199050009993",
+      "startTime": "2026-09-08T16:07:26.000Z",
+      "endTime": "2026-09-08T16:20:25.000Z",
+      "distance": 4,
+      "averageSpeed": 26,
+      "maxSpeed": 55.302019,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 1,
+      "totalIdleDuration": 217
+    },
+    {
+      "transactionId": "868199050092429-11126-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T16:03:26.000Z",
+      "endTime": "2026-09-08T16:17:10.000Z",
+      "distance": 5,
+      "averageSpeed": 33.5,
+      "maxSpeed": 72.1,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 270
+    },
+    {
+      "transactionId": "868199050092544-10816-202609",
+      "imei": "868199050092544",
+      "startTime": "2026-09-08T16:01:30.000Z",
+      "endTime": "2026-09-08T16:42:25.000Z",
+      "distance": 0,
+      "averageSpeed": 0,
+      "maxSpeed": 0,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 2445
+    },
+    {
+      "transactionId": "868199050092429-11125-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T16:01:07.000Z",
+      "endTime": "2026-09-08T16:01:43.000Z",
+      "distance": 0,
+      "averageSpeed": 4.3,
+      "maxSpeed": 4.970968,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 9
+    },
+    {
+      "transactionId": "868923055376903-17791-202609",
+      "imei": "868923055376903",
+      "startTime": "2026-09-08T15:54:42.000Z",
+      "endTime": "2026-09-08T16:10:13.000Z",
+      "distance": 8.5,
+      "averageSpeed": 37.2,
+      "maxSpeed": 75.185891,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 1,
+      "totalIdleDuration": 108
+    },
+    {
+      "transactionId": "864486066579554-3792-202609",
+      "imei": "864486066579554",
+      "startTime": "2026-09-08T15:51:43.000Z",
+      "endTime": "2026-09-08T16:12:34.000Z",
+      "distance": 9.4,
+      "averageSpeed": 30.4,
+      "maxSpeed": 54.680648,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 147
+    },
+    {
+      "transactionId": "868199050092429-11124-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T15:34:03.000Z",
+      "endTime": "2026-09-08T15:37:50.000Z",
+      "distance": 0.7,
+      "averageSpeed": 15.5,
+      "maxSpeed": 32.3,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 36
+    },
+    {
+      "transactionId": "868923055442135-13353-202609",
+      "imei": "868923055442135",
+      "startTime": "2026-09-08T15:33:59.000Z",
+      "endTime": "2026-09-08T15:44:52.000Z",
+      "distance": 2.7,
+      "averageSpeed": 29.8,
+      "maxSpeed": 71.457665,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 315
+    },
+    {
+      "transactionId": "865612072508498-939-202609",
+      "imei": "865612072508498",
+      "startTime": "2026-09-08T15:28:20.000Z",
+      "endTime": "2026-09-08T15:45:36.000Z",
+      "distance": 4.1,
+      "averageSpeed": 21.1,
+      "maxSpeed": 41.631857000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 331
+    },
+    {
+      "transactionId": "868199050011171-11444-202609",
+      "imei": "868199050011171",
+      "startTime": "2026-09-08T15:26:31.000Z",
+      "endTime": "2026-09-08T16:27:36.000Z",
+      "distance": 19.4,
+      "averageSpeed": 36.6,
+      "maxSpeed": 65.243955,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1758
+    },
+    {
+      "transactionId": "352602114574376-7326-202609",
+      "imei": "352602114574376",
+      "startTime": "2026-09-08T15:24:24.000Z",
+      "endTime": "2026-09-08T15:35:21.000Z",
+      "distance": 2,
+      "averageSpeed": 15.5,
+      "maxSpeed": 48.5,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 205
+    },
+    {
+      "transactionId": "868923055442135-13352-202609",
+      "imei": "868923055442135",
+      "startTime": "2026-09-08T15:23:48.000Z",
+      "endTime": "2026-09-08T15:30:32.000Z",
+      "distance": 3.1,
+      "averageSpeed": 30.4,
+      "maxSpeed": 47.845567,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 25
+    },
+    {
+      "transactionId": "868199050091991-5030-202609",
+      "imei": "868199050091991",
+      "startTime": "2026-09-08T15:22:06.000Z",
+      "endTime": "2026-09-08T15:34:23.000Z",
+      "distance": 5.9,
+      "averageSpeed": 32.3,
+      "maxSpeed": 49.70968,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 67
+    },
+    {
+      "transactionId": "868923055376903-17790-202609",
+      "imei": "868923055376903",
+      "startTime": "2026-09-08T15:21:19.000Z",
+      "endTime": "2026-09-08T15:48:06.000Z",
+      "distance": 7.6,
+      "averageSpeed": 21.7,
+      "maxSpeed": 37.903631,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 344
+    },
+    {
+      "transactionId": "865612072508498-938-202609",
+      "imei": "865612072508498",
+      "startTime": "2026-09-08T15:15:49.000Z",
+      "endTime": "2026-09-08T15:22:47.000Z",
+      "distance": 1.2,
+      "averageSpeed": 22.3,
+      "maxSpeed": 40.389115000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 207
+    },
+    {
+      "transactionId": "864486066579554-3791-202609",
+      "imei": "864486066579554",
+      "startTime": "2026-09-08T15:10:51.000Z",
+      "endTime": "2026-09-08T15:24:07.000Z",
+      "distance": 4,
+      "averageSpeed": 32.3,
+      "maxSpeed": 59.651616000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 363
+    },
+    {
+      "transactionId": "352602114574376-7325-202609",
+      "imei": "352602114574376",
+      "startTime": "2026-09-08T15:10:43.000Z",
+      "endTime": "2026-09-08T15:22:04.000Z",
+      "distance": 1.9,
+      "averageSpeed": 21.7,
+      "maxSpeed": 41,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 364
+    },
+    {
+      "transactionId": "868923055438364-9995-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T15:07:28.000Z",
+      "endTime": "2026-09-08T15:19:41.000Z",
+      "distance": 1.6,
+      "averageSpeed": 19.2,
+      "maxSpeed": 36.660889,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 137
+    },
+    {
+      "transactionId": "868199050011171-11443-202609",
+      "imei": "868199050011171",
+      "startTime": "2026-09-08T15:06:21.000Z",
+      "endTime": "2026-09-08T15:21:22.000Z",
+      "distance": 4.4,
+      "averageSpeed": 24.8,
+      "maxSpeed": 46.602825,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 254
+    },
+    {
+      "transactionId": "862255068864591-4818-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-08T15:05:14.000Z",
+      "endTime": "2026-09-08T15:14:34.000Z",
+      "distance": 1.6,
+      "averageSpeed": 13.6,
+      "maxSpeed": 26.1,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 122
+    },
+    {
+      "transactionId": "868199050016543-10660-202609",
+      "imei": "868199050016543",
+      "startTime": "2026-09-08T15:03:33.000Z",
+      "endTime": "2026-09-08T15:16:14.000Z",
+      "distance": 3,
+      "averageSpeed": 24.2,
+      "maxSpeed": 42.9,
+      "hardBrakingCount": 4,
+      "hardAccelerationCount": 2,
+      "totalIdleDuration": 6
+    },
+    {
+      "transactionId": "868199050092429-11123-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-08T15:01:53.000Z",
+      "endTime": "2026-09-08T15:06:22.000Z",
+      "distance": 1,
+      "averageSpeed": 18,
+      "maxSpeed": 36.039518,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 62
+    },
+    {
+      "transactionId": "868199050020511-10355-202609",
+      "imei": "868199050020511",
+      "startTime": "2026-09-08T15:00:00.000Z",
+      "endTime": "2026-09-08T15:25:36.000Z",
+      "distance": 12.6,
+      "averageSpeed": 32.9,
+      "maxSpeed": 51.6,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 161
+    },
+    {
+      "transactionId": "864486066579554-3790-202609",
+      "imei": "864486066579554",
+      "startTime": "2026-09-08T14:52:14.000Z",
+      "endTime": "2026-09-08T15:10:00.000Z",
+      "distance": 3.7,
+      "averageSpeed": 26,
+      "maxSpeed": 44.117341,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 559
+    },
+    {
+      "transactionId": "868199050016543-10659-202609",
+      "imei": "868199050016543",
+      "startTime": "2026-09-08T14:51:40.000Z",
+      "endTime": "2026-09-08T14:57:01.000Z",
+      "distance": 0.1,
+      "averageSpeed": 20.5,
+      "maxSpeed": 28,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 0
+    },
+    {
+      "transactionId": "868923055438364-9994-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-08T14:51:21.000Z",
+      "endTime": "2026-09-08T15:00:30.000Z",
+      "distance": 1.6,
+      "averageSpeed": 22.3,
+      "maxSpeed": 41.6,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 4
+    },
+    {
+      "transactionId": "868199050020511-10354-202609",
+      "imei": "868199050020511",
+      "startTime": "2026-09-08T14:50:11.000Z",
+      "endTime": "2026-09-08T14:55:34.000Z",
+      "distance": 0.6,
+      "averageSpeed": 12.4,
+      "maxSpeed": 22.990727,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 146
+    },
+    {
+      "transactionId": "862255068864591-4817-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-08T14:49:35.000Z",
+      "endTime": "2026-09-08T14:57:07.000Z",
+      "distance": 1.5,
+      "averageSpeed": 17.3,
+      "maxSpeed": 28.583066,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 130
+    },
+    {
+      "transactionId": "864486067935557-2072-202609",
+      "imei": "864486067935557",
+      "startTime": "2026-09-08T14:49:06.000Z",
+      "endTime": "2026-09-08T15:00:33.000Z",
+      "distance": 3.9,
+      "averageSpeed": 21.7,
+      "maxSpeed": 39.146373,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 54
+    },
+    {
+      "transactionId": "865612072508498-937-202609",
+      "imei": "865612072508498",
+      "startTime": "2026-09-08T14:46:26.000Z",
+      "endTime": "2026-09-08T15:12:08.000Z",
+      "distance": 0.4,
+      "averageSpeed": 12.4,
+      "maxSpeed": 26.718953,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1407
+    },
+    {
       "transactionId": "868199050091991-5029-202609",
       "imei": "868199050091991",
       "startTime": "2026-09-08T14:44:08.000Z",
+      "endTime": "2026-09-08T15:02:33.000Z",
+      "distance": 5,
+      "averageSpeed": 26.7,
+      "maxSpeed": 47.224196,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 413
     },
     {
       "transactionId": "865612072443787-807-202609",
       "imei": "865612072443787",
       "startTime": "2026-09-08T14:33:46.000Z",
+      "endTime": "2026-09-08T14:49:17.000Z",
+      "distance": 4.4,
+      "averageSpeed": 22.9,
+      "maxSpeed": 53.4,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 249
     },
     {
       "transactionId": "864486067935557-2071-202609",
@@ -482,8 +1422,13 @@
       "transactionId": "868199050011171-11442-202609",
       "imei": "868199050011171",
       "startTime": "2026-09-08T14:18:14.000Z",
+      "endTime": "2026-09-08T14:50:24.000Z",
+      "distance": 14.4,
+      "averageSpeed": 42.2,
+      "maxSpeed": 71.457665,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 713
     },
     {
       "transactionId": "862255068923033-4832-202609",
