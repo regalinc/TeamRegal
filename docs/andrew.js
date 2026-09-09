@@ -23,6 +23,12 @@ const ANDREW_YTD_GOAL = 2_500_000;
 // caption — see the ring-target-tick math in render().
 const ANDREW_CLOSING_GOAL_PCT = 50;
 
+// How many days an open (undecided) estimate can sit before the follow-up
+// nudge calls it out by name rather than just counting it — see the
+// "behind pace" branch in render(). Picked as "the better part of a work
+// week without an answer," not tied to any Housecall Pro or company policy.
+const STALE_ESTIMATE_DAYS = 5;
+
 const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
 const avatarSlot = document.getElementById("avatar-slot");
@@ -39,6 +45,7 @@ const goalFigures = document.getElementById("goal-figures");
 const goalFill = document.getElementById("goal-fill");
 const goalEmpty = document.getElementById("goal-empty");
 const paceBadge = document.getElementById("pace-badge");
+const followupNudge = document.getElementById("followup-nudge");
 const tileGiven = document.getElementById("tile-given");
 const tileApproved = document.getElementById("tile-approved");
 const tileApprovedNote = document.getElementById("tile-approved-note");
@@ -291,6 +298,7 @@ function render() {
       paceBadge.hidden = false;
       paceBadge.className = "pace-badge hit";
       paceBadge.textContent = "🎉 Goal hit — nice work!";
+      followupNudge.hidden = true;
     } else {
       const pace = paceInfo(currentPeriod, stats.revenue, meta.goal);
       if (pace) {
@@ -303,6 +311,33 @@ function render() {
       } else {
         paceBadge.hidden = true;
       }
+
+      // A concrete next step, not just a number — only when there's
+      // actually behind-pace *and* something on his own plate to act on.
+      // Deliberately scoped to estimatesGiven (the same period-bounded set
+      // the ring/hero line already use), not his whole all-time backlog —
+      // an all-time count runs into the hundreds for anyone who's been
+      // here a while and stops reading as "do this today."
+      if (pace && pace.diff < 0) {
+        const openInPeriod = estimatesGiven.filter((e) => !e.approved);
+        const staleCount = openInPeriod.filter((e) => {
+          const given = estimateGivenDate(e, tech);
+          return given && (now - new Date(given)) / 86_400_000 >= STALE_ESTIMATE_DAYS;
+        }).length;
+        if (openInPeriod.length > 0) {
+          followupNudge.hidden = false;
+          const openCount = openInPeriod.length;
+          const openWord = openCount === 1 ? "estimate" : "estimates";
+          followupNudge.innerHTML =
+            staleCount > 0
+              ? `📞 <b>${staleCount} of ${openCount} open ${openWord}</b> ${meta.givenPhrase} ${staleCount === 1 ? "hasn't" : "haven't"} heard back in ${STALE_ESTIMATE_DAYS}+ days — a follow-up call could help close the gap.`
+              : `📞 <b>${openCount} open ${openWord}</b> ${meta.givenPhrase} — checking in on ${openCount === 1 ? "it" : "them"} could help close the gap.`;
+        } else {
+          followupNudge.hidden = true;
+        }
+      } else {
+        followupNudge.hidden = true;
+      }
     }
   } else {
     goalCard.classList.remove("hit");
@@ -312,6 +347,7 @@ function render() {
     goalEmpty.hidden = false;
     goalEmpty.textContent = `No goal set for ${meta.goalLabel} yet.`;
     paceBadge.hidden = true;
+    followupNudge.hidden = true;
   }
 
   const sorted = unionById(estimatesGiven, approvedThisPeriod).sort((a, b) => {

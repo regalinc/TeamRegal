@@ -381,6 +381,24 @@ body {
   background: color-mix(in srgb, var(--text-muted) 12%, transparent);
 }
 
+/* ---------- follow-up nudge ---------- */
+/* Only ever shown alongside .pace-badge.behind (see render() in
+   andrew.js) — a concrete next step, not another status readout, so it
+   gets its own line rather than folding into the badge above it.
+   Deliberately neutral (border + muted text, no accent fill) rather than
+   colored like an alert: "you're behind" is already said by the badge
+   above it; this is a suggestion, not a second warning stacked on top. */
+.followup-nudge {
+  margin-top: 0.55rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.followup-nudge b { color: var(--text); font-weight: 650; }
+
 /* ---------- tile grid ---------- */
 .tiles {
   display: grid;
