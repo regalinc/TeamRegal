@@ -362,6 +362,14 @@ function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
     // don't), so this is often null — see SCHEDULE_SCOPED_ESTIMATOR_IDS in
     // app.js for the one place that reads it instead of created_at.
     schedule: estimate.schedule || null,
+    // Same job_fields.business_unit shape toPublicJob reads below — the
+    // user confirmed Estimates carry their own Business Unit field in
+    // Housecall Pro too (many inherit it from the job they were created
+    // from, but it's set on the estimate record itself either way, so no
+    // job-lookup/join is needed to get it). Added so company-scorecard.js
+    // can compute an Estimate closing % per department — see
+    // "estimateClosingRate" in departments-config.js/shared.js.
+    business_unit: estimate.job_fields?.business_unit?.name || null,
     assigned_employee_ids: (estimate.assigned_employees || []).map((e) => e.id),
     // Kept specifically so the dashboard can exclude canceled estimates from
     // Given/Approved/Revenue counts (CANCELED_ESTIMATE_STATUSES/

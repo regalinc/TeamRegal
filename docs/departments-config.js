@@ -74,6 +74,13 @@ const DEPARTMENTS = {
       { key: "leadTurnover", label: "Lead turnover", type: "pct", target: { goal: 1 / 12, direction: "min" } },
       { key: "accessorySold", label: "Accessory sold", type: "pct", target: { goal: 1 / 8, direction: "min" } },
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
+      // Estimates given/approved ÷, scoped to this department via the
+      // estimate's own job_fields.business_unit (see toPublicEstimate,
+      // scripts/sync.js) rather than the assigned tech's employee tag —
+      // HVAC Service techs write estimates for both BU 30 and BU 40 work,
+      // so a tech-tag-based split couldn't tell the two apart; the
+      // estimate's own Business Unit field can. No confirmed target yet.
+      { key: "estimateClosingRate", label: "Estimate closing %", type: "pct", target: null },
     ],
     pnl: [
       { key: "grossProfit", label: "Gross margin", target: { goal: 0.6, direction: "min" } },
@@ -120,6 +127,9 @@ const DEPARTMENTS = {
       // shown with no target until that's resolved, as a placeholder.
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: null },
       { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
+      // See BU 30's identical entry above for why this is scoped by the
+      // estimate's own Business Unit field, not the assigned tech.
+      { key: "estimateClosingRate", label: "Estimate closing %", type: "pct", target: null },
     ],
     // Combined with a detailed BU 40-specific financial KPI list — additive,
     // not a replacement, same treatment as BU 70. The 6 shared overhead
@@ -211,6 +221,9 @@ const DEPARTMENTS = {
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
       // No Lead turnover/Accessory sold on Plumbing Service's own KPI chart
       // — those are HVAC Service-specific, not carried over here.
+      // See BU 30's identical entry for why this is scoped by the
+      // estimate's own Business Unit field, not the assigned tech.
+      { key: "estimateClosingRate", label: "Estimate closing %", type: "pct", target: null },
     ],
     // Confirmed against a detailed BU 70-specific financial KPI list —
     // dropped the shared OVERHEAD_PNL_METRICS spread here since several of
@@ -299,6 +312,9 @@ const DEPARTMENTS = {
       // conversion rate — unlike BU 40's new-vs-renewal framing, there's no
       // synthetic conversion tile to approximate here.
       { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
+      // See BU 30's identical entry for why this is scoped by the
+      // estimate's own Business Unit field, not the assigned tech.
+      { key: "estimateClosingRate", label: "Estimate closing %", type: "pct", target: null },
     ],
     pnl: [
       // "Margin % w/out support wages" — same relabel logic as BU 10/50/

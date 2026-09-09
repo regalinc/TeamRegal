@@ -603,6 +603,13 @@ function hcpMetricValue(key, stats) {
     }
     case "totalClubAgreements":
       return stats.servicePlansSold;
+    // Computed by company-scorecard.js's render() (estimatesForDeptRange)
+    // and stashed onto stats the same way it already adds
+    // stats.nonMemberCount for clubConversion — not a job-derived number
+    // like everything else here, but this is still the one place every
+    // "From Housecall Pro" tile's raw value comes from.
+    case "estimateClosingRate":
+      return stats.estimateClosingRate;
     default:
       return null;
   }

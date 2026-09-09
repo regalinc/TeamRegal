@@ -191,25 +191,52 @@ function resolvePnlForDept(code) {
   return (pnlData && pnlData[currentMonth] && pnlData[currentMonth][code]) || null;
 }
 
+// Estimate closing % for one department over one date range — scoped by
+// the estimate's own business_unit (job_fields.business_unit, synced
+// straight onto the estimate record — see toPublicEstimate in
+// scripts/sync.js), not the assigned tech's employee tag. HVAC Service
+// techs write estimates for both BU 30 and BU 40 work (Plumbing Service
+// techs likewise for BU 70/80), so a tech-tag split couldn't tell those
+// two apart; the estimate's own field can, confirmed with the user that
+// it exists on Estimates the same way it does on Jobs. Every month
+// selectable on this page already has its P&L uploaded — meaning it's
+// already over by the time it's even an option here — so this always
+// uses the same "closed period" union-with-missingApprovedAtEstimates
+// logic computeEstimatorStats applies to lastmonth/lastweek elsewhere on
+// the site (crediting the department for closing an estimate given in an
+// earlier month, same idea as Andrew Rouscher's page), rather than the
+// "still open" branch used for a genuinely in-progress period. Returns
+// null (not 0) when nothing was given in range, same "no data stays
+// neutral" convention as every other tile here.
+function estimateClosingRateForDept(allEstimates, code, [start, end]) {
+  const inRange = (dateStr) => Boolean(dateStr) && new Date(dateStr) >= start && new Date(dateStr) < end;
+  const deptEstimates = (allEstimates || []).filter((e) => !isCanceledEstimate(e) && businessUnitCode(e.business_unit) === code);
+  const given = deptEstimates.filter((e) => inRange(e.created_at));
+  const approvedByDate = deptEstimates.filter((e) => e.approved && inRange(e.approved_at));
+  const approved = unionById(approvedByDate, missingApprovedAtEstimates(given));
+  return given.length ? approved.length / given.length : null;
+}
+
 function render() {
   if (!latestData || !currentMonth) return;
 
   const dept = DEPARTMENTS[currentDept];
   const pnlForDept = resolvePnlForDept(currentDept);
-  let jobs, manualForDept;
+  let jobs, manualForDept, range;
 
   if (isYtd(currentMonth)) {
     const year = ytdYear(currentMonth);
     const yearPrefix = `${year}-`;
     const pnlMonthKeys = Object.keys(pnlData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
-    const [start, end] = ytdRange(year, pnlMonthKeys);
+    range = ytdRange(year, pnlMonthKeys);
     jobs = (latestData.jobs || []).filter(
-      (j) => businessUnitCode(j.business_unit) === currentDept && jobInRange(j, [start, end])
+      (j) => businessUnitCode(j.business_unit) === currentDept && jobInRange(j, range)
     );
     const manualMonthKeys = Object.keys(manualData || {}).filter((mk) => mk.startsWith(yearPrefix)).sort();
     const deptManualData = Object.fromEntries(manualMonthKeys.map((mk) => [mk, manualData[mk]?.[currentDept]]));
     manualForDept = aggregateManualYtd(manualMonthKeys, deptManualData);
   } else {
+    range = monthRange(currentMonth);
     jobs = (latestData.jobs || []).filter(
       (j) => businessUnitCode(j.business_unit) === currentDept && jobInMonth(j, currentMonth)
     );
@@ -218,6 +245,11 @@ function render() {
 
   const stats = computeScorecardStats(jobs, { splitRevenue: false });
   stats.nonMemberCount = jobs.filter((j) => !CANCELED_STATUSES.has(j.work_status) && hasTag(j, "Non-Member")).length;
+  // Only meaningful for the 4 departments that actually have this metric
+  // in their `hcp` list (30/40/70/80) — computed unconditionally for
+  // every department anyway, same as nonMemberCount above, since it's
+  // cheap and dept.hcp simply won't reference the key for BU 10/50.
+  stats.estimateClosingRate = estimateClosingRateForDept(latestData.estimates, currentDept, range);
 
   appEl.innerHTML = `
     <div class="scorecard-head">
