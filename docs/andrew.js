@@ -35,6 +35,7 @@ const avatarSlot = document.getElementById("avatar-slot");
 const todayStrip = document.getElementById("today-strip");
 const heroEyebrow = document.getElementById("hero-eyebrow");
 const heroLine = document.getElementById("hero-line");
+const trendLine = document.getElementById("trend-line");
 const ringNumber = document.getElementById("ring-number");
 const ringFill = document.getElementById("ring-fill");
 const ringTarget = document.getElementById("ring-target");
@@ -45,6 +46,7 @@ const goalFigures = document.getElementById("goal-figures");
 const goalFill = document.getElementById("goal-fill");
 const goalEmpty = document.getElementById("goal-empty");
 const paceBadge = document.getElementById("pace-badge");
+const paceDetail = document.getElementById("pace-detail");
 const followupNudge = document.getElementById("followup-nudge");
 const tileGiven = document.getElementById("tile-given");
 const tileApproved = document.getElementById("tile-approved");
@@ -115,14 +117,84 @@ function isSameCalendarDay(a, b) {
 // *today*, not the full year, so the full-year boundaries are computed
 // here instead rather than reusing that (different purpose: that range is
 // for filtering estimates, this one is for measuring how much of the full
-// year has elapsed).
+// year has elapsed). Also returns what it'd take to actually catch up —
+// daysRemaining and the flat $/day needed for the rest of the period to
+// still hit goal — a "behind pace" number alone says how big the hole is
+// but not what to do about it today.
 function paceInfo(period, revenue, goal) {
   if (period === "lastmonth" || !goal) return null;
   const now = new Date();
   const [start, end] =
     period === "ytd" ? [new Date(now.getFullYear(), 0, 1), new Date(now.getFullYear() + 1, 0, 1)] : periodRange("month");
   const fracElapsed = Math.min(1, Math.max(0, (now - start) / (end - start)));
-  return { diff: revenue - goal * fracElapsed };
+  const daysRemaining = Math.max(1, Math.ceil((end - now) / 86_400_000));
+  const perDayNeeded = Math.max(0, goal - revenue) / daysRemaining;
+  return { diff: revenue - goal * fracElapsed, daysRemaining, perDayNeeded };
+}
+
+// The prior-cycle window to compare this period's numbers against,
+// capped at the same relative cutoff `period` is at right now — MTD on
+// day 9 compares against last month's day 1–9, not last month's full
+// total, which would always look "behind" until the month ends and
+// wouldn't actually be a fair comparison. A period that's already fully
+// elapsed (lastmonth) compares against the prior full cycle instead,
+// since there's no "so far" to match on either side. Returns null for
+// any period with no sensible prior cycle to compare against.
+function comparisonRange(period) {
+  const now = new Date();
+  if (period === "month") {
+    const dayOfMonth = now.getDate();
+    const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const end = new Date(now.getFullYear(), now.getMonth() - 1, dayOfMonth + 1);
+    return { range: [start, end], label: "last month" };
+  }
+  if (period === "lastmonth") {
+    const start = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+    const end = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    return { range: [start, end], label: "the month before" };
+  }
+  if (period === "week") {
+    const [thisWeekStart] = periodRange("week");
+    const dayOfWeek = now.getDay();
+    const start = new Date(thisWeekStart.getFullYear(), thisWeekStart.getMonth(), thisWeekStart.getDate() - 7);
+    const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + dayOfWeek + 1);
+    return { range: [start, end], label: "last week" };
+  }
+  if (period === "ytd") {
+    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 1)) / 86_400_000);
+    const start = new Date(now.getFullYear() - 1, 0, 1);
+    const end = new Date(now.getFullYear() - 1, 0, dayOfYear + 2);
+    return { range: [start, end], label: "last year" };
+  }
+  return null;
+}
+
+// A closed-period-style stats calc for an arbitrary past date window (not
+// one of the named periods dateInPeriod knows about) — used only for the
+// trend-line comparison windows above. A window that's fully in the past
+// means every estimate given in it has already had its chance to close,
+// so this always applies the same "closed period" logic
+// computeEstimatorStats uses for lastmonth/lastweek (union with
+// missingApprovedAtEstimates) rather than the "still open" branch it
+// uses for month/week/ytd.
+function statsForWindow(pool, tech, start, end) {
+  const inWindow = (dateStr) => Boolean(dateStr) && new Date(dateStr) >= start && new Date(dateStr) < end;
+  const given = pool.filter((e) => inWindow(estimateGivenDate(e, tech)));
+  const approvedByDate = pool.filter((e) => e.approved && inWindow(e.approved_at));
+  const approved = unionById(approvedByDate, missingApprovedAtEstimates(given));
+  const revenueCents = approved.reduce((sum, e) => sum + (e.approved_amount || 0), 0);
+  return { given: given.length, closingRate: given.length ? (approved.length / given.length) * 100 : 0, revenue: revenueCents / CENTS_PER_DOLLAR };
+}
+
+// One "▲ 8pts closing" / "▼ $1.1K revenue" chip for the trend line.
+// Treats a sub-unit difference as flat (a neutral "→", not a false up/down)
+// rather than letting rounding noise claim a direction that isn't real.
+function trendChip(delta, unit, metricLabel) {
+  const flat = unit === "pt" ? Math.round(delta) === 0 : Math.abs(delta) < 1;
+  const dirClass = flat ? "flat" : delta > 0 ? "up" : "down";
+  const arrow = flat ? "→" : delta > 0 ? "▲" : "▼";
+  const amount = unit === "pt" ? `${Math.abs(Math.round(delta))}pt${Math.abs(Math.round(delta)) === 1 ? "" : "s"}` : formatMoney(Math.abs(delta));
+  return `<span class="trend-value ${dirClass}">${arrow} ${amount} ${metricLabel}</span>`;
 }
 
 function periodMeta(period) {
@@ -132,6 +204,20 @@ function periodMeta(period) {
       goalLabel: monthLabel(1),
       eyebrow: `${monthLabel(1)} · full month`,
       givenPhrase: `given in ${monthLabel(1)}`,
+    };
+  }
+  if (period === "week") {
+    // No established weekly revenue target (only the monthly/annual ones
+    // above were ever set) — goal stays null rather than inventing one by
+    // dividing the monthly goal by ~4.3, so the goal card honestly shows
+    // "No goal set" instead of a number nobody actually agreed to.
+    const [start] = periodRange("week");
+    const weekLabel = `Week of ${start.toLocaleDateString([], { month: "short", day: "numeric" })}`;
+    return {
+      goal: null,
+      goalLabel: weekLabel,
+      eyebrow: `${weekLabel} · ${new Date().toLocaleDateString([], { weekday: "long" })}`,
+      givenPhrase: "given this week",
     };
   }
   if (period === "ytd") {
@@ -248,6 +334,19 @@ function render() {
   const givenEarlierCount = approvedThisPeriod.filter((e) => !givenInPeriodIds.has(e.id)).length;
   const undatedCount = missingApprovedAtEstimates(estimatesGiven).length;
 
+  // Independent of the goal/pace system below — this compares against his
+  // own recent past, not a target, so it still has something to say on
+  // the "week" tab (no revenue goal exists there) and even once a goal's
+  // already been hit for the period.
+  const comparison = comparisonRange(currentPeriod);
+  const compStats = comparison ? statsForWindow(mine, tech, comparison.range[0], comparison.range[1]) : null;
+  if (compStats && compStats.given > 0) {
+    trendLine.hidden = false;
+    trendLine.innerHTML = `vs ${comparison.label}: ${trendChip(stats.closingRate - compStats.closingRate, "pt", "closing")} · ${trendChip(stats.revenue - compStats.revenue, "$", "revenue")}`;
+  } else {
+    trendLine.hidden = true;
+  }
+
   const meta = periodMeta(currentPeriod);
 
   heroEyebrow.textContent = meta.eyebrow;
@@ -298,6 +397,7 @@ function render() {
       paceBadge.hidden = false;
       paceBadge.className = "pace-badge hit";
       paceBadge.textContent = "🎉 Goal hit — nice work!";
+      paceDetail.hidden = true;
       followupNudge.hidden = true;
     } else {
       const pace = paceInfo(currentPeriod, stats.revenue, meta.goal);
@@ -319,6 +419,12 @@ function render() {
       // an all-time count runs into the hundreds for anyone who's been
       // here a while and stops reading as "do this today."
       if (pace && pace.diff < 0) {
+        // Reframes the same gap as a daily number, not just a lump sum —
+        // "$32K behind" doesn't say what to actually do today; "~$1.5K/day
+        // for the rest of the month" does.
+        paceDetail.hidden = false;
+        paceDetail.textContent = `Needs ≈${formatMoney(pace.perDayNeeded)}/day for the rest of ${meta.goalLabel} to catch up.`;
+
         const openInPeriod = estimatesGiven.filter((e) => !e.approved);
         const staleCount = openInPeriod.filter((e) => {
           const given = estimateGivenDate(e, tech);
@@ -328,14 +434,33 @@ function render() {
           followupNudge.hidden = false;
           const openCount = openInPeriod.length;
           const openWord = openCount === 1 ? "estimate" : "estimates";
-          followupNudge.innerHTML =
+          const summary =
             staleCount > 0
               ? `📞 <b>${staleCount} of ${openCount} open ${openWord}</b> ${meta.givenPhrase} ${staleCount === 1 ? "hasn't" : "haven't"} heard back in ${STALE_ESTIMATE_DAYS}+ days — a follow-up call could help close the gap.`
               : `📞 <b>${openCount} open ${openWord}</b> ${meta.givenPhrase} — checking in on ${openCount === 1 ? "it" : "them"} could help close the gap.`;
+
+          // Names the single longest-open one specifically — a starting
+          // point, not just a pile to sort through himself. Only when the
+          // stale-days threshold is actually met (staleCount > 0
+          // guarantees the oldest one qualifies, since it's the max-age
+          // estimate in the set).
+          let spotlight = "";
+          if (staleCount > 0) {
+            const oldest = openInPeriod
+              .map((e) => ({ e, given: estimateGivenDate(e, tech) }))
+              .filter((x) => x.given)
+              .sort((a, b) => new Date(a.given) - new Date(b.given))[0];
+            if (oldest) {
+              const days = Math.floor((now - new Date(oldest.given)) / 86_400_000);
+              spotlight = `<div class="nudge-spotlight">Start with <b>${escapeHtml(oldest.e.customer_label || "Unknown")}</b> — ${days} day${days === 1 ? "" : "s"} and counting.</div>`;
+            }
+          }
+          followupNudge.innerHTML = summary + spotlight;
         } else {
           followupNudge.hidden = true;
         }
       } else {
+        paceDetail.hidden = true;
         followupNudge.hidden = true;
       }
     }
@@ -347,6 +472,7 @@ function render() {
     goalEmpty.hidden = false;
     goalEmpty.textContent = `No goal set for ${meta.goalLabel} yet.`;
     paceBadge.hidden = true;
+    paceDetail.hidden = true;
     followupNudge.hidden = true;
   }
 

@@ -27,6 +27,7 @@
       </div>
       <div class="period-controls" role="group" aria-label="Reporting period">
         <button class="period-btn" type="button" data-period="lastmonth">Last month</button>
+        <button class="period-btn" type="button" data-period="week">This week</button>
         <button class="period-btn active" type="button" data-period="month" aria-pressed="true">MTD</button>
         <button class="period-btn" type="button" data-period="ytd">YTD</button>
       </div>
@@ -50,6 +51,7 @@
       <div class="hero-copy">
         <p class="hero-eyebrow" id="hero-eyebrow">Loading…</p>
         <p class="hero-line" id="hero-line"></p>
+        <p class="trend-line" id="trend-line" hidden></p>
       </div>
     </div>
 
@@ -61,6 +63,7 @@
       <div class="goal-track"><div class="goal-fill" id="goal-fill" style="width:0%"></div></div>
       <div class="goal-empty" id="goal-empty" hidden></div>
       <div class="pace-badge" id="pace-badge" hidden></div>
+      <div class="pace-detail" id="pace-detail" hidden></div>
       <div class="followup-nudge" id="followup-nudge" hidden></div>
     </div>
 

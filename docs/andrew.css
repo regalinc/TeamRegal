@@ -166,6 +166,7 @@ body {
   margin-left: auto;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
   flex-shrink: 0;
 }
@@ -298,6 +299,22 @@ body {
 .hero-line b { font-weight: 650; }
 .hero-line .gold-num { color: var(--gold); font-weight: 650; }
 
+/* A quiet comparison to his own recent past, not a target — sits below
+   the headline sentence rather than above it, since it's supporting
+   context, not the main number. Neutral base color; only the individual
+   up/down/flat spans below carry any color, and even those stay muted
+   (this is a fact, not a celebration — .today-strip/.pace-badge.hit
+   already own that register). */
+.trend-line {
+  font-size: 0.76rem;
+  color: var(--text-faint);
+  margin: 0.3rem 0 0;
+}
+.trend-value { font-weight: 600; }
+.trend-value.up { color: var(--good); }
+.trend-value.down { color: var(--text-muted); }
+.trend-value.flat { color: var(--text-faint); }
+
 /* ---------- goal tracker ---------- */
 .goal-card {
   background: var(--card-bg);
@@ -358,7 +375,16 @@ body {
    .goal-card.hit's glow), "ahead" borrows --good so it reads as positive
    without introducing a third accent color, "behind" stays neutral/muted
    rather than red — this is a daily nudge, not a warning. */
-.pace-badge {
+/* :not([hidden]) rather than a bare display: inline-flex — that alone
+   would win the cascade over the browser's default [hidden]{display:none}
+   (author styles beat the UA stylesheet even at equal specificity), so
+   the pace-badge would stay visibly on-screen with stale leftover text
+   any time JS set .hidden = true without also clearing textContent.
+   Caught by testing the "This week"/"Last month" tabs right after a
+   "behind pace" MTD render — every other hidden-toggled element on this
+   page (.today-strip, .goal-empty, .followup-nudge, etc.) never sets its
+   own `display`, so this was the only one exposed to the bug. */
+.pace-badge:not([hidden]) {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -381,6 +407,15 @@ body {
   background: color-mix(in srgb, var(--text-muted) 12%, transparent);
 }
 
+/* Reframes the pace-badge gap as a daily number — plain caption text
+   under the pill rather than a second pill, so it reads as "here's what
+   that means today," not a second status to parse. */
+.pace-detail {
+  font-size: 0.76rem;
+  color: var(--text-faint);
+  margin-top: 0.35rem;
+}
+
 /* ---------- follow-up nudge ---------- */
 /* Only ever shown alongside .pace-badge.behind (see render() in
    andrew.js) — a concrete next step, not another status readout, so it
@@ -398,6 +433,15 @@ body {
   color: var(--text-muted);
 }
 .followup-nudge b { color: var(--text); font-weight: 650; }
+/* The one specific starting point, set apart from the summary line above
+   it by a hairline rather than just a line-break, so it reads as "and
+   here's where to start" rather than a second, competing headline. */
+.nudge-spotlight {
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed var(--border);
+  color: var(--text);
+}
 
 /* ---------- tile grid ---------- */
 .tiles {
