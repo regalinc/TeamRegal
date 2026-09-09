@@ -140,6 +140,34 @@ function isApprentice(tech) {
   return APPRENTICE_TECH_IDS.has(tech.id);
 }
 
+// Company leadership/admin accounts that show up in the Housecall Pro
+// roster but do no line-level estimate/job work this page tracks — every
+// one of their cards was all-zero tiles across the board, which reads as
+// confusing or broken rather than "this person just has no activity
+// here." Excluded the same way apprentices are — never selectable, never
+// gets a card — at the user's request, once that confusion came up.
+// Grouped here by function, not by Housecall Pro's own `role` field:
+// Michael Lohss Sr specifically is tagged "field tech" there, not admin.
+const MANAGEMENT_TECH_IDS = new Set([
+  "pro_83a3e6de7d2d4d3396c7c5dfa42482f0", // Derick Wilt
+  "pro_eb35c4da7a0c4a41bc3936da4d71da20", // Devin McNutt
+  "pro_96a68191accc411283feab20135d033d", // Tracey Shelley
+  "pro_5d116b968d0a4e2e85f619f5286a997a", // Michael Lohss, Jr.
+  "pro_b935c33608ce413b9d6a949760182675", // Michael Lohss, Sr
+]);
+
+function isManagement(tech) {
+  return MANAGEMENT_TECH_IDS.has(tech.id);
+}
+
+// The one combined check every roster-visibility choke point in app.js
+// uses — apprentices and management accounts are excluded from the
+// technician view for two different reasons, but nothing there needs to
+// distinguish between them, so callers only ever need one predicate.
+function isHiddenFromRoster(tech) {
+  return isApprentice(tech) || isManagement(tech);
+}
+
 // HVAC Installation techs don't control their own job pipeline — work gets
 // sold and handed to them, so an individual's Revenue/Jobs/Avg ticket mostly
 // reflects what landed on their schedule, not their own performance. There's
