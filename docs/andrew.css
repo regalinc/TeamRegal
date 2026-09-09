@@ -1,6 +1,6 @@
 /* Andrew Rouscher's dedicated scorecard — a personal daily-use page, not a
    shared multi-technician view, so it gets its own bespoke visual identity
-   (gold accent, larger hero treatment) rather than reusing style.css's
+   (accent color, larger hero treatment) rather than reusing style.css's
    generic tech-card look. Same three-state theme contract as the rest of
    the site (adaptive to prefers-color-scheme, not forced-dark like
    tv.css — this is read at a desk, not a shop-floor kiosk). */
@@ -14,13 +14,15 @@
   --text-muted: #6b7280;
   --text-faint: #9599a3;
 
-  /* Gold is TeamRegal's existing --series-yellow (style.css), adopted here
-     as this page's single focal color — a closed estimate reads as a
-     signed, gold-stamped deal. Every other surface stays neutral so this
-     is the one place the eye lands. */
-  --gold: #b9790a;
-  --gold-soft: #fbead0;
-  --gold-ring-track: #e9e2d3;
+  /* Matches hvac-sales.css's blue exactly, at the user's request, so
+     Andrew's page and Nick/Josh's HVAC Sales pages — the site's three
+     "personal scorecard" pages — read as one visual family rather than
+     two. The variable/class names below still say "gold" (kept as-is to
+     avoid a repo-wide rename for a value-only change); only what they
+     resolve to changed. */
+  --gold: #2563eb;
+  --gold-soft: #e3ebfd;
+  --gold-ring-track: #dbe4f3;
 
   --good: #1a7f37;
 
@@ -37,9 +39,9 @@
     --text-muted: #9aa0a8;
     --text-faint: #6b7178;
 
-    --gold: #e0a940;
-    --gold-soft: #3a2f16;
-    --gold-ring-track: #302a1c;
+    --gold: #5b8def;
+    --gold-soft: #1c2636;
+    --gold-ring-track: #232a38;
 
     --good: #3fa85e;
   }
