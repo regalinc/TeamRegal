@@ -766,16 +766,6 @@ function unionById(...lists) {
   return combined;
 }
 
-// Estimates given/approved use the estimate's created_at, same as Housecall
-// Pro's own reporting — kept for that direct comparison. Approved stays a
-// subset of "given," matching how the other paired scorecard metrics
-// (Leads/Leads sold, etc.) work. Used for the three estimate tiles a
-// non-estimator field tech's card also carries (extraStats in app.js).
-function computeEstimateStats(estimatesGiven) {
-  const approved = estimatesGiven.filter((e) => e.approved).length;
-  return { given: estimatesGiven.length, approved };
-}
-
 // A "closed" period is one that's entirely over and can't gain new activity
 // — lastweek/lastmonth are done, so an approval landing after the fact
 // shouldn't retroactively move that period's own numbers every time someone
@@ -1016,7 +1006,7 @@ function renderScorecard({
     tiles
       .filter((t) => !hiddenTiles.has(t.key))
       .map((t) => t.html)
-      .join("") + extraStats.map((s) => renderMiniStat(s.label, s.value)).join("");
+      .join("") + extraStats.map((s) => renderMiniStat(s.label, s.value, null, s.sub)).join("");
   card.appendChild(statsRow);
 
   const sortedJobs = [...jobs].sort((a, b) => {

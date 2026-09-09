@@ -85,15 +85,6 @@ function renderInstallationTeamCard(periodJobs) {
   return card;
 }
 
-// Estimates given/approved use the estimate's created_at, same as
-// Housecall Pro's own reporting — kept for that direct comparison. Approved
-// stays a subset of "given," matching how the other paired scorecard
-// metrics (Leads/Leads sold, etc.) work.
-function computeEstimateStats(estimatesGiven) {
-  const approved = estimatesGiven.filter((e) => e.approved).length;
-  return { given: estimatesGiven.length, approved };
-}
-
 // ESTIMATOR_TAG/isEstimator, SCHEDULE_SCOPED_ESTIMATOR_IDS/estimateGivenDate,
 // unionById, and computeEstimatorStats all live in shared.js now — andrew.js
 // (Andrew Rouscher's dedicated scorecard page) needs the exact same math, so
@@ -400,12 +391,13 @@ function render(data) {
   // list — since this is a reporting view, not a live per-job schedule.
   const periodJobs = filteredJobs.filter((j) => jobInPeriod(j, filters.period));
 
-  // Estimates given/approved (creation-date scoped, like Housecall Pro's
-  // own reporting) vs. approved-this-period (approval-date scoped) are two
-  // different slices of the same data — see computeEstimateStats and the
-  // "Approved this period" tile below. Neither is filtered by the
-  // job-specific filters above (tag/status/business unit/search); only by
-  // period and technician.
+  // approvedThisPeriod is approval-date scoped (dateInPeriod on
+  // approved_at) — every technician's "Estimates approved" tile now runs
+  // through this the same way Estimator cards' does (computeEstimatorStats
+  // below), not just given-date scoped like Housecall Pro's own reporting.
+  // Neither this nor estimates given is filtered by the job-specific
+  // filters above (tag/status/business unit/search); only by period and
+  // technician.
   // Excludes canceled estimates (customer called in and canceled before it
   // was ever presented) — see isCanceledEstimate/CANCELED_ESTIMATE_STATUSES
   // in shared.js. Filtered once here so every estimate-derived number below
@@ -474,14 +466,34 @@ function render(data) {
     }
 
     const jobs = periodJobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id));
-    const estimateStats = computeEstimateStats(techEstimatesGiven);
-    // Dropped "Approved this period" here too, same reasoning as the
-    // Estimator card above: it's scoped by approval date rather than given
-    // date, so it can disagree with "Estimates approved" (given-date scoped)
-    // in a way that looks like an error rather than two different questions.
+    // Same approval-date-scoped logic every Estimator-tagged card uses
+    // (computeEstimatorStats, shared.js) — an estimate given last period
+    // that gets approved this period now counts toward *this* period's
+    // Approved here too, same as it would on Andrew Rouscher's own page.
+    // Used to intentionally stay simpler and given-date-scoped instead
+    // (computeEstimateStats, now removed — see git history), on the theory
+    // that a mismatch would read as a bug rather than two different
+    // questions; asked directly, the answer was that regular techs should
+    // just work the same way Estimator-tagged people do. Unlike the
+    // Estimator card (which skips a sub-note in favor of its expandable
+    // per-estimate list explaining any given/approved gap), a plain tech
+    // card's own expandable list is jobs, not estimates — there's no
+    // equivalent detail to dig into here, so the gap gets a sub-note
+    // instead (renderMiniStat's `sub` param, shared.js).
+    const estimateStats = computeEstimatorStats(techEstimatesGiven, techApprovedThisPeriodEstimates, filters.period);
+    const givenInPeriodIds = new Set(techEstimatesGiven.map((e) => e.id));
+    const givenEarlierCount = techApprovedThisPeriodEstimates.filter((e) => !givenInPeriodIds.has(e.id)).length;
+    const undatedCount = missingApprovedAtEstimates(techEstimatesGiven).length;
+    const approvedNoteParts = [];
+    if (givenEarlierCount > 0) approvedNoteParts.push(`${givenEarlierCount} given earlier`);
+    if (undatedCount > 0) approvedNoteParts.push(`${undatedCount} no exact date`);
     const extraStats = [
       { label: "Estimates given", value: estimateStats.given.toLocaleString() },
-      { label: "Estimates approved", value: estimateStats.approved.toLocaleString() },
+      {
+        label: "Estimates approved",
+        value: estimateStats.approved.toLocaleString(),
+        sub: approvedNoteParts.length ? `incl. ${approvedNoteParts.join(" · ")}` : undefined,
+      },
     ];
 
     grid.appendChild(renderTechCard(tech, jobs, extraStats, kpiBuCode));
