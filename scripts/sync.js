@@ -427,6 +427,14 @@ async function main() {
   const rawEstimates = await fetchEstimatesInWindow();
   console.log(`  ${rawEstimates.length} estimates fetched`);
 
+  // TEMPORARY DEBUG — remove once the real business_unit field path is
+  // confirmed (see toPublicEstimate below, currently guessing
+  // job_fields.business_unit to mirror toPublicJob, which came back null
+  // for every estimate on the first attempt). Prints the first 2 raw
+  // estimates' full JSON so the actual field shape can be read straight
+  // from the workflow log.
+  console.log("DEBUG raw estimate sample:", JSON.stringify(rawEstimates.slice(0, 2), null, 2));
+
   const technicians = employees.map(toPublicTechnician);
   const publicJobs = rawJobs.map(toPublicJob);
   const publicEstimates = rawEstimates.map((e) => toPublicEstimate(e, previousEstimatesById.get(e.id), syncedAtIso));
