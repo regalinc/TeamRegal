@@ -22582,7 +22582,7 @@
   {
     "id": "job_c3aee177fab4453eaff7cda0d198a828",
     "description": "30 - Initial Service Fee After Hours",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Syrena K.",
     "city": "York",
     "state": "PA",
@@ -22607,7 +22607,7 @@
     "total_amount": 51897,
     "outstanding_balance": 0,
     "completed_at": "2026-01-18T20:30:00Z",
-    "updated_at": "2026-09-03T10:57:27Z",
+    "updated_at": "2026-09-09T02:08:31Z",
     "invoice_number": "52142",
     "created_at": "2026-01-18T17:56:39Z"
   },
@@ -314330,7 +314330,7 @@
     "total_amount": 32230,
     "outstanding_balance": 0,
     "completed_at": "2026-09-04T14:08:46Z",
-    "updated_at": "2026-09-04T14:08:47Z",
+    "updated_at": "2026-09-09T01:58:06Z",
     "invoice_number": "60976",
     "created_at": "2026-08-31T13:15:40Z"
   },
@@ -317122,7 +317122,7 @@
   {
     "id": "job_124c64fac8bf42f4a1f149956eb162f1",
     "description": "Billing - 10 HVAC AOR",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Syrena K.",
     "city": "York",
     "state": "PA",
@@ -317147,8 +317147,8 @@
     "lead_source": null,
     "total_amount": 1275900,
     "outstanding_balance": 1275900,
-    "completed_at": null,
-    "updated_at": "2026-09-04T11:54:59Z",
+    "completed_at": "2026-09-09T02:08:31Z",
+    "updated_at": "2026-09-09T02:08:31Z",
     "invoice_number": "61198",
     "created_at": "2026-09-02T20:56:58Z"
   },
@@ -318961,14 +318961,15 @@
     "tags": [
       "70",
       "Opportunity",
-      "Non-Member"
+      "Non-Member",
+      "Plumbing Parts"
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 121590,
     "outstanding_balance": 121590,
     "completed_at": null,
-    "updated_at": "2026-09-08T23:33:06Z",
+    "updated_at": "2026-09-09T01:08:07Z",
     "invoice_number": "61370",
     "created_at": "2026-09-08T23:01:34Z"
   },
