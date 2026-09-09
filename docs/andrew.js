@@ -7,12 +7,12 @@
 const ANDREW_ID = "pro_ca120cbb55fa40fe9361d492161b101f";
 
 // Flat month over month (unlike the HVAC Installation team's per-month
-// dict in tv.js) — $2.5M/year split evenly across 12 months. The YTD view
-// tracks cumulative revenue against its own flat $2.5M annual target
-// (not prorated to today's date — a running total against a full-year
-// quota, same convention a sales quota uses).
-const ANDREW_MONTHLY_GOAL = 2_500_000 / 12;
-const ANDREW_YTD_GOAL = 2_500_000;
+// dict in tv.js) — $1.75M/year split evenly across 12 months. The YTD
+// view tracks cumulative revenue against its own flat $1.75M annual
+// target (not prorated to today's date — a running total against a
+// full-year quota, same convention a sales quota uses).
+const ANDREW_MONTHLY_GOAL = 1_750_000 / 12;
+const ANDREW_YTD_GOAL = 1_750_000;
 
 // A closing-rate target, not a revenue one — a ratio rather than a
 // cumulative dollar figure, so unlike the two goals above it doesn't need
