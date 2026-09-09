@@ -238,17 +238,30 @@ const BOUNCIE_VEHICLE_TECH_IDS = {
   "868923055442135": "pro_9b6be6b8146547fabe281dac539e3f28", // Ben Aston
 };
 
-// Maps the "CA" (consultant) first name used in the hand-maintained HVAC
-// Sales workbook (docs/data/hvac-sales.json, scripts/parse-hvac-sales.ps1)
-// to the matching Housecall Pro technician, so hvac-sales.js can show a real
-// name/avatar instead of a bare first name — same manual-mapping pattern as
-// BOUNCIE_VEHICLE_TECH_IDS/MANUAL_AVATAR_OVERRIDES above. The workbook only
-// ever uses a first name (no last name, no employee id), so this is
-// matched by hand rather than derived; a new consultant added to the sheet
-// needs an entry added here too.
-const HVAC_SALES_CA_TECH_IDS = {
-  Josh: "pro_62aa1ba4432340829b0aba02abd1d307", // Josh Zieger
-  Nick: "pro_27fcce8f21bc4186b44abe4d9a87c03f", // Nick Webb
+// Public URL tokens for hvac-sales.html?u=<token> — opaque and unrelated
+// to either consultant's own name, specifically so that swapping in a
+// guessed name (or a coworker's own first name) doesn't work the way
+// ?ca=Josh / ?ca=Nick used to (a real gap: either of them could see the
+// other's page just by editing the URL). Each token maps to the actual
+// "CA" value used to match rows in hvac-sales.json (still the bare first
+// name typed into the workbook's CA column — that can't change without
+// touching the spreadsheet itself, so it stays internal, never exposed
+// in the URL) and the matching Housecall Pro technician. Same
+// manual-mapping convention as BOUNCIE_VEHICLE_TECH_IDS/
+// MANUAL_AVATAR_OVERRIDES above — a new consultant needs a freshly
+// generated token added here (e.g. `openssl rand -hex 8`).
+//
+// What this does and doesn't protect: it stops casual URL-guessing. It
+// does NOT hide either consultant's data from someone who opens browser
+// dev tools — this map ships in shared.js, fetched by every visitor
+// regardless of which token they used, and hvac-sales.json itself
+// already contains both consultants' full raw rows (the page filters to
+// one CA client-side, after fetching everything) — same as every other
+// page on this site, none of which have a real auth layer. See the
+// README's "HVAC Sales scorecard" section for the fuller tradeoff.
+const HVAC_SALES_TOKENS = {
+  "3cf6d793d05b3191": { ca: "Josh", techId: "pro_62aa1ba4432340829b0aba02abd1d307" }, // Josh Zieger
+  "b062ff740c81f5e8": { ca: "Nick", techId: "pro_27fcce8f21bc4186b44abe4d9a87c03f" }, // Nick Webb
 };
 
 // Housecall Pro's avatar CDN stores an employee's photo at several sizes

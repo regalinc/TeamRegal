@@ -1,17 +1,19 @@
-// HVAC Sales scorecard — one consultant's personal page, selected via
-// ?ca=Josh / ?ca=Nick (the exact "CA" value used in the source workbook).
-// One shared template rather than a hardcoded page per person (unlike
-// andrew.js, which is the only one of its kind) — this is the same
-// "one page, many instances via a URL param" pattern tv.html and
-// company-scorecard.html already use for exactly this reason: two people
-// today, and a new consultant added to HVAC_SALES_CA_TECH_IDS (shared.js)
-// just works here without a new page.
+// HVAC Sales scorecard — one consultant's personal page, selected via an
+// opaque ?u=<token> (HVAC_SALES_TOKENS, shared.js) rather than a human
+// name — see that map's own comment for why: a name-based ?ca=Josh /
+// ?ca=Nick param used to work here, and either consultant could see the
+// other's page just by swapping in a guessed name. One shared template
+// rather than a hardcoded page per person (unlike andrew.js, which is
+// the only one of its kind) — this is the same "one page, many instances
+// via a URL param" pattern tv.html and company-scorecard.html already
+// use for exactly this reason: two people today, and a new consultant
+// added to HVAC_SALES_TOKENS just works here without a new page.
 //
 // Data comes from docs/data/hvac-sales.json (scripts/parse-hvac-sales.ps1,
 // hand-run against the "HVAC Sales" workbook — not part of the automated
 // hourly sync, see that script's header comment) for the opportunity/close
 // records, and dashboard.json for the consultant's real name/avatar via
-// HVAC_SALES_CA_TECH_IDS (shared.js).
+// HVAC_SALES_TOKENS (shared.js).
 //
 // greetingPrefix/firstName/monthLabel intentionally mirror andrew.js's
 // versions of the same tiny helpers rather than importing them — small
@@ -20,18 +22,20 @@
 
 const urlParams = new URLSearchParams(location.search);
 
-// Case/whitespace-forgiving, same reasoning as tv.js's normalizeDeptKey/
-// resolveDept for its own ?dept= param: a bookmarked or hand-typed URL
-// ("?ca=nick") shouldn't 404-style fail just because the exact case of
-// HVAC_SALES_CA_TECH_IDS's keys (shared.js) didn't match — confirmed real
-// via a user bookmarking a lowercase ?ca=nick and getting the "no such CA"
-// empty state despite the page otherwise working fine.
-function resolveCa(raw) {
+// Case-forgiving the same way the old ?ca= lookup was — a bookmarked or
+// hand-typed token shouldn't 404-style fail over case alone. Unlike the
+// old name-based version, no partial/fuzzy match of any kind: a token
+// either matches one of HVAC_SALES_TOKENS's keys exactly (case aside) or
+// it doesn't, and the empty state below deliberately doesn't enumerate
+// the valid ones — doing that would just recreate the guessing problem
+// this token scheme exists to close.
+function resolveToken(raw) {
   const key = String(raw || "").trim().toLowerCase();
-  return Object.keys(HVAC_SALES_CA_TECH_IDS).find((ca) => ca.toLowerCase() === key) || null;
+  const match = Object.keys(HVAC_SALES_TOKENS).find((token) => token.toLowerCase() === key);
+  return match ? HVAC_SALES_TOKENS[match] : null;
 }
 
-const CA = resolveCa(urlParams.get("ca"));
+const TOKEN_ENTRY = resolveToken(urlParams.get("u"));
 
 const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
@@ -229,17 +233,18 @@ let currentPeriod = "month";
 function render() {
   if (!latestDashboard || !latestSales) return;
 
-  if (!CA || !HVAC_SALES_CA_TECH_IDS[CA]) {
-    document.querySelector(".page").innerHTML = `<p class="empty-state">Use ?ca= with one of: ${Object.keys(HVAC_SALES_CA_TECH_IDS)
-      .map(escapeHtml)
-      .join(", ")}</p>`;
+  if (!TOKEN_ENTRY) {
+    // Deliberately generic — no "here are the valid options" list. That
+    // would hand back exactly the kind of guessable enumeration this
+    // token scheme replaced ?ca=Josh/?ca=Nick to get away from.
+    document.querySelector(".page").innerHTML = "<p class=\"empty-state\">This link isn't valid. Check the URL you were given.</p>";
     return;
   }
 
-  const techId = HVAC_SALES_CA_TECH_IDS[CA];
+  const { ca: CA, techId } = TOKEN_ENTRY;
   const tech = (latestDashboard.technicians || []).find((t) => t.id === techId);
   if (!tech) {
-    document.querySelector(".page").innerHTML = `<p class="empty-state">${escapeHtml(CA)} was not found in the synced roster.</p>`;
+    document.querySelector(".page").innerHTML = '<p class="empty-state">Consultant not found in the synced roster.</p>';
     return;
   }
 
