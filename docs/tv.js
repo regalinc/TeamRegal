@@ -59,6 +59,15 @@ const PLUMBING_FLEX_TECH_IDS = new Set([
   "pro_878f7465a7ae48a39312d99aedaa3fd1", // Bradley Adams
 ]);
 
+// Apprentices on this crew get a name-and-photo strip at the bottom of the
+// screen — no metrics (they don't carry their own revenue split, see
+// APPRENTICE_TECH_IDS in shared.js), just a "welcome to the crew" line so
+// they're visibly part of the team. Same manual-list pattern; move an id
+// out once that person is scored as a full tech.
+const PLUMBING_FLEX_APPRENTICE_TECH_IDS = new Set([
+  "pro_06aeac3b71a24c60a826c7e11499d8b5", // Jaylees Vazquez
+]);
+
 const VALID_DEPTS = [...SINGLE_DEPTS, FLEX_DEPT, ...Object.keys(BU_DEPTS)];
 
 // The dept param has to survive being typed on a TV remote's on-screen
@@ -360,12 +369,28 @@ function renderFlexCard(entry) {
   `;
 }
 
+// A slim, metric-free row for an apprentice — dashed border + badge so it
+// never reads as "a tech whose numbers are all zero."
+function renderApprenticeStrip(tech) {
+  return `
+    <div class="tv-flex-appr">
+      ${renderAvatarBlock(tech, "tv-flex-appr-photo", "tv-flex-appr-fallback", { large: true })}
+      <div class="tv-flex-appr-text">
+        <div class="tv-flex-appr-name">${escapeHtml(tech.name || "Unknown")}</div>
+        <div class="tv-flex-appr-tagline">Learning the trade alongside the crew</div>
+      </div>
+      <div class="tv-flex-appr-badge">Apprentice in Training</div>
+    </div>
+  `;
+}
+
 function renderPlumbingFlexScreen() {
   const jobs = latestData.jobs || [];
   // Canceled estimates excluded, same as every other estimate count on
   // the site (isCanceledEstimate, shared.js).
   const allEstimates = (latestData.estimates || []).filter((est) => !isCanceledEstimate(est));
   const techs = (latestData.technicians || []).filter((t) => PLUMBING_FLEX_TECH_IDS.has(t.id));
+  const apprentices = (latestData.technicians || []).filter((t) => PLUMBING_FLEX_APPRENTICE_TECH_IDS.has(t.id));
 
   if (techs.length === 0) {
     mainEl.innerHTML = `<p class="tv-empty">No Plumbing Flex technicians found in the synced roster.</p>`;
@@ -412,7 +437,7 @@ function renderPlumbingFlexScreen() {
 
   const list = document.createElement("div");
   list.className = "tv-flex-list";
-  list.innerHTML = entries.map(renderFlexCard).join("");
+  list.innerHTML = entries.map(renderFlexCard).join("") + apprentices.map(renderApprenticeStrip).join("");
   mainEl.innerHTML = "";
   mainEl.appendChild(list);
 }
