@@ -42,7 +42,24 @@ const BU_DEPTS = {
   80: { rosterTag: "Plumbing Service", fallbackLabel: "80 Plumbing Maintenance" },
 };
 
-const VALID_DEPTS = [...SINGLE_DEPTS, ...Object.keys(BU_DEPTS)];
+// Four plumbers who split their time between Plumbing Installation (BU 50)
+// and Plumbing Service (BU 70) work — they carry only the "Plumbing
+// Installation" tag, so they don't show on the BU 70/80 screens, and a
+// single blended number would mix $15k installs with $500 service calls.
+// FLEX_DEPT gets its own screen (renderPlumbingFlexScreen) where each
+// person's card is split: a graded Service half (BU 70 targets) and a
+// plain Install half (BU 50 jobs, no targets to grade against on a TV).
+// Manual id list, same pattern as INSTALLATION_TEAM_TECH_IDS — add a
+// name here if the roster changes.
+const FLEX_DEPT = "Plumbing Flex";
+const PLUMBING_FLEX_TECH_IDS = new Set([
+  "pro_1526b39a952147619f19902966416543", // Justin Baker
+  "pro_79f4ca1c644741dc89563174e5b5d4fa", // Jason Smeltzer
+  "pro_9a3f2249ef464465a1522f4a3ccfef5a", // Brandon Soltes
+  "pro_878f7465a7ae48a39312d99aedaa3fd1", // Bradley Adams
+]);
+
+const VALID_DEPTS = [...SINGLE_DEPTS, FLEX_DEPT, ...Object.keys(BU_DEPTS)];
 
 // The dept param has to survive being typed on a TV remote's on-screen
 // keyboard, which is slow and error-prone for spaces/capitalization/exact
@@ -96,6 +113,14 @@ const TIER_CLASS = { good: "tv-good", warn: "tv-warn", bad: "tv-bad" };
 
 function kpiClass(metricKey, stats) {
   const result = kpiTier(DEPT, metricKey, stats);
+  return result ? TIER_CLASS[result] : null;
+}
+
+// Same mapping, graded against an explicit BU code rather than DEPT — the
+// Plumbing Flex screen's Service tiles grade against BU 70 even though
+// DEPT is "Plumbing Flex" (which has no DEPARTMENTS entry).
+function tierClassFor(buCode, metricKey, stats) {
+  const result = kpiTier(buCode, metricKey, stats);
   return result ? TIER_CLASS[result] : null;
 }
 
@@ -282,6 +307,116 @@ function renderInstallationTeamScreen() {
   `;
 }
 
+// ---- Plumbing Flex screen (BU 50 + BU 70 split cards) ----
+
+// One person's card: a graded Service half (their BU 70 jobs, the same
+// tile set + colouring a BU-70-filtered technician card shows on
+// index.html, including the two estimate tiles) and a plain Install half
+// (their BU 50 jobs — Jobs + split Revenue, no targets to grade against
+// on a TV).
+function renderFlexCard(entry) {
+  const { tech, serviceStats: s, installStats: i, estStats: e, totalRevenue, totalJobs, rank } = entry;
+  const svc = (label, value, metricKey) => tvTile(label, value, tierClassFor("70", metricKey, s), "tv-flex-tile");
+
+  const serviceTiles = [
+    tvTile("Jobs", s.totalJobs.toLocaleString(), null, "tv-flex-tile"),
+    tvTile("Revenue (split)", formatMoney(s.totalRevenue), null, "tv-flex-tile"),
+    svc("Avg ticket", formatMoney(s.avgTicket), "avgTicket"),
+    tvTile("Completion", `${s.completionRate.toFixed(0)}%`, null, "tv-flex-tile"),
+    tvTile("RCC sold", s.servicePlansSold.toLocaleString(), null, "tv-flex-tile"),
+    svc("$0 Call", s.ifo.toLocaleString(), "ifo"),
+    svc("Accessory sold", s.accessorySold.toLocaleString(), "accessorySold"),
+    tvTile("Est. given", e.given.toLocaleString(), null, "tv-flex-tile"),
+    tvTile("Est. approved", e.approved.toLocaleString(), tierClassFor("70", "estimateClosingRate", e), "tv-flex-tile"),
+  ].join("");
+
+  const installTiles = [
+    tvTile("Jobs", i.totalJobs.toLocaleString(), null, "tv-flex-tile"),
+    tvTile("Revenue (split)", formatMoney(i.totalRevenue), null, "tv-flex-tile"),
+  ].join("");
+
+  return `
+    <div class="tv-flex-card">
+      <div class="tv-flex-head">
+        <div class="tv-flex-rank">#${rank}</div>
+        ${renderAvatarBlock(tech, "tv-flex-photo", "tv-flex-photo-fallback", { large: true })}
+        <div class="tv-flex-name-block">
+          <div class="tv-flex-name">${escapeHtml(tech.name || "Unknown")}</div>
+          <div class="tv-flex-total">${escapeHtml(formatMoney(totalRevenue))} total &middot; ${totalJobs.toLocaleString()} job${
+    totalJobs === 1 ? "" : "s"
+  }</div>
+        </div>
+      </div>
+      <div class="tv-flex-sections">
+        <div class="tv-flex-section tv-flex-section-service">
+          <div class="tv-flex-section-label">Service &middot; BU 70</div>
+          <div class="tv-flex-grid tv-flex-grid-service">${serviceTiles}</div>
+        </div>
+        <div class="tv-flex-section tv-flex-section-install">
+          <div class="tv-flex-section-label">Install &middot; BU 50</div>
+          <div class="tv-flex-grid tv-flex-grid-install">${installTiles}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPlumbingFlexScreen() {
+  const jobs = latestData.jobs || [];
+  // Canceled estimates excluded, same as every other estimate count on
+  // the site (isCanceledEstimate, shared.js).
+  const allEstimates = (latestData.estimates || []).filter((est) => !isCanceledEstimate(est));
+  const techs = (latestData.technicians || []).filter((t) => PLUMBING_FLEX_TECH_IDS.has(t.id));
+
+  if (techs.length === 0) {
+    mainEl.innerHTML = `<p class="tv-empty">No Plumbing Flex technicians found in the synced roster.</p>`;
+    return;
+  }
+
+  const entries = techs.map((tech) => {
+    const techJobs = jobs.filter((j) => (j.assigned_employee_ids || []).includes(tech.id) && jobInPeriod(j, PERIOD));
+    const serviceStats = computeScorecardStats(
+      techJobs.filter((j) => businessUnitCode(j.business_unit) === "70"),
+      { splitRevenue: true }
+    );
+    const installStats = computeScorecardStats(
+      techJobs.filter((j) => businessUnitCode(j.business_unit) === "50"),
+      { splitRevenue: true }
+    );
+
+    // Estimates aren't BU-scoped here — the estimate's own business_unit
+    // field is blank on ~80% of them, so this counts all the tech's
+    // estimates, exactly as the BU-70-filtered technician card on
+    // index.html does. estimateGivenDate is created_at for everyone but
+    // Andrew (none of these four).
+    const mine = allEstimates.filter((est) => (est.assigned_employee_ids || []).includes(tech.id));
+    const estGiven = mine.filter((est) => dateInPeriod(estimateGivenDate(est, tech), PERIOD));
+    const estApproved = mine.filter((est) => est.approved && dateInPeriod(est.approved_at, PERIOD));
+    const estStats = computeEstimatorStats(estGiven, estApproved, PERIOD);
+    // Fraction under the key kpiTier/hcpMetricValue read, so "Estimates
+    // approved" grades against BU 70's estimateClosingRate target (>= 50%).
+    estStats.estimateClosingRate = estStats.given ? estStats.approved / estStats.given : null;
+
+    return {
+      tech,
+      serviceStats,
+      installStats,
+      estStats,
+      totalRevenue: serviceStats.totalRevenue + installStats.totalRevenue,
+      totalJobs: serviceStats.totalJobs + installStats.totalJobs,
+    };
+  });
+
+  entries.sort((a, b) => b.totalRevenue - a.totalRevenue);
+  entries.forEach((entry, idx) => (entry.rank = idx + 1));
+
+  const list = document.createElement("div");
+  list.className = "tv-flex-list";
+  list.innerHTML = entries.map(renderFlexCard).join("");
+  mainEl.innerHTML = "";
+  mainEl.appendChild(list);
+}
+
 // Ranks every tech in the roster by revenue for the selected period —
 // including $0 techs, ranked last, so the full roster is always visible
 // rather than only whoever has activity.
@@ -368,6 +503,13 @@ function render() {
     deptNameEl.textContent = "10 HVAC Installation";
     mainEl.className = "tv-main";
     renderInstallationTeamScreen();
+    return;
+  }
+
+  if (DEPT === FLEX_DEPT) {
+    deptNameEl.textContent = "Plumbing Flex · BU 50 + 70";
+    mainEl.className = "tv-main";
+    renderPlumbingFlexScreen();
     return;
   }
 

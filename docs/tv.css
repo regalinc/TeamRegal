@@ -318,3 +318,116 @@ body {
 .tv-team-tile.tv-good .tv-tile-label, .tv-team-tile.tv-good .tv-tile-value { color: var(--good-text); }
 .tv-team-tile.tv-warn .tv-tile-label, .tv-team-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
 .tv-team-tile.tv-bad .tv-tile-label, .tv-team-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
+
+/* Plumbing Flex screen (renderPlumbingFlexScreen, tv.js) — always exactly
+   4 split cards stacked to fill .tv-main, so sizes are keyed to "quarter
+   of the screen" rather than the variable --row-count the ranked lists
+   use. Each card: a header line, then a wide graded Service section (BU
+   70's full tech-scorecard tile set) beside a narrow plain Install
+   section (BU 50 jobs + split revenue). */
+.tv-flex-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6vh;
+  min-width: 0;
+}
+.tv-flex-card {
+  flex: 1;
+  min-height: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2vh 1.4vw;
+  display: flex;
+  align-items: stretch;
+  gap: 1.6vw;
+}
+/* Header is a fixed-width left rail so all four cards' Service grids line
+   up vertically down the screen. */
+.tv-flex-head {
+  flex: 0 0 15vw;
+  display: flex;
+  align-items: center;
+  gap: 0.9vw;
+  min-width: 0;
+}
+.tv-flex-rank {
+  font-weight: 700;
+  font-size: clamp(16px, 2.6vh, 40px);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.tv-flex-photo, .tv-flex-photo-fallback {
+  width: min(9vh, 4.5vw);
+  height: min(9vh, 4.5vw);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top; /* see .tv-featured-photo above */
+  flex-shrink: 0;
+}
+.tv-flex-photo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: clamp(11px, 2.2vh, 28px);
+}
+.tv-flex-name-block { min-width: 0; }
+.tv-flex-name {
+  font-size: clamp(14px, 2.2vh, 32px);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tv-flex-total { font-size: clamp(10px, 1.35vh, 19px); color: var(--text-muted); margin-top: 0.3vh; }
+.tv-flex-sections { flex: 1; min-width: 0; align-self: stretch; display: flex; gap: 1vw; }
+.tv-flex-section { display: flex; flex-direction: column; min-width: 0; }
+.tv-flex-section-service { flex: 1 1 auto; }
+/* A rule between the two halves so it reads as "service | install" at a
+   glance rather than one long strip of tiles. */
+.tv-flex-section-install { flex: 0 0 15%; border-left: 2px solid var(--border); padding-left: 1vw; }
+.tv-flex-section-label {
+  font-size: clamp(8px, 1.05vh, 15px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.5vh;
+  flex-shrink: 0;
+}
+.tv-flex-grid { flex: 1; min-height: 0; display: grid; gap: 0.6vh 0.5vw; }
+/* One row of 9 for Service (keeps each card short — 4 fit the screen with
+   headroom), one row of 2 for Install; grid-auto-rows: 1fr so the two
+   sections' tiles are the same height. */
+.tv-flex-grid-service { grid-template-columns: repeat(9, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+.tv-flex-grid-install { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+.tv-flex-tile {
+  background: var(--tile-bg);
+  border-radius: calc(var(--radius) * 0.6);
+  padding: 0.5vh 0.4vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
+}
+.tv-flex-tile.tv-good { background: var(--good-bg); }
+.tv-flex-tile.tv-warn { background: var(--warn-bg); }
+.tv-flex-tile.tv-bad { background: var(--bad-bg); }
+.tv-flex-tile .tv-tile-label {
+  font-size: clamp(8px, 1.05vh, 15px);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tv-flex-tile .tv-tile-value { font-size: clamp(11px, 1.9vh, 28px); font-weight: 600; margin-top: 0.3vh; }
+.tv-flex-tile.tv-good .tv-tile-label, .tv-flex-tile.tv-good .tv-tile-value { color: var(--good-text); }
+.tv-flex-tile.tv-warn .tv-tile-label, .tv-flex-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
+.tv-flex-tile.tv-bad .tv-tile-label, .tv-flex-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
