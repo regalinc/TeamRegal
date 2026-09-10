@@ -174,6 +174,53 @@ function renderManualSection(dept, manual, stats, pnl) {
   return sectionHtml("Entered by hand", note, tiles);
 }
 
+// ---- Curated single-list "scorecard" view (BU 30/40/70/80) ----
+// A department with a `scorecard` array (departments-config.js) renders
+// one flat, deliberately-ordered list instead of the three
+// source-grouped sections above. Each entry just points at a metric
+// already defined in that department's hcp/pnl/manual list — those stay
+// intact and untouched, so the matrix page (which reads pnl + three
+// revenue-per-X manual keys) is completely unaffected by this view. An
+// entry's own `label`/`target` override the base metric's for display
+// here only.
+
+// The base metric descriptor a `scorecard` entry points at.
+function scorecardBase(item, dept) {
+  const list = item.source === "hcp" ? dept.hcp : item.source === "pnl" ? dept.pnl : dept.manual;
+  return (list || []).find((m) => m.key === item.key) || {};
+}
+
+// The raw (unformatted) value for one `scorecard` entry — dispatched by
+// source to the same helper the corresponding full section would use, so
+// a metric reads identically whether it's shown here or on the matrix.
+function scorecardItemValue(item, dept, stats, pnl, manual) {
+  if (item.source === "hcp") return hcpMetricValue(item.key, stats);
+  const base = scorecardBase(item, dept);
+  if (item.source === "pnl") {
+    return pnlMetricValue({ key: item.key, type: base.type, compute: base.compute }, pnl);
+  }
+  const m = manual || {};
+  return base.compute ? base.compute(m, stats, pnl) : m[item.key];
+}
+
+function renderScorecardSection(dept, stats, pnl, manual) {
+  const tiles = dept.scorecard
+    .map((item) => {
+      const base = scorecardBase(item, dept);
+      const label = item.label || base.label || item.key;
+      const type = item.type || base.type || "pct";
+      const target = "target" in item ? item.target : base.target;
+      const value = scorecardItemValue(item, dept, stats, pnl, manual);
+      return tileFor(label, type, value === undefined ? null : value, target);
+    })
+    .join("");
+  const scope = isYtd(currentMonth)
+    ? `Jan 1 through the latest month with a P&L uploaded, ${ytdYear(currentMonth)}`
+    : monthLabel(currentMonth);
+  const note = `A mix of live Housecall Pro data, this period's P&L, and hand-entered figures — scoped to this department and ${escapeHtml(scope)}. A blank tile ("—") is a metric with no data fed to it yet.`;
+  return sectionHtml("Scorecard", note, tiles);
+}
+
 // Resolves ANY department's P&L for whichever period is currently selected
 // (a single month, or summed across the year for YTD) — the same logic
 // render() uses for the selected department, generalized so a manual
@@ -251,14 +298,19 @@ function render() {
   // cheap and dept.hcp simply won't reference the key for BU 10/50.
   stats.estimateClosingRate = estimateClosingRateForDept(latestData.estimates, currentDept, range);
 
+  // BU 30/40/70/80 have a curated `scorecard` list (departments-config.js)
+  // and render as one flat section; BU 10/50 have none and keep the
+  // original three source-grouped sections.
+  const body = dept.scorecard
+    ? renderScorecardSection(dept, stats, pnlForDept, manualForDept)
+    : `${renderHcpSection(dept, stats)}${renderPnlSection(dept, pnlForDept)}${renderManualSection(dept, manualForDept, stats, pnlForDept)}`;
+
   appEl.innerHTML = `
     <div class="scorecard-head">
       <h2 class="dept-name">${escapeHtml(dept.buLabel)}</h2>
       <p class="dept-sub">${escapeHtml(monthLabel(currentMonth))}</p>
     </div>
-    ${renderHcpSection(dept, stats)}
-    ${renderPnlSection(dept, pnlForDept)}
-    ${renderManualSection(dept, manualForDept, stats, pnlForDept)}
+    ${body}
   `;
 }
 
