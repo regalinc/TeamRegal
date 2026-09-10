@@ -315,7 +315,7 @@ function renderInstallationTeamScreen() {
 // (their BU 50 jobs — Jobs + split Revenue, no targets to grade against
 // on a TV).
 function renderFlexCard(entry) {
-  const { tech, serviceStats: s, installStats: i, estStats: e, totalRevenue, totalJobs, rank } = entry;
+  const { tech, serviceStats: s, installStats: i, estStats: e, totalRevenue, totalJobs } = entry;
   const svc = (label, value, metricKey) => tvTile(label, value, tierClassFor("70", metricKey, s), "tv-flex-tile");
 
   const serviceTiles = [
@@ -338,7 +338,6 @@ function renderFlexCard(entry) {
   return `
     <div class="tv-flex-card">
       <div class="tv-flex-head">
-        <div class="tv-flex-rank">#${rank}</div>
         ${renderAvatarBlock(tech, "tv-flex-photo", "tv-flex-photo-fallback", { large: true })}
         <div class="tv-flex-name-block">
           <div class="tv-flex-name">${escapeHtml(tech.name || "Unknown")}</div>
@@ -349,11 +348,11 @@ function renderFlexCard(entry) {
       </div>
       <div class="tv-flex-sections">
         <div class="tv-flex-section tv-flex-section-service">
-          <div class="tv-flex-section-label">Service &middot; BU 70</div>
+          <div class="tv-flex-section-label"><span class="tv-flex-bu">BU 70</span> Service</div>
           <div class="tv-flex-grid tv-flex-grid-service">${serviceTiles}</div>
         </div>
         <div class="tv-flex-section tv-flex-section-install">
-          <div class="tv-flex-section-label">Install &middot; BU 50</div>
+          <div class="tv-flex-section-label"><span class="tv-flex-bu">BU 50</span> Install</div>
           <div class="tv-flex-grid tv-flex-grid-install">${installTiles}</div>
         </div>
       </div>
@@ -407,8 +406,9 @@ function renderPlumbingFlexScreen() {
     };
   });
 
-  entries.sort((a, b) => b.totalRevenue - a.totalRevenue);
-  entries.forEach((entry, idx) => (entry.rank = idx + 1));
+  // Alphabetical by name — this is a small fixed crew, not a leaderboard,
+  // so a stable name order reads more naturally than a revenue ranking.
+  entries.sort((a, b) => (a.tech.name || "").localeCompare(b.tech.name || ""));
 
   const list = document.createElement("div");
   list.className = "tv-flex-list";
