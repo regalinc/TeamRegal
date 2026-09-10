@@ -347,13 +347,13 @@ function renderFlexCard(entry) {
         </div>
       </div>
       <div class="tv-flex-sections">
-        <div class="tv-flex-section tv-flex-section-service">
-          <div class="tv-flex-section-label"><span class="tv-flex-bu">BU 70</span> Service</div>
-          <div class="tv-flex-grid tv-flex-grid-service">${serviceTiles}</div>
-        </div>
         <div class="tv-flex-section tv-flex-section-install">
           <div class="tv-flex-section-label"><span class="tv-flex-bu">BU 50</span> Install</div>
           <div class="tv-flex-grid tv-flex-grid-install">${installTiles}</div>
+        </div>
+        <div class="tv-flex-section tv-flex-section-service">
+          <div class="tv-flex-section-label"><span class="tv-flex-bu">BU 70</span> Service</div>
+          <div class="tv-flex-grid tv-flex-grid-service">${serviceTiles}</div>
         </div>
       </div>
     </div>

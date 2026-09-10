@@ -380,9 +380,9 @@ body {
 .tv-flex-total { font-size: clamp(10px, 1.35vh, 19px); color: var(--text-muted); margin-top: 0.3vh; }
 .tv-flex-sections { flex: 1; min-width: 0; align-self: stretch; display: flex; gap: 1.1vw; }
 /* Each half is its own tinted, bordered panel with a solid colour-coded
-   header band — Service = blue (BU 70), Install = violet (BU 50) — so from
-   ~10ft across the room it's instantly clear which block is which without
-   reading any tile label. */
+   header band — Install = magenta (BU 50) on the left, Service = blue
+   (BU 70) on the right — so from ~10ft across the room it's instantly clear
+   which block is which without reading any tile label. */
 .tv-flex-section {
   display: flex;
   flex-direction: column;
