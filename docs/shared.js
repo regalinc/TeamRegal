@@ -118,6 +118,7 @@ const MANUAL_AVATAR_OVERRIDES = {
   "pro_ca120cbb55fa40fe9361d492161b101f": "assets/tech-photos/andrew-rouscher.jpg", // Andrew Rouscher — his own largeAvatarUrl() 403s (see andrew.js), same gap as the rest of this list
   "pro_62aa1ba4432340829b0aba02abd1d307": "assets/tech-photos/josh-zieger.jpg", // Josh Zieger — same gap, blurry on hvac-sales.html at the 112px identity-photo size
   "pro_27fcce8f21bc4186b44abe4d9a87c03f": "assets/tech-photos/nick-webb.jpg", // Nick Webb — same gap, blurry on hvac-sales.html at the 112px identity-photo size
+  "pro_06aeac3b71a24c60a826c7e11499d8b5": "assets/tech-photos/jaylees-vazquez.jpg", // Jaylees Vazquez — apprentice; HCP only has the 40x40 thumb, blurry on the Plumbing Flex TV strip
 };
 
 // Apprentices — currently training/riding along with a real technician, not
