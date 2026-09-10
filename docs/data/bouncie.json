@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-10T21:08:25.578Z",
+    "last_synced_at": "2026-09-10T23:21:51.980Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 1397
+    "trip_count": 1399
   },
   "vehicles": [
     {
@@ -126,7 +126,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 15176.4
+      "odometer": 15183.8
     },
     {
       "imei": "864486067935557",
@@ -247,7 +247,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 43344.09999999942
+      "odometer": 43347.89999999942
     },
     {
       "imei": "868199050016543",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 80975
+      "odometer": 81016
     },
     {
       "imei": "868199050033175",
@@ -417,18 +417,52 @@
   ],
   "trips": [
     {
+      "transactionId": "862255068902755-4037-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-10T23:03:31.000Z",
+      "endTime": "2026-09-10T23:21:31.000Z",
+      "distance": 0,
+      "averageSpeed": 0,
+      "maxSpeed": 0,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1070
+    },
+    {
+      "transactionId": "862255068902755-4036-202609",
+      "imei": "862255068902755",
+      "startTime": "2026-09-10T21:59:58.000Z",
+      "endTime": "2026-09-10T22:14:49.000Z",
+      "distance": 0,
+      "averageSpeed": 0,
+      "maxSpeed": 0,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 881
+    },
+    {
       "transactionId": "864486067735866-1939-202609",
       "imei": "864486067735866",
       "startTime": "2026-09-10T21:04:14.000Z",
+      "endTime": "2026-09-10T21:18:21.000Z",
+      "distance": 7.2,
+      "averageSpeed": 37.9,
+      "maxSpeed": 66.486697,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 156
     },
     {
       "transactionId": "868199050012070-8113-202609",
       "imei": "868199050012070",
       "startTime": "2026-09-10T20:56:10.000Z",
+      "endTime": "2026-09-10T21:16:12.000Z",
+      "distance": 3.8,
+      "averageSpeed": 22.3,
+      "maxSpeed": 41.010486,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 575
     },
     {
       "transactionId": "864486067735866-1938-202609",
