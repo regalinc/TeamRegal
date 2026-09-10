@@ -50,7 +50,14 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
   const tagsHtml =
     tech.tags && tech.tags.length > 0 ? tech.tags.map((t) => `<span class="tech-tag-chip">${escapeHtml(t)}</span>`).join("") : "";
 
-  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode });
+  // Leads / Leads sold aren't a metric for Plumbing Service / Maintenance
+  // (BU 70/80) — same reasoning as the TV screens (tv.js). Only hidden
+  // when the view is actually narrowed to one of those BUs; unfiltered,
+  // the tiles stay for everyone.
+  const buCode = businessUnitCode(String(kpiBuCode || ""));
+  const hiddenTiles = buCode === "70" || buCode === "80" ? new Set(["leads", "leadsSold"]) : new Set();
+
+  return renderScorecard({ headerHtml, tagsHtml, jobs, extraStats, splitRevenue: true, kpiBuCode, hiddenTiles });
 }
 
 // One card for the whole HVAC Installation roster instead of nine

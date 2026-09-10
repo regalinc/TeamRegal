@@ -401,6 +401,12 @@ const DEPARTMENTS = {
     buLabel: "80 Plumbing Maintenance",
     hcp: [
       { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 250, direction: "min" } },
+      // Not on 2B's own chart — added at the user's request, using the
+      // same ≤ 5% bar as BU 70 (Plumbing Service), so $0 Call grades on
+      // the BU 80 TV screen and its company scorecard. Same kpiTier
+      // lookup as everywhere else, so it also colours this tile on
+      // admin.html's BU 80 card and BU-80-filtered index.html tech cards.
+      { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.05, direction: "max", buffer: 1 / 3 } },
       // 2B's chart asks for the raw count only ("overall"), not a
       // conversion rate — unlike BU 40's new-vs-renewal framing, there's no
       // synthetic conversion tile to approximate here.
@@ -441,6 +447,7 @@ const DEPARTMENTS = {
     // all, no target divergences.
     scorecard: [
       { source: "hcp", key: "avgTicket", label: "Avg ticket" },
+      { source: "hcp", key: "zeroCall", label: "$0 Call (diagnostic-fee-only calls)" },
       { source: "hcp", key: "totalClubAgreements", label: "Total club agreements" },
       { source: "manual", key: "attendancePct", label: "Attendance" },
       { source: "manual", key: "reviewsGenerated", label: "Reviews generated" },

@@ -128,20 +128,34 @@ function currentMonthName() {
 // renderAvatarBlock()/tvTile() live in shared.js now — fleet-tv.js (the
 // driving-behavior kiosk) reuses both.
 
+// Per-screen tile suppression: a metric that just isn't a thing for that
+// department. Plumbing Service / Plumbing Maintenance (BU 70/80) don't
+// work leads the way HVAC Service does, so Leads / Leads sold only ever
+// read 0 there — dropped from those two screens' tile grids at the user's
+// request. Keyed by DEPT (a bare "70"/"80" for a BU screen).
+const BU_HIDDEN_TV_TILES = {
+  70: new Set(["Leads", "Leads sold"]),
+  80: new Set(["Leads", "Leads sold"]),
+};
+
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
 // for a compact list row).
 function metricTiles(stats, sizeClass) {
+  const hidden = BU_HIDDEN_TV_TILES[DEPT] || new Set();
   return [
-    tvTile("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats), sizeClass),
-    tvTile("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats), sizeClass),
-    tvTile("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats), sizeClass),
-    tvTile("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats), sizeClass),
-    tvTile("Leads", stats.leads.toLocaleString(), kpiClass("leads", stats), sizeClass),
-    tvTile("Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats), sizeClass),
-    tvTile("$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats), sizeClass),
-    tvTile("Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats), sizeClass),
-  ].join("");
+    ["Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats)],
+    ["Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats)],
+    ["Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats)],
+    ["Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats)],
+    ["Leads", stats.leads.toLocaleString(), kpiClass("leads", stats)],
+    ["Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats)],
+    ["$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats)],
+    ["Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats)],
+  ]
+    .filter(([label]) => !hidden.has(label))
+    .map(([label, value, cls]) => tvTile(label, value, cls, sizeClass))
+    .join("");
 }
 
 function renderFeatured(entry, screenLabel) {
