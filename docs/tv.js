@@ -66,6 +66,7 @@ const PLUMBING_FLEX_TECH_IDS = new Set([
 // out once that person is scored as a full tech.
 const PLUMBING_FLEX_APPRENTICE_TECH_IDS = new Set([
   "pro_06aeac3b71a24c60a826c7e11499d8b5", // Jaylees Vazquez
+  "pro_b5ab5cc9e362414cb376d0a02d64bef8", // Trevor McWilliams
 ]);
 
 const VALID_DEPTS = [...SINGLE_DEPTS, FLEX_DEPT, ...Object.keys(BU_DEPTS)];
@@ -369,32 +370,38 @@ function renderFlexCard(entry) {
   `;
 }
 
-// A metric-free row for an apprentice — dashed border + badge so it never
-// reads as "a tech whose numbers are all zero." Same row height as the
-// four scorecards (flex: 1 in tv.css).
+// One metric-free row holding every apprentice on the crew side by side —
+// dashed border + a shared "Apprentices in Training" badge so it never
+// reads as "techs whose numbers are all zero." Same row height as the four
+// scorecards (flex: 1 in tv.css).
 //
 // Avatar: an apprentice's Housecall Pro photo is only the 40x40 thumbnail
 // (every larger variant 403s, same gap as the crew in
-// MANUAL_AVATAR_OVERRIDES), so at this row's photo size it just upscales
-// to a blur. Use the crisp colour-initials circle unless a full-res local
-// photo has been dropped in assets/tech-photos/ and wired into
+// MANUAL_AVATAR_OVERRIDES), so at this size it just upscales to a blur.
+// Use the crisp colour-initials circle unless a full-res local photo has
+// been dropped in assets/tech-photos/ and wired into
 // MANUAL_AVATAR_OVERRIDES, in which case use that.
-function renderApprenticeStrip(tech) {
-  const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
-  const initialsText = escapeHtml(initials(tech.name || "?"));
-  const localPhoto = MANUAL_AVATAR_OVERRIDES[tech.id];
-  const avatar = localPhoto
-    ? `<img class="tv-flex-appr-photo" src="${escapeHtml(localPhoto)}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-       <div class="tv-flex-appr-fallback" style="background:${bg};display:none">${initialsText}</div>`
-    : `<div class="tv-flex-appr-fallback" style="background:${bg}">${initialsText}</div>`;
+function renderApprenticeStrip(apprentices) {
+  if (!apprentices.length) return "";
+  const people = apprentices
+    .map((tech) => {
+      const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
+      const initialsText = escapeHtml(initials(tech.name || "?"));
+      const localPhoto = MANUAL_AVATAR_OVERRIDES[tech.id];
+      const avatar = localPhoto
+        ? `<img class="tv-flex-appr-photo" src="${escapeHtml(localPhoto)}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+           <div class="tv-flex-appr-fallback" style="background:${bg};display:none">${initialsText}</div>`
+        : `<div class="tv-flex-appr-fallback" style="background:${bg}">${initialsText}</div>`;
+      return `<div class="tv-flex-appr-person">${avatar}<div class="tv-flex-appr-name">${escapeHtml(
+        tech.name || "Unknown"
+      )}</div></div>`;
+    })
+    .join("");
+  const label = apprentices.length === 1 ? "Apprentice in Training" : "Apprentices in Training";
   return `
     <div class="tv-flex-appr">
-      ${avatar}
-      <div class="tv-flex-appr-text">
-        <div class="tv-flex-appr-name">${escapeHtml(tech.name || "Unknown")}</div>
-        <div class="tv-flex-appr-tagline">Learning the trade alongside the crew</div>
-      </div>
-      <div class="tv-flex-appr-badge">Apprentice in Training</div>
+      <div class="tv-flex-appr-badge">${label}</div>
+      <div class="tv-flex-appr-people">${people}</div>
     </div>
   `;
 }
@@ -405,7 +412,9 @@ function renderPlumbingFlexScreen() {
   // the site (isCanceledEstimate, shared.js).
   const allEstimates = (latestData.estimates || []).filter((est) => !isCanceledEstimate(est));
   const techs = (latestData.technicians || []).filter((t) => PLUMBING_FLEX_TECH_IDS.has(t.id));
-  const apprentices = (latestData.technicians || []).filter((t) => PLUMBING_FLEX_APPRENTICE_TECH_IDS.has(t.id));
+  const apprentices = (latestData.technicians || [])
+    .filter((t) => PLUMBING_FLEX_APPRENTICE_TECH_IDS.has(t.id))
+    .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
   if (techs.length === 0) {
     mainEl.innerHTML = `<p class="tv-empty">No Plumbing Flex technicians found in the synced roster.</p>`;
@@ -452,7 +461,7 @@ function renderPlumbingFlexScreen() {
 
   const list = document.createElement("div");
   list.className = "tv-flex-list";
-  list.innerHTML = entries.map(renderFlexCard).join("") + apprentices.map(renderApprenticeStrip).join("");
+  list.innerHTML = entries.map(renderFlexCard).join("") + renderApprenticeStrip(apprentices);
   mainEl.innerHTML = "";
   mainEl.appendChild(list);
 }
