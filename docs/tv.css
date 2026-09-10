@@ -86,6 +86,13 @@ body {
   height: min(24vh, 16vw);
   border-radius: 50%;
   object-fit: cover;
+  /* Most tech photos (MANUAL_AVATAR_OVERRIDES, shared.js) are square
+     800x800 crops and this is a no-op for them. Andrew Rouscher / Josh
+     Zieger / Nick Webb are 800x1200 portraits, though, and a centered
+     crop into this circle cuts the top of the head off — anchor to the
+     top instead so the crop comes off the chest/shoulders. Same fix
+     andrew.css/hvac-sales.css already apply to their identity photos. */
+  object-position: center top;
 }
 .tv-featured-photo-fallback {
   display: flex;
@@ -155,6 +162,7 @@ body {
   height: min(7vh, 5vw);
   border-radius: 50%;
   object-fit: cover;
+  object-position: center top; /* see .tv-featured-photo above */
   flex-shrink: 0;
 }
 .tv-row-photo-fallback {
@@ -272,6 +280,7 @@ body {
   height: min(13vh, 9.5vw);
   border-radius: 50%;
   object-fit: cover;
+  object-position: center top; /* see .tv-featured-photo above */
   margin: 0 auto;
 }
 .tv-team-photo-fallback {
