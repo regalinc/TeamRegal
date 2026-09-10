@@ -161,6 +161,18 @@ const DEPARTMENTS = {
       // $250, confirmed against a detailed BU 40 chart: matches the
       // existing target exactly, no change.
       { key: "avgTicket", label: "Avg ticket", type: "money", target: { goal: 250, direction: "min" } },
+      // Not on BU 40's own KPI chart — added at the user's request so the
+      // BU 40 TV screen (tv.html?dept=40) grades these job-rate tiles
+      // instead of leaving all but Avg ticket grey. Numbers copied from BU
+      // 30's identical entries: same HVAC-Service team, just their
+      // maintenance work. Also colors these three tiles on admin.html's BU
+      // 40 department card and index.html's BU-40-filtered tech cards
+      // (same kpiTier lookup); company-scorecard.html's BU 40 view is
+      // unaffected (it renders its own `scorecard` list, which doesn't
+      // include these).
+      { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.075, direction: "max", buffer: 1 / 3 } },
+      { key: "leadTurnover", label: "Lead turnover", type: "pct", target: { goal: 1 / 12, direction: "min" } },
+      { key: "accessorySold", label: "Accessory sold", type: "pct", target: { goal: 1 / 8, direction: "min" } },
       // BU 40's chart frames this as new-vs-renewal, not a flat conversion
       // rate — Housecall Pro's new-vs-renewal distinction isn't confirmed
       // yet (see README), so this is the same conversion math as BU 30's
