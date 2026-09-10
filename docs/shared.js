@@ -1041,7 +1041,7 @@ function renderScorecard({
     tiles
       .filter((t) => !hiddenTiles.has(t.key))
       .map((t) => t.html)
-      .join("") + extraStats.map((s) => renderMiniStat(s.label, s.value, null, s.sub)).join("");
+      .join("") + extraStats.map((s) => renderMiniStat(s.label, s.value, s.tier || null, s.sub)).join("");
   card.appendChild(statsRow);
 
   const sortedJobs = [...jobs].sort((a, b) => {

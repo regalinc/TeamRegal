@@ -488,12 +488,33 @@ function render(data) {
     const approvedNoteParts = [];
     if (givenEarlierCount > 0) approvedNoteParts.push(`${givenEarlierCount} given earlier`);
     if (undatedCount > 0) approvedNoteParts.push(`${undatedCount} no exact date`);
+
+    // Grade "Estimates approved" by closing rate (approved ÷ given) against
+    // the `estimateClosingRate` target in DEPARTMENTS (≥ 50%, green at or
+    // above) — same target the company scorecard uses, defined once in
+    // departments-config.js. Only fires when a single BU is filtered to
+    // one of 30/40/70/80 (the departments that carry that hcp entry);
+    // kpiTier returns null otherwise (no BU filter, BU 10/50, zero
+    // estimates), same as every other coloured tile here. The tile still
+    // shows the approved *count* — the colour just reflects the rate — so
+    // a "N% closing" note is added to make that legible.
+    const closingFraction = estimateStats.given ? estimateStats.approved / estimateStats.given : null;
+    estimateStats.estimateClosingRate = closingFraction; // key hcpMetricValue reads for kpiTier
+    const approvedTier = kpiTier(kpiBuCode, "estimateClosingRate", estimateStats);
+    const approvedSub = [
+      approvedTier ? `${Math.round(closingFraction * 100)}% closing` : null,
+      approvedNoteParts.length ? `incl. ${approvedNoteParts.join(" · ")}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
     const extraStats = [
       { label: "Estimates given", value: estimateStats.given.toLocaleString() },
       {
         label: "Estimates approved",
         value: estimateStats.approved.toLocaleString(),
-        sub: approvedNoteParts.length ? `incl. ${approvedNoteParts.join(" · ")}` : undefined,
+        tier: approvedTier,
+        sub: approvedSub || undefined,
       },
     ];
 
