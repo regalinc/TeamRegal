@@ -460,22 +460,24 @@ body {
 .tv-flex-tile.tv-warn .tv-tile-label, .tv-flex-tile.tv-warn .tv-tile-value { color: var(--warn-text); }
 .tv-flex-tile.tv-bad .tv-tile-label, .tv-flex-tile.tv-bad .tv-tile-value { color: var(--bad-text); }
 
-/* Apprentice strip — sits under the four cards, no metric grid. Dashed
-   border + pill badge so it reads as "in training, part of the crew"
-   rather than a tech with an empty scorecard. */
+/* Apprentice strip — sits under the four cards and takes an equal share of
+   the column height (flex: 1), so the screen reads as five even rows. No
+   metric grid: dashed border + pill badge so it reads as "in training,
+   part of the crew" rather than a tech with an empty scorecard. */
 .tv-flex-appr {
-  flex: 0 0 auto;
+  flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
-  gap: 1.4vw;
-  padding: 1vh 1.6vw;
+  gap: 1.6vw;
+  padding: 1.2vh 1.6vw;
   background: rgba(37, 99, 235, 0.06);
   border: 1px dashed var(--border);
   border-radius: var(--radius);
 }
 .tv-flex-appr-photo, .tv-flex-appr-fallback {
-  width: min(7vh, 3.6vw);
-  height: min(7vh, 3.6vw);
+  width: min(9vh, 4.5vw);
+  height: min(9vh, 4.5vw);
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
@@ -487,29 +489,29 @@ body {
   justify-content: center;
   color: #fff;
   font-weight: 600;
-  font-size: clamp(10px, 1.8vh, 22px);
+  font-size: clamp(13px, 2.6vh, 34px);
 }
 .tv-flex-appr-text { display: flex; flex-direction: column; min-width: 0; }
 .tv-flex-appr-name {
-  font-size: clamp(13px, 2vh, 30px);
+  font-size: clamp(14px, 2.4vh, 34px);
   font-weight: 650;
   letter-spacing: -0.01em;
 }
 .tv-flex-appr-tagline {
-  font-size: clamp(10px, 1.35vh, 19px);
+  font-size: clamp(11px, 1.6vh, 22px);
   color: var(--text-muted);
-  margin-top: 0.2vh;
+  margin-top: 0.35vh;
 }
 .tv-flex-appr-badge {
   margin-left: auto;
   flex-shrink: 0;
-  font-size: clamp(11px, 1.7vh, 26px);
+  font-size: clamp(12px, 2vh, 30px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #fff;
   background: #2563eb;
-  padding: 0.55vh 1.1vw;
+  padding: 0.7vh 1.3vw;
   border-radius: 999px;
   white-space: nowrap;
 }

@@ -369,12 +369,27 @@ function renderFlexCard(entry) {
   `;
 }
 
-// A slim, metric-free row for an apprentice — dashed border + badge so it
-// never reads as "a tech whose numbers are all zero."
+// A metric-free row for an apprentice — dashed border + badge so it never
+// reads as "a tech whose numbers are all zero." Same row height as the
+// four scorecards (flex: 1 in tv.css).
+//
+// Avatar: an apprentice's Housecall Pro photo is only the 40x40 thumbnail
+// (every larger variant 403s, same gap as the crew in
+// MANUAL_AVATAR_OVERRIDES), so at this row's photo size it just upscales
+// to a blur. Use the crisp colour-initials circle unless a full-res local
+// photo has been dropped in assets/tech-photos/ and wired into
+// MANUAL_AVATAR_OVERRIDES, in which case use that.
 function renderApprenticeStrip(tech) {
+  const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
+  const initialsText = escapeHtml(initials(tech.name || "?"));
+  const localPhoto = MANUAL_AVATAR_OVERRIDES[tech.id];
+  const avatar = localPhoto
+    ? `<img class="tv-flex-appr-photo" src="${escapeHtml(localPhoto)}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+       <div class="tv-flex-appr-fallback" style="background:${bg};display:none">${initialsText}</div>`
+    : `<div class="tv-flex-appr-fallback" style="background:${bg}">${initialsText}</div>`;
   return `
     <div class="tv-flex-appr">
-      ${renderAvatarBlock(tech, "tv-flex-appr-photo", "tv-flex-appr-fallback", { large: true })}
+      ${avatar}
       <div class="tv-flex-appr-text">
         <div class="tv-flex-appr-name">${escapeHtml(tech.name || "Unknown")}</div>
         <div class="tv-flex-appr-tagline">Learning the trade alongside the crew</div>
