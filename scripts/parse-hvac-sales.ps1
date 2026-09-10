@@ -158,10 +158,13 @@ if ($records.Count -eq 0) {
   exit 1
 }
 
-$meta = [ordered]@{
-  generated_at  = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
-  record_count  = $records.Count
-}
+# Deliberately no generated_at timestamp: the scheduled wrapper decides
+# whether to commit by diffing this file, so its contents must be a pure
+# function of the workbook. A per-run timestamp would make every run look
+# like a change and produce a commit even when Josh/Nick added nothing.
+# ("Last synced" on the page comes from dashboard.json anyway -- see
+# hvac-sales.js.) record_count stays as a quick sanity check in diffs.
+$meta = [ordered]@{ record_count = $records.Count }
 $result = [ordered]@{ meta = $meta; records = $records }
 
 # Full regenerate every run (not an incremental merge like the P&L parser's
