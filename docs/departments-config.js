@@ -363,10 +363,11 @@ const DEPARTMENTS = {
       { key: "dso", label: "A/R days sales outstanding", type: "count", target: { goal: 15, direction: "max" } },
     ],
     // Curated view for company-scorecard.html only (see BU 30's scorecard
-    // comment). Two intentional target divergences from the base metrics
-    // this page's matrix/kpiTier siblings still use: Avg ticket $850 here
-    // vs. $500 on the hcp entry, and Gross margin 50% here vs. the 48%
-    // floor on the pnl entry.
+    // comment). One intentional target divergence from the base metrics
+    // this page's matrix/kpiTier siblings still use: Gross margin 50% here
+    // vs. the 48% floor on the pnl entry. (Avg ticket was briefly
+    // overridden to $850 here too, then set back to $500 — no override
+    // now, so it just inherits the hcp entry's $500 target.)
     scorecard: [
       { source: "manual", key: "efficiency", label: "Service efficiency (billed / paid hrs)" },
       { source: "manual", key: "productivityRevenue", label: "Service productivity ($ billed / paid hr)" },
@@ -375,7 +376,7 @@ const DEPARTMENTS = {
       { source: "hcp", key: "clubConversion", label: "Club agreement conversion" },
       { source: "manual", key: "attendancePct", label: "Attendance" },
       { source: "manual", key: "truckInventoryAccuracyPct", label: "Truck inventory count accuracy" },
-      { source: "hcp", key: "avgTicket", label: "Avg ticket (no sales)", target: { goal: 850, direction: "min" } },
+      { source: "hcp", key: "avgTicket", label: "Avg ticket (no sales)" },
       { source: "manual", key: "reviewsGenerated", label: "Reviews generated" },
       { source: "manual", key: "callbackCount", label: "Callback rate" },
       { source: "pnl", key: "grossProfit", label: "Gross margin", target: { goal: 0.5, direction: "min" } },
