@@ -66,12 +66,16 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "git commit failed ($LASTEXITCODE)" }
 
   # 4. Rebase onto whatever the hourly HCP sync bot pushed in the meantime,
-  #    then push. One retry if the push races another bot commit.
+  #    then push. --autostash so an unrelated dirty file in the tree (an
+  #    in-progress edit elsewhere) doesn't block the rebase. One retry if
+  #    the push races another bot commit.
   foreach ($attempt in 1..2) {
-    & git pull --rebase origin main
+    & git fetch origin main
+    if ($LASTEXITCODE -ne 0) { throw "git fetch failed ($LASTEXITCODE)" }
+    & git rebase --autostash FETCH_HEAD
     if ($LASTEXITCODE -ne 0) {
       & git rebase --abort 2>$null
-      throw "git pull --rebase failed ($LASTEXITCODE), resolve by hand"
+      throw "git rebase failed ($LASTEXITCODE), resolve by hand"
     }
     & git push origin HEAD:main
     if ($LASTEXITCODE -eq 0) {

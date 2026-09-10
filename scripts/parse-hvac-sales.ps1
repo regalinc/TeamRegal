@@ -24,11 +24,19 @@
 # which is also how a not-yet-arrived future month (an empty tab) naturally
 # produces zero records for it without any special-casing.
 #
+# The workbook lives under OneDrive and is usually a Files-On-Demand
+# placeholder (a reparse point, not real local bytes). Headless Excel
+# (Visible = $false) refuses to open those directly -- "Microsoft Excel
+# cannot access the file" -- even when the bytes are actually cached. So we
+# copy it to a plain local temp file first (which also forces OneDrive to
+# hydrate it) and open that copy read-only; the temp copy is deleted on the
+# way out, success or failure.
+#
 # FAILURE HANDLING: the output file is only overwritten on a clean, non-empty
-# parse. If the workbook can't be opened (most commonly because it's open in
-# Excel on the user's machine, or is a OneDrive online-only placeholder), or
-# if zero rows come back across all 12 tabs, the script writes nothing and
-# exits 1 -- a locked or missing source can never blank the live scorecard.
+# parse. If the workbook can't be copied or opened (source path missing, or
+# it's genuinely open with an exclusive lock in Excel), or if zero rows come
+# back across all 12 tabs, the script writes nothing and exits 1 -- a locked
+# or missing source can never blank the live scorecard.
 param(
   [string]$Path = "C:\Users\MichaelLohssJr\OneDrive - Regal, Inc,\Regal, Inc\HVAC Sales\2026\HVAC Sales.2026.xlsx",
   [string]$OutJson = "docs\data\hvac-sales.json"
@@ -52,7 +60,12 @@ $spawnedPid = Get-Process EXCEL -ErrorAction SilentlyContinue |
   Where-Object { $excelPidsBefore -notcontains $_.Id } |
   Select-Object -First 1 -ExpandProperty Id
 
-# Tear down the Excel COM instance (and only the PID this run spawned).
+# Local temp copy of the workbook (see header comment) -- set once we make
+# it, cleared once we delete it, so Close-Excel can tidy up on any path.
+$tempCopy = $null
+
+# Tear down the Excel COM instance (and only the PID this run spawned), and
+# delete the temp copy if one was made.
 function Close-Excel {
   param([object]$Workbook)
   if ($Workbook) { try { $Workbook.Close($false) } catch {} }
@@ -66,15 +79,29 @@ function Close-Excel {
       Stop-Process -Id $spawnedPid -Force -ErrorAction SilentlyContinue
     }
   }
+  if ($script:tempCopy -and (Test-Path -LiteralPath $script:tempCopy)) {
+    Remove-Item -LiteralPath $script:tempCopy -Force -ErrorAction SilentlyContinue
+  }
 }
 
 $wb = $null
 $records = @()
 try {
-  # Read-only open. Throws if the file is locked (open in Excel) or absent.
-  $wb = $excel.Workbooks.Open($Path, [Type]::Missing, $true)
-  if (-not $wb) { throw "Workbooks.Open returned nothing for '$Path'." }
-  Write-Host "Opened workbook: $($wb.Name)"
+  if (-not (Test-Path -LiteralPath $Path)) {
+    throw "Source workbook not found at '$Path'."
+  }
+
+  # Copy to a plain local file first -- forces OneDrive to hydrate the
+  # placeholder and gives Excel a path with no reparse point / cloud
+  # handshake to choke on. Unblock-File clears any Mark-of-the-Web.
+  $tempCopy = Join-Path $env:TEMP ("hvac-sales-parse-" + [guid]::NewGuid().ToString("N") + ".xlsx")
+  Copy-Item -LiteralPath $Path -Destination $tempCopy -Force
+  Unblock-File -LiteralPath $tempCopy -ErrorAction SilentlyContinue
+
+  # Read-only open of the copy.
+  $wb = $excel.Workbooks.Open($tempCopy, [Type]::Missing, $true)
+  if (-not $wb) { throw "Workbooks.Open returned nothing for the temp copy of '$Path'." }
+  Write-Host "Opened workbook copy: $($wb.Name)"
 
   foreach ($monthName in $MONTH_TABS) {
     $ws = $wb.Worksheets.Item($monthName)
