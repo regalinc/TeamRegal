@@ -430,6 +430,26 @@ async function main() {
   const rawEstimates = await fetchEstimatesInWindow();
   console.log(`  ${rawEstimates.length} estimates fetched`);
 
+  // TEMPORARY DEBUG — checking whether an estimate created "on a job" in
+  // Housecall Pro carries any reference back to that job (so its
+  // business_unit could be pulled from the job when the estimate's own
+  // estimate_fields.business_unit is null, which it is for ~80% of them).
+  // Remove once answered.
+  {
+    const keyCounts = {};
+    for (const e of rawEstimates) {
+      for (const k of Object.keys(e)) keyCounts[k] = (keyCounts[k] || 0) + 1;
+    }
+    console.log("DEBUG estimate top-level key counts (of " + rawEstimates.length + "):", JSON.stringify(keyCounts, null, 2));
+    const jobbish = rawEstimates.filter((e) =>
+      Object.keys(e).some((k) => /job|lead|parent|source|origin/i.test(k) && k !== "lead_source")
+    );
+    console.log("DEBUG estimates with a job/lead/parent-ish key:", jobbish.length);
+    console.log("DEBUG first 3 such estimates (full JSON):", JSON.stringify(jobbish.slice(0, 3), null, 2));
+    const noBu = rawEstimates.filter((e) => !(e.estimate_fields && e.estimate_fields.business_unit));
+    console.log("DEBUG first 2 estimates with NO estimate_fields.business_unit (full JSON):", JSON.stringify(noBu.slice(0, 2), null, 2));
+  }
+
   const technicians = employees.map(toPublicTechnician);
   const publicJobs = rawJobs.map(toPublicJob);
   const publicEstimates = rawEstimates.map((e) => toPublicEstimate(e, previousEstimatesById.get(e.id), syncedAtIso));
