@@ -292,7 +292,16 @@ body {
 .goal-card.unset { border-style: dashed; }
 .goal-empty { font-size: 0.82rem; color: var(--text-faint); margin-top: 0.5rem; }
 
-.pace-badge {
+/* :not([hidden]) rather than a bare display: inline-flex — the exact same
+   fix andrew.css already carries for this identical component (this page's
+   goal card was copied from that one, but from a version predating that
+   fix, which is how this slipped back in). A bare display: inline-flex
+   would win the cascade over the browser's default [hidden]{display:none}
+   at equal specificity, so paceBadge.hidden = true wouldn't actually hide
+   anything — confirmed by testing, not assumed: the "Last month" tab
+   (which never sets a pace) showed stale "behind pace" text left over from
+   a previous MTD render. */
+.pace-badge:not([hidden]) {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;

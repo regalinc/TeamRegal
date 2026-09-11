@@ -9,11 +9,19 @@
 // use for exactly this reason: two people today, and a new consultant
 // added to HVAC_SALES_TOKENS just works here without a new page.
 //
-// Data comes from docs/data/hvac-sales.json (scripts/parse-hvac-sales.ps1,
-// hand-run against the "HVAC Sales" workbook — not part of the automated
-// hourly sync, see that script's header comment) for the opportunity/close
-// records, and dashboard.json for the consultant's real name/avatar via
-// HVAC_SALES_TOKENS (shared.js).
+// Two data sources, merged (buildMergedRecords, below):
+// - dashboard.json's Housecall Pro Estimates are the actual base for
+//   "opportunities ran" — already synced hourly, no manual entry, dated by
+//   the estimate's scheduled visit (SCHEDULE_SCOPED_ESTIMATOR_IDS in
+//   shared.js — Josh and Nick get the same fix Andrew Rouscher already
+//   had). Also where the consultant's real name/avatar comes from, via
+//   HVAC_SALES_TOKENS (shared.js).
+// - docs/data/hvac-sales.json (scripts/parse-hvac-sales.ps1, hand-run
+//   against the "HVAC Sales" workbook — not part of the automated hourly
+//   sync, see that script's header comment) supplies what Housecall Pro
+//   has no field for at all: Lead source, Club Member, Customer Type,
+//   System Type, and the Sold flag — joined onto each estimate by
+//   customer name, since there's no shared id between the two sources.
 //
 // greetingPrefix/firstName/monthLabel intentionally mirror andrew.js's
 // versions of the same tiny helpers rather than importing them — small
@@ -131,25 +139,6 @@ function commissionWeekRange(startStr, endStr) {
   return `${fmt(start)} – ${fmt(end)}`;
 }
 
-// A row scheduled for a future date hasn't actually happened yet — it
-// shouldn't count as "ran" (or drag down a closing rate as an unsold
-// opportunity) just because its Date falls within the selected period,
-// the same way an HVAC Installation job that's scheduled but not yet
-// started doesn't count toward that team's Jobs/Revenue elsewhere on this
-// site (NOT_YET_STARTED_STATUSES, shared.js) — a full calendar month's
-// worth of already-booked future appointments would otherwise inflate
-// "opportunities ran" and tank the closing rate for a month that's still
-// in progress. periodRange("today")'s own end boundary (start of
-// tomorrow, in local time) is reused here rather than a fresh comparison,
-// so "today" means exactly the same thing here as it does everywhere else
-// period filtering happens on this site.
-function hasHappened(dateStr) {
-  if (!dateStr) return false;
-  const [, todayEnd] = periodRange("today");
-  const d = new Date(dateStr);
-  return !Number.isNaN(d.getTime()) && d < todayEnd;
-}
-
 function periodMeta(period) {
   if (period === "lastmonth") {
     return { eyebrow: `${monthLabel(1)} · full month`, ranPhrase: `in ${monthLabel(1)}` };
@@ -179,6 +168,120 @@ function renderLargeAvatar(tech) {
     <img class="avatar" src="${escapeHtml(bigUrl)}" data-thumb-src="${escapeHtml(tech.avatar_url)}" alt="" onerror="handleLargeAvatarError(this)" />
     <div class="avatar" style="background:${bg};display:none">${initialsText}</div>
   `;
+}
+
+// Housecall Pro masks a customer down to "First L." (customerLabel() in
+// scripts/sync.js) on every synced estimate/job — the spreadsheet has the
+// real full name, so matching one to the other means normalizing the full
+// name down to that same shape rather than the other way around. Returns
+// every plausible label rather than one, since an "&"-joined household
+// name ("Timothy & Brenda Diehl") could resolve to either person's label
+// depending on which one Housecall Pro's customer record is actually filed
+// under — trying both beats guessing wrong and never matching at all.
+function normalizeCustomerLabels(fullName) {
+  if (!fullName) return [];
+  const trimmed = fullName.trim();
+  const overallLastName = trimmed.split(/\s+/).pop();
+  return trimmed
+    .split("&")
+    .map((part) => {
+      const words = part.trim().split(/\s+/).filter(Boolean);
+      if (words.length === 0) return null;
+      const first = words[0];
+      const last = words.length > 1 ? words[words.length - 1] : overallLastName;
+      return last ? `${first} ${last[0]}.` : null;
+    })
+    .filter(Boolean);
+}
+
+// Same local calendar day, comparing an ISO datetime (an estimate's
+// schedule.scheduled_start/created_at, UTC) against a plain "yyyy-MM-dd"
+// spreadsheet date — mirrors how dateInPeriod/formatDate elsewhere on this
+// site already treat every date as local time, so "the same day" means the
+// same thing here it does everywhere else. Noon avoids a midnight-either-
+// side-of-DST edge case that comparing raw Date objects at 00:00 could hit.
+function sameLocalDay(isoA, dateStrB) {
+  if (!isoA || !dateStrB) return false;
+  const a = new Date(isoA);
+  const b = new Date(`${dateStrB}T12:00:00`);
+  return !Number.isNaN(a.getTime()) && !Number.isNaN(b.getTime()) && a.toDateString() === b.toDateString();
+}
+
+// The actual base data for "opportunities ran": Housecall Pro's own
+// Estimates for this consultant (already synced hourly, no manual entry —
+// see estimateGivenDate/SCHEDULE_SCOPED_ESTIMATOR_IDS in shared.js, Josh
+// and Nick get the exact same created_at-vs-actual-visit-date fix Andrew
+// Rouscher already had). Confirmed against real data: for Josh, created_at
+// gave 11 for September so far where scheduled_start gave the correct 15 —
+// matching both Housecall Pro's and OnCall Air's own counts, and "Josh or
+// Nick never really run a lead unless it's in their HCP schedule" (the
+// user's own words) is exactly what this is built on.
+//
+// The spreadsheet (hvac-sales.json) still supplies what Housecall Pro has
+// no field for at all — Lead source, Club Member, Customer Type, System
+// Type, and the Sold flag — joined onto each estimate by customer name
+// (normalizeCustomerLabels, above) preferring a same-day match and falling
+// back to a looser name-only match. An estimate with no match yet (the
+// admin hasn't entered that row) still counts toward Ran, just with those
+// fields reading "Unknown" until it's entered — better than being invisible
+// like a spreadsheet-only pipeline would leave it.
+//
+// A spreadsheet row marked Sold that never matches any estimate at all
+// (walk-in, phone sale, or just outside Housecall Pro's currently-synced
+// window) still counts toward Sold — the Sold flag is never lost — but
+// never toward Ran, consistent with the same "never really ran unless it's
+// in HCP" principle: it just isn't added to the ran/scheduled sets below.
+function buildMergedRecords(tech, estimates, salesRows) {
+  const mine = estimates.filter((e) => !isCanceledEstimate(e) && (e.assigned_employee_ids || []).includes(tech.id));
+  const unclaimed = new Set(salesRows.map((_, i) => i));
+
+  const merged = mine.map((estimate) => {
+    const rawDate = estimate.schedule?.scheduled_start || estimate.created_at;
+    // null for a visit scheduled later than today — see estimateGivenDate.
+    const givenDate = estimateGivenDate(estimate, tech);
+
+    let matchIdx = [...unclaimed].find((i) => {
+      const labels = normalizeCustomerLabels(salesRows[i].customerName);
+      return labels.includes(estimate.customer_label) && sameLocalDay(rawDate, salesRows[i].date);
+    });
+    if (matchIdx === undefined) {
+      matchIdx = [...unclaimed].find((i) => normalizeCustomerLabels(salesRows[i].customerName).includes(estimate.customer_label));
+    }
+    const row = matchIdx !== undefined ? salesRows[matchIdx] : null;
+    if (matchIdx !== undefined) unclaimed.delete(matchIdx);
+
+    return {
+      date: rawDate,
+      countedDate: givenDate,
+      customerName: row ? row.customerName : estimate.customer_label || "Unknown",
+      lead: row ? row.lead : "",
+      clubMember: row ? row.clubMember : "",
+      customerType: row ? row.customerType : "",
+      systemType: row ? row.systemType : "",
+      sold: row ? row.sold : false,
+      job: row ? row.job : "",
+      fromEstimate: true,
+    };
+  });
+
+  for (const i of unclaimed) {
+    const row = salesRows[i];
+    if (!row.sold) continue;
+    merged.push({
+      date: row.date,
+      countedDate: null, // never counts toward Ran — see header comment
+      customerName: row.customerName,
+      lead: row.lead,
+      clubMember: row.clubMember,
+      customerType: row.customerType,
+      systemType: row.systemType,
+      sold: true,
+      job: row.job,
+      fromEstimate: false,
+    });
+  }
+
+  return merged;
 }
 
 // Housecall Pro's "Job #" (invoice_number, synced by scripts/sync.js) is
@@ -412,7 +515,7 @@ function renderRecordRow(r) {
   // job whose Job # matched a Housecall Pro job created on a later date
   // than the consultation) — a bare date would be ambiguous about which
   // one it is, same reasoning as andrew.js's estimate rows.
-  const upcoming = !r.sold && !hasHappened(r.date);
+  const upcoming = !r.sold && !r.countedDate;
   const dateParts = [`${upcoming ? "Scheduled" : "Ran"} ${formatDate(r.date)}`];
   if (r.sold && r.soldDateResolved && r.soldDateResolved !== r.date) {
     dateParts.push(`Sold ${formatDate(r.soldDateResolved)}`);
@@ -459,19 +562,26 @@ function render() {
   avatarSlot.innerHTML = renderLargeAvatar(tech);
 
   const jobsByInvoiceNumber = buildJobsByInvoiceNumber(latestDashboard.jobs || []);
-  const mine = (latestSales.records || []).map((r) => ({ ...r, soldDateResolved: resolveSoldDate(r, jobsByInvoiceNumber) })).filter((r) => r.ca === CA);
+  const salesRows = (latestSales.records || []).filter((r) => r.ca === CA);
+  const mine = buildMergedRecords(tech, latestDashboard.estimates || [], salesRows).map((r) => ({
+    ...r,
+    soldDateResolved: resolveSoldDate(r, jobsByInvoiceNumber),
+  }));
 
   // Two independently-dated views of the same roster (see resolveSoldDate):
   // "ran" by the consultation date, "sold" by the resolved sold date — a
   // job sold this period can be present in one set and absent from the
   // other, same as Andrew Rouscher's given/approved split. "ran" also
-  // requires hasHappened — a consultation scheduled for later this month
-  // hasn't happened yet, so it doesn't count as run (or as an unsold
-  // opportunity) just because its date falls in the period. scheduledInPeriod
-  // is the broader, ungated set used only for the record list below, so a
-  // future appointment still shows there for visibility.
+  // requires a non-null countedDate — either a consultation scheduled later
+  // this month hasn't happened yet (estimateGivenDate returns null for
+  // that, shared.js), or the record is an orphaned sold spreadsheet row with
+  // no matching Housecall Pro estimate at all (buildMergedRecords sets
+  // countedDate: null for those) — so it doesn't count as run just because
+  // its date falls in the period. scheduledInPeriod is the broader,
+  // ungated set used only for the record list below, so a future
+  // appointment still shows there for visibility.
   const scheduledInPeriod = mine.filter((r) => dateInPeriod(r.date, currentPeriod));
-  const ranInPeriod = scheduledInPeriod.filter((r) => hasHappened(r.date));
+  const ranInPeriod = mine.filter((r) => r.countedDate && dateInPeriod(r.countedDate, currentPeriod));
   const soldInPeriod = mine.filter((r) => r.sold && dateInPeriod(r.soldDateResolved, currentPeriod));
 
   const ran = ranInPeriod.length;

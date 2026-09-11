@@ -761,6 +761,12 @@ function isEstimator(tech) {
 // there's no visit to attribute to a period.
 const SCHEDULE_SCOPED_ESTIMATOR_IDS = new Set([
   "pro_ca120cbb55fa40fe9361d492161b101f", // Andrew Rouscher
+  "pro_62aa1ba4432340829b0aba02abd1d307", // Josh Zieger — same created_at-vs-actual-visit gap as Andy: HCP's
+  "pro_27fcce8f21bc4186b44abe4d9a87c03f", // Nick Webb        estimate record is created days before the real visit
+  // (verified against real data for Josh: created_at gave 11 for September so far, scheduled_start gave the
+  // correct 15 — matching both Housecall Pro's and OnCall Air's own counts). hvac-sales.js (the HVAC Sales
+  // scorecard) is what actually consumes this for these two — their regular index.html cards pick up the fix
+  // too as a side effect, same as Andy's did.
 ]);
 
 function estimateGivenDate(estimate, tech) {
