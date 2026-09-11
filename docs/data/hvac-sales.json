@@ -5716,12 +5716,12 @@
                         "ca":  "Josh",
                         "date":  "2026-09-04",
                         "customerName":  "Judy Bakk",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "61508",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -5757,26 +5757,15 @@
                         "sold":  false
                     },
                     {
-                        "ca":  "Nick",
-                        "date":  "2026-09-09",
-                        "customerName":  "Danielle Tucci",
-                        "job":  "",
-                        "systemType":  "",
-                        "clubMember":  "No",
-                        "lead":  "Lowes",
-                        "customerType":  "New",
-                        "sold":  false
-                    },
-                    {
                         "ca":  "Josh",
                         "date":  "2026-09-09",
                         "customerName":  "Tom Haberkorn",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "61506",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -5829,6 +5818,17 @@
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-14",
+                        "customerName":  "Don Hopple",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
                         "sold":  false
