@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  532
+                 "record_count":  535
              },
     "records":  [
                     {
@@ -5716,12 +5716,12 @@
                         "ca":  "Josh",
                         "date":  "2026-09-04",
                         "customerName":  "Judy Bakk",
-                        "job":  "61508",
-                        "systemType":  "Legacy",
+                        "job":  "",
+                        "systemType":  "",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  true
+                        "sold":  false
                     },
                     {
                         "ca":  "Josh",
@@ -5834,6 +5834,28 @@
                         "sold":  false
                     },
                     {
+                        "ca":  "Nick",
+                        "date":  "2026-09-14",
+                        "customerName":  "Garrett Strine",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Lowes",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-14",
+                        "customerName":  "Andrew Krepps",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
                         "ca":  "Josh",
                         "date":  "2026-09-16",
                         "customerName":  "Mark Price",
@@ -5842,6 +5864,17 @@
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-16",
+                        "customerName":  "Donna Taylor",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
                         "sold":  false
                     },
                     {
