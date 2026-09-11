@@ -1,5 +1,29 @@
 [
   {
+    "id": "csr_e7a17333dc2b43c38d87de707fec0429",
+    "estimate_number": "13379",
+    "customer_label": "Domenic P.",
+    "created_at": "2026-09-11T18:39:52Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac",
+      "pro_06aeac3b71a24c60a826c7e11499d8b5"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_2740f7eb1a744155b48a3dcfbecb1a1e",
     "estimate_number": "13378",
     "customer_label": "Andrew K.",
@@ -153,10 +177,10 @@
     "assigned_employee_ids": [
       "pro_83a3e6de7d2d4d3396c7c5dfa42482f0"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-09-11T21:41:47.515Z",
+    "approved_amount": 103788
   },
   {
     "id": "csr_f146997ea0674ad288c4fb96ee7fbf57",
@@ -3191,9 +3215,9 @@
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
     "work_status": "complete rated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-09-11T21:41:47.515Z",
+    "approved_amount": 650000
   },
   {
     "id": "csr_96baf02dca75423dbd34acc26927a272",
@@ -3214,9 +3238,9 @@
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
     "work_status": "complete unrated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-09-11T21:41:47.515Z",
+    "approved_amount": 650000
   },
   {
     "id": "csr_6d6103d3a72a4887b6e23d1a72eb6ef0",
@@ -72488,30 +72512,6 @@
     "business_unit": null,
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
-    ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_e7a17333dc2b43c38d87de707fec0429",
-    "estimate_number": "13379",
-    "customer_label": "Domenic P.",
-    "created_at": "2026-09-11T18:39:52Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_8fc589c75489437bb66ff45ca0aea7ac",
-      "pro_06aeac3b71a24c60a826c7e11499d8b5"
     ],
     "work_status": "needs scheduling",
     "approved": false,
