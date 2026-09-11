@@ -129,13 +129,18 @@ $weekGroups = $thisMonth | Group-Object WeekStart | Sort-Object { [datetime]$_.N
 $weeks = @()
 $weekNum = 0
 foreach ($g in $weekGroups) {
-  $weekNum++
   $ws = [datetime]$g.Name
   $we = $ws.AddDays(6)
+  # The week containing today reads "Current Week" instead of a sequential
+  # number -- it's always the last one chronologically (a sale can't land
+  # in a future week), so numbering only advances for the completed weeks
+  # before it.
+  $isCurrent = $today -ge $ws -and $today -lt $ws.AddDays(7)
+  $label = if ($isCurrent) { "Current Week" } else { $weekNum++; "Week $weekNum" }
   $totals = @{ Josh = 0.0; Nick = 0.0 }
   foreach ($row in $g.Group) { $totals[$row.CA] += [double]$row.Commission }
   $weeks += [ordered]@{
-    label     = "Week $weekNum"
+    label     = $label
     weekStart = $ws.ToString("yyyy-MM-dd")
     weekEnd   = $we.ToString("yyyy-MM-dd")
     totals    = [ordered]@{ Josh = [math]::Round($totals.Josh, 2); Nick = [math]::Round($totals.Nick, 2) }
