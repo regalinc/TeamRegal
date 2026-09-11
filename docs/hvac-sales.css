@@ -237,6 +237,84 @@ body {
 .hero-line b { font-weight: 650; }
 .hero-line .accent-num { color: var(--accent); font-weight: 650; }
 
+/* ---------- goal tracker ---------- */
+/* Mirrors andrew.css's goal card exactly (same markup, same behavior in
+   hvac-sales.js) — accent blue instead of Andrew's gold, matching the
+   accent already established for this page rather than introducing gold's
+   "money" association here too. */
+.goal-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem 1.25rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+.goal-card.hit {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent), 0 8px 28px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.goal-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+}
+.goal-title {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.goal-figures {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+.goal-figures .of { color: var(--text-faint); font-weight: 400; }
+.goal-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--accent-ring-track);
+  overflow: hidden;
+}
+.goal-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.goal-card.unset { border-style: dashed; }
+.goal-empty { font-size: 0.82rem; color: var(--text-faint); margin-top: 0.5rem; }
+
+.pace-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+.pace-badge.hit {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.pace-badge.ahead {
+  color: var(--good);
+  background: color-mix(in srgb, var(--good) 14%, transparent);
+}
+.pace-badge.behind {
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--text-muted) 12%, transparent);
+}
+
 /* ---------- tile grid ---------- */
 .tiles {
   display: grid;

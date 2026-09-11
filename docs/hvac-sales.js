@@ -37,6 +37,33 @@ function resolveToken(raw) {
 
 const TOKEN_ENTRY = resolveToken(urlParams.get("u"));
 
+// Revenue goals, per CA — same two-tier shape as Andrew Rouscher's page
+// (ANDREW_MONTHLY_GOAL/ANDREW_YTD_GOAL in andrew.js): a monthly dict keyed
+// "YYYY-MM" (like the HVAC Installation TV screen's INSTALLATION_MONTHLY_GOALS
+// in tv.js — needs a new entry added by hand each month) covers the
+// lastmonth/MTD period tabs, and a separate flat annual figure covers YTD —
+// not the sum of the monthly entries, a real distinct target the business
+// sets, not derived from the months (Andrew's YTD goal works the same way).
+// Tracked against real revenue — the reconstructed true subtotal per sold
+// proposal (docs/data/commission-report.json's "revenue" section, written
+// by scripts/update-commission-scorecard.ps1 from the same OnCall Air
+// webhook data commission is computed from), not commission dollars, which
+// are a small percentage of this and would never reach these targets.
+const HVAC_SALES_MONTHLY_GOALS = {
+  Josh: {
+    "2026-08": 300000,
+    "2026-09": 300000,
+    "2026-10": 275000,
+    "2026-11": 275000,
+    "2026-12": 275000,
+  },
+  Nick: {},
+};
+const HVAC_SALES_YTD_GOALS = {
+  Josh: 3600000,
+  Nick: null,
+};
+
 const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
 const avatarSlot = document.getElementById("avatar-slot");
@@ -53,6 +80,12 @@ const recordListBody = document.getElementById("record-list-body");
 const commissionMonthEl = document.getElementById("commission-month");
 const commissionWeeksEl = document.getElementById("commission-weeks");
 const commissionMtdValueEl = document.getElementById("commission-mtd-value");
+const goalCard = document.getElementById("goal-card");
+const goalTitle = document.getElementById("goal-title");
+const goalFigures = document.getElementById("goal-figures");
+const goalFill = document.getElementById("goal-fill");
+const goalEmpty = document.getElementById("goal-empty");
+const paceBadge = document.getElementById("pace-badge");
 
 const CIRCUMFERENCE = 2 * Math.PI * 60;
 
@@ -251,6 +284,94 @@ function renderSystemTypeBreakdown(rows) {
     .join("");
 }
 
+function monthKey(monthsAgo) {
+  const d = new Date();
+  d.setDate(1);
+  d.setMonth(d.getMonth() - monthsAgo);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+}
+
+// How far ahead of (or behind) a flat, evenly-paced march toward the goal
+// this period's revenue actually is right now — mirrors andrew.js's
+// identical helper exactly (see its own comment for the full reasoning).
+// Only meaningful for an open period with a real goal: "lastmonth" is
+// already over, and a null/missing goal has nothing to pace against.
+function paceInfo(period, revenue, goal) {
+  if (period === "lastmonth" || !goal) return null;
+  const now = new Date();
+  const [start, end] =
+    period === "ytd" ? [new Date(now.getFullYear(), 0, 1), new Date(now.getFullYear() + 1, 0, 1)] : periodRange("month");
+  const fracElapsed = Math.min(1, Math.max(0, (now - start) / (end - start)));
+  return { diff: revenue - goal * fracElapsed };
+}
+
+function goalMeta(CA, period) {
+  if (period === "lastmonth") {
+    return { goal: (HVAC_SALES_MONTHLY_GOALS[CA] || {})[monthKey(1)] ?? null, goalLabel: monthLabel(1) };
+  }
+  if (period === "ytd") {
+    return { goal: HVAC_SALES_YTD_GOALS[CA] ?? null, goalLabel: String(new Date().getFullYear()) };
+  }
+  return { goal: (HVAC_SALES_MONTHLY_GOALS[CA] || {})[monthKey(0)] ?? null, goalLabel: monthLabel(0) };
+}
+
+// Revenue here is the reconstructed true subtotal (commission-report.json's
+// "revenue" section — see HVAC_SALES_MONTHLY_GOALS's own comment above for
+// why that file and not a separate one), not the Sold tile's opportunity
+// count above it — two different things that happen to share this page.
+function goalRevenue(CA, period) {
+  if (!latestCommission || !latestCommission.revenue) return 0;
+  const bucket =
+    period === "lastmonth" ? latestCommission.revenue.lastMonth : period === "ytd" ? latestCommission.revenue.ytd : latestCommission.revenue.mtd;
+  return (bucket && bucket[CA]) || 0;
+}
+
+// Same structure/behavior as andrew.js's goal-card rendering (pace badge,
+// hit state, empty state for a month with no target set) — see that
+// file's comments for the full reasoning behind each piece. formatMoney
+// (abbreviated, shared.js), not formatDollarsPrecise — these are large
+// round targets ($300,000), not exact-to-the-cent pay like the commission
+// section below.
+function renderGoal(CA, period) {
+  const { goal, goalLabel } = goalMeta(CA, period);
+  const revenue = goalRevenue(CA, period);
+
+  goalTitle.textContent = `Revenue goal · ${goalLabel}`;
+  if (goal) {
+    goalCard.classList.remove("unset");
+    const pct = Math.min(100, Math.round((revenue / goal) * 100));
+    goalFigures.innerHTML = `${formatMoney(revenue)} <span class="of">of ${formatMoney(goal)}</span> · ${pct}%`;
+    goalFill.style.width = `${pct}%`;
+    goalEmpty.hidden = true;
+
+    const goalHit = revenue >= goal;
+    goalCard.classList.toggle("hit", goalHit);
+    if (goalHit) {
+      paceBadge.hidden = false;
+      paceBadge.className = "pace-badge hit";
+      paceBadge.textContent = "🎉 Goal hit — nice work!";
+    } else {
+      const pace = paceInfo(period, revenue, goal);
+      if (pace) {
+        paceBadge.hidden = false;
+        paceBadge.className = `pace-badge ${pace.diff >= 0 ? "ahead" : "behind"}`;
+        paceBadge.textContent =
+          pace.diff >= 0 ? `↑ ${formatMoney(pace.diff)} ahead of pace` : `${formatMoney(Math.abs(pace.diff))} behind an even pace`;
+      } else {
+        paceBadge.hidden = true;
+      }
+    }
+  } else {
+    goalCard.classList.remove("hit");
+    goalCard.classList.add("unset");
+    goalFigures.textContent = "";
+    goalFill.style.width = "0%";
+    goalEmpty.hidden = false;
+    goalEmpty.textContent = `No goal set for ${goalLabel} yet.`;
+    paceBadge.hidden = true;
+  }
+}
+
 // Commission is separate from the ran/sold/period stuff above it — it's
 // always "this calendar month," not scoped by the Last month/MTD/YTD
 // period buttons (a commission week is a fixed Wed-Tue pay cycle, not
@@ -376,6 +497,7 @@ function render() {
   const soldFromEarlierCount = soldInPeriod.filter((r) => !dateInPeriod(r.date, currentPeriod)).length;
   tileSoldNote.textContent = soldFromEarlierCount > 0 ? `incl. ${soldFromEarlierCount} from an earlier period` : "";
 
+  renderGoal(CA, currentPeriod);
   renderCommission(CA);
 
   renderRateBreakdown("breakdown-club-member", closingRateBreakdown(ranInPeriod, soldInPeriod, "clubMember"));

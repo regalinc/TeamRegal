@@ -109,6 +109,7 @@ foreach ($p in $allPayloads) {
   $computed += [pscustomobject]@{
     CA         = $ca
     WeekStart  = $weekStart
+    Subtotal   = $subtotal
     Commission = $subtotal * $rate
   }
 }
@@ -152,12 +153,37 @@ $mtd = [ordered]@{
   Nick = [math]::Round((($thisMonth | Where-Object { $_.CA -eq "Nick" } | Measure-Object -Property Commission -Sum).Sum), 2)
 }
 
+# --- Revenue (true subtotal, not commission) for goal-tracking on the
+# scorecard's own Last month/MTD/YTD tabs -- reuses the exact same $computed
+# rows (and the same WeekStart-based "a week belongs to whichever month its
+# Wednesday falls in" convention the commission weeks/MTD above already use,
+# so a revenue figure and its corresponding commission figure always
+# describe the identical set of sales) rather than a second, differently-
+# defined month boundary. -----------------------------------------------
+function SumSubtotal($rows, $ca) {
+  [math]::Round((($rows | Where-Object { $_.CA -eq $ca } | Measure-Object -Property Subtotal -Sum).Sum), 2)
+}
+
+$lastMonthStart = $monthStart.AddMonths(-1)
+$lastMonthSales = $computed | Where-Object { $_.WeekStart -ge $lastMonthStart -and $_.WeekStart -lt $monthStart }
+$yearStart = Get-Date -Year $today.Year -Month 1 -Day 1
+$ytdSales = $computed | Where-Object { $_.WeekStart -ge $yearStart -and $_.WeekStart -le $today }
+
+$revenue = [ordered]@{
+  lastMonth = [ordered]@{ Josh = (SumSubtotal $lastMonthSales "Josh"); Nick = (SumSubtotal $lastMonthSales "Nick") }
+  mtd       = [ordered]@{ Josh = (SumSubtotal $thisMonth "Josh");      Nick = (SumSubtotal $thisMonth "Nick") }
+  ytd       = [ordered]@{ Josh = (SumSubtotal $ytdSales "Josh");       Nick = (SumSubtotal $ytdSales "Nick") }
+}
+
 $result = [ordered]@{
-  meta  = [ordered]@{ generated_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"); month = $monthStart.ToString("yyyy-MM") }
-  weeks = $weeks
-  mtd   = $mtd
+  meta    = [ordered]@{ generated_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"); month = $monthStart.ToString("yyyy-MM") }
+  weeks   = $weeks
+  mtd     = $mtd
+  revenue = $revenue
 }
 
 $result | ConvertTo-Json -Depth 6 | Out-File -FilePath $OutJson -Encoding utf8
 Write-Host "`nWrote $($weeks.Count) week(s) for $($monthStart.ToString('MMMM yyyy')) to $OutJson"
-Write-Host ("MTD -- Josh: `${0:N2}   Nick: `${1:N2}" -f $mtd.Josh, $mtd.Nick)
+Write-Host ("Commission MTD -- Josh: `${0:N2}   Nick: `${1:N2}" -f $mtd.Josh, $mtd.Nick)
+Write-Host ("Revenue MTD -- Josh: `${0:N2}   Nick: `${1:N2}" -f $revenue.mtd.Josh, $revenue.mtd.Nick)
+Write-Host ("Revenue YTD -- Josh: `${0:N2}   Nick: `${1:N2}" -f $revenue.ytd.Josh, $revenue.ytd.Nick)
