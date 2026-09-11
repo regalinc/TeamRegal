@@ -1,2 +1,11 @@
 node_modules/
 .env
+
+# Report outputs from scripts/generate-membership-savings-report.ps1 and
+# scripts/generate-commission-report.ps1 -- real customer names,
+# addresses, and dollar figures. These are meant to stay local (or get
+# moved to a private location by hand), never committed to this public
+# repo. docs/data/commission-report.json is the one exception: that's the
+# deliberately aggregate-only, no-PII file the scorecard page reads.
+/membership-savings-*.csv
+/commission-report-*.csv

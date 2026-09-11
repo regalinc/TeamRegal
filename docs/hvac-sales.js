@@ -50,6 +50,9 @@ const tileSoldNote = document.getElementById("tile-sold-note");
 const recordListCard = document.getElementById("record-list-card");
 const recordListSummary = document.getElementById("record-list-summary");
 const recordListBody = document.getElementById("record-list-body");
+const commissionMonthEl = document.getElementById("commission-month");
+const commissionWeeksEl = document.getElementById("commission-weeks");
+const commissionMtdValueEl = document.getElementById("commission-mtd-value");
 
 const CIRCUMFERENCE = 2 * Math.PI * 60;
 
@@ -69,6 +72,30 @@ function monthLabel(monthsAgo) {
   d.setDate(1);
   d.setMonth(d.getMonth() - monthsAgo);
   return d.toLocaleDateString([], { month: "long" });
+}
+
+// Commission dollars need to read exactly right (this is pay, not a KPI
+// tile) — shared.js's formatMoney rounds to whole dollars and abbreviates
+// to K/M above $10k, which isn't what you want for an exact figure.
+function formatDollarsPrecise(amount) {
+  return `$${(amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function commissionMonthLabel(monthStr) {
+  if (!monthStr) return "";
+  const [y, m] = monthStr.split("-").map(Number);
+  return new Date(y, m - 1, 1).toLocaleDateString([], { month: "long", year: "numeric" });
+}
+
+// weekStart/weekEnd come through as "yyyy-MM-dd" strings (from
+// commission-report.json, written by update-commission-scorecard.ps1) —
+// appending T00:00:00 avoids the UTC-midnight-parses-as-previous-local-day
+// surprise plain "yyyy-MM-dd" parsing has in most timezones.
+function commissionWeekRange(startStr, endStr) {
+  const start = new Date(`${startStr}T00:00:00`);
+  const end = new Date(`${endStr}T00:00:00`);
+  const fmt = (d) => d.toLocaleDateString([], { month: "short", day: "numeric" });
+  return `${fmt(start)} – ${fmt(end)}`;
 }
 
 function periodMeta(period) {
@@ -205,6 +232,41 @@ function renderSystemTypeBreakdown(rows) {
     .join("");
 }
 
+// Commission is separate from the ran/sold/period stuff above it — it's
+// always "this calendar month," not scoped by the Last month/MTD/YTD
+// period buttons (a commission week is a fixed Wed-Tue pay cycle, not
+// something that makes sense to re-slice by an arbitrary period toggle).
+// latestCommission can be null (fetch failed, or the file doesn't exist
+// yet on a fresh deploy) — render an empty state rather than throwing.
+function renderCommission(CA) {
+  if (!latestCommission) {
+    commissionMonthEl.textContent = "";
+    commissionWeeksEl.innerHTML = '<div class="commission-empty">Commission data not available right now.</div>';
+    commissionMtdValueEl.textContent = "—";
+    return;
+  }
+
+  commissionMonthEl.textContent = commissionMonthLabel(latestCommission.meta && latestCommission.meta.month);
+
+  const weeks = latestCommission.weeks || [];
+  commissionWeeksEl.innerHTML = weeks.length
+    ? weeks
+        .map((w) => {
+          const value = (w.totals && w.totals[CA]) || 0;
+          return `
+            <div class="commission-week-row">
+              <span class="commission-week-label">${escapeHtml(w.label)}<span class="commission-week-range"> · ${commissionWeekRange(w.weekStart, w.weekEnd)}</span></span>
+              <span class="commission-week-value">${formatDollarsPrecise(value)}</span>
+            </div>
+          `;
+        })
+        .join("")
+    : '<div class="commission-empty">No commission recorded yet this month.</div>';
+
+  const mtd = (latestCommission.mtd && latestCommission.mtd[CA]) || 0;
+  commissionMtdValueEl.textContent = formatDollarsPrecise(mtd);
+}
+
 function renderRecordRow(r) {
   // Both dates explicitly labeled once they can actually differ (a sold
   // job whose Job # matched a Housecall Pro job created on a later date
@@ -228,6 +290,7 @@ function renderRecordRow(r) {
 
 let latestDashboard = null;
 let latestSales = null;
+let latestCommission = null;
 let currentPeriod = "month";
 
 function render() {
@@ -285,6 +348,8 @@ function render() {
   const soldFromEarlierCount = soldInPeriod.filter((r) => !dateInPeriod(r.date, currentPeriod)).length;
   tileSoldNote.textContent = soldFromEarlierCount > 0 ? `incl. ${soldFromEarlierCount} from an earlier period` : "";
 
+  renderCommission(CA);
+
   renderRateBreakdown("breakdown-club-member", closingRateBreakdown(ranInPeriod, soldInPeriod, "clubMember"));
   renderRateBreakdown("breakdown-lead", closingRateBreakdown(ranInPeriod, soldInPeriod, "lead"));
   renderRateBreakdown("breakdown-customer-type", closingRateBreakdown(ranInPeriod, soldInPeriod, "customerType"));
@@ -312,6 +377,19 @@ async function loadData() {
 
     latestDashboard = await dashRes.json();
     latestSales = await salesRes.json();
+
+    // Own try/catch, deliberately not part of the Promise.all above or the
+    // outer catch below — a missing/failed commission-report.json (e.g. a
+    // fresh deploy before the first scheduled refresh has run) shouldn't
+    // take down the rest of the page. renderCommission already handles
+    // latestCommission staying null.
+    try {
+      const commissionRes = await fetch(`data/commission-report.json?_=${Date.now()}`, { cache: "no-store" });
+      latestCommission = commissionRes.ok ? await commissionRes.json() : null;
+    } catch (commissionErr) {
+      latestCommission = null;
+      console.error(commissionErr);
+    }
 
     render();
     // The dashboard.json meta, not hvac-sales.json's — that file has no
