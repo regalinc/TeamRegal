@@ -463,6 +463,11 @@ body {
 }
 .record-status.won { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); }
 .record-status.open { color: var(--text-muted); background: color-mix(in srgb, var(--text-muted) 12%, transparent); }
+/* A future-dated, not-yet-happened consultation — distinct from "open"
+   (already happened, didn't close) so it doesn't read as a loss. Uses the
+   accent color rather than muted gray specifically so it doesn't blend in
+   with "Not sold," which would defeat the point of distinguishing them. */
+.record-status.scheduled { color: var(--accent); background: var(--accent-soft); }
 
 .no-records { padding: 1rem 1.1rem; color: var(--text-faint); font-size: 0.85rem; border-top: 1px solid var(--border); }
 

@@ -98,6 +98,25 @@ function commissionWeekRange(startStr, endStr) {
   return `${fmt(start)} – ${fmt(end)}`;
 }
 
+// A row scheduled for a future date hasn't actually happened yet — it
+// shouldn't count as "ran" (or drag down a closing rate as an unsold
+// opportunity) just because its Date falls within the selected period,
+// the same way an HVAC Installation job that's scheduled but not yet
+// started doesn't count toward that team's Jobs/Revenue elsewhere on this
+// site (NOT_YET_STARTED_STATUSES, shared.js) — a full calendar month's
+// worth of already-booked future appointments would otherwise inflate
+// "opportunities ran" and tank the closing rate for a month that's still
+// in progress. periodRange("today")'s own end boundary (start of
+// tomorrow, in local time) is reused here rather than a fresh comparison,
+// so "today" means exactly the same thing here as it does everywhere else
+// period filtering happens on this site.
+function hasHappened(dateStr) {
+  if (!dateStr) return false;
+  const [, todayEnd] = periodRange("today");
+  const d = new Date(dateStr);
+  return !Number.isNaN(d.getTime()) && d < todayEnd;
+}
+
 function periodMeta(period) {
   if (period === "lastmonth") {
     return { eyebrow: `${monthLabel(1)} · full month`, ranPhrase: `in ${monthLabel(1)}` };
@@ -272,18 +291,21 @@ function renderRecordRow(r) {
   // job whose Job # matched a Housecall Pro job created on a later date
   // than the consultation) — a bare date would be ambiguous about which
   // one it is, same reasoning as andrew.js's estimate rows.
-  const dateParts = [`Ran ${formatDate(r.date)}`];
+  const upcoming = !r.sold && !hasHappened(r.date);
+  const dateParts = [`${upcoming ? "Scheduled" : "Ran"} ${formatDate(r.date)}`];
   if (r.sold && r.soldDateResolved && r.soldDateResolved !== r.date) {
     dateParts.push(`Sold ${formatDate(r.soldDateResolved)}`);
   }
   const meta = [dateParts.join(" · "), r.lead, r.systemType].filter(Boolean).join(" · ");
+  const statusClass = r.sold ? "won" : upcoming ? "scheduled" : "open";
+  const statusLabel = r.sold ? "Sold" : upcoming ? "Scheduled" : "Not sold";
   return `
     <div class="record-row">
       <div class="record-left">
         <span class="record-customer">${escapeHtml(r.customerName || "Unknown")}</span>
         <span class="record-meta">${escapeHtml(meta)}</span>
       </div>
-      <span class="record-status ${r.sold ? "won" : "open"}">${r.sold ? "Sold" : "Not sold"}</span>
+      <span class="record-status ${statusClass}">${statusLabel}</span>
     </div>
   `;
 }
@@ -321,8 +343,14 @@ function render() {
   // Two independently-dated views of the same roster (see resolveSoldDate):
   // "ran" by the consultation date, "sold" by the resolved sold date — a
   // job sold this period can be present in one set and absent from the
-  // other, same as Andrew Rouscher's given/approved split.
-  const ranInPeriod = mine.filter((r) => dateInPeriod(r.date, currentPeriod));
+  // other, same as Andrew Rouscher's given/approved split. "ran" also
+  // requires hasHappened — a consultation scheduled for later this month
+  // hasn't happened yet, so it doesn't count as run (or as an unsold
+  // opportunity) just because its date falls in the period. scheduledInPeriod
+  // is the broader, ungated set used only for the record list below, so a
+  // future appointment still shows there for visibility.
+  const scheduledInPeriod = mine.filter((r) => dateInPeriod(r.date, currentPeriod));
+  const ranInPeriod = scheduledInPeriod.filter((r) => hasHappened(r.date));
   const soldInPeriod = mine.filter((r) => r.sold && dateInPeriod(r.soldDateResolved, currentPeriod));
 
   const ran = ranInPeriod.length;
@@ -355,12 +383,15 @@ function render() {
   renderRateBreakdown("breakdown-customer-type", closingRateBreakdown(ranInPeriod, soldInPeriod, "customerType"));
   renderSystemTypeBreakdown(systemTypeBreakdown(soldInPeriod));
 
-  // Union, not just "ran this period" — a job sold this period but run
-  // earlier belongs in the list too, or the record list would silently
-  // disagree with the Sold tile/note above it. Records are unique object
-  // references (one per source row, freshly mapped above), so a plain Set
-  // dedupes a row present in both sets without needing a synthetic id.
-  const listRecords = [...new Set([...ranInPeriod, ...soldInPeriod])];
+  // Union of scheduledInPeriod (not ranInPeriod) and soldInPeriod — a job
+  // sold this period but run earlier belongs in the list too, and so does
+  // a consultation booked for later this period that hasn't happened yet
+  // (shown, per an explicit request, even though it's excluded from the
+  // Ran tile/metrics above until its date actually arrives). Records are
+  // unique object references (one per source row, freshly mapped above),
+  // so a plain Set dedupes a row present in both sets without needing a
+  // synthetic id.
+  const listRecords = [...new Set([...scheduledInPeriod, ...soldInPeriod])];
   const sorted = listRecords.sort((a, b) => (b.soldDateResolved || b.date || "").localeCompare(a.soldDateResolved || a.date || ""));
   recordListSummary.textContent = `${sorted.length} opportunit${sorted.length === 1 ? "y" : "ies"} in view`;
   recordListBody.innerHTML = sorted.length ? sorted.map(renderRecordRow).join("") : '<div class="no-records">No opportunities match this period.</div>';
