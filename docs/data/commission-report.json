@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-11T23:05:03.258Z",
+                 "generated_at":  "2026-09-12T00:29:01.542Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -17,5 +17,19 @@
     "mtd":  {
                 "Josh":  1794.33,
                 "Nick":  0
-            }
+            },
+    "revenue":  {
+                    "lastMonth":  {
+                                      "Josh":  0,
+                                      "Nick":  0
+                                  },
+                    "mtd":  {
+                                "Josh":  35712.79,
+                                "Nick":  0
+                            },
+                    "ytd":  {
+                                "Josh":  35712.79,
+                                "Nick":  0
+                            }
+                }
 }

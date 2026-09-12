@@ -109,7 +109,7 @@ foreach ($p in $allPayloads) {
   $computed += [pscustomobject]@{
     CA         = $ca
     WeekStart  = $weekStart
-    Subtotal   = $subtotal
+    Revenue    = $totalInvestment
     Commission = $subtotal * $rate
   }
 }
@@ -153,15 +153,20 @@ $mtd = [ordered]@{
   Nick = [math]::Round((($thisMonth | Where-Object { $_.CA -eq "Nick" } | Measure-Object -Property Commission -Sum).Sum), 2)
 }
 
-# --- Revenue (true subtotal, not commission) for goal-tracking on the
-# scorecard's own Last month/MTD/YTD tabs -- reuses the exact same $computed
-# rows (and the same WeekStart-based "a week belongs to whichever month its
-# Wednesday falls in" convention the commission weeks/MTD above already use,
-# so a revenue figure and its corresponding commission figure always
-# describe the identical set of sales) rather than a second, differently-
-# defined month boundary. -----------------------------------------------
-function SumSubtotal($rows, $ca) {
-  [math]::Round((($rows | Where-Object { $_.CA -eq $ca } | Measure-Object -Property Subtotal -Sum).Sum), 2)
+# --- Revenue (full job price after discounts, NOT the commission-eligible
+# subtotal) for goal-tracking on the scorecard's own Last month/MTD/YTD tabs.
+# This is proposal.total_investment -- OnCall Air's own sale_price minus
+# discounts_total -- deliberately WITHOUT subtracting commission_markup/
+# financing_markup/rebate_markup the way the commission math above does:
+# those markups are real dollars the customer is paying, just not dollars
+# a CA earns commission on, so they belong in revenue but not in Commission.
+# Reuses the exact same $computed rows (and the same WeekStart-based "a week
+# belongs to whichever month its Wednesday falls in" convention the
+# commission weeks/MTD above already use, so a revenue figure and its
+# corresponding commission figure always describe the identical set of
+# sales) rather than a second, differently-defined month boundary. ------
+function SumRevenue($rows, $ca) {
+  [math]::Round((($rows | Where-Object { $_.CA -eq $ca } | Measure-Object -Property Revenue -Sum).Sum), 2)
 }
 
 $lastMonthStart = $monthStart.AddMonths(-1)
@@ -170,9 +175,9 @@ $yearStart = Get-Date -Year $today.Year -Month 1 -Day 1
 $ytdSales = $computed | Where-Object { $_.WeekStart -ge $yearStart -and $_.WeekStart -le $today }
 
 $revenue = [ordered]@{
-  lastMonth = [ordered]@{ Josh = (SumSubtotal $lastMonthSales "Josh"); Nick = (SumSubtotal $lastMonthSales "Nick") }
-  mtd       = [ordered]@{ Josh = (SumSubtotal $thisMonth "Josh");      Nick = (SumSubtotal $thisMonth "Nick") }
-  ytd       = [ordered]@{ Josh = (SumSubtotal $ytdSales "Josh");       Nick = (SumSubtotal $ytdSales "Nick") }
+  lastMonth = [ordered]@{ Josh = (SumRevenue $lastMonthSales "Josh"); Nick = (SumRevenue $lastMonthSales "Nick") }
+  mtd       = [ordered]@{ Josh = (SumRevenue $thisMonth "Josh");      Nick = (SumRevenue $thisMonth "Nick") }
+  ytd       = [ordered]@{ Josh = (SumRevenue $ytdSales "Josh");       Nick = (SumRevenue $ytdSales "Nick") }
 }
 
 $result = [ordered]@{
