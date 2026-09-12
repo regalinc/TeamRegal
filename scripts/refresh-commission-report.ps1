@@ -39,7 +39,21 @@ function Log {
 try {
   Log "--- refresh start ---"
 
-  # 1. Pull the latest sold-proposal payloads.
+  # 1. Pull TeamRegal itself first -- this script invokes
+  #    update-commission-scorecard.ps1 from the local checkout on disk, so a
+  #    stale clone silently keeps running old scoring/report logic forever
+  #    even after a fix is pushed to main. (Discovered 2026-09-11: a revenue-
+  #    tracking change sat on origin/main for 40+ minutes while this machine's
+  #    stale checkout kept regenerating commission-report.json without it.)
+  Set-Location $RepoRoot
+  & git pull --ff-only origin main
+  if ($LASTEXITCODE -ne 0) {
+    Log "git pull in TeamRegal failed ($LASTEXITCODE), aborting this run"
+    Log "--- refresh end (error) ---"
+    exit 1
+  }
+
+  # 2. Pull the latest sold-proposal payloads.
   Set-Location $OncallairRepo
   & git pull --ff-only origin main
   if ($LASTEXITCODE -ne 0) {
@@ -48,7 +62,7 @@ try {
     exit 1
   }
 
-  # 2. Recompute this month's commission totals.
+  # 3. Recompute this month's commission totals.
   Set-Location $RepoRoot
   & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "update-commission-scorecard.ps1")
   if ($LASTEXITCODE -ne 0) {
@@ -57,7 +71,7 @@ try {
     exit 1
   }
 
-  # 3. Did the committed file actually change?
+  # 4. Did the committed file actually change?
   & git diff --quiet -- $DataFile
   if ($LASTEXITCODE -eq 0) {
     Log "no change in $DataFile, nothing to commit"
@@ -67,13 +81,13 @@ try {
 
   Log "$DataFile changed, committing"
 
-  # 4. Commit just this one file (path-scoped, so any unrelated dirty file
+  # 5. Commit just this one file (path-scoped, so any unrelated dirty file
   #    in the tree is left alone).
   & git add -- $DataFile
   & git commit -q -m "Refresh commission report" -- $DataFile
   if ($LASTEXITCODE -ne 0) { throw "git commit failed ($LASTEXITCODE)" }
 
-  # 5. Rebase onto whatever the hourly HCP sync bot (or the HVAC Sales
+  # 6. Rebase onto whatever the hourly HCP sync bot (or the HVAC Sales
   #    refresh) pushed in the meantime, then push. --autostash so an
   #    unrelated dirty file doesn't block the rebase. One retry if the
   #    push races another commit.
