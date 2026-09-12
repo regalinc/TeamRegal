@@ -78,6 +78,12 @@ foreach ($p in $allPayloads) {
   $ca = if ($firstName -eq "Josh") { "Josh" } elseif ($firstName -eq "Nick") { "Nick" } else { $null }
   if (-not $ca) { continue }  # not one of the two this scorecard tracks
 
+  # Revenue (total_investment) doesn't depend on System Type at all -- only
+  # Commission does, since the rate table is keyed by it. So a sale with an
+  # unresolved System Type still counts toward Revenue below; it's excluded
+  # from Commission only, same as before.
+  $totalInvestment = [decimal]$p.proposal.total_investment
+
   $custName = $p.customer.full_name
   # @(...) forces a real array even when Where-Object matches exactly one
   # row -- otherwise PowerShell hands back a bare object whose .Count is
@@ -90,27 +96,28 @@ foreach ($p in $allPayloads) {
   $systemType = if ($candidates.Count -eq 1) { $candidates[0].systemType } else { $null }
   $ok = $candidates.Count -eq 1 -and $systemType -and $RATE_GROUPS.ContainsKey($systemType)
 
-  if (-not $ok) {
+  $commission = 0
+  if ($ok) {
+    $commissionMarkup = if ($p.proposal.commission_markup) { [decimal]$p.proposal.commission_markup } else { 0 }
+    $financingMarkup = if ($p.proposal.financing_markup) { [decimal]$p.proposal.financing_markup } else { 0 }
+    $rebateMarkup = if ($p.proposal.rebate_markup) { [decimal]$p.proposal.rebate_markup } else { 0 }
+    $subtotal = $totalInvestment - $commissionMarkup - $financingMarkup - $rebateMarkup
+    $rate = $RATE_GROUPS[$systemType][$ca]
+    $commission = $subtotal * $rate
+  } else {
     $reason = if ($candidates.Count -eq 0) { "no hvac-sales.json match" }
               elseif ($candidates.Count -gt 1) { "ambiguous ($($candidates.Count) matches)" }
               elseif (-not $systemType) { "blank System Type" }
               else { "unrecognized System Type '$systemType'" }
     $unresolved += "$custName ($ca, week of $($weekStart.ToString('yyyy-MM-dd'))): $reason"
-    continue
   }
 
-  $totalInvestment = [decimal]$p.proposal.total_investment
-  $commissionMarkup = if ($p.proposal.commission_markup) { [decimal]$p.proposal.commission_markup } else { 0 }
-  $financingMarkup = if ($p.proposal.financing_markup) { [decimal]$p.proposal.financing_markup } else { 0 }
-  $rebateMarkup = if ($p.proposal.rebate_markup) { [decimal]$p.proposal.rebate_markup } else { 0 }
-  $subtotal = $totalInvestment - $commissionMarkup - $financingMarkup - $rebateMarkup
-
-  $rate = $RATE_GROUPS[$systemType][$ca]
   $computed += [pscustomobject]@{
     CA         = $ca
     WeekStart  = $weekStart
+    Date       = $acceptedAt.Date
     Revenue    = $totalInvestment
-    Commission = $subtotal * $rate
+    Commission = $commission
   }
 }
 
@@ -121,7 +128,12 @@ if ($unresolved.Count -gt 0) {
 
 # --- Bucket into this calendar month's weeks --------------------------------
 $today = (Get-Date).Date
-$monthStart = Get-Date -Year $today.Year -Month $today.Month -Day 1
+# .Date at the end matters: Get-Date -Year/-Month/-Day without -Hour/-Minute/
+# -Second keeps the CURRENT time-of-day, so without it $monthStart lands a
+# few hours into 9/1 instead of at midnight -- any sale dated exactly on the
+# 1st then falls just before $monthStart and silently gets bucketed into the
+# prior month instead of this one.
+$monthStart = (Get-Date -Year $today.Year -Month $today.Month -Day 1).Date
 $monthEndExclusive = $monthStart.AddMonths(1)
 
 $thisMonth = $computed | Where-Object { $_.WeekStart -ge $monthStart -and $_.WeekStart -lt $monthEndExclusive }
@@ -169,15 +181,47 @@ function SumRevenue($rows, $ca) {
   [math]::Round((($rows | Where-Object { $_.CA -eq $ca } | Measure-Object -Property Revenue -Sum).Sum), 2)
 }
 
+# One-time manual backfill for sales accepted before the OnCall Air webhook
+# went live (2026-09-11) -- the private sold-proposals repo has no history
+# before that date. Pulled by Michael from OnCall Air's own "Accepted"
+# report on 2026-09-11, revenue (total_investment) only -- System Type
+# wasn't visible in that report, so these are excluded from Commission the
+# same way an unresolved webhook sale is above (use
+# generate-commission-report.ps1 for the exact itemized payroll figures on
+# these). Bucketed by actual accepted date below, so each entry naturally
+# stops counting once its date ages out of "this month" -- no manual
+# cleanup needed once October starts.
+$MANUAL_REVENUE_BACKFILL = @(
+  @{ CA = "Josh"; Date = "2026-09-09"; Revenue = 15863.00 }  # Ron Lease
+  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00 }   # Steve O'Brien
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00 }  # Ron Goodling
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00 }  # Rachel Johnson
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00 }  # Sirina Cohr
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05 }   # Robert White
+  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 16707.00 }  # Kim Strobeck
+  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 12554.00 }  # Patricia Bingaman
+  @{ CA = "Nick"; Date = "2026-09-07"; Revenue = 18308.00 }  # Margaret Fedor
+)
+$manualRevenueRows = $MANUAL_REVENUE_BACKFILL | ForEach-Object {
+  [pscustomobject]@{ CA = $_.CA; Date = [datetime]$_.Date; Revenue = [decimal]$_.Revenue }
+}
+$allRevenueRows = @($computed) + @($manualRevenueRows)
+
+# Revenue is bucketed by the actual accepted calendar date, NOT WeekStart --
+# unlike commission, a revenue goal is about when a deal closed, not which
+# Wed-Tue pay period it lands in. (A sale accepted Tue 9/1 belongs to
+# August's pay week for commission purposes, but it's still September
+# revenue.)
 $lastMonthStart = $monthStart.AddMonths(-1)
-$lastMonthSales = $computed | Where-Object { $_.WeekStart -ge $lastMonthStart -and $_.WeekStart -lt $monthStart }
-$yearStart = Get-Date -Year $today.Year -Month 1 -Day 1
-$ytdSales = $computed | Where-Object { $_.WeekStart -ge $yearStart -and $_.WeekStart -le $today }
+$thisMonthRevenue = $allRevenueRows | Where-Object { $_.Date -ge $monthStart -and $_.Date -lt $monthEndExclusive }
+$lastMonthSales = $allRevenueRows | Where-Object { $_.Date -ge $lastMonthStart -and $_.Date -lt $monthStart }
+$yearStart = (Get-Date -Year $today.Year -Month 1 -Day 1).Date
+$ytdSales = $allRevenueRows | Where-Object { $_.Date -ge $yearStart -and $_.Date -le $today }
 
 $revenue = [ordered]@{
-  lastMonth = [ordered]@{ Josh = (SumRevenue $lastMonthSales "Josh"); Nick = (SumRevenue $lastMonthSales "Nick") }
-  mtd       = [ordered]@{ Josh = (SumRevenue $thisMonth "Josh");      Nick = (SumRevenue $thisMonth "Nick") }
-  ytd       = [ordered]@{ Josh = (SumRevenue $ytdSales "Josh");       Nick = (SumRevenue $ytdSales "Nick") }
+  lastMonth = [ordered]@{ Josh = (SumRevenue $lastMonthSales "Josh");   Nick = (SumRevenue $lastMonthSales "Nick") }
+  mtd       = [ordered]@{ Josh = (SumRevenue $thisMonthRevenue "Josh"); Nick = (SumRevenue $thisMonthRevenue "Nick") }
+  ytd       = [ordered]@{ Josh = (SumRevenue $ytdSales "Josh");         Nick = (SumRevenue $ytdSales "Nick") }
 }
 
 $result = [ordered]@{
