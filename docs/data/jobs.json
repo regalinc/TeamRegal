@@ -242661,7 +242661,7 @@
   {
     "id": "job_e2599aeb350e44c98826b9a4eee52a35",
     "description": "30 - Initial Service Fee After Hours",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Robert M.",
     "city": "York",
     "state": "PA",
@@ -242686,7 +242686,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-07-11T16:23:01Z",
-    "updated_at": "2026-07-14T13:30:22Z",
+    "updated_at": "2026-09-12T16:25:04Z",
     "invoice_number": "59119",
     "created_at": "2026-07-11T12:41:52Z"
   },
@@ -332068,7 +332068,7 @@
   {
     "id": "job_d055fbc9ab754fff86329f8b43ed160a",
     "description": "70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Jessica K.",
     "city": "York",
     "state": "PA",
@@ -332096,7 +332096,7 @@
     "total_amount": 19525,
     "outstanding_balance": 0,
     "completed_at": "2026-09-11T17:38:03Z",
-    "updated_at": "2026-09-11T19:24:25Z",
+    "updated_at": "2026-09-12T18:41:26Z",
     "invoice_number": "61528-1",
     "created_at": "2026-09-11T16:12:25Z"
   },
@@ -332461,7 +332461,7 @@
   {
     "id": "job_3bde21fe1522486b81478ef77f2f5abe",
     "description": "",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Robert M.",
     "city": "York",
     "state": "PA",
@@ -332485,15 +332485,15 @@
     "lead_source": null,
     "total_amount": 0,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-09-12T15:42:59Z",
+    "completed_at": "2026-09-12T16:25:04Z",
+    "updated_at": "2026-09-12T16:25:04Z",
     "invoice_number": "61552",
     "created_at": "2026-09-12T12:25:38Z"
   },
   {
     "id": "job_aa15ad6ca6e74bde9e594f0669db6385",
     "description": "70 - Initial Service Fee",
-    "work_status": "scheduled",
+    "work_status": "complete unrated",
     "customer_label": "Jessica K.",
     "city": "York",
     "state": "PA",
@@ -332515,10 +332515,10 @@
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
-    "total_amount": 8900,
-    "outstanding_balance": 8900,
-    "completed_at": null,
-    "updated_at": "2026-09-12T15:32:10Z",
+    "total_amount": 19525,
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-12T18:41:26Z",
+    "updated_at": "2026-09-12T18:41:27Z",
     "invoice_number": "61528-2",
     "created_at": "2026-09-12T14:45:17Z"
   },
