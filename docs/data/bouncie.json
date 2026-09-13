@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-13T17:03:13.456Z",
+    "last_synced_at": "2026-09-13T19:42:38.387Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 1668
+    "trip_count": 1672
   },
   "vehicles": [
     {
@@ -60,7 +60,7 @@
         "name": "Maverick",
         "year": 2024
       },
-      "odometer": 34067.00000000012
+      "odometer": 34071.20000000012
     },
     {
       "imei": "862255068902755",
@@ -416,6 +416,54 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "862255068864591-4840-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-13T17:47:37.000Z",
+      "endTime": "2026-09-13T17:52:18.000Z",
+      "distance": 0.9,
+      "averageSpeed": 19.2,
+      "maxSpeed": 33.6,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 112
+    },
+    {
+      "transactionId": "862255068864591-4839-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-13T17:32:20.000Z",
+      "endTime": "2026-09-13T17:35:29.000Z",
+      "distance": 0.9,
+      "averageSpeed": 19.8,
+      "maxSpeed": 29.204437,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 21
+    },
+    {
+      "transactionId": "862255068864591-4838-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-13T17:24:57.000Z",
+      "endTime": "2026-09-13T17:29:11.000Z",
+      "distance": 1.3,
+      "averageSpeed": 20.5,
+      "maxSpeed": 28,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 20
+    },
+    {
+      "transactionId": "862255068864591-4837-202609",
+      "imei": "862255068864591",
+      "startTime": "2026-09-13T17:19:32.000Z",
+      "endTime": "2026-09-13T17:23:30.000Z",
+      "distance": 1.1,
+      "averageSpeed": 21.1,
+      "maxSpeed": 32.932663,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 40
+    },
     {
       "transactionId": "868199050012070-8124-202609",
       "imei": "868199050012070",
