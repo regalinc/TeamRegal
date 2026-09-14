@@ -358,6 +358,26 @@ function SumRevenue($rows, $ca) {
 # $MANUAL_REVENUE_BACKFILL comment above.
 $allRevenueRows = @($computed) + @($manualRevenueRows)
 
+# One-time YTD baseline for revenue earned before the granular pipeline
+# existed at all -- Josh's and Nick's own Jan 1-Aug 31, 2026 totals, read
+# off OnCall Air's own YTD report by Michael (2026-09-15). Distinct from
+# $MANUAL_REVENUE_BACKFILL above: that's itemized Sept 1-9 sales (customer,
+# date, System Type where known); this is one lump number per CA for the
+# stretch before that, where no itemized backfill was practical. Cross-
+# checked against the granular pipeline before being added: Michael's
+# separately-given "YTD including September" figure for Josh ($3,595,667)
+# minus his baseline ($3,407,034.52) comes out to $188,632.48 -- matching
+# September's own already-verified total ($188,632.41) to the cent (the
+# 7-cent gap is rounding in his rough total, not a bug).
+#
+# Added on top of the granular sum below rather than folded into
+# $allRevenueRows as a row, and that sum is deliberately bounded to this
+# cutoff (not $yearStart) so a future webhook/backfill entry dated before
+# September -- if the private repo's history ever gets extended backward --
+# can never double-count against this lump baseline.
+$YTD_REVENUE_BASELINE_CUTOFF = [datetime]"2026-09-01"
+$YTD_REVENUE_BASELINE = @{ Josh = 3407034.52; Nick = 501779.53 }
+
 # Revenue is bucketed by the actual accepted calendar date, NOT WeekStart --
 # unlike commission, a revenue goal is about when a deal closed, not which
 # Wed-Tue pay period it lands in. (A sale accepted Tue 9/1 belongs to
@@ -366,13 +386,15 @@ $allRevenueRows = @($computed) + @($manualRevenueRows)
 $lastMonthStart = $monthStart.AddMonths(-1)
 $thisMonthRevenue = $allRevenueRows | Where-Object { $_.Date -ge $monthStart -and $_.Date -lt $monthEndExclusive }
 $lastMonthSales = $allRevenueRows | Where-Object { $_.Date -ge $lastMonthStart -and $_.Date -lt $monthStart }
-$yearStart = (Get-Date -Year $today.Year -Month 1 -Day 1).Date
-$ytdSales = $allRevenueRows | Where-Object { $_.Date -ge $yearStart -and $_.Date -le $today }
+$ytdGranularSales = $allRevenueRows | Where-Object { $_.Date -ge $YTD_REVENUE_BASELINE_CUTOFF -and $_.Date -le $today }
 
 $revenue = [ordered]@{
   lastMonth = [ordered]@{ Josh = (SumRevenue $lastMonthSales "Josh");   Nick = (SumRevenue $lastMonthSales "Nick") }
   mtd       = [ordered]@{ Josh = (SumRevenue $thisMonthRevenue "Josh"); Nick = (SumRevenue $thisMonthRevenue "Nick") }
-  ytd       = [ordered]@{ Josh = (SumRevenue $ytdSales "Josh");         Nick = (SumRevenue $ytdSales "Nick") }
+  ytd       = [ordered]@{
+    Josh = [math]::Round($YTD_REVENUE_BASELINE.Josh + (SumRevenue $ytdGranularSales "Josh"), 2)
+    Nick = [math]::Round($YTD_REVENUE_BASELINE.Nick + (SumRevenue $ytdGranularSales "Nick"), 2)
+  }
 }
 
 $result = [ordered]@{
