@@ -504,7 +504,7 @@ body {
   font-size: 0.64rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--warn);
   padding: 0.6rem 0 0.3rem;
 }
 .commission-detail-week-label:first-child { padding-top: 0.4rem; }
