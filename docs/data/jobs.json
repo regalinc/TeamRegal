@@ -332563,6 +332563,39 @@
     "created_at": "2026-09-12T19:45:54Z"
   },
   {
+    "id": "job_5362404a8588469ab38148fa19ea5458",
+    "description": "70 - RCC Whole Home Initial Service Fee",
+    "work_status": "scheduled",
+    "customer_label": "Allen & Bernadette N.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-09-14T11:00:00Z",
+      "scheduled_end": "2026-09-14T13:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-14T07:00:00-04:00",
+      "scheduled_end_local": "2026-09-14T09:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+    ],
+    "tags": [
+      "70",
+      "Opportunity"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-14T01:31:29Z",
+    "invoice_number": "61555",
+    "created_at": "2026-09-14T01:31:27Z"
+  },
+  {
     "id": "job_da0c6e0e94a24067bc78bdf1f5609f2e",
     "description": "Visit #3",
     "work_status": "scheduled",
