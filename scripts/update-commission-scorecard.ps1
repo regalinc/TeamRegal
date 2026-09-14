@@ -2,16 +2,18 @@
 # bucketed into Wed-Tue pay weeks, and writes docs/data/commission-report.json
 # for hvac-sales.html to render as a running "Week N: $X ... MTD: $X" section.
 #
-# Deliberately aggregate-only in what it writes: per-week, per-CA dollar
-# totals, nothing itemized. hvac-sales.json already ships both consultants'
-# full row data client-side (accepted tradeoff, see its own header comment
-# and the README), but that's opportunity/close records, not dollar
-# amounts -- this file adds real commission $ to a page served from the
-# public TeamRegal repo, so it stays limited to numbers a person would
-# already see about their own pay, not a customer-by-customer breakdown.
-# The itemized version (customer, subtotal, system type, flagged
-# mismatches) lives only in the private weekly CSV from
-# generate-commission-report.ps1, run by hand for payroll.
+# Itemized per-sale detail (customer, System Type, rate, payout) is
+# included per week, at the user's explicit request, so the commission
+# section can show a dropdown that reconciles to the visible total the
+# same way the opportunities list already does. Only *resolved* sales are
+# itemized here -- one with no clean System Type match isn't part of the
+# total shown, so it isn't part of this breakdown either (it still shows
+# up in generate-commission-report.ps1's flagged-for-review output, run by
+# hand for payroll). hvac-sales.json already ships both consultants' full
+# row data (including customer names) client-side on this same page
+# (accepted tradeoff, see its own header comment and the README) -- this
+# adds a $ figure next to a name already visible there, not a new category
+# of exposure.
 #
 # Rate table and the true-subtotal reconstruction (total_investment minus
 # OnCall Air's own commission_markup/financing_markup/rebate_markup, NOT
@@ -97,6 +99,7 @@ foreach ($p in $allPayloads) {
   $ok = $candidates.Count -eq 1 -and $systemType -and $RATE_GROUPS.ContainsKey($systemType)
 
   $commission = 0
+  $rate = $null
   if ($ok) {
     $commissionMarkup = if ($p.proposal.commission_markup) { [decimal]$p.proposal.commission_markup } else { 0 }
     $financingMarkup = if ($p.proposal.financing_markup) { [decimal]$p.proposal.financing_markup } else { 0 }
@@ -113,11 +116,15 @@ foreach ($p in $allPayloads) {
   }
 
   $computed += [pscustomobject]@{
-    CA         = $ca
-    WeekStart  = $weekStart
-    Date       = $acceptedAt.Date
-    Revenue    = $totalInvestment
-    Commission = $commission
+    CA           = $ca
+    WeekStart    = $weekStart
+    Date         = $acceptedAt.Date
+    Revenue      = $totalInvestment
+    Commission   = $commission
+    Ok           = $ok
+    CustomerName = $custName
+    SystemType   = $systemType
+    Rate         = $rate
   }
 }
 
@@ -152,11 +159,32 @@ foreach ($g in $weekGroups) {
   $label = if ($isCurrent) { "Current Week" } else { $weekNum++; "Week $weekNum" }
   $totals = @{ Josh = 0.0; Nick = 0.0 }
   foreach ($row in $g.Group) { $totals[$row.CA] += [double]$row.Commission }
+
+  # Itemized, resolved-only sales per CA -- these are exactly the rows
+  # that make up totals above, so they always sum to it exactly (both
+  # computed from the same $g.Group, nothing re-derived separately).
+  # Sorted most-recent-first, matching the opportunities list's own
+  # convention elsewhere on this page.
+  $salesByCa = @{ Josh = @(); Nick = @() }
+  foreach ($ca in @("Josh", "Nick")) {
+    $salesByCa[$ca] = @(
+      $g.Group | Where-Object { $_.CA -eq $ca -and $_.Ok } | Sort-Object Date -Descending | ForEach-Object {
+        [ordered]@{
+          customerName = $_.CustomerName
+          systemType   = $_.SystemType
+          rate         = $_.Rate
+          commission   = [math]::Round([double]$_.Commission, 2)
+        }
+      }
+    )
+  }
+
   $weeks += [ordered]@{
     label     = $label
     weekStart = $ws.ToString("yyyy-MM-dd")
     weekEnd   = $we.ToString("yyyy-MM-dd")
     totals    = [ordered]@{ Josh = [math]::Round($totals.Josh, 2); Nick = [math]::Round($totals.Nick, 2) }
+    sales     = [ordered]@{ Josh = $salesByCa.Josh; Nick = $salesByCa.Nick }
   }
 }
 
@@ -231,7 +259,7 @@ $result = [ordered]@{
   revenue = $revenue
 }
 
-$result | ConvertTo-Json -Depth 6 | Out-File -FilePath $OutJson -Encoding utf8
+$result | ConvertTo-Json -Depth 8 | Out-File -FilePath $OutJson -Encoding utf8
 Write-Host "`nWrote $($weeks.Count) week(s) for $($monthStart.ToString('MMMM yyyy')) to $OutJson"
 Write-Host ("Commission MTD -- Josh: `${0:N2}   Nick: `${1:N2}" -f $mtd.Josh, $mtd.Nick)
 Write-Host ("Revenue MTD -- Josh: `${0:N2}   Nick: `${1:N2}" -f $revenue.mtd.Josh, $revenue.mtd.Nick)

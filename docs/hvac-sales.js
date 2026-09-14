@@ -88,6 +88,8 @@ const recordListBody = document.getElementById("record-list-body");
 const commissionMonthEl = document.getElementById("commission-month");
 const commissionWeeksEl = document.getElementById("commission-weeks");
 const commissionMtdValueEl = document.getElementById("commission-mtd-value");
+const commissionDetailSummary = document.getElementById("commission-detail-summary");
+const commissionDetailBody = document.getElementById("commission-detail-body");
 const goalCard = document.getElementById("goal-card");
 const goalTitle = document.getElementById("goal-title");
 const goalFigures = document.getElementById("goal-figures");
@@ -475,6 +477,23 @@ function renderGoal(CA, period) {
   }
 }
 
+// One itemized sale row inside the dropdown — mirrors renderRecordRow's
+// customer/meta-left, value-right shape, with a rate% + System Type meta
+// line instead of a Ran/Sold status pill.
+function renderCommissionSaleRow(sale) {
+  const ratePct = typeof sale.rate === "number" ? `${Math.round(sale.rate * 100)}%` : "";
+  const meta = [sale.systemType, ratePct].filter(Boolean).join(" · ");
+  return `
+    <div class="commission-sale-row">
+      <div class="commission-sale-left">
+        <span class="commission-sale-customer">${escapeHtml(sale.customerName || "Unknown")}</span>
+        <span class="commission-sale-meta">${escapeHtml(meta)}</span>
+      </div>
+      <span class="commission-sale-value">${formatDollarsPrecise(sale.commission)}</span>
+    </div>
+  `;
+}
+
 // Commission is separate from the ran/sold/period stuff above it — it's
 // always "this calendar month," not scoped by the Last month/MTD/YTD
 // period buttons (a commission week is a fixed Wed-Tue pay cycle, not
@@ -486,6 +505,8 @@ function renderCommission(CA) {
     commissionMonthEl.textContent = "";
     commissionWeeksEl.innerHTML = '<div class="commission-empty">Commission data not available right now.</div>';
     commissionMtdValueEl.textContent = "—";
+    commissionDetailSummary.textContent = "No sale detail available";
+    commissionDetailBody.innerHTML = "";
     return;
   }
 
@@ -508,6 +529,25 @@ function renderCommission(CA) {
 
   const mtd = (latestCommission.mtd && latestCommission.mtd[CA]) || 0;
   commissionMtdValueEl.textContent = formatDollarsPrecise(mtd);
+
+  // Itemized breakdown, grouped by the same weeks shown above — each
+  // week's rows sum exactly to that week's total, since both come from
+  // the identical underlying sale list (update-commission-scorecard.ps1).
+  const weeksWithSales = weeks.filter((w) => ((w.sales && w.sales[CA]) || []).length > 0);
+  const totalSaleCount = weeksWithSales.reduce((sum, w) => sum + w.sales[CA].length, 0);
+  commissionDetailSummary.textContent = totalSaleCount
+    ? `${totalSaleCount} sale${totalSaleCount === 1 ? "" : "s"} this month`
+    : "No sales to break down yet";
+  commissionDetailBody.innerHTML = weeksWithSales.length
+    ? weeksWithSales
+        .map(
+          (w) => `
+            <div class="commission-detail-week-label">${escapeHtml(w.label)} · ${commissionWeekRange(w.weekStart, w.weekEnd)}</div>
+            ${w.sales[CA].map(renderCommissionSaleRow).join("")}
+          `
+        )
+        .join("")
+    : "";
 }
 
 function renderRecordRow(r) {
