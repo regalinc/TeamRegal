@@ -197,6 +197,27 @@ function normalizeCustomerLabels(fullName) {
     .filter(Boolean);
 }
 
+// normalizeCustomerLabels only knows how to shape a PERSONAL name ("First
+// L."), because that's the only kind Housecall Pro's own customerLabel()
+// (scripts/sync.js) truncates. A commercial customer with no first/last
+// name gets its raw, untruncated company name instead (confirmed against a
+// real case: HCP's customer.company field for one is genuinely "Senior
+// Commons at P.", not a masked/shortened version of something longer) --
+// running that through the personal-name shaper produces nonsense ("Senior
+// Commons" -> "Senior C.") that never matches. This is the fallback for
+// that case: does the (unmasked, since company names aren't privacy-
+// sensitive the way personal ones are) spreadsheet name and HCP's label
+// prefix-match each other, for whichever one someone happened to type the
+// fuller version of. Length floor and the same-day requirement (only used
+// alongside sameLocalDay below) keep this from loosely matching short or
+// unrelated names.
+function companyPrefixMatch(customerName, label) {
+  if (!customerName || !label) return false;
+  const a = customerName.trim().toLowerCase();
+  const b = label.trim().toLowerCase();
+  return a.length >= 4 && b.length >= 4 && (a.startsWith(b) || b.startsWith(a));
+}
+
 // Same local calendar day, comparing an ISO datetime (an estimate's
 // schedule.scheduled_start/created_at, UTC) against a plain "yyyy-MM-dd"
 // spreadsheet date — mirrors how dateInPeriod/formatDate elsewhere on this
@@ -249,6 +270,11 @@ function buildMergedRecords(tech, estimates, salesRows) {
     });
     if (matchIdx === undefined) {
       matchIdx = [...unclaimed].find((i) => normalizeCustomerLabels(salesRows[i].customerName).includes(estimate.customer_label));
+    }
+    if (matchIdx === undefined) {
+      matchIdx = [...unclaimed].find(
+        (i) => companyPrefixMatch(salesRows[i].customerName, estimate.customer_label) && sameLocalDay(rawDate, salesRows[i].date)
+      );
     }
     const row = matchIdx !== undefined ? salesRows[matchIdx] : null;
     if (matchIdx !== undefined) unclaimed.delete(matchIdx);
