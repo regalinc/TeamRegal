@@ -55,6 +55,20 @@ function NormalizeName($s) {
   ($s.Trim().ToLower() -replace '\s+', ' ')
 }
 
+# Confirmed OnCall-Air-side data-entry mistakes, not guesses -- each one
+# was verified by hand against the real customer before being added here.
+# Keyed/valued by normalized name. Applied only when matching against
+# hvac-sales.json; the page still shows the corrected name so it reads the
+# same as the Excel sheet everyone already uses. Duplicated in
+# generate-commission-report.ps1 -- keep both in sync.
+$NAME_ALIASES = @{
+  "jr hartman" = "Ronald Hartman"  # OnCall Air has first_name "Jr", last_name "Hartman" on this customer's record; confirmed 2026-09-14 this is Ronald Hartman (hvac-sales.json Job #61525).
+}
+function ResolveAliasedName($s) {
+  $key = NormalizeName $s
+  if ($NAME_ALIASES.ContainsKey($key)) { $NAME_ALIASES[$key] } else { $s }
+}
+
 # Wednesday-of-the-week a given date falls in (the pay week's start).
 function WeekStartFor([datetime]$date) {
   $daysSinceWednesday = (([int]$date.DayOfWeek) - [int][DayOfWeek]::Wednesday + 7) % 7
@@ -86,7 +100,7 @@ foreach ($p in $allPayloads) {
   # from Commission only, same as before.
   $totalInvestment = [decimal]$p.proposal.total_investment
 
-  $custName = $p.customer.full_name
+  $custName = ResolveAliasedName $p.customer.full_name
   # @(...) forces a real array even when Where-Object matches exactly one
   # row -- otherwise PowerShell hands back a bare object whose .Count is
   # $null, not 1, and a genuinely clean single match gets misclassified.

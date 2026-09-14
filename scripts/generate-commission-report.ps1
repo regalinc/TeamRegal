@@ -78,6 +78,19 @@ function NormalizeName($s) {
   ($s.Trim().ToLower() -replace '\s+', ' ')
 }
 
+# Confirmed OnCall-Air-side data-entry mistakes, not guesses -- each one
+# was verified by hand against the real customer before being added here.
+# Keyed/valued by normalized name. Applied only when matching against
+# hvac-sales.json; the report still prints/exports the corrected name so
+# it reads the same as the Excel sheet everyone already uses.
+$NAME_ALIASES = @{
+  "jr hartman" = "Ronald Hartman"  # OnCall Air has first_name "Jr", last_name "Hartman" on this customer's record; confirmed 2026-09-14 this is Ronald Hartman (hvac-sales.json Job #61525).
+}
+function ResolveAliasedName($s) {
+  $key = NormalizeName $s
+  if ($NAME_ALIASES.ContainsKey($key)) { $NAME_ALIASES[$key] } else { $s }
+}
+
 # --- Load hvac-sales.json (System Type source) ------------------------------
 $hvacSales = (Get-Content $HvacSalesJson -Raw | ConvertFrom-Json).records
 Write-Host "Loaded $($hvacSales.Count) rows from hvac-sales.json"
@@ -98,7 +111,7 @@ foreach ($p in $weekPayloads) {
   $firstName = $p.assigned_consultant.first_name
   $ca = if ($firstName -eq "Josh") { "Josh" } elseif ($firstName -eq "Nick") { "Nick" } else { $null }
 
-  $custName = $p.customer.full_name
+  $custName = ResolveAliasedName $p.customer.full_name
   $acceptedAt = [datetime]$p.timestamps.accepted_at
   # NOT proposal.subtotal -- confirmed against a real OnCall Air pricing
   # summary screenshot that the field OnCall Air's webhook literally names

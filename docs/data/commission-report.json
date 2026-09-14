@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-14T14:18:14.481Z",
+                 "generated_at":  "2026-09-14T14:43:29.975Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -104,7 +104,7 @@
                       "weekStart":  "2026-09-09",
                       "weekEnd":  "2026-09-15",
                       "totals":  {
-                                     "Josh":  3821.18,
+                                     "Josh":  4473.54,
                                      "Nick":  0
                                  },
                       "sales":  {
@@ -120,6 +120,12 @@
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
                                                      "commission":  612.01
+                                                 },
+                                                 {
+                                                     "customerName":  "Ronald Hartman",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  652.36
                                                  },
                                                  {
                                                      "customerName":  "Ethan Besbris",
@@ -141,10 +147,6 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
-                                                       "customerName":  "Jr Hartman",
-                                                       "reason":  "possibly logged as \"Ronald Hartman\" -- OnCall Air may have the wrong name on file"
-                                                   },
-                                                   {
                                                        "customerName":  "Judy Bakk",
                                                        "reason":  "logged under a different date"
                                                    }
@@ -156,7 +158,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  6852,
+                "Josh":  7504.37,
                 "Nick":  616.42
             },
     "revenue":  {
