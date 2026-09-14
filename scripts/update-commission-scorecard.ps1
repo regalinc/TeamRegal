@@ -188,6 +188,15 @@ $today = (Get-Date).Date
 # prior month instead of this one.
 $monthStart = (Get-Date -Year $today.Year -Month $today.Month -Day 1).Date
 $monthEndExclusive = $monthStart.AddMonths(1)
+# The one pay week immediately before this month, so a week that straddles
+# the month boundary (its Wednesday in the prior month, its Tuesday in this
+# one -- e.g. Aug 26-Sep 1) still shows up on the 1st/2nd of a new month
+# instead of disappearing until enough of it falls in "this month" to get
+# picked up by the filter below. Deliberately just the one trailing week,
+# not open-ended lookback -- $thisMonth (below) is still the strict
+# calendar-month set and is what MTD is summed from, so this extra week
+# shows on the page without inflating MTD with the prior month's dollars.
+$windowStart = WeekStartFor $monthStart.AddDays(-1)
 
 # One-time manual backfill for sales accepted before the OnCall Air webhook
 # went live (2026-09-11) -- the private sold-proposals repo has no history
@@ -226,7 +235,7 @@ $manualSupplementRows = @(
   $MANUAL_REVENUE_BACKFILL | ForEach-Object {
     $d = [datetime]$_.Date
     $ws = WeekStartFor $d
-    if ($ws -ge $monthStart -and $ws -lt $monthEndExclusive) {
+    if ($ws -ge $windowStart -and $ws -lt $monthEndExclusive) {
       if ($_.SystemType -and $_.Subtotal) {
         $rate = $RATE_GROUPS[$_.SystemType][$_.CA]
         [pscustomobject]@{
@@ -246,8 +255,13 @@ $manualSupplementRows = @(
   }
 )
 
-$thisMonth = @($computed | Where-Object { $_.WeekStart -ge $monthStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualSupplementRows
-$weekGroups = $thisMonth | Group-Object WeekStart | Sort-Object { [datetime]$_.Name }
+# $displayRows drives what's shown on the page (this month plus the one
+# trailing week); $thisMonth stays the strict calendar-month subset of it,
+# used below only for the MTD sum so a trailing prior-month week is visible
+# without counting toward this month's total.
+$displayRows = @($computed | Where-Object { $_.WeekStart -ge $windowStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualSupplementRows
+$thisMonth = @($displayRows | Where-Object { $_.WeekStart -ge $monthStart })
+$weekGroups = $displayRows | Group-Object WeekStart | Sort-Object { [datetime]$_.Name }
 
 $weeks = @()
 $weekNum = 0

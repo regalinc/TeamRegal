@@ -1,11 +1,47 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-14T14:04:32.508Z",
+                 "generated_at":  "2026-09-14T14:18:14.481Z",
                  "month":  "2026-09"
              },
     "weeks":  [
                   {
                       "label":  "Week 1",
+                      "weekStart":  "2026-08-26",
+                      "weekEnd":  "2026-09-01",
+                      "totals":  {
+                                     "Josh":  1528.5,
+                                     "Nick":  0
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+                                                 {
+                                                     "customerName":  "Patricia Bingaman",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  684.72
+                                                 },
+                                                 {
+                                                     "customerName":  "Kim Strobeck",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  843.78
+                                                 }
+                                             ],
+                                    "Nick":  [
+
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+
+                                               ],
+                                      "Nick":  [
+
+                                               ]
+                                  }
+                  },
+                  {
+                      "label":  "Week 2",
                       "weekStart":  "2026-09-02",
                       "weekEnd":  "2026-09-08",
                       "totals":  {
