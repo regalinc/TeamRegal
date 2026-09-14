@@ -520,7 +520,13 @@ body {
 }
 .commission-note { font-size: 0.78rem; color: var(--text-faint); }
 
-.commission-row {
+/* :not([hidden]) rather than a bare `display: flex` -- see the identical
+   note on .pace-badge above; a class-selector display always wins the
+   cascade over the UA [hidden]{display:none} rule at equal specificity, so
+   without this the last-month row would stay visibly on-screen (as an
+   empty row) whenever JS sets its `hidden` property. Caught by testing the
+   suppressed-last-month state directly, same way that one was. */
+.commission-row:not([hidden]) {
   display: flex;
   align-items: baseline;
   justify-content: space-between;

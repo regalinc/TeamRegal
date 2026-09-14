@@ -56,10 +56,20 @@ const tileAvgTicket = document.getElementById("tile-avg-ticket");
 const estimateListCard = document.getElementById("estimate-list-card");
 const estimateListSummary = document.getElementById("estimate-list-summary");
 const estimateListBody = document.getElementById("estimate-list-body");
+const commissionRowLastmonth = document.getElementById("commission-row-lastmonth");
+const commissionLabelLastmonth = document.getElementById("commission-label-lastmonth");
+const commissionValueLastmonth = document.getElementById("commission-value-lastmonth");
 const commissionLabelThismonth = document.getElementById("commission-label-thismonth");
 const commissionValueThismonth = document.getElementById("commission-value-thismonth");
 const commissionDetailSummary = document.getElementById("commission-detail-summary");
 const commissionDetailBody = document.getElementById("commission-detail-body");
+
+// One-time: Michael asked (2026-09-14) not to show August's commission
+// total specifically, but to resume showing "last month" normally once
+// the calendar rolls past this cutoff -- i.e. starting October, when "last
+// month" becomes September. Nothing to touch here going forward; this
+// just stops applying once today >= the cutoff.
+const SUPPRESS_LAST_MONTH_COMMISSION_BEFORE = new Date(2026, 9, 1); // Oct 1, 2026
 
 // Flat rate on the actual sale amount -- unlike Josh/Nick's HVAC Sales
 // commission (a System-Type-dependent percentage of a reconstructed
@@ -276,23 +286,27 @@ function renderCommissionSaleRow(e) {
 }
 
 // Independent of the period tabs above (which drive the hero/goal/tiles) --
-// commission is always this real calendar month, since that's what's
-// actually paid out and when, regardless of which period someone happens
-// to be looking at. Sourced from `mine`, the same Housecall Pro estimates
-// already trusted for Revenue accepted elsewhere on this page -- no
-// separate data pipeline the way HVAC Sales needs. Estimates approved with
-// no recorded approval date (see missingApprovedAtEstimates/undatedCount
-// above) can't be placed in a month at all and are quietly excluded here,
-// same as they already are from the weekly/monthly closing-rate stats --
-// not a new gap this introduces.
+// commission is always this real calendar month plus last, since that's
+// what's actually paid out and when, regardless of which period someone
+// happens to be looking at. Sourced from `mine`, the same Housecall Pro
+// estimates already trusted for Revenue accepted elsewhere on this page --
+// no separate data pipeline the way HVAC Sales needs. Estimates approved
+// with no recorded approval date (see missingApprovedAtEstimates/
+// undatedCount above) can't be placed in a month at all and are quietly
+// excluded here, same as they already are from the weekly/monthly
+// closing-rate stats -- not a new gap this introduces.
 //
-// Last month's final total was shown here too at first; at the user's
-// request (2026-09-14) it's hidden for now -- see git history for the row
-// markup and the two-line-item version of this function if it comes back.
+// The last-month row/group is skipped entirely while
+// SUPPRESS_LAST_MONTH_COMMISSION_BEFORE hasn't passed yet (see its own
+// comment above) -- August isn't shown, but the row itself (and its
+// dropdown group) comes back on its own in October with September's
+// total, no code change needed then.
 function renderCommission(mine) {
   const now = new Date();
   const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const nextMonthStart = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const showLastMonth = now >= SUPPRESS_LAST_MONTH_COMMISSION_BEFORE;
 
   const inRange = (e, start, end) => {
     const d = new Date(e.approved_at);
@@ -301,19 +315,36 @@ function renderCommission(mine) {
   const approvedMine = mine.filter((e) => e.approved && e.approved_at);
   const byNewest = (a, b) => b.approved_at.localeCompare(a.approved_at);
   const thisMonthSales = approvedMine.filter((e) => inRange(e, thisMonthStart, nextMonthStart)).sort(byNewest);
+  const lastMonthSales = showLastMonth
+    ? approvedMine.filter((e) => inRange(e, lastMonthStart, thisMonthStart)).sort(byNewest)
+    : [];
 
   const sumCommission = (sales) =>
     sales.reduce((sum, e) => sum + (e.approved_amount || 0) / CENTS_PER_DOLLAR, 0) * ANDREW_COMMISSION_RATE;
 
+  commissionRowLastmonth.hidden = !showLastMonth;
+  if (showLastMonth) {
+    commissionLabelLastmonth.textContent = `${monthLabelWithYear(1)} · Final`;
+    commissionValueLastmonth.textContent = formatMoney(sumCommission(lastMonthSales));
+  }
   commissionLabelThismonth.textContent = `${monthLabelWithYear(0)} · Month to date`;
   commissionValueThismonth.textContent = formatMoney(sumCommission(thisMonthSales));
 
-  commissionDetailSummary.textContent = thisMonthSales.length
-    ? `${thisMonthSales.length} sale${thisMonthSales.length === 1 ? "" : "s"} this month`
-    : "No sold jobs yet this month";
+  commissionDetailSummary.textContent =
+    thisMonthSales.length || lastMonthSales.length
+      ? `${thisMonthSales.length} sale${thisMonthSales.length === 1 ? "" : "s"} this month${
+          lastMonthSales.length ? `, ${lastMonthSales.length} last month` : ""
+        }`
+      : "No sold jobs yet this month";
 
-  commissionDetailBody.innerHTML = thisMonthSales.length
-    ? thisMonthSales.map(renderCommissionSaleRow).join("")
+  const groups = [];
+  if (thisMonthSales.length) groups.push({ label: monthLabelWithYear(0), sales: thisMonthSales });
+  if (lastMonthSales.length) groups.push({ label: monthLabelWithYear(1), sales: lastMonthSales });
+
+  commissionDetailBody.innerHTML = groups.length
+    ? groups
+        .map((g) => `<div class="commission-detail-month-label">${escapeHtml(g.label)}</div>${g.sales.map(renderCommissionSaleRow).join("")}`)
+        .join("")
     : '<div class="commission-empty">No sold jobs yet this month.</div>';
 }
 
