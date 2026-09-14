@@ -484,6 +484,120 @@ body {
   line-height: 1.3;
 }
 
+/* ---------- commission ---------- */
+/* Andrew's commission is a flat 2% of the sale amount, paid out monthly
+   (approved during a calendar month, paid the first week of the next) --
+   simpler than Josh/Nick's HVAC Sales weekly Wed-Tue cycle, so this is
+   just two rows (last month's final total, this month's running total)
+   rather than a per-week breakdown. Computed straight from the same
+   Housecall Pro estimates already synced for the rest of this page (see
+   andrew.js render()) -- no separate data source or manual entry, so
+   there's no "pending/unresolved" state to surface the way HVAC Sales
+   needs (that page reconciles two independent, occasionally-mismatched
+   sources; this page has exactly one, already trusted for Revenue accepted
+   above). */
+.commission-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem 0.3rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+.commission-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.commission-title {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.commission-note { font-size: 0.78rem; color: var(--text-faint); }
+
+.commission-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--border);
+}
+.commission-row-label { font-size: 0.86rem; }
+.commission-row-value {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+/* This month's still-accruing total is the number that matters day to
+   day (last month's is already locked in and about to be paid out) -- the
+   same gold accent used for Revenue accepted/the goal track above, so it
+   reads as the headline figure rather than a plain row. */
+.commission-row.current .commission-row-label { font-weight: 600; color: var(--text); }
+.commission-row.current .commission-row-value { color: var(--gold); font-size: 1.1rem; }
+
+/* Reuses .list-card's own chrome/chevron pattern (see below) rather than
+   duplicating it -- this <details> just needs the summary/body content
+   swapped in by andrew.js. */
+.commission-detail {
+  border-top: 1px solid var(--border);
+  margin-top: 0.3rem;
+}
+.commission-detail summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.7rem 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.commission-detail summary::-webkit-details-marker { display: none; }
+.commission-detail summary::after {
+  content: "\2304";
+  font-size: 0.85rem;
+  transition: transform 0.15s ease;
+}
+.commission-detail[open] summary::after { transform: rotate(180deg); }
+
+.commission-detail-month-label {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.5rem 0 0.3rem;
+}
+.commission-detail-month-label:first-child { padding-top: 0; }
+
+.commission-sale-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.84rem;
+}
+.commission-detail-month-label + .commission-sale-row { border-top: none; }
+.commission-sale-left { display: flex; align-items: baseline; gap: 0.5rem; min-width: 0; flex-wrap: wrap; }
+.commission-sale-customer { font-weight: 550; }
+.commission-sale-meta { color: var(--text-faint); font-size: 0.76rem; }
+.commission-sale-value {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.commission-empty { padding: 0.6rem 0; color: var(--text-faint); font-size: 0.85rem; }
+
 /* ---------- estimate list ---------- */
 .list-card {
   background: var(--card-bg);
