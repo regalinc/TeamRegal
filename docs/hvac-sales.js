@@ -535,8 +535,13 @@ function renderCommission(CA) {
   // the identical underlying sale list (update-commission-scorecard.ps1).
   const weeksWithSales = weeks.filter((w) => ((w.sales && w.sales[CA]) || []).length > 0);
   const totalSaleCount = weeksWithSales.reduce((sum, w) => sum + w.sales[CA].length, 0);
+  // "this week" while only one week has any sales yet (true, and matches
+  // what's actually shown below it) — switches to "this month" once a
+  // second week's worth of sales appears, since the list spans the whole
+  // month at that point, not just the current pay week.
+  const scopeWord = weeksWithSales.length > 1 ? "month" : "week";
   commissionDetailSummary.textContent = totalSaleCount
-    ? `${totalSaleCount} sale${totalSaleCount === 1 ? "" : "s"} this month`
+    ? `${totalSaleCount} sale${totalSaleCount === 1 ? "" : "s"} this ${scopeWord}`
     : "No sales to break down yet";
   commissionDetailBody.innerHTML = weeksWithSales.length
     ? weeksWithSales
