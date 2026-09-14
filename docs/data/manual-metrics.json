@@ -1,57 +1,332 @@
-{
-  "2026-07": {
-    "30": {
-      "paidHours": null,
-      "billedHours": null,
-      "attendancePct": null,
-      "truckInventoryAccuracyPct": null,
-      "reviewsGenerated": null,
-      "callbackCount": null,
-      "vehicleCount": 5,
-      "employeeCount": 5,
-      "dso": null
-    },
-    "40": {
-      "attendancePct": null,
-      "ptuConversionPct": null,
-      "vehicleCount": 2,
-      "paidHours": null,
-      "billedHours": null,
-      "ptuTechDays": null,
-      "employeeCount": null,
-      "supportCount": null,
-      "productionCount": null,
-      "newCustClubConversion": null,
-      "renewalRate": null
-    },
-    "70": {
-      "paidHours": null,
-      "billedHours": null,
-      "attendancePct": null,
-      "truckInventoryAccuracyPct": null,
-      "reviewsGenerated": null,
-      "callbackCount": null,
-      "vehicleCount": 6,
-      "employeeCount": null,
-      "supportCount": null,
-      "productionCount": null,
-      "dso": null
-    },
-    "80": {
-      "attendancePct": null,
-      "reviewsGenerated": null,
-      "callbackCount": null,
-      "vehicleCount": 0
-    },
-    "10": {
-      "employeeCount": null,
-      "vehicleCount": 8,
-      "crewCount": null
-    },
-    "50": {
-      "employeeCount": 5,
-      "vehicleCount": 4,
-      "crewCount": null
-    }
-  }
+﻿{
+    "2026-07":  {
+                    "30":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  5,
+                               "employeeCount":  5,
+                               "dso":  null
+                           },
+                    "40":  {
+                               "attendancePct":  null,
+                               "ptuConversionPct":  null,
+                               "vehicleCount":  2,
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "ptuTechDays":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "newCustClubConversion":  null,
+                               "renewalRate":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  6,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           },
+                    "80":  {
+                               "attendancePct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  0
+                           },
+                    "10":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  8,
+                               "crewCount":  null
+                           },
+                    "50":  {
+                               "employeeCount":  5,
+                               "vehicleCount":  4,
+                               "crewCount":  null
+                           }
+                },
+    "2026-08":  {
+                    "30":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "dso":  null
+                           },
+                    "40":  {
+                               "attendancePct":  null,
+                               "ptuConversionPct":  null,
+                               "vehicleCount":  null,
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "ptuTechDays":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "newCustClubConversion":  null,
+                               "renewalRate":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           },
+                    "80":  {
+                               "attendancePct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null
+                           },
+                    "10":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           },
+                    "50":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           }
+                },
+    "2026-09":  {
+                    "30":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "dso":  null
+                           },
+                    "40":  {
+                               "attendancePct":  null,
+                               "ptuConversionPct":  null,
+                               "vehicleCount":  null,
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "ptuTechDays":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "newCustClubConversion":  null,
+                               "renewalRate":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           },
+                    "80":  {
+                               "attendancePct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null
+                           },
+                    "10":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           },
+                    "50":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           }
+                },
+    "2026-10":  {
+                    "30":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "dso":  null
+                           },
+                    "40":  {
+                               "attendancePct":  null,
+                               "ptuConversionPct":  null,
+                               "vehicleCount":  null,
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "ptuTechDays":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "newCustClubConversion":  null,
+                               "renewalRate":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           },
+                    "80":  {
+                               "attendancePct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null
+                           },
+                    "10":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           },
+                    "50":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           }
+                },
+    "2026-11":  {
+                    "30":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "dso":  null
+                           },
+                    "40":  {
+                               "attendancePct":  null,
+                               "ptuConversionPct":  null,
+                               "vehicleCount":  null,
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "ptuTechDays":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "newCustClubConversion":  null,
+                               "renewalRate":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           },
+                    "80":  {
+                               "attendancePct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null
+                           },
+                    "10":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           },
+                    "50":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           }
+                },
+    "2026-12":  {
+                    "30":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "dso":  null
+                           },
+                    "40":  {
+                               "attendancePct":  null,
+                               "ptuConversionPct":  null,
+                               "vehicleCount":  null,
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "ptuTechDays":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "newCustClubConversion":  null,
+                               "renewalRate":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  null,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           },
+                    "80":  {
+                               "attendancePct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null
+                           },
+                    "10":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           },
+                    "50":  {
+                               "employeeCount":  null,
+                               "vehicleCount":  null,
+                               "crewCount":  null
+                           }
+                }
 }
