@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  535
+                 "record_count":  537
              },
     "records":  [
                     {
@@ -5857,6 +5857,17 @@
                     },
                     {
                         "ca":  "Josh",
+                        "date":  "2026-09-15",
+                        "customerName":  "Mary Myers",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
                         "date":  "2026-09-16",
                         "customerName":  "Mark Price",
                         "job":  "",
@@ -5886,6 +5897,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-18",
+                        "customerName":  "Sue Sprenkle",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     }
                 ]
