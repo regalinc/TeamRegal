@@ -566,11 +566,17 @@ function renderCommission(CA) {
   // OnCall Air-confirmed sale this week, counted or not.
   const weeksWithContent = weeks.filter((w) => ((w.sales && w.sales[CA]) || []).length > 0 || ((w.pending && w.pending[CA]) || []).length > 0);
   const totalSaleCount = weeksWithContent.reduce((sum, w) => sum + ((w.sales && w.sales[CA]) || []).length, 0);
-  // "this week" while only one week has any content yet (true, and matches
-  // what's actually shown below it) — switches to "this month" once a
-  // second week's worth appears, since the list spans the whole month at
-  // that point, not just the current pay week.
-  const scopeWord = weeksWithContent.length > 1 ? "month" : "week";
+  // "this week" only when the one-and-only week with content actually IS
+  // the current pay week — not just whenever there's exactly one week with
+  // content. Nick's first resolved sale (Fedor, accepted the Mon before
+  // this week) was the caught case: weeksWithContent.length was 1, but
+  // that week was "Week 2" (Sept 2-8), not "Current Week" — the old
+  // `length > 1` check alone couldn't tell the difference and said "this
+  // week" for a sale that was really last week's. "This month" is always
+  // true and matches the header above it, so it's the safe fallback
+  // whenever the content isn't confined to the current week specifically.
+  const scopeWord =
+    weeksWithContent.length === 1 && weeksWithContent[0].label === "Current Week" ? "week" : "month";
   const summaryParts = [];
   if (totalSaleCount) summaryParts.push(`${totalSaleCount} sale${totalSaleCount === 1 ? "" : "s"}`);
   if (totalPendingCount) summaryParts.push(`${totalPendingCount} pending`);
