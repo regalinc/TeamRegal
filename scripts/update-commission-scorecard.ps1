@@ -100,6 +100,7 @@ foreach ($p in $allPayloads) {
 
   $commission = 0
   $rate = $null
+  $publicReason = $null
   if ($ok) {
     $commissionMarkup = if ($p.proposal.commission_markup) { [decimal]$p.proposal.commission_markup } else { 0 }
     $financingMarkup = if ($p.proposal.financing_markup) { [decimal]$p.proposal.financing_markup } else { 0 }
@@ -108,11 +109,29 @@ foreach ($p in $allPayloads) {
     $rate = $RATE_GROUPS[$systemType][$ca]
     $commission = $subtotal * $rate
   } else {
+    # Two versions of the same fact: a precise technical reason for the
+    # console log (whoever's chasing this down via
+    # generate-commission-report.ps1 wants the exact cause), and a short,
+    # non-technical phrase for the public JSON (Josh/Nick just need "this
+    # isn't counted yet," not the internal matching mechanics).
+    # A same-week miss can still have a real row -- just dated outside this
+    # pay week (e.g. consultation Sept 4, accepted sometime the following
+    # week -- a real case this caught). Doesn't change the match/inclusion
+    # rule at all (still requires a same-week row to count toward the
+    # total), only makes the displayed reason honest about which kind of
+    # miss this is, rather than implying "no row exists" when one does.
+    $anyRowForName = if ($candidates.Count -eq 0) {
+      @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) }).Count -gt 0
+    } else { $false }
+
     $reason = if ($candidates.Count -eq 0) { "no hvac-sales.json match" }
               elseif ($candidates.Count -gt 1) { "ambiguous ($($candidates.Count) matches)" }
               elseif (-not $systemType) { "blank System Type" }
               else { "unrecognized System Type '$systemType'" }
     $unresolved += "$custName ($ca, week of $($weekStart.ToString('yyyy-MM-dd'))): $reason"
+    $publicReason = if ($candidates.Count -eq 0) {
+      if ($anyRowForName) { "logged under a different date" } else { "not yet logged in the sheet" }
+    } else { "System Type not entered yet" }
   }
 
   $computed += [pscustomobject]@{
@@ -122,6 +141,7 @@ foreach ($p in $allPayloads) {
     Revenue      = $totalInvestment
     Commission   = $commission
     Ok           = $ok
+    Reason       = $publicReason
     CustomerName = $custName
     SystemType   = $systemType
     Rate         = $rate
@@ -166,6 +186,11 @@ foreach ($g in $weekGroups) {
   # Sorted most-recent-first, matching the opportunities list's own
   # convention elsewhere on this page.
   $salesByCa = @{ Josh = @(); Nick = @() }
+  # Sold-but-unresolved sales, same shape/grouping as salesByCa above --
+  # these are the rows NOT counted in totals (Ok = $false), shown on the
+  # page so a viewer can see who's still outstanding instead of the total
+  # just silently looking smaller than it should.
+  $pendingByCa = @{ Josh = @(); Nick = @() }
   foreach ($ca in @("Josh", "Nick")) {
     $salesByCa[$ca] = @(
       $g.Group | Where-Object { $_.CA -eq $ca -and $_.Ok } | Sort-Object Date -Descending | ForEach-Object {
@@ -177,6 +202,14 @@ foreach ($g in $weekGroups) {
         }
       }
     )
+    $pendingByCa[$ca] = @(
+      $g.Group | Where-Object { $_.CA -eq $ca -and -not $_.Ok } | Sort-Object Date -Descending | ForEach-Object {
+        [ordered]@{
+          customerName = $_.CustomerName
+          reason       = $_.Reason
+        }
+      }
+    )
   }
 
   $weeks += [ordered]@{
@@ -185,6 +218,7 @@ foreach ($g in $weekGroups) {
     weekEnd   = $we.ToString("yyyy-MM-dd")
     totals    = [ordered]@{ Josh = [math]::Round($totals.Josh, 2); Nick = [math]::Round($totals.Nick, 2) }
     sales     = [ordered]@{ Josh = $salesByCa.Josh; Nick = $salesByCa.Nick }
+    pending   = [ordered]@{ Josh = $pendingByCa.Josh; Nick = $pendingByCa.Nick }
   }
 }
 

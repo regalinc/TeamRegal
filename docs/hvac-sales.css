@@ -24,6 +24,8 @@
   --accent-ring-track: #dbe4f3;
 
   --good: #1a7f37;
+  --warn: #a05a00;
+  --warn-soft: #fbebd2;
 
   --mono: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
   --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -43,6 +45,8 @@
     --accent-ring-track: #232a38;
 
     --good: #3fa85e;
+    --warn: #e0a94f;
+    --warn-soft: #3a2c12;
   }
 }
 
@@ -432,6 +436,41 @@ body {
 }
 
 .commission-empty { color: var(--text-faint); font-size: 0.82rem; padding: 0.4rem 0; }
+
+/* Pending-sales banner -- sits right under the header, above the week
+   rows, since it caveats everything below it (week totals *and* MTD are
+   both understated while anything's pending, not just one figure). */
+.commission-pending-banner {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--warn);
+  background: var(--warn-soft);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.commission-pending-banner b { font-weight: 650; }
+
+.commission-pending-label {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--warn);
+  padding: 0.6rem 0 0.3rem;
+}
+.commission-pending-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.3rem 0;
+  font-size: 0.84rem;
+}
+.commission-pending-customer { font-weight: 550; }
+.commission-pending-reason { color: var(--warn); font-size: 0.76rem; flex-shrink: 0; }
 
 /* Nested inside .commission-card, which already supplies a background and
    border — reusing .list-card's own card chrome here would nest a card

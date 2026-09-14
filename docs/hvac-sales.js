@@ -90,6 +90,7 @@ const commissionWeeksEl = document.getElementById("commission-weeks");
 const commissionMtdValueEl = document.getElementById("commission-mtd-value");
 const commissionDetailSummary = document.getElementById("commission-detail-summary");
 const commissionDetailBody = document.getElementById("commission-detail-body");
+const commissionPendingBanner = document.getElementById("commission-pending-banner");
 const goalCard = document.getElementById("goal-card");
 const goalTitle = document.getElementById("goal-title");
 const goalFigures = document.getElementById("goal-figures");
@@ -494,6 +495,19 @@ function renderCommissionSaleRow(sale) {
   `;
 }
 
+// A pending (sold-but-unresolved) row — no dollar figure to show, so the
+// reason takes that slot instead. Same left/right shape as a real sale
+// row for visual consistency, just muted/warn-colored throughout since
+// it's explicitly "not counted yet," not a real payout.
+function renderCommissionPendingRow(p) {
+  return `
+    <div class="commission-pending-row">
+      <span class="commission-pending-customer">${escapeHtml(p.customerName || "Unknown")}</span>
+      <span class="commission-pending-reason">${escapeHtml(p.reason || "not counted yet")}</span>
+    </div>
+  `;
+}
+
 // Commission is separate from the ran/sold/period stuff above it — it's
 // always "this calendar month," not scoped by the Last month/MTD/YTD
 // period buttons (a commission week is a fixed Wed-Tue pay cycle, not
@@ -503,6 +517,7 @@ function renderCommissionSaleRow(sale) {
 function renderCommission(CA) {
   if (!latestCommission) {
     commissionMonthEl.textContent = "";
+    commissionPendingBanner.hidden = true;
     commissionWeeksEl.innerHTML = '<div class="commission-empty">Commission data not available right now.</div>';
     commissionMtdValueEl.textContent = "—";
     commissionDetailSummary.textContent = "No sale detail available";
@@ -530,27 +545,48 @@ function renderCommission(CA) {
   const mtd = (latestCommission.mtd && latestCommission.mtd[CA]) || 0;
   commissionMtdValueEl.textContent = formatDollarsPrecise(mtd);
 
+  // Pending banner: sits above the week rows because it caveats ALL of
+  // them plus MTD, not just one figure — every one of those totals is
+  // understated by whatever's still pending. Counted across every week
+  // shown, not just the current one, so it stays accurate even once a
+  // second week exists this month.
+  const totalPendingCount = weeks.reduce((sum, w) => sum + ((w.pending && w.pending[CA]) || []).length, 0);
+  if (totalPendingCount > 0) {
+    commissionPendingBanner.hidden = false;
+    commissionPendingBanner.innerHTML = `⚠ <b>${totalPendingCount} sale${totalPendingCount === 1 ? "" : "s"}</b> still pending manual entry — not included in the totals above. See below for who.`;
+  } else {
+    commissionPendingBanner.hidden = true;
+  }
+
   // Itemized breakdown, grouped by the same weeks shown above — each
-  // week's rows sum exactly to that week's total, since both come from
-  // the identical underlying sale list (update-commission-scorecard.ps1).
-  const weeksWithSales = weeks.filter((w) => ((w.sales && w.sales[CA]) || []).length > 0);
-  const totalSaleCount = weeksWithSales.reduce((sum, w) => sum + w.sales[CA].length, 0);
-  // "this week" while only one week has any sales yet (true, and matches
+  // week's SALE rows sum exactly to that week's total, since both come
+  // from the identical underlying sale list (update-commission-scorecard.ps1).
+  // Pending rows ride along in the same per-week group, visually
+  // separated by their own sub-label, so the breakdown accounts for every
+  // OnCall Air-confirmed sale this week, counted or not.
+  const weeksWithContent = weeks.filter((w) => ((w.sales && w.sales[CA]) || []).length > 0 || ((w.pending && w.pending[CA]) || []).length > 0);
+  const totalSaleCount = weeksWithContent.reduce((sum, w) => sum + ((w.sales && w.sales[CA]) || []).length, 0);
+  // "this week" while only one week has any content yet (true, and matches
   // what's actually shown below it) — switches to "this month" once a
-  // second week's worth of sales appears, since the list spans the whole
-  // month at that point, not just the current pay week.
-  const scopeWord = weeksWithSales.length > 1 ? "month" : "week";
-  commissionDetailSummary.textContent = totalSaleCount
-    ? `${totalSaleCount} sale${totalSaleCount === 1 ? "" : "s"} this ${scopeWord}`
-    : "No sales to break down yet";
-  commissionDetailBody.innerHTML = weeksWithSales.length
-    ? weeksWithSales
-        .map(
-          (w) => `
+  // second week's worth appears, since the list spans the whole month at
+  // that point, not just the current pay week.
+  const scopeWord = weeksWithContent.length > 1 ? "month" : "week";
+  const summaryParts = [];
+  if (totalSaleCount) summaryParts.push(`${totalSaleCount} sale${totalSaleCount === 1 ? "" : "s"}`);
+  if (totalPendingCount) summaryParts.push(`${totalPendingCount} pending`);
+  commissionDetailSummary.textContent = summaryParts.length ? `${summaryParts.join(", ")} this ${scopeWord}` : "No sales to break down yet";
+
+  commissionDetailBody.innerHTML = weeksWithContent.length
+    ? weeksWithContent
+        .map((w) => {
+          const sales = (w.sales && w.sales[CA]) || [];
+          const pending = (w.pending && w.pending[CA]) || [];
+          return `
             <div class="commission-detail-week-label">${escapeHtml(w.label)} · ${commissionWeekRange(w.weekStart, w.weekEnd)}</div>
-            ${w.sales[CA].map(renderCommissionSaleRow).join("")}
-          `
-        )
+            ${sales.map(renderCommissionSaleRow).join("")}
+            ${pending.length ? `<div class="commission-pending-label">Pending</div>${pending.map(renderCommissionPendingRow).join("")}` : ""}
+          `;
+        })
         .join("")
     : "";
 }
