@@ -406,8 +406,8 @@ body {
 }
 .commission-week-row:first-child { border-top: none; padding-top: 0; }
 
-.commission-week-label { min-width: 0; }
-.commission-week-range { color: var(--text-faint); font-size: 0.74rem; margin-left: 0.35rem; }
+.commission-week-label { min-width: 0; color: var(--warn); font-weight: 600; }
+.commission-week-range { color: var(--warn); font-size: 0.74rem; margin-left: 0.35rem; font-weight: 400; }
 
 .commission-week-value {
   font-family: var(--mono);
