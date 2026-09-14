@@ -1,9 +1,56 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-14T13:11:40.612Z",
+                 "generated_at":  "2026-09-14T13:30:56.062Z",
                  "month":  "2026-09"
              },
     "weeks":  [
+                  {
+                      "label":  "Week 1",
+                      "weekStart":  "2026-09-02",
+                      "weekEnd":  "2026-09-08",
+                      "totals":  {
+                                     "Josh":  0,
+                                     "Nick":  0
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+
+                                             ],
+                                    "Nick":  [
+
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+                                                   {
+                                                       "customerName":  "Steve O\u0027Brien",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+                                                   },
+                                                   {
+                                                       "customerName":  "Rachel Johnson",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+                                                   },
+                                                   {
+                                                       "customerName":  "Ron Goodling",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+                                                   },
+                                                   {
+                                                       "customerName":  "Robert White",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+                                                   },
+                                                   {
+                                                       "customerName":  "Sirina Cohr",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+                                                   }
+                                               ],
+                                      "Nick":  [
+                                                   {
+                                                       "customerName":  "Margaret Fedor",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+                                                   }
+                                               ]
+                                  }
+                  },
                   {
                       "label":  "Current Week",
                       "weekStart":  "2026-09-09",
@@ -41,11 +88,15 @@
                                       "Josh":  [
                                                    {
                                                        "customerName":  "Jr Hartman",
-                                                       "reason":  "not yet logged in the sheet"
+                                                       "reason":  "possibly logged as \"Ronald Hartman\" -- OnCall Air may have the wrong name on file"
                                                    },
                                                    {
                                                        "customerName":  "Judy Bakk",
                                                        "reason":  "logged under a different date"
+                                                   },
+                                                   {
+                                                       "customerName":  "Ron Lease",
+                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
                                                    }
                                                ],
                                       "Nick":  [

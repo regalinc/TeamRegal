@@ -124,13 +124,39 @@ foreach ($p in $allPayloads) {
       @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) }).Count -gt 0
     } else { $false }
 
+    # Catches a real, distinct failure mode from the date-mismatch one
+    # above: OnCall Air's own customer record can just have the wrong
+    # name on it (confirmed live -- a real customer's OnCall Air record
+    # had first_name "Jr", last_name "Hartman" where the sheet correctly
+    # has "Ronald Hartman", someone's data-entry mistake on OnCall Air's
+    # side, not ours to auto-fix). Never auto-matched or counted toward
+    # the total either way -- bridging a full first-name mismatch
+    # algorithmically risks matching the wrong person if two different
+    # customers ever share a last name. Only surfaced as a hint when
+    # there's exactly one same-last-name row this week, so whoever's
+    # reviewing Pending can spot and manually confirm it in seconds
+    # instead of being told (misleadingly) that no row exists at all.
+    $lastNameHint = $null
+    if ($candidates.Count -eq 0 -and -not $anyRowForName) {
+      $custLastName = ((NormalizeName $custName) -split ' ' | Select-Object -Last 1)
+      if ($custLastName) {
+        $lastNameMatches = @($hvacSales | Where-Object {
+          $_.date -and ([datetime]$_.date -ge $weekStart) -and ([datetime]$_.date -lt $weekEndExclusive) -and
+          (((NormalizeName $_.customerName) -split ' ' | Select-Object -Last 1) -eq $custLastName)
+        })
+        if ($lastNameMatches.Count -eq 1) { $lastNameHint = $lastNameMatches[0].customerName }
+      }
+    }
+
     $reason = if ($candidates.Count -eq 0) { "no hvac-sales.json match" }
               elseif ($candidates.Count -gt 1) { "ambiguous ($($candidates.Count) matches)" }
               elseif (-not $systemType) { "blank System Type" }
               else { "unrecognized System Type '$systemType'" }
-    $unresolved += "$custName ($ca, week of $($weekStart.ToString('yyyy-MM-dd'))): $reason"
+    $unresolved += "$custName ($ca, week of $($weekStart.ToString('yyyy-MM-dd'))): $reason$(if ($lastNameHint) { " -- possible match: $lastNameHint" })"
     $publicReason = if ($candidates.Count -eq 0) {
-      if ($anyRowForName) { "logged under a different date" } else { "not yet logged in the sheet" }
+      if ($lastNameHint) { "possibly logged as `"$lastNameHint`" -- OnCall Air may have the wrong name on file" }
+      elseif ($anyRowForName) { "logged under a different date" }
+      else { "not yet logged in the sheet" }
     } else { "System Type not entered yet" }
   }
 
@@ -163,7 +189,54 @@ $today = (Get-Date).Date
 $monthStart = (Get-Date -Year $today.Year -Month $today.Month -Day 1).Date
 $monthEndExclusive = $monthStart.AddMonths(1)
 
-$thisMonth = $computed | Where-Object { $_.WeekStart -ge $monthStart -and $_.WeekStart -lt $monthEndExclusive }
+# One-time manual backfill for sales accepted before the OnCall Air webhook
+# went live (2026-09-11) -- the private sold-proposals repo has no history
+# before that date. Pulled by Michael from OnCall Air's own "Accepted"
+# report on 2026-09-11. System Type wasn't visible in that report, so none
+# of these can run through the normal commission math -- they need a human
+# to enter System Type and confirm the rate by hand (use
+# generate-commission-report.ps1 for the exact itemized payroll figures).
+#
+# Feeds two different things: $manualRevenueRows (Revenue only, for the
+# Last month/MTD/YTD goal tracker further down) and $manualPendingRows
+# (below) which surfaces each one in the Commission section's own Pending
+# list for whichever pay week it falls in -- otherwise a sale accepted in
+# the days just before the webhook went live, but still inside a pay week
+# that's showing on the page right now (e.g. Ron Lease, accepted 9/9,
+# falls in the still-open Sept 9-15 week), is invisible everywhere except
+# the Revenue tab, which reads as if it never happened. Never counted
+# toward the Commission total either way -- same "flag, don't guess" rule
+# as every other unresolved sale.
+$MANUAL_REVENUE_BACKFILL = @(
+  @{ CA = "Josh"; Date = "2026-09-09"; Revenue = 15863.00; Name = "Ron Lease" }
+  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00;  Name = "Steve O'Brien" }
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00; Name = "Ron Goodling" }
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00; Name = "Rachel Johnson" }
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00; Name = "Sirina Cohr" }
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05;  Name = "Robert White" }
+  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 16707.00; Name = "Kim Strobeck" }
+  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 12554.00; Name = "Patricia Bingaman" }
+  @{ CA = "Nick"; Date = "2026-09-07"; Revenue = 18308.00; Name = "Margaret Fedor" }
+)
+$manualRevenueRows = $MANUAL_REVENUE_BACKFILL | ForEach-Object {
+  [pscustomobject]@{ CA = $_.CA; Date = [datetime]$_.Date; Revenue = [decimal]$_.Revenue }
+}
+$manualPendingRows = @(
+  $MANUAL_REVENUE_BACKFILL | ForEach-Object {
+    $d = [datetime]$_.Date
+    $ws = WeekStartFor $d
+    if ($ws -ge $monthStart -and $ws -lt $monthEndExclusive) {
+      [pscustomobject]@{
+        CA = $_.CA; WeekStart = $ws; Date = $d; Revenue = [decimal]$_.Revenue
+        Commission = 0; Ok = $false
+        Reason = "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+        CustomerName = $_.Name; SystemType = $null; Rate = $null
+      }
+    }
+  }
+)
+
+$thisMonth = @($computed | Where-Object { $_.WeekStart -ge $monthStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualPendingRows
 $weekGroups = $thisMonth | Group-Object WeekStart | Sort-Object { [datetime]$_.Name }
 
 $weeks = @()
@@ -243,30 +316,8 @@ function SumRevenue($rows, $ca) {
   [math]::Round((($rows | Where-Object { $_.CA -eq $ca } | Measure-Object -Property Revenue -Sum).Sum), 2)
 }
 
-# One-time manual backfill for sales accepted before the OnCall Air webhook
-# went live (2026-09-11) -- the private sold-proposals repo has no history
-# before that date. Pulled by Michael from OnCall Air's own "Accepted"
-# report on 2026-09-11, revenue (total_investment) only -- System Type
-# wasn't visible in that report, so these are excluded from Commission the
-# same way an unresolved webhook sale is above (use
-# generate-commission-report.ps1 for the exact itemized payroll figures on
-# these). Bucketed by actual accepted date below, so each entry naturally
-# stops counting once its date ages out of "this month" -- no manual
-# cleanup needed once October starts.
-$MANUAL_REVENUE_BACKFILL = @(
-  @{ CA = "Josh"; Date = "2026-09-09"; Revenue = 15863.00 }  # Ron Lease
-  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00 }   # Steve O'Brien
-  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00 }  # Ron Goodling
-  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00 }  # Rachel Johnson
-  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00 }  # Sirina Cohr
-  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05 }   # Robert White
-  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 16707.00 }  # Kim Strobeck
-  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 12554.00 }  # Patricia Bingaman
-  @{ CA = "Nick"; Date = "2026-09-07"; Revenue = 18308.00 }  # Margaret Fedor
-)
-$manualRevenueRows = $MANUAL_REVENUE_BACKFILL | ForEach-Object {
-  [pscustomobject]@{ CA = $_.CA; Date = [datetime]$_.Date; Revenue = [decimal]$_.Revenue }
-}
+# $manualRevenueRows built earlier, alongside $manualPendingRows -- see the
+# $MANUAL_REVENUE_BACKFILL comment above.
 $allRevenueRows = @($computed) + @($manualRevenueRows)
 
 # Revenue is bucketed by the actual accepted calendar date, NOT WeekStart --
