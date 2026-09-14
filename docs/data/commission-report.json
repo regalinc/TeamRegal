@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-14T13:58:11.610Z",
+                 "generated_at":  "2026-09-14T14:04:32.508Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -10,7 +10,7 @@
                       "weekEnd":  "2026-09-08",
                       "totals":  {
                                      "Josh":  3030.83,
-                                     "Nick":  0
+                                     "Nick":  616.42
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -46,7 +46,12 @@
                                                  }
                                              ],
                                     "Nick":  [
-
+                                                 {
+                                                     "customerName":  "Margaret Fedor",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.04,
+                                                     "commission":  616.42
+                                                 }
                                              ]
                                 },
                       "pending":  {
@@ -54,10 +59,7 @@
 
                                                ],
                                       "Nick":  [
-                                                   {
-                                                       "customerName":  "Margaret Fedor",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-                                                   }
+
                                                ]
                                   }
                   },
@@ -66,7 +68,7 @@
                       "weekStart":  "2026-09-09",
                       "weekEnd":  "2026-09-15",
                       "totals":  {
-                                     "Josh":  3020.02,
+                                     "Josh":  3821.18,
                                      "Nick":  0
                                  },
                       "sales":  {
@@ -88,6 +90,12 @@
                                                      "systemType":  "Preferred",
                                                      "rate":  0.06,
                                                      "commission":  1182.32
+                                                 },
+                                                 {
+                                                     "customerName":  "Ron Lease",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  801.15
                                                  }
                                              ],
                                     "Nick":  [
@@ -103,10 +111,6 @@
                                                    {
                                                        "customerName":  "Judy Bakk",
                                                        "reason":  "logged under a different date"
-                                                   },
-                                                   {
-                                                       "customerName":  "Ron Lease",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
                                                    }
                                                ],
                                       "Nick":  [
@@ -116,8 +120,8 @@
                   }
               ],
     "mtd":  {
-                "Josh":  6050.85,
-                "Nick":  0
+                "Josh":  6852,
+                "Nick":  616.42
             },
     "revenue":  {
                     "lastMonth":  {

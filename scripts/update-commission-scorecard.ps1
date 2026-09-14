@@ -209,15 +209,15 @@ $monthEndExclusive = $monthStart.AddMonths(1)
 # never counted toward the Commission total, same "flag, don't guess" rule
 # as every other unresolved sale.
 $MANUAL_REVENUE_BACKFILL = @(
-  @{ CA = "Josh"; Date = "2026-09-09"; Revenue = 15863.00; Name = "Ron Lease" }
-  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00;  Name = "Steve O'Brien";   SystemType = "Flex";      Subtotal = 6863.25 }
-  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00; Name = "Ron Goodling";    SystemType = "Legacy";   Subtotal = 14021.28 }
-  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00; Name = "Rachel Johnson";  SystemType = "Legacy";   Subtotal = 11514.00 }
-  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00; Name = "Sirina Cohr";     SystemType = "Legacy";   Subtotal = 10908.17 }
-  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05;  Name = "Robert White";    SystemType = "Preferred"; Subtotal = 7207.10 }
-  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 16707.00; Name = "Kim Strobeck" }
-  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 12554.00; Name = "Patricia Bingaman" }
-  @{ CA = "Nick"; Date = "2026-09-07"; Revenue = 18308.00; Name = "Margaret Fedor" }
+  @{ CA = "Josh"; Date = "2026-09-09"; Revenue = 15863.00; Name = "Ron Lease";         SystemType = "Legacy";   Subtotal = 13352.50 }
+  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00;  Name = "Steve O'Brien";     SystemType = "Flex";      Subtotal = 6863.25 }
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00; Name = "Ron Goodling";      SystemType = "Legacy";   Subtotal = 14021.28 }
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00; Name = "Rachel Johnson";    SystemType = "Legacy";   Subtotal = 11514.00 }
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00; Name = "Sirina Cohr";       SystemType = "Legacy";   Subtotal = 10908.17 }
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05;  Name = "Robert White";      SystemType = "Preferred"; Subtotal = 7207.10 }
+  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 16707.00; Name = "Kim Strobeck";      SystemType = "Legacy";   Subtotal = 14063.00 }
+  @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 12554.00; Name = "Patricia Bingaman"; SystemType = "Legacy";   Subtotal = 11412.08 }
+  @{ CA = "Nick"; Date = "2026-09-07"; Revenue = 18308.00; Name = "Margaret Fedor";    SystemType = "Preferred"; Subtotal = 15410.50 }
 )
 $manualRevenueRows = $MANUAL_REVENUE_BACKFILL | ForEach-Object {
   [pscustomobject]@{ CA = $_.CA; Date = [datetime]$_.Date; Revenue = [decimal]$_.Revenue }
