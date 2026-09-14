@@ -192,28 +192,29 @@ $monthEndExclusive = $monthStart.AddMonths(1)
 # One-time manual backfill for sales accepted before the OnCall Air webhook
 # went live (2026-09-11) -- the private sold-proposals repo has no history
 # before that date. Pulled by Michael from OnCall Air's own "Accepted"
-# report on 2026-09-11. System Type wasn't visible in that report, so none
-# of these can run through the normal commission math -- they need a human
-# to enter System Type and confirm the rate by hand (use
-# generate-commission-report.ps1 for the exact itemized payroll figures).
+# report on 2026-09-11. Revenue (total_investment) is from that report;
+# SystemType/Subtotal, when present, are from Josh/Nick's own manual
+# commission sheet for these (Michael read them off by hand, 2026-09-14) --
+# without both, there's no way to run a sale through the normal commission
+# math, so it stays Pending instead (needs a human to enter System Type and
+# confirm the rate; use generate-commission-report.ps1 for the exact
+# itemized payroll figures either way).
 #
 # Feeds two different things: $manualRevenueRows (Revenue only, for the
-# Last month/MTD/YTD goal tracker further down) and $manualPendingRows
-# (below) which surfaces each one in the Commission section's own Pending
-# list for whichever pay week it falls in -- otherwise a sale accepted in
-# the days just before the webhook went live, but still inside a pay week
-# that's showing on the page right now (e.g. Ron Lease, accepted 9/9,
-# falls in the still-open Sept 9-15 week), is invisible everywhere except
-# the Revenue tab, which reads as if it never happened. Never counted
-# toward the Commission total either way -- same "flag, don't guess" rule
+# Last month/MTD/YTD goal tracker further down) and $manualSupplementRows
+# (below) which surfaces each one in the Commission section for whichever
+# pay week it falls in -- as a real sale (if SystemType/Subtotal are known)
+# or as Pending (if not) -- rather than being invisible everywhere except
+# the Revenue tab, which reads as if it never happened. A Pending one is
+# never counted toward the Commission total, same "flag, don't guess" rule
 # as every other unresolved sale.
 $MANUAL_REVENUE_BACKFILL = @(
   @{ CA = "Josh"; Date = "2026-09-09"; Revenue = 15863.00; Name = "Ron Lease" }
-  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00;  Name = "Steve O'Brien" }
-  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00; Name = "Ron Goodling" }
-  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00; Name = "Rachel Johnson" }
-  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00; Name = "Sirina Cohr" }
-  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05;  Name = "Robert White" }
+  @{ CA = "Josh"; Date = "2026-09-08"; Revenue = 7550.00;  Name = "Steve O'Brien";   SystemType = "Flex";      Subtotal = 6863.25 }
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 15424.00; Name = "Ron Goodling";    SystemType = "Legacy";   Subtotal = 14021.28 }
+  @{ CA = "Josh"; Date = "2026-09-03"; Revenue = 13679.00; Name = "Rachel Johnson";  SystemType = "Legacy";   Subtotal = 11514.00 }
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 12759.00; Name = "Sirina Cohr";     SystemType = "Legacy";   Subtotal = 10908.17 }
+  @{ CA = "Josh"; Date = "2026-09-02"; Revenue = 7928.05;  Name = "Robert White";    SystemType = "Preferred"; Subtotal = 7207.10 }
   @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 16707.00; Name = "Kim Strobeck" }
   @{ CA = "Josh"; Date = "2026-09-01"; Revenue = 12554.00; Name = "Patricia Bingaman" }
   @{ CA = "Nick"; Date = "2026-09-07"; Revenue = 18308.00; Name = "Margaret Fedor" }
@@ -221,22 +222,31 @@ $MANUAL_REVENUE_BACKFILL = @(
 $manualRevenueRows = $MANUAL_REVENUE_BACKFILL | ForEach-Object {
   [pscustomobject]@{ CA = $_.CA; Date = [datetime]$_.Date; Revenue = [decimal]$_.Revenue }
 }
-$manualPendingRows = @(
+$manualSupplementRows = @(
   $MANUAL_REVENUE_BACKFILL | ForEach-Object {
     $d = [datetime]$_.Date
     $ws = WeekStartFor $d
     if ($ws -ge $monthStart -and $ws -lt $monthEndExclusive) {
-      [pscustomobject]@{
-        CA = $_.CA; WeekStart = $ws; Date = $d; Revenue = [decimal]$_.Revenue
-        Commission = 0; Ok = $false
-        Reason = "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-        CustomerName = $_.Name; SystemType = $null; Rate = $null
+      if ($_.SystemType -and $_.Subtotal) {
+        $rate = $RATE_GROUPS[$_.SystemType][$_.CA]
+        [pscustomobject]@{
+          CA = $_.CA; WeekStart = $ws; Date = $d; Revenue = [decimal]$_.Revenue
+          Commission = [decimal]$_.Subtotal * $rate; Ok = $true
+          Reason = $null; CustomerName = $_.Name; SystemType = $_.SystemType; Rate = $rate
+        }
+      } else {
+        [pscustomobject]@{
+          CA = $_.CA; WeekStart = $ws; Date = $d; Revenue = [decimal]$_.Revenue
+          Commission = 0; Ok = $false
+          Reason = "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
+          CustomerName = $_.Name; SystemType = $null; Rate = $null
+        }
       }
     }
   }
 )
 
-$thisMonth = @($computed | Where-Object { $_.WeekStart -ge $monthStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualPendingRows
+$thisMonth = @($computed | Where-Object { $_.WeekStart -ge $monthStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualSupplementRows
 $weekGroups = $thisMonth | Group-Object WeekStart | Sort-Object { [datetime]$_.Name }
 
 $weeks = @()

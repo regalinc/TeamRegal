@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-14T13:30:56.062Z",
+                 "generated_at":  "2026-09-14T13:58:11.610Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -9,12 +9,41 @@
                       "weekStart":  "2026-09-02",
                       "weekEnd":  "2026-09-08",
                       "totals":  {
-                                     "Josh":  0,
+                                     "Josh":  3030.83,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
-
+                                                 {
+                                                     "customerName":  "Steve O\u0027Brien",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.06,
+                                                     "commission":  411.8
+                                                 },
+                                                 {
+                                                     "customerName":  "Rachel Johnson",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  690.84
+                                                 },
+                                                 {
+                                                     "customerName":  "Ron Goodling",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  841.28
+                                                 },
+                                                 {
+                                                     "customerName":  "Robert White",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.06,
+                                                     "commission":  432.43
+                                                 },
+                                                 {
+                                                     "customerName":  "Sirina Cohr",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  654.49
+                                                 }
                                              ],
                                     "Nick":  [
 
@@ -22,26 +51,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Steve O\u0027Brien",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-                                                   },
-                                                   {
-                                                       "customerName":  "Rachel Johnson",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-                                                   },
-                                                   {
-                                                       "customerName":  "Ron Goodling",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-                                                   },
-                                                   {
-                                                       "customerName":  "Robert White",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-                                                   },
-                                                   {
-                                                       "customerName":  "Sirina Cohr",
-                                                       "reason":  "sold before the OnCall Air webhook went live (Sept 11) -- needs manual commission entry"
-                                                   }
+
                                                ],
                                       "Nick":  [
                                                    {
@@ -106,7 +116,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  3020.02,
+                "Josh":  6050.85,
                 "Nick":  0
             },
     "revenue":  {
