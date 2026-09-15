@@ -10,6 +10,19 @@
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "dso":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  0.99,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
                            }
                 },
     "2026-05":  {
@@ -22,6 +35,19 @@
                                "callbackCount":  null,
                                "vehicleCount":  null,
                                "employeeCount":  null,
+                               "dso":  null
+                           },
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  1,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
                                "dso":  null
                            }
                 },
@@ -353,6 +379,66 @@
                                "employeeCount":  null,
                                "vehicleCount":  null,
                                "crewCount":  null
+                           }
+                },
+    "2026-01":  {
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  0.94,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           }
+                },
+    "2026-02":  {
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  0.98,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           }
+                },
+    "2026-03":  {
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  0.97,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
+                           }
+                },
+    "2026-06":  {
+                    "70":  {
+                               "paidHours":  null,
+                               "billedHours":  null,
+                               "attendancePct":  0.99,
+                               "truckInventoryAccuracyPct":  null,
+                               "reviewsGenerated":  null,
+                               "callbackCount":  null,
+                               "vehicleCount":  null,
+                               "employeeCount":  null,
+                               "supportCount":  null,
+                               "productionCount":  null,
+                               "dso":  null
                            }
                 }
 }
