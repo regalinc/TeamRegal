@@ -56,6 +56,7 @@ const tileAvgTicket = document.getElementById("tile-avg-ticket");
 const estimateListCard = document.getElementById("estimate-list-card");
 const estimateListSummary = document.getElementById("estimate-list-summary");
 const estimateListBody = document.getElementById("estimate-list-body");
+const commissionCardEl = document.getElementById("commission-card");
 const commissionRowLastmonth = document.getElementById("commission-row-lastmonth");
 const commissionLabelLastmonth = document.getElementById("commission-label-lastmonth");
 const commissionValueLastmonth = document.getElementById("commission-value-lastmonth");
@@ -582,7 +583,15 @@ function render() {
     followupNudge.hidden = true;
   }
 
-  renderCommission(mine);
+  // Projected Commission is always this-month-plus-last-month numbers,
+  // independent of the period tabs above it (renderCommission computes its
+  // own month windows off `now`, not off currentPeriod) -- so under This
+  // week/Last month/YTD it just kept showing the same frozen "current
+  // month" figures while everything else on the page changed to match the
+  // selected tab. Only render/show it for MTD, same fix already applied to
+  // Josh/Nick's pages (hvac-sales.js).
+  commissionCardEl.hidden = currentPeriod !== "month";
+  if (currentPeriod === "month") renderCommission(mine);
 
   const sorted = unionById(estimatesGiven, approvedThisPeriod).sort((a, b) => {
     const aDate = estimateGivenDate(a, tech) || a.created_at || "";
