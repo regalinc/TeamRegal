@@ -89,6 +89,7 @@ const tileSoldNote = document.getElementById("tile-sold-note");
 const recordListCard = document.getElementById("record-list-card");
 const recordListSummary = document.getElementById("record-list-summary");
 const recordListBody = document.getElementById("record-list-body");
+const commissionCardEl = document.getElementById("commission-card");
 const commissionMonthEl = document.getElementById("commission-month");
 const commissionWeeksEl = document.getElementById("commission-weeks");
 const commissionMtdValueEl = document.getElementById("commission-mtd-value");
@@ -725,7 +726,16 @@ function render() {
   tileSoldNote.textContent = soldFromEarlierCount > 0 ? `incl. ${soldFromEarlierCount} from an earlier period` : "";
 
   renderGoal(CA, currentPeriod);
-  renderCommission(CA);
+
+  // Projected Commission is always this calendar month's numbers (the
+  // weekly Wed-Tue breakdown and its MTD total) -- update-commission-
+  // scorecard.ps1 doesn't compute a lastmonth/ytd version of it at all, so
+  // showing this card under those tabs was just the current month's figures
+  // relabeled as if they were "Last month" or "YTD," which they weren't.
+  // Only render/show it for MTD; hide it entirely otherwise rather than
+  // leave stale content visible under the wrong tab.
+  commissionCardEl.hidden = currentPeriod !== "month";
+  if (currentPeriod === "month") renderCommission(CA);
 
   renderRateBreakdown("breakdown-club-member", closingRateBreakdown(ranInPeriod, soldInPeriod, "clubMember"));
   renderRateBreakdown("breakdown-lead", closingRateBreakdown(ranInPeriod, soldInPeriod, "lead"));
