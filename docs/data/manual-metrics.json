@@ -22,7 +22,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -46,7 +47,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -77,7 +79,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -101,7 +104,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -132,7 +136,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -156,7 +161,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -187,7 +193,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -211,7 +218,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -242,7 +250,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -266,7 +275,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -281,7 +291,7 @@
                                "attendancePct":  null,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  5,
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "dso":  null
@@ -297,7 +307,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  1
                            },
                     "70":  {
                                "paidHours":  null,
@@ -305,7 +316,7 @@
                                "attendancePct":  0.99,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  0,
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "supportCount":  null,
@@ -315,13 +326,14 @@
                     "80":  {
                                "attendancePct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  0,
                                "vehicleCount":  null
                            },
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  0
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -336,7 +348,7 @@
                                "attendancePct":  null,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  4,
                                "vehicleCount":  5,
                                "employeeCount":  5,
                                "dso":  null
@@ -352,7 +364,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  3
                            },
                     "70":  {
                                "paidHours":  null,
@@ -360,7 +373,7 @@
                                "attendancePct":  null,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  7,
                                "vehicleCount":  6,
                                "employeeCount":  null,
                                "supportCount":  null,
@@ -370,13 +383,14 @@
                     "80":  {
                                "attendancePct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  0,
                                "vehicleCount":  0
                            },
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  8,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  3
                            },
                     "50":  {
                                "employeeCount":  5,
@@ -391,7 +405,7 @@
                                "attendancePct":  0.83,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  12,
+                               "callbackCount":  5,
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "dso":  null
@@ -407,7 +421,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  2
                            },
                     "70":  {
                                "paidHours":  null,
@@ -415,7 +430,7 @@
                                "attendancePct":  null,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  5,
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "supportCount":  null,
@@ -425,13 +440,14 @@
                     "80":  {
                                "attendancePct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  1,
                                "vehicleCount":  null
                            },
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  1
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -446,7 +462,7 @@
                                "attendancePct":  null,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  2,
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "dso":  null
@@ -462,7 +478,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  1
                            },
                     "70":  {
                                "paidHours":  null,
@@ -470,7 +487,7 @@
                                "attendancePct":  null,
                                "truckInventoryAccuracyPct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  1,
                                "vehicleCount":  null,
                                "employeeCount":  null,
                                "supportCount":  null,
@@ -480,13 +497,14 @@
                     "80":  {
                                "attendancePct":  null,
                                "reviewsGenerated":  null,
-                               "callbackCount":  null,
+                               "callbackCount":  0,
                                "vehicleCount":  null
                            },
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  1
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -517,7 +535,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -541,7 +560,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -572,7 +592,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -596,7 +617,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
@@ -627,7 +649,8 @@
                                "supportCount":  null,
                                "productionCount":  null,
                                "newCustClubConversion":  null,
-                               "renewalRate":  null
+                               "renewalRate":  null,
+                               "callbackCount":  null
                            },
                     "70":  {
                                "paidHours":  null,
@@ -651,7 +674,8 @@
                     "10":  {
                                "employeeCount":  null,
                                "vehicleCount":  null,
-                               "crewCount":  null
+                               "crewCount":  null,
+                               "callbackCount":  null
                            },
                     "50":  {
                                "employeeCount":  null,
