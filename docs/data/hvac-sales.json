@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  537
+                 "record_count":  538
              },
     "records":  [
                     {
@@ -5859,23 +5859,12 @@
                         "ca":  "Josh",
                         "date":  "2026-09-15",
                         "customerName":  "Mary Myers",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "61639",
+                        "systemType":  "Legacy",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
-                    },
-                    {
-                        "ca":  "Josh",
-                        "date":  "2026-09-16",
-                        "customerName":  "Mark Price",
-                        "job":  "",
-                        "systemType":  "",
-                        "clubMember":  "Yes",
-                        "lead":  "Tech",
-                        "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -5907,6 +5896,28 @@
                         "systemType":  "",
                         "clubMember":  "No",
                         "lead":  "EC",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-17",
+                        "customerName":  "Tina Kent",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-18",
+                        "customerName":  "Mark Price",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
                         "customerType":  "Existing",
                         "sold":  false
                     }
