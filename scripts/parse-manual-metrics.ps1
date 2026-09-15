@@ -42,7 +42,10 @@
 # brand new workbook or a month with nothing entered yet is a real state --
 # so an empty result still writes, but a copy/open failure never does).
 param(
-  [string]$Path = "C:\Users\MichaelLohssJr\OneDrive - Regal, Inc,\Regal, Inc\Company Scorecard\Manual Metrics.xlsx",
+  # Moved 2026-09-15 from the private "OneDrive - Regal, Inc," root into the
+  # shared "Regal, Inc. - Documents" library, at the user's request, so
+  # department managers filling in their own tab can actually find the file.
+  [string]$Path = "C:\Users\MichaelLohssJr\Regal, Inc,\Regal, Inc. - Documents\Company Scorecard\Manual Metrics.xlsx",
   [string]$OutJson = "docs\data\manual-metrics.json"
 )
 
