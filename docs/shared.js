@@ -421,27 +421,38 @@ function renderStatTile({ label, value, meterPct }) {
   return tile;
 }
 
-// Raw totals — used for the page-level summary row (Team/Company summary),
-// as opposed to computeScorecardStats' tag-based numbers used on each card.
+// Raw totals — used for the page-level summary row (Team/Company summary).
+// Jobs/Avg ticket now use the exact same countsTowardJobs() definition
+// computeScorecardStats' department/tech cards already use (Opportunity tag
+// for most departments, Oncall Air tag for BU 10, raw count for BU 50) —
+// changed at the user's request (2026-09-15) after this page-level summary
+// and admin.html's per-department cards were found showing different Jobs/
+// Avg ticket numbers for the same department: the card's Jobs count only
+// ever counted "real opportunities" (tag-filtered), while this summary
+// counted every completed job and divided revenue by billed-job count
+// instead — two different, correctly-computed but confusingly-different
+// answers sitting next to each other. Revenue is deliberately NOT
+// tag-filtered either way — total revenue for the period, all completed
+// work — only which jobs count as "a job" and the Avg ticket denominator
+// changed.
 function computeStats(allJobs) {
   const jobs = allJobs.filter((j) => !CANCELED_STATUSES.has(j.work_status));
   const startedJobs = jobs.filter((j) => !NOT_YET_STARTED_STATUSES.has(j.work_status));
   const completedJobs = startedJobs.filter((j) => COMPLETE_STATUSES.has(j.work_status));
   const completionRate = startedJobs.length ? (completedJobs.length / startedJobs.length) * 100 : 0;
 
-  // Every total below — Jobs, Revenue, Avg ticket — only counts completed
-  // work. A `scheduled` or `in progress` job's total_amount is very often a
+  // A `scheduled` or `in progress` job's total_amount is very often a
   // pre-set quote for a visit that hasn't happened yet, not real revenue; on
   // the first day of a new month, with most of the month's work still
   // scheduled ahead, that inflated a BU/tech's numbers well past anything
   // actually done (confirmed: a $0-billed month showed thousands of dollars
-  // from scheduled/in-progress jobs alone). Completion rate above is
-  // unaffected — it's deliberately a ratio of started vs. completed, not a
-  // "total."
-  const totalJobs = completedJobs.length;
+  // from scheduled/in-progress jobs alone) — Jobs/Revenue/Avg ticket below
+  // only ever count completed work. Completion rate above is unaffected —
+  // it's deliberately a ratio of started vs. completed, not a "total."
+  const countedJobs = completedJobs.filter(countsTowardJobs);
+  const totalJobs = countedJobs.length;
   const totalRevenueCents = completedJobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
-  const billedJobs = completedJobs.filter((j) => (j.total_amount || 0) > 0);
-  const avgTicketCents = billedJobs.length ? totalRevenueCents / billedJobs.length : 0;
+  const avgTicketCents = totalJobs ? totalRevenueCents / totalJobs : 0;
 
   return {
     totalJobs,
