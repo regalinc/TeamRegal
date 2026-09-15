@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-14T20:05:03.787Z",
+                 "generated_at":  "2026-09-15T16:35:03.468Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -104,11 +104,17 @@
                       "weekStart":  "2026-09-09",
                       "weekEnd":  "2026-09-15",
                       "totals":  {
-                                     "Josh":  4473.54,
+                                     "Josh":  5176.42,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
+                                                 {
+                                                     "customerName":  "Mary Myers",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  702.88
+                                                 },
                                                  {
                                                      "customerName":  "Diane DeVere",
                                                      "systemType":  "Preferred",
@@ -116,16 +122,16 @@
                                                      "commission":  1225.69
                                                  },
                                                  {
-                                                     "customerName":  "Tom Haberkorn",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  612.01
-                                                 },
-                                                 {
                                                      "customerName":  "Ronald Hartman",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
                                                      "commission":  652.36
+                                                 },
+                                                 {
+                                                     "customerName":  "Tom Haberkorn",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  612.01
                                                  },
                                                  {
                                                      "customerName":  "Ethan Besbris",
@@ -158,7 +164,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  7504.37,
+                "Josh":  8207.25,
                 "Nick":  616.42
             },
     "revenue":  {
@@ -167,11 +173,11 @@
                                       "Nick":  0
                                   },
                     "mtd":  {
-                                "Josh":  188632.41,
+                                "Josh":  202549.41,
                                 "Nick":  18308
                             },
                     "ytd":  {
-                                "Josh":  3595666.93,
+                                "Josh":  3609583.93,
                                 "Nick":  520087.53
                             }
                 }
