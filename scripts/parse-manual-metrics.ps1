@@ -73,7 +73,7 @@ $DEPARTMENTS = @(
       @{ Key = "billedHours"; Pct = $false }, @{ Key = "ptuTechDays"; Pct = $false },
       @{ Key = "employeeCount"; Pct = $false }, @{ Key = "supportCount"; Pct = $false },
       @{ Key = "productionCount"; Pct = $false }, @{ Key = "newCustClubConversion"; Pct = $true },
-      @{ Key = "renewalRate"; Pct = $true }
+      @{ Key = "renewalRate"; Pct = $true }, @{ Key = "callbackCount"; Pct = $false }
     )
   },
   @{
@@ -98,7 +98,7 @@ $DEPARTMENTS = @(
     Sheet = "10 HVAC Installation"; Code = "10"
     Columns = @(
       @{ Key = "employeeCount"; Pct = $false }, @{ Key = "vehicleCount"; Pct = $false },
-      @{ Key = "crewCount"; Pct = $false }
+      @{ Key = "crewCount"; Pct = $false }, @{ Key = "callbackCount"; Pct = $false }
     )
   },
   @{

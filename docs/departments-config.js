@@ -265,6 +265,11 @@ const DEPARTMENTS = {
       // conversion >= 50%, existing-customer renewal >= 85%.
       { key: "newCustClubConversion", label: "New-customer club conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
       { key: "renewalRate", label: "Existing-customer renewal rate", type: "pct", target: { goal: 0.85, direction: "min" } },
+      // Added once the separate Company Callback Report started tracking
+      // every department (not just 30/70/80) -- same denominator/compute
+      // pattern as those three. No confirmed target for this department yet,
+      // same untargeted treatment as BU 80's callback tile.
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
     ],
     // Curated view for company-scorecard.html only (see BU 30's scorecard
     // comment). BU 40's revamped list drops the P&L section entirely and
@@ -276,6 +281,7 @@ const DEPARTMENTS = {
       { source: "manual", key: "renewalRate", label: "Existing-customer renewal rate" },
       { source: "manual", key: "ptuConversionPct", label: "PTU marketing conversion" },
       { source: "hcp", key: "totalClubAgreements", label: "Total club agreements" },
+      { source: "manual", key: "callbackCount", label: "Callback rate" },
     ],
   },
   70: {
@@ -507,6 +513,11 @@ const DEPARTMENTS = {
       // as every other range on this chart; 600k is the stretch, not wired in.
       { key: "revenuePerVehicle", label: "Revenue per tech/vehicle", type: "money", target: { goal: 400000, direction: "min" }, compute: (m, s, pnl) => (m.vehicleCount && pnl ? pnl.totalIncome / m.vehicleCount : null) },
       { key: "revenuePerCrew", label: "Revenue per install crew", type: "money", target: { goal: 2500000, direction: "min" }, compute: (m, s, pnl) => (m.crewCount && pnl ? pnl.totalIncome / m.crewCount : null) },
+      // Added once the separate Company Callback Report started tracking
+      // every department (not just 30/70/80) -- same denominator/compute
+      // pattern as those three. No confirmed target for this department yet,
+      // same untargeted treatment as BU 80's callback tile.
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
     ],
   },
   // Confirmed against BU 50's own detailed financial KPI list — replaced the
