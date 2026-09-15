@@ -69,7 +69,11 @@ const HVAC_SALES_MONTHLY_GOALS = {
 };
 const HVAC_SALES_YTD_GOALS = {
   Josh: 3600000,
-  Nick: null,
+  // Nick started in March, not January -- $1,495,000 is already scaled
+  // down by Michael to reflect that shorter window, not a full-year figure,
+  // so the pace math below stays Jan 1-based (unchanged) rather than
+  // needing its own March-start special case for Nick.
+  Nick: 1495000,
 };
 
 const greetingEl = document.getElementById("greeting");
