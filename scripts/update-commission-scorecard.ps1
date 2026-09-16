@@ -69,6 +69,25 @@ function ResolveAliasedName($s) {
   if ($NAME_ALIASES.ContainsKey($key)) { $NAME_ALIASES[$key] } else { $s }
 }
 
+# Manual System Type overrides for a webhook-captured sale whose automatic
+# same-pay-week match to hvac-sales.json failed -- not a name problem (that's
+# $NAME_ALIASES above), a DATE one: the consultation was logged in one pay
+# week but accepted in a later one, so the row exists but falls outside the
+# $weekStart/$weekEndExclusive window the normal match requires (deliberately
+# strict -- see the "same-week miss" comment further down -- broadening it
+# to match across weeks automatically risks pairing the wrong sale when two
+# customers share a name). Keyed by the sold-proposal payload's own
+# proposal.id (stable, unique, never reused) -> confirmed System Type,
+# approved by Michael after manual review.
+# Judy Bakk (proposal 5780155): hvac-sales.json has her consultation dated
+# 9/4 (the week of Sept 2-8), but she wasn't accepted until 9/11 (the week
+# of Sept 9-15) -- exactly the cross-week case this table exists for.
+# System Type confirmed Legacy off the payload's own equipment line ("Bryant®
+# Legacy™ ... Heat Pump Condensing Unit"), approved 2026-09-16.
+$MANUAL_SYSTEM_TYPE_OVERRIDES = @{
+  "5780155" = "Legacy"  # Judy Bakk
+}
+
 # Wednesday-of-the-week a given date falls in (the pay week's start).
 function WeekStartFor([datetime]$date) {
   $daysSinceWednesday = (([int]$date.DayOfWeek) - [int][DayOfWeek]::Wednesday + 7) % 7
@@ -111,6 +130,11 @@ foreach ($p in $allPayloads) {
 
   $systemType = if ($candidates.Count -eq 1) { $candidates[0].systemType } else { $null }
   $ok = $candidates.Count -eq 1 -and $systemType -and $RATE_GROUPS.ContainsKey($systemType)
+
+  if (-not $ok -and $MANUAL_SYSTEM_TYPE_OVERRIDES.ContainsKey([string]$p.proposal.id)) {
+    $systemType = $MANUAL_SYSTEM_TYPE_OVERRIDES[[string]$p.proposal.id]
+    $ok = $true
+  }
 
   $commission = 0
   $rate = $null

@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-15T23:05:03.555Z",
+                 "generated_at":  "2026-09-16T10:59:36.303Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -100,11 +100,11 @@
                                   }
                   },
                   {
-                      "label":  "Current Week",
+                      "label":  "Week 3",
                       "weekStart":  "2026-09-09",
                       "weekEnd":  "2026-09-15",
                       "totals":  {
-                                     "Josh":  5176.42,
+                                     "Josh":  5870.65,
                                      "Nick":  0
                                  },
                       "sales":  {
@@ -120,6 +120,12 @@
                                                      "systemType":  "Preferred",
                                                      "rate":  0.06,
                                                      "commission":  1225.69
+                                                 },
+                                                 {
+                                                     "customerName":  "Judy Bakk",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  694.23
                                                  },
                                                  {
                                                      "customerName":  "Ronald Hartman",
@@ -152,10 +158,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Judy Bakk",
-                                                       "reason":  "logged under a different date"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -164,7 +167,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  8207.25,
+                "Josh":  8901.48,
                 "Nick":  616.42
             },
     "revenue":  {
