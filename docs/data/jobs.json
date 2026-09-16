@@ -307323,9 +307323,9 @@
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 47698,
-    "outstanding_balance": 47698,
+    "outstanding_balance": 0,
     "completed_at": "2026-08-31T12:32:15Z",
-    "updated_at": "2026-09-07T12:30:22Z",
+    "updated_at": "2026-09-16T01:18:12Z",
     "invoice_number": "60353",
     "created_at": "2026-08-13T17:16:30Z"
   },
@@ -319684,9 +319684,9 @@
     "business_unit": "40 HVAC MAINT",
     "lead_source": null,
     "total_amount": 51397,
-    "outstanding_balance": 51397,
+    "outstanding_balance": 0,
     "completed_at": "2026-09-15T15:18:12Z",
-    "updated_at": "2026-09-15T18:02:33Z",
+    "updated_at": "2026-09-16T02:27:10Z",
     "invoice_number": "59824",
     "created_at": "2026-08-03T13:24:47Z"
   },
@@ -320980,7 +320980,7 @@
     "total_amount": 15433,
     "outstanding_balance": 0,
     "completed_at": "2026-09-14T13:54:56Z",
-    "updated_at": "2026-09-14T13:54:56Z",
+    "updated_at": "2026-09-16T00:42:43Z",
     "invoice_number": "59970",
     "created_at": "2026-08-05T15:01:28Z"
   },
@@ -329138,7 +329138,7 @@
   {
     "id": "job_805490c12f9b4940a47f9fc68a989a4a",
     "description": "Billing - 30 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "David M.",
     "city": "York",
     "state": "PA",
@@ -329165,7 +329165,7 @@
     "total_amount": 8900,
     "outstanding_balance": 0,
     "completed_at": "2026-09-10T13:35:07Z",
-    "updated_at": "2026-09-10T13:35:07Z",
+    "updated_at": "2026-09-16T03:24:59Z",
     "invoice_number": "61356",
     "created_at": "2026-09-08T17:14:53Z"
   },
@@ -331161,7 +331161,7 @@
   {
     "id": "job_e5cf478a92c1487a88735f06005f03b1",
     "description": "30 HVAC Service",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "David M.",
     "city": "York",
     "state": "PA",
@@ -331186,9 +331186,9 @@
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 98912,
-    "outstanding_balance": 98912,
-    "completed_at": null,
-    "updated_at": "2026-09-11T19:01:57Z",
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-16T03:24:59Z",
+    "updated_at": "2026-09-16T03:25:17Z",
     "invoice_number": "61504-1",
     "created_at": "2026-09-11T11:22:19Z"
   },
@@ -332437,7 +332437,7 @@
     "total_amount": 50775,
     "outstanding_balance": 0,
     "completed_at": "2026-09-14T17:50:46Z",
-    "updated_at": "2026-09-14T17:50:47Z",
+    "updated_at": "2026-09-16T00:42:41Z",
     "invoice_number": "61558",
     "created_at": "2026-09-14T11:13:40Z"
   },
@@ -332605,7 +332605,7 @@
     "total_amount": 344674,
     "outstanding_balance": 0,
     "completed_at": "2026-09-15T15:20:17Z",
-    "updated_at": "2026-09-15T17:12:10Z",
+    "updated_at": "2026-09-16T00:42:39Z",
     "invoice_number": "61565",
     "created_at": "2026-09-14T11:50:14Z"
   },
