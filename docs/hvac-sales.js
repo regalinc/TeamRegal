@@ -90,10 +90,12 @@ const recordListCard = document.getElementById("record-list-card");
 const recordListSummary = document.getElementById("record-list-summary");
 const recordListBody = document.getElementById("record-list-body");
 const commissionCardEl = document.getElementById("commission-card");
+const salesMetricsCardEl = document.getElementById("sales-metrics-card");
 const commissionMonthEl = document.getElementById("commission-month");
 const commissionWeeksEl = document.getElementById("commission-weeks");
 const commissionMtdValueEl = document.getElementById("commission-mtd-value");
-const commissionInsightsEl = document.getElementById("commission-insights");
+const salesMetricsMonthEl = document.getElementById("sales-metrics-month");
+const salesMetricsInsightsEl = document.getElementById("sales-metrics-insights");
 const commissionDetailSummary = document.getElementById("commission-detail-summary");
 const commissionDetailBody = document.getElementById("commission-detail-body");
 const commissionPendingBanner = document.getElementById("commission-pending-banner");
@@ -540,6 +542,40 @@ function renderCommissionPendingRow(p) {
   `;
 }
 
+// A standalone card, separate from Commission — same underlying
+// latestCommission.closingStats data (still "this calendar month," not
+// scoped by the Last month/MTD/YTD period buttons, same reasoning as
+// Commission below), but these are behavior signals (how a deal closed),
+// not dollars, so they get their own "blocked" section up near Opportunities
+// ran/Sold rather than living inside the money card. Split out from
+// renderCommission() at the user's request (2026-09-16).
+function renderSalesMetrics(CA) {
+  salesMetricsMonthEl.textContent = latestCommission ? commissionMonthLabel(latestCommission.meta && latestCommission.meta.month) : "";
+
+  // Closing-behavior signals, each its own accent-tinted block — omitted
+  // individually (not shown as a dash/0%) when that particular metric has
+  // no sample yet this month, so the row only ever shows real numbers.
+  const closing = (latestCommission && latestCommission.closingStats && latestCommission.closingStats[CA]) || null;
+  const chips = [];
+  if (closing && closing.sameDaySample > 0) {
+    chips.push({ value: `${Math.round(closing.sameDayRate * 100)}% (${closing.sameDayCount} of ${closing.sameDaySample})`, label: "Same-day close" });
+  }
+  if (closing && closing.daysSample > 0) {
+    chips.push({ value: `${closing.avgDaysToClose} day${closing.avgDaysToClose === 1 ? "" : "s"}`, label: "Avg. days to close" });
+  }
+  if (closing && closing.discountSample > 0) {
+    chips.push({ value: `${(closing.avgDiscountPct * 100).toFixed(1)}%`, label: "Avg. discount" });
+  }
+
+  if (chips.length === 0) {
+    salesMetricsInsightsEl.innerHTML = '<div class="commission-empty">No sales metrics yet this month.</div>';
+    return;
+  }
+  salesMetricsInsightsEl.innerHTML = chips
+    .map((c) => `<div class="commission-insight"><span class="commission-insight-value">${escapeHtml(c.value)}</span><span class="commission-insight-label">${escapeHtml(c.label)}</span></div>`)
+    .join("");
+}
+
 // Commission is separate from the ran/sold/period stuff above it — it's
 // always "this calendar month," not scoped by the Last month/MTD/YTD
 // period buttons (a commission week is a fixed Wed-Tue pay cycle, not
@@ -552,8 +588,6 @@ function renderCommission(CA) {
     commissionPendingBanner.hidden = true;
     commissionWeeksEl.innerHTML = '<div class="commission-empty">Commission data not available right now.</div>';
     commissionMtdValueEl.textContent = "—";
-    commissionInsightsEl.hidden = true;
-    commissionInsightsEl.innerHTML = "";
     commissionDetailSummary.textContent = "No sale detail available";
     commissionDetailBody.innerHTML = "";
     return;
@@ -578,25 +612,6 @@ function renderCommission(CA) {
 
   const mtd = (latestCommission.mtd && latestCommission.mtd[CA]) || 0;
   commissionMtdValueEl.textContent = formatDollarsPrecise(mtd);
-
-  // Closing-behavior signals, each its own accent-tinted block — omitted
-  // individually (not shown as a dash/0%) when that particular metric has
-  // no sample yet this month, so the row only ever shows real numbers.
-  const closing = (latestCommission.closingStats && latestCommission.closingStats[CA]) || null;
-  const chips = [];
-  if (closing && closing.sameDaySample > 0) {
-    chips.push({ value: `${Math.round(closing.sameDayRate * 100)}% (${closing.sameDayCount} of ${closing.sameDaySample})`, label: "Same-day close" });
-  }
-  if (closing && closing.daysSample > 0) {
-    chips.push({ value: `${closing.avgDaysToClose} day${closing.avgDaysToClose === 1 ? "" : "s"}`, label: "Avg. days to close" });
-  }
-  if (closing && closing.discountSample > 0) {
-    chips.push({ value: `${(closing.avgDiscountPct * 100).toFixed(1)}%`, label: "Avg. discount" });
-  }
-  commissionInsightsEl.hidden = chips.length === 0;
-  commissionInsightsEl.innerHTML = chips
-    .map((c) => `<div class="commission-insight"><span class="commission-insight-value">${escapeHtml(c.value)}</span><span class="commission-insight-label">${escapeHtml(c.label)}</span></div>`)
-    .join("");
 
   // Pending banner: sits above the week rows because it caveats ALL of
   // them plus MTD, not just one figure — every one of those totals is
@@ -749,15 +764,21 @@ function render() {
 
   renderGoal(CA, currentPeriod);
 
-  // Projected Commission is always this calendar month's numbers (the
-  // weekly Wed-Tue breakdown and its MTD total) -- update-commission-
-  // scorecard.ps1 doesn't compute a lastmonth/ytd version of it at all, so
-  // showing this card under those tabs was just the current month's figures
-  // relabeled as if they were "Last month" or "YTD," which they weren't.
-  // Only render/show it for MTD; hide it entirely otherwise rather than
-  // leave stale content visible under the wrong tab.
+  // Projected Commission and Sales Metrics are both always this calendar
+  // month's numbers (the weekly Wed-Tue breakdown/MTD total, and the
+  // closing-behavior stats derived from the same pipeline) --
+  // update-commission-scorecard.ps1 doesn't compute a lastmonth/ytd version
+  // of either at all, so showing these cards under those tabs was just the
+  // current month's figures relabeled as if they were "Last month" or
+  // "YTD," which they weren't. Only render/show them for MTD; hide both
+  // entirely otherwise rather than leave stale content visible under the
+  // wrong tab.
   commissionCardEl.hidden = currentPeriod !== "month";
-  if (currentPeriod === "month") renderCommission(CA);
+  salesMetricsCardEl.hidden = currentPeriod !== "month";
+  if (currentPeriod === "month") {
+    renderCommission(CA);
+    renderSalesMetrics(CA);
+  }
 
   renderRateBreakdown("breakdown-club-member", closingRateBreakdown(ranInPeriod, soldInPeriod, "clubMember"));
   renderRateBreakdown("breakdown-lead", closingRateBreakdown(ranInPeriod, soldInPeriod, "lead"));
