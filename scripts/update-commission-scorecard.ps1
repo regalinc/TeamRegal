@@ -233,6 +233,19 @@ foreach ($p in $allPayloads) {
   $daysToClose = if ($p.timestamps.created_at) {
     ($acceptedAt - [datetime]$p.timestamps.created_at).TotalDays
   } else { $null }
+  # How much of the deal's own price was given away as discount/rebate --
+  # discounts_total + instant_rebates_total only. customer_direct_rebates_total
+  # is deliberately excluded at the user's request (2026-09-16): those are
+  # utility-company rebates, not something Regal gave up, so including them
+  # would make a CA's own discounting look bigger than it really was. $null
+  # (not 0) when sale_price is missing/zero, same "don't fabricate a data
+  # point" reasoning as SameDayClose/DaysToClose above.
+  $salePrice = if ($p.proposal.sale_price) { [decimal]$p.proposal.sale_price } else { $null }
+  $discountPct = if ($salePrice -and $salePrice -gt 0) {
+    $discountsTotal = if ($p.proposal.discounts_total) { [decimal]$p.proposal.discounts_total } else { 0 }
+    $instantRebates = if ($p.proposal.instant_rebates_total) { [decimal]$p.proposal.instant_rebates_total } else { 0 }
+    ($discountsTotal + $instantRebates) / $salePrice
+  } else { $null }
 
   $computed += [pscustomobject]@{
     CA           = $ca
@@ -247,6 +260,7 @@ foreach ($p in $allPayloads) {
     Rate         = $rate
     SameDayClose = $sameDayClose
     DaysToClose  = $daysToClose
+    DiscountPct  = $discountPct
   }
 }
 
@@ -414,12 +428,15 @@ function ComputeClosingStats($rows, $ca) {
   $withPresented = @($caRows | Where-Object { $null -ne $_.SameDayClose })
   $sameDayCount = @($withPresented | Where-Object { $_.SameDayClose -eq $true }).Count
   $withDays = @($caRows | Where-Object { $null -ne $_.DaysToClose })
+  $withDiscount = @($caRows | Where-Object { $null -ne $_.DiscountPct })
   [ordered]@{
     sameDayRate    = if ($withPresented.Count -gt 0) { [math]::Round($sameDayCount / $withPresented.Count, 4) } else { $null }
     sameDayCount   = $sameDayCount
     sameDaySample  = $withPresented.Count
     avgDaysToClose = if ($withDays.Count -gt 0) { [math]::Round(($withDays | Measure-Object -Property DaysToClose -Average).Average, 1) } else { $null }
     daysSample     = $withDays.Count
+    avgDiscountPct = if ($withDiscount.Count -gt 0) { [math]::Round(($withDiscount | Measure-Object -Property DiscountPct -Average).Average, 4) } else { $null }
+    discountSample = $withDiscount.Count
   }
 }
 $closingStats = [ordered]@{

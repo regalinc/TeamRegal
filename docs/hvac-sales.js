@@ -94,8 +94,6 @@ const commissionMonthEl = document.getElementById("commission-month");
 const commissionWeeksEl = document.getElementById("commission-weeks");
 const commissionMtdValueEl = document.getElementById("commission-mtd-value");
 const commissionInsightsEl = document.getElementById("commission-insights");
-const commissionSamedayValueEl = document.getElementById("commission-sameday-value");
-const commissionAvgdaysValueEl = document.getElementById("commission-avgdays-value");
 const commissionDetailSummary = document.getElementById("commission-detail-summary");
 const commissionDetailBody = document.getElementById("commission-detail-body");
 const commissionPendingBanner = document.getElementById("commission-pending-banner");
@@ -555,6 +553,7 @@ function renderCommission(CA) {
     commissionWeeksEl.innerHTML = '<div class="commission-empty">Commission data not available right now.</div>';
     commissionMtdValueEl.textContent = "—";
     commissionInsightsEl.hidden = true;
+    commissionInsightsEl.innerHTML = "";
     commissionDetailSummary.textContent = "No sale detail available";
     commissionDetailBody.innerHTML = "";
     return;
@@ -580,20 +579,24 @@ function renderCommission(CA) {
   const mtd = (latestCommission.mtd && latestCommission.mtd[CA]) || 0;
   commissionMtdValueEl.textContent = formatDollarsPrecise(mtd);
 
-  // Closing-behavior signals -- hidden entirely rather than showing "—"
-  // when there's no sample yet this month (a fresh CA, or before any sale
-  // has a real webhook payload with timestamps) — a dash here would read
-  // as "0%," not "not enough data yet."
+  // Closing-behavior signals, each its own accent-tinted block — omitted
+  // individually (not shown as a dash/0%) when that particular metric has
+  // no sample yet this month, so the row only ever shows real numbers.
   const closing = (latestCommission.closingStats && latestCommission.closingStats[CA]) || null;
-  const hasSample = closing && (closing.sameDaySample > 0 || closing.daysSample > 0);
-  commissionInsightsEl.hidden = !hasSample;
-  if (hasSample) {
-    commissionSamedayValueEl.textContent =
-      closing.sameDaySample > 0
-        ? `${Math.round(closing.sameDayRate * 100)}% (${closing.sameDayCount} of ${closing.sameDaySample})`
-        : "—";
-    commissionAvgdaysValueEl.textContent = closing.daysSample > 0 ? `${closing.avgDaysToClose} day${closing.avgDaysToClose === 1 ? "" : "s"}` : "—";
+  const chips = [];
+  if (closing && closing.sameDaySample > 0) {
+    chips.push({ value: `${Math.round(closing.sameDayRate * 100)}% (${closing.sameDayCount} of ${closing.sameDaySample})`, label: "Same-day close" });
   }
+  if (closing && closing.daysSample > 0) {
+    chips.push({ value: `${closing.avgDaysToClose} day${closing.avgDaysToClose === 1 ? "" : "s"}`, label: "Avg. days to close" });
+  }
+  if (closing && closing.discountSample > 0) {
+    chips.push({ value: `${(closing.avgDiscountPct * 100).toFixed(1)}%`, label: "Avg. discount" });
+  }
+  commissionInsightsEl.hidden = chips.length === 0;
+  commissionInsightsEl.innerHTML = chips
+    .map((c) => `<div class="commission-insight"><span class="commission-insight-value">${escapeHtml(c.value)}</span><span class="commission-insight-label">${escapeHtml(c.label)}</span></div>`)
+    .join("");
 
   // Pending banner: sits above the week rows because it caveats ALL of
   // them plus MTD, not just one figure — every one of those totals is

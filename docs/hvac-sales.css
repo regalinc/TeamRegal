@@ -437,32 +437,44 @@ body {
 
 .commission-empty { color: var(--text-faint); font-size: 0.82rem; padding: 0.4rem 0; }
 
-/* Closing-behavior signals (same-day close rate, avg. days to close) --
-   secondary to the dollar totals above, so a plain two-up row rather than
-   another bordered section; :not([hidden]) for the same reason as
-   .pace-badge/.commission-row elsewhere on this site -- a bare `display:
-   flex` here would beat the browser's own [hidden]{display:none} at equal
-   specificity and leave an empty row on screen whenever JS hides it (no
-   sample yet for that CA this month). */
+/* Closing-behavior signals (same-day close, avg. days to close, avg.
+   discount) -- rendered as small accent-tinted blocks (same soft-fill/
+   solid-text pairing as .role-chip/.pace-badge elsewhere on this site)
+   rather than plain text, so they read as a distinct "insights" moment
+   instead of blending into the dollar figures around them. :not([hidden])
+   for the same reason as .pace-badge/.commission-row elsewhere -- a bare
+   `display: flex` here would beat the browser's own [hidden]{display:none}
+   at equal specificity and leave an empty row on screen whenever JS hides
+   it (no sample yet for that CA this month). */
 .commission-insights:not([hidden]) {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
 }
-.commission-insight { display: flex; flex-direction: column; gap: 0.1rem; }
+.commission-insight {
+  flex: 1 1 auto;
+  min-width: 108px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem 0.45rem;
+}
 .commission-insight-value {
+  display: block;
   font-family: var(--mono);
-  font-size: 1rem;
-  font-weight: 650;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
 .commission-insight-label {
-  font-size: 0.7rem;
-  color: var(--text-faint);
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
 /* Pending-sales banner -- sits right under the header, above the week

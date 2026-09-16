@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-16T14:11:07.694Z",
+                 "generated_at":  "2026-09-16T17:08:37.861Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -190,14 +190,18 @@
                                       "sameDayCount":  3,
                                       "sameDaySample":  6,
                                       "avgDaysToClose":  3.5,
-                                      "daysSample":  6
+                                      "daysSample":  6,
+                                      "avgDiscountPct":  0.056,
+                                      "discountSample":  6
                                   },
                          "Nick":  {
                                       "sameDayRate":  null,
                                       "sameDayCount":  0,
                                       "sameDaySample":  0,
                                       "avgDaysToClose":  null,
-                                      "daysSample":  0
+                                      "daysSample":  0,
+                                      "avgDiscountPct":  null,
+                                      "discountSample":  0
                                   }
                      }
 }
