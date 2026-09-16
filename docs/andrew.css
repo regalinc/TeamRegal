@@ -604,6 +604,41 @@ body {
 }
 .commission-empty { padding: 0.6rem 0; color: var(--text-faint); font-size: 0.85rem; }
 
+/* Closing-behavior signals (Same-day close, Avg. days to close) on the
+   Sales Metrics card -- same accent-tinted block treatment as HVAC Sales'
+   identical feature (hvac-sales.css), using this page's own --gold/
+   --gold-soft tokens instead of that page's --accent/--accent-soft (same
+   blue value either way -- see this file's :root comment). */
+.commission-insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.commission-insight {
+  flex: 1 1 auto;
+  min-width: 108px;
+  background: var(--gold-soft);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem 0.45rem;
+}
+.commission-insight-value {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.commission-insight-label {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 /* ---------- estimate list ---------- */
 .list-card {
   background: var(--card-bg);

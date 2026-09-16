@@ -56,6 +56,8 @@ const tileAvgTicket = document.getElementById("tile-avg-ticket");
 const estimateListCard = document.getElementById("estimate-list-card");
 const estimateListSummary = document.getElementById("estimate-list-summary");
 const estimateListBody = document.getElementById("estimate-list-body");
+const salesMetricsPeriodEl = document.getElementById("sales-metrics-period");
+const salesMetricsInsightsEl = document.getElementById("sales-metrics-insights");
 const commissionCardEl = document.getElementById("commission-card");
 const commissionRowLastmonth = document.getElementById("commission-row-lastmonth");
 const commissionLabelLastmonth = document.getElementById("commission-label-lastmonth");
@@ -302,6 +304,54 @@ function renderCommissionSaleRow(e) {
 // comment above) -- August isn't shown, but the row itself (and its
 // dropdown group) comes back on its own in October with September's
 // total, no code change needed then.
+//
+// Same-day close / Avg. days to close, the same two closing-behavior
+// signals HVAC Sales added for Josh/Nick (from OnCall Air's timestamps) --
+// here built from Housecall Pro estimates instead, at the user's request
+// (2026-09-16): estimateGivenDate(e, tech) (Andrew's actual scheduled-visit
+// date, not created_at -- see SCHEDULE_SCOPED_ESTIMATOR_IDS in shared.js)
+// against approved_at. Unlike Projected Commission below, this respects
+// whichever period tab is selected rather than being pinned to "this
+// month only" -- HVAC Sales' version is stuck on-month only because it's a
+// batch script (update-commission-scorecard.ps1) that only ever computes
+// the current month; this is computed live from the same estimates every
+// other tile on this page already reflects for the selected period, so
+// there's no reason to special-case it.
+function renderSalesMetrics(approvedThisPeriod, tech, periodLabel) {
+  salesMetricsPeriodEl.textContent = periodLabel;
+
+  const withGiven = approvedThisPeriod
+    .filter((e) => e.approved_at)
+    .map((e) => {
+      const given = estimateGivenDate(e, tech);
+      return given ? { given: new Date(given), approved: new Date(e.approved_at) } : null;
+    })
+    .filter(Boolean);
+
+  const sameDayCount = withGiven.filter((x) => isSameCalendarDay(x.given, x.approved)).length;
+  // A negative gap (approved before the given/scheduled date -- e.g. a
+  // phone approval ahead of the scheduled visit) isn't a real "days to
+  // close" and would skew the average, so it's excluded from this list
+  // specifically -- same-day-close above is unaffected, that's a calendar-
+  // date comparison, not a sign-dependent one.
+  const daysToCloseList = withGiven.map((x) => (x.approved - x.given) / 86_400_000).filter((d) => d >= 0);
+
+  const chips = [];
+  if (withGiven.length > 0) {
+    chips.push({ value: `${Math.round((sameDayCount / withGiven.length) * 100)}% (${sameDayCount} of ${withGiven.length})`, label: "Same-day close" });
+  }
+  if (daysToCloseList.length > 0) {
+    const avgDays = Math.round((daysToCloseList.reduce((sum, d) => sum + d, 0) / daysToCloseList.length) * 10) / 10;
+    chips.push({ value: `${avgDays} day${avgDays === 1 ? "" : "s"}`, label: "Avg. days to close" });
+  }
+
+  salesMetricsInsightsEl.innerHTML = chips.length
+    ? chips
+        .map((c) => `<div class="commission-insight"><span class="commission-insight-value">${escapeHtml(c.value)}</span><span class="commission-insight-label">${escapeHtml(c.label)}</span></div>`)
+        .join("")
+    : '<div class="commission-empty">No closed estimates in this period yet.</div>';
+}
+
 function renderCommission(mine) {
   const now = new Date();
   const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -455,6 +505,8 @@ function render() {
   }
 
   const meta = periodMeta(currentPeriod);
+
+  renderSalesMetrics(approvedThisPeriod, tech, meta.goalLabel);
 
   heroEyebrow.textContent = meta.eyebrow;
   ringNumber.textContent = `${stats.closingRate.toFixed(0)}%`;
