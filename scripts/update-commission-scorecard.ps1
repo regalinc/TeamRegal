@@ -15,12 +15,23 @@
 # adds a $ figure next to a name already visible there, not a new category
 # of exposure.
 #
-# Rate table and the true-subtotal reconstruction (total_investment minus
-# OnCall Air's own commission_markup/financing_markup/rebate_markup, NOT
-# the misleadingly-named proposal.subtotal field) are intentionally
-# duplicated from generate-commission-report.ps1 rather than shared, to
-# keep these two scripts independent -- keep both in sync if the rate
-# table or the subtotal math ever changes.
+# Rate table and the true-subtotal reconstruction (proposal.subtotal minus
+# OnCall Air's own commission_markup/financing_markup/rebate_markup) are
+# intentionally duplicated from generate-commission-report.ps1 rather than
+# shared, to keep these two scripts independent -- keep both in sync if the
+# rate table or the subtotal math ever changes.
+#
+# CORRECTED 2026-09-16: this used to subtract the markups from
+# total_investment instead of proposal.subtotal, on the theory that
+# "subtotal" was OnCall Air's misleadingly-named Total Investment figure
+# with the markups already added back on top. That theory was wrong --
+# total_investment and subtotal are two independently-tracked numbers
+# (subtotal = sale_price - discounts_total; total_investment = balance_due,
+# a different figure that happens to equal subtotal only when
+# financing_markup is $0) -- confirmed against Michael's own manually-
+# computed commission for 7 real Josh sales, which matched proposal.subtotal
+# minus the markups to within a few cents on every one (one exact to the
+# penny) and were off by hundreds of dollars using total_investment.
 #
 # A week "belongs" to whichever calendar month its Wednesday start date
 # falls in, and MTD is just the sum of that month's weeks -- so the
@@ -116,7 +127,11 @@ foreach ($p in $allPayloads) {
   # Revenue (total_investment) doesn't depend on System Type at all -- only
   # Commission does, since the rate table is keyed by it. So a sale with an
   # unresolved System Type still counts toward Revenue below; it's excluded
-  # from Commission only, same as before.
+  # from Commission only, same as before. Deliberately total_investment, NOT
+  # proposal.subtotal, here -- Revenue wants the customer's actual balance
+  # due (full price after discounts), while Commission below wants the
+  # pre-markup subtotal. The two fields measure different things and are
+  # NOT interchangeable -- see the header comment's 2026-09-16 correction.
   $totalInvestment = [decimal]$p.proposal.total_investment
 
   $custName = ResolveAliasedName $p.customer.full_name
@@ -140,10 +155,11 @@ foreach ($p in $allPayloads) {
   $rate = $null
   $publicReason = $null
   if ($ok) {
+    $proposalSubtotal = [decimal]$p.proposal.subtotal
     $commissionMarkup = if ($p.proposal.commission_markup) { [decimal]$p.proposal.commission_markup } else { 0 }
     $financingMarkup = if ($p.proposal.financing_markup) { [decimal]$p.proposal.financing_markup } else { 0 }
     $rebateMarkup = if ($p.proposal.rebate_markup) { [decimal]$p.proposal.rebate_markup } else { 0 }
-    $subtotal = $totalInvestment - $commissionMarkup - $financingMarkup - $rebateMarkup
+    $subtotal = $proposalSubtotal - $commissionMarkup - $financingMarkup - $rebateMarkup
     $rate = $RATE_GROUPS[$systemType][$ca]
     $commission = $subtotal * $rate
   } else {

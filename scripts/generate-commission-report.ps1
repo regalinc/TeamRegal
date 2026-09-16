@@ -1,12 +1,30 @@
 # Weekly sales commission report for Josh Zieger and Nick Webb.
 #
 # Commission is a percentage of each sold proposal's real discounted
-# subtotal -- NOT proposal.subtotal (that field is misleadingly named; it's
-# actually OnCall Air's "Total Investment" figure, with their own Tech Tier
-# commission and financing markup already added back on top). The real
-# subtotal is reconstructed as total_investment - commission_markup -
-# financing_markup - rebate_markup, verified against a real pricing-summary
-# screenshot. The percentage depends on system type:
+# subtotal: proposal.subtotal - commission_markup - financing_markup -
+# rebate_markup. The percentage depends on system type:
+#
+# CORRECTED 2026-09-16: this used to subtract the markups from
+# total_investment instead of proposal.subtotal, on the theory that
+# "subtotal" was misleadingly named -- actually OnCall Air's "Total
+# Investment" figure with the markups already added back on top. That
+# theory was checked against a real pricing-summary screenshot at the time
+# and seemed to hold, but the screenshot happened to be a sale with
+# financing_markup = $0, where total_investment and subtotal coincide by
+# construction -- not a case that could distinguish the two formulas at
+# all. Confirmed wrong against Michael's own manually-computed commission
+# for 7 real Josh sales (several with nonzero financing_markup): using
+# proposal.subtotal as the base matched his numbers to within a few cents
+# on every one (one exact to the penny); using total_investment was off by
+# hundreds of dollars on several. total_investment and subtotal are two
+# independently-tracked OnCall Air numbers, not one field with markups
+# added back on -- subtotal = sale_price - discounts_total;
+# total_investment = balance_due, a different figure entirely that only
+# equals subtotal when financing_markup happens to be $0.
+#
+# THIS MEANS ANY COMMISSION ALREADY PAID OUT USING A PRIOR RUN OF THIS
+# SCRIPT MAY HAVE BEEN UNDERSTATED FOR ANY SALE WITH NONZERO
+# financing_markup -- worth reviewing past payroll runs against this fix.
 #
 #   System type                          Josh   Nick
 #   Flex                                   6%     3%
@@ -113,20 +131,13 @@ foreach ($p in $weekPayloads) {
 
   $custName = ResolveAliasedName $p.customer.full_name
   $acceptedAt = [datetime]$p.timestamps.accepted_at
-  # NOT proposal.subtotal -- confirmed against a real OnCall Air pricing
-  # summary screenshot that the field OnCall Air's webhook literally names
-  # "subtotal" is actually their UI's "Total Investment" figure: the real
-  # discounted subtotal with Tech Tier commission_markup and
-  # financing_markup already added back on top. Backing those back out
-  # reconstructs the true (pre-markup) subtotal -- verified to the penny
-  # (off by $0.02 from a company-wide "round total investment up to the
-  # nearest dollar" office setting, an unavoidable residual of well under
-  # $1 that doesn't move a commission total by more than a few cents).
-  $totalInvestment = [decimal]$p.proposal.total_investment
+  # See the header comment's 2026-09-16 correction -- proposal.subtotal is
+  # the real base, not total_investment.
+  $proposalSubtotal = [decimal]$p.proposal.subtotal
   $commissionMarkup = if ($p.proposal.commission_markup) { [decimal]$p.proposal.commission_markup } else { 0 }
   $financingMarkup = if ($p.proposal.financing_markup) { [decimal]$p.proposal.financing_markup } else { 0 }
   $rebateMarkup = if ($p.proposal.rebate_markup) { [decimal]$p.proposal.rebate_markup } else { 0 }
-  $subtotal = $totalInvestment - $commissionMarkup - $financingMarkup - $rebateMarkup
+  $subtotal = $proposalSubtotal - $commissionMarkup - $financingMarkup - $rebateMarkup
 
   # Match by customer name + same commission week -- not exact date, since
   # the Excel "Date" column and OnCall Air's accepted_at aren't guaranteed
