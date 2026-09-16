@@ -214,6 +214,26 @@ foreach ($p in $allPayloads) {
     } else { "System Type not entered yet" }
   }
 
+  # Closing-behavior signals -- purely a function of the webhook's own
+  # timestamps, unrelated to the hvac-sales.json match/System Type/rate
+  # chain above, so these are captured for EVERY accepted proposal
+  # (Ok or not) rather than gated behind $ok like Commission is. A sale
+  # stuck in Pending over a name/date-matching issue still really did close
+  # same-day or not; excluding it here would just be losing real signal for
+  # a reason that has nothing to do with what these two measure.
+  # Same-day close: last_presented_at and accepted_at fall on the same
+  # local calendar date -- $null (not false) when last_presented_at is
+  # missing, so a payload with no presentation timestamp on record doesn't
+  # silently count as a "didn't close same-day" data point.
+  $sameDayClose = if ($p.timestamps.last_presented_at) {
+    ([datetime]$p.timestamps.last_presented_at).Date -eq $acceptedAt.Date
+  } else { $null }
+  # Days from proposal creation to acceptance -- $null (not 0) when
+  # created_at is missing, same reasoning as above.
+  $daysToClose = if ($p.timestamps.created_at) {
+    ($acceptedAt - [datetime]$p.timestamps.created_at).TotalDays
+  } else { $null }
+
   $computed += [pscustomobject]@{
     CA           = $ca
     WeekStart    = $weekStart
@@ -225,6 +245,8 @@ foreach ($p in $allPayloads) {
     CustomerName = $custName
     SystemType   = $systemType
     Rate         = $rate
+    SameDayClose = $sameDayClose
+    DaysToClose  = $daysToClose
   }
 }
 
@@ -378,6 +400,33 @@ $mtd = [ordered]@{
   Nick = [math]::Round((($thisMonth | Where-Object { $_.CA -eq "Nick" } | Measure-Object -Property Commission -Sum).Sum), 2)
 }
 
+# Closing-behavior stats -- same $thisMonth scope as Commission MTD above
+# (so every figure on the page describes the same set of sales), but
+# Ok/Pending doesn't matter here (see the SameDayClose/DaysToClose comment
+# where they're captured) and $manualSupplementRows entries (the
+# pre-webhook backfill) simply have no SameDayClose/DaysToClose property at
+# all, so PowerShell reads them as $null and they're naturally excluded
+# below without any extra filtering. sampleSize is included alongside each
+# rate/average so the page can show "(5 of 11)" rather than a bare
+# percentage that reads as more certain than a small sample actually is.
+function ComputeClosingStats($rows, $ca) {
+  $caRows = @($rows | Where-Object { $_.CA -eq $ca })
+  $withPresented = @($caRows | Where-Object { $null -ne $_.SameDayClose })
+  $sameDayCount = @($withPresented | Where-Object { $_.SameDayClose -eq $true }).Count
+  $withDays = @($caRows | Where-Object { $null -ne $_.DaysToClose })
+  [ordered]@{
+    sameDayRate    = if ($withPresented.Count -gt 0) { [math]::Round($sameDayCount / $withPresented.Count, 4) } else { $null }
+    sameDayCount   = $sameDayCount
+    sameDaySample  = $withPresented.Count
+    avgDaysToClose = if ($withDays.Count -gt 0) { [math]::Round(($withDays | Measure-Object -Property DaysToClose -Average).Average, 1) } else { $null }
+    daysSample     = $withDays.Count
+  }
+}
+$closingStats = [ordered]@{
+  Josh = ComputeClosingStats $thisMonth "Josh"
+  Nick = ComputeClosingStats $thisMonth "Nick"
+}
+
 # --- Revenue (full job price after discounts, NOT the commission-eligible
 # subtotal) for goal-tracking on the scorecard's own Last month/MTD/YTD tabs.
 # This is proposal.total_investment -- OnCall Air's own sale_price minus
@@ -438,10 +487,11 @@ $revenue = [ordered]@{
 }
 
 $result = [ordered]@{
-  meta    = [ordered]@{ generated_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"); month = $monthStart.ToString("yyyy-MM") }
-  weeks   = $weeks
-  mtd     = $mtd
-  revenue = $revenue
+  meta         = [ordered]@{ generated_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"); month = $monthStart.ToString("yyyy-MM") }
+  weeks        = $weeks
+  mtd          = $mtd
+  revenue      = $revenue
+  closingStats = $closingStats
 }
 
 $result | ConvertTo-Json -Depth 8 | Out-File -FilePath $OutJson -Encoding utf8
