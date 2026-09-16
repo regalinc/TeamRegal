@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-15T22:25:10.229Z",
+    "last_synced_at": "2026-09-16T00:44:48.307Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 2142
+    "trip_count": 2145
   },
   "vehicles": [
     {
@@ -126,7 +126,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 15364
+      "odometer": 15383.7
     },
     {
       "imei": "864486067935557",
@@ -247,7 +247,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 43408.899999999405
+      "odometer": 43412.69999999941
     },
     {
       "imei": "868199050016543",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 81180
+      "odometer": 81221
     },
     {
       "imei": "868199050033175",
@@ -416,6 +416,42 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868199050012070-8134-202609",
+      "imei": "868199050012070",
+      "startTime": "2026-09-16T00:02:29.000Z",
+      "endTime": "2026-09-16T00:13:48.000Z",
+      "distance": 3.8,
+      "averageSpeed": 25.4,
+      "maxSpeed": 40.389115000000004,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 139
+    },
+    {
+      "transactionId": "864486067735866-1968-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-15T23:15:02.000Z",
+      "endTime": "2026-09-15T23:20:04.000Z",
+      "distance": 1.7,
+      "averageSpeed": 21.7,
+      "maxSpeed": 44.738712,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 12
+    },
+    {
+      "transactionId": "864486067735866-1967-202609",
+      "imei": "864486067735866",
+      "startTime": "2026-09-15T22:40:08.000Z",
+      "endTime": "2026-09-15T23:10:14.000Z",
+      "distance": 17.7,
+      "averageSpeed": 37.9,
+      "maxSpeed": 65.2,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 134
+    },
     {
       "transactionId": "862255068902755-4066-202609",
       "imei": "862255068902755",
