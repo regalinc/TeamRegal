@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-17T00:51:05.932Z",
+    "last_synced_at": "2026-09-17T06:36:24.290Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 2412
+    "trip_count": 2413
   },
   "vehicles": [
     {
@@ -416,6 +416,18 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868199050185405-14366-202609",
+      "imei": "868199050185405",
+      "startTime": "2026-09-17T03:50:38.000Z",
+      "endTime": "2026-09-17T03:52:44.000Z",
+      "distance": 0.1,
+      "averageSpeed": 8.6,
+      "maxSpeed": 18,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 58
+    },
     {
       "transactionId": "868199050012070-8145-202609",
       "imei": "868199050012070",
