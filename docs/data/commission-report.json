@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-17T15:30:44.933Z",
+                 "generated_at":  "2026-09-17T15:35:06.585Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -171,7 +171,7 @@
                       "weekEnd":  "2026-09-22",
                       "totals":  {
                                      "Josh":  1575.37,
-                                     "Nick":  612.42
+                                     "Nick":  654.23
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -200,6 +200,12 @@
                                                      "systemType":  "Preferred",
                                                      "rate":  0.04,
                                                      "commission":  612.42
+                                                 },
+                                                 {
+                                                     "customerName":  "Outhouse Storage",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.03,
+                                                     "commission":  41.81
                                                  }
                                              ]
                                 },
@@ -208,17 +214,14 @@
 
                                                ],
                                       "Nick":  [
-                                                   {
-                                                       "customerName":  "Out House Storage",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   }
+
                                                ]
                                   }
                   }
               ],
     "mtd":  {
                 "Josh":  10689.47,
-                "Nick":  1228.84
+                "Nick":  1270.65
             },
     "revenue":  {
                     "lastMonth":  {

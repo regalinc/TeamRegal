@@ -103,6 +103,7 @@ function NormalizeName($s) {
 # it reads the same as the Excel sheet everyone already uses.
 $NAME_ALIASES = @{
   "jr hartman" = "Ronald Hartman"  # OnCall Air has first_name "Jr", last_name "Hartman" on this customer's record; confirmed 2026-09-14 this is Ronald Hartman (hvac-sales.json Job #61525).
+  "out house storage" = "Outhouse Storage"  # OnCall Air has this commercial account as "Out House Storage" (two words); the sheet has it as one word, "Outhouse Storage" -- confirmed by Michael 2026-09-17.
 }
 function ResolveAliasedName($s) {
   $key = NormalizeName $s
