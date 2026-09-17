@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-16T17:08:37.861Z",
+                 "generated_at":  "2026-09-17T14:34:56.800Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -164,6 +164,49 @@
 
                                                ]
                                   }
+                  },
+                  {
+                      "label":  "Current Week",
+                      "weekStart":  "2026-09-16",
+                      "weekEnd":  "2026-09-22",
+                      "totals":  {
+                                     "Josh":  0,
+                                     "Nick":  0
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+
+                                             ],
+                                    "Nick":  [
+
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+                                                   {
+                                                       "customerName":  "Joe Wasylenko",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   },
+                                                   {
+                                                       "customerName":  "Andrew Krepps",
+                                                       "reason":  "logged under a different date"
+                                                   },
+                                                   {
+                                                       "customerName":  "Brenda Lincoln",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   }
+                                               ],
+                                      "Nick":  [
+                                                   {
+                                                       "customerName":  "Ryan Brosius",
+                                                       "reason":  "logged under a different date"
+                                                   },
+                                                   {
+                                                       "customerName":  "Out House Storage",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   }
+                                               ]
+                                  }
                   }
               ],
     "mtd":  {
@@ -176,32 +219,32 @@
                                       "Nick":  0
                                   },
                     "mtd":  {
-                                "Josh":  202549.41,
-                                "Nick":  18308
+                                "Josh":  229955.38,
+                                "Nick":  40885.35
                             },
                     "ytd":  {
-                                "Josh":  3609583.93,
-                                "Nick":  520087.53
+                                "Josh":  3636989.9,
+                                "Nick":  542664.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.5,
-                                      "sameDayCount":  3,
-                                      "sameDaySample":  6,
-                                      "avgDaysToClose":  3.5,
-                                      "daysSample":  6,
-                                      "avgDiscountPct":  0.056,
-                                      "discountSample":  6
+                                      "sameDayRate":  0.5556,
+                                      "sameDayCount":  5,
+                                      "sameDaySample":  9,
+                                      "avgDaysToClose":  2.9,
+                                      "daysSample":  9,
+                                      "avgDiscountPct":  0.0639,
+                                      "discountSample":  9
                                   },
                          "Nick":  {
-                                      "sameDayRate":  null,
-                                      "sameDayCount":  0,
-                                      "sameDaySample":  0,
-                                      "avgDaysToClose":  null,
-                                      "daysSample":  0,
-                                      "avgDiscountPct":  null,
-                                      "discountSample":  0
+                                      "sameDayRate":  1,
+                                      "sameDayCount":  2,
+                                      "sameDaySample":  2,
+                                      "avgDaysToClose":  33.6,
+                                      "daysSample":  2,
+                                      "avgDiscountPct":  0.1083,
+                                      "discountSample":  2
                                   }
                      }
 }
