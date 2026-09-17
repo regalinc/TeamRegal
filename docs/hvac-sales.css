@@ -697,6 +697,14 @@ body {
    accent color rather than muted gray specifically so it doesn't blend in
    with "Not sold," which would defeat the point of distinguishing them. */
 .record-status.scheduled { color: var(--accent); background: var(--accent-soft); }
+/* OnCall Air already confirmed this one accepted; the Excel sheet just
+   hasn't caught up yet (see pendingOnCallAirLabels in hvac-sales.js) --
+   warn-colored like every other "not resolved yet" signal on this page
+   (the Pending banner/rows on the Commission card), distinct from both
+   "Sold" (green, confirmed everywhere) and "Not sold" (neutral gray, no
+   claim either way) so it reads as its own third state, not a variant of
+   either. */
+.record-status.oncall-pending { color: var(--warn); background: var(--warn-soft); }
 
 .no-records { padding: 1rem 1.1rem; color: var(--text-faint); font-size: 0.85rem; border-top: 1px solid var(--border); }
 

@@ -665,6 +665,26 @@ function renderCommission(CA) {
     : "";
 }
 
+// Every OnCall-Air-confirmed sale not yet resolved in the Excel sheet, for
+// this CA, across every week update-commission-scorecard.ps1 currently
+// shows (this month + the one trailing week) — used to badge a "Not sold"
+// opportunity row that's actually already sold per OnCall Air, just
+// waiting on the sheet. Names come through as commission-report.json's
+// pending[].customerName (a full name, e.g. "Joe Wasylenko") but a merged
+// record's own customerName is Housecall Pro's abbreviated "First L."
+// label — normalizeCustomerLabels (above) is the same First-L. shaping
+// buildMergedRecords already uses to join the two sources, reused here so
+// "Joe Wasylenko" matches "Joe W." the same way it would in that join.
+// Self-correcting by construction: once the sheet's updated, the row
+// either resolves (leaves commission's Pending list) or the merged
+// record's own `sold` flips true first — either way this stops matching
+// on its own, no separate "clear the badge" step needed.
+function pendingOnCallAirLabels(commission, CA) {
+  if (!commission || !commission.weeks) return new Set();
+  const names = commission.weeks.flatMap((w) => ((w.pending && w.pending[CA]) || []).map((p) => p.customerName));
+  return new Set(names.flatMap((n) => normalizeCustomerLabels(n)).map((l) => l.toLowerCase()));
+}
+
 function renderRecordRow(r) {
   // Both dates explicitly labeled once they can actually differ (a sold
   // job whose Job # matched a Housecall Pro job created on a later date
@@ -676,8 +696,8 @@ function renderRecordRow(r) {
     dateParts.push(`Sold ${formatDate(r.soldDateResolved)}`);
   }
   const meta = [dateParts.join(" · "), r.lead, r.systemType].filter(Boolean).join(" · ");
-  const statusClass = r.sold ? "won" : upcoming ? "scheduled" : "open";
-  const statusLabel = r.sold ? "Sold" : upcoming ? "Scheduled" : "Not sold";
+  const statusClass = r.sold ? "won" : r.onCallAirPending ? "oncall-pending" : upcoming ? "scheduled" : "open";
+  const statusLabel = r.sold ? "Sold" : r.onCallAirPending ? "Accepted · pending sheet" : upcoming ? "Scheduled" : "Not sold";
   return `
     <div class="record-row">
       <div class="record-left">
@@ -718,9 +738,11 @@ function render() {
 
   const jobsByInvoiceNumber = buildJobsByInvoiceNumber(latestDashboard.jobs || []);
   const salesRows = (latestSales.records || []).filter((r) => r.ca === CA);
+  const pendingLabels = pendingOnCallAirLabels(latestCommission, CA);
   const mine = buildMergedRecords(tech, latestDashboard.estimates || [], salesRows).map((r) => ({
     ...r,
     soldDateResolved: resolveSoldDate(r, jobsByInvoiceNumber),
+    onCallAirPending: !r.sold && normalizeCustomerLabels(r.customerName).some((label) => pendingLabels.has(label.toLowerCase())),
   }));
 
   // Two independently-dated views of the same roster (see resolveSoldDate):
