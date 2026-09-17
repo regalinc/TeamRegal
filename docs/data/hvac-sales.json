@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  540
+                 "record_count":  542
              },
     "records":  [
                     {
@@ -5090,11 +5090,11 @@
                         "date":  "2026-08-03",
                         "customerName":  "Ryan Brosius",
                         "job":  "",
-                        "systemType":  "",
+                        "systemType":  "Preferred",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -5721,7 +5721,7 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -5849,11 +5849,11 @@
                         "date":  "2026-09-14",
                         "customerName":  "Andrew Krepps",
                         "job":  "",
-                        "systemType":  "",
+                        "systemType":  "Tankless",
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -5887,6 +5887,28 @@
                         "lead":  "Tech",
                         "customerType":  "Existing",
                         "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-16",
+                        "customerName":  "Joe Wasylenko",
+                        "job":  "",
+                        "systemType":  "Legacy",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  true
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-16",
+                        "customerName":  "Brenda Lincoln",
+                        "job":  "",
+                        "systemType":  "Legacy",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
