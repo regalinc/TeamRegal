@@ -76,6 +76,18 @@ const HVAC_SALES_YTD_GOALS = {
   Nick: 1495000,
 };
 
+// Nick was in training through early March 2026 -- his real first
+// opportunity was Trevor K. on 2026-03-06 (confirmed by the user,
+// 2026-09-17). A handful of Housecall Pro estimates from that stretch
+// (Jan 27-Feb 19) are still sitting in the synced data, all "in progress"
+// and never approved, seven-plus months stale -- training-period
+// placeholders, not real opportunities he independently ran. Filtered out
+// below wherever Nick's own estimates are gathered, so they don't inflate
+// his YTD Given/closing-rate numbers or clutter the Opportunities list.
+// CA-keyed (not a general rule) since this is specific to how Nick's own
+// tenure started, not something every consultant needs.
+const CA_EFFECTIVE_START_DATE = { Nick: "2026-03-06" };
+
 const greetingEl = document.getElementById("greeting");
 const identityName = document.getElementById("identity-name");
 const avatarSlot = document.getElementById("avatar-slot");
@@ -760,7 +772,22 @@ function render() {
   const pendingEntries = pendingOnCallAirEntries(latestCommission, CA);
   const pendingLabels = new Set(pendingEntries.flatMap((e) => normalizeCustomerLabels(e.customerName)).map((l) => l.toLowerCase()));
   const pendingWeekByLabel = pendingOnCallAirWeekByLabel(pendingEntries);
-  const mine = buildMergedRecords(tech, latestDashboard.estimates || [], salesRows).map((r) => {
+
+  // CA_EFFECTIVE_START_DATE (above): drop this CA's own estimates dated
+  // before their real start, before they ever reach buildMergedRecords --
+  // everyone else's estimates pass through untouched (buildMergedRecords
+  // filters to this tech internally anyway, so leaving other techs' rows
+  // alone here is just avoiding unnecessary work, not a correctness need).
+  const effectiveStartDate = CA_EFFECTIVE_START_DATE[CA];
+  const eligibleEstimates = effectiveStartDate
+    ? (latestDashboard.estimates || []).filter((e) => {
+        if (!(e.assigned_employee_ids || []).includes(tech.id)) return true;
+        const given = estimateGivenDate(e, tech) || e.created_at;
+        return !given || new Date(given) >= new Date(effectiveStartDate);
+      })
+    : latestDashboard.estimates || [];
+
+  const mine = buildMergedRecords(tech, eligibleEstimates, salesRows).map((r) => {
     const matchedLabel = normalizeCustomerLabels(r.customerName).find((label) => pendingLabels.has(label.toLowerCase()));
     return {
       ...r,
