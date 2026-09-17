@@ -293,26 +293,47 @@ function sameLocalDay(isoA, dateStrB) {
 function buildMergedRecords(tech, estimates, salesRows) {
   const mine = estimates.filter((e) => !isCanceledEstimate(e) && (e.assigned_employee_ids || []).includes(tech.id));
   const unclaimed = new Set(salesRows.map((_, i) => i));
+  const rawDateOf = (estimate) => estimate.schedule?.scheduled_start || estimate.created_at;
+  // Case-insensitive -- confirmed 2026-09-17 against a real Housecall Pro
+  // customer record with an all-caps name ("CRISPUS ATTUCKS"), which never
+  // equaled the normal-cased "Crispus Attucks" typed into Excel under a
+  // plain === check.
+  const labelsMatch = (labels, estimateLabel) => labels.some((l) => l.toLowerCase() === estimateLabel.toLowerCase());
+
+  // Three GLOBAL passes (tightest match first) rather than trying all three
+  // strategies for one estimate before moving to the next. Two different
+  // real customers can share the same abbreviated Housecall Pro label (two
+  // unrelated "William H." customers, five weeks apart, both confirmed real
+  // 2026-09-17) -- with a per-estimate loop, whichever estimate happened to
+  // come first in `estimates`' own array order could steal the OTHER
+  // customer's Excel row via the date-blind name-only fallback, even when
+  // the rightful same-day match hadn't been tried yet. Doing every
+  // estimate's exact same-day match first, globally, before any estimate is
+  // allowed to fall back to a looser strategy, means array order can no
+  // longer decide who wins a row that has a real same-day match.
+  const matchOf = new Map();
+  const passes = [
+    (estimate, row) => labelsMatch(normalizeCustomerLabels(row.customerName), estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
+    (estimate, row) => labelsMatch(normalizeCustomerLabels(row.customerName), estimate.customer_label),
+    (estimate, row) => companyPrefixMatch(row.customerName, estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
+  ];
+  for (const pass of passes) {
+    for (const estimate of mine) {
+      if (matchOf.has(estimate)) continue;
+      const matchIdx = [...unclaimed].find((i) => pass(estimate, salesRows[i]));
+      if (matchIdx !== undefined) {
+        matchOf.set(estimate, matchIdx);
+        unclaimed.delete(matchIdx);
+      }
+    }
+  }
 
   const merged = mine.map((estimate) => {
-    const rawDate = estimate.schedule?.scheduled_start || estimate.created_at;
+    const rawDate = rawDateOf(estimate);
     // null for a visit scheduled later than today — see estimateGivenDate.
     const givenDate = estimateGivenDate(estimate, tech);
-
-    let matchIdx = [...unclaimed].find((i) => {
-      const labels = normalizeCustomerLabels(salesRows[i].customerName);
-      return labels.includes(estimate.customer_label) && sameLocalDay(rawDate, salesRows[i].date);
-    });
-    if (matchIdx === undefined) {
-      matchIdx = [...unclaimed].find((i) => normalizeCustomerLabels(salesRows[i].customerName).includes(estimate.customer_label));
-    }
-    if (matchIdx === undefined) {
-      matchIdx = [...unclaimed].find(
-        (i) => companyPrefixMatch(salesRows[i].customerName, estimate.customer_label) && sameLocalDay(rawDate, salesRows[i].date)
-      );
-    }
+    const matchIdx = matchOf.get(estimate);
     const row = matchIdx !== undefined ? salesRows[matchIdx] : null;
-    if (matchIdx !== undefined) unclaimed.delete(matchIdx);
 
     return {
       date: rawDate,
