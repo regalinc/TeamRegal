@@ -139,27 +139,32 @@ foreach ($p in $weekPayloads) {
   $rebateMarkup = if ($p.proposal.rebate_markup) { [decimal]$p.proposal.rebate_markup } else { 0 }
   $subtotal = $proposalSubtotal - $commissionMarkup - $financingMarkup - $rebateMarkup
 
-  # Match by customer name + same commission week -- not exact date, since
-  # the Excel "Date" column and OnCall Air's accepted_at aren't guaranteed
-  # to be the same calendar day. @(...) forces a real array even for
-  # exactly one match -- a bare Where-Object result's .Count is $null for
-  # a single match, not 1 (this only "worked" before because the single-
-  # match case was the unconditional else branch, not an explicit -eq 1
-  # check -- update-commission-scorecard.ps1 hit that same trap directly).
-  $candidates = @($hvacSales | Where-Object {
-    (NormalizeName $_.customerName) -eq (NormalizeName $custName) -and
-    $_.date -and ([datetime]$_.date -ge $WeekStart) -and ([datetime]$_.date -lt $weekEndExclusive)
-  })
+  # Match by customer name only -- NOT scoped to this pay week. CORRECTED
+  # 2026-09-17: the Excel "Date" column is when the estimate/consultation
+  # was scheduled, a different thing entirely from OnCall Air's
+  # accepted_at (the sale date) -- the two can legitimately be days or
+  # weeks apart (confirmed real cases: Judy Bakk, Andrew Krepps, both
+  # logged a full pay week or more before they actually signed). A
+  # same-week requirement here was catching real, unambiguous matches as
+  # if they were missing. The actual risk a date check would guard
+  # against -- two different customers sharing the same name -- is still
+  # caught below: multiple candidates is still "ambiguous," never guessed.
+  # @(...) forces a real array even for exactly one match -- a bare
+  # Where-Object result's .Count is $null for a single match, not 1 (this
+  # only "worked" before because the single-match case was the
+  # unconditional else branch, not an explicit -eq 1 check --
+  # update-commission-scorecard.ps1 hit that same trap directly).
+  $candidates = @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) })
 
   $systemType = $null
   $matchStatus = "ok"
   if (-not $ca) {
     $matchStatus = "unknown CA ($firstName $($p.assigned_consultant.last_name)) -- not Josh or Nick, no rate rules defined"
   } elseif ($candidates.Count -eq 0) {
-    $matchStatus = "NO MATCH in hvac-sales.json for '$custName' in this week -- System Type unknown"
+    $matchStatus = "NO MATCH in hvac-sales.json for '$custName' -- System Type unknown"
   } elseif ($candidates.Count -gt 1) {
     $types = ($candidates | ForEach-Object { "$($_.date):$($_.systemType)" }) -join "; "
-    $matchStatus = "AMBIGUOUS -- $($candidates.Count) rows for '$custName' this week ($types) -- pick manually"
+    $matchStatus = "AMBIGUOUS -- $($candidates.Count) rows for '$custName' ($types) -- pick manually"
   } else {
     $systemType = $candidates[0].systemType
     if (-not $systemType) { $matchStatus = "matched row has blank System Type" }

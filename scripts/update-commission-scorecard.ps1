@@ -135,13 +135,21 @@ foreach ($p in $allPayloads) {
   $totalInvestment = [decimal]$p.proposal.total_investment
 
   $custName = ResolveAliasedName $p.customer.full_name
+  # Matched by name only -- NOT scoped to this pay week. CORRECTED
+  # 2026-09-17: the sheet's "Date" column is when the estimate/consultation
+  # was scheduled, a different thing entirely from OnCall Air's
+  # accepted_at (the sale date this row's own pay week comes from) -- the
+  # two can legitimately be days or weeks apart (confirmed real cases:
+  # Judy Bakk, Andrew Krepps, both logged a full pay week or more before
+  # they actually signed). Requiring them to land in the same week was
+  # catching real, unambiguous matches as if they were missing. The actual
+  # risk a date check would guard against -- two different customers
+  # sharing the same name -- is still caught below: multiple candidates is
+  # still "ambiguous," never guessed at.
   # @(...) forces a real array even when Where-Object matches exactly one
   # row -- otherwise PowerShell hands back a bare object whose .Count is
   # $null, not 1, and a genuinely clean single match gets misclassified.
-  $candidates = @($hvacSales | Where-Object {
-    (NormalizeName $_.customerName) -eq (NormalizeName $custName) -and
-    $_.date -and ([datetime]$_.date -ge $weekStart) -and ([datetime]$_.date -lt $weekEndExclusive)
-  })
+  $candidates = @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) })
 
   $systemType = if ($candidates.Count -eq 1) { $candidates[0].systemType } else { $null }
   $ok = $candidates.Count -eq 1 -and $systemType -and $RATE_GROUPS.ContainsKey($systemType)
@@ -168,35 +176,26 @@ foreach ($p in $allPayloads) {
     # generate-commission-report.ps1 wants the exact cause), and a short,
     # non-technical phrase for the public JSON (Josh/Nick just need "this
     # isn't counted yet," not the internal matching mechanics).
-    # A same-week miss can still have a real row -- just dated outside this
-    # pay week (e.g. consultation Sept 4, accepted sometime the following
-    # week -- a real case this caught). Doesn't change the match/inclusion
-    # rule at all (still requires a same-week row to count toward the
-    # total), only makes the displayed reason honest about which kind of
-    # miss this is, rather than implying "no row exists" when one does.
-    $anyRowForName = if ($candidates.Count -eq 0) {
-      @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) }).Count -gt 0
-    } else { $false }
-
-    # Catches a real, distinct failure mode from the date-mismatch one
-    # above: OnCall Air's own customer record can just have the wrong
-    # name on it (confirmed live -- a real customer's OnCall Air record
-    # had first_name "Jr", last_name "Hartman" where the sheet correctly
-    # has "Ronald Hartman", someone's data-entry mistake on OnCall Air's
-    # side, not ours to auto-fix). Never auto-matched or counted toward
-    # the total either way -- bridging a full first-name mismatch
+    #
+    # Catches a real failure mode distinct from "not logged at all": OnCall
+    # Air's own customer record can just have the wrong name on it
+    # (confirmed live -- a real customer's OnCall Air record had
+    # first_name "Jr", last_name "Hartman" where the sheet correctly has
+    # "Ronald Hartman", someone's data-entry mistake on OnCall Air's side,
+    # not ours to auto-fix). Never auto-matched or counted toward the
+    # total either way -- bridging a full first-name mismatch
     # algorithmically risks matching the wrong person if two different
     # customers ever share a last name. Only surfaced as a hint when
-    # there's exactly one same-last-name row this week, so whoever's
+    # there's exactly one same-last-name row anywhere in the sheet (not
+    # week-scoped, same reasoning as the name match above), so whoever's
     # reviewing Pending can spot and manually confirm it in seconds
     # instead of being told (misleadingly) that no row exists at all.
     $lastNameHint = $null
-    if ($candidates.Count -eq 0 -and -not $anyRowForName) {
+    if ($candidates.Count -eq 0) {
       $custLastName = ((NormalizeName $custName) -split ' ' | Select-Object -Last 1)
       if ($custLastName) {
         $lastNameMatches = @($hvacSales | Where-Object {
-          $_.date -and ([datetime]$_.date -ge $weekStart) -and ([datetime]$_.date -lt $weekEndExclusive) -and
-          (((NormalizeName $_.customerName) -split ' ' | Select-Object -Last 1) -eq $custLastName)
+          ((NormalizeName $_.customerName) -split ' ' | Select-Object -Last 1) -eq $custLastName
         })
         if ($lastNameMatches.Count -eq 1) { $lastNameHint = $lastNameMatches[0].customerName }
       }
@@ -209,7 +208,6 @@ foreach ($p in $allPayloads) {
     $unresolved += "$custName ($ca, week of $($weekStart.ToString('yyyy-MM-dd'))): $reason$(if ($lastNameHint) { " -- possible match: $lastNameHint" })"
     $publicReason = if ($candidates.Count -eq 0) {
       if ($lastNameHint) { "possibly logged as `"$lastNameHint`" -- OnCall Air may have the wrong name on file" }
-      elseif ($anyRowForName) { "logged under a different date" }
       else { "not yet logged in the sheet" }
     } else { "System Type not entered yet" }
   }
