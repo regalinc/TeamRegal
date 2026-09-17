@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-17T15:01:31.892Z",
+                 "generated_at":  "2026-09-17T15:30:44.933Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -170,37 +170,44 @@
                       "weekStart":  "2026-09-16",
                       "weekEnd":  "2026-09-22",
                       "totals":  {
-                                     "Josh":  0,
-                                     "Nick":  0
+                                     "Josh":  1575.37,
+                                     "Nick":  612.42
                                  },
                       "sales":  {
                                     "Josh":  [
-
+                                                 {
+                                                     "customerName":  "Joe Wasylenko",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  375.15
+                                                 },
+                                                 {
+                                                     "customerName":  "Andrew Krepps",
+                                                     "systemType":  "Tankless",
+                                                     "rate":  0.08,
+                                                     "commission":  426.99
+                                                 },
+                                                 {
+                                                     "customerName":  "Brenda Lincoln",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  773.24
+                                                 }
                                              ],
                                     "Nick":  [
-
+                                                 {
+                                                     "customerName":  "Ryan Brosius",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.04,
+                                                     "commission":  612.42
+                                                 }
                                              ]
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Joe Wasylenko",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   },
-                                                   {
-                                                       "customerName":  "Andrew Krepps",
-                                                       "reason":  "System Type not entered yet"
-                                                   },
-                                                   {
-                                                       "customerName":  "Brenda Lincoln",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   }
+
                                                ],
                                       "Nick":  [
-                                                   {
-                                                       "customerName":  "Ryan Brosius",
-                                                       "reason":  "System Type not entered yet"
-                                                   },
                                                    {
                                                        "customerName":  "Out House Storage",
                                                        "reason":  "not yet logged in the sheet"
@@ -210,8 +217,8 @@
                   }
               ],
     "mtd":  {
-                "Josh":  9114.1,
-                "Nick":  616.42
+                "Josh":  10689.47,
+                "Nick":  1228.84
             },
     "revenue":  {
                     "lastMonth":  {
