@@ -201,20 +201,35 @@ function renderLargeAvatar(tech) {
 // name ("Timothy & Brenda Diehl") could resolve to either person's label
 // depending on which one Housecall Pro's customer record is actually filed
 // under — trying both beats guessing wrong and never matching at all.
+//
+// A THIRD variant is included for the "&" case specifically: Housecall Pro
+// sometimes files a couple as a single customer record with a combined
+// first_name ("Stephen & Anne") and one shared last_name, so its own
+// customerLabel() never splits them at all — it comes back "Stephen & Anne
+// B.", not "Stephen B." or "Anne B." individually. Confirmed 2026-09-17
+// against real sold rows (Stephen & Anne Bahn, Gary & Sandy Taylor, Robert &
+// Sarah Soler, Richard & Kelly Bowers, and others) that were logged
+// correctly in Excel but never matched their Housecall Pro estimate —
+// silently landing in the scorecard's "Unknown" bucket for Lead/Club
+// Member/Customer Type despite being real, already-attributed sales.
 function normalizeCustomerLabels(fullName) {
   if (!fullName) return [];
   const trimmed = fullName.trim();
-  const overallLastName = trimmed.split(/\s+/).pop();
-  return trimmed
+  const words = trimmed.split(/\s+/).filter(Boolean);
+  const overallLastName = words[words.length - 1];
+  const perPersonLabels = trimmed
     .split("&")
     .map((part) => {
-      const words = part.trim().split(/\s+/).filter(Boolean);
-      if (words.length === 0) return null;
-      const first = words[0];
-      const last = words.length > 1 ? words[words.length - 1] : overallLastName;
+      const partWords = part.trim().split(/\s+/).filter(Boolean);
+      if (partWords.length === 0) return null;
+      const first = partWords[0];
+      const last = partWords.length > 1 ? partWords[partWords.length - 1] : overallLastName;
       return last ? `${first} ${last[0]}.` : null;
     })
     .filter(Boolean);
+  const joinedLabel =
+    words.length > 1 && overallLastName ? `${words.slice(0, -1).join(" ")} ${overallLastName[0]}.` : null;
+  return [...new Set(joinedLabel ? [...perPersonLabels, joinedLabel] : perPersonLabels)];
 }
 
 // normalizeCustomerLabels only knows how to shape a PERSONAL name ("First
