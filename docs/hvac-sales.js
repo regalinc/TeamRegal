@@ -679,10 +679,29 @@ function renderCommission(CA) {
 // either resolves (leaves commission's Pending list) or the merged
 // record's own `sold` flips true first — either way this stops matching
 // on its own, no separate "clear the badge" step needed.
-function pendingOnCallAirLabels(commission, CA) {
-  if (!commission || !commission.weeks) return new Set();
-  const names = commission.weeks.flatMap((w) => ((w.pending && w.pending[CA]) || []).map((p) => p.customerName));
-  return new Set(names.flatMap((n) => normalizeCustomerLabels(n)).map((l) => l.toLowerCase()));
+// One entry per OnCall-Air-confirmed-but-Excel-pending sale for this CA,
+// carrying the pay week it was accepted in (weekStart, a "yyyy-MM-dd"
+// string) alongside the name — the badge only ever needed the name, but
+// counting one of these toward "Sold" (below) needs to know *when* it was
+// accepted too, to decide whether that falls in whatever period is
+// currently selected.
+function pendingOnCallAirEntries(commission, CA) {
+  if (!commission || !commission.weeks) return [];
+  return commission.weeks.flatMap((w) => ((w.pending && w.pending[CA]) || []).map((p) => ({ customerName: p.customerName, weekStart: w.weekStart })));
+}
+
+// Normalized-label -> weekStart, for the "counts toward Sold" lookup in
+// render() below. First match wins on a collision, which in practice never
+// happens (these are distinct real sales).
+function pendingOnCallAirWeekByLabel(entries) {
+  const map = new Map();
+  for (const e of entries) {
+    for (const label of normalizeCustomerLabels(e.customerName)) {
+      const key = label.toLowerCase();
+      if (!map.has(key)) map.set(key, e.weekStart);
+    }
+  }
+  return map;
 }
 
 function renderRecordRow(r) {
@@ -738,12 +757,18 @@ function render() {
 
   const jobsByInvoiceNumber = buildJobsByInvoiceNumber(latestDashboard.jobs || []);
   const salesRows = (latestSales.records || []).filter((r) => r.ca === CA);
-  const pendingLabels = pendingOnCallAirLabels(latestCommission, CA);
-  const mine = buildMergedRecords(tech, latestDashboard.estimates || [], salesRows).map((r) => ({
-    ...r,
-    soldDateResolved: resolveSoldDate(r, jobsByInvoiceNumber),
-    onCallAirPending: !r.sold && normalizeCustomerLabels(r.customerName).some((label) => pendingLabels.has(label.toLowerCase())),
-  }));
+  const pendingEntries = pendingOnCallAirEntries(latestCommission, CA);
+  const pendingLabels = new Set(pendingEntries.flatMap((e) => normalizeCustomerLabels(e.customerName)).map((l) => l.toLowerCase()));
+  const pendingWeekByLabel = pendingOnCallAirWeekByLabel(pendingEntries);
+  const mine = buildMergedRecords(tech, latestDashboard.estimates || [], salesRows).map((r) => {
+    const matchedLabel = normalizeCustomerLabels(r.customerName).find((label) => pendingLabels.has(label.toLowerCase()));
+    return {
+      ...r,
+      soldDateResolved: resolveSoldDate(r, jobsByInvoiceNumber),
+      onCallAirPending: !r.sold && !!matchedLabel,
+      onCallAirPendingWeekStart: matchedLabel ? pendingWeekByLabel.get(matchedLabel.toLowerCase()) : null,
+    };
+  });
 
   // Two independently-dated views of the same roster (see resolveSoldDate):
   // "ran" by the consultation date, "sold" by the resolved sold date — a
@@ -761,8 +786,35 @@ function render() {
   const ranInPeriod = mine.filter((r) => r.countedDate && dateInPeriod(r.countedDate, currentPeriod));
   const soldInPeriod = mine.filter((r) => r.sold && dateInPeriod(r.soldDateResolved, currentPeriod));
 
+  // A rare third case, distinct from both of the above: OnCall Air already
+  // confirmed the sale, accepted THIS period, but the consultation that
+  // led to it ran in an entirely different one (Ryan Brosius: consultation
+  // in July, didn't accept until September — a ~7-week gap). Excel hasn't
+  // caught up (r.sold is still false) so it's not in soldInPeriod, and its
+  // own "ran" date falls outside the period so it's not in
+  // scheduledInPeriod either — without this, it would be invisible on the
+  // page in any period, indefinitely, for however long the sheet lags.
+  // Counted the same way a genuinely-sold "from an earlier period" record
+  // already is (below), just gated on the accepted week instead of a
+  // confirmed sold date — deliberately NOT extended to a pending sale that
+  // also ran this period (e.g. Andrew Krepps): that one's already visible
+  // via scheduledInPeriod, and folding it in here would inflate the Sold
+  // tile for something Excel hasn't confirmed, which is a bigger step than
+  // just "don't lose track of this one entirely."
+  const onCallAirAcceptedElsewhereRan =
+    currentPeriod === "month"
+      ? mine.filter(
+          (r) =>
+            r.onCallAirPending &&
+            r.onCallAirPendingWeekStart &&
+            dateInPeriod(`${r.onCallAirPendingWeekStart}T00:00:00`, currentPeriod) &&
+            !dateInPeriod(r.date, currentPeriod)
+        )
+      : [];
+
   const ran = ranInPeriod.length;
-  const sold = soldInPeriod.length;
+  const soldTileRecords = [...new Set([...soldInPeriod, ...onCallAirAcceptedElsewhereRan])];
+  const sold = soldTileRecords.length;
   const closingRate = ran ? (sold / ran) * 100 : 0;
 
   const meta = periodMeta(currentPeriod);
@@ -780,8 +832,12 @@ function render() {
   // Of this period's sold count, however many actually ran in some other
   // period — the same "given earlier" transparency Andrew Rouscher's page
   // surfaces for the identical situation, so the number never looks like
-  // it disagrees with the record list below it.
-  const soldFromEarlierCount = soldInPeriod.filter((r) => !dateInPeriod(r.date, currentPeriod)).length;
+  // it disagrees with the record list below it. onCallAirAcceptedElsewhereRan
+  // entries always qualify here by construction (that's exactly what
+  // distinguishes them from a same-period pending sale), so this reads
+  // "incl. 1" the moment Ryan-Brosius-style case exists, same as it would
+  // for a confirmed sale in the identical situation.
+  const soldFromEarlierCount = soldTileRecords.filter((r) => !dateInPeriod(r.date, currentPeriod)).length;
   tileSoldNote.textContent = soldFromEarlierCount > 0 ? `incl. ${soldFromEarlierCount} from an earlier period` : "";
 
   renderGoal(CA, currentPeriod);
@@ -807,15 +863,16 @@ function render() {
   renderRateBreakdown("breakdown-customer-type", closingRateBreakdown(ranInPeriod, soldInPeriod, "customerType"));
   renderSystemTypeBreakdown(systemTypeBreakdown(soldInPeriod));
 
-  // Union of scheduledInPeriod (not ranInPeriod) and soldInPeriod — a job
-  // sold this period but run earlier belongs in the list too, and so does
-  // a consultation booked for later this period that hasn't happened yet
+  // Union of scheduledInPeriod (not ranInPeriod), soldInPeriod, and
+  // onCallAirAcceptedElsewhereRan — a job sold (or OnCall-Air-accepted)
+  // this period but run earlier belongs in the list too, and so does a
+  // consultation booked for later this period that hasn't happened yet
   // (shown, per an explicit request, even though it's excluded from the
   // Ran tile/metrics above until its date actually arrives). Records are
   // unique object references (one per source row, freshly mapped above),
-  // so a plain Set dedupes a row present in both sets without needing a
-  // synthetic id.
-  const listRecords = [...new Set([...scheduledInPeriod, ...soldInPeriod])];
+  // so a plain Set dedupes a row present in more than one of these sets
+  // without needing a synthetic id.
+  const listRecords = [...new Set([...scheduledInPeriod, ...soldInPeriod, ...onCallAirAcceptedElsewhereRan])];
   const sorted = listRecords.sort((a, b) => (b.soldDateResolved || b.date || "").localeCompare(a.soldDateResolved || a.date || ""));
   recordListSummary.textContent = `${sorted.length} opportunit${sorted.length === 1 ? "y" : "ies"} in view`;
   recordListBody.innerHTML = sorted.length ? sorted.map(renderRecordRow).join("") : '<div class="no-records">No opportunities match this period.</div>';
