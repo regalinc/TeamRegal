@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  542
+                 "record_count":  543
              },
     "records":  [
                     {
@@ -5896,6 +5896,17 @@
                         "systemType":  "Legacy",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  true
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-09-16",
+                        "customerName":  "Outhouse Storage",
+                        "job":  "",
+                        "systemType":  "Flex",
+                        "clubMember":  "No",
+                        "lead":  "EC",
                         "customerType":  "Existing",
                         "sold":  true
                     },
