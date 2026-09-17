@@ -173,12 +173,23 @@ const BU_HIDDEN_TV_TILES = {
   80: new Set(["Leads", "Leads sold"]),
 };
 
+// The two tile slots Leads/Leads sold freed up on BU 70/80 (above), filled
+// with per-tech estimate counts at the user's request (2026-09-17) -- same
+// "Est. given"/"Est. approved" pair the Plumbing Flex screen already shows
+// for BU 70, and the same not-BU-scoped estimate matching (buildBuRanked
+// below) since an estimate's own business_unit field is blank on ~80% of
+// them. Both departments already have a confirmed estimateClosingRate
+// target (>= 50%, departments-config.js) to grade "Estimates approved"
+// against, which is why these two specifically (not e.g. BU 30/40, which
+// have no room and a different tile set already).
+const BU_SHOWN_ESTIMATE_TV_TILES = new Set(["70", "80"]);
+
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
 // for a compact list row).
 function metricTiles(stats, sizeClass) {
   const hidden = BU_HIDDEN_TV_TILES[DEPT] || new Set();
-  return [
+  const tiles = [
     ["Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats)],
     ["Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats)],
     ["Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats)],
@@ -187,10 +198,19 @@ function metricTiles(stats, sizeClass) {
     ["Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats)],
     ["$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats)],
     ["Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats)],
-  ]
-    .filter(([label]) => !hidden.has(label))
-    .map(([label, value, cls]) => tvTile(label, value, cls, sizeClass))
-    .join("");
+  ].filter(([label]) => !hidden.has(label));
+
+  // No target exists for the raw "given" count (same as the Flex screen's
+  // identical tile), so it's always neutral; "approved" grades against
+  // estimateClosingRate like every other coloured tile here.
+  if (BU_SHOWN_ESTIMATE_TV_TILES.has(DEPT)) {
+    tiles.push(
+      ["Estimates", stats.estimatesGiven.toLocaleString(), null],
+      ["Estimates approved", stats.estimatesApproved.toLocaleString(), kpiClass("estimateClosingRate", stats)]
+    );
+  }
+
+  return tiles.map(([label, value, cls]) => tvTile(label, value, cls, sizeClass)).join("");
 }
 
 function renderFeatured(entry, screenLabel) {
@@ -485,6 +505,14 @@ function buildRanked(deptTechs, jobs) {
 // screen ranking and BU-40 screen ranking can (and often do) differ, since
 // each is scoped to only that BU's jobs.
 function buildBuRanked(deptTechs, jobs, code) {
+  // Estimates given/approved -- BU 70/80 only (BU_SHOWN_ESTIMATE_TV_TILES,
+  // see metricTiles above). Not BU-scoped, same reasoning as
+  // renderPlumbingFlexScreen: an estimate's own business_unit field is
+  // blank on ~80% of them, so this counts all of a tech's estimates,
+  // matching the BU-70/80-filtered technician card on index.html.
+  const showEstimates = BU_SHOWN_ESTIMATE_TV_TILES.has(code);
+  const allEstimates = showEstimates ? (latestData.estimates || []).filter((est) => !isCanceledEstimate(est)) : [];
+
   const entries = deptTechs.map((tech) => {
     const techJobs = jobs.filter(
       (j) =>
@@ -493,6 +521,18 @@ function buildBuRanked(deptTechs, jobs, code) {
         businessUnitCode(j.business_unit) === code
     );
     const stats = computeScorecardStats(techJobs, { splitRevenue: true });
+
+    if (showEstimates) {
+      const mine = allEstimates.filter((est) => (est.assigned_employee_ids || []).includes(tech.id));
+      const estGiven = mine.filter((est) => dateInPeriod(estimateGivenDate(est, tech), PERIOD));
+      const estApproved = mine.filter((est) => est.approved && dateInPeriod(est.approved_at, PERIOD));
+      stats.estimatesGiven = estGiven.length;
+      stats.estimatesApproved = estApproved.length;
+      // Fraction under the key kpiTier/hcpMetricValue read, so "Estimates
+      // approved" grades against this BU's estimateClosingRate target.
+      stats.estimateClosingRate = estGiven.length ? estApproved.length / estGiven.length : null;
+    }
+
     return { tech, stats };
   });
   entries.sort((a, b) => b.stats.totalRevenue - a.stats.totalRevenue);
