@@ -49,6 +49,20 @@ try {
     exit 0
   }
 
+  # 1.5. Heads-up only, never blocking -- a consultation that's logged once
+  #      "not sold" and then re-logged as a new row once it closes (instead
+  #      of the original row being updated) is the single most common way
+  #      this sheet grows accidental duplicate rows (three real ones found
+  #      2026-09-17: Timothy Hare, Scott Kerr, Glenn Nelson). Just the count
+  #      goes in this log -- full detail is find-duplicate-sales.ps1's job,
+  #      run by hand, since sorting real repeat customers from actual
+  #      duplicates needs a person looking at it.
+  $dupOutput = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "find-duplicate-sales.ps1")
+  $dupCount = ($dupOutput | Select-String -Pattern "^\d+ possible duplicate pair" | ForEach-Object { ($_ -split " ")[0] })
+  if ($dupCount) {
+    Log "$dupCount possible duplicate row pair(s) in the sheet -- run scripts\find-duplicate-sales.ps1 to review"
+  }
+
   # 2. Did the committed file actually change?
   & git diff --quiet -- $DataFile
   if ($LASTEXITCODE -eq 0) {
