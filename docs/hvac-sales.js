@@ -294,11 +294,16 @@ function buildMergedRecords(tech, estimates, salesRows) {
   const mine = estimates.filter((e) => !isCanceledEstimate(e) && (e.assigned_employee_ids || []).includes(tech.id));
   const unclaimed = new Set(salesRows.map((_, i) => i));
   const rawDateOf = (estimate) => estimate.schedule?.scheduled_start || estimate.created_at;
-  // Case-insensitive -- confirmed 2026-09-17 against a real Housecall Pro
-  // customer record with an all-caps name ("CRISPUS ATTUCKS"), which never
-  // equaled the normal-cased "Crispus Attucks" typed into Excel under a
-  // plain === check.
-  const labelsMatch = (labels, estimateLabel) => labels.some((l) => l.toLowerCase() === estimateLabel.toLowerCase());
+  // Case- and whitespace-insensitive -- confirmed 2026-09-17 against two
+  // real Housecall Pro records: an all-caps name ("CRISPUS ATTUCKS") that
+  // never equaled the normal-cased "Crispus Attucks" typed into Excel, and
+  // a commercial account Housecall Pro has as "Out House S." (two words)
+  // where Excel has "Outhouse Storage" -> "Outhouse S." (one word) -- the
+  // same real customer, already known to spell differently between the two
+  // systems (see the identical $NAME_ALIASES entry in
+  // update-commission-scorecard.ps1/generate-commission-report.ps1).
+  const squash = (s) => s.toLowerCase().replace(/\s+/g, "");
+  const labelsMatch = (labels, estimateLabel) => labels.some((l) => squash(l) === squash(estimateLabel));
 
   // Three GLOBAL passes (tightest match first) rather than trying all three
   // strategies for one estimate before moving to the next. Two different
