@@ -1,5 +1,28 @@
 [
   {
+    "id": "csr_dc08f6eb4f134facb2ba63481052543f",
+    "estimate_number": "13475",
+    "customer_label": "Kathy K.",
+    "created_at": "2026-09-18T18:41:12Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_bc6a61865382434b83d1793024416bd3",
     "estimate_number": "13474",
     "customer_label": "Kathy K.",
@@ -74691,29 +74714,6 @@
     "business_unit": null,
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
-    ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_dc08f6eb4f134facb2ba63481052543f",
-    "estimate_number": "13475",
-    "customer_label": "Kathy K.",
-    "created_at": "2026-09-18T18:41:12Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_e328d4cad27249d48750d091fd1faa3b"
     ],
     "work_status": "needs scheduling",
     "approved": false,
