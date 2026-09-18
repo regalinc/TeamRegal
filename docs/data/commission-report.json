@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-17T16:35:13.862Z",
+                 "generated_at":  "2026-09-18T23:05:04.925Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -212,7 +212,19 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
+                                                       "customerName":  "Manuel Matos",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   },
+                                                   {
+                                                       "customerName":  "Alexis Dettinger",
+                                                       "reason":  "System Type not entered yet"
+                                                   },
+                                                   {
                                                        "customerName":  "David Walter",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   },
+                                                   {
+                                                       "customerName":  "Manuel Matos",
                                                        "reason":  "not yet logged in the sheet"
                                                    }
                                                ],
@@ -232,23 +244,23 @@
                                       "Nick":  0
                                   },
                     "mtd":  {
-                                "Josh":  242906.38,
+                                "Josh":  290826.78,
                                 "Nick":  40885.35
                             },
                     "ytd":  {
-                                "Josh":  3649940.9,
+                                "Josh":  3697861.3,
                                 "Nick":  542664.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.6,
-                                      "sameDayCount":  6,
-                                      "sameDaySample":  10,
-                                      "avgDaysToClose":  2.7,
-                                      "daysSample":  10,
-                                      "avgDiscountPct":  0.0636,
-                                      "discountSample":  10
+                                      "sameDayRate":  0.6923,
+                                      "sameDayCount":  9,
+                                      "sameDaySample":  13,
+                                      "avgDaysToClose":  4,
+                                      "daysSample":  13,
+                                      "avgDiscountPct":  0.0578,
+                                      "discountSample":  13
                                   },
                          "Nick":  {
                                       "sameDayRate":  1,
