@@ -332897,7 +332897,7 @@
   {
     "id": "job_c5e302d2bd7c4128bf314534df34e0c0",
     "description": "30 HVAC Service",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "David M.",
     "city": "York",
     "state": "PA",
@@ -332922,7 +332922,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-09-18T12:03:14Z",
-    "updated_at": "2026-09-18T12:03:14Z",
+    "updated_at": "2026-09-19T00:26:01Z",
     "invoice_number": "61504-2",
     "created_at": "2026-09-14T14:02:32Z"
   },
@@ -336486,7 +336486,7 @@
   {
     "id": "job_b17a364c2bd6488696b79b0af7c317d4",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "David M.",
     "city": "York",
     "state": "PA",
@@ -336512,8 +336512,8 @@
     "lead_source": null,
     "total_amount": 54028,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-09-18T23:58:49Z",
+    "completed_at": "2026-09-19T00:26:01Z",
+    "updated_at": "2026-09-19T00:26:01Z",
     "invoice_number": "61771",
     "created_at": "2026-09-18T21:30:37Z"
   },
