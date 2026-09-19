@@ -317724,7 +317724,7 @@
   {
     "id": "job_6ac6987abecd44ef8d5866704d6a7e93",
     "description": "30 - RCC Whole Home Waived Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Heather P.",
     "city": "York",
     "state": "PA",
@@ -317750,7 +317750,7 @@
     "total_amount": 31359,
     "outstanding_balance": 0,
     "completed_at": "2026-09-04T15:26:12Z",
-    "updated_at": "2026-09-07T19:29:29Z",
+    "updated_at": "2026-09-19T14:59:11Z",
     "invoice_number": "61258",
     "created_at": "2026-09-03T22:15:45Z"
   },
@@ -336520,7 +336520,7 @@
   {
     "id": "job_89be340db0e94d0a90bb0a46218c6085",
     "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Heather P.",
     "city": "York",
     "state": "PA",
@@ -336545,8 +336545,8 @@
     "lead_source": null,
     "total_amount": 63280,
     "outstanding_balance": 63280,
-    "completed_at": null,
-    "updated_at": "2026-09-19T14:17:32Z",
+    "completed_at": "2026-09-19T14:59:11Z",
+    "updated_at": "2026-09-19T14:59:11Z",
     "invoice_number": "61773",
     "created_at": "2026-09-19T12:30:52Z"
   },
