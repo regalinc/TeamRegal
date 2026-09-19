@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-19T18:11:29.468Z",
+    "last_synced_at": "2026-09-19T20:56:58.945Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 2875
+    "trip_count": 2878
   },
   "vehicles": [
     {
@@ -104,7 +104,7 @@
         "name": "ProMaster 2500",
         "year": 2024
       },
-      "odometer": 26613.9
+      "odometer": 26614
     },
     {
       "imei": "864486067218087",
@@ -324,7 +324,7 @@
         "name": "Express",
         "year": 2024
       },
-      "odometer": 23540
+      "odometer": 23548
     },
     {
       "imei": "868199050091991",
@@ -346,7 +346,7 @@
         "name": "Promaster 2500",
         "year": 2022
       },
-      "odometer": 51263.7
+      "odometer": 51264.4
     },
     {
       "imei": "868199050092544",
@@ -416,6 +416,42 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868199050092429-11214-202609",
+      "imei": "868199050092429",
+      "startTime": "2026-09-19T20:46:34.000Z",
+      "endTime": "2026-09-19T20:47:05.000Z",
+      "distance": 0,
+      "averageSpeed": 4.3,
+      "maxSpeed": 4.349597,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 13
+    },
+    {
+      "transactionId": "868199050091579-11995-202609",
+      "imei": "868199050091579",
+      "startTime": "2026-09-19T20:01:11.000Z",
+      "endTime": "2026-09-19T20:25:13.000Z",
+      "distance": 8.3,
+      "averageSpeed": 36,
+      "maxSpeed": 50.952422,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 603
+    },
+    {
+      "transactionId": "864486066579554-3862-202609",
+      "imei": "864486066579554",
+      "startTime": "2026-09-19T19:49:39.000Z",
+      "endTime": "2026-09-19T19:49:49.000Z",
+      "distance": 0,
+      "averageSpeed": 0,
+      "maxSpeed": 0,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 0
+    },
     {
       "transactionId": "868199050185405-14408-202609",
       "imei": "868199050185405",
