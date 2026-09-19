@@ -328578,9 +328578,9 @@
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 109778,
-    "outstanding_balance": 109778,
+    "outstanding_balance": 0,
     "completed_at": "2026-09-11T19:23:50Z",
-    "updated_at": "2026-09-14T17:25:07Z",
+    "updated_at": "2026-09-19T11:15:03Z",
     "invoice_number": "56981-2",
     "created_at": "2026-09-08T12:49:19Z"
   },
@@ -336516,6 +336516,39 @@
     "updated_at": "2026-09-19T00:26:01Z",
     "invoice_number": "61771",
     "created_at": "2026-09-18T21:30:37Z"
+  },
+  {
+    "id": "job_89be340db0e94d0a90bb0a46218c6085",
+    "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Heather P.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17408",
+    "schedule": {
+      "scheduled_start": "2026-09-19T13:00:00Z",
+      "scheduled_end": "2026-09-19T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-19T09:00:00-04:00",
+      "scheduled_end_local": "2026-09-19T10:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "tags": [
+      "30",
+      "Opportunity"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
+    "total_amount": 63280,
+    "outstanding_balance": 63280,
+    "completed_at": null,
+    "updated_at": "2026-09-19T14:17:32Z",
+    "invoice_number": "61773",
+    "created_at": "2026-09-19T12:30:52Z"
   },
   {
     "id": "job_360fe5b87e7c497886dd519d8698fd52",
