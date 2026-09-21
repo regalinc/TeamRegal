@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  564
+                 "record_count":  568
              },
     "records":  [
                     {
@@ -6204,7 +6204,51 @@
                         "systemType":  "",
                         "clubMember":  "Yes",
                         "lead":  "EC",
-                        "customerType":  "",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-09-28",
+                        "customerName":  "Georgio Padres",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-09-29",
+                        "customerName":  "Patrick Shaughnessy",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Lowes",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-09-29",
+                        "customerName":  "Sk Md Alimuzzaman",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Lowes",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-09-29",
+                        "customerName":  "Woo Yul Byun",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Lowes",
+                        "customerType":  "New",
                         "sold":  false
                     }
                 ]
