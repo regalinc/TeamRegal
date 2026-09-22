@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  569
+                 "record_count":  571
              },
     "records":  [
                     {
@@ -6178,12 +6178,12 @@
                         "ca":  "Josh",
                         "date":  "2026-09-22",
                         "customerName":  "Mark Lindsay",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "61874",
+                        "systemType":  "NTI",
                         "clubMember":  "Yes",
                         "lead":  "EC",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6193,6 +6193,28 @@
                         "systemType":  "",
                         "clubMember":  "No",
                         "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-24",
+                        "customerName":  "Rajesh Kumar Grandhi",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-25",
+                        "customerName":  "Diane Schaefer",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "EC",
                         "customerType":  "Existing",
                         "sold":  false
                     },
