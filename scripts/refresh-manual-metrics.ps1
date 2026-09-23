@@ -38,6 +38,23 @@ function Log {
 
 Set-Location $RepoRoot
 
+# Serialize against the other refresh scripts (HVAC Sales, Commission
+# Report) -- all of them run git pull/commit/push against this same
+# TeamRegal checkout, and if two fire close enough together, git's own
+# ref-locking makes one fail outright rather than just wait (real incident
+# 2026-09-21 through 2026-09-23: this task and Commission Report were
+# scheduled at the identical times and silently failed nearly every run
+# for two days with "cannot lock ref" / "Cannot fast-forward to multiple
+# branches"). A named Mutex holds even if trigger times ever drift back
+# into collision, or a run just happens to take longer than usual --
+# unlike relying on the schedule's own spacing, which is a guess about how
+# long each run takes.
+$repoLock = New-Object System.Threading.Mutex($false, "Global\TeamRegal-Refresh-Lock")
+if (-not $repoLock.WaitOne([TimeSpan]::FromMinutes(5))) {
+  Log "Could not get the shared TeamRegal refresh lock within 5 minutes -- another refresh script is still running (or stuck); skipping this run rather than racing it"
+  exit 1
+}
+
 try {
   Log "--- refresh start ---"
 
@@ -105,6 +122,9 @@ catch {
   Log "ERROR: $($_.Exception.Message)"
   Log "--- refresh end (error) ---"
   exit 1
+}
+finally {
+  $repoLock.ReleaseMutex()
 }
 
 # ---------------------------------------------------------------------------
