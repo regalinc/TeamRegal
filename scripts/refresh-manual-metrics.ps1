@@ -7,13 +7,16 @@
 # Scheduler a few times a day (see the Register-ScheduledTask snippet at the
 # bottom of this file), but also fine to double-click / run by hand any time.
 #
-# It is a no-op when:
-#   - the workbook is open in Excel or unreachable (parser exits 1, nothing
-#     is written, the live scorecard keeps its last-good numbers)
-#   - the parsed data is byte-for-byte identical to what's committed
-#
-# So scheduling it often is cheap: most runs do nothing, and the first run
-# after a department manager edits the sheet is the one that ships.
+# It is a true no-op (writes nothing at all) only when the workbook is open
+# in Excel or unreachable -- parser exits 1, nothing is written, the live
+# scorecard keeps its last-good numbers. Otherwise every successful run
+# commits and pushes SOMETHING: docs/data/manual-metrics.json when the
+# parsed data actually changed (the first run after a department manager
+# edits the sheet is the one that ships), and always
+# docs/data/refresh-health.json, a tiny timestamp file the dashboard reads
+# to show whether this pipeline is still alive -- added after a real
+# incident (2026-09-21 through 2026-09-23) where a different refresh
+# script failed silently for two days before anyone noticed.
 #
 # Requirements on the machine it runs on: Excel installed, the OneDrive
 # folder synced locally (not online-only), git on PATH with push
@@ -24,6 +27,7 @@ $ErrorActionPreference = "Stop"
 
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $DataFile = "docs/data/manual-metrics.json"
+$HealthFile = "docs/data/refresh-health.json"
 $LogDir   = Join-Path $env:LOCALAPPDATA "TeamRegal"
 $LogFile  = Join-Path $LogDir "refresh-manual-metrics.log"
 
@@ -34,6 +38,17 @@ function Log {
   $line = "{0}  {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $Message
   Add-Content -Path $LogFile -Value $line -Encoding utf8
   Write-Host $line
+}
+
+# Records that this script successfully reached and parsed its source --
+# separate from $DataFile itself because that file's commit-on-diff logic
+# has no per-run timestamp of its own (a timestamp there would make every
+# run look like a change). See refresh-hvac-sales.ps1's copy of this same
+# function for the real incident it exists to catch faster next time.
+function RecordHealthCheck([string]$Key) {
+  $health = if (Test-Path $HealthFile) { Get-Content $HealthFile -Raw | ConvertFrom-Json } else { [pscustomobject]@{} }
+  $health | Add-Member -NotePropertyName $Key -NotePropertyValue ((Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")) -Force
+  ($health | ConvertTo-Json) | Out-File -FilePath $HealthFile -Encoding utf8
 }
 
 Set-Location $RepoRoot
@@ -79,20 +94,28 @@ try {
     exit 0
   }
 
-  # 3. Did the committed file actually change?
+  # 2.5. Reaching here means the workbook was readable and parsed cleanly --
+  #      record that regardless of whether $DataFile itself changed below.
+  RecordHealthCheck "manualMetrics"
+
+  # 3. Did the committed data file actually change? Either way there's now
+  #    something to commit -- at minimum the health check above, which
+  #    always differs run to run.
   & git diff --quiet -- $DataFile
-  if ($LASTEXITCODE -eq 0) {
-    Log "no change in $DataFile, nothing to commit"
-    Log "--- refresh end (no-op) ---"
-    exit 0
+  $filesToCommit = @($HealthFile)
+  $commitMessage = "Refresh health check"
+  if ($LASTEXITCODE -ne 0) {
+    $filesToCommit += $DataFile
+    $commitMessage = "Refresh manual metrics"
+    Log "$DataFile changed, committing"
+  } else {
+    Log "no change in $DataFile, recording health check only"
   }
 
-  Log "$DataFile changed, committing"
-
-  # 4. Commit just this one file (path-scoped, so any unrelated dirty file
-  #    in the tree is left alone).
-  & git add -- $DataFile
-  & git commit -q -m "Refresh manual metrics" -- $DataFile
+  # 4. Commit just these files (path-scoped, so any unrelated dirty file in
+  #    the tree is left alone).
+  & git add -- $filesToCommit
+  & git commit -q -m $commitMessage -- $filesToCommit
   if ($LASTEXITCODE -ne 0) { throw "git commit failed ($LASTEXITCODE)" }
 
   # 5. Rebase onto whatever the hourly HCP sync bot (or any other refresh
@@ -130,19 +153,25 @@ finally {
 # ---------------------------------------------------------------------------
 # One-time setup: register the scheduled task (run once in PowerShell as the
 # user who owns the OneDrive folder; no admin needed for a user task).
-# Fires 12:35, 16:05 and 19:05 on weekdays -- a few minutes after
-# refresh-hvac-sales.ps1's own slots, same offset reasoning as
-# refresh-commission-report.ps1 (so this always sees that run's freshest
-# data if the two ever needed to agree on something, though today they
-# don't share any fields).
+# Fires 12:40, 16:10 and 19:10 on weekdays -- deliberately NOT the same
+# slots as refresh-hvac-sales.ps1 (12:30/16:00/19:00) or
+# refresh-commission-report.ps1 (12:35/16:05/19:05). This task used to sit
+# on Commission Report's exact times, and both scripts run git pull/commit/
+# push against this same checkout -- when they fired together, git's own
+# ref-locking made one fail outright, silently, for two days
+# (2026-09-21 through 2026-09-23) before anyone noticed. All three scripts
+# now also hold a shared mutex around their whole run as a second, timing-
+# independent guard against this -- see refresh-hvac-sales.ps1's own
+# comment on it -- but keep these three schedules staggered anyway so a
+# normal run rarely has to wait on another one at all.
 #
 #   $ps  = "powershell.exe"
 #   $arg = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\dev\TeamRegal\scripts\refresh-manual-metrics.ps1"'
 #   $act = New-ScheduledTaskAction -Execute $ps -Argument $arg
 #   $trg = @(
-#     New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 12:35PM
-#     New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 4:05PM
-#     New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 7:05PM
+#     New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 12:40PM
+#     New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 4:10PM
+#     New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 7:10PM
 #   )
 #   $set = New-ScheduledTaskSettingsSet -StartWhenAvailable -DontStopOnIdleEnd -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
 #   Register-ScheduledTask -TaskName "TeamRegal - Refresh Manual Metrics" -Action $act -Trigger $trg -Settings $set -Description "Parse the Manual Metrics workbook and push docs/data/manual-metrics.json if it changed."

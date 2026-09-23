@@ -24,6 +24,7 @@ $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $OncallairRepo = "C:\dev\oncallair-sales-data"
 $DataFile = "docs/data/commission-report.json"
+$HealthFile = "docs/data/refresh-health.json"
 $LogDir   = Join-Path $env:LOCALAPPDATA "TeamRegal"
 $LogFile  = Join-Path $LogDir "refresh-commission-report.log"
 
@@ -34,6 +35,18 @@ function Log {
   $line = "{0}  {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $Message
   Add-Content -Path $LogFile -Value $line -Encoding utf8
   Write-Host $line
+}
+
+# Records that this script successfully pulled and recomputed -- belt and
+# suspenders alongside commission-report.json's own meta.generated_at
+# (which already updates every run) so hvac-sales.html's staleness banner
+# reads from ONE place for all three refresh scripts rather than each
+# having its own shape. See refresh-hvac-sales.ps1's copy of this same
+# function for the real incident it exists to catch faster next time.
+function RecordHealthCheck([string]$Key) {
+  $health = if (Test-Path $HealthFile) { Get-Content $HealthFile -Raw | ConvertFrom-Json } else { [pscustomobject]@{} }
+  $health | Add-Member -NotePropertyName $Key -NotePropertyValue ((Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")) -Force
+  ($health | ConvertTo-Json) | Out-File -FilePath $HealthFile -Encoding utf8
 }
 
 # Serialize against the other refresh scripts (HVAC Sales, Manual Metrics)
@@ -88,20 +101,30 @@ try {
     exit 1
   }
 
-  # 4. Did the committed file actually change?
+  # 3.5. Reaching here means both repos pulled cleanly and the recompute
+  #      succeeded -- record that regardless of whether $DataFile itself
+  #      changed below.
+  Set-Location $RepoRoot
+  RecordHealthCheck "commission"
+
+  # 4. Did the committed data file actually change? Either way there's now
+  #    something to commit -- at minimum the health check above, which
+  #    always differs run to run.
   & git diff --quiet -- $DataFile
-  if ($LASTEXITCODE -eq 0) {
-    Log "no change in $DataFile, nothing to commit"
-    Log "--- refresh end (no-op) ---"
-    exit 0
+  $filesToCommit = @($HealthFile)
+  $commitMessage = "Refresh health check"
+  if ($LASTEXITCODE -ne 0) {
+    $filesToCommit += $DataFile
+    $commitMessage = "Refresh commission report"
+    Log "$DataFile changed, committing"
+  } else {
+    Log "no change in $DataFile, recording health check only"
   }
 
-  Log "$DataFile changed, committing"
-
-  # 5. Commit just this one file (path-scoped, so any unrelated dirty file
-  #    in the tree is left alone).
-  & git add -- $DataFile
-  & git commit -q -m "Refresh commission report" -- $DataFile
+  # 5. Commit just these files (path-scoped, so any unrelated dirty file in
+  #    the tree is left alone).
+  & git add -- $filesToCommit
+  & git commit -q -m $commitMessage -- $filesToCommit
   if ($LASTEXITCODE -ne 0) { throw "git commit failed ($LASTEXITCODE)" }
 
   # 6. Rebase onto whatever the hourly HCP sync bot (or the HVAC Sales

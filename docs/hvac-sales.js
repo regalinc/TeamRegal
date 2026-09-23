@@ -977,6 +977,7 @@ async function loadData() {
     // workbook has new rows, same as pnl-monthly.json/manual-metrics.json
     // on company-scorecard.html, which follows this identical convention).
     updateSyncStatus(latestDashboard.meta || {});
+    checkRefreshHealth(["hvacSales", "commission"]);
   } catch (err) {
     syncStatusEl.textContent = "Failed to load data";
     syncStatusEl.classList.add("error");

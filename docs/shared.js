@@ -1004,6 +1004,69 @@ function updateSyncStatus(meta) {
   syncStatusEl.classList.toggle("stale", ageMs > STALE_AFTER_MS);
 }
 
+// Separate from updateSyncStatus above -- that one watches dashboard.json's
+// hourly HCP sync bot, this one watches the human-maintained Excel
+// pipelines (scripts/refresh-hvac-sales.ps1, refresh-commission-report.ps1,
+// refresh-manual-metrics.ps1), which only run a few times on weekdays and
+// went silently broken for two days (2026-09-21 through 2026-09-23) with
+// nothing on any page to show it. Each script writes its own key into
+// docs/data/refresh-health.json on every successful run, whether or not
+// the underlying data actually changed (a per-run timestamp can't live
+// inside hvac-sales.json/manual-metrics.json themselves -- see
+// refresh-hvac-sales.ps1's header comment on why).
+//
+// "Stale" means the most recently COMPLETED weekday (walking back over a
+// weekend) has no successful check on record -- not a fixed hour count,
+// since these scripts only run Mon-Fri and a flat threshold would falsely
+// flag every Monday morning before that day's first run has had a chance
+// to fire yet.
+function mostRecentCompleteWeekday(now) {
+  const d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  d.setDate(d.getDate() - 1);
+  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() - 1);
+  return d;
+}
+
+const REFRESH_HEALTH_LABELS = {
+  hvacSales: "HVAC Sales sheet",
+  commission: "Commission report",
+  manualMetrics: "Manual Metrics sheet",
+};
+
+// `keys` are which of refresh-health.json's entries this particular page
+// cares about (hvac-sales.html watches hvacSales+commission,
+// company-scorecard.html watches manualMetrics) -- a page only warns about
+// the pipelines that actually feed it. Silently no-ops on a page with no
+// #staleness-banner element, and on a network hiccup fetching the health
+// file itself -- that's not worth alarming over when the page's own data
+// fetch already has its own error state.
+async function checkRefreshHealth(keys) {
+  const banner = document.getElementById("staleness-banner");
+  if (!banner) return;
+  try {
+    const res = await fetch(`data/refresh-health.json?_=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const health = await res.json();
+    const floor = mostRecentCompleteWeekday(new Date());
+    const stale = keys
+      .map((key) => ({ key, at: health[key] ? new Date(health[key]) : null }))
+      .filter((r) => !r.at || Number.isNaN(r.at.getTime()) || r.at < floor);
+
+    if (stale.length === 0) {
+      banner.hidden = true;
+      return;
+    }
+    const parts = stale.map((r) => {
+      const label = REFRESH_HEALTH_LABELS[r.key] || r.key;
+      return r.at ? `${label} (last checked ${r.at.toLocaleDateString()})` : `${label} (never checked)`;
+    });
+    banner.textContent = `⚠ ${parts.join(", ")} hasn't refreshed since before the last business day — the scheduled sync may be stuck.`;
+    banner.hidden = false;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 // A scorecard: header line + tag-based mini stat tiles (computeScorecardStats
 // — same metric set as computeStats' raw totals, but scoped to just this
 // card's jobs), with the underlying job list tucked behind a native

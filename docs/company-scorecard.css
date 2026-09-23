@@ -2,6 +2,22 @@
 
 .topbar h1 { font-size: 1.05rem; margin: 0 0 0 4px; color: var(--text-muted); font-weight: 500; }
 
+/* Page-level staleness warning (shared.js's checkRefreshHealth) -- sits
+   outside #app, not inside it, since #app's innerHTML gets replaced
+   wholesale on every render and would otherwise wipe this out. Hidden by
+   default; only shown when the Manual Metrics refresh pipeline hasn't
+   checked in since before the last business day. */
+.staleness-banner {
+  max-width: 900px;
+  margin: 0 auto 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 #dept-select, #month-select {
   padding: 6px 10px;
   border: 1px solid var(--border);

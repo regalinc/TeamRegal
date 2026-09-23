@@ -477,6 +477,24 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* Page-level staleness warning -- the whole page's numbers could be days
+   stale if the underlying refresh pipeline is stuck, so this sits above
+   everything else, not scoped to one card the way commission-pending-banner
+   below is. Hidden by default; shared.js's checkRefreshHealth() only shows
+   it when something's actually wrong. */
+.staleness-banner {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--warn);
+  background: var(--warn-soft);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.9rem;
+  font-weight: 550;
+}
+
 /* Pending-sales banner -- sits right under the header, above the week
    rows, since it caveats everything below it (week totals *and* MTD are
    both understated while anything's pending, not just one figure). */

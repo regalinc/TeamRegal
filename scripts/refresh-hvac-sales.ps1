@@ -6,13 +6,16 @@
 # Register-ScheduledTask snippet at the bottom of this file), but it's also
 # fine to double-click / run by hand any time.
 #
-# It is a no-op when:
-#   - the workbook is open in Excel or unreachable (parser exits 1, nothing
-#     is written, the live scorecard keeps its last-good numbers)
-#   - the parsed data is byte-for-byte identical to what's committed
-#
-# So scheduling it often is cheap: most runs do nothing, and the first run
-# after Josh/Nick add rows to the sheet is the one that ships.
+# It is a true no-op (writes nothing at all) only when the workbook is open
+# in Excel or unreachable -- parser exits 1, nothing is written, the live
+# scorecard keeps its last-good numbers. Otherwise every successful run
+# commits and pushes SOMETHING: docs/data/hvac-sales.json when the parsed
+# data actually changed (the first run after Josh/Nick add rows is the one
+# that ships), and always docs/data/refresh-health.json, a tiny timestamp
+# file the scorecard reads to show whether this pipeline is still alive --
+# added after a real incident (2026-09-21 through 2026-09-23) where a
+# different refresh script failed silently for two days before anyone
+# noticed.
 #
 # Requirements on the machine it runs on: Excel installed, the OneDrive
 # folder synced locally (not online-only), git on PATH with push
@@ -23,6 +26,7 @@ $ErrorActionPreference = "Stop"
 
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $DataFile = "docs/data/hvac-sales.json"
+$HealthFile = "docs/data/refresh-health.json"
 $LogDir   = Join-Path $env:LOCALAPPDATA "TeamRegal"
 $LogFile  = Join-Path $LogDir "refresh-hvac-sales.log"
 
@@ -33,6 +37,21 @@ function Log {
   $line = "{0}  {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $Message
   Add-Content -Path $LogFile -Value $line -Encoding utf8
   Write-Host $line
+}
+
+# Records that this script successfully reached and parsed its source, for
+# hvac-sales.html's own staleness banner -- separate from $DataFile itself
+# because that file's commit-on-diff logic deliberately has no per-run
+# timestamp (see parse-hvac-sales.ps1's header comment: a timestamp there
+# would make every run look like a change). Real incident this exists to
+# catch faster next time: 2026-09-21 through 2026-09-23, a *different*
+# script (Commission Report) failed silently for two days because nothing
+# was watching its log -- this file lets the page itself notice instead of
+# relying on Michael happening to check.
+function RecordHealthCheck([string]$Key) {
+  $health = if (Test-Path $HealthFile) { Get-Content $HealthFile -Raw | ConvertFrom-Json } else { [pscustomobject]@{} }
+  $health | Add-Member -NotePropertyName $Key -NotePropertyValue ((Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ")) -Force
+  ($health | ConvertTo-Json) | Out-File -FilePath $HealthFile -Encoding utf8
 }
 
 Set-Location $RepoRoot
@@ -80,20 +99,28 @@ try {
     Log "$dupCount possible duplicate row pair(s) in the sheet -- run scripts\find-duplicate-sales.ps1 to review"
   }
 
-  # 2. Did the committed file actually change?
+  # 1.6. Reaching here means the workbook was readable and parsed cleanly --
+  #      record that regardless of whether $DataFile itself changed below.
+  RecordHealthCheck "hvacSales"
+
+  # 2. Did the committed data file actually change? Either way there's now
+  #    something to commit -- at minimum the health check above, which
+  #    always differs run to run.
   & git diff --quiet -- $DataFile
-  if ($LASTEXITCODE -eq 0) {
-    Log "no change in $DataFile, nothing to commit"
-    Log "--- refresh end (no-op) ---"
-    exit 0
+  $filesToCommit = @($HealthFile)
+  $commitMessage = "Refresh health check"
+  if ($LASTEXITCODE -ne 0) {
+    $filesToCommit += $DataFile
+    $commitMessage = "Refresh HVAC sales data"
+    Log "$DataFile changed, committing"
+  } else {
+    Log "no change in $DataFile, recording health check only"
   }
 
-  Log "$DataFile changed, committing"
-
-  # 3. Commit just this one file (path-scoped, so any unrelated dirty file
-  #    in the tree is left alone).
-  & git add -- $DataFile
-  & git commit -q -m "Refresh HVAC sales data" -- $DataFile
+  # 3. Commit just these files (path-scoped, so any unrelated dirty file in
+  #    the tree is left alone).
+  & git add -- $filesToCommit
+  & git commit -q -m $commitMessage -- $filesToCommit
   if ($LASTEXITCODE -ne 0) { throw "git commit failed ($LASTEXITCODE)" }
 
   # 4. Rebase onto whatever the hourly HCP sync bot pushed in the meantime,

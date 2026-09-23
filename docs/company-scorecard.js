@@ -329,6 +329,7 @@ async function loadData() {
     if (!monthSelect.options.length) populateMonthSelect();
     render();
     updateSyncStatus(latestData.meta || {});
+    checkRefreshHealth(["manualMetrics"]);
   } catch (err) {
     syncStatusEl.textContent = "Failed to load data";
     syncStatusEl.classList.add("error");
