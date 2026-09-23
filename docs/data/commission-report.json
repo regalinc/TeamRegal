@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-18T23:05:04.925Z",
+                 "generated_at":  "2026-09-23T11:07:16.920Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -166,20 +166,56 @@
                                   }
                   },
                   {
-                      "label":  "Current Week",
+                      "label":  "Week 4",
                       "weekStart":  "2026-09-16",
                       "weekEnd":  "2026-09-22",
                       "totals":  {
-                                     "Josh":  1575.37,
+                                     "Josh":  6299.27,
                                      "Nick":  654.23
                                  },
                       "sales":  {
                                     "Josh":  [
                                                  {
-                                                     "customerName":  "Joe Wasylenko",
+                                                     "customerName":  "Mark Lindsay",
+                                                     "systemType":  "NTI",
+                                                     "rate":  0.08,
+                                                     "commission":  1033.28
+                                                 },
+                                                 {
+                                                     "customerName":  "Mark Price",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.06,
+                                                     "commission":  434.99
+                                                 },
+                                                 {
+                                                     "customerName":  "Manuel Matos",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.06,
+                                                     "commission":  870.56
+                                                 },
+                                                 {
+                                                     "customerName":  "Alexis Dettinger",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
-                                                     "commission":  375.15
+                                                     "commission":  808.09
+                                                 },
+                                                 {
+                                                     "customerName":  "Manuel Matos",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.06,
+                                                     "commission":  870.56
+                                                 },
+                                                 {
+                                                     "customerName":  "David Walter",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  706.42
+                                                 },
+                                                 {
+                                                     "customerName":  "Brenda Lincoln",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  773.24
                                                  },
                                                  {
                                                      "customerName":  "Andrew Krepps",
@@ -188,10 +224,10 @@
                                                      "commission":  426.99
                                                  },
                                                  {
-                                                     "customerName":  "Brenda Lincoln",
+                                                     "customerName":  "Joe Wasylenko",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
-                                                     "commission":  773.24
+                                                     "commission":  375.15
                                                  }
                                              ],
                                     "Nick":  [
@@ -212,20 +248,8 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
-                                                       "customerName":  "Manuel Matos",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   },
-                                                   {
-                                                       "customerName":  "Alexis Dettinger",
+                                                       "customerName":  "Geri Bates",
                                                        "reason":  "System Type not entered yet"
-                                                   },
-                                                   {
-                                                       "customerName":  "David Walter",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   },
-                                                   {
-                                                       "customerName":  "Manuel Matos",
-                                                       "reason":  "not yet logged in the sheet"
                                                    }
                                                ],
                                       "Nick":  [
@@ -235,7 +259,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  10689.47,
+                "Josh":  15413.37,
                 "Nick":  1270.65
             },
     "revenue":  {
@@ -244,23 +268,23 @@
                                       "Nick":  0
                                   },
                     "mtd":  {
-                                "Josh":  290826.78,
+                                "Josh":  315567.24,
                                 "Nick":  40885.35
                             },
                     "ytd":  {
-                                "Josh":  3697861.3,
+                                "Josh":  3722601.76,
                                 "Nick":  542664.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.6923,
-                                      "sameDayCount":  9,
-                                      "sameDaySample":  13,
-                                      "avgDaysToClose":  4,
-                                      "daysSample":  13,
-                                      "avgDiscountPct":  0.0578,
-                                      "discountSample":  13
+                                      "sameDayRate":  0.6875,
+                                      "sameDayCount":  11,
+                                      "sameDaySample":  16,
+                                      "avgDaysToClose":  47.6,
+                                      "daysSample":  16,
+                                      "avgDiscountPct":  0.0616,
+                                      "discountSample":  16
                                   },
                          "Nick":  {
                                       "sameDayRate":  1,
