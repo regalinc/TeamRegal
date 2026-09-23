@@ -157,6 +157,18 @@ foreach ($p in $weekPayloads) {
   # update-commission-scorecard.ps1 hit that same trap directly).
   $candidates = @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) })
 
+  # A name match with more than one row is usually a genuine repeat
+  # customer (confirmed real case 2026-09-23: Geri Bates, an unrelated
+  # Boiler sale in May and a Flex sale in September) rather than the
+  # ambiguity a date filter was originally meant to guard against. Narrow
+  # to whichever candidate(s) fall in THIS sale's own commission week
+  # before giving up -- still never guesses: if more than one candidate is
+  # left even after narrowing, it's genuinely ambiguous and stays flagged.
+  if ($candidates.Count -gt 1) {
+    $sameWeek = @($candidates | Where-Object { $_.date -and ([datetime]$_.date -ge $WeekStart) -and ([datetime]$_.date -lt $weekEndExclusive) })
+    if ($sameWeek.Count -eq 1) { $candidates = $sameWeek }
+  }
+
   $systemType = $null
   $matchStatus = "ok"
   if (-not $ca) {

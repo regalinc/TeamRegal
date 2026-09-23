@@ -152,6 +152,18 @@ foreach ($p in $allPayloads) {
   # $null, not 1, and a genuinely clean single match gets misclassified.
   $candidates = @($hvacSales | Where-Object { (NormalizeName $_.customerName) -eq (NormalizeName $custName) })
 
+  # A name match with more than one row is usually a genuine repeat
+  # customer (confirmed real case 2026-09-23: Geri Bates, an unrelated
+  # Boiler sale in May and a Flex sale in September) rather than the
+  # ambiguity a date filter was originally meant to guard against. Narrow
+  # to whichever candidate(s) fall in THIS sale's own commission week
+  # before giving up -- still never guesses: if more than one candidate is
+  # left even after narrowing, it's genuinely ambiguous and stays flagged.
+  if ($candidates.Count -gt 1) {
+    $sameWeek = @($candidates | Where-Object { $_.date -and ([datetime]$_.date -ge $weekStart) -and ([datetime]$_.date -lt $weekEndExclusive) })
+    if ($sameWeek.Count -eq 1) { $candidates = $sameWeek }
+  }
+
   $systemType = if ($candidates.Count -eq 1) { $candidates[0].systemType } else { $null }
   $ok = $candidates.Count -eq 1 -and $systemType -and $RATE_GROUPS.ContainsKey($systemType)
 
@@ -227,11 +239,20 @@ foreach ($p in $allPayloads) {
   $sameDayClose = if ($p.timestamps.last_presented_at) {
     ([datetime]$p.timestamps.last_presented_at).Date -eq $acceptedAt.Date
   } else { $null }
-  # Days from proposal creation to acceptance -- $null (not 0) when
-  # created_at is missing, same reasoning as above.
-  $daysToClose = if ($p.timestamps.created_at) {
-    ($acceptedAt - [datetime]$p.timestamps.created_at).TotalDays
-  } else { $null }
+  # Days from the real consultation to acceptance. Prefers the Excel
+  # sheet's own Date column (whenever exactly one row matches this sale by
+  # name) over the webhook's created_at -- confirmed real case 2026-09-23:
+  # Mark Lindsay's accepted proposal carried a created_at from October
+  # 2024, two years before Michael confirmed Josh actually ran him again,
+  # because Housecall Pro reused/revived an old estimate record rather than
+  # creating a fresh one. The Excel date is the human-confirmed visit date
+  # and doesn't have that failure mode. Falls back to created_at only when
+  # there's no single matching row to trust instead; $null (not 0) when
+  # neither is available.
+  $consultationDate = if ($candidates.Count -eq 1 -and $candidates[0].date) { [datetime]$candidates[0].date }
+                       elseif ($p.timestamps.created_at) { [datetime]$p.timestamps.created_at }
+                       else { $null }
+  $daysToClose = if ($consultationDate) { ($acceptedAt - $consultationDate).TotalDays } else { $null }
   # How much of the deal's own price was given away as discount/rebate --
   # discounts_total + instant_rebates_total only. customer_direct_rebates_total
   # is deliberately excluded at the user's request (2026-09-16): those are
