@@ -1,5 +1,166 @@
 [
   {
+    "id": "csr_30b6defba2af4ee89ddf254012a80107",
+    "estimate_number": "13524",
+    "customer_label": "Lisa & Ted W.",
+    "created_at": "2026-09-23T19:37:50Z",
+    "schedule": {
+      "scheduled_start": "2026-09-25T13:30:00Z",
+      "scheduled_end": "2026-09-25T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-25T09:30:00-04:00",
+      "scheduled_end_local": "2026-09-25T12:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "50 PLUMBING AOR",
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_7bd9e93b92cb4e6aa77c4c30b5d06713",
+    "estimate_number": "13523",
+    "customer_label": "Lyle S.",
+    "created_at": "2026-09-23T18:44:58Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_a147eea604e04ccfa458813cf1b374f0"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_a18f377f33a545688d3080cc00d52564",
+    "estimate_number": "13522",
+    "customer_label": "Jeff G.",
+    "created_at": "2026-09-23T18:37:29Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 42075
+  },
+  {
+    "id": "csr_a73902a205fd4fcbb1460d6b83bf4c9c",
+    "estimate_number": "13521",
+    "customer_label": "Aaron E.",
+    "created_at": "2026-09-23T18:36:10Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_d895ef0a8113446b93f1b169c4f22769",
+    "estimate_number": "13520",
+    "customer_label": "David R.",
+    "created_at": "2026-09-23T18:24:30Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_c22ddd76ecad414e8e7e2e0ba5efcc21",
+    "estimate_number": "13519",
+    "customer_label": "Kaleh M.",
+    "created_at": "2026-09-23T18:10:18Z",
+    "schedule": {
+      "scheduled_start": "2026-09-23T19:30:00Z",
+      "scheduled_end": "2026-09-23T20:30:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-23T15:30:00-04:00",
+      "scheduled_end_local": "2026-09-23T16:30:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "in progress",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_58b62abb67d0442c9c7be3929e984492",
+    "estimate_number": "13518",
+    "customer_label": "Michael S.",
+    "created_at": "2026-09-23T17:00:31Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-09-23T20:18:47.108Z",
+    "approved_amount": 141860
+  },
+  {
     "id": "csr_2849ee00534249479c4ef45b38a91d84",
     "estimate_number": "13517",
     "customer_label": "Rejean and Allison C.",
@@ -20,7 +181,7 @@
     "work_status": "needs scheduling",
     "approved": true,
     "approved_at": null,
-    "approved_amount": 96828
+    "approved_amount": 114964
   },
   {
     "id": "csr_ae60bd73f462496b89e1e881247ff200",
@@ -1945,7 +2106,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -75679,29 +75840,6 @@
     "business_unit": null,
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
-    ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_58b62abb67d0442c9c7be3929e984492",
-    "estimate_number": "13518",
-    "customer_label": "Michael S.",
-    "created_at": "2026-09-23T17:00:31Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_0c24f7fb4b534fde920650a76dc8365f"
     ],
     "work_status": "needs scheduling",
     "approved": false,
