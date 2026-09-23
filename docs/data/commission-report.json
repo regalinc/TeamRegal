@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-23T11:07:16.920Z",
+                 "generated_at":  "2026-09-23T11:14:17.932Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -170,7 +170,7 @@
                       "weekStart":  "2026-09-16",
                       "weekEnd":  "2026-09-22",
                       "totals":  {
-                                     "Josh":  6299.27,
+                                     "Josh":  6408.55,
                                      "Nick":  654.23
                                  },
                       "sales":  {
@@ -200,16 +200,22 @@
                                                      "commission":  808.09
                                                  },
                                                  {
-                                                     "customerName":  "Manuel Matos",
-                                                     "systemType":  "Preferred",
+                                                     "customerName":  "Geri Bates",
+                                                     "systemType":  "Flex",
                                                      "rate":  0.06,
-                                                     "commission":  870.56
+                                                     "commission":  109.29
                                                  },
                                                  {
                                                      "customerName":  "David Walter",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
                                                      "commission":  706.42
+                                                 },
+                                                 {
+                                                     "customerName":  "Manuel Matos",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.06,
+                                                     "commission":  870.56
                                                  },
                                                  {
                                                      "customerName":  "Brenda Lincoln",
@@ -247,10 +253,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Geri Bates",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -259,7 +262,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  15413.37,
+                "Josh":  15522.65,
                 "Nick":  1270.65
             },
     "revenue":  {
