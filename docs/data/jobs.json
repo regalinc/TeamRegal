@@ -274706,7 +274706,7 @@
   {
     "id": "job_9df277070cf14c1481115dee88aa7654",
     "description": "30 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Spear Managment L.",
     "city": "York",
     "state": "PA",
@@ -274733,7 +274733,7 @@
     "total_amount": 43325,
     "outstanding_balance": 0,
     "completed_at": "2026-07-29T16:41:20Z",
-    "updated_at": "2026-07-30T12:42:41Z",
+    "updated_at": "2026-09-24T22:00:00Z",
     "invoice_number": "59691",
     "created_at": "2026-07-29T13:46:24Z"
   },
@@ -342959,7 +342959,7 @@
       "appointments": []
     },
     "assigned_employee_ids": [
-      "pro_0c24f7fb4b534fde920650a76dc8365f"
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
     ],
     "tags": [
       "40",
@@ -342970,7 +342970,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": null,
-    "updated_at": "2026-08-31T15:20:15Z",
+    "updated_at": "2026-09-24T20:28:11Z",
     "invoice_number": "61004",
     "created_at": "2026-08-31T15:11:43Z"
   },
@@ -343135,7 +343135,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": null,
-    "updated_at": "2026-09-01T12:34:38Z",
+    "updated_at": "2026-09-24T19:57:05Z",
     "invoice_number": "61037",
     "created_at": "2026-09-01T12:32:26Z"
   },
@@ -345287,7 +345287,7 @@
   {
     "id": "job_7df57ac654024f62a2b21939ce06ca97",
     "description": "Billing - 10 HVAC AOR",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Diane D.",
     "city": "York",
     "state": "PA",
@@ -345311,14 +345311,14 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-09-24T11:26:39Z",
-    "updated_at": "2026-09-24T11:26:39Z",
+    "updated_at": "2026-09-24T19:17:08Z",
     "invoice_number": "61549-3",
     "created_at": "2026-09-14T14:58:48Z"
   },
   {
     "id": "job_c101dcee8b26469bb18742703dfa54bd",
     "description": "Billing - 10 HVAC AOR",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Diane D.",
     "city": "York",
     "state": "PA",
@@ -345341,8 +345341,8 @@
     "lead_source": null,
     "total_amount": 0,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-09-24T11:20:25Z",
+    "completed_at": "2026-09-24T19:17:08Z",
+    "updated_at": "2026-09-24T19:17:08Z",
     "invoice_number": "61549-4",
     "created_at": "2026-09-14T14:59:30Z"
   },
@@ -346333,7 +346333,7 @@
   {
     "id": "job_9b9fd01fc6aa4728bc0f419bc8e38c1b",
     "description": "70 - Initial Service Fee",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Georgia H.",
     "city": "Dover",
     "state": "PA",
@@ -346359,8 +346359,8 @@
     "lead_source": null,
     "total_amount": 55528,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-09-24T19:06:14Z",
+    "completed_at": "2026-09-24T19:28:36Z",
+    "updated_at": "2026-09-24T19:28:36Z",
     "invoice_number": "61755",
     "created_at": "2026-09-18T16:06:35Z"
   },
@@ -346876,14 +346876,15 @@
       "pro_7c54b30de89c4b6ea22a9053f0662f3d"
     ],
     "tags": [
-      "30"
+      "30",
+      "HVAC Attention"
     ],
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 169040,
     "outstanding_balance": 169040,
     "completed_at": null,
-    "updated_at": "2026-09-24T12:35:18Z",
+    "updated_at": "2026-09-24T20:20:29Z",
     "invoice_number": "61821",
     "created_at": "2026-09-21T17:42:18Z"
   },
@@ -348651,7 +348652,7 @@
   {
     "id": "job_b80ca78472f8438b8907d3020ca3ea73",
     "description": "30 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Jeff G.",
     "city": "Shrewsbury",
     "state": "PA",
@@ -348679,7 +348680,7 @@
     "total_amount": 8900,
     "outstanding_balance": 8900,
     "completed_at": "2026-09-23T18:51:25Z",
-    "updated_at": "2026-09-24T11:23:06Z",
+    "updated_at": "2026-09-24T19:34:57Z",
     "invoice_number": "61925",
     "created_at": "2026-09-23T14:12:58Z"
   },
@@ -348987,7 +348988,7 @@
   {
     "id": "job_43d9e05aaf144de5b0c2abecb993a3fa",
     "description": "30 HVAC Service",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Jeff G.",
     "city": "Shrewsbury",
     "state": "PA",
@@ -349010,9 +349011,9 @@
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 42075,
-    "outstanding_balance": 42075,
-    "completed_at": null,
-    "updated_at": "2026-09-24T18:38:56Z",
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-24T19:34:57Z",
+    "updated_at": "2026-09-24T20:03:12Z",
     "invoice_number": "61950",
     "created_at": "2026-09-23T18:42:48Z"
   },
@@ -349387,16 +349388,16 @@
     "state": "PA",
     "zip": "17404",
     "schedule": {
-      "scheduled_start": "2026-10-01T15:00:00Z",
-      "scheduled_end": "2026-10-01T17:00:00Z",
+      "scheduled_start": "2026-10-01T17:00:00Z",
+      "scheduled_end": "2026-10-01T19:00:00Z",
       "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-10-01T11:00:00-04:00",
-      "scheduled_end_local": "2026-10-01T13:00:00-04:00",
+      "scheduled_start_local": "2026-10-01T13:00:00-04:00",
+      "scheduled_end_local": "2026-10-01T15:00:00-04:00",
       "arrival_window": 120,
       "appointments": []
     },
     "assigned_employee_ids": [
-      "pro_8d943eadd54f485b9dba4296c807fb8f"
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
     ],
     "tags": [
       "30",
@@ -349408,7 +349409,7 @@
     "total_amount": 8900,
     "outstanding_balance": 8900,
     "completed_at": null,
-    "updated_at": "2026-09-24T12:24:10Z",
+    "updated_at": "2026-09-24T20:01:07Z",
     "invoice_number": "61968",
     "created_at": "2026-09-24T12:21:57Z"
   },
@@ -349454,11 +349455,11 @@
     "state": "PA",
     "zip": "17347",
     "schedule": {
-      "scheduled_start": "2026-09-24T11:45:00Z",
-      "scheduled_end": "2026-09-24T12:45:00Z",
+      "scheduled_start": "2026-09-25T11:45:00Z",
+      "scheduled_end": "2026-09-25T12:45:00Z",
       "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-09-24T07:45:00-04:00",
-      "scheduled_end_local": "2026-09-24T08:45:00-04:00",
+      "scheduled_start_local": "2026-09-25T07:45:00-04:00",
+      "scheduled_end_local": "2026-09-25T08:45:00-04:00",
       "arrival_window": 120,
       "appointments": []
     },
@@ -349474,7 +349475,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": null,
-    "updated_at": "2026-09-24T12:41:24Z",
+    "updated_at": "2026-09-24T19:21:43Z",
     "invoice_number": "61970-2",
     "created_at": "2026-09-24T12:28:37Z"
   },
@@ -349842,7 +349843,7 @@
     "total_amount": 43752,
     "outstanding_balance": 0,
     "completed_at": "2026-09-24T18:58:15Z",
-    "updated_at": "2026-09-24T18:58:15Z",
+    "updated_at": "2026-09-24T19:14:42Z",
     "invoice_number": "61997",
     "created_at": "2026-09-24T16:20:51Z"
   },
@@ -350044,7 +350045,7 @@
   {
     "id": "job_7b4a9a66897f4c4dbd11f431021ae208",
     "description": "Billing - 70 - Initial Service Fee After Hours",
-    "work_status": "scheduled",
+    "work_status": "complete unrated",
     "customer_label": "Spear Managment L.",
     "city": "Mechanicsburg",
     "state": "PA",
@@ -350059,20 +350060,56 @@
       "appointments": []
     },
     "assigned_employee_ids": [
-      "pro_1526b39a952147619f19902966416543"
+      "pro_79f4ca1c644741dc89563174e5b5d4fa"
     ],
     "tags": [
       "70",
       "Opportunity",
-      "Non-Member"
+      "Non-Member",
+      "Plumbing Parts",
+      "Plumbing Attention"
     ],
     "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 47230,
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-24T22:00:00Z",
+    "updated_at": "2026-09-24T22:00:00Z",
+    "invoice_number": "62011",
+    "created_at": "2026-09-24T18:51:09Z"
+  },
+  {
+    "id": "job_f40c4b9e094448658ff700b75c54d267",
+    "description": "Billing - 30 - Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Louise S.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-09-24T19:00:00Z",
+      "scheduled_end": "2026-09-24T20:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-24T15:00:00-04:00",
+      "scheduled_end_local": "2026-09-24T16:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "tags": [
+      "30",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 23900,
     "outstanding_balance": 23900,
     "completed_at": null,
-    "updated_at": "2026-09-24T19:11:41Z",
-    "invoice_number": "62011",
-    "created_at": "2026-09-24T18:51:09Z"
+    "updated_at": "2026-09-24T22:17:26Z",
+    "invoice_number": "62013",
+    "created_at": "2026-09-24T18:59:30Z"
   }
 ]

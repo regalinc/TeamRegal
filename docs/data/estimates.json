@@ -1,5 +1,29 @@
 [
   {
+    "id": "csr_e0cd6029e3044ddca20709ca1e70acd8",
+    "estimate_number": "13539",
+    "customer_label": "Rajesh K.",
+    "created_at": "2026-09-24T20:10:29Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b",
+      "pro_add4ba12688e47c696e827fb91a7d9fd"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_33aef8699cb44660978a3df8461e57a3",
     "estimate_number": "13538",
     "customer_label": "Sandra V.",
@@ -889,7 +913,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
