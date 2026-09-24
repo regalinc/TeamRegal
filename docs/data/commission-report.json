@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-23T20:05:04.293Z",
+                 "generated_at":  "2026-09-24T16:35:04.300Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -253,11 +253,52 @@
 
                                                ]
                                   }
+                  },
+                  {
+                      "label":  "Current Week",
+                      "weekStart":  "2026-09-23",
+                      "weekEnd":  "2026-09-29",
+                      "totals":  {
+                                     "Josh":  865.29,
+                                     "Nick":  407.68
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+                                                 {
+                                                     "customerName":  "Ram Vijayakumar",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  489.38
+                                                 },
+                                                 {
+                                                     "customerName":  "Kaleh Macmanara",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  375.91
+                                                 }
+                                             ],
+                                    "Nick":  [
+                                                 {
+                                                     "customerName":  "Garrett Strine",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.04,
+                                                     "commission":  407.68
+                                                 }
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+
+                                               ],
+                                      "Nick":  [
+
+                                               ]
+                                  }
                   }
               ],
     "mtd":  {
-                "Josh":  14652.1,
-                "Nick":  1270.65
+                "Josh":  15517.39,
+                "Nick":  1678.33
             },
     "revenue":  {
                     "lastMonth":  {
@@ -265,32 +306,32 @@
                                       "Nick":  0
                                   },
                     "mtd":  {
-                                "Josh":  299607.04,
-                                "Nick":  40885.35
+                                "Josh":  315470.66,
+                                "Nick":  52993.35
                             },
                     "ytd":  {
-                                "Josh":  3706641.56,
-                                "Nick":  542664.88
+                                "Josh":  3722505.18,
+                                "Nick":  554772.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.6667,
-                                      "sameDayCount":  10,
-                                      "sameDaySample":  15,
+                                      "sameDayRate":  0.6471,
+                                      "sameDayCount":  11,
+                                      "sameDaySample":  17,
                                       "avgDaysToClose":  1.1,
-                                      "daysSample":  15,
-                                      "avgDiscountPct":  0.0638,
-                                      "discountSample":  15
+                                      "daysSample":  17,
+                                      "avgDiscountPct":  0.0646,
+                                      "discountSample":  17
                                   },
                          "Nick":  {
-                                      "sameDayRate":  1,
+                                      "sameDayRate":  0.6667,
                                       "sameDayCount":  2,
-                                      "sameDaySample":  2,
-                                      "avgDaysToClose":  22.8,
-                                      "daysSample":  2,
-                                      "avgDiscountPct":  0.1083,
-                                      "discountSample":  2
+                                      "sameDaySample":  3,
+                                      "avgDaysToClose":  18.4,
+                                      "daysSample":  3,
+                                      "avgDiscountPct":  0.0976,
+                                      "discountSample":  3
                                   }
                      }
 }
