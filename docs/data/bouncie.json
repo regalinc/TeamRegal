@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-26T07:58:49.570Z",
+    "last_synced_at": "2026-09-26T17:22:09.846Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 4045
+    "trip_count": 4049
   },
   "vehicles": [
     {
@@ -115,7 +115,7 @@
         "name": "ProMaster 2500",
         "year": 2025
       },
-      "odometer": 11940.300000000016
+      "odometer": 11948.300000000016
     },
     {
       "imei": "864486067735866",
@@ -416,6 +416,49 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868199050012070-8191-202609",
+      "imei": "868199050012070",
+      "startTime": "2026-09-26T17:21:22.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "864486068446786-2273-202609",
+      "imei": "864486068446786",
+      "startTime": "2026-09-26T13:41:27.000Z",
+      "endTime": "2026-09-26T13:42:53.000Z",
+      "distance": 0,
+      "averageSpeed": 1.8,
+      "maxSpeed": 3.7282260000000003,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 26
+    },
+    {
+      "transactionId": "864486067218087-1822-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-26T13:20:40.000Z",
+      "endTime": "2026-09-26T14:11:57.000Z",
+      "distance": 3.9,
+      "averageSpeed": 22.9,
+      "maxSpeed": 44.738712,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 2480
+    },
+    {
+      "transactionId": "864486067218087-1821-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-26T11:38:55.000Z",
+      "endTime": "2026-09-26T11:52:15.000Z",
+      "distance": 4.1,
+      "averageSpeed": 21.7,
+      "maxSpeed": 35.418147,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 122
+    },
     {
       "transactionId": "864486067218087-1820-202609",
       "imei": "864486067218087",
