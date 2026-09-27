@@ -336219,9 +336219,9 @@
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 63280,
-    "outstanding_balance": 63280,
+    "outstanding_balance": 0,
     "completed_at": "2026-09-19T14:59:11Z",
-    "updated_at": "2026-09-22T17:03:42Z",
+    "updated_at": "2026-09-27T21:38:14Z",
     "invoice_number": "61773",
     "created_at": "2026-09-19T12:30:52Z"
   },
@@ -340611,7 +340611,7 @@
   {
     "id": "job_c9e40fbcb1264640aae329bdaf293058",
     "description": "Gas cleaning",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Typical Life C.",
     "city": "York",
     "state": "PA",
@@ -340637,7 +340637,7 @@
     "total_amount": 16355,
     "outstanding_balance": 16355,
     "completed_at": "2026-09-24T17:13:28Z",
-    "updated_at": "2026-09-24T17:29:57Z",
+    "updated_at": "2026-09-27T20:54:38Z",
     "invoice_number": "60538",
     "created_at": "2026-08-18T12:48:16Z"
   },
@@ -351162,7 +351162,7 @@
   {
     "id": "job_85f76e7e380947e8be0994c8bc5c3975",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Typical Life C.",
     "city": "York",
     "state": "PA",
@@ -351186,10 +351186,10 @@
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
-    "total_amount": 19120,
-    "outstanding_balance": 19120,
-    "completed_at": null,
-    "updated_at": "2026-09-27T18:19:24Z",
+    "total_amount": 61620,
+    "outstanding_balance": 61620,
+    "completed_at": "2026-09-27T20:54:38Z",
+    "updated_at": "2026-09-27T20:54:38Z",
     "invoice_number": "62066",
     "created_at": "2026-09-27T17:00:00Z"
   },
