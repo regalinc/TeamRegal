@@ -46650,7 +46650,7 @@
   {
     "id": "job_642b24e2539d4054b0718a0fede8fbc8",
     "description": "Billing - 70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Gary D.",
     "city": "York",
     "state": "PA",
@@ -46673,7 +46673,7 @@
     "total_amount": 42312,
     "outstanding_balance": 0,
     "completed_at": "2026-02-10T19:53:48Z",
-    "updated_at": "2026-02-10T19:53:48Z",
+    "updated_at": "2026-09-27T16:32:38Z",
     "invoice_number": "52998",
     "created_at": "2026-02-09T12:20:25Z"
   },
@@ -350528,7 +350528,7 @@
   {
     "id": "job_f483468859df4aa3a1109f6719113014",
     "description": "30 - Initial Service Fee",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Gary D.",
     "city": "York",
     "state": "PA",
@@ -350553,9 +350553,9 @@
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 94248,
-    "outstanding_balance": 94248,
-    "completed_at": null,
-    "updated_at": "2026-09-25T20:30:26Z",
+    "outstanding_balance": 0,
+    "completed_at": "2026-09-27T16:32:38Z",
+    "updated_at": "2026-09-27T16:32:38Z",
     "invoice_number": "62043",
     "created_at": "2026-09-25T16:00:55Z"
   },
@@ -351158,6 +351158,40 @@
     "updated_at": "2026-09-27T00:01:22Z",
     "invoice_number": "62065",
     "created_at": "2026-09-26T20:37:33Z"
+  },
+  {
+    "id": "job_85f76e7e380947e8be0994c8bc5c3975",
+    "description": "70 - Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Typical Life C.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-09-27T17:00:00Z",
+      "scheduled_end": "2026-09-27T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-09-27T13:00:00-04:00",
+      "scheduled_end_local": "2026-09-27T15:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7ccf9b4457bb40ecbb84540d250950e1"
+    ],
+    "tags": [
+      "70",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 19120,
+    "outstanding_balance": 19120,
+    "completed_at": null,
+    "updated_at": "2026-09-27T18:19:24Z",
+    "invoice_number": "62066",
+    "created_at": "2026-09-27T17:00:00Z"
   },
   {
     "id": "job_3f247c681a85451f82446509e3404013",
