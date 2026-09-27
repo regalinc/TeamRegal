@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-27T14:15:03.622Z",
+    "last_synced_at": "2026-09-27T18:37:58.499Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 4057
+    "trip_count": 4060
   },
   "vehicles": [
     {
@@ -247,7 +247,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 43675.199999999364
+      "odometer": 43678.29999999936
     },
     {
       "imei": "868199050016543",
@@ -258,7 +258,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 8825.999999999998
+      "odometer": 8826.099999999999
     },
     {
       "imei": "868199050019885",
@@ -401,7 +401,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 48784.70340439964
+      "odometer": 48790.30340439964
     },
     {
       "imei": "868923055442135",
@@ -416,6 +416,42 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868923055438364-10130-202609",
+      "imei": "868923055438364",
+      "startTime": "2026-09-27T18:04:33.000Z",
+      "endTime": "2026-09-27T18:23:46.000Z",
+      "distance": 5.6,
+      "averageSpeed": 24.2,
+      "maxSpeed": 51.573793,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 21
+    },
+    {
+      "transactionId": "868199050016543-10685-202609",
+      "imei": "868199050016543",
+      "startTime": "2026-09-27T17:40:40.000Z",
+      "endTime": "2026-09-27T17:46:06.000Z",
+      "distance": 0.1,
+      "averageSpeed": 14.2,
+      "maxSpeed": 25.476211,
+      "hardBrakingCount": 2,
+      "hardAccelerationCount": 2,
+      "totalIdleDuration": 0
+    },
+    {
+      "transactionId": "868199050012070-8195-202609",
+      "imei": "868199050012070",
+      "startTime": "2026-09-27T16:53:55.000Z",
+      "endTime": "2026-09-27T17:07:44.000Z",
+      "distance": 3.1,
+      "averageSpeed": 23.6,
+      "maxSpeed": 41.6,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 346
+    },
     {
       "transactionId": "868923055438364-10129-202609",
       "imei": "868923055438364",
