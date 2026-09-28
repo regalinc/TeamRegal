@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  577
+                 "record_count":  580
              },
     "records":  [
                     {
@@ -6296,6 +6296,17 @@
                         "sold":  false
                     },
                     {
+                        "ca":  "Josh",
+                        "date":  "2026-09-28",
+                        "customerName":  "Brian Crilley",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
                         "ca":  "Nick",
                         "date":  "2026-09-29",
                         "customerName":  "Patrick Shaughnessy",
@@ -6329,14 +6340,25 @@
                         "sold":  false
                     },
                     {
-                        "ca":  "Nick",
-                        "date":  "2026-09-30",
-                        "customerName":  "Victor Canavra",
+                        "ca":  "Josh",
+                        "date":  "2026-09-29",
+                        "customerName":  "Michael Conto",
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "No",
-                        "lead":  "Lowes",
+                        "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-30",
+                        "customerName":  "Tim \u0026 Jen Orndorff",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
@@ -6348,6 +6370,17 @@
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-10-14",
+                        "customerName":  "Victor Canavra",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Lowes",
+                        "customerType":  "New",
                         "sold":  false
                     }
                 ]
