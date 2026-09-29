@@ -63076,7 +63076,7 @@
   {
     "id": "job_85b61094affa46fe804e7cc33ac336ef",
     "description": "Billing - 70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Gerald M.",
     "city": "York",
     "state": "PA",
@@ -63099,7 +63099,7 @@
     "total_amount": 22550,
     "outstanding_balance": 0,
     "completed_at": "2026-02-19T18:33:05Z",
-    "updated_at": "2026-02-19T18:33:06Z",
+    "updated_at": "2026-09-29T02:00:31Z",
     "invoice_number": "53529",
     "created_at": "2026-02-19T15:36:54Z"
   },
@@ -352350,7 +352350,7 @@
   {
     "id": "job_9ea15cab2f774ad68341e889c82772e1",
     "description": "70 - Initial Service Fee",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Gerald M.",
     "city": "York",
     "state": "PA",
@@ -352376,8 +352376,8 @@
     "lead_source": null,
     "total_amount": 51400,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-09-28T19:13:28Z",
+    "completed_at": "2026-09-29T02:00:31Z",
+    "updated_at": "2026-09-29T02:00:31Z",
     "invoice_number": "62130",
     "created_at": "2026-09-28T18:13:08Z"
   },
