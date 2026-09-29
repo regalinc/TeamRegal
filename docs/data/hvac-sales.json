@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  580
+                 "record_count":  581
              },
     "records":  [
                     {
@@ -6244,23 +6244,23 @@
                         "ca":  "Josh",
                         "date":  "2026-09-28",
                         "customerName":  "Emily Miller",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62135",
+                        "systemType":  "Mini-Split",
                         "clubMember":  "Yes",
                         "lead":  "EC",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
                         "date":  "2026-09-28",
                         "customerName":  "Georgio Padres",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62134",
+                        "systemType":  "Mini-Split",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6359,6 +6359,17 @@
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-09-30",
+                        "customerName":  "Rob Cauller",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Lowes",
+                        "customerType":  "New",
                         "sold":  false
                     },
                     {
