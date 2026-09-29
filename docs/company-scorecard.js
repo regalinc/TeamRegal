@@ -238,26 +238,78 @@ function resolvePnlForDept(code) {
   return (pnlData && pnlData[currentMonth] && pnlData[currentMonth][code]) || null;
 }
 
+// One-time home-BU backfill for estimates missing their own business_unit
+// field (~80% of all estimates -- see the estimate_fields.business_unit
+// comment on toPublicEstimate in scripts/sync.js). HVAC Service techs write
+// estimates for both BU 30 and BU 40 (Plumbing Service techs likewise for
+// BU 70/80), so job history can't reliably separate those either --
+// checked against a real tech's 2026 jobs and got 227 BU 40 vs. 221 BU 30,
+// essentially a coin flip. So this is Michael's own confirmed home-
+// department call for each HVAC-Service-tagged tech (2026-09-29), not a
+// derived guess. Every Plumbing-Service-tagged tech is confirmed BU 70 in
+// practice, but rather than assume zero BU 80 estimates ever come from
+// this group, their blank estimates pool into a combined 70+80 bucket
+// instead -- added to BOTH BU 70's and BU 80's own genuinely-tagged counts,
+// so a real (if rare) BU 80 estimate is never silently reassigned to 70,
+// and neither department's own explicitly-tagged data gets diluted by the
+// other's.
+//
+// Only applies to estimates given before ESTIMATE_BU_BACKFILL_CUTOFF --
+// starting then, staff are expected to set Business Unit on every new
+// estimate directly, so this stops covering new gaps on its own rather
+// than papering over a process regression indefinitely.
+const ESTIMATE_BU_BACKFILL_CUTOFF = new Date(2026, 9, 1); // Oct 1, 2026
+const HVAC_SERVICE_TECH_HOME_BU = {
+  pro_1b87fcb406c9484b84e8fccd6f2c777b: "30", // Benjamin Murphy
+  pro_aab24498cf6e4c46844bddcbc7161f26: "30", // Brandon DiPangrazio
+  pro_0c24f7fb4b534fde920650a76dc8365f: "40", // Hector Rivera
+  pro_8d943eadd54f485b9dba4296c807fb8f: "30", // Josh McDonald
+  pro_add4ba12688e47c696e827fb91a7d9fd: "40", // Josh Miller
+  pro_7c54b30de89c4b6ea22a9053f0662f3d: "30", // Juan Puello
+  pro_e328d4cad27249d48750d091fd1faa3b: "30", // Max Murog
+};
+const PLUMBING_SERVICE_COMBINED_TECH_IDS = new Set([
+  "pro_8fc589c75489437bb66ff45ca0aea7ac", // Aidan Shaull
+  "pro_9b6be6b8146547fabe281dac539e3f28", // Ben Aston
+  "pro_a147eea604e04ccfa458813cf1b374f0", // Daniel Ahearn
+  "pro_d67d4e694a8c4bbdaba6801433d3bc20", // Kevin Schrum
+  "pro_7ccf9b4457bb40ecbb84540d250950e1", // Korry Dunkle
+  "pro_4a63b04bb5a64d97b8e1728dd8ea77fb", // Roger Renoll
+  "pro_b5ab5cc9e362414cb376d0a02d64bef8", // Trevor McWilliams
+]);
+
+// True if a blank-BU estimate should backfill into department `code`,
+// based on who it's assigned to and when it was given. An estimate that
+// already carries its own business_unit is never a backfill candidate --
+// real data always wins over this fallback.
+function estimateBackfillsInto(estimate, code) {
+  if (estimate.business_unit) return false;
+  if (new Date(estimate.created_at) >= ESTIMATE_BU_BACKFILL_CUTOFF) return false;
+  const techIds = estimate.assigned_employee_ids || [];
+  if (code === "70" || code === "80") return techIds.some((id) => PLUMBING_SERVICE_COMBINED_TECH_IDS.has(id));
+  if (code === "30" || code === "40") return techIds.some((id) => HVAC_SERVICE_TECH_HOME_BU[id] === code);
+  return false;
+}
+
 // Estimate closing % for one department over one date range — scoped by
-// the estimate's own business_unit (job_fields.business_unit, synced
+// the estimate's own business_unit (estimate_fields.business_unit, synced
 // straight onto the estimate record — see toPublicEstimate in
-// scripts/sync.js), not the assigned tech's employee tag. HVAC Service
-// techs write estimates for both BU 30 and BU 40 work (Plumbing Service
-// techs likewise for BU 70/80), so a tech-tag split couldn't tell those
-// two apart; the estimate's own field can, confirmed with the user that
-// it exists on Estimates the same way it does on Jobs. Every month
-// selectable on this page already has its P&L uploaded — meaning it's
-// already over by the time it's even an option here — so this always
-// uses the same "closed period" union-with-missingApprovedAtEstimates
-// logic computeEstimatorStats applies to lastmonth/lastweek elsewhere on
-// the site (crediting the department for closing an estimate given in an
-// earlier month, same idea as Andrew Rouscher's page), rather than the
-// "still open" branch used for a genuinely in-progress period. Returns
-// null (not 0) when nothing was given in range, same "no data stays
-// neutral" convention as every other tile here.
+// scripts/sync.js) union'd with the home-BU backfill above for whichever
+// estimates don't have one. Every month selectable on this page already
+// has its P&L uploaded — meaning it's already over by the time it's even
+// an option here — so this always uses the same "closed period"
+// union-with-missingApprovedAtEstimates logic computeEstimatorStats
+// applies to lastmonth/lastweek elsewhere on the site (crediting the
+// department for closing an estimate given in an earlier month, same idea
+// as Andrew Rouscher's page), rather than the "still open" branch used
+// for a genuinely in-progress period. Returns null (not 0) when nothing
+// was given in range, same "no data stays neutral" convention as every
+// other tile here.
 function estimateClosingRateForDept(allEstimates, code, [start, end]) {
   const inRange = (dateStr) => Boolean(dateStr) && new Date(dateStr) >= start && new Date(dateStr) < end;
-  const deptEstimates = (allEstimates || []).filter((e) => !isCanceledEstimate(e) && businessUnitCode(e.business_unit) === code);
+  const deptEstimates = (allEstimates || []).filter(
+    (e) => !isCanceledEstimate(e) && (businessUnitCode(e.business_unit) === code || estimateBackfillsInto(e, code))
+  );
   const given = deptEstimates.filter((e) => inRange(e.created_at));
   const approvedByDate = deptEstimates.filter((e) => e.approved && inRange(e.approved_at));
   const approved = unionById(approvedByDate, missingApprovedAtEstimates(given));

@@ -151,6 +151,12 @@ const DEPARTMENTS = {
       { source: "pnl", key: "grossProfit", label: "Gross margin" },
       { source: "manual", key: "dso", label: "A/R days sales outstanding" },
       { source: "pnl", key: "laborCost", label: "Labor to sales" },
+      // Was left off this list originally because the sample size was too
+      // small to be meaningful (~80% of estimates have no Business Unit set
+      // -- see estimateClosingRateForDept in company-scorecard.js) -- added
+      // back 2026-09-29 once a confirmed tech-home-department backfill made
+      // BU 30's own sample real (7 -> 762 given YTD).
+      { source: "hcp", key: "estimateClosingRate", label: "Estimate closure %" },
     ],
   },
   40: {
@@ -282,6 +288,10 @@ const DEPARTMENTS = {
       { source: "manual", key: "ptuConversionPct", label: "PTU marketing conversion" },
       { source: "hcp", key: "totalClubAgreements", label: "Total club agreements" },
       { source: "manual", key: "callbackCount", label: "Callback rate" },
+      // Same story as BU 30's identical addition just above in this file --
+      // added back 2026-09-29 once the tech-home-department backfill made
+      // BU 40's own sample real (3 -> 190 given YTD).
+      { source: "hcp", key: "estimateClosingRate", label: "Estimate closure %" },
     ],
   },
   70: {
