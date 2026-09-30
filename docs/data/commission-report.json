@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-30T11:25:07.035Z",
+                 "generated_at":  "2026-09-30T16:35:05.098Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -260,7 +260,7 @@
                       "weekEnd":  "2026-09-29",
                       "totals":  {
                                      "Josh":  2351.11,
-                                     "Nick":  1422.36
+                                     "Nick":  407.68
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -291,12 +291,6 @@
                                              ],
                                     "Nick":  [
                                                  {
-                                                     "customerName":  "Gregorio Paredes",
-                                                     "systemType":  "Mini-Split",
-                                                     "rate":  0.04,
-                                                     "commission":  1014.68
-                                                 },
-                                                 {
                                                      "customerName":  "Garrett Strine",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.04,
@@ -309,14 +303,50 @@
 
                                                ],
                                       "Nick":  [
+                                                   {
+                                                       "customerName":  "Gregorio Paredes",
+                                                       "reason":  "possibly logged as \"Georgio Paredes\" -- OnCall Air may have the wrong name on file"
+                                                   }
+                                               ]
+                                  }
+                  },
+                  {
+                      "label":  "Current Week",
+                      "weekStart":  "2026-09-30",
+                      "weekEnd":  "2026-10-06",
+                      "totals":  {
+                                     "Josh":  929.85,
+                                     "Nick":  0
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+                                                 {
+                                                     "customerName":  "Maclean Lunko",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  929.85
+                                                 }
+                                             ],
+                                    "Nick":  [
+
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+                                                   {
+                                                       "customerName":  "Typical Life Corporation",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   }
+                                               ],
+                                      "Nick":  [
 
                                                ]
                                   }
                   }
               ],
     "mtd":  {
-                "Josh":  17003.2,
-                "Nick":  2693.02
+                "Josh":  17933.05,
+                "Nick":  1678.33
             },
     "revenue":  {
                     "lastMonth":  {
@@ -324,29 +354,29 @@
                                       "Nick":  0
                                   },
                     "mtd":  {
-                                "Josh":  345365.15,
+                                "Josh":  373196.39,
                                 "Nick":  84477.35
                             },
                     "ytd":  {
-                                "Josh":  3752399.67,
+                                "Josh":  3780230.91,
                                 "Nick":  586256.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.6842,
-                                      "sameDayCount":  13,
-                                      "sameDaySample":  19,
-                                      "avgDaysToClose":  1,
-                                      "daysSample":  19,
-                                      "avgDiscountPct":  0.0654,
-                                      "discountSample":  19
+                                      "sameDayRate":  0.6667,
+                                      "sameDayCount":  14,
+                                      "sameDaySample":  21,
+                                      "avgDaysToClose":  5.5,
+                                      "daysSample":  21,
+                                      "avgDiscountPct":  0.062,
+                                      "discountSample":  21
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.75,
                                       "sameDayCount":  3,
                                       "sameDaySample":  4,
-                                      "avgDaysToClose":  13.9,
+                                      "avgDaysToClose":  15.5,
                                       "daysSample":  4,
                                       "avgDiscountPct":  0.0805,
                                       "discountSample":  4
