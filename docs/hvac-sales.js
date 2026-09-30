@@ -229,7 +229,17 @@ function normalizeCustomerLabels(fullName) {
     .filter(Boolean);
   const joinedLabel =
     words.length > 1 && overallLastName ? `${words.slice(0, -1).join(" ")} ${overallLastName[0]}.` : null;
-  return [...new Set(joinedLabel ? [...perPersonLabels, joinedLabel] : perPersonLabels)];
+  // A plain (non-"&") three-plus-word name can have its real surname in the
+  // MIDDLE, not at the end -- confirmed real case 2026-09-30: Excel's
+  // "Rajesh Kumar Grandhi" vs. Housecall Pro's own customer record, which
+  // files this person as "Rajesh K." (Kumar as the surname, Grandhi as an
+  // extra name HCP doesn't carry at all). Adding "First (2nd word initial)."
+  // as one more candidate is safe the same way the joined-couple variant
+  // above is: it only ever matches if Housecall Pro's own label happens to
+  // equal that exact string, so a normal two-word name is unaffected.
+  const middleSurnameLabel = !trimmed.includes("&") && words.length > 2 ? `${words[0]} ${words[1][0]}.` : null;
+  const allLabels = [...perPersonLabels, joinedLabel, middleSurnameLabel].filter(Boolean);
+  return [...new Set(allLabels)];
 }
 
 // normalizeCustomerLabels only knows how to shape a PERSONAL name ("First
