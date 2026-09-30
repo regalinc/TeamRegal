@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-09-30T00:44:07.894Z",
+    "last_synced_at": "2026-09-30T07:18:22.995Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 4577
+    "trip_count": 4579
   },
   "vehicles": [
     {
@@ -115,7 +115,7 @@
         "name": "ProMaster 2500",
         "year": 2025
       },
-      "odometer": 12060.500000000016
+      "odometer": 12063.800000000016
     },
     {
       "imei": "864486067735866",
@@ -313,7 +313,7 @@
         "name": "Promaster 3500",
         "year": 2020
       },
-      "odometer": 41856
+      "odometer": 41897
     },
     {
       "imei": "868199050091579",
@@ -324,7 +324,7 @@
         "name": "Express",
         "year": 2024
       },
-      "odometer": 23765
+      "odometer": 23806
     },
     {
       "imei": "868199050091991",
@@ -417,11 +417,40 @@
   ],
   "trips": [
     {
+      "transactionId": "864486067218087-1846-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-30T01:09:56.000Z",
+      "endTime": "2026-09-30T01:16:58.000Z",
+      "distance": 1.4,
+      "averageSpeed": 13.6,
+      "maxSpeed": 23.612098,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 64
+    },
+    {
+      "transactionId": "864486067218087-1845-202609",
+      "imei": "864486067218087",
+      "startTime": "2026-09-30T00:58:17.000Z",
+      "endTime": "2026-09-30T01:03:28.000Z",
+      "distance": 0.9,
+      "averageSpeed": 13,
+      "maxSpeed": 24.85484,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 49
+    },
+    {
       "transactionId": "864486067218087-1844-202609",
       "imei": "864486067218087",
       "startTime": "2026-09-30T00:40:12.000Z",
+      "endTime": "2026-09-30T00:45:07.000Z",
+      "distance": 1,
+      "averageSpeed": 13,
+      "maxSpeed": 27.961695,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 18
     },
     {
       "transactionId": "868199050016543-10703-202609",
