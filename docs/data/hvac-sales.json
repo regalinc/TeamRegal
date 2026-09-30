@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  583
+                 "record_count":  584
              },
     "records":  [
                     {
@@ -4649,12 +4649,12 @@
                         "ca":  "Josh",
                         "date":  "2026-07-09",
                         "customerName":  "Maclean Lunko",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62177",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6167,12 +6167,12 @@
                         "ca":  "Josh",
                         "date":  "2026-09-22",
                         "customerName":  "Typical Life",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62179",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6370,6 +6370,17 @@
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-09-30",
+                        "customerName":  "Tom Buzurro",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
