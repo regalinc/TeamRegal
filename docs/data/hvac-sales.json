@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  584
+                 "record_count":  587
              },
     "records":  [
                     {
@@ -6310,12 +6310,12 @@
                         "ca":  "Nick",
                         "date":  "2026-09-29",
                         "customerName":  "Patrick Shaughnessy",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62193",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -6376,17 +6376,39 @@
                         "ca":  "Josh",
                         "date":  "2026-09-30",
                         "customerName":  "Tom Buzurro",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62198",
+                        "systemType":  "Preferred",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
                         "date":  "2026-10-01",
                         "customerName":  "Joshua Puterio",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-01",
+                        "customerName":  "Tamra Peroni",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-02",
+                        "customerName":  "Andrew Sheridan",
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "No",
@@ -6414,6 +6436,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-10-05",
+                        "customerName":  "Andrew Paxton",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
