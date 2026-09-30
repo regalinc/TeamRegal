@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-29T20:05:04.237Z",
+                 "generated_at":  "2026-09-30T11:25:07.035Z",
                  "month":  "2026-09"
              },
     "weeks":  [
@@ -255,12 +255,12 @@
                                   }
                   },
                   {
-                      "label":  "Current Week",
+                      "label":  "Week 5",
                       "weekStart":  "2026-09-23",
                       "weekEnd":  "2026-09-29",
                       "totals":  {
                                      "Josh":  2351.11,
-                                     "Nick":  407.68
+                                     "Nick":  1422.36
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -291,6 +291,12 @@
                                              ],
                                     "Nick":  [
                                                  {
+                                                     "customerName":  "Gregorio Paredes",
+                                                     "systemType":  "Mini-Split",
+                                                     "rate":  0.04,
+                                                     "commission":  1014.68
+                                                 },
+                                                 {
                                                      "customerName":  "Garrett Strine",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.04,
@@ -303,17 +309,14 @@
 
                                                ],
                                       "Nick":  [
-                                                   {
-                                                       "customerName":  "Gregorio Paredes",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   }
+
                                                ]
                                   }
                   }
               ],
     "mtd":  {
                 "Josh":  17003.2,
-                "Nick":  1678.33
+                "Nick":  2693.02
             },
     "revenue":  {
                     "lastMonth":  {
@@ -343,7 +346,7 @@
                                       "sameDayRate":  0.75,
                                       "sameDayCount":  3,
                                       "sameDaySample":  4,
-                                      "avgDaysToClose":  15.5,
+                                      "avgDaysToClose":  13.9,
                                       "daysSample":  4,
                                       "avgDiscountPct":  0.0805,
                                       "discountSample":  4
