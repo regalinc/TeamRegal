@@ -169,6 +169,37 @@ function isHiddenFromRoster(tech) {
   return isApprentice(tech) || isManagement(tech);
 }
 
+// Former employees — last real working day, not a termination-effective
+// date (there's no gap between the two here). Keyed/valued like
+// APPRENTICE_TECH_IDS above, but date-scoped rather than a flat permanent
+// hide: a departed tech's card should still show for any period that
+// actually overlaps their time here (their own "Last month," a YTD range
+// that includes months they worked), and only stop appearing once the
+// viewed period is entirely after their last day — see
+// isHiddenFromRosterForPeriod below, the period-aware counterpart to
+// isHiddenFromRoster that both app.js and tv.js use for this.
+const FORMER_EMPLOYEE_LAST_DAY = {
+  pro_add4ba12688e47c696e827fb91a7d9fd: new Date(2026, 8, 30), // Josh Miller -- last day 2026-09-30, BU 30/40 (HVAC Service)
+};
+
+// Same idea as isHiddenFromRoster, but also hides a departed tech once the
+// CURRENTLY VIEWED PERIOD no longer overlaps their employment -- i.e. the
+// period's own start date falls after their last working day. Using the
+// period's start (not its end) means a period that only *partly* postdates
+// their departure (this month, viewed partway through it, or a YTD range
+// that still spans back to when they worked) still shows their real
+// contribution instead of hiding it outright; only a period that's
+// entirely after they left (today/this week/this month once that month
+// has fully rolled past their last day) excludes them. This self-adjusts
+// with the calendar — no code change needed on the day they actually
+// leave, and none needed later to "undo" this once every period that
+// could show their data has rolled past.
+function isHiddenFromRosterForPeriod(tech, [periodStart]) {
+  if (isHiddenFromRoster(tech)) return true;
+  const lastDay = FORMER_EMPLOYEE_LAST_DAY[tech.id];
+  return Boolean(lastDay) && periodStart > lastDay;
+}
+
 // HVAC Installation techs don't control their own job pipeline — work gets
 // sold and handed to them, so an individual's Revenue/Jobs/Avg ticket mostly
 // reflects what landed on their schedule, not their own performance. There's

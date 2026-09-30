@@ -93,16 +93,21 @@ function resolveDept(raw) {
 
 const DEPT = resolveDept(urlParams.get("dept"));
 const PERIOD = urlParams.has("period") ? urlParams.get("period") : "month";
+// Resolved once, same as PERIOD itself — see isHiddenFromRosterForPeriod
+// in shared.js for why a departed tech's row can still show here (a past-
+// month PERIOD that predates when they left), not just a flat hide.
+const PERIOD_RANGE = periodRange(PERIOD);
 
 const deptNameEl = document.getElementById("tv-dept-name");
 const mainEl = document.getElementById("tv-main");
 
 function departmentOf(tech) {
-  // Apprentices don't get their own TV row yet, same reason they don't get
-  // their own scorecard on index.html — see APPRENTICE_TECH_IDS in
-  // shared.js. Distinct from EXCLUDED_TECH_IDS below (those are
-  // dispatch/system accounts that aren't real people at all).
-  if (EXCLUDED_TECH_IDS.has(tech.id) || isApprentice(tech)) return null;
+  // Apprentices (and, once they've left, former employees whose last day
+  // is before this PERIOD even starts) don't get their own TV row — see
+  // isHiddenFromRosterForPeriod in shared.js. Distinct from
+  // EXCLUDED_TECH_IDS below (those are dispatch/system accounts that
+  // aren't real people at all).
+  if (EXCLUDED_TECH_IDS.has(tech.id) || isHiddenFromRosterForPeriod(tech, PERIOD_RANGE)) return null;
   const tags = tech.tags || [];
   for (const dept of FIELD_DEPT_TAGS) {
     if (tags.includes(dept)) return dept;

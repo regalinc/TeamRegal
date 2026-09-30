@@ -267,9 +267,15 @@ function populateFilterOptions(data) {
 // isHiddenFromRoster in shared.js — this is the one choke point every
 // card-rendering path goes through, so filtering here is enough even if
 // one of their ids somehow ends up in selectedTechIds (e.g. a
-// hand-crafted ?techs= URL).
-function getRosterTechs(technicians) {
-  const eligible = technicians.filter((t) => !isHiddenFromRoster(t));
+// hand-crafted ?techs= URL). `period` (the currently-viewed period string)
+// additionally hides a departed tech (FORMER_EMPLOYEE_LAST_DAY, shared.js)
+// once the viewed period no longer overlaps their employment — see
+// isHiddenFromRosterForPeriod's own comment for why their card still shows
+// for a period (like "Last month" or YTD) that genuinely includes time
+// they worked here.
+function getRosterTechs(technicians, period) {
+  const range = periodRange(period);
+  const eligible = technicians.filter((t) => !isHiddenFromRosterForPeriod(t, range));
   if (selectedTechIds.size === 0) return eligible;
   return eligible.filter((t) => selectedTechIds.has(t.id));
 }
@@ -390,7 +396,7 @@ function render(data) {
   const filters = currentFilters();
   const filteredJobs = (data.jobs || []).filter((j) => jobMatchesFilters(j, filters, techById));
 
-  const rosterTechs = getRosterTechs(data.technicians || []).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  const rosterTechs = getRosterTechs(data.technicians || [], filters.period).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
   const rosterActive = selectedTechIds.size > 0;
   const rosterTechIds = new Set(rosterTechs.map((t) => t.id));
 
