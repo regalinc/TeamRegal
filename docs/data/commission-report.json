@@ -1,315 +1,9 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-09-30T23:05:04.541Z",
-                 "month":  "2026-09"
+                 "generated_at":  "2026-10-01T14:04:15.159Z",
+                 "month":  "2026-10"
              },
     "weeks":  [
-                  {
-                      "label":  "Week 1",
-                      "weekStart":  "2026-08-26",
-                      "weekEnd":  "2026-09-01",
-                      "totals":  {
-                                     "Josh":  1528.5,
-                                     "Nick":  0
-                                 },
-                      "sales":  {
-                                    "Josh":  [
-                                                 {
-                                                     "customerName":  "Patricia Bingaman",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  684.72
-                                                 },
-                                                 {
-                                                     "customerName":  "Kim Strobeck",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  843.78
-                                                 }
-                                             ],
-                                    "Nick":  [
-
-                                             ]
-                                },
-                      "pending":  {
-                                      "Josh":  [
-
-                                               ],
-                                      "Nick":  [
-
-                                               ]
-                                  }
-                  },
-                  {
-                      "label":  "Week 2",
-                      "weekStart":  "2026-09-02",
-                      "weekEnd":  "2026-09-08",
-                      "totals":  {
-                                     "Josh":  3030.83,
-                                     "Nick":  616.42
-                                 },
-                      "sales":  {
-                                    "Josh":  [
-                                                 {
-                                                     "customerName":  "Steve O\u0027Brien",
-                                                     "systemType":  "Flex",
-                                                     "rate":  0.06,
-                                                     "commission":  411.8
-                                                 },
-                                                 {
-                                                     "customerName":  "Rachel Johnson",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  690.84
-                                                 },
-                                                 {
-                                                     "customerName":  "Ron Goodling",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  841.28
-                                                 },
-                                                 {
-                                                     "customerName":  "Robert White",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.06,
-                                                     "commission":  432.43
-                                                 },
-                                                 {
-                                                     "customerName":  "Sirina Cohr",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  654.49
-                                                 }
-                                             ],
-                                    "Nick":  [
-                                                 {
-                                                     "customerName":  "Margaret Fedor",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.04,
-                                                     "commission":  616.42
-                                                 }
-                                             ]
-                                },
-                      "pending":  {
-                                      "Josh":  [
-
-                                               ],
-                                      "Nick":  [
-
-                                               ]
-                                  }
-                  },
-                  {
-                      "label":  "Week 3",
-                      "weekStart":  "2026-09-09",
-                      "weekEnd":  "2026-09-15",
-                      "totals":  {
-                                     "Josh":  6083.27,
-                                     "Nick":  0
-                                 },
-                      "sales":  {
-                                    "Josh":  [
-                                                 {
-                                                     "customerName":  "Mary Myers",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  702.88
-                                                 },
-                                                 {
-                                                     "customerName":  "Diane DeVere",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.06,
-                                                     "commission":  1312.27
-                                                 },
-                                                 {
-                                                     "customerName":  "Judy Bakk",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  761.22
-                                                 },
-                                                 {
-                                                     "customerName":  "Ronald Hartman",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  652.36
-                                                 },
-                                                 {
-                                                     "customerName":  "Tom Haberkorn",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  671.06
-                                                 },
-                                                 {
-                                                     "customerName":  "Ethan Besbris",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.06,
-                                                     "commission":  1182.32
-                                                 },
-                                                 {
-                                                     "customerName":  "Ron Lease",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  801.15
-                                                 }
-                                             ],
-                                    "Nick":  [
-
-                                             ]
-                                },
-                      "pending":  {
-                                      "Josh":  [
-
-                                               ],
-                                      "Nick":  [
-
-                                               ]
-                                  }
-                  },
-                  {
-                      "label":  "Week 4",
-                      "weekStart":  "2026-09-16",
-                      "weekEnd":  "2026-09-22",
-                      "totals":  {
-                                     "Josh":  5538,
-                                     "Nick":  654.23
-                                 },
-                      "sales":  {
-                                    "Josh":  [
-                                                 {
-                                                     "customerName":  "Mark Lindsay",
-                                                     "systemType":  "NTI",
-                                                     "rate":  0.08,
-                                                     "commission":  1033.28
-                                                 },
-                                                 {
-                                                     "customerName":  "Mark Price",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.06,
-                                                     "commission":  434.99
-                                                 },
-                                                 {
-                                                     "customerName":  "Alexis Dettinger",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  808.09
-                                                 },
-                                                 {
-                                                     "customerName":  "Geri Bates",
-                                                     "systemType":  "Flex",
-                                                     "rate":  0.06,
-                                                     "commission":  109.29
-                                                 },
-                                                 {
-                                                     "customerName":  "Manuel Matos",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.06,
-                                                     "commission":  870.56
-                                                 },
-                                                 {
-                                                     "customerName":  "David Walter",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  706.42
-                                                 },
-                                                 {
-                                                     "customerName":  "Brenda Lincoln",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  773.24
-                                                 },
-                                                 {
-                                                     "customerName":  "Andrew Krepps",
-                                                     "systemType":  "Tankless",
-                                                     "rate":  0.08,
-                                                     "commission":  426.99
-                                                 },
-                                                 {
-                                                     "customerName":  "Joe Wasylenko",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  375.15
-                                                 }
-                                             ],
-                                    "Nick":  [
-                                                 {
-                                                     "customerName":  "Ryan Brosius",
-                                                     "systemType":  "Preferred",
-                                                     "rate":  0.04,
-                                                     "commission":  612.42
-                                                 },
-                                                 {
-                                                     "customerName":  "Outhouse Storage",
-                                                     "systemType":  "Flex",
-                                                     "rate":  0.03,
-                                                     "commission":  41.81
-                                                 }
-                                             ]
-                                },
-                      "pending":  {
-                                      "Josh":  [
-
-                                               ],
-                                      "Nick":  [
-
-                                               ]
-                                  }
-                  },
-                  {
-                      "label":  "Week 5",
-                      "weekStart":  "2026-09-23",
-                      "weekEnd":  "2026-09-29",
-                      "totals":  {
-                                     "Josh":  2351.11,
-                                     "Nick":  407.68
-                                 },
-                      "sales":  {
-                                    "Josh":  [
-                                                 {
-                                                     "customerName":  "Brian Crilley",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  791.06
-                                                 },
-                                                 {
-                                                     "customerName":  "Emily Miller",
-                                                     "systemType":  "Mini-Split",
-                                                     "rate":  0.06,
-                                                     "commission":  694.75
-                                                 },
-                                                 {
-                                                     "customerName":  "Ram Vijayakumar",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  489.38
-                                                 },
-                                                 {
-                                                     "customerName":  "Kaleh Macmanara",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  375.91
-                                                 }
-                                             ],
-                                    "Nick":  [
-                                                 {
-                                                     "customerName":  "Garrett Strine",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.04,
-                                                     "commission":  407.68
-                                                 }
-                                             ]
-                                },
-                      "pending":  {
-                                      "Josh":  [
-
-                                               ],
-                                      "Nick":  [
-                                                   {
-                                                       "customerName":  "Gregorio Paredes",
-                                                       "reason":  "possibly logged as \"Georgio Paredes\" -- OnCall Air may have the wrong name on file"
-                                                   }
-                                               ]
-                                  }
-                  },
                   {
                       "label":  "Current Week",
                       "weekStart":  "2026-09-30",
@@ -356,17 +50,17 @@
                   }
               ],
     "mtd":  {
-                "Josh":  18381.2,
-                "Nick":  2142.82
+                "Josh":  1378,
+                "Nick":  464.49
             },
     "revenue":  {
                     "lastMonth":  {
-                                      "Josh":  0,
-                                      "Nick":  0
+                                      "Josh":  381412.39,
+                                      "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  381412.39,
-                                "Nick":  96947.35
+                                "Josh":  0,
+                                "Nick":  0
                             },
                     "ytd":  {
                                 "Josh":  3788446.91,
@@ -375,22 +69,22 @@
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.6818,
-                                      "sameDayCount":  15,
-                                      "sameDaySample":  22,
-                                      "avgDaysToClose":  5.3,
-                                      "daysSample":  22,
-                                      "avgDiscountPct":  0.0636,
-                                      "discountSample":  22
+                                      "sameDayRate":  0.6667,
+                                      "sameDayCount":  2,
+                                      "sameDaySample":  3,
+                                      "avgDaysToClose":  32.2,
+                                      "daysSample":  3,
+                                      "avgDiscountPct":  0.0527,
+                                      "discountSample":  3
                                   },
                          "Nick":  {
-                                      "sameDayRate":  0.6,
-                                      "sameDayCount":  3,
-                                      "sameDaySample":  5,
-                                      "avgDaysToClose":  12.7,
-                                      "daysSample":  5,
-                                      "avgDiscountPct":  0.0644,
-                                      "discountSample":  5
+                                      "sameDayRate":  0,
+                                      "sameDayCount":  0,
+                                      "sameDaySample":  1,
+                                      "avgDaysToClose":  1.4,
+                                      "daysSample":  1,
+                                      "avgDiscountPct":  0,
+                                      "discountSample":  1
                                   }
                      }
 }
