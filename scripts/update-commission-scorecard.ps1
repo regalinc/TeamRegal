@@ -369,8 +369,27 @@ $manualSupplementRows = @(
 # trailing week); $thisMonth stays the strict calendar-month subset of it,
 # used below only for the MTD sum so a trailing prior-month week is visible
 # without counting toward this month's total.
+#
+# "Belongs to this month" is decided by which month holds the MAJORITY of
+# the week's 7 days, not just whether WeekStart (the Wednesday) falls on or
+# after the 1st. Those agree almost always -- but when the 1st of a month
+# lands on a Thursday (so the prior Wednesday, the week's start, is the
+# LAST day of the old month), a plain WeekStart>=monthStart check throws
+# out a week that's 6/7ths in the new month. Confirmed real case
+# 2026-09-30 -> 2026-10-01: the Sep 30-Oct 6 week has only Sep 30 in
+# September, the other 6 days in October, but WeekStart (Sep 30) < Oct 1
+# excluded it from October's MTD entirely -- dry-run confirmed Josh's and
+# Nick's October MTD read $0.00 despite real sales already in that week.
+# A week can straddle at most one boundary (every month is >= 28 days), so
+# "how many of its days are >= monthStart" is enough to decide majority.
+function DaysInNewMonth($weekStart, [datetime]$newMonthStart) {
+  $weekEnd = $weekStart.AddDays(6)
+  if ($weekEnd -lt $newMonthStart) { return 0 }
+  $days = ($weekEnd - $newMonthStart).Days + 1
+  return [Math]::Min($days, 7)
+}
 $displayRows = @($computed | Where-Object { $_.WeekStart -ge $windowStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualSupplementRows
-$thisMonth = @($displayRows | Where-Object { $_.WeekStart -ge $monthStart })
+$thisMonth = @($displayRows | Where-Object { $_.WeekStart -ge $monthStart -or (DaysInNewMonth $_.WeekStart $monthStart) -ge 4 })
 $weekGroups = $displayRows | Group-Object WeekStart | Sort-Object { [datetime]$_.Name }
 
 $weeks = @()
