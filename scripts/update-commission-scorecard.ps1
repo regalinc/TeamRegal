@@ -75,6 +75,7 @@ function NormalizeName($s) {
 $NAME_ALIASES = @{
   "jr hartman" = "Ronald Hartman"  # OnCall Air has first_name "Jr", last_name "Hartman" on this customer's record; confirmed 2026-09-14 this is Ronald Hartman (hvac-sales.json Job #61525).
   "out house storage" = "Outhouse Storage"  # OnCall Air has this commercial account as "Out House Storage" (two words); the sheet has it as one word, "Outhouse Storage" -- confirmed by Michael 2026-09-17.
+  "typical life corporation" = "Typical Life"  # OnCall Air has this commercial account's full legal name; the sheet shortens it to "Typical Life" -- confirmed by Michael 2026-10-01 (hvac-sales.json Job #62179).
 }
 function ResolveAliasedName($s) {
   $key = NormalizeName $s
