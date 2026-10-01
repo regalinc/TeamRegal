@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  588
+                 "record_count":  589
              },
     "records":  [
                     {
@@ -6458,6 +6458,17 @@
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-05",
+                        "customerName":  "Amy Ford",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
                         "sold":  false
                     },
                     {
