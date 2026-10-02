@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  594
+                 "record_count":  595
              },
     "records":  [
                     {
@@ -6409,12 +6409,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-02",
                         "customerName":  "Andrew Sheridan",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62308",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6436,6 +6436,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-02",
+                        "customerName":  "Michal Edmondson",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
