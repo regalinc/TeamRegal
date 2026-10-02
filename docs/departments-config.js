@@ -122,7 +122,8 @@ const DEPARTMENTS = {
       // A/R days sales outstanding — a hand-entered number (from
       // QuickBooks' A/R aging), not derivable from anything currently
       // synced. Target < 15 days.
-      { key: "dso", label: "A/R days sales outstanding", type: "count", target: { goal: 15, direction: "max" } },
+      // Hardcoded to 1 day (Michael, 2026-10-02): payment is collected at time of service, so there's no A/R aging to enter.
+      { key: "dso", label: "A/R days sales outstanding", type: "count", target: { goal: 15, direction: "max" }, compute: () => 1 },
     ],
     // A curated, re-ordered view for company-scorecard.html only — the
     // user's revamped BU 30 KPI list. Each entry points at a metric
@@ -389,7 +390,8 @@ const DEPARTMENTS = {
       { key: "productionToSupportRatio", label: "Production to support ratio", type: "ratio", target: { goal: 2, direction: "min" }, compute: (m) => (m.supportCount ? m.productionCount / m.supportCount : null) },
       // Added for the revamped `scorecard` list below — same hand-entered
       // A/R days sales outstanding as BU 30's, target < 15 days.
-      { key: "dso", label: "A/R days sales outstanding", type: "count", target: { goal: 15, direction: "max" } },
+      // Hardcoded to 1 day (Michael, 2026-10-02): payment is collected at time of service, so there's no A/R aging to enter.
+      { key: "dso", label: "A/R days sales outstanding", type: "count", target: { goal: 15, direction: "max" }, compute: () => 1 },
     ],
     // Curated view for company-scorecard.html only (see BU 30's scorecard
     // comment). One intentional target divergence from the base metrics
