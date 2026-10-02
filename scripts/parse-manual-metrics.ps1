@@ -67,9 +67,12 @@ $DEPARTMENTS = @(
   },
   @{
     Sheet = "40 HVAC Maintenance"; Code = "40"
+    # Column order re-synced 2026-10-02: Paid Hours moved to B (and Vehicles
+    # to E) in the workbook, and this parser reads by position, so BU 40's
+    # Vehicles "2" was being stored as paidHours (real YTD paid hours: 4,091.5).
     Columns = @(
-      @{ Key = "attendancePct"; Pct = $true }, @{ Key = "ptuConversionPct"; Pct = $true },
-      @{ Key = "vehicleCount"; Pct = $false }, @{ Key = "paidHours"; Pct = $false },
+      @{ Key = "paidHours"; Pct = $false }, @{ Key = "attendancePct"; Pct = $true },
+      @{ Key = "ptuConversionPct"; Pct = $true }, @{ Key = "vehicleCount"; Pct = $false },
       @{ Key = "billedHours"; Pct = $false }, @{ Key = "ptuTechDays"; Pct = $false },
       @{ Key = "employeeCount"; Pct = $false }, @{ Key = "supportCount"; Pct = $false },
       @{ Key = "productionCount"; Pct = $false }, @{ Key = "newCustClubConversion"; Pct = $true },
@@ -89,9 +92,11 @@ $DEPARTMENTS = @(
   },
   @{
     Sheet = "80 Plumbing Maintenance"; Code = "80"
+    # Paid Hours column added at B in the workbook (no data entered yet as of 2026-10-02).
     Columns = @(
-      @{ Key = "attendancePct"; Pct = $true }, @{ Key = "reviewsGenerated"; Pct = $false },
-      @{ Key = "callbackCount"; Pct = $false }, @{ Key = "vehicleCount"; Pct = $false }
+      @{ Key = "paidHours"; Pct = $false }, @{ Key = "attendancePct"; Pct = $true },
+      @{ Key = "reviewsGenerated"; Pct = $false }, @{ Key = "callbackCount"; Pct = $false },
+      @{ Key = "vehicleCount"; Pct = $false }
     )
   },
   @{

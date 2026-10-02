@@ -103,10 +103,11 @@ const DEPARTMENTS = {
       // a month with no P&L uploaded yet, same "no data" neutral tile as
       // every other P&L-sourced value.
       { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
-      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      // Attendance >= 92% and Callback rate < 5%: confirmed by Michael 2026-10-02.
+      { key: "attendancePct", label: "Attendance", type: "pct", target: { goal: 0.92, direction: "min" } },
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
-      { key: "callbackCount", label: "Callback rate", type: "pct", target: null, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
+      { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.05, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
       // Tracked for the whole company, but only BU 10/50's KPI chart pairs
       // this with a Revenue-per-vehicle target — shown here as a plain
       // count, same as Reviews generated, rather than inventing a ratio.
@@ -115,9 +116,9 @@ const DEPARTMENTS = {
       { key: "revenuePerEmployee", label: "Revenue per employee", type: "money", target: { goal: 80000, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && pnl ? pnl.totalIncome / m.employeeCount : null) },
       // Added for the revamped `scorecard` list below (not on the old
       // 3-section chart). Revenue billed ÷ paid hours — a different figure
-      // from Productivity (GP/hr) above, same as BU 70's pair. No
-      // confirmed target given, so uncolored for now.
-      { key: "productivityRevenue", label: "Service productivity ($ billed / paid hr)", type: "money", target: null, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
+      // from Productivity (GP/hr) above, same as BU 70's pair. Target
+      // >= $150/hr confirmed by Michael 2026-10-02.
+      { key: "productivityRevenue", label: "Service productivity ($ billed / paid hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
       // A/R days sales outstanding — a hand-entered number (from
       // QuickBooks' A/R aging), not derivable from anything currently
       // synced. Target < 15 days.
@@ -150,7 +151,7 @@ const DEPARTMENTS = {
       { source: "manual", key: "callbackCount", label: "Callback rate" },
       { source: "pnl", key: "grossProfit", label: "Gross margin" },
       { source: "manual", key: "dso", label: "A/R days sales outstanding" },
-      { source: "pnl", key: "laborCost", label: "Labor to sales" },
+      { source: "pnl", key: "laborCost", label: "Labor to sales (non-burdened)" },
       // Was left off this list originally because the sample size was too
       // small to be meaningful (~80% of estimates have no Business Unit set
       // -- see estimateClosingRateForDept in company-scorecard.js) -- added
