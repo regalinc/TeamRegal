@@ -363,7 +363,8 @@ const DEPARTMENTS = {
       // GP/hr away from revenue, so that one keeps Gross Profit specifically.
       { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
       { key: "productivityRevenue", label: "Productivity (Revenue/hr, with sales)", type: "money", target: { goal: 60, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
-      { key: "attendancePct", label: "Attendance", type: "pct", target: null },
+      // Attendance >= 92%, same as BU 30: confirmed by Michael 2026-10-02.
+      { key: "attendancePct", label: "Attendance", type: "pct", target: { goal: 0.92, direction: "min" } },
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
       { key: "reviewsGenerated", label: "Reviews generated", type: "count", target: null },
       { key: "callbackCount", label: "Callback rate", type: "pct", target: { goal: 0.015, direction: "max" }, compute: (m, s) => (m.callbackCount != null && s.totalJobs ? m.callbackCount / s.totalJobs : null) },
