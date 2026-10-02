@@ -103,6 +103,10 @@ const DEPARTMENTS = {
       // a month with no P&L uploaded yet, same "no data" neutral tile as
       // every other P&L-sourced value.
       { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
+      // Gross profit per tech per day, target >= $1,350 (Michael, 2026-10-02;
+      // replaces GP/hr on this scorecard). Same math as BU 70's: P&L gross
+      // profit ÷ (employeeCount x weekdays), weekdays via stats.workDays.
+      { key: "gpPerManDay", label: "Gross profit per tech per day", type: "money", target: { goal: 1350, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && s && s.workDays && pnl ? pnl.grossProfit / (m.employeeCount * s.workDays) : null) },
       // Attendance >= 92% and Callback rate < 5%: confirmed by Michael 2026-10-02.
       { key: "attendancePct", label: "Attendance", type: "pct", target: { goal: 0.92, direction: "min" } },
       { key: "truckInventoryAccuracyPct", label: "Truck inventory accuracy", type: "pct", target: null },
@@ -141,7 +145,7 @@ const DEPARTMENTS = {
       // a tighter target: 5% vs. the 7.5% the hcp entry still carries for
       // admin.html/index.html coloring. Intentional divergence.
       { source: "hcp", key: "zeroCall", label: "DFO (diagnostic-fee-only calls)", target: { goal: 0.05, direction: "max", buffer: 1 / 3 } },
-      { source: "manual", key: "productivity", label: "Gross profit per paid hour" },
+      { source: "manual", key: "gpPerManDay", label: "Gross profit per tech per day" },
       { source: "hcp", key: "clubConversion", label: "Club agreement conversion" },
       { source: "manual", key: "attendancePct", label: "Attendance" },
       { source: "manual", key: "truckInventoryAccuracyPct", label: "Truck inventory count accuracy" },
@@ -362,12 +366,13 @@ const DEPARTMENTS = {
       // not a duplicate of GP/hr) — an earlier fix deliberately corrected
       // GP/hr away from revenue, so that one keeps Gross Profit specifically.
       { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
-      // Gross profit per man per day, target >= $150 (Michael, 2026-10-02 --
-      // replaces GP/hr on this department's scorecard). Gross profit ÷
+      // Gross profit per man per day, target >= $1,500 (Michael, 2026-10-02 --
+      // replaces GP/hr on this department's scorecard; corrected from an
+      // earlier $150 read off the chart). Gross profit ÷
       // (employeeCount x weekdays in the period); weekdays are counted by
       // company-scorecard.js and handed in as stats.workDays, with no
       // holiday adjustment. Neutral ("--") for a month with no employee count.
-      { key: "gpPerManDay", label: "Gross profit per man per day", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && s && s.workDays && pnl ? pnl.grossProfit / (m.employeeCount * s.workDays) : null) },
+      { key: "gpPerManDay", label: "Gross profit per man per day", type: "money", target: { goal: 1500, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && s && s.workDays && pnl ? pnl.grossProfit / (m.employeeCount * s.workDays) : null) },
       { key: "productivityRevenue", label: "Productivity (Revenue/hr, with sales)", type: "money", target: { goal: 60, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
       // Attendance >= 92%, same as BU 30: confirmed by Michael 2026-10-02.
       { key: "attendancePct", label: "Attendance", type: "pct", target: { goal: 0.92, direction: "min" } },
