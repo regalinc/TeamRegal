@@ -70,6 +70,17 @@ function monthRange(monthStr) {
   return [new Date(y, m - 1, 1), new Date(y, m, 1)];
 }
 
+// Mon-Fri days in [start, end) -- the "per day" denominator for per-man-per-day
+// metrics. No holiday adjustment.
+function weekdaysInRange([start, end]) {
+  let n = 0;
+  for (let d = new Date(start); d < end; d.setDate(d.getDate() + 1)) {
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) n++;
+  }
+  return n;
+}
+
 function jobInRange(job, [start, end]) {
   const sched = job.schedule?.scheduled_start;
   if (!sched) return false;
@@ -349,6 +360,7 @@ function render() {
   // every department anyway, same as nonMemberCount above, since it's
   // cheap and dept.hcp simply won't reference the key for BU 10/50.
   stats.estimateClosingRate = estimateClosingRateForDept(latestData.estimates, currentDept, range);
+  stats.workDays = weekdaysInRange(range);
 
   // BU 30/40/70/80 have a curated `scorecard` list (departments-config.js)
   // and render as one flat section; BU 10/50 have none and keep the

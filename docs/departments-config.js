@@ -361,8 +361,13 @@ const DEPARTMENTS = {
       // tile/input. Revenue/hr stays as its own tile (a different formula,
       // not a duplicate of GP/hr) — an earlier fix deliberately corrected
       // GP/hr away from revenue, so that one keeps Gross Profit specifically.
-      // GP/hr target lowered from $150 to >= $100 for BU 70: Michael, 2026-10-02.
-      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 100, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
+      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
+      // Gross profit per man per day, target >= $150 (Michael, 2026-10-02 --
+      // replaces GP/hr on this department's scorecard). Gross profit ÷
+      // (employeeCount x weekdays in the period); weekdays are counted by
+      // company-scorecard.js and handed in as stats.workDays, with no
+      // holiday adjustment. Neutral ("--") for a month with no employee count.
+      { key: "gpPerManDay", label: "Gross profit per man per day", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.employeeCount && s && s.workDays && pnl ? pnl.grossProfit / (m.employeeCount * s.workDays) : null) },
       { key: "productivityRevenue", label: "Productivity (Revenue/hr, with sales)", type: "money", target: { goal: 60, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
       // Attendance >= 92%, same as BU 30: confirmed by Michael 2026-10-02.
       { key: "attendancePct", label: "Attendance", type: "pct", target: { goal: 0.92, direction: "min" } },
@@ -405,7 +410,7 @@ const DEPARTMENTS = {
       { source: "manual", key: "efficiency", label: "Service efficiency (billed / paid hrs)" },
       { source: "manual", key: "productivityRevenue", label: "Service productivity ($ billed / paid hr)" },
       { source: "hcp", key: "zeroCall", label: "IFO (diagnostic-fee-only calls)" },
-      { source: "manual", key: "productivity", label: "Gross profit per paid hour" },
+      { source: "manual", key: "gpPerManDay", label: "Gross profit per man per day" },
       { source: "hcp", key: "clubConversion", label: "Club agreement conversion" },
       { source: "manual", key: "attendancePct", label: "Attendance" },
       { source: "manual", key: "truckInventoryAccuracyPct", label: "Truck inventory count accuracy" },
