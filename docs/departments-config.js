@@ -361,7 +361,8 @@ const DEPARTMENTS = {
       // tile/input. Revenue/hr stays as its own tile (a different formula,
       // not a duplicate of GP/hr) — an earlier fix deliberately corrected
       // GP/hr away from revenue, so that one keeps Gross Profit specifically.
-      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 150, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
+      // GP/hr target lowered from $150 to >= $100 for BU 70: Michael, 2026-10-02.
+      { key: "productivity", label: "Productivity (GP/hr)", type: "money", target: { goal: 100, direction: "min" }, compute: (m, s, pnl) => (m.paidHours && pnl ? pnl.grossProfit / m.paidHours : null) },
       { key: "productivityRevenue", label: "Productivity (Revenue/hr, with sales)", type: "money", target: { goal: 60, direction: "min" }, compute: (m, s) => (m.paidHours ? s.totalRevenue / m.paidHours : null) },
       // Attendance >= 92%, same as BU 30: confirmed by Michael 2026-10-02.
       { key: "attendancePct", label: "Attendance", type: "pct", target: { goal: 0.92, direction: "min" } },
