@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-01T21:58:27.048Z",
+    "last_synced_at": "2026-10-02T01:47:45.531Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 37,
-    "trip_count": 5073
+    "trip_count": 5076
   },
   "vehicles": [
     {
@@ -225,7 +225,7 @@
         "name": "Promaster 3500",
         "year": 2023
       },
-      "odometer": 39558.3
+      "odometer": 39578.8
     },
     {
       "imei": "868199050011171",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 81836
+      "odometer": 81877
     },
     {
       "imei": "868199050033175",
@@ -417,6 +417,42 @@
   ],
   "trips": [
     {
+      "transactionId": "868199050010215-8067-202610",
+      "imei": "868199050010215",
+      "startTime": "2026-10-01T23:28:42.000Z",
+      "endTime": "2026-10-01T23:51:01.000Z",
+      "distance": 6.3,
+      "averageSpeed": 26.7,
+      "maxSpeed": 48.5,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 486
+    },
+    {
+      "transactionId": "868199050010215-8066-202610",
+      "imei": "868199050010215",
+      "startTime": "2026-10-01T22:52:01.000Z",
+      "endTime": "2026-10-01T23:15:03.000Z",
+      "distance": 3.5,
+      "averageSpeed": 22.9,
+      "maxSpeed": 49.70968,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 848
+    },
+    {
+      "transactionId": "868199050010215-8065-202610",
+      "imei": "868199050010215",
+      "startTime": "2026-10-01T22:11:03.000Z",
+      "endTime": "2026-10-01T22:34:12.000Z",
+      "distance": 9.4,
+      "averageSpeed": 31,
+      "maxSpeed": 53.437906,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 276
+    },
+    {
       "transactionId": "865612072508498-1089-202610",
       "imei": "865612072508498",
       "startTime": "2026-10-01T20:59:48.000Z",
@@ -470,7 +506,7 @@
       "startTime": "2026-10-01T19:58:20.000Z",
       "endTime": "2026-10-01T20:05:58.000Z",
       "distance": 3.1,
-      "averageSpeed": 27.3,
+      "averageSpeed": 27.9,
       "maxSpeed": 41.010486,
       "hardBrakingCount": 0,
       "hardAccelerationCount": 0,
