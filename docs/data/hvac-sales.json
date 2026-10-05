@@ -6442,23 +6442,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-02",
                         "customerName":  "Michal Edmondson",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62316",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
-                    },
-                    {
-                        "ca":  "Nick",
-                        "date":  "2026-10-05",
-                        "customerName":  "Guervio Charles",
-                        "job":  "",
-                        "systemType":  "",
-                        "clubMember":  "No",
-                        "lead":  "Lowes",
-                        "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -6534,6 +6523,17 @@
                         "systemType":  "",
                         "clubMember":  "No",
                         "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-08",
+                        "customerName":  "John Brant",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
                         "customerType":  "Existing",
                         "sold":  false
                     },
