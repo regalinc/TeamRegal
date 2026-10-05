@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-05T16:35:04.672Z",
+                 "generated_at":  "2026-10-05T20:05:04.698Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -10,7 +10,7 @@
                       "weekEnd":  "2026-10-06",
                       "totals":  {
                                      "Josh":  2836.29,
-                                     "Nick":  464.49
+                                     "Nick":  524.49
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -41,6 +41,12 @@
                                              ],
                                     "Nick":  [
                                                  {
+                                                     "customerName":  "Andrew Paxton",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.03,
+                                                     "commission":  60
+                                                 },
+                                                 {
                                                      "customerName":  "Patrick Shaughnessy",
                                                      "systemType":  "Legacy",
                                                      "rate":  0.04,
@@ -63,7 +69,7 @@
               ],
     "mtd":  {
                 "Josh":  2836.29,
-                "Nick":  464.49
+                "Nick":  524.49
             },
     "revenue":  {
                     "lastMonth":  {
@@ -72,11 +78,11 @@
                                   },
                     "mtd":  {
                                 "Josh":  27820.8,
-                                "Nick":  0
+                                "Nick":  2200
                             },
                     "ytd":  {
                                 "Josh":  3816267.71,
-                                "Nick":  598726.88
+                                "Nick":  600926.88
                             }
                 },
     "closingStats":  {
@@ -90,13 +96,13 @@
                                       "discountSample":  5
                                   },
                          "Nick":  {
-                                      "sameDayRate":  0,
-                                      "sameDayCount":  0,
-                                      "sameDaySample":  1,
-                                      "avgDaysToClose":  1.4,
-                                      "daysSample":  1,
+                                      "sameDayRate":  0.5,
+                                      "sameDayCount":  1,
+                                      "sameDaySample":  2,
+                                      "avgDaysToClose":  0.9,
+                                      "daysSample":  2,
                                       "avgDiscountPct":  0,
-                                      "discountSample":  1
+                                      "discountSample":  2
                                   }
                      }
 }
