@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  595
+                 "record_count":  597
              },
     "records":  [
                     {
@@ -6453,12 +6453,12 @@
                         "ca":  "Nick",
                         "date":  "2026-10-05",
                         "customerName":  "Andrew Paxton",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62366",
+                        "systemType":  "Flex",
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6469,6 +6469,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-05",
+                        "customerName":  "Steven Eyler",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
@@ -6546,6 +6557,17 @@
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-11-04",
+                        "customerName":  "Michael Albert",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "",
                         "sold":  false
                     }
                 ]
