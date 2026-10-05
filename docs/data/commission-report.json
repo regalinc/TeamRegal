@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-02T23:05:04.574Z",
+                 "generated_at":  "2026-10-05T16:35:04.672Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -9,7 +9,7 @@
                       "weekStart":  "2026-09-30",
                       "weekEnd":  "2026-10-06",
                       "totals":  {
-                                     "Josh":  2096.14,
+                                     "Josh":  2836.29,
                                      "Nick":  464.49
                                  },
                       "sales":  {
@@ -19,6 +19,12 @@
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
                                                      "commission":  718.14
+                                                 },
+                                                 {
+                                                     "customerName":  "Michal Edmondson",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  740.15
                                                  },
                                                  {
                                                      "customerName":  "Maclean Lunko",
@@ -45,10 +51,6 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
-                                                       "customerName":  "Michal Edmondson",
-                                                       "reason":  "System Type not entered yet"
-                                                   },
-                                                   {
                                                        "customerName":  "Typical Life",
                                                        "reason":  "System Type not entered yet"
                                                    }
@@ -60,7 +62,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  2096.14,
+                "Josh":  2836.29,
                 "Nick":  464.49
             },
     "revenue":  {
