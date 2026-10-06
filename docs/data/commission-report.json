@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-05T23:05:04.602Z",
+                 "generated_at":  "2026-10-06T15:52:53.838Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -9,7 +9,7 @@
                       "weekStart":  "2026-09-30",
                       "weekEnd":  "2026-10-06",
                       "totals":  {
-                                     "Josh":  2836.29,
+                                     "Josh":  3424.51,
                                      "Nick":  524.49
                                  },
                       "sales":  {
@@ -31,6 +31,12 @@
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
                                                      "commission":  929.85
+                                                 },
+                                                 {
+                                                     "customerName":  "Typical Life",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  588.22
                                                  },
                                                  {
                                                      "customerName":  "Tom Buzurro",
@@ -57,18 +63,21 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
-                                                       "customerName":  "Typical Life",
-                                                       "reason":  "System Type not entered yet"
+                                                       "customerName":  "Carol Jones",
+                                                       "reason":  "possibly logged as \"Dwayne Jones\" -- OnCall Air may have the wrong name on file"
                                                    }
                                                ],
                                       "Nick":  [
-
+                                                   {
+                                                       "customerName":  "Pedro Domingos",
+                                                       "reason":  "System Type not entered yet"
+                                                   }
                                                ]
                                   }
                   }
               ],
     "mtd":  {
-                "Josh":  2836.29,
+                "Josh":  3424.51,
                 "Nick":  524.49
             },
     "revenue":  {
@@ -77,32 +86,32 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  27820.8,
-                                "Nick":  2200
+                                "Josh":  35725.8,
+                                "Nick":  11701
                             },
                     "ytd":  {
-                                "Josh":  3816267.71,
-                                "Nick":  600926.88
+                                "Josh":  3824172.71,
+                                "Nick":  610427.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.8,
-                                      "sameDayCount":  4,
-                                      "sameDaySample":  5,
-                                      "avgDaysToClose":  19.5,
-                                      "daysSample":  5,
-                                      "avgDiscountPct":  0.052,
-                                      "discountSample":  5
+                                      "sameDayRate":  0.8333,
+                                      "sameDayCount":  5,
+                                      "sameDaySample":  6,
+                                      "avgDaysToClose":  28.3,
+                                      "daysSample":  6,
+                                      "avgDiscountPct":  0.0612,
+                                      "discountSample":  6
                                   },
                          "Nick":  {
-                                      "sameDayRate":  0.5,
-                                      "sameDayCount":  1,
-                                      "sameDaySample":  2,
-                                      "avgDaysToClose":  0.9,
-                                      "daysSample":  2,
+                                      "sameDayRate":  0.6667,
+                                      "sameDayCount":  2,
+                                      "sameDaySample":  3,
+                                      "avgDaysToClose":  0.7,
+                                      "daysSample":  3,
                                       "avgDiscountPct":  0,
-                                      "discountSample":  2
+                                      "discountSample":  3
                                   }
                      }
 }
