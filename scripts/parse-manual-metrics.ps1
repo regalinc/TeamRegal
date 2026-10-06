@@ -169,19 +169,24 @@ try {
 
   foreach ($dept in $DEPARTMENTS) {
     $ws = $wb.Worksheets.Item($dept.Sheet)
-    $used = $ws.UsedRange
-    $rows = $used.Rows.Count
+    # Bound the scan to the last row that actually has a Month in column A,
+    # NOT UsedRange.Rows.Count: a whole-column format applied to a tab
+    # (found 2026-10-06 on 70 Plumbing Service and 80 Plumbing Maintenance,
+    # real data ending at row 13) inflates UsedRange to all 1,048,576 rows,
+    # and this loop makes a separate Excel COM call per cell -- the refresh
+    # ran 18+ minutes on that tab without finishing. -4162 = xlUp.
+    $rows = $ws.Cells.Item($ws.Rows.Count, 1).End(-4162).Row
 
     $monthCount = 0
     for ($r = 2; $r -le $rows; $r++) {
-      $monthVal = $used.Cells.Item($r, 1).Value2
+      $monthVal = $ws.Cells.Item($r, 1).Value2
       if (-not ($monthVal -is [double])) { continue }
       $monthKey = [DateTime]::FromOADate($monthVal).ToString("yyyy-MM")
 
       $entry = [ordered]@{}
       for ($c = 0; $c -lt $dept.Columns.Count; $c++) {
         $col = $dept.Columns[$c]
-        $raw = $used.Cells.Item($r, $c + 2).Value2
+        $raw = $ws.Cells.Item($r, $c + 2).Value2
         # PowerShell coerces the RHS to the LHS's type on -eq, so a naive
         # "$raw -eq `"`"" is true for a numeric 0 (`"`" casts to 0) -- a real
         # value that must NOT be dropped as blank (BU 80's July Vehicles=0
