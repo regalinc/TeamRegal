@@ -164,6 +164,15 @@ foreach ($p in $allPayloads) {
     $sameWeek = @($candidates | Where-Object { $_.date -and ([datetime]$_.date -ge $weekStart) -and ([datetime]$_.date -lt $weekEndExclusive) })
     if ($sameWeek.Count -eq 1) { $candidates = $sameWeek }
   }
+  # Commission depends only on System Type, so rows that can't be told apart
+  # by week are only a real ambiguity if they DISAGREE on it. Confirmed case
+  # 2026-10-06: Typical Life has two Legacy rows (July, Sept 22) and sat
+  # "System Type not entered yet" for days though the type was right there.
+  # Same type on every candidate -> same rate -> safe to use it.
+  if ($candidates.Count -gt 1) {
+    $distinctTypes = @($candidates | ForEach-Object { $_.systemType } | Select-Object -Unique)
+    if ($distinctTypes.Count -eq 1 -and $distinctTypes[0]) { $candidates = @($candidates[0]) }
+  }
 
   $systemType = if ($candidates.Count -eq 1) { $candidates[0].systemType } else { $null }
   $ok = $candidates.Count -eq 1 -and $systemType -and $RATE_GROUPS.ContainsKey($systemType)
