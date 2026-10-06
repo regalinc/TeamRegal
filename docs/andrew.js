@@ -640,10 +640,14 @@ function render() {
   // own month windows off `now`, not off currentPeriod) -- so under This
   // week/Last month/YTD it just kept showing the same frozen "current
   // month" figures while everything else on the page changed to match the
-  // selected tab. Only render/show it for MTD, same fix already applied to
-  // Josh/Nick's pages (hvac-sales.js).
-  commissionCardEl.hidden = currentPeriod !== "month";
-  if (currentPeriod === "month") renderCommission(mine);
+  // selected tab. So it only shows under MTD and Last month (the two tabs
+  // whose own date ranges overlap what the card displays: last month's
+  // final plus this month to date). Last month was added 2026-10-06 --
+  // when it was MTD-only, last month's commission vanished from the page
+  // exactly when it was time to pay it out.
+  const showCommission = currentPeriod === "month" || currentPeriod === "lastmonth";
+  commissionCardEl.hidden = !showCommission;
+  if (showCommission) renderCommission(mine);
 
   const sorted = unionById(estimatesGiven, approvedThisPeriod).sort((a, b) => {
     const aDate = estimateGivenDate(a, tech) || a.created_at || "";
