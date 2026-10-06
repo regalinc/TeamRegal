@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  597
+                 "record_count":  599
              },
     "records":  [
                     {
@@ -6245,7 +6245,7 @@
                         "date":  "2026-09-28",
                         "customerName":  "Emily Miller",
                         "job":  "62135",
-                        "systemType":  "Mini-Split",
+                        "systemType":  "Preferred",
                         "clubMember":  "Yes",
                         "lead":  "EC",
                         "customerType":  "Existing",
@@ -6497,12 +6497,12 @@
                         "ca":  "Nick",
                         "date":  "2026-10-06",
                         "customerName":  "Pedro Domingos",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62398",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6514,6 +6514,17 @@
                         "lead":  "Marketed",
                         "customerType":  "New",
                         "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-06",
+                        "customerName":  "Carol Jones",
+                        "job":  "62402",
+                        "systemType":  "Preferred",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -6557,6 +6568,17 @@
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-20",
+                        "customerName":  "Jolene Tolbert",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
