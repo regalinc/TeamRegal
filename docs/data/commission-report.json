@@ -1,15 +1,15 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-06T16:35:04.703Z",
+                 "generated_at":  "2026-10-07T10:30:46.234Z",
                  "month":  "2026-10"
              },
     "weeks":  [
                   {
-                      "label":  "Current Week",
+                      "label":  "Week 1",
                       "weekStart":  "2026-09-30",
                       "weekEnd":  "2026-10-06",
                       "totals":  {
-                                     "Josh":  3855.7,
+                                     "Josh":  4893.37,
                                      "Nick":  906.35
                                  },
                       "sales":  {
@@ -19,6 +19,18 @@
                                                      "systemType":  "Preferred",
                                                      "rate":  0.06,
                                                      "commission":  431.18
+                                                 },
+                                                 {
+                                                     "customerName":  "Bob Savage",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.06,
+                                                     "commission":  317.68
+                                                 },
+                                                 {
+                                                     "customerName":  "John Bush",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  720
                                                  },
                                                  {
                                                      "customerName":  "Michal Edmondson",
@@ -83,7 +95,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  3855.7,
+                "Josh":  4893.37,
                 "Nick":  906.35
             },
     "revenue":  {
@@ -92,23 +104,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  35725.8,
+                                "Josh":  54499.8,
                                 "Nick":  11701
                             },
                     "ytd":  {
-                                "Josh":  3824172.71,
+                                "Josh":  3842946.71,
                                 "Nick":  610427.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.8333,
-                                      "sameDayCount":  5,
-                                      "sameDaySample":  6,
-                                      "avgDaysToClose":  28.4,
-                                      "daysSample":  6,
-                                      "avgDiscountPct":  0.0612,
-                                      "discountSample":  6
+                                      "sameDayRate":  0.875,
+                                      "sameDayCount":  7,
+                                      "sameDaySample":  8,
+                                      "avgDaysToClose":  21.4,
+                                      "daysSample":  8,
+                                      "avgDiscountPct":  0.0563,
+                                      "discountSample":  8
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.6667,
