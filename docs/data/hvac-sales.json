@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  599
+                 "record_count":  601
              },
     "records":  [
                     {
@@ -6509,11 +6509,11 @@
                         "date":  "2026-10-06",
                         "customerName":  "Bob Savage",
                         "job":  "",
-                        "systemType":  "",
+                        "systemType":  "Flex",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6521,6 +6521,28 @@
                         "customerName":  "Carol Jones",
                         "job":  "62402",
                         "systemType":  "Preferred",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  true
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-10-06",
+                        "customerName":  "Harry Becker",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-06",
+                        "customerName":  "John Bush",
+                        "job":  "",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
