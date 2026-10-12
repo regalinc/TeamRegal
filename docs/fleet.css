@@ -3,6 +3,18 @@
    the technician view); this file only covers what's specific to this
    page. */
 
+/* Shown only when the Bouncie sync hasn't succeeded in a long while (see
+   checkBouncieFreshness in fleet.js) -- a stuck sync is otherwise invisible
+   here, the numbers just quietly stop moving. Hidden by default. */
+.staleness-banner {
+  margin: 0;
+  padding: 10px 24px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 .fleet-data-note {
   margin: 0;
   padding: 10px 24px;

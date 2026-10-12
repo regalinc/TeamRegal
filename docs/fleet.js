@@ -156,6 +156,29 @@ function render() {
   appEl.appendChild(grid);
 }
 
+// The Bouncie sync is an hourly GitHub Action, but GitHub spaces scheduled
+// runs out to every few hours in practice (observed gaps up to ~7.5h), so the
+// generic 90-minute "stale" tint on the Last synced chip is amber nearly all
+// the time and tells you nothing. Nothing flagged the 2026-10-04 outage (an
+// expired token) for 8 days. 12h clears every normal gap, and still catches a
+// stuck sync within a business day.
+const BOUNCIE_STALE_AFTER_MS = 12 * 60 * 60 * 1000;
+
+function checkBouncieFreshness(meta) {
+  const banner = document.getElementById("staleness-banner");
+  if (!banner) return;
+  const syncedAt = meta.last_synced_at ? new Date(meta.last_synced_at) : null;
+  const valid = syncedAt && !Number.isNaN(syncedAt.getTime());
+  if (valid && Date.now() - syncedAt.getTime() <= BOUNCIE_STALE_AFTER_MS) {
+    banner.hidden = true;
+    return;
+  }
+  banner.textContent = valid
+    ? `⚠ Fleet data last synced ${syncedAt.toLocaleString()} — the Bouncie sync may be stuck, so the numbers below could be out of date.`
+    : "⚠ Fleet data has no sync time on record — the Bouncie sync may not be running.";
+  banner.hidden = false;
+}
+
 async function loadData() {
   try {
     const [bouncieRes, dashRes] = await Promise.all([
@@ -171,6 +194,7 @@ async function loadData() {
 
     render();
     updateSyncStatus(latestBouncie.meta || {});
+    checkBouncieFreshness(latestBouncie.meta || {});
   } catch (err) {
     syncStatusEl.textContent = "Failed to load data";
     syncStatusEl.classList.add("error");

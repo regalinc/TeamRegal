@@ -52,10 +52,27 @@ jobs:
       # next sync fails outright (an already-used refresh token is dead) —
       # that's intentional fail-loud behavior rather than silently drifting
       # onto a stale, invalid credential.
+      #
+      # Runs even when "Run sync" fails (if: always()). The script writes the
+      # new token to that file the instant Bouncie issues it, before any
+      # later request can throw -- so a Bouncie hiccup mid-sync used to skip
+      # THIS step, strand the secret on a token Bouncie had already
+      # invalidated, and break every run after it (the 2026-10-04 outage
+      # ended in that same dead-token state, via an expired PAT making this
+      # step fail instead of skip). The file check makes it a
+      # no-op when the run died before Bouncie issued a token (nothing new to
+      # save), and also covers a cancelled run (cancel-in-progress above).
       - name: Rotate BOUNCIE_REFRESH_TOKEN secret
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.SECRETS_ROTATE_PAT }}
-        run: gh secret set BOUNCIE_REFRESH_TOKEN --repo "${{ github.repository }}" < "$RUNNER_TEMP/bouncie-refresh-token.txt"
+        run: |
+          token_file="$RUNNER_TEMP/bouncie-refresh-token.txt"
+          if [ -s "$token_file" ]; then
+            gh secret set BOUNCIE_REFRESH_TOKEN --repo "${{ github.repository }}" < "$token_file"
+          else
+            echo "No new refresh token was issued this run -- nothing to save."
+          fi
 
       - name: Commit updated data
         run: |
