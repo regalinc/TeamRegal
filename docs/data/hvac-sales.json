@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  614
+                 "record_count":  615
              },
     "records":  [
                     {
@@ -6731,6 +6731,17 @@
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-19",
+                        "customerName":  "Andrea Taylor",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
                         "sold":  false
