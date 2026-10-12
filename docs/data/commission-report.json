@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-12T20:05:05.196Z",
+                 "generated_at":  "2026-10-12T23:05:04.904Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -145,7 +145,10 @@
                                                    }
                                                ],
                                       "Nick":  [
-
+                                                   {
+                                                       "customerName":  "Michael Jordan",
+                                                       "reason":  "System Type not entered yet"
+                                                   }
                                                ]
                                   }
                   }
@@ -161,11 +164,11 @@
                                   },
                     "mtd":  {
                                 "Josh":  90039.29,
-                                "Nick":  18038
+                                "Nick":  25538
                             },
                     "ytd":  {
                                 "Josh":  3878486.2,
-                                "Nick":  616764.88
+                                "Nick":  624264.88
                             }
                 },
     "closingStats":  {
@@ -179,13 +182,13 @@
                                       "discountSample":  12
                                   },
                          "Nick":  {
-                                      "sameDayRate":  0.4,
-                                      "sameDayCount":  2,
-                                      "sameDaySample":  5,
-                                      "avgDaysToClose":  2,
-                                      "daysSample":  5,
+                                      "sameDayRate":  0.5,
+                                      "sameDayCount":  3,
+                                      "sameDaySample":  6,
+                                      "avgDaysToClose":  1.8,
+                                      "daysSample":  6,
                                       "avgDiscountPct":  0,
-                                      "discountSample":  5
+                                      "discountSample":  6
                                   }
                      }
 }
