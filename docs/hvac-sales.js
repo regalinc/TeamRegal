@@ -65,7 +65,13 @@ const HVAC_SALES_MONTHLY_GOALS = {
     "2026-11": 275000,
     "2026-12": 275000,
   },
-  Nick: {},
+  // Given by Michael 2026-10-12.
+  Nick: {
+    "2026-09": 150000,
+    "2026-10": 140000,
+    "2026-11": 140000,
+    "2026-12": 140000,
+  },
 };
 const HVAC_SALES_YTD_GOALS = {
   Josh: 3600000,
