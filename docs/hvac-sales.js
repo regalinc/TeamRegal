@@ -806,11 +806,9 @@ let currentPeriod = "month";
 
 // ---- Encouragement (ported from andrew.js) --------------------------------
 
-// A spreadsheet date ("2026-10-08") is a local calendar day; new Date() would
-// read it as UTC midnight and slide it back a day for anyone west of UTC.
 function parseLocalDate(value) {
   if (!value) return null;
-  const d = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T12:00:00`) : new Date(value);
+  const d = parseDateValue(value);
   return Number.isNaN(d.getTime()) ? null : d;
 }
 

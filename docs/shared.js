@@ -62,9 +62,17 @@ function jobTimeLabel(job) {
   return end ? `${start} – ${end}` : start;
 }
 
+// A bare "yyyy-MM-dd" (the Excel-sourced sales sheets carry these) is a local
+// calendar day, but new Date() reads it as UTC midnight -- the evening before
+// anywhere west of UTC. Anchor it at local noon so it stays on its own day;
+// full ISO timestamps (Housecall Pro) parse as before.
+function parseDateValue(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T12:00:00`) : new Date(value);
+}
+
 function formatDate(iso) {
   if (!iso) return "";
-  const d = new Date(iso);
+  const d = parseDateValue(iso);
   if (Number.isNaN(d.getTime())) return "";
   return d.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
 }
@@ -975,7 +983,7 @@ function dateInPeriod(isoString, period) {
   if (!range) return true;
 
   if (!isoString) return false;
-  const d = new Date(isoString);
+  const d = parseDateValue(isoString);
   if (Number.isNaN(d.getTime())) return false;
 
   return d >= range[0] && d < range[1];
