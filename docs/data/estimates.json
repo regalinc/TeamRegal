@@ -1,5 +1,74 @@
 [
   {
+    "id": "csr_cf04652c6c8146e797d27f98e88e0303",
+    "estimate_number": "13785",
+    "customer_label": "Margie M.",
+    "created_at": "2026-10-12T18:37:06Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_26c530b10b1f4a0c99036bb31f79e05e",
+    "estimate_number": "13784",
+    "customer_label": "Andrea T.",
+    "created_at": "2026-10-12T18:33:27Z",
+    "schedule": {
+      "scheduled_start": "2026-10-19T13:00:00Z",
+      "scheduled_end": "2026-10-19T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-19T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-19T11:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_6fd8d7a8d4554834a1ad1ac197fe1dc7",
+    "estimate_number": "13783",
+    "customer_label": "Bobbie F.",
+    "created_at": "2026-10-12T18:27:49Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_970a5c6ce3f845a68dca7ebf5806d38c",
     "estimate_number": "13782",
     "customer_label": "Donna B.",
@@ -40,10 +109,10 @@
     "assigned_employee_ids": [
       "pro_aab24498cf6e4c46844bddcbc7161f26"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-10-12T20:16:10.527Z",
+    "approved_amount": 102512
   },
   {
     "id": "csr_c666db2ab59e4eaf87c89335c2036e5d",
@@ -120,22 +189,22 @@
     "customer_label": "Dave S.",
     "created_at": "2026-10-12T16:07:19Z",
     "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
+      "scheduled_start": "2026-10-20T15:00:00Z",
+      "scheduled_end": "2026-10-20T19:00:00Z",
       "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
+      "scheduled_start_local": "2026-10-20T11:00:00-04:00",
+      "scheduled_end_local": "2026-10-20T15:00:00-04:00",
+      "arrival_window": 120,
       "appointments": []
     },
     "business_unit": null,
     "assigned_employee_ids": [
-      "pro_83a3e6de7d2d4d3396c7c5dfa42482f0"
+      "pro_6d9b30f8ab864817a118fb9563bb667f"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "scheduled",
+    "approved": true,
+    "approved_at": "2026-10-12T20:16:10.527Z",
+    "approved_amount": 88565
   },
   {
     "id": "csr_de37a13a00db4c7ab3dd84d2d5d9b415",
@@ -753,7 +822,7 @@
     "assigned_employee_ids": [
       "pro_3f2297b66a9742d09eaf20976a20183a"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -4332,9 +4401,9 @@
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
     "work_status": "complete rated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-10-12T20:16:10.527Z",
+    "approved_amount": 71000
   },
   {
     "id": "csr_ce001711650a4ee3a6f2fffb65b5fbf3",
@@ -11041,10 +11110,10 @@
     "assigned_employee_ids": [
       "pro_9b6be6b8146547fabe281dac539e3f28"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-10-12T20:16:10.527Z",
+    "approved_amount": 69522
   },
   {
     "id": "csr_5a2dba5b66f54ed9af0dae3f8a39f67e",
