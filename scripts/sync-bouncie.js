@@ -47,7 +47,11 @@ const REFRESH_TOKEN_OUT = path.join(process.env.RUNNER_TEMP || os.tmpdir(), "bou
 // docs warn duplicate trip events are possible), and prune anything past
 // RETENTION_DAYS. History builds up gradually over the following days/weeks
 // after this first ships rather than being fully backfilled on day one.
-const LOOKBACK_DAYS = 3;
+// Temporarily 6 (normally 3): the sync has failed since 2026-10-04 (refresh
+// token not rotated -- see the Rotate step in sync-bouncie.yml), so the first
+// run after the credentials are fixed needs to backfill that gap. Stays under
+// the one-week window cap above; safe to drop back to 3 after one good run.
+const LOOKBACK_DAYS = 6;
 const RETENTION_DAYS = 180;
 
 async function refreshAccessToken() {
