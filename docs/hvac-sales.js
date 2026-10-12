@@ -99,6 +99,8 @@ const identityName = document.getElementById("identity-name");
 const avatarSlot = document.getElementById("avatar-slot");
 const heroEyebrow = document.getElementById("hero-eyebrow");
 const heroLine = document.getElementById("hero-line");
+const trendLineEl = document.getElementById("trend-line");
+const todayStripEl = document.getElementById("today-strip");
 const ringNumber = document.getElementById("ring-number");
 const ringFill = document.getElementById("ring-fill");
 const tileRan = document.getElementById("tile-ran");
@@ -802,6 +804,93 @@ let latestSales = null;
 let latestCommission = null;
 let currentPeriod = "month";
 
+// ---- Encouragement (ported from andrew.js) --------------------------------
+
+// A spreadsheet date ("2026-10-08") is a local calendar day; new Date() would
+// read it as UTC midnight and slide it back a day for anyone west of UTC.
+function parseLocalDate(value) {
+  if (!value) return null;
+  const d = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T12:00:00`) : new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function dateInRange(value, range) {
+  const d = parseLocalDate(value);
+  return !!d && d >= range[0] && d < range[1];
+}
+
+// The window to compare against: the same stretch of the previous month
+// (day 1 through today's day-of-month, so a mid-month MTD isn't measured
+// against a full month), the month before for Last month, and the same
+// stretch of last year for YTD.
+function comparisonRange(period) {
+  const now = new Date();
+  if (period === "month") {
+    return {
+      range: [new Date(now.getFullYear(), now.getMonth() - 1, 1), new Date(now.getFullYear(), now.getMonth() - 1, now.getDate() + 1)],
+      label: "last month",
+    };
+  }
+  if (period === "lastmonth") {
+    return {
+      range: [new Date(now.getFullYear(), now.getMonth() - 2, 1), new Date(now.getFullYear(), now.getMonth() - 1, 1)],
+      label: "the month before",
+    };
+  }
+  if (period === "ytd") {
+    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 1)) / 86_400_000);
+    return {
+      range: [new Date(now.getFullYear() - 1, 0, 1), new Date(now.getFullYear() - 1, 0, dayOfYear + 2)],
+      label: "last year",
+    };
+  }
+  return null;
+}
+
+function trendChip(delta, unit, metricLabel) {
+  const rounded = Math.round(delta);
+  if (rounded === 0) return `<span class="trend-value flat">→ ${metricLabel} flat</span>`;
+  const up = rounded > 0;
+  return `<span class="trend-value ${up ? "up" : "down"}">${up ? "▲" : "▼"} ${Math.abs(rounded)}${unit} ${metricLabel}</span>`;
+}
+
+// Quiet one-liner under the hero: closing rate and sold count against the
+// comparison window. Skipped when the window has no ran opportunities at all
+// (a new consultant, or last year before they started) -- a delta against
+// nothing would only ever read as a meaningless "▲ everything."
+function renderTrendLine(mine, closingRate, sold) {
+  const comparison = comparisonRange(currentPeriod);
+  if (!comparison) {
+    trendLineEl.hidden = true;
+    return;
+  }
+  const { range, label } = comparison;
+  const priorRan = mine.filter((r) => r.countedDate && dateInRange(r.countedDate, range)).length;
+  if (priorRan === 0) {
+    trendLineEl.hidden = true;
+    return;
+  }
+  const priorSold = mine.filter((r) => r.sold && dateInRange(r.soldDateResolved, range)).length;
+  const priorRate = (priorSold / priorRan) * 100;
+  trendLineEl.innerHTML = `vs ${label}: ${trendChip(closingRate - priorRate, "pts", "closing")} · ${trendChip(sold - priorSold, "", sold - priorSold === 1 || sold - priorSold === -1 ? "sale" : "sales")}`;
+  trendLineEl.hidden = false;
+}
+
+// Appears only on a day with a confirmed sale (Excel-side sold date is today);
+// an always-present "0 sold today" would read as a scoreboard calling out a
+// slow morning. The sheet lags OnCall Air by a day or so, so this lights up
+// when the sale lands in the sheet, not the moment the customer accepts.
+function renderTodayStrip(mine) {
+  const todayStart = periodRange("today");
+  const n = mine.filter((r) => r.sold && dateInRange(r.soldDateResolved, todayStart)).length;
+  if (n === 0) {
+    todayStripEl.hidden = true;
+    return;
+  }
+  todayStripEl.innerHTML = `🎉 <b>${n} ${n === 1 ? "sale" : "sales"} closed today</b> — nice work.`;
+  todayStripEl.hidden = false;
+}
+
 function render() {
   if (!latestDashboard || !latestSales) return;
 
@@ -925,6 +1014,8 @@ function render() {
   tileSoldNote.textContent = soldFromEarlierCount > 0 ? `incl. ${soldFromEarlierCount} from an earlier period` : "";
 
   renderGoal(CA, currentPeriod);
+  renderTrendLine(mine, closingRate, sold);
+  renderTodayStrip(mine);
 
   // Projected Commission and Sales Metrics are both always this calendar
   // month's numbers (the weekly Wed-Tue breakdown/MTD total, and the

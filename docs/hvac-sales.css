@@ -238,6 +238,32 @@ body {
   margin: 0;
   max-width: 46ch;
 }
+/* Encouragement, ported from Andrew's page (andrew.css): a quiet comparison
+   against the consultant's own recent past, and a banner that only exists on
+   a day with a sale -- an empty "0 sold today" would read as a scoreboard
+   calling out a slow morning, so it's absent entirely instead. */
+.trend-line { font-size: 0.76rem; color: var(--text-faint); margin: 0.3rem 0 0; }
+.trend-value { font-weight: 600; }
+.trend-value.up { color: var(--good); }
+.trend-value.down { color: var(--text-muted); }
+.trend-value.flat { color: var(--text-faint); }
+.today-strip {
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  animation: today-strip-in 0.4s ease;
+}
+.today-strip b { color: var(--accent); }
+@keyframes today-strip-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .today-strip { animation: none; } }
+
 .hero-line b { font-weight: 650; }
 .hero-line .accent-num { color: var(--accent); font-weight: 650; }
 
