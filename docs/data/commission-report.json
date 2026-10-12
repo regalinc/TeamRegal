@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-12T14:50:08.134Z",
+                 "generated_at":  "2026-10-12T14:54:40.992Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -9,7 +9,7 @@
                       "weekStart":  "2026-09-30",
                       "weekEnd":  "2026-10-06",
                       "totals":  {
-                                     "Josh":  4575.7,
+                                     "Josh":  4893.37,
                                      "Nick":  906.35
                                  },
                       "sales":  {
@@ -19,6 +19,12 @@
                                                      "systemType":  "Preferred",
                                                      "rate":  0.06,
                                                      "commission":  431.18
+                                                 },
+                                                 {
+                                                     "customerName":  "Bob Savage",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.06,
+                                                     "commission":  317.68
                                                  },
                                                  {
                                                      "customerName":  "John Bush",
@@ -80,10 +86,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Bob Savage",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -95,11 +98,23 @@
                       "weekStart":  "2026-10-07",
                       "weekEnd":  "2026-10-13",
                       "totals":  {
-                                     "Josh":  42.99,
+                                     "Josh":  1431.7,
                                      "Nick":  171.47
                                  },
                       "sales":  {
                                     "Josh":  [
+                                                 {
+                                                     "customerName":  "Matt Dohn",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.06,
+                                                     "commission":  1155.26
+                                                 },
+                                                 {
+                                                     "customerName":  "Joe Dettinger",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.06,
+                                                     "commission":  233.46
+                                                 },
                                                  {
                                                      "customerName":  "Lois Strock",
                                                      "systemType":  "Flex",
@@ -124,14 +139,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Matt Dohn",
-                                                       "reason":  "System Type not entered yet"
-                                                   },
-                                                   {
-                                                       "customerName":  "Joe Dettinger",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -140,7 +148,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  4618.68,
+                "Josh":  6325.08,
                 "Nick":  1077.81
             },
     "revenue":  {
