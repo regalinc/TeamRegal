@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-12T13:44:31.289Z",
+                 "generated_at":  "2026-10-12T14:50:08.134Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -125,6 +125,10 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
+                                                       "customerName":  "Matt Dohn",
+                                                       "reason":  "System Type not entered yet"
+                                                   },
+                                                   {
                                                        "customerName":  "Joe Dettinger",
                                                        "reason":  "System Type not entered yet"
                                                    }
@@ -145,23 +149,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  59567.8,
+                                "Josh":  82441.8,
                                 "Nick":  18038
                             },
                     "ytd":  {
-                                "Josh":  3848014.71,
+                                "Josh":  3870888.71,
                                 "Nick":  616764.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.9,
-                                      "sameDayCount":  9,
-                                      "sameDaySample":  10,
-                                      "avgDaysToClose":  17.2,
-                                      "daysSample":  10,
-                                      "avgDiscountPct":  0.0506,
-                                      "discountSample":  10
+                                      "sameDayRate":  0.9091,
+                                      "sameDayCount":  10,
+                                      "sameDaySample":  11,
+                                      "avgDaysToClose":  15.9,
+                                      "daysSample":  11,
+                                      "avgDiscountPct":  0.0523,
+                                      "discountSample":  11
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4,
