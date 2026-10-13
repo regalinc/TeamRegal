@@ -1,5 +1,74 @@
 [
   {
+    "id": "csr_caf7c8e90a244e69ada69128e248f63c",
+    "estimate_number": "13788",
+    "customer_label": "Susquehanna M.",
+    "created_at": "2026-10-13T12:40:55Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_ae00edc18dc5457a95b23a9ed3aab094",
+    "estimate_number": "13787",
+    "customer_label": "Daniel F.",
+    "created_at": "2026-10-13T12:18:40Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_c71e48411eba4ebc9a4206172e26e82e",
+    "estimate_number": "13786",
+    "customer_label": "Susan M.",
+    "created_at": "2026-10-13T12:07:51Z",
+    "schedule": {
+      "scheduled_start": "2026-10-13T13:00:00Z",
+      "scheduled_end": "2026-10-13T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-13T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-13T11:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "in progress",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_cf04652c6c8146e797d27f98e88e0303",
     "estimate_number": "13785",
     "customer_label": "Margie M.",
@@ -22277,7 +22346,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "in progress",
+    "work_status": "user canceled",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -28009,7 +28078,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "in progress",
+    "work_status": "user canceled",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -40774,7 +40843,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "in progress",
+    "work_status": "user canceled",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -57104,7 +57173,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "in progress",
+    "work_status": "user canceled",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -82002,10 +82071,10 @@
     "approved_amount": 0
   },
   {
-    "id": "csr_4a90a41e6ae54024a65e8b582096dbf4",
-    "estimate_number": "10219",
-    "customer_label": "Nadia H.",
-    "created_at": "2025-12-31T12:11:26Z",
+    "id": "csr_e9bb3e32e75a4d75a9fbdeb542513682",
+    "estimate_number": "13789",
+    "customer_label": "Cathy D.",
+    "created_at": "2026-10-13T12:58:40Z",
     "schedule": {
       "scheduled_start": null,
       "scheduled_end": null,
@@ -82017,11 +82086,11 @@
     },
     "business_unit": null,
     "assigned_employee_ids": [
-      "pro_ca120cbb55fa40fe9361d492161b101f"
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
     ],
-    "work_status": "created job from estimate",
-    "approved": true,
+    "work_status": "needs scheduling",
+    "approved": false,
     "approved_at": null,
-    "approved_amount": 89000
+    "approved_amount": 0
   }
 ]
