@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  615
+                 "record_count":  618
              },
     "records":  [
                     {
@@ -974,6 +974,17 @@
                     {
                         "ca":  "Josh",
                         "date":  "2026-02-12",
+                        "customerName":  "Joesph Benitez",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-02-12",
                         "customerName":  "Tristan Maschke",
                         "job":  "53279",
                         "systemType":  "Tankless",
@@ -1465,6 +1476,17 @@
                         "lead":  "EC",
                         "customerType":  "Existing",
                         "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-03-09",
+                        "customerName":  "Jennifer Ring",
+                        "job":  "",
+                        "systemType":  "Legacy",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -3557,7 +3579,7 @@
                         "sold":  false
                     },
                     {
-                        "ca":  "Nick",
+                        "ca":  "Josh",
                         "date":  "2026-05-27",
                         "customerName":  "Nick Hauck",
                         "job":  "58075",
@@ -4470,7 +4492,7 @@
                         "sold":  true
                     },
                     {
-                        "ca":  "Nick",
+                        "ca":  "Josh",
                         "date":  "2026-07-06",
                         "customerName":  "Ryan Bridge",
                         "job":  "58917",
@@ -6497,7 +6519,7 @@
                         "ca":  "Nick",
                         "date":  "2026-10-06",
                         "customerName":  "Pedro Domingos",
-                        "job":  "62398",
+                        "job":  "62623",
                         "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Lowes",
@@ -6585,12 +6607,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-08",
                         "customerName":  "John Brant",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62629",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -6651,12 +6673,12 @@
                         "ca":  "Nick",
                         "date":  "2026-10-12",
                         "customerName":  "Michael Jordan",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62632",
+                        "systemType":  "Preferred",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6684,6 +6706,17 @@
                         "ca":  "Josh",
                         "date":  "2026-10-13",
                         "customerName":  "Susquehanna Micro",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-13",
+                        "customerName":  "Susan McClellan",
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "Yes",
