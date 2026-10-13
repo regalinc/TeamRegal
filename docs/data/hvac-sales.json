@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  618
+                 "record_count":  619
              },
     "records":  [
                     {
@@ -6519,7 +6519,7 @@
                         "ca":  "Nick",
                         "date":  "2026-10-06",
                         "customerName":  "Pedro Domingos",
-                        "job":  "62623",
+                        "job":  "62633",
                         "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Lowes",
@@ -6717,12 +6717,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-13",
                         "customerName":  "Susan McClellan",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62644",
+                        "systemType":  "Preferred",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -6755,6 +6755,17 @@
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-15",
+                        "customerName":  "George Boutin",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
