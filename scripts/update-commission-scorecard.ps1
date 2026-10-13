@@ -111,6 +111,17 @@ $hvacSales = (Get-Content $HvacSalesJson -Raw | ConvertFrom-Json).records
 $allPayloads = Get-ChildItem "$SoldProposalsDir\*.json" -ErrorAction SilentlyContinue |
   ForEach-Object { Get-Content $_.FullName -Raw | ConvertFrom-Json }
 
+# One sale per proposal: OnCall Air fires the webhook again if a proposal is
+# re-presented and re-accepted (Pedro Domingos, proposal 5865803: accepted
+# 2026-10-06 at $10,501, then 2026-10-12 at $9,000 -- the $9,000 was confirmed
+# the final price), and the repo keeps both files. Keep only the most recently
+# accepted one per proposal.id so a revised sale isn't counted twice.
+# Duplicated in generate-commission-report.ps1 -- keep both in sync.
+$allPayloads = @($allPayloads |
+  Where-Object { $_.timestamps.accepted_at } |
+  Group-Object { $_.proposal.id } |
+  ForEach-Object { $_.Group | Sort-Object { [datetime]$_.timestamps.accepted_at } -Descending | Select-Object -First 1 })
+
 Write-Host "Loaded $($hvacSales.Count) hvac-sales.json rows, $($allPayloads.Count) sold-proposal payload(s)."
 
 $unresolved = @()

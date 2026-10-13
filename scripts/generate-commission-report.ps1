@@ -119,6 +119,17 @@ Write-Host "Loaded $($hvacSales.Count) rows from hvac-sales.json"
 $allPayloads = Get-ChildItem "$SoldProposalsDir\*.json" -ErrorAction SilentlyContinue |
   ForEach-Object { Get-Content $_.FullName -Raw | ConvertFrom-Json }
 
+# One sale per proposal: a proposal that's re-presented and re-accepted fires
+# the webhook again (Pedro Domingos, proposal 5865803: $10,501 on 2026-10-06,
+# then $9,000 on 2026-10-12, confirmed the final price) and the repo keeps both
+# files. Keep only the most recently accepted one per proposal.id -- done before
+# the week filter so the superseded acceptance drops out of its own week too.
+# Duplicated in update-commission-scorecard.ps1 -- keep both in sync.
+$allPayloads = @($allPayloads |
+  Where-Object { $_.timestamps.accepted_at } |
+  Group-Object { $_.proposal.id } |
+  ForEach-Object { $_.Group | Sort-Object { [datetime]$_.timestamps.accepted_at } -Descending | Select-Object -First 1 })
+
 $weekPayloads = $allPayloads | Where-Object {
   $acc = $_.timestamps.accepted_at
   $acc -and ([datetime]$acc -ge $WeekStart) -and ([datetime]$acc -lt $weekEndExclusive)
