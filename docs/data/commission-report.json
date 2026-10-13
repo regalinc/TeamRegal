@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-12T23:05:04.904Z",
+                 "generated_at":  "2026-10-13T13:13:49.311Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -98,8 +98,8 @@
                       "weekStart":  "2026-10-07",
                       "weekEnd":  "2026-10-13",
                       "totals":  {
-                                     "Josh":  1431.7,
-                                     "Nick":  171.47
+                                     "Josh":  1830.87,
+                                     "Nick":  771.06
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -108,6 +108,12 @@
                                                      "systemType":  "Preferred",
                                                      "rate":  0.06,
                                                      "commission":  1155.26
+                                                 },
+                                                 {
+                                                     "customerName":  "John Brant",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  399.16
                                                  },
                                                  {
                                                      "customerName":  "Joe Dettinger",
@@ -124,6 +130,18 @@
                                              ],
                                     "Nick":  [
                                                  {
+                                                     "customerName":  "Michael Jordan",
+                                                     "systemType":  "Preferred",
+                                                     "rate":  0.04,
+                                                     "commission":  277.78
+                                                 },
+                                                 {
+                                                     "customerName":  "Pedro Domingos",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.04,
+                                                     "commission":  321.82
+                                                 },
+                                                 {
                                                      "customerName":  "David Wantz",
                                                      "systemType":  "Flex",
                                                      "rate":  0.03,
@@ -139,23 +157,17 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "John Brant",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
-                                                   {
-                                                       "customerName":  "Michael Jordan",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ]
                                   }
                   }
               ],
     "mtd":  {
-                "Josh":  6325.08,
-                "Nick":  1077.81
+                "Josh":  6724.24,
+                "Nick":  1677.41
             },
     "revenue":  {
                     "lastMonth":  {
@@ -164,11 +176,11 @@
                                   },
                     "mtd":  {
                                 "Josh":  90039.29,
-                                "Nick":  25538
+                                "Nick":  34538
                             },
                     "ytd":  {
                                 "Josh":  3878486.2,
-                                "Nick":  624264.88
+                                "Nick":  633264.88
                             }
                 },
     "closingStats":  {
@@ -182,13 +194,13 @@
                                       "discountSample":  12
                                   },
                          "Nick":  {
-                                      "sameDayRate":  0.5,
-                                      "sameDayCount":  3,
-                                      "sameDaySample":  6,
-                                      "avgDaysToClose":  1.8,
-                                      "daysSample":  6,
+                                      "sameDayRate":  0.5714,
+                                      "sameDayCount":  4,
+                                      "sameDaySample":  7,
+                                      "avgDaysToClose":  2.4,
+                                      "daysSample":  7,
                                       "avgDiscountPct":  0,
-                                      "discountSample":  6
+                                      "discountSample":  7
                                   }
                      }
 }
