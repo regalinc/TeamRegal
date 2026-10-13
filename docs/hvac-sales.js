@@ -271,6 +271,35 @@ function companyPrefixMatch(customerName, label) {
   return a.length >= 4 && b.length >= 4 && (a.startsWith(b) || b.startsWith(a));
 }
 
+// Hand-confirmed pairs where Housecall Pro's label and the sheet's name are
+// genuinely different strings for one real customer -- a nickname (William H.
+// is "Bill Herr"), a customer filed under a business or a different name
+// (Glenn D. is "York First Church of God"), or a different spelling of one
+// (Joesph/Joseph). Same idea as the $NAME_ALIASES list in
+// update-commission-scorecard.ps1, but keyed to the exact HCP label (lowercase)
+// and only honored within a day of the sheet row's date -- a label like
+// "William H." is shared by unrelated customers, so the date is what keeps this
+// from claiming the wrong one. Add to this when a name keeps landing in
+// "Unknown" and fuzzyLabelMatch below can't reach it.
+const ESTIMATE_LABEL_ALIASES = {
+  "george e c.": ["George Cramer JR"],
+  "william h.": ["Bill Herr"],
+  "st. paul's united methodist c.": ["St Paul's Luthern Church"],
+  "economic & community development s.": ["Economic & Development"],
+  "glenn d.": ["York First Church of God"],
+  "joseph b.": ["Joseph Benitez", "Joesph Benitez"],
+};
+
+function aliasLabelMatch(customerName, label, rawDate, rowDate) {
+  const aliases = ESTIMATE_LABEL_ALIASES[(label || "").trim().toLowerCase()];
+  if (!aliases || !customerName) return false;
+  const wanted = customerName.trim().toLowerCase();
+  if (!aliases.some((a) => a.toLowerCase() === wanted)) return false;
+  const a = new Date(rawDate);
+  const b = new Date(`${rowDate}T12:00:00`);
+  return !Number.isNaN(a.getTime()) && !Number.isNaN(b.getTime()) && Math.abs(a - b) <= 36 * 3600 * 1000;
+}
+
 // Last-resort, same-day-only matcher for the cases the exact label passes
 // can never reach: a typo or alternate spelling in the sheet ("Jacki Roe" vs
 // Housecall Pro's "Jackie R.", "Phyliss McCullough" vs "Phyllis M.",
@@ -387,6 +416,7 @@ function buildMergedRecords(tech, estimates, salesRows) {
     (estimate, row) => labelsMatch(normalizeCustomerLabels(row.customerName), estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
     (estimate, row) => labelsMatch(normalizeCustomerLabels(row.customerName), estimate.customer_label),
     (estimate, row) => companyPrefixMatch(row.customerName, estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
+    (estimate, row) => aliasLabelMatch(row.customerName, estimate.customer_label, rawDateOf(estimate), row.date),
     (estimate, row) => fuzzyLabelMatch(row.customerName, estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
   ];
   for (const pass of passes) {
@@ -400,7 +430,25 @@ function buildMergedRecords(tech, estimates, salesRows) {
     }
   }
 
-  const merged = mine.map((estimate) => {
+  // Housecall Pro sometimes holds two estimates for what the sheet (and the
+  // business) treats as ONE bid -- a two-location quote entered as two visits
+  // (Southern Area Fire and Rescue, 2026-07-29), or a first visit plus a
+  // return a few weeks later (Gregory Singley, 5/1 and 5/21). The sheet has
+  // one row, so one estimate claims it and the other would sit in "Unknown"
+  // and inflate Ran. An unmatched estimate whose same-label sibling DID match
+  // a row within three weeks is that repeat visit; fold it into the bid it
+  // belongs to instead of counting it separately.
+  const DAY_MS = 86_400_000;
+  const matchedEstimates = mine.filter((e) => matchOf.has(e));
+  const isRepeatVisit = (estimate) =>
+    !matchOf.has(estimate) &&
+    matchedEstimates.some(
+      (m) =>
+        squash(m.customer_label || "") === squash(estimate.customer_label || "") &&
+        Math.abs(new Date(rawDateOf(m)) - new Date(rawDateOf(estimate))) <= 21 * DAY_MS
+    );
+
+  const merged = mine.filter((estimate) => !isRepeatVisit(estimate)).map((estimate) => {
     const rawDate = rawDateOf(estimate);
     // null for a visit scheduled later than today — see estimateGivenDate.
     const givenDate = estimateGivenDate(estimate, tech);
