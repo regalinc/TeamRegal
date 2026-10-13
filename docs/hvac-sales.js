@@ -271,6 +271,54 @@ function companyPrefixMatch(customerName, label) {
   return a.length >= 4 && b.length >= 4 && (a.startsWith(b) || b.startsWith(a));
 }
 
+// Last-resort, same-day-only matcher for the cases the exact label passes
+// can never reach: a typo or alternate spelling in the sheet ("Jacki Roe" vs
+// Housecall Pro's "Jackie R.", "Phyliss McCullough" vs "Phyllis M.",
+// "Calvary Luthern" vs "Calvary Lutheran C."), or a commercial name Housecall
+// Pro shortens to everything-but-the-last-word plus that word's initial
+// ("Southern Area Fire and R.", "Mt. Washington C.") that the sheet spells
+// out in full or punctuates differently ("Saint" vs "St"). HCP's label is
+// always leading words + a single-letter initial, so the check is: the
+// leading words fuzzy-equal the sheet name's first words, and the initial is
+// the first letter of the sheet's next word (or the sheet dropped that last
+// word entirely, "Calvary Luthern", which is only trusted with 2+ leading
+// words). Gated on the same day, one consultant, and an unclaimed row by the
+// caller, which is what keeps a loose spelling match from grabbing a stranger.
+function fuzzyLabelMatch(customerName, label) {
+  if (!customerName || !label) return false;
+  const tokens = (s) =>
+    s
+      .toLowerCase()
+      .replace(/[.'’,]/g, "")
+      .replace(/&/g, " and ")
+      .replace(/\bsaint\b/g, "st")
+      .split(/\s+/)
+      .filter(Boolean);
+  const labelTokens = tokens(label);
+  if (labelTokens.length < 2 || labelTokens[labelTokens.length - 1].length !== 1) return false;
+  const initial = labelTokens[labelTokens.length - 1];
+  const leading = labelTokens.slice(0, -1);
+  const rowTokens = tokens(customerName);
+  const within = (a, b) => {
+    if (a === b) return true;
+    const limit = a.length >= 7 ? 2 : a.length >= 4 ? 1 : 0;
+    if (limit === 0 || Math.abs(a.length - b.length) > limit) return false;
+    let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i];
+      for (let j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      }
+      prev = cur;
+    }
+    return prev[b.length] <= limit;
+  };
+  if (rowTokens.length < leading.length) return false;
+  if (!leading.every((w, i) => within(w, rowTokens[i]))) return false;
+  const next = rowTokens[leading.length];
+  return next ? next[0] === initial : leading.length >= 2;
+}
+
 // Same local calendar day, comparing an ISO datetime (an estimate's
 // schedule.scheduled_start/created_at, UTC) against a plain "yyyy-MM-dd"
 // spreadsheet date — mirrors how dateInPeriod/formatDate elsewhere on this
@@ -339,6 +387,7 @@ function buildMergedRecords(tech, estimates, salesRows) {
     (estimate, row) => labelsMatch(normalizeCustomerLabels(row.customerName), estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
     (estimate, row) => labelsMatch(normalizeCustomerLabels(row.customerName), estimate.customer_label),
     (estimate, row) => companyPrefixMatch(row.customerName, estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
+    (estimate, row) => fuzzyLabelMatch(row.customerName, estimate.customer_label) && sameLocalDay(rawDateOf(estimate), row.date),
   ];
   for (const pass of passes) {
     for (const estimate of mine) {
