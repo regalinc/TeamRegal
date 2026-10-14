@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-14T12:09:15.202Z",
+                 "generated_at":  "2026-10-14T14:25:28.099Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -169,6 +169,34 @@
 
                                                ]
                                   }
+                  },
+                  {
+                      "label":  "Current Week",
+                      "weekStart":  "2026-10-14",
+                      "weekEnd":  "2026-10-20",
+                      "totals":  {
+                                     "Josh":  0,
+                                     "Nick":  0
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+
+                                             ],
+                                    "Nick":  [
+
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+                                                   {
+                                                       "customerName":  "Jason Rorapaugh",
+                                                       "reason":  "System Type not entered yet"
+                                                   }
+                                               ],
+                                      "Nick":  [
+
+                                               ]
+                                  }
                   }
               ],
     "mtd":  {
@@ -181,23 +209,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  98525.29,
+                                "Josh":  131864.29,
                                 "Nick":  26452
                             },
                     "ytd":  {
-                                "Josh":  3886972.2,
+                                "Josh":  3920311.2,
                                 "Nick":  625178.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.8462,
+                                      "sameDayRate":  0.7857,
                                       "sameDayCount":  11,
-                                      "sameDaySample":  13,
-                                      "avgDaysToClose":  13.8,
-                                      "daysSample":  13,
-                                      "avgDiscountPct":  0.056,
-                                      "discountSample":  13
+                                      "sameDaySample":  14,
+                                      "avgDaysToClose":  13,
+                                      "daysSample":  14,
+                                      "avgDiscountPct":  0.0531,
+                                      "discountSample":  14
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4286,
