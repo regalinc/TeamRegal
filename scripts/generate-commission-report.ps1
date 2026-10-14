@@ -217,6 +217,10 @@ foreach ($p in $weekPayloads) {
     Customer     = $custName
     AcceptedAt   = $acceptedAt.ToString("yyyy-MM-dd HH:mm")
     Subtotal     = $subtotal
+    GrossSubtotal    = $proposalSubtotal
+    CommissionMarkup = $commissionMarkup
+    FinancingMarkup  = $financingMarkup
+    RebateMarkup     = $rebateMarkup
     SystemType   = $systemType
     Rate         = $rate
     Commission   = $commission
