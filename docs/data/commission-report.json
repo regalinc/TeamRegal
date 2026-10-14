@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-14T14:25:28.099Z",
+                 "generated_at":  "2026-10-14T16:35:06.373Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -175,12 +175,17 @@
                       "weekStart":  "2026-10-14",
                       "weekEnd":  "2026-10-20",
                       "totals":  {
-                                     "Josh":  0,
+                                     "Josh":  2164.88,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
-
+                                                 {
+                                                     "customerName":  "Jason Rorapaugh",
+                                                     "systemType":  "Evolution",
+                                                     "rate":  0.08,
+                                                     "commission":  2164.88
+                                                 }
                                              ],
                                     "Nick":  [
 
@@ -188,10 +193,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Jason Rorapaugh",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -200,7 +202,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  7187.12,
+                "Josh":  9352,
                 "Nick":  1334.14
             },
     "revenue":  {
