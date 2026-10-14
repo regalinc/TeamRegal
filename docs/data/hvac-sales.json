@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  619
+                 "record_count":  620
              },
     "records":  [
                     {
@@ -6607,12 +6607,12 @@
                         "ca":  "Nick",
                         "date":  "2026-10-08",
                         "customerName":  "Pat Murray",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62672",
+                        "systemType":  "Flex",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6799,6 +6799,17 @@
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-27",
+                        "customerName":  "Alison Bitzer",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
