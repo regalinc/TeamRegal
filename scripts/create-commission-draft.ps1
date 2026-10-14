@@ -164,6 +164,13 @@ $sections
   if ($To) { $mail.To = $To }
   $mail.HTMLBody = $html
   $mail.Save()
+  # Michael reads mail in the NEW Outlook, which has no COM interface -- this
+  # draft is created through classic Outlook against the same Exchange Online
+  # mailbox (cached mode), and reaches the new Outlook only once classic syncs
+  # it up to the server. Kick a send/receive and give it time before the
+  # script ends (classic stays running afterwards; it isn't closed here).
+  try { foreach ($so in $ol.Session.SyncObjects) { $so.Start() } } catch { Log "sync kick failed: $($_.Exception.Message)" }
+  Start-Sleep -Seconds 45
   Log "saved draft '$subject' (To: $(if ($To) { $To } else { '<blank>' }); Josh $(M $totals.Josh), Nick $(M $totals.Nick), $($flagged.Count) flagged)"
   Log "--- draft end (saved) ---"
 } catch {
