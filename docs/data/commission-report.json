@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-13T20:05:04.792Z",
+                 "generated_at":  "2026-10-14T12:09:15.202Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -88,12 +88,12 @@
                                   }
                   },
                   {
-                      "label":  "Current Week",
+                      "label":  "Week 2",
                       "weekStart":  "2026-10-07",
                       "weekEnd":  "2026-10-13",
                       "totals":  {
                                      "Josh":  2293.75,
-                                     "Nick":  771.06
+                                     "Nick":  809.66
                                  },
                       "sales":  {
                                     "Josh":  [
@@ -129,6 +129,12 @@
                                                  }
                                              ],
                                     "Nick":  [
+                                                 {
+                                                     "customerName":  "Pat Murray",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.03,
+                                                     "commission":  38.59
+                                                 },
                                                  {
                                                      "customerName":  "Michael Jordan",
                                                      "systemType":  "Preferred",
@@ -167,7 +173,7 @@
               ],
     "mtd":  {
                 "Josh":  7187.12,
-                "Nick":  1295.55
+                "Nick":  1334.14
             },
     "revenue":  {
                     "lastMonth":  {
@@ -176,11 +182,11 @@
                                   },
                     "mtd":  {
                                 "Josh":  98525.29,
-                                "Nick":  25037
+                                "Nick":  26452
                             },
                     "ytd":  {
                                 "Josh":  3886972.2,
-                                "Nick":  623763.88
+                                "Nick":  625178.88
                             }
                 },
     "closingStats":  {
@@ -194,13 +200,13 @@
                                       "discountSample":  13
                                   },
                          "Nick":  {
-                                      "sameDayRate":  0.5,
+                                      "sameDayRate":  0.4286,
                                       "sameDayCount":  3,
-                                      "sameDaySample":  6,
-                                      "avgDaysToClose":  2.8,
-                                      "daysSample":  6,
+                                      "sameDaySample":  7,
+                                      "avgDaysToClose":  3.2,
+                                      "daysSample":  7,
                                       "avgDiscountPct":  0,
-                                      "discountSample":  6
+                                      "discountSample":  7
                                   }
                      }
 }
