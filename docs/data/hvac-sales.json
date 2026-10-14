@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  623
+                 "record_count":  624
              },
     "records":  [
                     {
@@ -6720,6 +6720,17 @@
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-14",
+                        "customerName":  "Suzanne Plitt",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
                         "sold":  false
