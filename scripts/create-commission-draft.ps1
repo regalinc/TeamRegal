@@ -1,6 +1,7 @@
-# Builds the weekly sales-commission email for the controller and leaves it as
-# an UNSENT draft in Outlook -- it never sends anything. Michael reviews the
-# draft Wednesday morning and sends it himself.
+# Builds the weekly sales-commission email for the controller and saves it as
+# an unsent .eml file (Desktop\Commission Emails by default) -- it never sends
+# anything. Michael double-clicks it Wednesday morning, it opens in Outlook as
+# an editable message, he reviews it and sends it himself.
 #
 # What it does:
 #   1. (unless -SkipRefresh) runs the HVAC Sales and Commission refreshes so
@@ -9,8 +10,8 @@
 #   2. Runs generate-commission-report.ps1 for the target Wed-Tue pay week
 #      (the payroll source of truth: it flags any sale it can't rate, rather
 #      than guessing) and reads its CSV.
-#   3. Builds the email (summary + every sale with its math) and saves it to
-#      the Outlook Drafts folder via the classic-Outlook COM object.
+#   3. Builds the email (summary + every sale with its math) and writes it as
+#      an .eml with X-Unsent: 1 so Outlook opens it as an unsent message.
 #
 # A sale that can't be rated (no/ambiguous System Type, unknown consultant) is
 # listed at the TOP of the draft as "needs review -- not in the totals" and the
@@ -25,7 +26,8 @@
 #   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\create-commission-draft.ps1
 #   ...-WeekStart "2026-10-07"      # a specific week (the Wednesday it starts)
 #   ...-SkipRefresh                  # just rebuild from the data already on disk
-#   ...-Force                        # replace/duplicate even if a draft with this subject exists
+#   ...-Force                        # rebuild even if this week's .eml already exists
+#   ...-OutDir "C:\some\folder"      # write somewhere other than Desktop\Commission Emails
 #
 # Scheduled: "TeamRegal - Commission Email Draft", Wednesdays 05:50 (after the
 # 05:30/05:35 refreshes). Log: %LOCALAPPDATA%\TeamRegal\create-commission-draft.log
@@ -33,7 +35,8 @@ param(
   [datetime]$WeekStart,
   [string]$To,
   [switch]$SkipRefresh,
-  [switch]$Force
+  [switch]$Force,
+  [string]$OutDir
 )
 
 $ErrorActionPreference = "Stop"
@@ -134,45 +137,32 @@ $sections
     if (Test-Path $toFile) { $To = (Get-Content $toFile -Raw).Trim() }
   }
 
-  # Outlook rejects COM calls (RPC_E_CALL_REJECTED / RPC failed) for a few
-  # seconds while it's starting up, which is exactly the state it's in when
-  # this runs at 05:50 with Outlook closed -- retry instead of failing.
-  $ol = $null
-  $drafts = $null
-  for ($attempt = 1; $attempt -le 8 -and -not $drafts; $attempt++) {
-    try {
-      $ol = New-Object -ComObject Outlook.Application
-      $drafts = $ol.Session.GetDefaultFolder(16)   # olFolderDrafts
-    } catch {
-      Log "Outlook not ready (attempt $attempt): $($_.Exception.Message.Split([char]10)[0])"
-      Start-Sleep -Seconds 8
-    }
-  }
-  if (-not $drafts) { throw "could not reach Outlook after several attempts" }
-  # Match on the base subject (with or without the review tag) so a re-run
-  # replaces its own earlier draft instead of stacking duplicates.
-  $baseSubject = "Sales commission - pay week $rangeText"
-  $existing = @($drafts.Items | Where-Object { $_.Subject -eq $baseSubject -or $_.Subject -eq "[REVIEW NEEDED] $baseSubject" })
-  if ($existing.Count -and -not $Force) {
-    Log "a draft '$baseSubject' already exists in Drafts -- leaving it alone (use -Force to replace)"
+  # Written as an .eml with "X-Unsent: 1", which Outlook opens as an editable,
+  # unsent message (To/Subject/body filled in) rather than a received one.
+  # This replaced creating a draft through classic Outlook's COM object
+  # (2026-10-14): Michael uses the NEW Outlook, which has no COM interface,
+  # and the draft saved by classic never synced up to his mailbox. Nothing is
+  # sent -- he double-clicks the file, adds/confirms the recipient, and sends.
+  if (-not $OutDir) { $OutDir = Join-Path ([Environment]::GetFolderPath("Desktop")) "Commission Emails" }
+  New-Item -ItemType Directory -Force $OutDir | Out-Null
+  $baseName = ("Sales commission - pay week $rangeText") -replace '[\\/:*?"<>|]', '-'
+  $emlPath = Join-Path $OutDir "$baseName.eml"
+  if ((Test-Path $emlPath) -and -not $Force) {
+    Log "'$emlPath' already exists -- leaving it alone (use -Force to rebuild)"
     return
   }
-  foreach ($e in $existing) { $e.Delete() | Out-Null }
 
-  $mail = $ol.CreateItem(0)
-  $mail.Subject = $subject
-  if ($To) { $mail.To = $To }
-  $mail.HTMLBody = $html
-  $mail.Save()
-  # Michael reads mail in the NEW Outlook, which has no COM interface -- this
-  # draft is created through classic Outlook against the same Exchange Online
-  # mailbox (cached mode), and reaches the new Outlook only once classic syncs
-  # it up to the server. Kick a send/receive and give it time before the
-  # script ends (classic stays running afterwards; it isn't closed here).
-  try { foreach ($so in $ol.Session.SyncObjects) { $so.Start() } } catch { Log "sync kick failed: $($_.Exception.Message)" }
-  Start-Sleep -Seconds 45
-  Log "saved draft '$subject' (To: $(if ($To) { $To } else { '<blank>' }); Josh $(M $totals.Josh), Nick $(M $totals.Nick), $($flagged.Count) flagged)"
-  Log "--- draft end (saved) ---"
+  $b64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($html))
+  $b64Lines = for ($i = 0; $i -lt $b64.Length; $i += 76) { $b64.Substring($i, [math]::Min(76, $b64.Length - $i)) }
+  $headers = @("X-Unsent: 1")
+  if ($To) { $headers += "To: $To" }
+  $headers += "Subject: $subject"
+  $headers += "MIME-Version: 1.0"
+  $headers += "Content-Type: text/html; charset=utf-8"
+  $headers += "Content-Transfer-Encoding: base64"
+  $eml = ($headers -join "`r`n") + "`r`n`r`n" + ($b64Lines -join "`r`n") + "`r`n"
+  [IO.File]::WriteAllText($emlPath, $eml, (New-Object Text.ASCIIEncoding))
+  Log "saved '$emlPath' (To: $(if ($To) { $To } else { '<blank>' }); Josh $(M $totals.Josh), Nick $(M $totals.Nick), $($flagged.Count) flagged)"  Log "--- draft end (saved) ---"
 } catch {
   Log "ERROR: $($_.Exception.Message)"
   Log "--- draft end (error) ---"
