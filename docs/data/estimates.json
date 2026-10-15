@@ -1,5 +1,28 @@
 [
   {
+    "id": "csr_42d7e2fc123244099f44e77539e1be1f",
+    "estimate_number": "13831",
+    "customer_label": "Steven S.",
+    "created_at": "2026-10-15T11:13:16Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_274e52527fbe47a594a663cf899dcf21",
     "estimate_number": "13830",
     "customer_label": "SHADOWFAX C.",
@@ -41,9 +64,9 @@
       "pro_eb35c4da7a0c4a41bc3936da4d71da20"
     ],
     "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-10-15T11:22:29.778Z",
+    "approved_amount": 120360
   },
   {
     "id": "csr_47f4387ff0a64561b657f0431fdeb881",
@@ -916,7 +939,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -62937,7 +62960,7 @@
     "assigned_employee_ids": [
       "pro_9b6be6b8146547fabe281dac539e3f28"
     ],
-    "work_status": "needs scheduling",
+    "work_status": "created job from estimate",
     "approved": true,
     "approved_at": "2026-10-15T05:52:30.636Z",
     "approved_amount": 518372
