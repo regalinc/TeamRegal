@@ -661,6 +661,10 @@ function hcpMetricValue(key, stats) {
     // "From Housecall Pro" tile's raw value comes from.
     case "estimateClosingRate":
       return stats.estimateClosingRate;
+    // Same pattern: computed by company-scorecard.js (BU 30/40 only) from
+    // sold tech leads, not derivable from this stats object's own jobs.
+    case "avgTicketWithSales":
+      return stats.avgTicketWithSales;
     default:
       return null;
   }

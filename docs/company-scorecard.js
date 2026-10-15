@@ -327,6 +327,67 @@ function estimateClosingRateForDept(allEstimates, code, [start, end]) {
   return given.length ? approved.length / given.length : null;
 }
 
+// Avg ticket with and without sold tech leads, for BU 30/40 (HVAC Service
+// and Maintenance -- the two departments whose techs hand leads to Josh and
+// Nick). A tech's call tagged "TGL Sold" (tech-generated lead, sold) comes
+// out of the regular avg ticket entirely -- its count AND its own revenue
+// -- and shows up in "Avg ticket with sales" instead: that call counts as
+// one call and the sale's full price (after discounts, the OnCall Air job's
+// total) counts as its revenue, credited to the month the sale happened,
+// not the month the tech ran the call. Michael's rules, 2026-10-14.
+//
+// The sale is the OnCall Air-tagged Housecall Pro job auto-created when the
+// advisor's proposal is accepted -- Housecall Pro has no link between that
+// job and the tech's lead call, so it's matched by customer + date: the
+// first OnCall Air job for the same customer created from a day before the
+// call to 90 days after. Checked against the whole year's data first: every
+// one of 162 sold-lead calls matched (151 unambiguously). A sold-lead call
+// with no match found stays in the regular ticket rather than silently
+// dropping out of both numbers.
+//
+// Revenue/job counting otherwise mirrors computeScorecardStats exactly --
+// revenue sums every completed job, the count only includes Opportunity-
+// tagged ones -- so with no sold leads this reproduces the existing Avg
+// ticket tile to the dollar. Returns null for any other department.
+function avgTicketWithSalesForDept(allJobs, code, [start, end]) {
+  if (code !== "30" && code !== "40") return null;
+  const inRange = (d) => Boolean(d) && new Date(d) >= start && new Date(d) < end;
+  const deptJobs = (allJobs || []).filter((j) => businessUnitCode(j.business_unit) === code);
+  const saleJobs = (allJobs || []).filter((j) => hasTag(j, "OnCall Air") && (j.total_amount || 0) > 0);
+
+  const saleFor = (call) => {
+    const callDate = new Date(call.completed_at || call.schedule?.scheduled_start);
+    if (Number.isNaN(callDate.getTime())) return null;
+    const lo = callDate.getTime() - 86400000;
+    const hi = callDate.getTime() + 90 * 86400000;
+    return (
+      saleJobs
+        .filter((s) => s.customer_label === call.customer_label && new Date(s.created_at).getTime() >= lo && new Date(s.created_at).getTime() <= hi)
+        .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))[0] || null
+    );
+  };
+
+  const leadSoldPairs = deptJobs
+    .filter((j) => COMPLETE_STATUSES.has(j.work_status) && hasTag(j, "TGL Sold"))
+    .map((call) => ({ call, sale: saleFor(call) }))
+    .filter((p) => p.sale);
+  const leadSoldIds = new Set(leadSoldPairs.map((p) => p.call.id));
+
+  // Regular side: this month's department jobs, minus the sold-lead calls.
+  const regularJobs = deptJobs.filter((j) => jobInRange(j, [start, end]) && !leadSoldIds.has(j.id));
+  const regular = computeScorecardStats(regularJobs, { splitRevenue: false });
+
+  // With-sales side: add each sold lead whose SALE landed in this period.
+  const credited = leadSoldPairs.filter((p) => inRange(p.sale.created_at));
+  const salesDollars = credited.reduce((sum, p) => sum + p.sale.total_amount / CENTS_PER_DOLLAR, 0);
+  const calls = regular.totalJobs + credited.length;
+
+  return {
+    noSales: regular.avgTicket,
+    withSales: calls ? (regular.totalRevenue + salesDollars) / calls : null,
+  };
+}
+
 function render() {
   if (!latestData || !currentMonth) return;
 
@@ -361,6 +422,16 @@ function render() {
   // cheap and dept.hcp simply won't reference the key for BU 10/50.
   stats.estimateClosingRate = estimateClosingRateForDept(latestData.estimates, currentDept, range);
   stats.workDays = weekdaysInRange(range);
+
+  // BU 30/40 only. Overrides avgTicket on this page's local stats object
+  // (not shared.js's computation, which TV/admin/index still use as-is) so
+  // the "no sales" tile excludes sold-lead calls; totalJobs etc. stay put
+  // so the callback-rate and other ratios aren't affected.
+  const avgTicketSplit = avgTicketWithSalesForDept(latestData.jobs, currentDept, range);
+  if (avgTicketSplit) {
+    stats.avgTicket = avgTicketSplit.noSales;
+    stats.avgTicketWithSales = avgTicketSplit.withSales;
+  }
 
   // BU 30/40/70/80 have a curated `scorecard` list (departments-config.js)
   // and render as one flat section; BU 10/50 have none and keep the
