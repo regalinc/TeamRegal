@@ -706,6 +706,35 @@ function kpiTier(buCode, metricKey, stats) {
   return tier(value, metric.target);
 }
 
+// Each completed, sold tech lead in one business unit (a call tagged "TGL
+// Sold") paired with the sale it turned into: the OnCall Air-tagged
+// Housecall Pro job auto-created when the advisor's proposal is accepted.
+// Housecall Pro has no link between the two, so they're matched by customer
+// + date -- the first OnCall Air job for the same customer created from a
+// day before the call to 90 days after. Checked against a year of data: all
+// 162 sold-lead calls matched (151 unambiguously). A sold lead with no
+// match is left out of the result entirely, so callers keep it in the
+// regular ticket instead of silently dropping it from both numbers. Used by
+// the BU 30/40 "Avg ticket with sales" tiles (company-scorecard.js, tv.js).
+function soldLeadPairsForBu(allJobs, code) {
+  const jobs = allJobs || [];
+  const saleJobs = jobs.filter((j) => hasTag(j, "OnCall Air") && (j.total_amount || 0) > 0);
+  return jobs
+    .filter((j) => businessUnitCode(j.business_unit) === code && COMPLETE_STATUSES.has(j.work_status) && hasTag(j, "TGL Sold"))
+    .map((call) => {
+      const callDate = new Date(call.completed_at || call.schedule?.scheduled_start);
+      if (Number.isNaN(callDate.getTime())) return { call, sale: null };
+      const lo = callDate.getTime() - 86400000;
+      const hi = callDate.getTime() + 90 * 86400000;
+      const sale =
+        saleJobs
+          .filter((s) => s.customer_label === call.customer_label && new Date(s.created_at).getTime() >= lo && new Date(s.created_at).getTime() <= hi)
+          .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))[0] || null;
+      return { call, sale };
+    })
+    .filter((p) => p.sale);
+}
+
 function countsTowardJobs(job) {
   const code = businessUnitCode(job.business_unit);
   if (code === "10") return hasTag(job, "Oncall Air");

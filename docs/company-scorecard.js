@@ -336,14 +336,8 @@ function estimateClosingRateForDept(allEstimates, code, [start, end]) {
 // total) counts as its revenue, credited to the month the sale happened,
 // not the month the tech ran the call. Michael's rules, 2026-10-14.
 //
-// The sale is the OnCall Air-tagged Housecall Pro job auto-created when the
-// advisor's proposal is accepted -- Housecall Pro has no link between that
-// job and the tech's lead call, so it's matched by customer + date: the
-// first OnCall Air job for the same customer created from a day before the
-// call to 90 days after. Checked against the whole year's data first: every
-// one of 162 sold-lead calls matched (151 unambiguously). A sold-lead call
-// with no match found stays in the regular ticket rather than silently
-// dropping out of both numbers.
+// How a sold lead is matched to its sale: see soldLeadPairsForBu in
+// shared.js (the same pairing the TV rows use).
 //
 // Revenue/job counting otherwise mirrors computeScorecardStats exactly --
 // revenue sums every completed job, the count only includes Opportunity-
@@ -353,24 +347,7 @@ function avgTicketWithSalesForDept(allJobs, code, [start, end]) {
   if (code !== "30" && code !== "40") return null;
   const inRange = (d) => Boolean(d) && new Date(d) >= start && new Date(d) < end;
   const deptJobs = (allJobs || []).filter((j) => businessUnitCode(j.business_unit) === code);
-  const saleJobs = (allJobs || []).filter((j) => hasTag(j, "OnCall Air") && (j.total_amount || 0) > 0);
-
-  const saleFor = (call) => {
-    const callDate = new Date(call.completed_at || call.schedule?.scheduled_start);
-    if (Number.isNaN(callDate.getTime())) return null;
-    const lo = callDate.getTime() - 86400000;
-    const hi = callDate.getTime() + 90 * 86400000;
-    return (
-      saleJobs
-        .filter((s) => s.customer_label === call.customer_label && new Date(s.created_at).getTime() >= lo && new Date(s.created_at).getTime() <= hi)
-        .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))[0] || null
-    );
-  };
-
-  const leadSoldPairs = deptJobs
-    .filter((j) => COMPLETE_STATUSES.has(j.work_status) && hasTag(j, "TGL Sold"))
-    .map((call) => ({ call, sale: saleFor(call) }))
-    .filter((p) => p.sale);
+  const leadSoldPairs = soldLeadPairsForBu(allJobs, code);
   const leadSoldIds = new Set(leadSoldPairs.map((p) => p.call.id));
 
   // Regular side: this month's department jobs, minus the sold-lead calls.

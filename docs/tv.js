@@ -189,18 +189,36 @@ const BU_HIDDEN_TV_TILES = {
 // have no room and a different tile set already).
 const BU_SHOWN_ESTIMATE_TV_TILES = new Set(["70", "80"]);
 
+// BU 30/40 get "Avg ticket w/ sales" and a merged "Leads sold 2/5" tile --
+// see metricTiles and buildBuRanked.
+const BU_LEAD_SALES_TV_CODES = new Set(["30", "40"]);
+
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
 // for a compact list row).
 function metricTiles(stats, sizeClass) {
   const hidden = BU_HIDDEN_TV_TILES[DEPT] || new Set();
+  // BU 30/40 (2026-10-14): Leads and Leads sold collapse into one "Leads
+  // sold 2/5" tile (sold/total) to make room for "Avg ticket w/ sales" --
+  // a tech's sold leads come out of "Avg ticket" and go into the with-sales
+  // one at the sale's full price. The merged tile keeps the old Leads
+  // tile's coloring (lead turnover, the metric with an actual target);
+  // Leads sold never had one. See buildBuRanked for how the numbers get here.
+  const leadSales = BU_LEAD_SALES_TV_CODES.has(DEPT);
   const tiles = [
     ["Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats)],
     ["Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats)],
+    ...(leadSales
+      ? [["Avg ticket w/ sales", stats.avgTicketWithSales == null ? "—" : formatMoney(stats.avgTicketWithSales), kpiClass("avgTicketWithSales", stats)]]
+      : []),
     ["Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats)],
     ["Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats)],
-    ["Leads", stats.leads.toLocaleString(), kpiClass("leads", stats)],
-    ["Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats)],
+    ...(leadSales
+      ? [["Leads sold", `${stats.leadsSold}/${stats.leads}`, kpiClass("leads", stats)]]
+      : [
+          ["Leads", stats.leads.toLocaleString(), kpiClass("leads", stats)],
+          ["Leads sold", stats.leadsSold.toLocaleString(), kpiClass("leadsSold", stats)],
+        ]),
     ["$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats)],
     ["Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats)],
   ].filter(([label]) => !hidden.has(label));
@@ -518,6 +536,9 @@ function buildBuRanked(deptTechs, jobs, code) {
   const showEstimates = BU_SHOWN_ESTIMATE_TV_TILES.has(code);
   const allEstimates = showEstimates ? (latestData.estimates || []).filter((est) => !isCanceledEstimate(est)) : [];
 
+  // BU 30/40 only: this BU's sold tech leads, each paired with its sale.
+  const leadSoldPairs = BU_LEAD_SALES_TV_CODES.has(code) ? soldLeadPairsForBu(jobs, code) : [];
+
   const entries = deptTechs.map((tech) => {
     const techJobs = jobs.filter(
       (j) =>
@@ -526,6 +547,28 @@ function buildBuRanked(deptTechs, jobs, code) {
         businessUnitCode(j.business_unit) === code
     );
     const stats = computeScorecardStats(techJobs, { splitRevenue: true });
+
+    if (BU_LEAD_SALES_TV_CODES.has(code)) {
+      // Rules (Michael, 2026-10-14): a sold-lead call leaves the regular avg
+      // ticket entirely (its count and its own revenue); "with sales" counts
+      // it as one call at the sale's full price, credited to the period the
+      // SALE landed in, not the period the call was run. Every other tile
+      // (Revenue, Jobs, Leads, ...) is left exactly as it was. A shared
+      // call's sale splits across its real (non-apprentice) techs the same
+      // way HCP splits the job's own revenue.
+      const mine = leadSoldPairs.filter((p) => (p.call.assigned_employee_ids || []).includes(tech.id));
+      const mineIds = new Set(mine.map((p) => p.call.id));
+      const regular = computeScorecardStats(
+        techJobs.filter((j) => !mineIds.has(j.id)),
+        { splitRevenue: true }
+      );
+      const credited = mine.filter((p) => dateInPeriod(p.sale.created_at, PERIOD));
+      const realTechs = (p) => Math.max(1, (p.call.assigned_employee_ids || []).filter((id) => !APPRENTICE_TECH_IDS.has(id)).length);
+      const saleDollars = credited.reduce((sum, p) => sum + p.sale.total_amount / CENTS_PER_DOLLAR / realTechs(p), 0);
+      const calls = regular.totalJobs + credited.length;
+      stats.avgTicket = regular.avgTicket;
+      stats.avgTicketWithSales = calls ? (regular.totalRevenue + saleDollars) / calls : null;
+    }
 
     if (showEstimates) {
       const mine = allEstimates.filter((est) => (est.assigned_employee_ids || []).includes(tech.id));
