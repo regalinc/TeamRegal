@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-14T22:33:41.503Z",
+    "last_synced_at": "2026-10-15T00:48:01.560Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 36,
-    "trip_count": 6839
+    "trip_count": 6840
   },
   "vehicles": [
     {
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 82369
+      "odometer": 82410
     },
     {
       "imei": "868199050033175",
@@ -390,7 +390,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 49324.10340439961
+      "odometer": 49327.10340439961
     },
     {
       "imei": "868923055442135",
@@ -405,6 +405,18 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868923055438364-10247-202610",
+      "imei": "868923055438364",
+      "startTime": "2026-10-15T00:07:50.000Z",
+      "endTime": "2026-10-15T00:19:14.000Z",
+      "distance": 3,
+      "averageSpeed": 27.3,
+      "maxSpeed": 49.70968,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 1,
+      "totalIdleDuration": 0
+    },
     {
       "transactionId": "862255068902755-4232-202610",
       "imei": "862255068902755",
