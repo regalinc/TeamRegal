@@ -1,5 +1,189 @@
 [
   {
+    "id": "csr_9d498ae09dab4212b3f2065cbd87a94e",
+    "estimate_number": "13861",
+    "customer_label": "Don G.",
+    "created_at": "2026-10-16T18:13:46Z",
+    "schedule": {
+      "scheduled_start": "2026-10-19T17:00:00Z",
+      "scheduled_end": "2026-10-19T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-19T13:00:00-04:00",
+      "scheduled_end_local": "2026-10-19T15:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "10 HVAC AOR",
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_5c842b0dceb14a75b20a2937436cbd0f",
+    "estimate_number": "13860",
+    "customer_label": "Janyll J.",
+    "created_at": "2026-10-16T17:54:19Z",
+    "schedule": {
+      "scheduled_start": "2026-10-19T13:00:00Z",
+      "scheduled_end": "2026-10-19T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-19T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-19T12:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "50 PLUMBING AOR",
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_6cc69e53bb9d4b63972ec3488c79a3c2",
+    "estimate_number": "13859",
+    "customer_label": "Nick H.",
+    "created_at": "2026-10-16T16:37:46Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_cac152ea5d9c40a396f366f98a43d08d",
+    "estimate_number": "13858",
+    "customer_label": "Dan C.",
+    "created_at": "2026-10-16T16:36:17Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_b477e08b94624a1484d7f5485360c525",
+    "estimate_number": "13857",
+    "customer_label": "Loretta B.",
+    "created_at": "2026-10-16T15:30:39Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": "30 HVAC SERVICE",
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 53720
+  },
+  {
+    "id": "csr_157d8cd39c5a467d9b197188cc535298",
+    "estimate_number": "13856",
+    "customer_label": "Andrew T.",
+    "created_at": "2026-10-16T15:29:57Z",
+    "schedule": {
+      "scheduled_start": "2026-10-19T13:00:00Z",
+      "scheduled_end": "2026-10-19T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-19T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-19T11:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "50 PLUMBING AOR",
+    "assigned_employee_ids": [
+      "pro_ca120cbb55fa40fe9361d492161b101f"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_c045a2750df24827a6bbd135673ee0c0",
+    "estimate_number": "13855",
+    "customer_label": "Hauck L.",
+    "created_at": "2026-10-16T15:05:53Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_eb2d5f87684d4473ad1481fdfe82fa65",
+    "estimate_number": "13854",
+    "customer_label": "Patricia D.",
+    "created_at": "2026-10-16T14:56:18Z",
+    "schedule": {
+      "scheduled_start": "2026-10-21T13:00:00Z",
+      "scheduled_end": "2026-10-21T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-21T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-21T11:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "10 HVAC AOR",
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_681857b016914341807fd2083187cdb6",
     "estimate_number": "13853",
     "customer_label": "Johnathan & Andrea L.",
@@ -15,7 +199,7 @@
     },
     "business_unit": null,
     "assigned_employee_ids": [
-      "pro_e328d4cad27249d48750d091fd1faa3b"
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
     ],
     "work_status": "needs scheduling",
     "approved": false,
@@ -1218,7 +1402,7 @@
     "work_status": "created job from estimate",
     "approved": true,
     "approved_at": "2026-10-13T22:40:59.654Z",
-    "approved_amount": 715000
+    "approved_amount": 965000
   },
   {
     "id": "csr_053fcd1afadc4a45927a9fed13af9ec1",
@@ -4937,10 +5121,10 @@
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-10-16T18:47:06.533Z",
+    "approved_amount": 141900
   },
   {
     "id": "csr_5cdbeb49f02341b4967b8937181f8dc1",
@@ -83400,144 +83584,6 @@
     "business_unit": null,
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
-    ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_56ca2300f8944b978bdd98859b7dd8a7",
-    "estimate_number": "10226",
-    "customer_label": "Dylon J.",
-    "created_at": "2025-12-31T16:57:45Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": "50 PLUMBING AOR",
-    "assigned_employee_ids": [
-      "pro_ca120cbb55fa40fe9361d492161b101f"
-    ],
-    "work_status": "created job from estimate",
-    "approved": true,
-    "approved_at": null,
-    "approved_amount": 745000
-  },
-  {
-    "id": "csr_0baf3993710d4dafb8682499ae628284",
-    "estimate_number": "10225",
-    "customer_label": "First Capitol P.",
-    "created_at": "2025-12-31T16:28:29Z",
-    "schedule": {
-      "scheduled_start": "2025-12-31T16:30:00Z",
-      "scheduled_end": "2025-12-31T17:30:00Z",
-      "time_zone": "America/New_York",
-      "scheduled_start_local": "2025-12-31T11:30:00-05:00",
-      "scheduled_end_local": "2025-12-31T12:30:00-05:00",
-      "arrival_window": 120,
-      "appointments": []
-    },
-    "business_unit": "70 PLUMBING SERVICE",
-    "assigned_employee_ids": [
-      "pro_a147eea604e04ccfa458813cf1b374f0"
-    ],
-    "work_status": "created job from estimate",
-    "approved": true,
-    "approved_at": null,
-    "approved_amount": 49577
-  },
-  {
-    "id": "csr_ea5e60fe30dd4fd3a9d6678aaecc5da3",
-    "estimate_number": "10224",
-    "customer_label": "Sterling S.",
-    "created_at": "2025-12-31T15:57:39Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_6e334ed481b84edfab66eac860258325"
-    ],
-    "work_status": "created job from estimate",
-    "approved": true,
-    "approved_at": null,
-    "approved_amount": 108888
-  },
-  {
-    "id": "csr_912694ba8308462c89e0b740ba51f92a",
-    "estimate_number": "10223",
-    "customer_label": "Basketball W.",
-    "created_at": "2025-12-31T15:03:18Z",
-    "schedule": {
-      "scheduled_start": "2025-12-31T15:15:00Z",
-      "scheduled_end": "2025-12-31T16:15:00Z",
-      "time_zone": "America/New_York",
-      "scheduled_start_local": "2025-12-31T10:15:00-05:00",
-      "scheduled_end_local": "2025-12-31T11:15:00-05:00",
-      "arrival_window": 120,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
-    ],
-    "work_status": "complete unrated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_eb2d5f87684d4473ad1481fdfe82fa65",
-    "estimate_number": "13854",
-    "customer_label": "Patricia D.",
-    "created_at": "2026-10-16T14:56:18Z",
-    "schedule": {
-      "scheduled_start": "2026-10-21T13:00:00Z",
-      "scheduled_end": "2026-10-21T15:00:00Z",
-      "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-10-21T09:00:00-04:00",
-      "scheduled_end_local": "2026-10-21T11:00:00-04:00",
-      "arrival_window": 120,
-      "appointments": []
-    },
-    "business_unit": "10 HVAC AOR",
-    "assigned_employee_ids": [
-      "pro_62aa1ba4432340829b0aba02abd1d307"
-    ],
-    "work_status": "scheduled",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_c045a2750df24827a6bbd135673ee0c0",
-    "estimate_number": "13855",
-    "customer_label": "Hauck L.",
-    "created_at": "2026-10-16T15:05:53Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_0c24f7fb4b534fde920650a76dc8365f"
     ],
     "work_status": "needs scheduling",
     "approved": false,
