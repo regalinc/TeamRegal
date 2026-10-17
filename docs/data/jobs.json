@@ -373871,6 +373871,40 @@
     "created_at": "2026-10-16T17:23:06Z"
   },
   {
+    "id": "job_be342643ddb345d5b6335be38337632f",
+    "description": "70 - Initial Service Fee After Hours",
+    "work_status": "scheduled",
+    "customer_label": "Typical Life C.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-10-17T17:00:00Z",
+      "scheduled_end": "2026-10-17T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-17T13:00:00-04:00",
+      "scheduled_end_local": "2026-10-17T15:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_79f4ca1c644741dc89563174e5b5d4fa"
+    ],
+    "tags": [
+      "70",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 19120,
+    "outstanding_balance": 19120,
+    "completed_at": null,
+    "updated_at": "2026-10-17T16:55:21Z",
+    "invoice_number": "62765",
+    "created_at": "2026-10-17T16:55:19Z"
+  },
+  {
     "id": "job_1526de7276f94a2d9b5091ebae948c6b",
     "description": "Visit #11",
     "work_status": "scheduled",
