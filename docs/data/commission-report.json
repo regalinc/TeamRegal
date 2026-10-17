@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-16T23:05:04.379Z",
+                 "generated_at":  "2026-10-17T03:35:05.341Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -194,6 +194,10 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
+                                                       "customerName":  "Jeffrey Chambers",
+                                                       "reason":  "System Type not entered yet"
+                                                   },
+                                                   {
                                                        "customerName":  "Suzanne Plitt",
                                                        "reason":  "System Type not entered yet"
                                                    }
@@ -214,23 +218,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  146371.74,
+                                "Josh":  160024.74,
                                 "Nick":  26452
                             },
                     "ytd":  {
-                                "Josh":  3934818.65,
+                                "Josh":  3948471.65,
                                 "Nick":  625178.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.8,
-                                      "sameDayCount":  12,
-                                      "sameDaySample":  15,
-                                      "avgDaysToClose":  12.2,
-                                      "daysSample":  15,
+                                      "sameDayRate":  0.8125,
+                                      "sameDayCount":  13,
+                                      "sameDaySample":  16,
+                                      "avgDaysToClose":  11.7,
+                                      "daysSample":  16,
                                       "avgDiscountPct":  0.0535,
-                                      "discountSample":  15
+                                      "discountSample":  16
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4286,
