@@ -267337,7 +267337,7 @@
   {
     "id": "job_a0c2ee37692a41f6bb4fb5d2c9758c7a",
     "description": "4-5\" Standard Filter",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Joy G.",
     "city": "Dallastown",
     "state": "PA",
@@ -267364,7 +267364,7 @@
     "total_amount": 7949,
     "outstanding_balance": 0,
     "completed_at": "2026-08-03T14:06:34Z",
-    "updated_at": "2026-08-04T11:31:38Z",
+    "updated_at": "2026-10-17T20:04:44Z",
     "invoice_number": "58718",
     "created_at": "2026-07-01T16:19:48Z"
   },
@@ -364979,7 +364979,7 @@
   {
     "id": "job_4c112e195c184a4ab7761355e9d0747f",
     "description": "40 HVAC Maintenance",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Typical Life C.",
     "city": "York",
     "state": "PA",
@@ -365004,7 +365004,7 @@
     "total_amount": 128377,
     "outstanding_balance": 128377,
     "completed_at": "2026-10-15T19:05:53Z",
-    "updated_at": "2026-10-15T19:05:53Z",
+    "updated_at": "2026-10-17T18:17:37Z",
     "invoice_number": "62331",
     "created_at": "2026-10-05T12:33:56Z"
   },
@@ -373873,7 +373873,7 @@
   {
     "id": "job_be342643ddb345d5b6335be38337632f",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "scheduled",
+    "work_status": "complete unrated",
     "customer_label": "Typical Life C.",
     "city": "York",
     "state": "PA",
@@ -373897,12 +373897,45 @@
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
-    "total_amount": 19120,
-    "outstanding_balance": 19120,
-    "completed_at": null,
-    "updated_at": "2026-10-17T16:55:21Z",
+    "total_amount": 42966,
+    "outstanding_balance": 42966,
+    "completed_at": "2026-10-17T18:17:37Z",
+    "updated_at": "2026-10-17T18:17:37Z",
     "invoice_number": "62765",
     "created_at": "2026-10-17T16:55:19Z"
+  },
+  {
+    "id": "job_8c00753aa8ca4ebd8d04fc62371fb7d2",
+    "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Joy G.",
+    "city": "Dallastown",
+    "state": "PA",
+    "zip": "17313",
+    "schedule": {
+      "scheduled_start": "2026-10-17T18:00:00Z",
+      "scheduled_end": "2026-10-17T20:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-17T14:00:00-04:00",
+      "scheduled_end_local": "2026-10-17T16:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_79f4ca1c644741dc89563174e5b5d4fa"
+    ],
+    "tags": [
+      "70",
+      "Opportunity"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 36064,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-17T20:04:44Z",
+    "updated_at": "2026-10-17T20:04:44Z",
+    "invoice_number": "62766",
+    "created_at": "2026-10-17T17:33:57Z"
   },
   {
     "id": "job_1526de7276f94a2d9b5091ebae948c6b",
