@@ -373938,6 +373938,75 @@
     "created_at": "2026-10-17T17:33:57Z"
   },
   {
+    "id": "job_a8eb62fc06af41bf9f8069dea9ba16cf",
+    "description": "30 - Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Hailey G.",
+    "city": "Spring Grove",
+    "state": "PA",
+    "zip": "17362",
+    "schedule": {
+      "scheduled_start": "2026-10-18T12:00:00Z",
+      "scheduled_end": "2026-10-18T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-18T08:00:00-04:00",
+      "scheduled_end_local": "2026-10-18T10:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "tags": [
+      "30",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": "FF Kling",
+    "total_amount": 71128,
+    "outstanding_balance": 71128,
+    "completed_at": "2026-10-18T14:08:20Z",
+    "updated_at": "2026-10-18T14:08:20Z",
+    "invoice_number": "62767",
+    "created_at": "2026-10-18T11:33:42Z"
+  },
+  {
+    "id": "job_4de1b67a474445c9a380974047120d00",
+    "description": "30 - Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Paul D.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17408",
+    "schedule": {
+      "scheduled_start": "2026-10-18T15:00:00Z",
+      "scheduled_end": "2026-10-18T17:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-18T11:00:00-04:00",
+      "scheduled_end_local": "2026-10-18T13:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "tags": [
+      "30",
+      "Opportunity",
+      "Non-Member",
+      "HVAC Parts"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
+    "total_amount": 23900,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-18T15:02:32Z",
+    "updated_at": "2026-10-18T15:02:54Z",
+    "invoice_number": "62768",
+    "created_at": "2026-10-18T14:04:17Z"
+  },
+  {
     "id": "job_1526de7276f94a2d9b5091ebae948c6b",
     "description": "Visit #11",
     "work_status": "scheduled",
