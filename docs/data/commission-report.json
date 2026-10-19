@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-19T09:35:05.769Z",
+                 "generated_at":  "2026-10-19T16:35:04.667Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -175,16 +175,28 @@
                       "weekStart":  "2026-10-14",
                       "weekEnd":  "2026-10-20",
                       "totals":  {
-                                     "Josh":  2164.88,
+                                     "Josh":  3964.69,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
                                                  {
+                                                     "customerName":  "Jeffrey Chambers",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  744.71
+                                                 },
+                                                 {
                                                      "customerName":  "Jason Rorapaugh",
                                                      "systemType":  "Evolution",
                                                      "rate":  0.08,
                                                      "commission":  2164.88
+                                                 },
+                                                 {
+                                                     "customerName":  "Suzanne Plitt",
+                                                     "systemType":  "NTI",
+                                                     "rate":  0.08,
+                                                     "commission":  1055.09
                                                  }
                                              ],
                                     "Nick":  [
@@ -193,14 +205,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Jeffrey Chambers",
-                                                       "reason":  "System Type not entered yet"
-                                                   },
-                                                   {
-                                                       "customerName":  "Suzanne Plitt",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -209,7 +214,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  9352,
+                "Josh":  11151.81,
                 "Nick":  1334.14
             },
     "revenue":  {
