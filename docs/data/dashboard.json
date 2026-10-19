@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-19T01:12:59.978Z",
+    "last_synced_at": "2026-10-19T06:10:24.037Z",
     "window_days_back": 292,
     "window_days_forward": 13,
     "technician_count": 47,
@@ -362686,7 +362686,7 @@
     {
       "id": "job_99299c2b385247c9b66bcc669852225f",
       "description": "Visit #12; Heating",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Kelly M.",
       "city": "Windsor",
       "state": "PA",
@@ -362705,21 +362705,22 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "HVAC Attention"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 13038,
       "outstanding_balance": 13038,
-      "completed_at": null,
-      "updated_at": "2026-10-16T17:53:52Z",
+      "completed_at": "2026-10-19T01:24:25Z",
+      "updated_at": "2026-10-19T01:24:25Z",
       "invoice_number": "61570",
       "created_at": "2026-09-14T12:51:51Z"
     },
     {
       "id": "job_348f58c464f5421f8729aa234abdccee",
       "description": "Visit #11; Plumbing",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Kelly M.",
       "city": "Windsor",
       "state": "PA",
@@ -362746,7 +362747,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-16T18:50:17Z",
-      "updated_at": "2026-10-16T18:50:17Z",
+      "updated_at": "2026-10-19T01:24:25Z",
       "invoice_number": "61571",
       "created_at": "2026-09-14T12:52:49Z"
     },
@@ -369396,7 +369397,7 @@
       "total_amount": 638306,
       "outstanding_balance": 0,
       "completed_at": "2026-10-15T17:20:41Z",
-      "updated_at": "2026-10-15T17:50:07Z",
+      "updated_at": "2026-10-19T01:54:54Z",
       "invoice_number": "62560",
       "created_at": "2026-10-09T16:46:28Z"
     },
@@ -371387,7 +371388,7 @@
     {
       "id": "job_17fa04424dbd444aad848358f1a8e5ee",
       "description": "30 - RCC Whole Home Waived Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Tina R.",
       "city": "Red Lion",
       "state": "PA",
@@ -371413,7 +371414,7 @@
       "total_amount": 80884,
       "outstanding_balance": 0,
       "completed_at": "2026-10-16T12:53:20Z",
-      "updated_at": "2026-10-16T19:51:05Z",
+      "updated_at": "2026-10-19T01:37:43Z",
       "invoice_number": "62649-1",
       "created_at": "2026-10-13T13:59:57Z"
     },
@@ -373728,7 +373729,7 @@
       "total_amount": 25900,
       "outstanding_balance": 0,
       "completed_at": "2026-10-15T18:47:20Z",
-      "updated_at": "2026-10-15T18:47:20Z",
+      "updated_at": "2026-10-19T01:54:53Z",
       "invoice_number": "62730",
       "created_at": "2026-10-15T16:01:40Z"
     },
@@ -374171,7 +374172,7 @@
     {
       "id": "job_1a41c7b07da54d3aa958634de1280a0e",
       "description": "30 HVAC Service",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Tina R.",
       "city": "Red Lion",
       "state": "PA",
@@ -374189,14 +374190,16 @@
         "pro_8d943eadd54f485b9dba4296c807fb8f"
       ],
       "tags": [
-        "30"
+        "30",
+        "HVAC Attention",
+        "Print Invoice"
       ],
       "business_unit": "30 HVAC SERVICE",
       "lead_source": null,
       "total_amount": 24806,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-16T19:51:05Z",
+      "completed_at": "2026-10-19T01:37:43Z",
+      "updated_at": "2026-10-19T01:39:42Z",
       "invoice_number": "62649-2",
       "created_at": "2026-10-16T15:13:45Z"
     },
@@ -504268,7 +504271,7 @@
       {
         "id": "job_348f58c464f5421f8729aa234abdccee",
         "description": "Visit #11; Plumbing",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Kelly M.",
         "city": "Windsor",
         "state": "PA",
@@ -504295,7 +504298,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-16T18:50:17Z",
-        "updated_at": "2026-10-16T18:50:17Z",
+        "updated_at": "2026-10-19T01:24:25Z",
         "invoice_number": "61571",
         "created_at": "2026-09-14T12:52:49Z"
       },
@@ -646859,7 +646862,7 @@
       {
         "id": "job_348f58c464f5421f8729aa234abdccee",
         "description": "Visit #11; Plumbing",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Kelly M.",
         "city": "Windsor",
         "state": "PA",
@@ -646886,7 +646889,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-16T18:50:17Z",
-        "updated_at": "2026-10-16T18:50:17Z",
+        "updated_at": "2026-10-19T01:24:25Z",
         "invoice_number": "61571",
         "created_at": "2026-09-14T12:52:49Z"
       },
@@ -759174,7 +759177,7 @@
       {
         "id": "job_99299c2b385247c9b66bcc669852225f",
         "description": "Visit #12; Heating",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Kelly M.",
         "city": "Windsor",
         "state": "PA",
@@ -759193,14 +759196,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "HVAC Attention"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 13038,
         "outstanding_balance": 13038,
-        "completed_at": null,
-        "updated_at": "2026-10-16T17:53:52Z",
+        "completed_at": "2026-10-19T01:24:25Z",
+        "updated_at": "2026-10-19T01:24:25Z",
         "invoice_number": "61570",
         "created_at": "2026-09-14T12:51:51Z"
       },
@@ -759538,7 +759542,7 @@
       {
         "id": "job_17fa04424dbd444aad848358f1a8e5ee",
         "description": "30 - RCC Whole Home Waived Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Tina R.",
         "city": "Red Lion",
         "state": "PA",
@@ -759564,14 +759568,14 @@
         "total_amount": 80884,
         "outstanding_balance": 0,
         "completed_at": "2026-10-16T12:53:20Z",
-        "updated_at": "2026-10-16T19:51:05Z",
+        "updated_at": "2026-10-19T01:37:43Z",
         "invoice_number": "62649-1",
         "created_at": "2026-10-13T13:59:57Z"
       },
       {
         "id": "job_1a41c7b07da54d3aa958634de1280a0e",
         "description": "30 HVAC Service",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Tina R.",
         "city": "Red Lion",
         "state": "PA",
@@ -759589,14 +759593,16 @@
           "pro_8d943eadd54f485b9dba4296c807fb8f"
         ],
         "tags": [
-          "30"
+          "30",
+          "HVAC Attention",
+          "Print Invoice"
         ],
         "business_unit": "30 HVAC SERVICE",
         "lead_source": null,
         "total_amount": 24806,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-16T19:51:05Z",
+        "completed_at": "2026-10-19T01:37:43Z",
+        "updated_at": "2026-10-19T01:39:42Z",
         "invoice_number": "62649-2",
         "created_at": "2026-10-16T15:13:45Z"
       },
@@ -795541,7 +795547,7 @@
         "total_amount": 25900,
         "outstanding_balance": 0,
         "completed_at": "2026-10-15T18:47:20Z",
-        "updated_at": "2026-10-15T18:47:20Z",
+        "updated_at": "2026-10-19T01:54:53Z",
         "invoice_number": "62730",
         "created_at": "2026-10-15T16:01:40Z"
       },
@@ -899375,7 +899381,7 @@
         "total_amount": 638306,
         "outstanding_balance": 0,
         "completed_at": "2026-10-15T17:20:41Z",
-        "updated_at": "2026-10-15T17:50:07Z",
+        "updated_at": "2026-10-19T01:54:54Z",
         "invoice_number": "62560",
         "created_at": "2026-10-09T16:46:28Z"
       },
@@ -906116,7 +906122,7 @@
         "total_amount": 638306,
         "outstanding_balance": 0,
         "completed_at": "2026-10-15T17:20:41Z",
-        "updated_at": "2026-10-15T17:50:07Z",
+        "updated_at": "2026-10-19T01:54:54Z",
         "invoice_number": "62560",
         "created_at": "2026-10-09T16:46:28Z"
       },
