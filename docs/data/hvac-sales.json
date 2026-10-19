@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  624
+                 "record_count":  629
              },
     "records":  [
                     {
@@ -6673,12 +6673,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-12",
                         "customerName":  "Jeffrey Chambers",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62763",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6728,12 +6728,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-14",
                         "customerName":  "Suzanne Plitt",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62706",
+                        "systemType":  "NTI",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -6793,10 +6793,21 @@
                     {
                         "ca":  "Josh",
                         "date":  "2026-10-19",
-                        "customerName":  "Andrea Taylor",
+                        "customerName":  "Don Gross",
                         "job":  "",
                         "systemType":  "",
-                        "clubMember":  "No",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-19",
+                        "customerName":  "Elyse Byrnes",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
                         "sold":  false
@@ -6824,6 +6835,28 @@
                         "sold":  false
                     },
                     {
+                        "ca":  "Josh",
+                        "date":  "2026-10-20",
+                        "customerName":  "Miranda Mentzer",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-21",
+                        "customerName":  "Shari Gulliver",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
                         "ca":  "Nick",
                         "date":  "2026-10-21",
                         "customerName":  "Eric Harris",
@@ -6843,6 +6876,28 @@
                         "clubMember":  "No",
                         "lead":  "EC",
                         "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-21",
+                        "customerName":  "Patricia Doran",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-10-22",
+                        "customerName":  "Hunter Shannon",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
                         "sold":  false
                     },
                     {
