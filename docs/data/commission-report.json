@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-19T16:35:04.667Z",
+                 "generated_at":  "2026-10-19T20:05:04.943Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -175,11 +175,17 @@
                       "weekStart":  "2026-10-14",
                       "weekEnd":  "2026-10-20",
                       "totals":  {
-                                     "Josh":  3964.69,
+                                     "Josh":  4689.85,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
+                                                 {
+                                                     "customerName":  "Elyse Byrnes",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  725.16
+                                                 },
                                                  {
                                                      "customerName":  "Jeffrey Chambers",
                                                      "systemType":  "Legacy",
@@ -214,7 +220,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  11151.81,
+                "Josh":  11876.97,
                 "Nick":  1334.14
             },
     "revenue":  {
@@ -223,23 +229,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  160024.74,
+                                "Josh":  174382.74,
                                 "Nick":  26452
                             },
                     "ytd":  {
-                                "Josh":  3948471.65,
+                                "Josh":  3962829.65,
                                 "Nick":  625178.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.8125,
-                                      "sameDayCount":  13,
-                                      "sameDaySample":  16,
-                                      "avgDaysToClose":  11.7,
-                                      "daysSample":  16,
-                                      "avgDiscountPct":  0.0535,
-                                      "discountSample":  16
+                                      "sameDayRate":  0.8235,
+                                      "sameDayCount":  14,
+                                      "sameDaySample":  17,
+                                      "avgDaysToClose":  11,
+                                      "daysSample":  17,
+                                      "avgDiscountPct":  0.0541,
+                                      "discountSample":  17
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4286,
