@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  629
+                 "record_count":  630
              },
     "records":  [
                     {
@@ -6805,12 +6805,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-19",
                         "customerName":  "Elyse Byrnes",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62835",
+                        "systemType":  "Legacy",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6843,6 +6843,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-10-20",
+                        "customerName":  "Jacob Slyder",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
