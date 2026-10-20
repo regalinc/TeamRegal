@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  630
+                 "record_count":  633
              },
     "records":  [
                     {
@@ -6684,12 +6684,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-13",
                         "customerName":  "Susquehanna Micro",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62866",
+                        "systemType":  "Other",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6858,6 +6858,28 @@
                     },
                     {
                         "ca":  "Josh",
+                        "date":  "2026-10-20",
+                        "customerName":  "Jane Ford",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Nick",
+                        "date":  "2026-10-20",
+                        "customerName":  "Wanda Rios",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
                         "date":  "2026-10-21",
                         "customerName":  "Shari Gulliver",
                         "job":  "",
@@ -6904,6 +6926,17 @@
                         "ca":  "Nick",
                         "date":  "2026-10-22",
                         "customerName":  "Hunter Shannon",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-23",
+                        "customerName":  "Dana Moore",
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "No",
