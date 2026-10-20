@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-20T16:35:04.916Z",
+                 "generated_at":  "2026-10-20T20:05:04.492Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -175,7 +175,7 @@
                       "weekStart":  "2026-10-14",
                       "weekEnd":  "2026-10-20",
                       "totals":  {
-                                     "Josh":  4689.85,
+                                     "Josh":  3634.76,
                                      "Nick":  0
                                  },
                       "sales":  {
@@ -197,12 +197,6 @@
                                                      "systemType":  "Evolution",
                                                      "rate":  0.08,
                                                      "commission":  2164.88
-                                                 },
-                                                 {
-                                                     "customerName":  "Suzanne Plitt",
-                                                     "systemType":  "NTI",
-                                                     "rate":  0.08,
-                                                     "commission":  1055.09
                                                  }
                                              ],
                                     "Nick":  [
@@ -214,6 +208,10 @@
                                                    {
                                                        "customerName":  "Susquehanna Micro Inc.",
                                                        "reason":  "not yet logged in the sheet"
+                                                   },
+                                                   {
+                                                       "customerName":  "Suzanne Plitt",
+                                                       "reason":  "System Type not entered yet"
                                                    }
                                                ],
                                       "Nick":  [
@@ -223,7 +221,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  11876.97,
+                "Josh":  10821.88,
                 "Nick":  1334.14
             },
     "revenue":  {
