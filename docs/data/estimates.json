@@ -1,5 +1,28 @@
 [
   {
+    "id": "csr_ccbfb668cc5f426bab5128a41eafec06",
+    "estimate_number": "13906",
+    "customer_label": "Redevelopment A.",
+    "created_at": "2026-10-20T19:31:31Z",
+    "schedule": {
+      "scheduled_start": "2026-10-22T13:00:00Z",
+      "scheduled_end": "2026-10-22T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-22T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-22T11:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "10 HVAC AOR",
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_42eb41329ec54f969cc9c92b05264a97",
     "estimate_number": "13905",
     "customer_label": "Greg G.",
@@ -201,7 +224,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -570,9 +593,9 @@
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
     "work_status": "complete unrated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-10-20T22:15:54.767Z",
+    "approved_amount": 198700
   },
   {
     "id": "csr_4da4d3f9e44b4791918c6ee545646f6f",
@@ -84594,29 +84617,6 @@
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
     ],
     "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_ccbfb668cc5f426bab5128a41eafec06",
-    "estimate_number": "13906",
-    "customer_label": "Redevelopment A.",
-    "created_at": "2026-10-20T19:31:31Z",
-    "schedule": {
-      "scheduled_start": "2026-10-22T13:00:00Z",
-      "scheduled_end": "2026-10-22T15:00:00Z",
-      "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-10-22T09:00:00-04:00",
-      "scheduled_end_local": "2026-10-22T11:00:00-04:00",
-      "arrival_window": 120,
-      "appointments": []
-    },
-    "business_unit": "10 HVAC AOR",
-    "assigned_employee_ids": [
-      "pro_62aa1ba4432340829b0aba02abd1d307"
-    ],
-    "work_status": "scheduled",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0

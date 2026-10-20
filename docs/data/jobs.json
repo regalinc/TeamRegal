@@ -330479,7 +330479,7 @@
   {
     "id": "job_25409e7c044b4129be6b49c9cf5d96e0",
     "description": "30 - RCC Whole Home Waived Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Joel W.",
     "city": "York",
     "state": "PA",
@@ -330504,7 +330504,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-09-10T19:45:17Z",
-    "updated_at": "2026-10-06T16:21:58Z",
+    "updated_at": "2026-10-20T20:58:26Z",
     "invoice_number": "61484-1",
     "created_at": "2026-09-10T15:57:50Z"
   },
@@ -336992,7 +336992,7 @@
   {
     "id": "job_3f1b2d1e5e424cf6b640baa142adff47",
     "description": "70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Emmanuel Church of Christ",
     "city": "York",
     "state": "PA",
@@ -337019,7 +337019,7 @@
     "total_amount": 19525,
     "outstanding_balance": 19525,
     "completed_at": "2026-09-22T18:00:59Z",
-    "updated_at": "2026-09-23T11:53:03Z",
+    "updated_at": "2026-10-20T19:45:52Z",
     "invoice_number": "61853",
     "created_at": "2026-09-22T14:10:41Z"
   },
@@ -350981,7 +350981,7 @@
   {
     "id": "job_cd6b3fd3a39e4e02acbd01ad92b79d76",
     "description": "Misc Repair Lvl2",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Grace Manor Bed and B.",
     "city": "York",
     "state": "PA",
@@ -351009,7 +351009,7 @@
     "total_amount": 34425,
     "outstanding_balance": 25525,
     "completed_at": "2026-10-05T19:20:26Z",
-    "updated_at": "2026-10-20T17:31:35Z",
+    "updated_at": "2026-10-20T19:39:45Z",
     "invoice_number": "62097",
     "created_at": "2026-09-28T14:09:41Z"
   },
@@ -365925,7 +365925,7 @@
   {
     "id": "job_a69c504cd66b4e3b9e293ac2dda6aa03",
     "description": "30 HVAC Service",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Joel W.",
     "city": "York",
     "state": "PA",
@@ -365949,8 +365949,8 @@
     "lead_source": null,
     "total_amount": 0,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-10-20T13:43:04Z",
+    "completed_at": "2026-10-20T20:58:26Z",
+    "updated_at": "2026-10-20T20:58:26Z",
     "invoice_number": "61484-2",
     "created_at": "2026-10-06T17:21:37Z"
   },
@@ -367348,7 +367348,7 @@
   {
     "id": "job_bb77cf8e5dc848638fd4d411ff062f16",
     "description": "30 HVAC Service",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Grace Manor Bed and B.",
     "city": "York",
     "state": "PA",
@@ -367372,8 +367372,8 @@
     "lead_source": null,
     "total_amount": 85071,
     "outstanding_balance": 85071,
-    "completed_at": null,
-    "updated_at": "2026-10-20T18:36:17Z",
+    "completed_at": "2026-10-20T19:39:45Z",
+    "updated_at": "2026-10-20T19:39:45Z",
     "invoice_number": "62512",
     "created_at": "2026-10-08T13:41:49Z"
   },
@@ -370036,14 +370036,15 @@
     "tags": [
       "70",
       "Opportunity",
-      "Plumbing Spiff"
+      "Plumbing Spiff",
+      "Plumbing Attention"
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 104581,
     "outstanding_balance": 0,
     "completed_at": "2026-10-20T18:40:34Z",
-    "updated_at": "2026-10-20T18:54:13Z",
+    "updated_at": "2026-10-20T19:25:14Z",
     "invoice_number": "62628",
     "created_at": "2026-10-12T19:03:50Z"
   },
@@ -372462,7 +372463,7 @@
   {
     "id": "job_93f16c2395714985af3731eae5a4ab89",
     "description": "70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Melissa M.",
     "city": "Windsor",
     "state": "PA",
@@ -372489,7 +372490,7 @@
     "total_amount": 8900,
     "outstanding_balance": 0,
     "completed_at": "2026-10-19T15:32:44Z",
-    "updated_at": "2026-10-19T15:32:44Z",
+    "updated_at": "2026-10-20T19:33:49Z",
     "invoice_number": "62716-1",
     "created_at": "2026-10-15T13:07:13Z"
   },
@@ -373670,7 +373671,7 @@
   {
     "id": "job_c135d79f38b2470383fac18b90b31b42",
     "description": "30 - RCC Whole Home Waived Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Bernice L.",
     "city": "Manchester",
     "state": "PA",
@@ -373697,7 +373698,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-10-19T20:07:51Z",
-    "updated_at": "2026-10-20T15:59:08Z",
+    "updated_at": "2026-10-20T20:58:28Z",
     "invoice_number": "62772",
     "created_at": "2026-10-19T11:04:58Z"
   },
@@ -374578,7 +374579,7 @@
   {
     "id": "job_30359aec1b4c42f88df3261c2438f7aa",
     "description": "Billing - 30 - Initial Service Fee",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Emmanuel Church of Christ",
     "city": "York",
     "state": "PA",
@@ -374604,15 +374605,15 @@
     "lead_source": null,
     "total_amount": 8900,
     "outstanding_balance": 8900,
-    "completed_at": null,
-    "updated_at": "2026-10-20T18:03:08Z",
+    "completed_at": "2026-10-20T19:45:52Z",
+    "updated_at": "2026-10-20T19:48:37Z",
     "invoice_number": "62817",
     "created_at": "2026-10-19T14:59:38Z"
   },
   {
     "id": "job_6d378e8d8559431797b84afaf1360167",
     "description": "70 - Plumbing Service",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Melissa M.",
     "city": "Windsor",
     "state": "PA",
@@ -374638,8 +374639,8 @@
     "lead_source": null,
     "total_amount": 265802,
     "outstanding_balance": 0,
-    "completed_at": null,
-    "updated_at": "2026-10-20T19:13:18Z",
+    "completed_at": "2026-10-20T19:33:49Z",
+    "updated_at": "2026-10-20T19:33:49Z",
     "invoice_number": "62716-2",
     "created_at": "2026-10-19T15:02:33Z"
   },
@@ -375113,7 +375114,7 @@
   {
     "id": "job_c8a866a4e2b64d86ac6d918c389466af",
     "description": "30 - RCC Whole Home Waived Initial Service Fee",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Bernice L.",
     "city": "Manchester",
     "state": "PA",
@@ -375137,8 +375138,8 @@
     "lead_source": "FF Kling",
     "total_amount": 52360,
     "outstanding_balance": 52360,
-    "completed_at": null,
-    "updated_at": "2026-10-20T17:27:39Z",
+    "completed_at": "2026-10-20T20:58:28Z",
+    "updated_at": "2026-10-20T20:58:28Z",
     "invoice_number": "62856",
     "created_at": "2026-10-20T11:59:04Z"
   },
@@ -383396,14 +383397,15 @@
     ],
     "tags": [
       "30",
-      "Opportunity"
+      "Opportunity",
+      "HVAC Parts"
     ],
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": null,
-    "updated_at": "2026-10-20T15:26:06Z",
+    "updated_at": "2026-10-20T19:39:33Z",
     "invoice_number": "62879",
     "created_at": "2026-10-20T15:25:42Z"
   },
@@ -383600,5 +383602,71 @@
     "updated_at": "2026-10-20T18:53:13Z",
     "invoice_number": "62891",
     "created_at": "2026-10-20T18:51:30Z"
+  },
+  {
+    "id": "job_83c43ae5fbb348cd9f343bdd06e35148",
+    "description": "30 HVAC Service",
+    "work_status": "scheduled",
+    "customer_label": "Margie M.",
+    "city": "East Prospect",
+    "state": "PA",
+    "zip": "17317",
+    "schedule": {
+      "scheduled_start": "2026-10-21T18:30:00Z",
+      "scheduled_end": "2026-10-21T19:30:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-21T14:30:00-04:00",
+      "scheduled_end_local": "2026-10-21T15:30:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "tags": [
+      "30"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-20T19:28:16Z",
+    "invoice_number": "62600-3",
+    "created_at": "2026-10-20T19:25:26Z"
+  },
+  {
+    "id": "job_4d78a682f786446f8f2222a014d0e0b1",
+    "description": "30 - Initial Service Fee",
+    "work_status": "scheduled",
+    "customer_label": "Carrie P.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-10-27T17:00:00Z",
+      "scheduled_end": "2026-10-27T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-27T13:00:00-04:00",
+      "scheduled_end_local": "2026-10-27T15:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "tags": [
+      "30",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
+    "total_amount": 8900,
+    "outstanding_balance": 8900,
+    "completed_at": null,
+    "updated_at": "2026-10-20T19:50:35Z",
+    "invoice_number": "62894",
+    "created_at": "2026-10-20T19:47:25Z"
   }
 ]
