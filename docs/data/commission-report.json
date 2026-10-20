@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-20T09:35:05.539Z",
+                 "generated_at":  "2026-10-20T16:35:04.916Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -211,7 +211,10 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-
+                                                   {
+                                                       "customerName":  "Susquehanna Micro Inc.",
+                                                       "reason":  "not yet logged in the sheet"
+                                                   }
                                                ],
                                       "Nick":  [
 
@@ -229,23 +232,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  174382.74,
+                                "Josh":  195882.74,
                                 "Nick":  26452
                             },
                     "ytd":  {
-                                "Josh":  3962829.65,
+                                "Josh":  3984329.65,
                                 "Nick":  625178.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.8235,
+                                      "sameDayRate":  0.7778,
                                       "sameDayCount":  14,
-                                      "sameDaySample":  17,
-                                      "avgDaysToClose":  11,
-                                      "daysSample":  17,
-                                      "avgDiscountPct":  0.0541,
-                                      "discountSample":  17
+                                      "sameDaySample":  18,
+                                      "avgDaysToClose":  10.9,
+                                      "daysSample":  18,
+                                      "avgDiscountPct":  0.0511,
+                                      "discountSample":  18
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4286,
