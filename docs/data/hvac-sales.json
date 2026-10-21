@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  636
+                 "record_count":  637
              },
     "records":  [
                     {
@@ -6685,7 +6685,7 @@
                         "date":  "2026-10-13",
                         "customerName":  "Susquehanna Micro",
                         "job":  "62866",
-                        "systemType":  "Other",
+                        "systemType":  "Flex",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
@@ -6849,12 +6849,12 @@
                         "ca":  "Nick",
                         "date":  "2026-10-20",
                         "customerName":  "Jacob Slyder",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62895",
+                        "systemType":  "Legacy",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6882,12 +6882,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-20",
                         "customerName":  "Crispus Attucks",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "62896",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -6964,6 +6964,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-10-22",
+                        "customerName":  "Redevelopment Authority",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
