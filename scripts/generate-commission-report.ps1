@@ -29,7 +29,7 @@
 #   System type                          Josh   Nick
 #   Flex                                   6%     3%
 #   Legacy / Preferred / Boiler / Mini-Split 6%     4%
-#   Evolution / NTI / Tankless              8%     5%
+#   Evolution / NTI / Navien / Tankless     8%     5%
 #
 # (Boiler folds into Legacy/Preferred, Mini-Split folds into Preferred,
 # NTI and Tankless both fold into the Evolution/Navien tier -- confirmed
@@ -75,6 +75,7 @@ $RATE_GROUPS = @{
   "Mini-Split" = @{ Josh = 0.06; Nick = 0.04 }
   "Evolution"  = @{ Josh = 0.08; Nick = 0.05 }
   "NTI"        = @{ Josh = 0.08; Nick = 0.05 }
+  "Navien"     = @{ Josh = 0.08; Nick = 0.05 }  # combi boiler replacing NTI; same tier -- confirmed by Michael 2026-10-21 (Suzanne Plitt, Job #62706)
   "Tankless"   = @{ Josh = 0.08; Nick = 0.05 }
 }
 

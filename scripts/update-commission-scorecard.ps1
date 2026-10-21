@@ -58,6 +58,7 @@ $RATE_GROUPS = @{
   "Mini-Split" = @{ Josh = 0.06; Nick = 0.04 }
   "Evolution"  = @{ Josh = 0.08; Nick = 0.05 }
   "NTI"        = @{ Josh = 0.08; Nick = 0.05 }
+  "Navien"     = @{ Josh = 0.08; Nick = 0.05 }  # combi boiler replacing NTI; same tier -- confirmed by Michael 2026-10-21 (Suzanne Plitt, Job #62706)
   "Tankless"   = @{ Josh = 0.08; Nick = 0.05 }
 }
 
