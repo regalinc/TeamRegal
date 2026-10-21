@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-20T20:49:03.249Z",
+    "last_synced_at": "2026-10-21T00:04:58.740Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 36,
-    "trip_count": 7759
+    "trip_count": 7761
   },
   "vehicles": [
     {
@@ -115,7 +115,7 @@
         "name": "ProMaster 2500",
         "year": 2025
       },
-      "odometer": 12664.900000000027
+      "odometer": 12677.900000000027
     },
     {
       "imei": "864486067735866",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 82615
+      "odometer": 82656
     },
     {
       "imei": "868199050033175",
@@ -405,6 +405,30 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868199050185405-14739-202610",
+      "imei": "868199050185405",
+      "startTime": "2026-10-20T21:00:07.000Z",
+      "endTime": "2026-10-20T21:01:38.000Z",
+      "distance": 0.1,
+      "averageSpeed": 8.6,
+      "maxSpeed": 14.912904000000001,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 32
+    },
+    {
+      "transactionId": "864486067218087-1978-202610",
+      "imei": "864486067218087",
+      "startTime": "2026-10-20T20:56:35.000Z",
+      "endTime": "2026-10-20T21:25:16.000Z",
+      "distance": 13,
+      "averageSpeed": 31.6,
+      "maxSpeed": 73.943149,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 247
+    },
     {
       "transactionId": "864486066579554-4063-202610",
       "imei": "864486066579554",
