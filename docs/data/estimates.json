@@ -592,7 +592,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "complete unrated",
+    "work_status": "created job from estimate",
     "approved": true,
     "approved_at": "2026-10-20T22:15:54.767Z",
     "approved_amount": 198700
@@ -1163,7 +1163,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "complete unrated",
+    "work_status": "created job from estimate",
     "approved": true,
     "approved_at": "2026-10-21T00:37:56.881Z",
     "approved_amount": 789500
@@ -1922,7 +1922,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -84804,5 +84804,28 @@
     "approved": true,
     "approved_at": null,
     "approved_amount": 89000
+  },
+  {
+    "id": "csr_9b29e54cec5e40b381e4435c41508a45",
+    "estimate_number": "13907",
+    "customer_label": "Beverly H.",
+    "created_at": "2026-10-21T11:50:52Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
   }
 ]
