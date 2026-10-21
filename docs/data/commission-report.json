@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-21T12:48:37.796Z",
+                 "generated_at":  "2026-10-21T12:51:08.788Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -175,7 +175,7 @@
                       "weekStart":  "2026-10-14",
                       "weekEnd":  "2026-10-20",
                       "totals":  {
-                                     "Josh":  5105.59,
+                                     "Josh":  6160.68,
                                      "Nick":  426.56
                                  },
                       "sales":  {
@@ -209,6 +209,12 @@
                                                      "systemType":  "Evolution",
                                                      "rate":  0.08,
                                                      "commission":  2164.88
+                                                 },
+                                                 {
+                                                     "customerName":  "Suzanne Plitt",
+                                                     "systemType":  "Navien",
+                                                     "rate":  0.08,
+                                                     "commission":  1055.09
                                                  }
                                              ],
                                     "Nick":  [
@@ -222,10 +228,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Suzanne Plitt",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -234,7 +237,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  12292.71,
+                "Josh":  13347.8,
                 "Nick":  1760.7
             },
     "revenue":  {
