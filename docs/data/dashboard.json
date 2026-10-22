@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-22T04:37:49.926Z",
+    "last_synced_at": "2026-10-22T10:07:46.570Z",
     "window_days_back": 295,
     "window_days_forward": 13,
     "technician_count": 47,
@@ -386131,7 +386131,8 @@
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_8e95601ea8db4c5193be8f19fb319a44"
+        "pro_8e95601ea8db4c5193be8f19fb319a44",
+        "pro_86c3193093ac454e801f62babb7cf494"
       ],
       "tags": [],
       "business_unit": null,
@@ -386139,7 +386140,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-10-21T15:03:27Z",
+      "updated_at": "2026-10-22T09:41:02Z",
       "invoice_number": "62603-2",
       "created_at": "2026-10-21T15:01:45Z"
     },
@@ -386297,14 +386298,15 @@
       "tags": [
         "70",
         "Opportunity",
-        "Non-Member"
+        "Non-Member",
+        "Plumbing Attention"
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 135775,
-      "outstanding_balance": 135775,
+      "total_amount": 146400,
+      "outstanding_balance": 146400,
       "completed_at": "2026-10-21T23:12:48Z",
-      "updated_at": "2026-10-21T23:34:21Z",
+      "updated_at": "2026-10-22T10:00:28Z",
       "invoice_number": "62922",
       "created_at": "2026-10-21T15:44:49Z"
     },
@@ -474064,6 +474066,37 @@
         "updated_at": "2026-10-21T17:59:23Z",
         "invoice_number": "62672",
         "created_at": "2026-10-14T00:56:51Z"
+      },
+      {
+        "id": "job_c034fc21ff55405eac2ddb206e83edc6",
+        "description": "",
+        "work_status": "scheduled",
+        "customer_label": "Matt D.",
+        "city": "Seven Valleys",
+        "state": "PA",
+        "zip": "17360",
+        "schedule": {
+          "scheduled_start": "2026-10-22T11:00:00Z",
+          "scheduled_end": "2026-10-22T14:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-10-22T07:00:00-04:00",
+          "scheduled_end_local": "2026-10-22T10:00:00-04:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_8e95601ea8db4c5193be8f19fb319a44",
+          "pro_86c3193093ac454e801f62babb7cf494"
+        ],
+        "tags": [],
+        "business_unit": null,
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-10-22T09:41:02Z",
+        "invoice_number": "62603-2",
+        "created_at": "2026-10-21T15:01:45Z"
       }
     ],
     "pro_b5ab5cc9e362414cb376d0a02d64bef8": [
@@ -482777,14 +482810,15 @@
         "tags": [
           "70",
           "Opportunity",
-          "Non-Member"
+          "Non-Member",
+          "Plumbing Attention"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 135775,
-        "outstanding_balance": 135775,
+        "total_amount": 146400,
+        "outstanding_balance": 146400,
         "completed_at": "2026-10-21T23:12:48Z",
-        "updated_at": "2026-10-21T23:34:21Z",
+        "updated_at": "2026-10-22T10:00:28Z",
         "invoice_number": "62922",
         "created_at": "2026-10-21T15:44:49Z"
       }
@@ -542758,7 +542792,8 @@
           "appointments": []
         },
         "assigned_employee_ids": [
-          "pro_8e95601ea8db4c5193be8f19fb319a44"
+          "pro_8e95601ea8db4c5193be8f19fb319a44",
+          "pro_86c3193093ac454e801f62babb7cf494"
         ],
         "tags": [],
         "business_unit": null,
@@ -542766,7 +542801,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-10-21T15:03:27Z",
+        "updated_at": "2026-10-22T09:41:02Z",
         "invoice_number": "62603-2",
         "created_at": "2026-10-21T15:01:45Z"
       },
@@ -657730,14 +657765,15 @@
         "tags": [
           "70",
           "Opportunity",
-          "Non-Member"
+          "Non-Member",
+          "Plumbing Attention"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 135775,
-        "outstanding_balance": 135775,
+        "total_amount": 146400,
+        "outstanding_balance": 146400,
         "completed_at": "2026-10-21T23:12:48Z",
-        "updated_at": "2026-10-21T23:34:21Z",
+        "updated_at": "2026-10-22T10:00:28Z",
         "invoice_number": "62922",
         "created_at": "2026-10-21T15:44:49Z"
       },
