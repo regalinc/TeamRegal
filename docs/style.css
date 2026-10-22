@@ -485,3 +485,26 @@ img.avatar { object-fit: cover; }
 }
 .tech-job-details[open] summary { margin-bottom: 8px; }
 .tech-job-details summary:hover { color: var(--text); }
+
+.custom-range {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.custom-range[hidden] { display: none; }
+.custom-range label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted, var(--text));
+  font-size: 0.9em;
+}
+.custom-range input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}

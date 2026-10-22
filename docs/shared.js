@@ -903,6 +903,17 @@ function unionById(...lists) {
 // even though July itself was long over.
 const CLOSED_PERIODS = new Set(["lastweek", "lastmonth"]);
 
+// A custom range counts as closed once it ends before today (its upper
+// bound is exclusive, so a range ending today is still live).
+function isClosedPeriod(period) {
+  if (period === "custom") {
+    if (!customPeriodRange) return false;
+    const now = new Date();
+    return customPeriodRange[1] <= new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  }
+  return CLOSED_PERIODS.has(period);
+}
+
 // For an open (still-current) period, "Estimates approved" is a single
 // number covering two different things — estimates given this period that
 // are currently approved, plus estimates (given whenever) whose approval
@@ -945,7 +956,7 @@ const missingApprovedAtEstimates = (estimatesGiven) => estimatesGiven.filter((e)
 // way a naive revenue-over-given ratio would be.
 function computeEstimatorStats(estimatesGiven, approvedThisPeriodEstimates, period) {
   const given = estimatesGiven.length;
-  const approvedEstimates = CLOSED_PERIODS.has(period)
+  const approvedEstimates = isClosedPeriod(period)
     ? unionById(approvedThisPeriodEstimates, missingApprovedAtEstimates(estimatesGiven))
     : unionById(estimatesGiven.filter((e) => e.approved), approvedThisPeriodEstimates);
   const approved = approvedEstimates.length;
@@ -975,6 +986,12 @@ function renderStatsInto(el, stats) {
 // Period boundaries are computed in the viewer's local time, keyed off the
 // job's scheduled_start (the only date field currently synced — not a
 // completion/invoice date). Weeks start on Sunday. Bounds are [start, end).
+//
+// "custom" is the user-picked From/To range (see setupCustomRange below). It
+// stays null — i.e. no date filtering, same as "All synced time" — until
+// both dates are valid.
+let customPeriodRange = null;
+
 function periodRange(period) {
   const now = new Date();
   const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -1005,6 +1022,8 @@ function periodRange(period) {
       const start = new Date(now.getFullYear(), 0, 1);
       return [start, addDays(today, 1)];
     }
+    case "custom":
+      return customPeriodRange;
     default:
       return null;
   }
@@ -1059,6 +1078,92 @@ function setSelectFromUrlParam(urlParams, select, paramName) {
 function applyDefaultPeriod(urlParams, periodFilter, defaultValue) {
   if (urlParams.has("period")) setSelectFromUrlParam(urlParams, periodFilter, "period");
   else periodFilter.value = defaultValue;
+  syncCustomRange(periodFilter);
+}
+
+// Adds a "Custom range…" choice to a page's period <select>, with From / To
+// date inputs that appear next to it while it's selected. The range is
+// inclusive of both dates (stored as [from, day-after-to) to match
+// periodRange's convention). Mirrored into the URL as ?period=custom&from=
+// &to= so a range can be bookmarked or shared, and re-read from there on
+// load. Call once, BEFORE the page registers its own "change" listener on
+// the select, so the range is already updated when the page re-renders.
+// Date edits fire a synthetic "change" on the select for that same reason —
+// the page's existing listener is what re-renders.
+let customRangeEls = null;
+
+function setupCustomRange(periodFilter) {
+  if (customRangeEls) return;
+  periodFilter.appendChild(new Option("Custom range…", "custom"));
+
+  const wrap = document.createElement("span");
+  wrap.className = "custom-range";
+  wrap.hidden = true;
+  wrap.innerHTML =
+    '<label>From <input type="date" class="custom-range-from" aria-label="From date" /></label>' +
+    '<label>To <input type="date" class="custom-range-to" aria-label="To date" /></label>';
+  periodFilter.insertAdjacentElement("afterend", wrap);
+  const from = wrap.querySelector(".custom-range-from");
+  const to = wrap.querySelector(".custom-range-to");
+  customRangeEls = { wrap, from, to };
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("from")) from.value = params.get("from");
+  if (params.get("to")) to.value = params.get("to");
+
+  const onDateChange = () => {
+    syncCustomRange(periodFilter);
+    periodFilter.dispatchEvent(new Event("change"));
+  };
+  from.addEventListener("change", onDateChange);
+  to.addEventListener("change", onDateChange);
+  periodFilter.addEventListener("change", () => syncCustomRange(periodFilter));
+}
+
+// Recomputes customPeriodRange from the date inputs, shows/hides them, and
+// keeps the URL in step. A blank end defaults to today and a blank start to
+// the same day as the end (a single day); a From later than To is swapped.
+function syncCustomRange(periodFilter) {
+  if (!customRangeEls) return;
+  const { wrap, from, to } = customRangeEls;
+  const isCustom = periodFilter.value === "custom";
+  wrap.hidden = !isCustom;
+
+  const parse = (s) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || "");
+    return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : null;
+  };
+  let start = parse(from.value);
+  let end = parse(to.value);
+  if (!start && !end) {
+    customPeriodRange = null;
+  } else {
+    if (!end) {
+      const now = new Date();
+      end = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+    if (!start) start = end;
+    if (start > end) [start, end] = [end, start];
+    customPeriodRange = [start, new Date(end.getFullYear(), end.getMonth(), end.getDate() + 1)];
+  }
+
+  try {
+    const url = new URL(window.location.href);
+    if (isCustom) {
+      url.searchParams.set("period", "custom");
+      if (from.value) url.searchParams.set("from", from.value);
+      else url.searchParams.delete("from");
+      if (to.value) url.searchParams.set("to", to.value);
+      else url.searchParams.delete("to");
+    } else {
+      url.searchParams.delete("from");
+      url.searchParams.delete("to");
+      if (url.searchParams.get("period") === "custom") url.searchParams.delete("period");
+    }
+    window.history.replaceState(null, "", url);
+  } catch (e) {
+    // History API unavailable (sandboxed preview) — the range still works.
+  }
 }
 
 function updateSyncStatus(meta) {

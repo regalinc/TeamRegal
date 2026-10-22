@@ -580,6 +580,7 @@ searchInput.addEventListener("input", rerenderFromCache);
 businessUnitFilter.addEventListener("change", rerenderFromCache);
 tagFilter.addEventListener("change", rerenderFromCache);
 statusFilter.addEventListener("change", rerenderFromCache);
+setupCustomRange(periodFilter); // before the period listener, so the range is current when it re-renders
 periodFilter.addEventListener("change", rerenderFromCache);
 
 techSelectToggle.addEventListener("click", () => {
