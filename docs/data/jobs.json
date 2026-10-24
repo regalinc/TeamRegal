@@ -245142,7 +245142,7 @@
   {
     "id": "job_e8c6e941cc8a4c19b6cca975d690c0b6",
     "description": "Visit #6",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Courtney F.",
     "city": "York",
     "state": "PA",
@@ -245168,7 +245168,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-07-27T13:06:21Z",
-    "updated_at": "2026-07-27T13:06:21Z",
+    "updated_at": "2026-10-24T18:59:34Z",
     "invoice_number": "57341",
     "created_at": "2026-05-21T13:14:32Z"
   },
@@ -388094,7 +388094,7 @@
   {
     "id": "job_723d85481464488fb901a9787e62d664",
     "description": "70 - RCC Whole Home Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Courtney F.",
     "city": "York",
     "state": "PA",
@@ -388117,10 +388117,10 @@
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
-    "total_amount": 8900,
-    "outstanding_balance": 8900,
-    "completed_at": null,
-    "updated_at": "2026-10-24T17:28:55Z",
+    "total_amount": 17400,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-24T18:59:34Z",
+    "updated_at": "2026-10-24T18:59:34Z",
     "invoice_number": "63013",
     "created_at": "2026-10-24T16:25:45Z"
   },
