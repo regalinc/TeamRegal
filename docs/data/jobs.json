@@ -304360,7 +304360,7 @@
   {
     "id": "job_9432154498844bcaa0ec590f96dde932",
     "description": "Visit #8; Plumbing",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Philip M.",
     "city": "York",
     "state": "PA",
@@ -304387,7 +304387,7 @@
     "total_amount": 0,
     "outstanding_balance": 0,
     "completed_at": "2026-08-26T12:26:06Z",
-    "updated_at": "2026-08-27T16:37:15Z",
+    "updated_at": "2026-10-24T14:22:09Z",
     "invoice_number": "59745",
     "created_at": "2026-07-30T18:12:07Z"
   },
@@ -384810,7 +384810,7 @@
   {
     "id": "job_bec7eef5f1f040a58655ec74e3bfef84",
     "description": "High Efficient Boiler Cleaning",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Kenneth H.",
     "city": "Hummelstown",
     "state": "PA",
@@ -384838,7 +384838,7 @@
     "total_amount": 12900,
     "outstanding_balance": 0,
     "completed_at": "2026-10-23T19:20:16Z",
-    "updated_at": "2026-10-23T19:20:16Z",
+    "updated_at": "2026-10-24T16:16:50Z",
     "invoice_number": "62889",
     "created_at": "2026-10-20T18:23:39Z"
   },
@@ -387993,7 +387993,7 @@
   {
     "id": "job_23c6f6105ec24e869bc0f5e482c34b63",
     "description": "70 - RCC Whole Home Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Philip M.",
     "city": "York",
     "state": "PA",
@@ -388012,6 +388012,107 @@
     ],
     "tags": [
       "70",
+      "Opportunity",
+      "Plumbing Parts"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 8900,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-24T14:22:09Z",
+    "updated_at": "2026-10-24T14:47:36Z",
+    "invoice_number": "63009",
+    "created_at": "2026-10-24T12:13:06Z"
+  },
+  {
+    "id": "job_8f45ebeb4320412fbfab9bd04052f15c",
+    "description": "Misc. Non Specific Repair Level 1",
+    "work_status": "complete unrated",
+    "customer_label": "James D.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-10-24T17:00:00Z",
+      "scheduled_end": "2026-10-24T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-24T13:00:00-04:00",
+      "scheduled_end_local": "2026-10-24T15:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+    ],
+    "tags": [
+      "70",
+      "Opportunity"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 15620,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-24T17:28:40Z",
+    "updated_at": "2026-10-24T17:28:40Z",
+    "invoice_number": "63010",
+    "created_at": "2026-10-24T14:12:35Z"
+  },
+  {
+    "id": "job_c4301f268e1649a8a52e6cbc32c03b90",
+    "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Kenneth H.",
+    "city": "Hummelstown",
+    "state": "PA",
+    "zip": "17036",
+    "schedule": {
+      "scheduled_start": "2026-10-24T15:00:00Z",
+      "scheduled_end": "2026-10-24T17:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-24T11:00:00-04:00",
+      "scheduled_end_local": "2026-10-24T13:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9a3f2249ef464465a1522f4a3ccfef5a",
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "tags": [
+      "30",
+      "Opportunity"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": "Google",
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-24T16:16:50Z",
+    "updated_at": "2026-10-24T16:16:50Z",
+    "invoice_number": "63011",
+    "created_at": "2026-10-24T14:21:52Z"
+  },
+  {
+    "id": "job_723d85481464488fb901a9787e62d664",
+    "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Courtney F.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-10-24T17:00:00Z",
+      "scheduled_end": "2026-10-24T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-24T13:00:00-04:00",
+      "scheduled_end_local": "2026-10-24T15:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+    ],
+    "tags": [
+      "70",
       "Opportunity"
     ],
     "business_unit": "70 PLUMBING SERVICE",
@@ -388019,9 +388120,9 @@
     "total_amount": 8900,
     "outstanding_balance": 8900,
     "completed_at": null,
-    "updated_at": "2026-10-24T13:46:26Z",
-    "invoice_number": "63009",
-    "created_at": "2026-10-24T12:13:06Z"
+    "updated_at": "2026-10-24T17:28:55Z",
+    "invoice_number": "63013",
+    "created_at": "2026-10-24T16:25:45Z"
   },
   {
     "id": "job_a01f3dcc73ef4755bb7e3a68b8986059",
