@@ -1,11 +1,11 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-25T16:11:02.306Z",
+    "last_synced_at": "2026-10-25T19:00:30.915Z",
     "window_days_back": 298,
     "window_days_forward": 13,
     "technician_count": 47,
-    "job_count": 12199,
-    "estimate_count": 3734
+    "job_count": 12200,
+    "estimate_count": 3732
   },
   "technicians": [
     {
@@ -388630,7 +388630,7 @@
     {
       "id": "job_558370cfad614c63992294f3b8d9c966",
       "description": "70 - Initial Service Fee After Hours",
-      "work_status": "scheduled",
+      "work_status": "complete unrated",
       "customer_label": "Tim M.",
       "city": "York",
       "state": "PA",
@@ -388654,12 +388654,46 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
+      "total_amount": 55775,
+      "outstanding_balance": 0,
+      "completed_at": "2026-10-25T18:35:51Z",
+      "updated_at": "2026-10-25T18:35:51Z",
+      "invoice_number": "63014",
+      "created_at": "2026-10-25T16:09:47Z"
+    },
+    {
+      "id": "job_fc2539dd68c24403844d57a23ad21721",
+      "description": "30 - Initial Service Fee After Hours",
+      "work_status": "in progress",
+      "customer_label": "Tamie F.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17403",
+      "schedule": {
+        "scheduled_start": "2026-10-25T18:00:00Z",
+        "scheduled_end": "2026-10-25T20:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-10-25T14:00:00-04:00",
+        "scheduled_end_local": "2026-10-25T16:00:00-04:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+      ],
+      "tags": [
+        "30",
+        "Opportunity",
+        "Non-Member"
+      ],
+      "business_unit": "30 HVAC SERVICE",
+      "lead_source": null,
       "total_amount": 23900,
       "outstanding_balance": 23900,
       "completed_at": null,
-      "updated_at": "2026-10-25T16:09:49Z",
-      "invoice_number": "63014",
-      "created_at": "2026-10-25T16:09:47Z"
+      "updated_at": "2026-10-25T18:46:01Z",
+      "invoice_number": "63016",
+      "created_at": "2026-10-25T18:25:19Z"
     },
     {
       "id": "job_a01f3dcc73ef4755bb7e3a68b8986059",
@@ -476520,52 +476554,6 @@
       "approved": false,
       "approved_at": null,
       "approved_amount": 0
-    },
-    {
-      "id": "csr_56ca2300f8944b978bdd98859b7dd8a7",
-      "estimate_number": "10226",
-      "customer_label": "Dylon J.",
-      "created_at": "2025-12-31T16:57:45Z",
-      "schedule": {
-        "scheduled_start": null,
-        "scheduled_end": null,
-        "time_zone": "America/New_York",
-        "scheduled_start_local": null,
-        "scheduled_end_local": null,
-        "arrival_window": 0,
-        "appointments": []
-      },
-      "business_unit": "50 PLUMBING AOR",
-      "assigned_employee_ids": [
-        "pro_ca120cbb55fa40fe9361d492161b101f"
-      ],
-      "work_status": "created job from estimate",
-      "approved": true,
-      "approved_at": null,
-      "approved_amount": 745000
-    },
-    {
-      "id": "csr_0baf3993710d4dafb8682499ae628284",
-      "estimate_number": "10225",
-      "customer_label": "First Capitol P.",
-      "created_at": "2025-12-31T16:28:29Z",
-      "schedule": {
-        "scheduled_start": "2025-12-31T16:30:00Z",
-        "scheduled_end": "2025-12-31T17:30:00Z",
-        "time_zone": "America/New_York",
-        "scheduled_start_local": "2025-12-31T11:30:00-05:00",
-        "scheduled_end_local": "2025-12-31T12:30:00-05:00",
-        "arrival_window": 120,
-        "appointments": []
-      },
-      "business_unit": "70 PLUMBING SERVICE",
-      "assigned_employee_ids": [
-        "pro_a147eea604e04ccfa458813cf1b374f0"
-      ],
-      "work_status": "created job from estimate",
-      "approved": true,
-      "approved_at": null,
-      "approved_amount": 49577
     }
   ],
   "by_technician": {
@@ -609978,6 +609966,40 @@
         "updated_at": "2026-10-25T16:07:35Z",
         "invoice_number": "63011-2",
         "created_at": "2026-10-25T12:58:32Z"
+      },
+      {
+        "id": "job_fc2539dd68c24403844d57a23ad21721",
+        "description": "30 - Initial Service Fee After Hours",
+        "work_status": "in progress",
+        "customer_label": "Tamie F.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-10-25T18:00:00Z",
+          "scheduled_end": "2026-10-25T20:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-10-25T14:00:00-04:00",
+          "scheduled_end_local": "2026-10-25T16:00:00-04:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+        ],
+        "tags": [
+          "30",
+          "Opportunity",
+          "Non-Member"
+        ],
+        "business_unit": "30 HVAC SERVICE",
+        "lead_source": null,
+        "total_amount": 23900,
+        "outstanding_balance": 23900,
+        "completed_at": null,
+        "updated_at": "2026-10-25T18:46:01Z",
+        "invoice_number": "63016",
+        "created_at": "2026-10-25T18:25:19Z"
       }
     ],
     "pro_932c9cd2fe1642e0b5cb3d7a9c0c94a9": [],
@@ -837330,7 +837352,7 @@
       {
         "id": "job_558370cfad614c63992294f3b8d9c966",
         "description": "70 - Initial Service Fee After Hours",
-        "work_status": "scheduled",
+        "work_status": "complete unrated",
         "customer_label": "Tim M.",
         "city": "York",
         "state": "PA",
@@ -837354,10 +837376,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 23900,
-        "outstanding_balance": 23900,
-        "completed_at": null,
-        "updated_at": "2026-10-25T16:09:49Z",
+        "total_amount": 55775,
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-25T18:35:51Z",
+        "updated_at": "2026-10-25T18:35:51Z",
         "invoice_number": "63014",
         "created_at": "2026-10-25T16:09:47Z"
       }

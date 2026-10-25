@@ -388169,7 +388169,7 @@
   {
     "id": "job_558370cfad614c63992294f3b8d9c966",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "scheduled",
+    "work_status": "complete unrated",
     "customer_label": "Tim M.",
     "city": "York",
     "state": "PA",
@@ -388193,12 +388193,46 @@
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
+    "total_amount": 55775,
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-25T18:35:51Z",
+    "updated_at": "2026-10-25T18:35:51Z",
+    "invoice_number": "63014",
+    "created_at": "2026-10-25T16:09:47Z"
+  },
+  {
+    "id": "job_fc2539dd68c24403844d57a23ad21721",
+    "description": "30 - Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Tamie F.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-10-25T18:00:00Z",
+      "scheduled_end": "2026-10-25T20:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-25T14:00:00-04:00",
+      "scheduled_end_local": "2026-10-25T16:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_1b87fcb406c9484b84e8fccd6f2c777b"
+    ],
+    "tags": [
+      "30",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
     "total_amount": 23900,
     "outstanding_balance": 23900,
     "completed_at": null,
-    "updated_at": "2026-10-25T16:09:49Z",
-    "invoice_number": "63014",
-    "created_at": "2026-10-25T16:09:47Z"
+    "updated_at": "2026-10-25T18:46:01Z",
+    "invoice_number": "63016",
+    "created_at": "2026-10-25T18:25:19Z"
   },
   {
     "id": "job_a01f3dcc73ef4755bb7e3a68b8986059",
