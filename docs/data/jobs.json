@@ -388848,6 +388848,39 @@
     "created_at": "2026-09-10T18:11:17Z"
   },
   {
+    "id": "job_54f763a5645b4341b029df83dc817952",
+    "description": "Visit #6; Tankless only",
+    "work_status": "scheduled",
+    "customer_label": "Ken P.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-11-06T13:00:00Z",
+      "scheduled_end": "2026-11-06T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T08:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T10:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": "Google",
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-11T15:36:47Z",
+    "invoice_number": "61524",
+    "created_at": "2026-09-11T15:08:18Z"
+  },
+  {
     "id": "job_63fefc5a537d4c5d98d36edbf2f63729",
     "description": "Visit #2",
     "work_status": "scheduled",
@@ -388879,6 +388912,72 @@
     "updated_at": "2026-10-01T11:55:37Z",
     "invoice_number": "61531",
     "created_at": "2026-09-11T16:49:30Z"
+  },
+  {
+    "id": "job_8bbe14420e334b2fa540f2e7406677c1",
+    "description": "Visit #3",
+    "work_status": "scheduled",
+    "customer_label": "Devin L.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-11-06T14:00:00Z",
+      "scheduled_end": "2026-11-06T17:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T12:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-11T17:52:31Z",
+    "invoice_number": "61539",
+    "created_at": "2026-09-11T17:47:47Z"
+  },
+  {
+    "id": "job_dcf6d521f35f4af9957db6e476ca8dda",
+    "description": "Visit #6",
+    "work_status": "scheduled",
+    "customer_label": "Helen S.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-11-06T17:00:00Z",
+      "scheduled_end": "2026-11-06T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T12:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T14:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-17T13:48:52Z",
+    "invoice_number": "61546",
+    "created_at": "2026-09-11T18:34:34Z"
   },
   {
     "id": "job_1058c9400b4c4eeea8d5a75960531746",
@@ -389013,6 +389112,39 @@
     "created_at": "2026-09-16T14:35:39Z"
   },
   {
+    "id": "job_bee93f61b0644b03b8001aa334d90559",
+    "description": "Visit #12",
+    "work_status": "scheduled",
+    "customer_label": "Lori W.",
+    "city": "Dover",
+    "state": "PA",
+    "zip": "17315",
+    "schedule": {
+      "scheduled_start": "2026-11-06T12:00:00Z",
+      "scheduled_end": "2026-11-06T15:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T07:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T10:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-23T12:11:58Z",
+    "invoice_number": "61677",
+    "created_at": "2026-09-16T14:50:21Z"
+  },
+  {
     "id": "job_566644c3b2a740d0a35209ad6b5b06fa",
     "description": "Precision Tune Up (Non-Club Members)",
     "work_status": "scheduled",
@@ -389045,6 +389177,39 @@
     "updated_at": "2026-10-01T11:55:07Z",
     "invoice_number": "61694",
     "created_at": "2026-09-16T19:18:23Z"
+  },
+  {
+    "id": "job_d93b8dddfd9c47f780465f71a18f9a5b",
+    "description": "Visit #9",
+    "work_status": "scheduled",
+    "customer_label": "Donald P.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-11-06T17:00:00Z",
+      "scheduled_end": "2026-11-06T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T12:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T14:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-01T11:56:18Z",
+    "invoice_number": "61710",
+    "created_at": "2026-09-17T15:10:32Z"
   },
   {
     "id": "job_41f1855fe89d4221a75ac8129bfb5bd5",
@@ -389146,6 +389311,138 @@
     "created_at": "2026-09-18T12:25:13Z"
   },
   {
+    "id": "job_dcf5e3c75c3d405b96f7e5ed299a0960",
+    "description": "Visit #3",
+    "work_status": "scheduled",
+    "customer_label": "Jay B.",
+    "city": "Manchester",
+    "state": "PA",
+    "zip": "17345",
+    "schedule": {
+      "scheduled_start": "2026-11-06T12:00:00Z",
+      "scheduled_end": "2026-11-06T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T07:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T09:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-23T16:47:02Z",
+    "invoice_number": "61745",
+    "created_at": "2026-09-18T13:42:21Z"
+  },
+  {
+    "id": "job_12067d83ba0040d6b77537f10497da0b",
+    "description": "Visit #2",
+    "work_status": "scheduled",
+    "customer_label": "Paul M.",
+    "city": "Abbottstown",
+    "state": "PA",
+    "zip": "17301",
+    "schedule": {
+      "scheduled_start": "2026-11-06T13:00:00Z",
+      "scheduled_end": "2026-11-06T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T08:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_e328d4cad27249d48750d091fd1faa3b"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-18T14:03:21Z",
+    "invoice_number": "61747",
+    "created_at": "2026-09-18T14:01:11Z"
+  },
+  {
+    "id": "job_8907a949f9894a03b736a21829260ea9",
+    "description": "Visit #1",
+    "work_status": "scheduled",
+    "customer_label": "Robert B.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-11-06T12:00:00Z",
+      "scheduled_end": "2026-11-06T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T07:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T09:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-22T13:37:19Z",
+    "invoice_number": "61847",
+    "created_at": "2026-09-22T13:33:06Z"
+  },
+  {
+    "id": "job_862ae2dd5ffd413093dbee64c85e3c49",
+    "description": "Visit #12",
+    "work_status": "scheduled",
+    "customer_label": "Dean G.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-11-06T15:00:00Z",
+      "scheduled_end": "2026-11-06T17:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T10:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T12:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-22T15:06:15Z",
+    "invoice_number": "61862",
+    "created_at": "2026-09-22T15:04:33Z"
+  },
+  {
     "id": "job_188cedf232724369acd02b9c06c2c32c",
     "description": "Visit #3",
     "work_status": "scheduled",
@@ -389179,6 +389476,39 @@
     "created_at": "2026-09-23T12:35:03Z"
   },
   {
+    "id": "job_348d37dcf1ed4702a65e1c642e9e2a6c",
+    "description": "Visit #2",
+    "work_status": "scheduled",
+    "customer_label": "Willard D.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17404",
+    "schedule": {
+      "scheduled_start": "2026-11-06T14:00:00Z",
+      "scheduled_end": "2026-11-06T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-09-23T16:46:21Z",
+    "invoice_number": "61941",
+    "created_at": "2026-09-23T16:44:30Z"
+  },
+  {
     "id": "job_14ae4c06cb704016b8ae69e0e448d1df",
     "description": "Visit #1; Plumbing",
     "work_status": "scheduled",
@@ -389210,6 +389540,71 @@
     "updated_at": "2026-10-01T16:27:16Z",
     "invoice_number": "62234",
     "created_at": "2026-10-01T16:26:05Z"
+  },
+  {
+    "id": "job_02d3ec2e9dda48b28fadd3424eb9a394",
+    "description": "Visit #6; Plumbing",
+    "work_status": "scheduled",
+    "customer_label": "Ann Z.",
+    "city": "Dover",
+    "state": "PA",
+    "zip": "17315",
+    "schedule": {
+      "scheduled_start": "2026-11-06T12:00:00Z",
+      "scheduled_end": "2026-11-06T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T07:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T09:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "tags": [
+      "80",
+      "Opportunity"
+    ],
+    "business_unit": "80 PLUMBING MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-02T13:01:55Z",
+    "invoice_number": "62276",
+    "created_at": "2026-10-02T13:00:55Z"
+  },
+  {
+    "id": "job_6f6c551ac58d45efb0cdbca27686c8a2",
+    "description": "80 - Plumbing Maintenance",
+    "work_status": "scheduled",
+    "customer_label": "Vicki D.",
+    "city": "Dover",
+    "state": "PA",
+    "zip": "17315",
+    "schedule": {
+      "scheduled_start": "2026-11-06T14:00:00Z",
+      "scheduled_end": "2026-11-06T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "tags": [
+      "80"
+    ],
+    "business_unit": "80 PLUMBING MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-05T12:37:09Z",
+    "invoice_number": "62332",
+    "created_at": "2026-10-05T12:35:39Z"
   },
   {
     "id": "job_97462ea006dd41f080525e76739135b2",
@@ -389341,6 +389736,39 @@
     "created_at": "2026-10-07T11:20:05Z"
   },
   {
+    "id": "job_be351593b7c744919cc6e35867cfacad",
+    "description": "Visit #3",
+    "work_status": "scheduled",
+    "customer_label": "Bruce R.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17404",
+    "schedule": {
+      "scheduled_start": "2026-11-06T16:00:00Z",
+      "scheduled_end": "2026-11-06T17:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T11:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T12:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7c54b30de89c4b6ea22a9053f0662f3d"
+    ],
+    "tags": [
+      "40",
+      "Opportunity"
+    ],
+    "business_unit": "40 HVAC MAINT",
+    "lead_source": "FF Kling",
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-07T11:57:38Z",
+    "invoice_number": "62441",
+    "created_at": "2026-10-07T11:56:11Z"
+  },
+  {
     "id": "job_378f20b0a5a34228a3378f6917c064c1",
     "description": "Billing - 50 - Plumbing AOR",
     "work_status": "scheduled",
@@ -389369,6 +389797,39 @@
     "updated_at": "2026-10-07T12:14:04Z",
     "invoice_number": "60420-4",
     "created_at": "2026-10-07T12:12:51Z"
+  },
+  {
+    "id": "job_543ce8bb5c4f44e6b3d5a5a4dac9f264",
+    "description": "Visit #1; Plumbing",
+    "work_status": "scheduled",
+    "customer_label": "Chris C.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17404",
+    "schedule": {
+      "scheduled_start": "2026-11-06T14:00:00Z",
+      "scheduled_end": "2026-11-06T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "tags": [
+      "80",
+      "Opportunity"
+    ],
+    "business_unit": "80 PLUMBING MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-07T12:51:46Z",
+    "invoice_number": "62447",
+    "created_at": "2026-10-07T12:50:14Z"
   },
   {
     "id": "job_a508f0998507443ab19251eb9a6c5b1c",
@@ -389468,6 +389929,39 @@
     "updated_at": "2026-10-07T18:40:08Z",
     "invoice_number": "62492",
     "created_at": "2026-10-07T18:37:20Z"
+  },
+  {
+    "id": "job_9a00f66be03c400b8814272ff85bae80",
+    "description": "Visit #10; Plumbing",
+    "work_status": "scheduled",
+    "customer_label": "Lance S.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17406",
+    "schedule": {
+      "scheduled_start": "2026-11-06T12:00:00Z",
+      "scheduled_end": "2026-11-06T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T07:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T09:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+    ],
+    "tags": [
+      "80",
+      "Opportunity"
+    ],
+    "business_unit": "80 PLUMBING MAINT",
+    "lead_source": null,
+    "total_amount": 0,
+    "outstanding_balance": 0,
+    "completed_at": null,
+    "updated_at": "2026-10-09T12:17:44Z",
+    "invoice_number": "62547",
+    "created_at": "2026-10-09T12:15:40Z"
   },
   {
     "id": "job_b1bdce7b2ebb4bf189d305382c276f12",
