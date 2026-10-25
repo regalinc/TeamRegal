@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-25T06:46:56.057Z",
+    "last_synced_at": "2026-10-25T12:43:36.278Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 36,
-    "trip_count": 8437
+    "trip_count": 8440
   },
   "vehicles": [
     {
@@ -60,7 +60,7 @@
         "name": "Maverick",
         "year": 2024
       },
-      "odometer": 34852.700000000106
+      "odometer": 34858.50000000011
     },
     {
       "imei": "862255068902755",
@@ -126,7 +126,7 @@
         "name": "Maverick",
         "year": 2025
       },
-      "odometer": 16754.6
+      "odometer": 16763.3
     },
     {
       "imei": "864486067935557",
@@ -318,7 +318,7 @@
     {
       "imei": "868199050091579",
       "vin": "1GCWGAF7XR1102140",
-      "nickName": "Mark Zink",
+      "nickName": "Spare Truck 8",
       "model": {
         "make": "CHEVROLET",
         "name": "Express",
@@ -405,6 +405,37 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868199050091579-12088-202610",
+      "imei": "868199050091579",
+      "startTime": "2026-10-25T11:40:54.000Z",
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0
+    },
+    {
+      "transactionId": "864486067735866-2127-202610",
+      "imei": "864486067735866",
+      "startTime": "2026-10-25T10:55:53.000Z",
+      "endTime": "2026-10-25T11:20:01.000Z",
+      "distance": 8.4,
+      "averageSpeed": 29.2,
+      "maxSpeed": 49.088309,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 412
+    },
+    {
+      "transactionId": "862255068864591-4939-202610",
+      "imei": "862255068864591",
+      "startTime": "2026-10-25T09:27:05.000Z",
+      "endTime": "2026-10-25T09:42:45.000Z",
+      "distance": 5.8,
+      "averageSpeed": 26.7,
+      "maxSpeed": 43.49597,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 137
+    },
     {
       "transactionId": "352602114569707-1080-202610",
       "imei": "352602114569707",
