@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-26T15:48:51.642Z",
+                 "generated_at":  "2026-10-26T16:05:18.409Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -240,7 +240,7 @@
                       "weekStart":  "2026-10-21",
                       "weekEnd":  "2026-10-27",
                       "totals":  {
-                                     "Josh":  4837.13,
+                                     "Josh":  4448.68,
                                      "Nick":  226.97
                                  },
                       "sales":  {
@@ -276,12 +276,6 @@
                                                      "commission":  695.51
                                                  },
                                                  {
-                                                     "customerName":  "Kara Tate",
-                                                     "systemType":  "Legacy",
-                                                     "rate":  0.06,
-                                                     "commission":  388.45
-                                                 },
-                                                 {
                                                      "customerName":  "Kenneth Hollingworth",
                                                      "systemType":  "Navien",
                                                      "rate":  0.08,
@@ -308,7 +302,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  18184.93,
+                "Josh":  17796.48,
                 "Nick":  1987.67
             },
     "revenue":  {
@@ -317,23 +311,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  279588.89,
+                                "Josh":  271968.89,
                                 "Nick":  45884
                             },
                     "ytd":  {
-                                "Josh":  4068035.8,
+                                "Josh":  4060415.8,
                                 "Nick":  644610.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.7308,
-                                      "sameDayCount":  19,
-                                      "sameDaySample":  26,
-                                      "avgDaysToClose":  9.6,
-                                      "daysSample":  26,
-                                      "avgDiscountPct":  0.0557,
-                                      "discountSample":  26
+                                      "sameDayRate":  0.72,
+                                      "sameDayCount":  18,
+                                      "sameDaySample":  25,
+                                      "avgDaysToClose":  10,
+                                      "daysSample":  25,
+                                      "avgDiscountPct":  0.0554,
+                                      "discountSample":  25
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4444,
