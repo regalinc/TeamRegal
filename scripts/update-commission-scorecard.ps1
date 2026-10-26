@@ -442,7 +442,7 @@ foreach ($g in $weekGroups) {
   $pendingByCa = @{ Josh = @(); Nick = @() }
   foreach ($ca in @("Josh", "Nick")) {
     $salesByCa[$ca] = @(
-      $g.Group | Where-Object { $_.CA -eq $ca -and $_.Ok } | Sort-Object @{ Expression = "Date"; Descending = $true }, CustomerName | ForEach-Object {
+      $g.Group | Where-Object { $_.CA -eq $ca -and $_.Ok } | Sort-Object @{ Expression = "Date"; Descending = $true }, CustomerName, @{ Expression = "Commission"; Descending = $true } | ForEach-Object {
         [ordered]@{
           customerName = $_.CustomerName
           systemType   = $_.SystemType
@@ -452,7 +452,7 @@ foreach ($g in $weekGroups) {
       }
     )
     $pendingByCa[$ca] = @(
-      $g.Group | Where-Object { $_.CA -eq $ca -and -not $_.Ok } | Sort-Object @{ Expression = "Date"; Descending = $true }, CustomerName | ForEach-Object {
+      $g.Group | Where-Object { $_.CA -eq $ca -and -not $_.Ok } | Sort-Object @{ Expression = "Date"; Descending = $true }, CustomerName, @{ Expression = "Commission"; Descending = $true } | ForEach-Object {
         [ordered]@{
           customerName = $_.CustomerName
           reason       = $_.Reason
