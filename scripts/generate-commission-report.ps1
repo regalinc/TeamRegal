@@ -132,6 +132,17 @@ $allPayloads = @($allPayloads |
   Group-Object { $_.proposal.id } |
   ForEach-Object { $_.Group | Sort-Object { [datetime]$_.timestamps.accepted_at } -Descending | Select-Object -First 1 })
 
+# Proposals accepted by mistake and then un-accepted in OnCall Air (the webhook
+# already fired and the repo keeps the file). A DIFFERENT option on the same
+# consultation, unlike the re-acceptance dedupe above. Kara Tate: PLATINUM
+# 5914400 $7,620 accepted 2026-10-23 6:18 AM, replaced by BRONZE 5914273
+# $13,771 at 7:48 AM (confirmed by Michael 2026-10-26). Key = proposal.id.
+# Duplicated in update-commission-scorecard.ps1 -- keep both in sync.
+$SUPERSEDED_PROPOSAL_IDS = @{
+  "5914400" = "Kara Tate -- PLATINUM accepted in error, replaced by BRONZE 5914273"
+}
+$allPayloads = @($allPayloads | Where-Object { -not $SUPERSEDED_PROPOSAL_IDS.ContainsKey([string]$_.proposal.id) })
+
 $weekPayloads = $allPayloads | Where-Object {
   $acc = $_.timestamps.accepted_at
   $acc -and ([datetime]$acc -ge $WeekStart) -and ([datetime]$acc -lt $weekEndExclusive)
