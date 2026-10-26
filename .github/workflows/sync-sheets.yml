@@ -18,13 +18,19 @@ on:
   schedule:
     # Off the :00/:30 congestion peaks, like the other bots.
     - cron: "41 * * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      test_alert:
+        description: "Open a TEST duplicate-sale issue, to check that the email alert reaches you"
+        type: boolean
+        default: false
 
 env:
   SHEETS_MODE: compare
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: sheets-sync
@@ -101,3 +107,55 @@ jobs:
           done
           echo "::error::could not push after 4 attempts"
           exit 1
+
+      # --- Double-counted sale alert ----------------------------------------
+      # find-duplicate-proposals.ps1 flags OnCall Air sales that may be counted
+      # twice (e.g. a wrong option accepted, then replaced). Each new flag opens
+      # ONE GitHub issue assigned to regalinc -- GitHub emails the assignee --
+      # and the issue closes itself once the flag is gone (resolved, or
+      # confirmed as two real sales in commission-overrides.ps1). Issue text has
+      # no dollar amounts: this repo is public. Runs in both compare and write
+      # mode, and a failure here never blocks the data commit above.
+      - name: Check for possible duplicate sales
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          ./scripts/find-duplicate-proposals.ps1 `
+            -SoldProposalsDir ./oncallair-sales-data/sold-proposals `
+            -OutJson (Join-Path $env:RUNNER_TEMP 'dupes.json')
+
+      - name: Open or close duplicate-sale issues
+        continue-on-error: true
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEST_ALERT: ${{ inputs.test_alert }}
+        run: |
+          set -euo pipefail
+          json="$RUNNER_TEMP/dupes.json"
+          if [ "${TEST_ALERT:-false}" = "true" ]; then
+            jq '.flags = ((.flags // []) | if type=="array" then . else [.] end) + [{"title":"Possible duplicate sale: TEST (only a test)","body":"This is only a test of the duplicate-sale alert -- nothing is wrong. It closes itself on the next hourly run."}]' "$json" > "$json.tmp"
+            mv "$json.tmp" "$json"
+          fi
+          flags=$(jq -c '(.flags // []) | if type=="array" then . else [.] end' "$json")
+          gh label create duplicate-sale --color D93F0B --description "OnCall Air sale that may be double-counted" 2>/dev/null || true
+          open=$(gh issue list --label duplicate-sale --state open --json number,title)
+
+          # Open an issue for each current flag that doesn't have one yet.
+          jq -c '.[]' <<<"$flags" | while read -r flag; do
+            title=$(jq -r '.title' <<<"$flag")
+            body=$(jq -r '.body' <<<"$flag")
+            if ! jq -e --arg t "$title" 'map(select(.title == $t)) | length > 0' <<<"$open" >/dev/null; then
+              gh issue create --title "$title" --label duplicate-sale --assignee regalinc --body "@regalinc $body"
+            fi
+          done
+
+          # Close issues whose flag has gone away.
+          current=$(jq -r '.[].title' <<<"$flags")
+          jq -c '.[]' <<<"$open" | while read -r issue; do
+            num=$(jq -r '.number' <<<"$issue")
+            title=$(jq -r '.title' <<<"$issue")
+            if ! grep -Fxq -- "$title" <<<"$current"; then
+              gh issue close "$num" --comment "No longer flagged -- resolved, or confirmed as two separate sales."
+            fi
+          done

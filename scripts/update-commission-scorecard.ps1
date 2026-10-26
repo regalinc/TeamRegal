@@ -124,17 +124,10 @@ $allPayloads = @($allPayloads |
   Group-Object { $_.proposal.id } |
   ForEach-Object { $_.Group | Sort-Object { [datetime]$_.timestamps.accepted_at } -Descending | Select-Object -First 1 })
 
-# Proposals that were accepted by mistake and then un-accepted in OnCall Air.
-# The webhook already fired, and the repo keeps the file, so they have to be
-# excluded by hand. Distinct from the re-acceptance dedupe above: that handles
-# the SAME proposal accepted twice; this is a DIFFERENT option on the same
-# consultation (Kara Tate: PLATINUM 5914400 $7,620 accepted 2026-10-23 6:18 AM,
-# un-accepted and the customer re-accepted BRONZE 5914273 $13,771 at 7:48 AM --
-# confirmed by Michael 2026-10-26). Key = proposal.id. Duplicated in
-# generate-commission-report.ps1 -- keep both in sync.
-$SUPERSEDED_PROPOSAL_IDS = @{
-  "5914400" = "Kara Tate -- PLATINUM accepted in error, replaced by BRONZE 5914273"
-}
+# Proposals accepted by mistake and later un-accepted in OnCall Air are listed in
+# commission-overrides.ps1 (shared by the commission scripts and the duplicate
+# check) and excluded here.
+. (Join-Path $PSScriptRoot "commission-overrides.ps1")
 $allPayloads = @($allPayloads | Where-Object { -not $SUPERSEDED_PROPOSAL_IDS.ContainsKey([string]$_.proposal.id) })
 
 Write-Host "Loaded $($hvacSales.Count) hvac-sales.json rows, $($allPayloads.Count) sold-proposal payload(s)."
