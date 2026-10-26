@@ -328,19 +328,21 @@ function fuzzyLabelMatch(customerName, label) {
   const initial = labelTokens[labelTokens.length - 1];
   const leading = labelTokens.slice(0, -1);
   const rowTokens = tokens(customerName);
+  // Optimal-string-alignment distance: an adjacent swap ("Rafael"/"Rafeal",
+  // "Pretium"/"Pretuim") counts as ONE edit, the most common typo.
   const within = (a, b) => {
     if (a === b) return true;
     const limit = a.length >= 7 ? 2 : a.length >= 4 ? 1 : 0;
     if (limit === 0 || Math.abs(a.length - b.length) > limit) return false;
-    let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
     for (let i = 1; i <= a.length; i++) {
-      const cur = [i];
       for (let j = 1; j <= b.length; j++) {
-        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
       }
-      prev = cur;
     }
-    return prev[b.length] <= limit;
+    return d[a.length][b.length] <= limit;
   };
   if (rowTokens.length < leading.length) return false;
   if (!leading.every((w, i) => within(w, rowTokens[i]))) return false;
