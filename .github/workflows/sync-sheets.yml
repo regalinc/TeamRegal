@@ -32,9 +32,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install xlsx reader
-        run: npm install --no-save --no-audit --no-fund exceljs@4.4.0
-
       - name: Parse sheets and compare
         env:
           MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
