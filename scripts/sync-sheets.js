@@ -58,6 +58,7 @@ async function getToken() {
   const { MS_TENANT_ID, MS_CLIENT_ID, MS_CLIENT_SECRET } = process.env;
   const res = await fetch(`https://login.microsoftonline.com/${MS_TENANT_ID}/oauth2/v2.0/token`, {
     method: "POST",
+    signal: AbortSignal.timeout(60_000),
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
       client_id: MS_CLIENT_ID,
@@ -266,7 +267,9 @@ async function main() {
   const hvacPath = process.env.HVAC_SALES_PATH || `HVAC Installation/HVAC Sales.${year}.xlsx`;
   const metricsPath = process.env.MANUAL_METRICS_PATH || "Company Scorecard/Manual Metrics.xlsx";
 
+  console.log("Signing in to Microsoft...");
   const token = await getToken();
+  console.log("Signed in.");
   const site = await siteId(token);
   console.log(`Site: ${site}`);
 
@@ -284,7 +287,9 @@ async function main() {
   for (const job of jobs) {
     try {
       console.log(`Downloading ${job.remote}`);
-      parsed.push({ ...job, cloud: await job.parse(await download(token, site, job.remote)) });
+      const buffer = await download(token, site, job.remote);
+      console.log(`Downloaded ${buffer.length} bytes, parsing...`);
+      parsed.push({ ...job, cloud: await job.parse(buffer) });
     } catch (err) {
       failures++;
       console.log(`::error::${job.label}: ${err.message}`);
@@ -315,7 +320,20 @@ async function main() {
   if (mismatches) console.log("::warning::Cloud parse differs from the committed data (see log). Small differences are expected if the sheet changed since the PC last synced.");
 }
 
-main().catch((err) => {
-  console.error(`ERROR: ${err.message}`);
-  process.exit(1);
-});
+// A healthy run is a few seconds. If something stalls (a Graph call, a parse),
+// say so and stop instead of sitting until the job timeout, and always exit
+// explicitly so an open socket can't keep a finished run alive.
+const watchdog = setTimeout(() => {
+  console.error("::error::sync-sheets stalled for 3 minutes -- giving up (see the last log line above for where)");
+  process.exit(2);
+}, 180_000);
+
+main()
+  .then(() => {
+    clearTimeout(watchdog);
+    process.exit(process.exitCode || 0);
+  })
+  .catch((err) => {
+    console.error(`ERROR: ${err.message}`);
+    process.exit(1);
+  });
