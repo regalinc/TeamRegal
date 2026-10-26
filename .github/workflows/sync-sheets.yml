@@ -1,0 +1,42 @@
+name: Sync sheets (shadow)
+
+# Cloud replacement for the Windows-only refresh-hvac-sales / refresh-manual-
+# metrics tasks. SHADOW MODE: reads the two workbooks from SharePoint via
+# Microsoft Graph, parses them, and COMPARES the result to the committed
+# docs/data JSON -- it writes and commits nothing. Once it has matched for a
+# while, this flips to --write and the Windows tasks are retired.
+# Does nothing (and doesn't fail) until the MS_* secrets exist.
+
+on:
+  schedule:
+    # Off the :00/:30 congestion peaks, like the other bots.
+    - cron: "41 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sheets-sync
+  cancel-in-progress: true
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install xlsx reader
+        run: npm install --no-save --no-audit --no-fund exceljs@4.4.0
+
+      - name: Parse sheets and compare
+        env:
+          MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
+          MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
+          MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+        shell: bash
+        run: node scripts/sync-sheets.js --compare 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
