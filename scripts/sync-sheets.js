@@ -19,7 +19,7 @@
 // Optional:
 //   SP_SITE_ID          skip the site lookup (format: host,siteGuid,webGuid)
 //   SP_HOSTNAME / SP_SITE_PATH   default regalinc.sharepoint.com / /sites/RegalInc
-//   HVAC_SALES_PATH     default "HVAC Sales/<year>/HVAC Sales.<year>.xlsx"
+//   HVAC_SALES_PATH     default "HVAC Installation/HVAC Sales.<year>.xlsx"
 //   MANUAL_METRICS_PATH default "Company Scorecard/Manual Metrics.xlsx"
 //   OUT_DIR             default docs/data
 //
@@ -249,7 +249,7 @@ async function main() {
   }
 
   const year = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year: "numeric" }).format(new Date());
-  const hvacPath = process.env.HVAC_SALES_PATH || `HVAC Sales/${year}/HVAC Sales.${year}.xlsx`;
+  const hvacPath = process.env.HVAC_SALES_PATH || `HVAC Installation/HVAC Sales.${year}.xlsx`;
   const metricsPath = process.env.MANUAL_METRICS_PATH || "Company Scorecard/Manual Metrics.xlsx";
 
   const token = await getToken();

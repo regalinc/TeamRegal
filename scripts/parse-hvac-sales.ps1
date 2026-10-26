@@ -38,7 +38,7 @@
 # back across all 12 tabs, the script writes nothing and exits 1 -- a locked
 # or missing source can never blank the live scorecard.
 param(
-  [string]$Path = "C:\Users\MichaelLohssJr\OneDrive - Regal, Inc,\Regal, Inc\HVAC Sales\2026\HVAC Sales.2026.xlsx",
+  [string]$Path = "C:\Users\MichaelLohssJr\Regal, Inc,\Regal, Inc. - Documents\HVAC Installation\HVAC Sales.2026.xlsx",
   [string]$OutJson = "docs\data\hvac-sales.json"
 )
 
