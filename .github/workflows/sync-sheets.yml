@@ -1,10 +1,17 @@
-name: Sync sheets (shadow)
+name: Sync sheets and commissions
 
 # Cloud replacement for the Windows-only refresh-hvac-sales / refresh-manual-
-# metrics tasks. SHADOW MODE: reads the two workbooks from SharePoint via
-# Microsoft Graph, parses them, and COMPARES the result to the committed
-# docs/data JSON -- it writes and commits nothing. Once it has matched for a
-# while, this flips to --write and the Windows tasks are retired.
+# metrics / refresh-commission-report tasks: reads the two workbooks from
+# SharePoint (Microsoft Graph), rebuilds hvac-sales.json and manual-metrics.json,
+# then recomputes commission-report.json from the OnCall Air sold-proposal data.
+#
+# SHEETS_MODE controls what it does with the results:
+#   compare  (shadow) -- parse everything, diff against the committed files,
+#                        change and commit NOTHING.
+#   write    (live)   -- overwrite the data files, stamp refresh-health.json,
+#                        commit and push.
+# Flip it below (one line) once compare has matched for a while, and retire the
+# Windows scheduled tasks at the same time (two writers = formatting churn).
 # Does nothing (and doesn't fail) until the MS_* secrets exist.
 
 on:
@@ -13,29 +20,84 @@ on:
     - cron: "41 * * * *"
   workflow_dispatch: {}
 
+env:
+  SHEETS_MODE: compare
+
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: sheets-sync
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  compare:
+  sync:
     runs-on: ubuntu-latest
     # A healthy run takes well under a minute; never let a stuck one sit for hours.
     timeout-minutes: 10
+    env:
+      # Pay weeks are Wed-Tue in Eastern time, and the commission script buckets
+      # sales by local calendar day -- the runner defaults to UTC.
+      TZ: America/New_York
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out OnCall Air sold-proposal data
+        uses: actions/checkout@v4
+        with:
+          repository: regalinc/oncallair-sales-data
+          token: ${{ secrets.ONCALLAIR_READ_TOKEN }}
+          path: oncallair-sales-data
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Parse sheets and compare
+      - name: Read the workbooks
+        shell: bash
         env:
           MS_TENANT_ID: ${{ secrets.MS_TENANT_ID }}
           MS_CLIENT_ID: ${{ secrets.MS_CLIENT_ID }}
           MS_CLIENT_SECRET: ${{ secrets.MS_CLIENT_SECRET }}
+        run: node scripts/sync-sheets.js --${{ env.SHEETS_MODE }} 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Recompute commissions
+        shell: pwsh
+        run: |
+          $out = if ($env:SHEETS_MODE -eq 'write') { './docs/data/commission-report.json' } else { Join-Path $env:RUNNER_TEMP 'commission-report.json' }
+          ./scripts/update-commission-scorecard.ps1 `
+            -SoldProposalsDir ./oncallair-sales-data/sold-proposals `
+            -HvacSalesJson ./docs/data/hvac-sales.json `
+            -OutJson $out
+
+      - name: Compare commissions to the committed report (shadow)
+        if: env.SHEETS_MODE == 'compare'
         shell: bash
-        run: node scripts/sync-sheets.js --compare 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+        run: node scripts/compare-json.js docs/data/commission-report.json "$RUNNER_TEMP/commission-report.json" meta.generated_at 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Stamp health and commit (live)
+        if: env.SHEETS_MODE == 'write'
+        shell: bash
+        run: |
+          node scripts/stamp-health.js hvacSales commission manualMetrics
+          git config user.name "sheets-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/data/hvac-sales.json docs/data/manual-metrics.json docs/data/commission-report.json docs/data/refresh-health.json
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git commit -q -m "Sync sheets and commissions [skip ci]"
+          # Other bots (HCP, Bouncie) and people push to main too: rebase onto
+          # whatever landed meanwhile, and retry a few times on a race.
+          for attempt in 1 2 3 4; do
+            if git pull -q --rebase origin main && git push -q origin HEAD:main; then
+              echo "pushed (attempt $attempt)"
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "::error::could not push after 4 attempts"
+          exit 1

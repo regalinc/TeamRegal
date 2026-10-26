@@ -110,7 +110,7 @@ function WeekStartFor([datetime]$date) {
 }
 
 $hvacSales = (Get-Content $HvacSalesJson -Raw | ConvertFrom-Json).records
-$allPayloads = Get-ChildItem "$SoldProposalsDir\*.json" -ErrorAction SilentlyContinue |
+$allPayloads = Get-ChildItem -Path (Join-Path $SoldProposalsDir "*.json") -ErrorAction SilentlyContinue |
   ForEach-Object { Get-Content $_.FullName -Raw | ConvertFrom-Json }
 
 # One sale per proposal: OnCall Air fires the webhook again if a proposal is
