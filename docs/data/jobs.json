@@ -301561,7 +301561,7 @@
   {
     "id": "job_f9ebd944c67b4be290632d6fa7662ba2",
     "description": "70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Carol H.",
     "city": "Red Lion",
     "state": "PA",
@@ -301588,7 +301588,7 @@
     "total_amount": 15360,
     "outstanding_balance": 0,
     "completed_at": "2026-08-24T18:27:18Z",
-    "updated_at": "2026-08-25T11:23:52Z",
+    "updated_at": "2026-10-25T22:57:35Z",
     "invoice_number": "60725",
     "created_at": "2026-08-24T13:01:28Z"
   },
@@ -388246,7 +388246,7 @@
   {
     "id": "job_b83565b9af1a4f39954d17c476891ab9",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Carol H.",
     "city": "Red Lion",
     "state": "PA",
@@ -388271,9 +388271,9 @@
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 74328,
-    "outstanding_balance": 74328,
-    "completed_at": null,
-    "updated_at": "2026-10-25T21:07:30Z",
+    "outstanding_balance": 0,
+    "completed_at": "2026-10-25T22:57:35Z",
+    "updated_at": "2026-10-25T22:57:35Z",
     "invoice_number": "63018",
     "created_at": "2026-10-25T20:01:44Z"
   },
