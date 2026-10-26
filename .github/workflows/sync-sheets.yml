@@ -23,6 +23,8 @@ concurrency:
 jobs:
   compare:
     runs-on: ubuntu-latest
+    # A healthy run takes well under a minute; never let a stuck one sit for hours.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 

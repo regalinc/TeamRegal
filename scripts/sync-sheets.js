@@ -78,6 +78,7 @@ async function graph(token, url, asBuffer = false) {
   const res = await fetch(url.startsWith("http") ? url : `https://graph.microsoft.com/v1.0${url}`, {
     headers: { Authorization: `Bearer ${token}` },
     redirect: "follow",
+    signal: AbortSignal.timeout(60_000),
   });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
@@ -137,6 +138,18 @@ function asDate(raw) {
   return null;
 }
 
+// Rows that actually hold a value, from `firstRow` down. ws.rowCount follows
+// FORMATTING, not content: a row or column styled all the way down the sheet
+// reports ~1,048,576 rows, and a plain `for (r <= rowCount)` loop then churns
+// through a million empty rows (that's what hung the first cloud run).
+function dataRows(ws, firstRow) {
+  const rows = [];
+  ws.eachRow({ includeEmpty: false }, (row, n) => {
+    if (n >= firstRow) rows.push(row);
+  });
+  return rows;
+}
+
 function sheetNamed(wb, name) {
   const ws = wb.worksheets.find((w) => w.name.trim().toLowerCase() === name.trim().toLowerCase());
   if (!ws) throw new Error(`worksheet "${name}" not found (have: ${wb.worksheets.map((w) => `"${w.name}"`).join(", ")})`);
@@ -153,20 +166,20 @@ async function parseHvacSales(buffer) {
     const ws = sheetNamed(wb, month);
     let monthCount = 0;
     // Rows 1-2 are header + spacer; a row with no CA is a blank row.
-    for (let r = 3; r <= ws.rowCount; r++) {
-      const ca = cellText(ws.getCell(r, 1));
+    for (const row of dataRows(ws, 3)) {
+      const ca = cellText(row.getCell(1));
       if (ca === "") continue;
-      const d = asDate(cellRaw(ws.getCell(r, 2)));
+      const d = asDate(cellRaw(row.getCell(2)));
       records.push({
         ca,
         date: d ? isoDay(d) : null,
-        customerName: cellText(ws.getCell(r, 3)),
-        job: cellText(ws.getCell(r, 4)),
-        systemType: cellText(ws.getCell(r, 5)),
-        clubMember: cellText(ws.getCell(r, 6)),
-        lead: cellText(ws.getCell(r, 7)),
-        customerType: cellText(ws.getCell(r, 8)),
-        sold: cellText(ws.getCell(r, 9)).toLowerCase() === "yes",
+        customerName: cellText(row.getCell(3)),
+        job: cellText(row.getCell(4)),
+        systemType: cellText(row.getCell(5)),
+        clubMember: cellText(row.getCell(6)),
+        lead: cellText(row.getCell(7)),
+        customerType: cellText(row.getCell(8)),
+        sold: cellText(row.getCell(9)).toLowerCase() === "yes",
       });
       monthCount++;
     }
@@ -185,13 +198,14 @@ async function parseManualMetrics(buffer) {
   for (const dept of DEPARTMENTS) {
     const ws = sheetNamed(wb, dept.sheet);
     let monthCount = 0;
-    for (let r = 2; r <= ws.rowCount; r++) {
-      const month = asDate(cellRaw(ws.getCell(r, 1)));
+    for (const row of dataRows(ws, 2)) {
+      const r = row.number;
+      const month = asDate(cellRaw(row.getCell(1)));
       if (!month) continue;
       const monthKey = month.toISOString().slice(0, 7);
       const entry = {};
       dept.columns.forEach((col, i) => {
-        const raw = cellRaw(ws.getCell(r, i + 2));
+        const raw = cellRaw(row.getCell(i + 2));
         if (raw === null || raw === undefined || raw === "") {
           entry[col.key] = null;
           return;
