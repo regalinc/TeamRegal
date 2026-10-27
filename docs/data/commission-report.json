@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-27T20:05:05.452Z",
+                 "generated_at":  "2026-10-27T23:05:05.140Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -293,7 +293,10 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-
+                                                   {
+                                                       "customerName":  "Embree Construction",
+                                                       "reason":  "possibly logged as \"Kuhn Construction\" -- OnCall Air may have the wrong name on file"
+                                                   }
                                                ],
                                       "Nick":  [
 
@@ -311,23 +314,23 @@
                                       "Nick":  96947.35
                                   },
                     "mtd":  {
-                                "Josh":  271968.89,
+                                "Josh":  272906.89,
                                 "Nick":  45884
                             },
                     "ytd":  {
-                                "Josh":  4060415.8,
+                                "Josh":  4061353.8,
                                 "Nick":  644610.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  0.72,
+                                      "sameDayRate":  0.6923,
                                       "sameDayCount":  18,
-                                      "sameDaySample":  25,
-                                      "avgDaysToClose":  10,
-                                      "daysSample":  25,
-                                      "avgDiscountPct":  0.0554,
-                                      "discountSample":  25
+                                      "sameDaySample":  26,
+                                      "avgDaysToClose":  9.6,
+                                      "daysSample":  26,
+                                      "avgDiscountPct":  0.0533,
+                                      "discountSample":  26
                                   },
                          "Nick":  {
                                       "sameDayRate":  0.4444,
