@@ -450,7 +450,24 @@ function buildMergedRecords(tech, estimates, salesRows) {
         Math.abs(new Date(rawDateOf(m)) - new Date(rawDateOf(estimate))) <= 21 * DAY_MS
     );
 
-  const merged = mine.filter((estimate) => !isRepeatVisit(estimate)).map((estimate) => {
+  // Same appointment entered as two Housecall Pro estimates -- a two-location
+  // job quoted as two estimates (Carriage Works, 2026-09-10: created a minute
+  // apart, identical start time, one bid). Same customer label + same start
+  // time on this consultant's schedule is one visit: keep one estimate (the one
+  // that matched a sheet row if either did) and fold the rest. Estimates that
+  // each matched their OWN sheet row are never folded -- the sheet says they
+  // were separate bids.
+  const visitKey = (e) => `${squash(e.customer_label || "")}|${e.schedule?.scheduled_start || ""}`;
+  const keptForVisit = new Map();
+  for (const e of mine) {
+    if (!e.schedule?.scheduled_start) continue;
+    const k = visitKey(e);
+    const cur = keptForVisit.get(k);
+    if (!cur || (!matchOf.has(cur) && matchOf.has(e))) keptForVisit.set(k, e);
+  }
+  const isSameVisitDuplicate = (e) => !matchOf.has(e) && !!e.schedule?.scheduled_start && keptForVisit.get(visitKey(e)) !== e;
+
+  const merged = mine.filter((estimate) => !isRepeatVisit(estimate) && !isSameVisitDuplicate(estimate)).map((estimate) => {
     const rawDate = rawDateOf(estimate);
     // null for a visit scheduled later than today — see estimateGivenDate.
     const givenDate = estimateGivenDate(estimate, tech);
