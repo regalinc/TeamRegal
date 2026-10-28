@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-10-28T09:50:21.602Z",
+                 "generated_at":  "2026-10-28T10:23:26.305Z",
                  "month":  "2026-10"
              },
     "weeks":  [
@@ -240,11 +240,17 @@
                       "weekStart":  "2026-10-21",
                       "weekEnd":  "2026-10-27",
                       "totals":  {
-                                     "Josh":  4448.68,
+                                     "Josh":  4499.84,
                                      "Nick":  226.97
                                  },
                       "sales":  {
                                     "Josh":  [
+                                                 {
+                                                     "customerName":  "Embree Construction",
+                                                     "systemType":  "Flex",
+                                                     "rate":  0.06,
+                                                     "commission":  51.17
+                                                 },
                                                  {
                                                      "customerName":  "Jose Del Pielago",
                                                      "systemType":  "Legacy",
@@ -293,10 +299,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Embree Construction",
-                                                       "reason":  "possibly logged as \"Kuhn Construction\" -- OnCall Air may have the wrong name on file"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -305,7 +308,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  17796.48,
+                "Josh":  17847.64,
                 "Nick":  1987.67
             },
     "revenue":  {
@@ -327,7 +330,7 @@
                                       "sameDayRate":  0.6923,
                                       "sameDayCount":  18,
                                       "sameDaySample":  26,
-                                      "avgDaysToClose":  9.6,
+                                      "avgDaysToClose":  9.7,
                                       "daysSample":  26,
                                       "avgDiscountPct":  0.0533,
                                       "discountSample":  26
