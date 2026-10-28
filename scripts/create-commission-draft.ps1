@@ -40,7 +40,13 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$LogDir = Join-Path $env:LOCALAPPDATA "TeamRegal"
+# Not $env:LOCALAPPDATA: under Task Scheduler (cmd.exe /c powershell ...) the
+# 2026-10-28 05:50 run logged into the scheduler log only and found no
+# commission-email-to.txt, i.e. the env var didn't point at the real folder
+# there. The shell-folder API doesn't depend on the environment.
+$LocalApp = [Environment]::GetFolderPath("LocalApplicationData")
+if (-not $LocalApp) { $LocalApp = Join-Path $env:USERPROFILE "AppData\Local" }
+$LogDir = Join-Path $LocalApp "TeamRegal"
 New-Item -ItemType Directory -Force $LogDir | Out-Null
 $LogFile = Join-Path $LogDir "create-commission-draft.log"
 function Log([string]$msg) { "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))  $msg" | Tee-Object -FilePath $LogFile -Append | Write-Host }
