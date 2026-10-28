@@ -53,6 +53,7 @@ function Log([string]$msg) { "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss'))  $ms
 
 try {
   Log "--- draft start ---"
+  Log "env: user=$([Environment]::UserName) profile=$env:USERPROFILE localapp=$LocalApp logdir=$LogDir cwd=$((Get-Location).Path)"
 
   # Most recently completed Wed-Tue week (same rule as generate-commission-report.ps1).
   if (-not $WeekStart) {
