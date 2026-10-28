@@ -174,6 +174,7 @@ $reacceptedNote
   if (-not $To) {
     $toFile = Join-Path $LogDir "commission-email-to.txt"
     if (Test-Path $toFile) { $To = (Get-Content $toFile -Raw).Trim() }
+    Log "recipient file: $toFile exists=$(Test-Path $toFile) to='$To'"
   }
 
   # Written as an .eml with "X-Unsent: 1", which Outlook opens as an editable,
