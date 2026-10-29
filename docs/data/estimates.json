@@ -86,10 +86,10 @@
     "assigned_employee_ids": [
       "pro_8fc589c75489437bb66ff45ca0aea7ac"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-10-29T21:47:07.980Z",
+    "approved_amount": 48879
   },
   {
     "id": "csr_f51f029a06a8454daee129bc14b7d8fa",
@@ -6864,7 +6864,7 @@
     "assigned_employee_ids": [
       "pro_3f2297b66a9742d09eaf20976a20183a"
     ],
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
