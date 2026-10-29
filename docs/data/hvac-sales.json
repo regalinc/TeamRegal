@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  652
+                 "record_count":  653
              },
     "records":  [
                     {
@@ -7140,6 +7140,17 @@
                         "clubMember":  "No",
                         "lead":  "Lowes",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-11-02",
+                        "customerName":  "Margie McElhaney",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
                         "sold":  false
                     },
                     {
