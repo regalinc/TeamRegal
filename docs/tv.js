@@ -571,7 +571,7 @@ function buildBuRanked(deptTechs, jobs, code) {
         { splitRevenue: true }
       );
       const credited = mine.filter((p) => dateInPeriod(p.sale.created_at, PERIOD));
-      const realTechs = (p) => Math.max(1, (p.call.assigned_employee_ids || []).filter((id) => !APPRENTICE_TECH_IDS.has(id)).length);
+      const realTechs = (p) => Math.max(1, (p.call.assigned_employee_ids || []).filter(countsTowardRevenueSplit).length);
       const saleDollars = credited.reduce((sum, p) => sum + p.sale.total_amount / CENTS_PER_DOLLAR / realTechs(p), 0);
       const calls = regular.totalJobs + credited.length;
       stats.avgTicket = regular.avgTicket;

@@ -170,6 +170,23 @@ function isManagement(tech) {
   return MANAGEMENT_TECH_IDS.has(tech.id);
 }
 
+// Managers who ride along to help a tech but aren't the one whose numbers a
+// job's revenue is meant to represent -- they don't count as a person when a
+// job's revenue is split (same treatment as an apprentice), so a job with a tech
+// and one of these splits as a 1-person job. Devin McNutt runs the HVAC crew and
+// "runs for help" (Michael, 2026-10-30). When he runs a call on his own it still
+// counts: the job's full amount lands in its business unit's department
+// revenue (admin.html / company-scorecard.js total jobs by BU, never by who
+// worked them); he just has no individual card (MANAGEMENT_TECH_IDS above).
+const NON_SPLITTING_MANAGER_IDS = new Set([
+  "pro_eb35c4da7a0c4a41bc3936da4d71da20", // Devin McNutt
+]);
+
+// Does this assignee count as a person when a job's revenue is divided up?
+function countsTowardRevenueSplit(techId) {
+  return !APPRENTICE_TECH_IDS.has(techId) && !NON_SPLITTING_MANAGER_IDS.has(techId);
+}
+
 // The one combined check every roster-visibility choke point in app.js
 // uses — apprentices and management accounts are excluded from the
 // technician view for two different reasons, but nothing there needs to
@@ -761,7 +778,7 @@ function jobRevenueCents(job, splitRevenue) {
   // if every assignee happens to be an apprentice, to avoid a divide-by-zero;
   // that job won't be attributed to anyone's card anyway since apprentices
   // don't get one.
-  const realAssignees = (job.assigned_employee_ids || []).filter((id) => !APPRENTICE_TECH_IDS.has(id));
+  const realAssignees = (job.assigned_employee_ids || []).filter(countsTowardRevenueSplit);
   const assigneeCount = realAssignees.length || 1;
   return amount / assigneeCount;
 }
