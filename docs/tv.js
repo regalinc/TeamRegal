@@ -202,6 +202,9 @@ const BU_SHOWN_ESTIMATE_TV_TILES = new Set(["70", "80"]);
 // BU 30/40 get "Avg ticket w/ sales" and a merged "Leads sold 2/5" tile --
 // see metricTiles and buildBuRanked.
 const BU_LEAD_SALES_TV_CODES = new Set(["30", "40"]);
+// ...but BU 30 shows Leads and Leads sold as two separate tiles again, since each has
+// its own metric (Michael, 2026-10-30). BU 40 keeps the merged "Leads sold 2/5" tile.
+const BU_SEPARATE_LEADS_TV_CODES = new Set(["30"]);
 
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
@@ -223,7 +226,7 @@ function metricTiles(stats, sizeClass) {
       : []),
     ["Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats)],
     ["Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats)],
-    ...(leadSales
+    ...(leadSales && !BU_SEPARATE_LEADS_TV_CODES.has(DEPT)
       ? [["Leads sold", `${stats.leadsSold}/${stats.leads}`, kpiClass("leads", stats)]]
       : [
           ["Leads", stats.leads.toLocaleString(), kpiClass("leads", stats)],
