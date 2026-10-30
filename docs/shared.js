@@ -664,6 +664,9 @@ function hcpMetricValue(key, stats) {
       return stats.totalJobs ? stats.ifo / stats.totalJobs : null;
     case "leadTurnover":
       return stats.totalJobs ? stats.leads / stats.totalJobs : null;
+    // Leads sold as a share of leads -- BU 30's "Leads sold" target (departments-config.js).
+    case "leadsSold":
+      return stats.leads ? stats.leadsSold / stats.leads : null;
     case "accessorySold":
       return stats.totalJobs ? stats.accessorySold / stats.totalJobs : null;
     case "clubConversion": {

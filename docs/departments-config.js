@@ -76,6 +76,10 @@ const DEPARTMENTS = {
       // this one number instead of two different ones.
       { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.075, direction: "max", buffer: 1 / 3 } },
       { key: "leadTurnover", label: "Lead turnover", type: "pct", target: { goal: 1 / 12, direction: "min" } },
+      // Share of the leads a tech runs that SOLD (leads sold / leads). The TV's Leads sold tile shows the
+      // count but grades on this rate: green at 60%+, yellow 50-60%, red below 50% -- Michael, 2026-10-30.
+      // buffer 1/6 puts the yellow floor at exactly 50% (60% x (1 - 1/6)).
+      { key: "leadsSold", label: "Leads sold (% of leads)", type: "pct", target: { goal: 0.6, direction: "min", buffer: 1 / 6 } },
       { key: "accessorySold", label: "Accessory sold", type: "pct", target: { goal: 1 / 8, direction: "min" } },
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
       // Estimates approved ÷ estimates given, scoped to this department
