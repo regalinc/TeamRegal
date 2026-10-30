@@ -566,7 +566,7 @@ body {
 
 .tv-dept-panel {
   background: var(--card-bg);
-  border: 0.35vh solid var(--accent);
+  border: 0.35vh solid var(--dept-color, var(--accent));
   border-radius: var(--radius);
   padding: 0 1.2vw 1.4vh;
   display: flex;
@@ -574,7 +574,7 @@ body {
   overflow: hidden;
 }
 .tv-dept-banner {
-  background: var(--accent);
+  background: var(--dept-color, var(--accent));
   color: #fff;
   text-align: center;
   margin: 0 -1.2vw 1.2vh;

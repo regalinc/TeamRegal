@@ -613,6 +613,10 @@ let latestData = null;
 // above it, instead of the #1 tech's full-size card (Michael, 2026-10-30; BU
 // 30 first -- add a code here to roll it out to another BU screen).
 const BU_DEPARTMENT_PANEL_CODES = new Set(["30"]);
+// Each BU's own colour for its department outline/banner. BU 30 is red --
+// Housecall Pro's colour for the HVAC Service crew (#b71d1b, the techs' avatar
+// colour), per Michael 2026-10-30. A BU with no entry falls back to the blue accent.
+const BU_TV_COLORS = { 30: "#b71d1b" };
 // PREVIEW ONLY until Michael signs off: the live TVs keep the old layout unless
 // the URL carries &panel=1 (e.g. tv.html?dept=30&panel=1). Flip this to true
 // (or drop the check) to make it the default.
@@ -662,7 +666,7 @@ function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
           ${small("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats))}
         </div>
       </div>
-      <div class="tv-dept-panel">
+      <div class="tv-dept-panel" style="--dept-color:${BU_TV_COLORS[DEPT] || "var(--accent)"}">
         <div class="tv-dept-banner">
           <div class="tv-dept-banner-label">Department</div>
           <div class="tv-dept-banner-sub">${escapeHtml(screenLabel)} &middot; all technicians</div>
