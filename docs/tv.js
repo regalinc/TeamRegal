@@ -112,6 +112,14 @@ function departmentOf(tech) {
   for (const dept of FIELD_DEPT_TAGS) {
     if (tags.includes(dept)) return dept;
   }
+  // "HVAC Maintenance" is a Housecall Pro employee tag that appeared
+  // 2026-10-25 (Hector Rivera was re-tagged from "HVAC Service" to it, and
+  // Landen Garee joined with it). It isn't one of the four field tags above,
+  // so those techs fell through to the Office catch-all and vanished from the
+  // BU 30/40 screens. They work the same HVAC Service roster (BU 30 + 40
+  // jobs), so count the tag as that roster -- checked AFTER the loop so a tech
+  // who also carries a real field tag keeps that one.
+  if (tags.includes("HVAC Maintenance")) return "HVAC Service";
   return OFFICE_LABEL;
 }
 
