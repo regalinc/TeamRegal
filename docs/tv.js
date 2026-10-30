@@ -209,6 +209,9 @@ const BU_SEPARATE_LEADS_TV_CODES = new Set(["30", "40"]);
 // BU screens whose Revenue tile gets a slight green outline (Michael, 2026-10-30) -- Revenue has no
 // target to turn it red/green, so the outline just marks it as the headline number.
 const REVENUE_OUTLINE_BU_CODES = new Set(["30", "40", "70", "80"]);
+// BU screens with an "RCC Sold" tile, linked to the Housecall Pro "Membership Sold" job tag (Michael,
+// 2026-10-30; BU 70 first).
+const BU_RCC_SOLD_TV_CODES = new Set(["70"]);
 
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
@@ -238,6 +241,9 @@ function metricTiles(stats, sizeClass) {
         ]),
     ["$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats)],
     ["Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats)],
+    // RCC Sold = jobs tagged "Membership Sold" (stats.servicePlansSold, shared.js). No per-tech target exists
+    // for it, so the tile stays neutral.
+    ...(BU_RCC_SOLD_TV_CODES.has(DEPT) ? [["RCC Sold", stats.servicePlansSold.toLocaleString(), null]] : []),
   ].filter(([label]) => !hidden.has(label));
 
   // No target exists for the raw "given" count (same as the Flex screen's
