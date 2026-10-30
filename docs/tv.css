@@ -584,3 +584,12 @@ body {
 .tv-dept-banner-sub { font-size: clamp(11px, 1.6vh, 23px); opacity: 0.9; margin-top: 0.3vh; text-transform: uppercase; letter-spacing: 0.05em; }
 .tv-dept-panel .tv-tile-grid { gap: 0.8vh; align-content: stretch; grid-auto-rows: 1fr; }
 .tv-dept-panel .tv-tile { padding: 0.8vh 0.5vw; display: flex; flex-direction: column; justify-content: center; }
+
+/* With the department panel: the #1 tech's card gets a gold outline (the
+   department keeps blue) so the leader stands out, and every other tech's row
+   gets a slight outline to match. */
+.tv-has-dept .tv-featured-compact {
+  border: 0.35vh solid #f0b429;
+  box-shadow: 0 0 1.4vh rgba(240, 180, 41, 0.35);
+}
+.tv-has-dept .tv-row { border: 0.25vh solid #4b525e; }

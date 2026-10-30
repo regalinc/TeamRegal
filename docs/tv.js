@@ -680,6 +680,7 @@ function renderRoster(entries, screenLabel, deptStats) {
   const rest = entries.slice(1);
 
   mainEl.innerHTML = deptStats ? renderLeftColumnWithDepartment(featured, screenLabel, deptStats) : renderFeatured(featured, screenLabel);
+  if (deptStats) mainEl.classList.add("tv-has-dept");
   const list = document.createElement("div");
   list.className = "tv-list";
   // Row/tile sizing in tv.css reads this to scale down as more people need
