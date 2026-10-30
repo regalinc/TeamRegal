@@ -597,3 +597,8 @@ body {
 /* An odd number of department tiles (e.g. BU 30 once Completion is hidden):
    let the last one span the full width instead of leaving a hole. */
 .tv-dept-panel .tv-tile-grid > .tv-tile:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* Slight green outline on a tile (BU 30 Revenue): marks the headline number without grading it. */
+.tv-tile.tv-outline-good, .tv-row-tile.tv-outline-good { box-shadow: inset 0 0 0 0.25vh #2fa84f; }
+.tv-dept-banner-sub b { font-weight: 800; font-size: 1.15em; }
+.tv-dept-banner-note { opacity: 0.8; font-weight: 400; }

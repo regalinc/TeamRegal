@@ -205,6 +205,9 @@ const BU_LEAD_SALES_TV_CODES = new Set(["30", "40"]);
 // ...but BU 30 shows Leads and Leads sold as two separate tiles again, since each has
 // its own metric (Michael, 2026-10-30). BU 40 keeps the merged "Leads sold 2/5" tile.
 const BU_SEPARATE_LEADS_TV_CODES = new Set(["30"]);
+// BU screens whose Revenue tile gets a slight green outline (Michael, 2026-10-30) -- Revenue has no
+// target to turn it red/green, so the outline just marks it as the headline number.
+const REVENUE_OUTLINE_BU_CODES = new Set(["30"]);
 
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
@@ -219,7 +222,7 @@ function metricTiles(stats, sizeClass) {
   // Leads sold never had one. See buildBuRanked for how the numbers get here.
   const leadSales = BU_LEAD_SALES_TV_CODES.has(DEPT);
   const tiles = [
-    ["Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats)],
+    ["Revenue", formatMoney(stats.totalRevenue), REVENUE_OUTLINE_BU_CODES.has(DEPT) ? "tv-outline-good" : kpiClass("revenue", stats)],
     ["Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats)],
     ...(leadSales
       ? [["Avg ticket w/ sales", stats.avgTicketWithSales == null ? "—" : formatMoney(stats.avgTicketWithSales), kpiClass("avgTicketWithSales", stats)]]
@@ -647,6 +650,15 @@ function buildDepartmentStats(jobs, code) {
     const calls = regular.totalJobs + credited.length;
     stats.avgTicket = regular.avgTicket;
     stats.avgTicketWithSales = calls ? (regular.totalRevenue + saleDollars) / calls : null;
+
+    // The department's sold leads (calls run this period, same set as the Leads sold tile) and
+    // what their sales brought in for Installation -- the OnCall Air job each one turned into.
+    // Only this BU's leads (soldLeadPairsForBu is scoped to `code`). A sold lead with no
+    // matched sale job yet is counted separately so the line never silently drops it.
+    const inPeriod = pairs.filter((p) => jobInPeriod(p.call, PERIOD));
+    stats.soldLeadInstallRevenue = inPeriod.reduce((sum, p) => sum + p.sale.total_amount / CENTS_PER_DOLLAR, 0);
+    stats.soldLeadMatched = inPeriod.length;
+    stats.soldLeadUnmatched = Math.max(0, stats.leadsSold - inPeriod.length);
   }
   return stats;
 }
@@ -665,7 +677,7 @@ function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
           </div>
         </div>
         <div class="tv-fc-tiles">
-          ${small("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats))}
+          ${small("Revenue", formatMoney(stats.totalRevenue), REVENUE_OUTLINE_BU_CODES.has(DEPT) ? "tv-outline-good" : kpiClass("revenue", stats))}
           ${small("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats))}
           ${small("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats))}
           ${(BU_HIDDEN_TV_TILES[DEPT] || new Set()).has("Completion")
@@ -676,7 +688,7 @@ function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
       <div class="tv-dept-panel" style="--dept-color:${BU_TV_COLORS[DEPT] || "var(--accent)"}">
         <div class="tv-dept-banner">
           <div class="tv-dept-banner-label">Department</div>
-          <div class="tv-dept-banner-sub">${escapeHtml(screenLabel)} &middot; all technicians</div>
+          ${deptStats.soldLeadInstallRevenue == null ? `<div class="tv-dept-banner-sub">${escapeHtml(screenLabel)}</div>` : `<div class="tv-dept-banner-sub">${deptStats.soldLeadMatched} sold lead${deptStats.soldLeadMatched === 1 ? "" : "s"} &rarr; <b>${escapeHtml(formatMoney(deptStats.soldLeadInstallRevenue))}</b> install revenue${deptStats.soldLeadUnmatched ? ` <span class="tv-dept-banner-note">(+${deptStats.soldLeadUnmatched} not in installs yet)</span>` : ""}</div>`}
         </div>
         <div class="tv-tile-grid">
           ${metricTiles(deptStats)}
