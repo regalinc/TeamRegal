@@ -677,19 +677,15 @@ function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
           </div>
         </div>
         <div class="tv-fc-tiles">
-          ${small("Revenue", formatMoney(stats.totalRevenue), REVENUE_OUTLINE_BU_CODES.has(DEPT) ? "tv-outline-good" : kpiClass("revenue", stats))}
-          ${small("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats))}
-          ${small("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats))}
-          ${(BU_HIDDEN_TV_TILES[DEPT] || new Set()).has("Completion")
-            ? small("Avg ticket w/ sales", stats.avgTicketWithSales == null ? "—" : formatMoney(stats.avgTicketWithSales), kpiClass("avgTicketWithSales", stats))
-            : small("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats))}
+          ${metricTiles(stats, "tv-tile tv-fc-tile")}
         </div>
       </div>
       <div class="tv-dept-panel" style="--dept-color:${BU_TV_COLORS[DEPT] || "var(--accent)"}">
         <div class="tv-dept-banner">
           <div class="tv-dept-banner-label">Department</div>
-          ${deptStats.soldLeadInstallRevenue == null ? `<div class="tv-dept-banner-sub">${escapeHtml(screenLabel)}</div>` : `<div class="tv-dept-banner-sub">${deptStats.soldLeadMatched} sold lead${deptStats.soldLeadMatched === 1 ? "" : "s"} &rarr; <b>${escapeHtml(formatMoney(deptStats.soldLeadInstallRevenue))}</b> install revenue${deptStats.soldLeadUnmatched ? ` <span class="tv-dept-banner-note">(+${deptStats.soldLeadUnmatched} not in installs yet)</span>` : ""}</div>`}
+          <div class="tv-dept-banner-sub">${escapeHtml(screenLabel)}</div>
         </div>
+        ${deptStats.soldLeadInstallRevenue == null ? "" : `<div class="tv-dept-soldline"><span class="tv-dept-soldline-n">${deptStats.soldLeadMatched} sold lead${deptStats.soldLeadMatched === 1 ? "" : "s"}</span><span class="tv-dept-soldline-arrow">&rarr;</span><span class="tv-dept-soldline-money">${escapeHtml(formatMoney(deptStats.soldLeadInstallRevenue))}</span><span class="tv-dept-soldline-label">install revenue${deptStats.soldLeadUnmatched ? ` <em>(+${deptStats.soldLeadUnmatched} not in installs yet)</em>` : ""}</span></div>`}
         <div class="tv-tile-grid">
           ${metricTiles(deptStats)}
         </div>

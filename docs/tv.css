@@ -602,3 +602,38 @@ body {
 .tv-tile.tv-outline-good, .tv-row-tile.tv-outline-good { box-shadow: inset 0 0 0 0.25vh #2fa84f; }
 .tv-dept-banner-sub b { font-weight: 800; font-size: 1.15em; }
 .tv-dept-banner-note { opacity: 0.8; font-weight: 400; }
+
+/* The leader card now carries the full tile set (same eight as the tech rows). */
+.tv-fc-tiles { grid-template-columns: repeat(4, 1fr); gap: 0.7vh; }
+.tv-fc-tile { padding: 0.8vh 0.2vw; }
+.tv-fc-tile .tv-tile-label { font-size: clamp(8px, 1.05vh, 15px); }
+.tv-fc-tile .tv-tile-value { font-size: clamp(12px, 1.9vh, 28px); }
+
+/* Sold-lead -> install revenue line: its own strip under the department banner,
+   money in green so it reads as the number to look at. */
+.tv-dept-soldline {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5vw;
+  margin: 0 -1.2vw 1.2vh;
+  padding: 0.9vh 1vw;
+  background: #0c0e11;
+  border-bottom: 0.2vh solid var(--dept-color, var(--accent));
+}
+.tv-dept-soldline-n { font-size: clamp(13px, 2.1vh, 30px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.tv-dept-soldline-arrow { font-size: clamp(13px, 2.1vh, 30px); color: var(--text-muted); }
+.tv-dept-soldline-money { font-size: clamp(18px, 3.4vh, 48px); font-weight: 800; color: #4ade80; text-shadow: 0 0 1.2vh rgba(74, 222, 128, 0.45); }
+.tv-dept-soldline-label { font-size: clamp(11px, 1.6vh, 23px); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+.tv-dept-soldline-label em { font-style: normal; opacity: 0.8; }
+
+/* Tuning after the first look: fill the leader card, and keep the department's eight tiles on two rows. */
+.tv-fc-tiles { grid-auto-rows: 1fr; align-content: stretch; margin-top: 1.4vh; }
+.tv-fc-tile { padding: 1vh 0.2vw; display: flex; flex-direction: column; justify-content: center; }
+.tv-fc-tile .tv-tile-label { font-size: clamp(8px, 1.15vh, 16px); }
+.tv-fc-tile .tv-tile-value { font-size: clamp(13px, 2.3vh, 34px); }
+.tv-dept-panel .tv-tile-grid { grid-template-columns: repeat(4, 1fr); flex: 1; }
+.tv-dept-panel .tv-tile { padding: 0.6vh 0.2vw; }
+.tv-dept-panel .tv-tile .tv-tile-label { font-size: clamp(8px, 1.15vh, 16px); }
+.tv-dept-panel .tv-tile .tv-tile-value { font-size: clamp(13px, 2.3vh, 34px); }
