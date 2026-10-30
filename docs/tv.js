@@ -408,7 +408,7 @@ function renderFlexCard(entry) {
     tvTile("Revenue (split)", formatMoney(s.totalRevenue), null, "tv-flex-tile"),
     svc("Avg ticket", formatMoney(s.avgTicket), "avgTicket"),
     tvTile("Completion", `${s.completionRate.toFixed(0)}%`, null, "tv-flex-tile"),
-    tvTile("RCC sold", s.servicePlansSold.toLocaleString(), null, "tv-flex-tile"),
+    tvTile("RCC sold", `${s.servicePlansSold}/${s.memberPitchCalls}`, rccSoldClass(s), "tv-flex-tile"),
     svc("$0 Call", s.ifo.toLocaleString(), "ifo"),
     svc("Accessory sold", s.accessorySold.toLocaleString(), "accessorySold"),
     tvTile("Est. given", e.given.toLocaleString(), null, "tv-flex-tile"),
