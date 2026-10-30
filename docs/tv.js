@@ -184,6 +184,7 @@ function currentMonthName() {
 const BU_HIDDEN_TV_TILES = {
   // BU 30: no Completion tile (Michael, 2026-10-30; wanted everywhere eventually, BU 30 first).
   30: new Set(["Completion"]),
+  40: new Set(["Completion"]),
   70: new Set(["Leads", "Leads sold"]),
   80: new Set(["Leads", "Leads sold"]),
 };
@@ -204,10 +205,10 @@ const BU_SHOWN_ESTIMATE_TV_TILES = new Set(["70", "80"]);
 const BU_LEAD_SALES_TV_CODES = new Set(["30", "40"]);
 // ...but BU 30 shows Leads and Leads sold as two separate tiles again, since each has
 // its own metric (Michael, 2026-10-30). BU 40 keeps the merged "Leads sold 2/5" tile.
-const BU_SEPARATE_LEADS_TV_CODES = new Set(["30"]);
+const BU_SEPARATE_LEADS_TV_CODES = new Set(["30", "40"]);
 // BU screens whose Revenue tile gets a slight green outline (Michael, 2026-10-30) -- Revenue has no
 // target to turn it red/green, so the outline just marks it as the headline number.
-const REVENUE_OUTLINE_BU_CODES = new Set(["30"]);
+const REVENUE_OUTLINE_BU_CODES = new Set(["30", "40"]);
 
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
@@ -620,11 +621,11 @@ let latestData = null;
 // BU screens whose left column is a department panel with a shrunken #1 card
 // above it, instead of the #1 tech's full-size card (Michael, 2026-10-30; BU
 // 30 first -- add a code here to roll it out to another BU screen).
-const BU_DEPARTMENT_PANEL_CODES = new Set(["30"]);
+const BU_DEPARTMENT_PANEL_CODES = new Set(["30", "40"]);
 // Each BU's own colour for its department outline/banner. BU 30 is red --
 // Housecall Pro's colour for the HVAC Service crew (#b71d1b, the techs' avatar
 // colour), per Michael 2026-10-30. A BU with no entry falls back to the blue accent.
-const BU_TV_COLORS = { 30: "#b71d1b" };
+const BU_TV_COLORS = { 30: "#b71d1b", 40: "#8f25aa" }; // 40 = HVAC Maintenance purple (the colour HCP gives that crew)
 // ON by default for the BU screens in BU_DEPARTMENT_PANEL_CODES (Michael approved BU 30,
 // 2026-10-30). Add &panel=0 to the URL to get the old full-size-leader layout back.
 const SHOW_DEPARTMENT_PANEL = urlParams.get("panel") !== "0";

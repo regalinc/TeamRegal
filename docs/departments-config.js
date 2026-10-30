@@ -200,6 +200,9 @@ const DEPARTMENTS = {
       // include these).
       { key: "zeroCall", label: "$0 Call", type: "pct", target: { goal: 0.075, direction: "max", buffer: 1 / 3 } },
       { key: "leadTurnover", label: "Lead turnover", type: "pct", target: { goal: 1 / 12, direction: "min" } },
+      // Share of the leads a tech runs that SOLD (leads sold / leads) -- same target as BU 30:
+      // green 60%+, yellow 50-60%, red below 50% (Michael, 2026-10-30).
+      { key: "leadsSold", label: "Leads sold (% of leads)", type: "pct", target: { goal: 0.6, direction: "min", buffer: 1 / 6 } },
       { key: "accessorySold", label: "Accessory sold", type: "pct", target: { goal: 1 / 8, direction: "min" } },
       // BU 40's chart frames this as new-vs-renewal, not a flat conversion
       // rate — Housecall Pro's new-vs-renewal distinction isn't confirmed
