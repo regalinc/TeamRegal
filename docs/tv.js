@@ -609,11 +609,73 @@ function businessUnitLabelForCode(jobs, code, fallbackLabel) {
 
 let latestData = null;
 
-function renderRoster(entries, screenLabel) {
+// BU screens whose left column is a department panel with a shrunken #1 card
+// above it, instead of the #1 tech's full-size card (Michael, 2026-10-30; BU
+// 30 first -- add a code here to roll it out to another BU screen).
+const BU_DEPARTMENT_PANEL_CODES = new Set(["30"]);
+// PREVIEW ONLY until Michael signs off: the live TVs keep the old layout unless
+// the URL carries &panel=1 (e.g. tv.html?dept=30&panel=1). Flip this to true
+// (or drop the check) to make it the default.
+const SHOW_DEPARTMENT_PANEL = urlParams.get("panel") === "1";
+
+// The department-wide version of the per-tech tiles: every job in this BU for
+// the period, whoever worked it (so a call a manager like Devin runs by himself
+// counts), full job amounts with no revenue splitting -- same basis as the
+// company scorecard's department numbers. The sold-lead handling mirrors
+// buildBuRanked, just over all of the BU's calls instead of one tech's.
+function buildDepartmentStats(jobs, code) {
+  const deptJobs = jobs.filter((j) => jobInPeriod(j, PERIOD) && businessUnitCode(j.business_unit) === code);
+  const stats = computeScorecardStats(deptJobs, { splitRevenue: false });
+  if (BU_LEAD_SALES_TV_CODES.has(code)) {
+    const pairs = soldLeadPairsForBu(jobs, code);
+    const leadCallIds = new Set(pairs.map((p) => p.call.id));
+    const regular = computeScorecardStats(
+      deptJobs.filter((j) => !leadCallIds.has(j.id)),
+      { splitRevenue: false }
+    );
+    const credited = pairs.filter((p) => dateInPeriod(p.sale.created_at, PERIOD));
+    const saleDollars = credited.reduce((sum, p) => sum + p.sale.total_amount / CENTS_PER_DOLLAR, 0);
+    const calls = regular.totalJobs + credited.length;
+    stats.avgTicket = regular.avgTicket;
+    stats.avgTicketWithSales = calls ? (regular.totalRevenue + saleDollars) / calls : null;
+  }
+  return stats;
+}
+
+function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
+  const { tech, stats, rank } = featured;
+  const small = (label, value, cls) => tvTile(label, value, cls, "tv-tile tv-fc-tile");
+  return `
+    <div class="tv-left">
+      <div class="tv-featured tv-featured-compact">
+        <div class="tv-fc-top">
+          ${renderAvatarBlock(tech, "tv-fc-photo", "tv-fc-photo-fallback", { large: true })}
+          <div class="tv-fc-id">
+            <div class="tv-fc-name">${escapeHtml(tech.name || "Unknown")}</div>
+            <div class="tv-fc-rank">#${rank} · ${escapeHtml(screenLabel)}</div>
+          </div>
+        </div>
+        <div class="tv-fc-tiles">
+          ${small("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats))}
+          ${small("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats))}
+          ${small("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats))}
+        </div>
+      </div>
+      <div class="tv-dept-panel">
+        <div class="tv-dept-title">Department · ${escapeHtml(screenLabel)}</div>
+        <div class="tv-tile-grid">
+          ${metricTiles(deptStats)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderRoster(entries, screenLabel, deptStats) {
   const featured = entries[0];
   const rest = entries.slice(1);
 
-  mainEl.innerHTML = renderFeatured(featured, screenLabel);
+  mainEl.innerHTML = deptStats ? renderLeftColumnWithDepartment(featured, screenLabel, deptStats) : renderFeatured(featured, screenLabel);
   const list = document.createElement("div");
   list.className = "tv-list";
   // Row/tile sizing in tv.css reads this to scale down as more people need
@@ -691,7 +753,7 @@ function render() {
   // every data refresh; render() just always reads the current #1.
   if (buConfig) {
     const entries = buildBuRanked(deptTechs, jobs, DEPT);
-    renderRoster(entries, screenLabel);
+    renderRoster(entries, screenLabel, SHOW_DEPARTMENT_PANEL && BU_DEPARTMENT_PANEL_CODES.has(DEPT) ? buildDepartmentStats(jobs, DEPT) : null);
     return;
   }
 
