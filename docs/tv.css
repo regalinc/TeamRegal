@@ -593,3 +593,7 @@ body {
   box-shadow: 0 0 1.4vh rgba(240, 180, 41, 0.35);
 }
 .tv-has-dept .tv-row { border: 0.25vh solid #4b525e; }
+
+/* An odd number of department tiles (e.g. BU 30 once Completion is hidden):
+   let the last one span the full width instead of leaving a hole. */
+.tv-dept-panel .tv-tile-grid > .tv-tile:last-child:nth-child(odd) { grid-column: 1 / -1; }

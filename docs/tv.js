@@ -182,6 +182,8 @@ function currentMonthName() {
 // read 0 there — dropped from those two screens' tile grids at the user's
 // request. Keyed by DEPT (a bare "70"/"80" for a BU screen).
 const BU_HIDDEN_TV_TILES = {
+  // BU 30: no Completion tile (Michael, 2026-10-30; wanted everywhere eventually, BU 30 first).
+  30: new Set(["Completion"]),
   70: new Set(["Leads", "Leads sold"]),
   80: new Set(["Leads", "Leads sold"]),
 };
@@ -663,7 +665,9 @@ function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
           ${small("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats))}
           ${small("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats))}
           ${small("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats))}
-          ${small("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats))}
+          ${(BU_HIDDEN_TV_TILES[DEPT] || new Set()).has("Completion")
+            ? small("Avg ticket w/ sales", stats.avgTicketWithSales == null ? "—" : formatMoney(stats.avgTicketWithSales), kpiClass("avgTicketWithSales", stats))
+            : small("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats))}
         </div>
       </div>
       <div class="tv-dept-panel" style="--dept-color:${BU_TV_COLORS[DEPT] || "var(--accent)"}">
