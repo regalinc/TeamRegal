@@ -1,5 +1,74 @@
 [
   {
+    "id": "csr_3e1f3e021f9a4037b1d97079e2f4e952",
+    "estimate_number": "14050",
+    "customer_label": "Susan L.",
+    "created_at": "2026-10-30T19:14:14Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+    ],
+    "work_status": "needs scheduling",
+    "approved": true,
+    "approved_at": null,
+    "approved_amount": 92877
+  },
+  {
+    "id": "csr_065006d1b9854910bd831fd31c1b6c3b",
+    "estimate_number": "14049",
+    "customer_label": "Jim K.",
+    "created_at": "2026-10-30T18:51:38Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_aab24498cf6e4c46844bddcbc7161f26"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_d6bf2ab38e2d479f8a380916c0a0188b",
+    "estimate_number": "14048",
+    "customer_label": "Sara H.",
+    "created_at": "2026-10-30T18:36:18Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_8d943eadd54f485b9dba4296c807fb8f"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_f2e33f9195f1481ba01f79caace35791",
     "estimate_number": "14047",
     "customer_label": "Rodney W.",
@@ -87855,29 +87924,6 @@
     "business_unit": null,
     "assigned_employee_ids": [
       "pro_1b87fcb406c9484b84e8fccd6f2c777b"
-    ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_d6bf2ab38e2d479f8a380916c0a0188b",
-    "estimate_number": "14048",
-    "customer_label": "Sara H.",
-    "created_at": "2026-10-30T18:36:18Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_8d943eadd54f485b9dba4296c807fb8f"
     ],
     "work_status": "needs scheduling",
     "approved": false,

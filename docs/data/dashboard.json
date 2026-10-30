@@ -1,11 +1,11 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-30T18:22:03.459Z",
+    "last_synced_at": "2026-10-30T20:44:42.737Z",
     "window_days_back": 303,
     "window_days_forward": 13,
     "technician_count": 47,
-    "job_count": 12428,
-    "estimate_count": 3822
+    "job_count": 12431,
+    "estimate_count": 3824
   },
   "technicians": [
     {
@@ -197193,7 +197193,7 @@
     {
       "id": "job_fd2ba0274dff48efa2659f787918d8f7",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Susan L.",
       "city": "York",
       "state": "PA",
@@ -197219,7 +197219,7 @@
       "total_amount": 25947,
       "outstanding_balance": 0,
       "completed_at": "2026-06-11T19:12:25Z",
-      "updated_at": "2026-06-11T19:12:25Z",
+      "updated_at": "2026-10-30T19:20:17Z",
       "invoice_number": "57906",
       "created_at": "2026-06-08T12:29:59Z"
     },
@@ -218413,7 +218413,7 @@
     {
       "id": "job_aaf96eaf480a42dd8ce835f4a62cbd9f",
       "description": "30 HVAC Service",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Thomas R.",
       "city": "Etters",
       "state": "PA",
@@ -218436,7 +218436,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-06-22T19:20:04Z",
-      "updated_at": "2026-06-22T19:20:04Z",
+      "updated_at": "2026-10-30T18:54:42Z",
       "invoice_number": "58076-4",
       "created_at": "2026-06-22T18:36:52Z"
     },
@@ -221457,7 +221457,7 @@
     {
       "id": "job_6f4c701abc9e4a9cb4bcbd596d766e8a",
       "description": "OnCallair Consultation",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Sebastian Z.",
       "city": "York",
       "state": "PA",
@@ -221482,7 +221482,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-06-26T12:42:59Z",
-      "updated_at": "2026-06-29T12:05:35Z",
+      "updated_at": "2026-10-30T19:26:33Z",
       "invoice_number": "58572",
       "created_at": "2026-06-26T12:42:39Z"
     },
@@ -343696,7 +343696,7 @@
     {
       "id": "job_5fef5e37fdc3443f895313969225d58e",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Linda A.",
       "city": "York",
       "state": "PA",
@@ -343722,7 +343722,7 @@
       "total_amount": 13644,
       "outstanding_balance": 0,
       "completed_at": "2026-09-23T19:20:48Z",
-      "updated_at": "2026-09-23T19:20:48Z",
+      "updated_at": "2026-10-30T18:43:28Z",
       "invoice_number": "61208",
       "created_at": "2026-09-03T12:36:43Z"
     },
@@ -361365,7 +361365,7 @@
     {
       "id": "job_6668858333aa46c3ab41c6d70ad6f76a",
       "description": "Visit #2; Plumbing",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Zoe J.",
       "city": "Seven Valleys",
       "state": "PA",
@@ -361393,7 +361393,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-16T13:15:33Z",
-      "updated_at": "2026-10-22T13:02:14Z",
+      "updated_at": "2026-10-30T19:01:10Z",
       "invoice_number": "61413",
       "created_at": "2026-09-09T15:52:21Z"
     },
@@ -376713,33 +376713,34 @@
     {
       "id": "job_016ffbab94bf48d799341bee9fffc2b2",
       "description": "Visit #1; Plumbing",
-      "work_status": "scheduled",
+      "work_status": "complete unrated",
       "customer_label": "Sebastian Z.",
       "city": "York",
       "state": "PA",
       "zip": "17408",
       "schedule": {
-        "scheduled_start": "2026-10-30T17:00:00Z",
-        "scheduled_end": "2026-10-30T19:00:00Z",
+        "scheduled_start": "2026-10-30T18:30:00Z",
+        "scheduled_end": "2026-10-30T20:30:00Z",
         "time_zone": "America/New_York",
-        "scheduled_start_local": "2026-10-30T13:00:00-04:00",
-        "scheduled_end_local": "2026-10-30T15:00:00-04:00",
+        "scheduled_start_local": "2026-10-30T14:30:00-04:00",
+        "scheduled_end_local": "2026-10-30T16:30:00-04:00",
         "arrival_window": 120,
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+        "pro_a147eea604e04ccfa458813cf1b374f0"
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "Plumbing Attention"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-23T13:27:46Z",
+      "completed_at": "2026-10-30T19:26:33Z",
+      "updated_at": "2026-10-30T19:26:33Z",
       "invoice_number": "60878",
       "created_at": "2026-08-27T15:00:13Z"
     },
@@ -377585,7 +377586,7 @@
     {
       "id": "job_f9d4233217e7435eb06a87867d38347c",
       "description": "Visit #12",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Linda A.",
       "city": "York",
       "state": "PA",
@@ -377604,14 +377605,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "HVAC Parts"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:11:50Z",
+      "completed_at": "2026-10-30T18:43:28Z",
+      "updated_at": "2026-10-30T18:44:09Z",
       "invoice_number": "61206",
       "created_at": "2026-09-03T12:34:46Z"
     },
@@ -377872,14 +377874,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T13:32:58Z",
-      "updated_at": "2026-10-30T13:32:58Z",
+      "updated_at": "2026-10-30T18:50:34Z",
       "invoice_number": "61240",
       "created_at": "2026-09-03T16:58:18Z"
     },
@@ -377939,14 +377942,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T13:31:16Z",
-      "updated_at": "2026-10-30T13:31:16Z",
+      "updated_at": "2026-10-30T18:50:58Z",
       "invoice_number": "61255",
       "created_at": "2026-09-03T19:13:15Z"
     },
@@ -379518,14 +379522,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": "FF Kling",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T13:15:18Z",
-      "updated_at": "2026-10-30T13:15:18Z",
+      "updated_at": "2026-10-30T18:51:35Z",
       "invoice_number": "61497",
       "created_at": "2026-09-10T18:00:34Z"
     },
@@ -379788,14 +379793,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T15:52:41Z",
-      "updated_at": "2026-10-30T15:52:41Z",
+      "updated_at": "2026-10-30T18:48:42Z",
       "invoice_number": "61535",
       "created_at": "2026-09-11T17:20:38Z"
     },
@@ -380223,14 +380229,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": "FF Kling",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T16:37:20Z",
-      "updated_at": "2026-10-30T16:37:21Z",
+      "updated_at": "2026-10-30T18:48:05Z",
       "invoice_number": "61629",
       "created_at": "2026-09-15T12:31:03Z"
     },
@@ -380757,15 +380764,14 @@
       "tags": [
         "70",
         "Opportunity",
-        "Parts Ordered",
-        "Plumbing Attention"
+        "Parts Ordered"
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 45414,
       "outstanding_balance": 0,
       "completed_at": "2026-10-26T18:35:40Z",
-      "updated_at": "2026-10-30T15:55:40Z",
+      "updated_at": "2026-10-30T18:37:56Z",
       "invoice_number": "61863",
       "created_at": "2026-09-22T15:10:11Z"
     },
@@ -381497,9 +381503,9 @@
       "business_unit": "40 HVAC MAINT",
       "lead_source": "FF Kling",
       "total_amount": 8900,
-      "outstanding_balance": 8900,
+      "outstanding_balance": 0,
       "completed_at": "2026-10-28T10:30:40Z",
-      "updated_at": "2026-10-30T12:55:31Z",
+      "updated_at": "2026-10-30T20:12:16Z",
       "invoice_number": "62352",
       "created_at": "2026-10-05T15:28:15Z"
     },
@@ -382143,7 +382149,7 @@
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+        "pro_2e93b52e70a74c05aa466a52df32b9ef"
       ],
       "tags": [
         "80",
@@ -382154,7 +382160,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-10-07T17:40:30Z",
+      "updated_at": "2026-10-30T19:19:00Z",
       "invoice_number": "62486",
       "created_at": "2026-10-07T17:38:28Z"
     },
@@ -382621,7 +382627,7 @@
       "total_amount": 8900,
       "outstanding_balance": 8900,
       "completed_at": "2026-10-23T15:35:36Z",
-      "updated_at": "2026-10-30T18:01:00Z",
+      "updated_at": "2026-10-30T18:46:40Z",
       "invoice_number": "62616",
       "created_at": "2026-10-12T16:49:12Z"
     },
@@ -383265,9 +383271,9 @@
       "business_unit": "50 PLUMBING AOR",
       "lead_source": null,
       "total_amount": 815200,
-      "outstanding_balance": 815200,
+      "outstanding_balance": 0,
       "completed_at": "2026-10-30T16:23:52Z",
-      "updated_at": "2026-10-30T16:25:35Z",
+      "updated_at": "2026-10-30T20:50:16Z",
       "invoice_number": "62713-1",
       "created_at": "2026-10-15T12:44:26Z"
     },
@@ -384758,7 +384764,7 @@
     {
       "id": "job_5baf3f7d98e541a8bb83230cab2f6c47",
       "description": "40 HVAC Maintenance",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Tanner B.",
       "city": "Dillsburg",
       "state": "PA",
@@ -384783,7 +384789,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-21T13:58:57Z",
-      "updated_at": "2026-10-25T15:30:12Z",
+      "updated_at": "2026-10-30T20:01:32Z",
       "invoice_number": "62047-2",
       "created_at": "2026-10-20T13:24:23Z"
     },
@@ -385021,7 +385027,7 @@
     {
       "id": "job_d610fc5aff9640c086b9e1920c4b21fe",
       "description": "70 - Plumbing Service",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Roy R.",
       "city": "York",
       "state": "PA",
@@ -385046,7 +385052,7 @@
       "total_amount": 82130,
       "outstanding_balance": 0,
       "completed_at": "2026-10-21T13:39:17Z",
-      "updated_at": "2026-10-21T13:39:17Z",
+      "updated_at": "2026-10-30T18:55:02Z",
       "invoice_number": "62743-3",
       "created_at": "2026-10-20T17:59:37Z"
     },
@@ -385815,8 +385821,8 @@
     },
     {
       "id": "job_34eb2c8b913e408695683e82bc75872b",
-      "description": "Warranty Inducer Replacement",
-      "work_status": "in progress",
+      "description": "40 HVAC Maintenance",
+      "work_status": "complete unrated",
       "customer_label": "Tanner B.",
       "city": "Dillsburg",
       "state": "PA",
@@ -385838,10 +385844,10 @@
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
-      "total_amount": 98260,
-      "outstanding_balance": 98260,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:27:33Z",
+      "total_amount": 51340,
+      "outstanding_balance": 0,
+      "completed_at": "2026-10-30T20:01:32Z",
+      "updated_at": "2026-10-30T20:01:32Z",
       "invoice_number": "62918",
       "created_at": "2026-10-21T14:48:36Z"
     },
@@ -387710,7 +387716,7 @@
     {
       "id": "job_9fb2474fedc24b5aa3dde0186228586b",
       "description": "Billing - 10 HVAC AOR",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Clint S.",
       "city": "Dallastown",
       "state": "PA",
@@ -387736,7 +387742,7 @@
       "total_amount": 674100,
       "outstanding_balance": 674100,
       "completed_at": "2026-10-30T18:24:17Z",
-      "updated_at": "2026-10-30T18:24:17Z",
+      "updated_at": "2026-10-30T19:35:31Z",
       "invoice_number": "62993",
       "created_at": "2026-10-23T15:26:21Z"
     },
@@ -388366,7 +388372,7 @@
     {
       "id": "job_051e2a22539f4a079b94da28ea0a3aa9",
       "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Kenneth H.",
       "city": "Hummelstown",
       "state": "PA",
@@ -388389,7 +388395,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-25T16:07:34Z",
-      "updated_at": "2026-10-27T16:12:40Z",
+      "updated_at": "2026-10-30T18:50:03Z",
       "invoice_number": "63011-2",
       "created_at": "2026-10-25T12:58:32Z"
     },
@@ -389391,7 +389397,7 @@
     {
       "id": "job_9bad8078b94a4fb5b038a070f302df6b",
       "description": "30 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Tosha F.",
       "city": "York",
       "state": "PA",
@@ -389417,8 +389423,8 @@
       "lead_source": null,
       "total_amount": 53969,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T18:25:31Z",
+      "completed_at": "2026-10-30T18:36:50Z",
+      "updated_at": "2026-10-30T18:36:50Z",
       "invoice_number": "63039",
       "created_at": "2026-10-26T12:57:21Z"
     },
@@ -389627,7 +389633,7 @@
     {
       "id": "job_acf3757d12ab4ea79ba9c35382c0d690",
       "description": "70 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Clint S.",
       "city": "Dallastown",
       "state": "PA",
@@ -389651,10 +389657,10 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:43:34Z",
+      "total_amount": 68440,
+      "outstanding_balance": 0,
+      "completed_at": "2026-10-30T19:35:31Z",
+      "updated_at": "2026-10-30T19:35:48Z",
       "invoice_number": "63048",
       "created_at": "2026-10-26T14:16:55Z"
     },
@@ -389829,8 +389835,8 @@
     },
     {
       "id": "job_dbfe1dffcd7b46f992f352524707cafe",
-      "description": "30 - Initial Service Fee",
-      "work_status": "in progress",
+      "description": "30 HVAC Service",
+      "work_status": "complete unrated",
       "customer_label": "Thomas R.",
       "city": "Etters",
       "state": "PA",
@@ -389854,10 +389860,10 @@
       ],
       "business_unit": "30 HVAC SERVICE",
       "lead_source": null,
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:50:28Z",
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "completed_at": "2026-10-30T18:54:42Z",
+      "updated_at": "2026-10-30T18:54:42Z",
       "invoice_number": "63059",
       "created_at": "2026-10-26T16:22:30Z"
     },
@@ -390923,7 +390929,7 @@
     {
       "id": "job_eebb910850874af1b58cc62d0cbeadbb",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Zoe J.",
       "city": "Seven Valleys",
       "state": "PA",
@@ -390948,8 +390954,8 @@
       "lead_source": null,
       "total_amount": 73651,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:42:58Z",
+      "completed_at": "2026-10-30T19:01:10Z",
+      "updated_at": "2026-10-30T19:01:11Z",
       "invoice_number": "63114",
       "created_at": "2026-10-27T17:26:13Z"
     },
@@ -391011,16 +391017,16 @@
       "business_unit": "40 HVAC MAINT",
       "lead_source": "Word of Mouth - Neighbor/Friend",
       "total_amount": 39026,
-      "outstanding_balance": 39026,
+      "outstanding_balance": 0,
       "completed_at": "2026-10-30T15:08:18Z",
-      "updated_at": "2026-10-30T15:34:39Z",
+      "updated_at": "2026-10-30T18:35:58Z",
       "invoice_number": "63115",
       "created_at": "2026-10-27T17:46:27Z"
     },
     {
       "id": "job_0f2d37ae3c014f3e9b1f832be9bf3b4e",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Roy R.",
       "city": "York",
       "state": "PA",
@@ -391043,10 +391049,10 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 0,
+      "total_amount": 23846,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T18:13:49Z",
+      "completed_at": "2026-10-30T18:55:02Z",
+      "updated_at": "2026-10-30T18:55:02Z",
       "invoice_number": "63117",
       "created_at": "2026-10-27T18:37:33Z"
     },
@@ -391255,7 +391261,7 @@
     {
       "id": "job_fbbc69b8192f45969edb6a554065bfe4",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Patricia K.",
       "city": "York",
       "state": "PA",
@@ -391284,7 +391290,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-29T14:04:37Z",
-      "updated_at": "2026-10-29T16:18:17Z",
+      "updated_at": "2026-10-30T18:47:58Z",
       "invoice_number": "63123",
       "created_at": "2026-10-28T11:42:41Z"
     },
@@ -391954,7 +391960,7 @@
     {
       "id": "job_d07ec358e9a3470db69e77a64e90df3e",
       "description": "",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Kenneth H.",
       "city": "Hummelstown",
       "state": "PA",
@@ -391978,8 +391984,8 @@
       "lead_source": "Google",
       "total_amount": 0,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T15:39:34Z",
+      "completed_at": "2026-10-30T18:50:03Z",
+      "updated_at": "2026-10-30T18:50:04Z",
       "invoice_number": "63008-3",
       "created_at": "2026-10-28T17:27:08Z"
     },
@@ -392179,8 +392185,8 @@
       "total_amount": 8900,
       "outstanding_balance": 8900,
       "completed_at": null,
-      "updated_at": "2026-10-30T18:11:50Z",
-      "invoice_number": "63154",
+      "updated_at": "2026-10-30T18:45:59Z",
+      "invoice_number": "63154-1",
       "created_at": "2026-10-28T18:30:12Z"
     },
     {
@@ -392347,7 +392353,7 @@
     {
       "id": "job_ecbeac550a894405a7885e395fc05718",
       "description": "30 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Sara H.",
       "city": "York",
       "state": "PA",
@@ -392374,8 +392380,8 @@
       "lead_source": null,
       "total_amount": 50080,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T18:29:05Z",
+      "completed_at": "2026-10-30T18:41:50Z",
+      "updated_at": "2026-10-30T18:41:50Z",
       "invoice_number": "63162",
       "created_at": "2026-10-29T12:11:43Z"
     },
@@ -392450,7 +392456,7 @@
     {
       "id": "job_00a9e9faf97e41b9adf3262f6c117014",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Susan L.",
       "city": "York",
       "state": "PA",
@@ -392474,9 +392480,9 @@
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 26942,
-      "outstanding_balance": 26942,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:32:59Z",
+      "outstanding_balance": 0,
+      "completed_at": "2026-10-30T19:20:17Z",
+      "updated_at": "2026-10-30T19:20:17Z",
       "invoice_number": "63164",
       "created_at": "2026-10-29T12:31:30Z"
     },
@@ -392546,7 +392552,7 @@
     {
       "id": "job_30a588412dfb43dd8a0ab8f47ed1d648",
       "description": "70 - Plumbing Service",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Patricia K.",
       "city": "York",
       "state": "PA",
@@ -392570,8 +392576,8 @@
       "lead_source": null,
       "total_amount": 370499,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-10-30T18:16:52Z",
+      "completed_at": "2026-10-30T18:47:58Z",
+      "updated_at": "2026-10-30T19:05:54Z",
       "invoice_number": "63167",
       "created_at": "2026-10-29T13:37:30Z"
     },
@@ -392715,7 +392721,7 @@
     {
       "id": "job_60e855c5a6d844c4a1881e17b60260d4",
       "description": "30 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Megan H.",
       "city": "Shrewsbury",
       "state": "PA",
@@ -392734,15 +392740,14 @@
       ],
       "tags": [
         "30",
-        "Opportunity",
         "Non-Member"
       ],
       "business_unit": "30 HVAC SERVICE",
       "lead_source": null,
       "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "completed_at": null,
-      "updated_at": "2026-10-30T17:24:18Z",
+      "outstanding_balance": 0,
+      "completed_at": "2026-10-30T18:38:58Z",
+      "updated_at": "2026-10-30T18:43:32Z",
       "invoice_number": "63173",
       "created_at": "2026-10-29T15:05:24Z"
     },
@@ -392943,10 +392948,10 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 50615,
-      "outstanding_balance": 50615,
+      "total_amount": 8900,
+      "outstanding_balance": 8900,
       "completed_at": null,
-      "updated_at": "2026-10-30T18:09:36Z",
+      "updated_at": "2026-10-30T18:38:55Z",
       "invoice_number": "63183",
       "created_at": "2026-10-29T18:24:45Z"
     },
@@ -393399,7 +393404,9 @@
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+        "pro_9a3f2249ef464465a1522f4a3ccfef5a",
+        "pro_8fc589c75489437bb66ff45ca0aea7ac",
+        "pro_06aeac3b71a24c60a826c7e11499d8b5"
       ],
       "tags": [
         "70",
@@ -393408,10 +393415,10 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
+      "total_amount": 54651,
+      "outstanding_balance": 54651,
       "completed_at": null,
-      "updated_at": "2026-10-30T18:22:07Z",
+      "updated_at": "2026-10-30T20:45:16Z",
       "invoice_number": "63202",
       "created_at": "2026-10-30T15:49:01Z"
     },
@@ -393533,14 +393540,15 @@
         "pro_5048a923ca8a47a5bd4cc2bbe40c4faa"
       ],
       "tags": [
-        "OnCall Air"
+        "OnCall Air",
+        "HVAC Installation"
       ],
       "business_unit": "10 HVAC AOR",
       "lead_source": null,
       "total_amount": 650300,
       "outstanding_balance": 650300,
       "completed_at": null,
-      "updated_at": "2026-10-30T18:27:43Z",
+      "updated_at": "2026-10-30T18:37:23Z",
       "invoice_number": "63211",
       "created_at": "2026-10-30T18:12:54Z"
     },
@@ -393577,6 +393585,39 @@
       "updated_at": "2026-10-30T18:24:12Z",
       "invoice_number": "63212",
       "created_at": "2026-10-30T18:21:55Z"
+    },
+    {
+      "id": "job_f3eb67ae97c24435a07a688fdb6e1771",
+      "description": "70 - RCC Whole Home Initial Service Fee",
+      "work_status": "scheduled",
+      "customer_label": "Alissa W.",
+      "city": "East York",
+      "state": "PA",
+      "zip": "17402",
+      "schedule": {
+        "scheduled_start": "2026-11-02T14:00:00Z",
+        "scheduled_end": "2026-11-02T16:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-02T09:00:00-05:00",
+        "scheduled_end_local": "2026-11-02T11:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+      ],
+      "tags": [
+        "70",
+        "Opportunity"
+      ],
+      "business_unit": "70 PLUMBING SERVICE",
+      "lead_source": null,
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "completed_at": null,
+      "updated_at": "2026-10-30T19:17:24Z",
+      "invoice_number": "63215",
+      "created_at": "2026-10-30T19:12:27Z"
     },
     {
       "id": "job_b732977f0ace465894fb98d9998d6392",
@@ -398353,9 +398394,144 @@
       "updated_at": "2026-10-30T17:52:51Z",
       "invoice_number": "63209",
       "created_at": "2026-10-30T17:36:02Z"
+    },
+    {
+      "id": "job_b356c13a1df0465eb0909c56de5697c7",
+      "description": "70 - Initial Service Fee",
+      "work_status": "scheduled",
+      "customer_label": "Kim H.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17403",
+      "schedule": {
+        "scheduled_start": "2026-11-04T12:00:00Z",
+        "scheduled_end": "2026-11-04T14:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-04T07:00:00-05:00",
+        "scheduled_end_local": "2026-11-04T09:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_7ccf9b4457bb40ecbb84540d250950e1"
+      ],
+      "tags": [
+        "70",
+        "Non-Member"
+      ],
+      "business_unit": "70 PLUMBING SERVICE",
+      "lead_source": null,
+      "total_amount": 46849,
+      "outstanding_balance": 46849,
+      "completed_at": null,
+      "updated_at": "2026-10-30T18:47:32Z",
+      "invoice_number": "63154-2",
+      "created_at": "2026-10-30T18:45:48Z"
+    },
+    {
+      "id": "job_43b36a88612746d7bff6a85c7e7a6e58",
+      "description": "30 - RCC Whole Home Waived Initial Service Fee",
+      "work_status": "scheduled",
+      "customer_label": "Patricia K.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17402",
+      "schedule": {
+        "scheduled_start": "2026-11-05T16:00:00Z",
+        "scheduled_end": "2026-11-05T18:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-05T11:00:00-05:00",
+        "scheduled_end_local": "2026-11-05T13:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_e328d4cad27249d48750d091fd1faa3b"
+      ],
+      "tags": [
+        "30",
+        "Opportunity"
+      ],
+      "business_unit": "30 HVAC SERVICE",
+      "lead_source": null,
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "completed_at": null,
+      "updated_at": "2026-10-30T19:00:15Z",
+      "invoice_number": "63213",
+      "created_at": "2026-10-30T18:58:52Z"
     }
   ],
   "estimates": [
+    {
+      "id": "csr_3e1f3e021f9a4037b1d97079e2f4e952",
+      "estimate_number": "14050",
+      "customer_label": "Susan L.",
+      "created_at": "2026-10-30T19:14:14Z",
+      "schedule": {
+        "scheduled_start": null,
+        "scheduled_end": null,
+        "time_zone": "America/New_York",
+        "scheduled_start_local": null,
+        "scheduled_end_local": null,
+        "arrival_window": 0,
+        "appointments": []
+      },
+      "business_unit": null,
+      "assigned_employee_ids": [
+        "pro_d67d4e694a8c4bbdaba6801433d3bc20"
+      ],
+      "work_status": "needs scheduling",
+      "approved": true,
+      "approved_at": null,
+      "approved_amount": 92877
+    },
+    {
+      "id": "csr_065006d1b9854910bd831fd31c1b6c3b",
+      "estimate_number": "14049",
+      "customer_label": "Jim K.",
+      "created_at": "2026-10-30T18:51:38Z",
+      "schedule": {
+        "scheduled_start": null,
+        "scheduled_end": null,
+        "time_zone": "America/New_York",
+        "scheduled_start_local": null,
+        "scheduled_end_local": null,
+        "arrival_window": 0,
+        "appointments": []
+      },
+      "business_unit": null,
+      "assigned_employee_ids": [
+        "pro_aab24498cf6e4c46844bddcbc7161f26"
+      ],
+      "work_status": "needs scheduling",
+      "approved": false,
+      "approved_at": null,
+      "approved_amount": 0
+    },
+    {
+      "id": "csr_d6bf2ab38e2d479f8a380916c0a0188b",
+      "estimate_number": "14048",
+      "customer_label": "Sara H.",
+      "created_at": "2026-10-30T18:36:18Z",
+      "schedule": {
+        "scheduled_start": null,
+        "scheduled_end": null,
+        "time_zone": "America/New_York",
+        "scheduled_start_local": null,
+        "scheduled_end_local": null,
+        "arrival_window": 0,
+        "appointments": []
+      },
+      "business_unit": null,
+      "assigned_employee_ids": [
+        "pro_8d943eadd54f485b9dba4296c807fb8f"
+      ],
+      "work_status": "needs scheduling",
+      "approved": false,
+      "approved_at": null,
+      "approved_amount": 0
+    },
     {
       "id": "csr_f2e33f9195f1481ba01f79caace35791",
       "estimate_number": "14047",
@@ -486217,29 +486393,6 @@
       "approved": false,
       "approved_at": null,
       "approved_amount": 0
-    },
-    {
-      "id": "csr_d6bf2ab38e2d479f8a380916c0a0188b",
-      "estimate_number": "14048",
-      "customer_label": "Sara H.",
-      "created_at": "2026-10-30T18:36:18Z",
-      "schedule": {
-        "scheduled_start": null,
-        "scheduled_end": null,
-        "time_zone": "America/New_York",
-        "scheduled_start_local": null,
-        "scheduled_end_local": null,
-        "arrival_window": 0,
-        "appointments": []
-      },
-      "business_unit": null,
-      "assigned_employee_ids": [
-        "pro_8d943eadd54f485b9dba4296c807fb8f"
-      ],
-      "work_status": "needs scheduling",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
     }
   ],
   "by_technician": {
@@ -486861,7 +487014,7 @@
       {
         "id": "job_ecbeac550a894405a7885e395fc05718",
         "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Sara H.",
         "city": "York",
         "state": "PA",
@@ -486888,8 +487041,8 @@
         "lead_source": null,
         "total_amount": 50080,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T18:29:05Z",
+        "completed_at": "2026-10-30T18:41:50Z",
+        "updated_at": "2026-10-30T18:41:50Z",
         "invoice_number": "63162",
         "created_at": "2026-10-29T12:11:43Z"
       }
@@ -499678,6 +499831,39 @@
         "updated_at": "2026-10-23T14:06:10Z",
         "invoice_number": "61430",
         "created_at": "2026-09-09T17:50:04Z"
+      },
+      {
+        "id": "job_76aabd8725944eda87cf792db19a4f32",
+        "description": "Visit #2; Plumbing",
+        "work_status": "scheduled",
+        "customer_label": "Ron L.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-11-02T14:00:00Z",
+          "scheduled_end": "2026-11-02T16:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-02T09:00:00-05:00",
+          "scheduled_end_local": "2026-11-02T11:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_2e93b52e70a74c05aa466a52df32b9ef"
+        ],
+        "tags": [
+          "80",
+          "Opportunity"
+        ],
+        "business_unit": "80 PLUMBING MAINT",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-10-30T19:19:00Z",
+        "invoice_number": "62486",
+        "created_at": "2026-10-07T17:38:28Z"
       }
     ],
     "pro_7c54b30de89c4b6ea22a9053f0662f3d": [
@@ -516374,14 +516560,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T13:31:16Z",
-        "updated_at": "2026-10-30T13:31:16Z",
+        "updated_at": "2026-10-30T18:50:58Z",
         "invoice_number": "61255",
         "created_at": "2026-09-03T19:13:15Z"
       },
@@ -516744,14 +516931,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": "FF Kling",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T16:37:20Z",
-        "updated_at": "2026-10-30T16:37:21Z",
+        "updated_at": "2026-10-30T18:48:05Z",
         "invoice_number": "61629",
         "created_at": "2026-09-15T12:31:03Z"
       },
@@ -516819,7 +517007,7 @@
         "total_amount": 8900,
         "outstanding_balance": 8900,
         "completed_at": "2026-10-23T15:35:36Z",
-        "updated_at": "2026-10-30T18:01:00Z",
+        "updated_at": "2026-10-30T18:46:40Z",
         "invoice_number": "62616",
         "created_at": "2026-10-12T16:49:12Z"
       },
@@ -517124,7 +517312,7 @@
       {
         "id": "job_9bad8078b94a4fb5b038a070f302df6b",
         "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Tosha F.",
         "city": "York",
         "state": "PA",
@@ -517150,8 +517338,8 @@
         "lead_source": null,
         "total_amount": 53969,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T18:25:31Z",
+        "completed_at": "2026-10-30T18:36:50Z",
+        "updated_at": "2026-10-30T18:36:50Z",
         "invoice_number": "63039",
         "created_at": "2026-10-26T12:57:21Z"
       },
@@ -517279,9 +517467,9 @@
         "business_unit": "40 HVAC MAINT",
         "lead_source": "Word of Mouth - Neighbor/Friend",
         "total_amount": 39026,
-        "outstanding_balance": 39026,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-30T15:08:18Z",
-        "updated_at": "2026-10-30T15:34:39Z",
+        "updated_at": "2026-10-30T18:35:58Z",
         "invoice_number": "63115",
         "created_at": "2026-10-27T17:46:27Z"
       },
@@ -528586,7 +528774,7 @@
       {
         "id": "job_6668858333aa46c3ab41c6d70ad6f76a",
         "description": "Visit #2; Plumbing",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Zoe J.",
         "city": "Seven Valleys",
         "state": "PA",
@@ -528614,7 +528802,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-16T13:15:33Z",
-        "updated_at": "2026-10-22T13:02:14Z",
+        "updated_at": "2026-10-30T19:01:10Z",
         "invoice_number": "61413",
         "created_at": "2026-09-09T15:52:21Z"
       },
@@ -530217,6 +530405,42 @@
         "updated_at": "2026-10-30T15:17:37Z",
         "invoice_number": "63188",
         "created_at": "2026-10-30T11:17:33Z"
+      },
+      {
+        "id": "job_b8e13e49215b4b35b0086f881d8c03cc",
+        "description": "70 - Initial Service Fee",
+        "work_status": "in progress",
+        "customer_label": "Roger M.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-10-30T17:30:00Z",
+          "scheduled_end": "2026-10-30T18:30:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-10-30T13:30:00-04:00",
+          "scheduled_end_local": "2026-10-30T14:30:00-04:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_9a3f2249ef464465a1522f4a3ccfef5a",
+          "pro_8fc589c75489437bb66ff45ca0aea7ac",
+          "pro_06aeac3b71a24c60a826c7e11499d8b5"
+        ],
+        "tags": [
+          "70",
+          "Opportunity",
+          "Non-Member"
+        ],
+        "business_unit": "70 PLUMBING SERVICE",
+        "lead_source": null,
+        "total_amount": 54651,
+        "outstanding_balance": 54651,
+        "completed_at": null,
+        "updated_at": "2026-10-30T20:45:16Z",
+        "invoice_number": "63202",
+        "created_at": "2026-10-30T15:49:01Z"
       },
       {
         "id": "job_9fd56a5537204977b4eaf03b0ffb1086",
@@ -552531,7 +552755,7 @@
       {
         "id": "job_f9d4233217e7435eb06a87867d38347c",
         "description": "Visit #12",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Linda A.",
         "city": "York",
         "state": "PA",
@@ -552550,14 +552774,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "HVAC Parts"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:11:50Z",
+        "completed_at": "2026-10-30T18:43:28Z",
+        "updated_at": "2026-10-30T18:44:09Z",
         "invoice_number": "61206",
         "created_at": "2026-09-03T12:34:46Z"
       },
@@ -560414,7 +560639,7 @@
       {
         "id": "job_d07ec358e9a3470db69e77a64e90df3e",
         "description": "",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Kenneth H.",
         "city": "Hummelstown",
         "state": "PA",
@@ -560438,8 +560663,8 @@
         "lead_source": "Google",
         "total_amount": 0,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T15:39:34Z",
+        "completed_at": "2026-10-30T18:50:03Z",
+        "updated_at": "2026-10-30T18:50:04Z",
         "invoice_number": "63008-3",
         "created_at": "2026-10-28T17:27:08Z"
       },
@@ -575526,7 +575751,7 @@
       {
         "id": "job_9fb2474fedc24b5aa3dde0186228586b",
         "description": "Billing - 10 HVAC AOR",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Clint S.",
         "city": "Dallastown",
         "state": "PA",
@@ -575552,7 +575777,7 @@
         "total_amount": 674100,
         "outstanding_balance": 674100,
         "completed_at": "2026-10-30T18:24:17Z",
-        "updated_at": "2026-10-30T18:24:17Z",
+        "updated_at": "2026-10-30T19:35:31Z",
         "invoice_number": "62993",
         "created_at": "2026-10-23T15:26:21Z"
       },
@@ -601085,39 +601310,6 @@
         "created_at": "2026-10-07T13:55:01Z"
       },
       {
-        "id": "job_76aabd8725944eda87cf792db19a4f32",
-        "description": "Visit #2; Plumbing",
-        "work_status": "scheduled",
-        "customer_label": "Ron L.",
-        "city": "York",
-        "state": "PA",
-        "zip": "17402",
-        "schedule": {
-          "scheduled_start": "2026-11-02T14:00:00Z",
-          "scheduled_end": "2026-11-02T16:00:00Z",
-          "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-11-02T09:00:00-05:00",
-          "scheduled_end_local": "2026-11-02T11:00:00-05:00",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
-        ],
-        "tags": [
-          "80",
-          "Opportunity"
-        ],
-        "business_unit": "80 PLUMBING MAINT",
-        "lead_source": null,
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-07T17:40:30Z",
-        "invoice_number": "62486",
-        "created_at": "2026-10-07T17:38:28Z"
-      },
-      {
         "id": "job_8d5036c6596d495ab7938da48d5f8553",
         "description": "70 - Initial Service Fee",
         "work_status": "complete rated",
@@ -601691,7 +601883,7 @@
       {
         "id": "job_fbbc69b8192f45969edb6a554065bfe4",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Patricia K.",
         "city": "York",
         "state": "PA",
@@ -601720,7 +601912,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-29T14:04:37Z",
-        "updated_at": "2026-10-29T16:18:17Z",
+        "updated_at": "2026-10-30T18:47:58Z",
         "invoice_number": "63123",
         "created_at": "2026-10-28T11:42:41Z"
       },
@@ -601759,7 +601951,7 @@
       {
         "id": "job_30a588412dfb43dd8a0ab8f47ed1d648",
         "description": "70 - Plumbing Service",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Patricia K.",
         "city": "York",
         "state": "PA",
@@ -601783,8 +601975,8 @@
         "lead_source": null,
         "total_amount": 370499,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T18:16:52Z",
+        "completed_at": "2026-10-30T18:47:58Z",
+        "updated_at": "2026-10-30T19:05:54Z",
         "invoice_number": "63167",
         "created_at": "2026-10-29T13:37:30Z"
       },
@@ -601888,6 +602080,39 @@
         "updated_at": "2026-10-30T14:12:15Z",
         "invoice_number": "63201",
         "created_at": "2026-10-30T14:10:44Z"
+      },
+      {
+        "id": "job_f3eb67ae97c24435a07a688fdb6e1771",
+        "description": "70 - RCC Whole Home Initial Service Fee",
+        "work_status": "scheduled",
+        "customer_label": "Alissa W.",
+        "city": "East York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-11-02T14:00:00Z",
+          "scheduled_end": "2026-11-02T16:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-02T09:00:00-05:00",
+          "scheduled_end_local": "2026-11-02T11:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+        ],
+        "tags": [
+          "70",
+          "Opportunity"
+        ],
+        "business_unit": "70 PLUMBING SERVICE",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-10-30T19:17:24Z",
+        "invoice_number": "63215",
+        "created_at": "2026-10-30T19:12:27Z"
       },
       {
         "id": "job_31f6543d47c046dfaa63114f2c3234b1",
@@ -621315,14 +621540,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T13:32:58Z",
-        "updated_at": "2026-10-30T13:32:58Z",
+        "updated_at": "2026-10-30T18:50:34Z",
         "invoice_number": "61240",
         "created_at": "2026-09-03T16:58:18Z"
       },
@@ -621618,14 +621844,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T15:52:41Z",
-        "updated_at": "2026-10-30T15:52:41Z",
+        "updated_at": "2026-10-30T18:48:42Z",
         "invoice_number": "61535",
         "created_at": "2026-09-11T17:20:38Z"
       },
@@ -621999,7 +622226,7 @@
       {
         "id": "job_5baf3f7d98e541a8bb83230cab2f6c47",
         "description": "40 HVAC Maintenance",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Tanner B.",
         "city": "Dillsburg",
         "state": "PA",
@@ -622024,7 +622251,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-21T13:58:57Z",
-        "updated_at": "2026-10-25T15:30:12Z",
+        "updated_at": "2026-10-30T20:01:32Z",
         "invoice_number": "62047-2",
         "created_at": "2026-10-20T13:24:23Z"
       },
@@ -622198,8 +622425,8 @@
       },
       {
         "id": "job_34eb2c8b913e408695683e82bc75872b",
-        "description": "Warranty Inducer Replacement",
-        "work_status": "in progress",
+        "description": "40 HVAC Maintenance",
+        "work_status": "complete unrated",
         "customer_label": "Tanner B.",
         "city": "Dillsburg",
         "state": "PA",
@@ -622221,10 +622448,10 @@
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
-        "total_amount": 98260,
-        "outstanding_balance": 98260,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:27:33Z",
+        "total_amount": 51340,
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-30T20:01:32Z",
+        "updated_at": "2026-10-30T20:01:32Z",
         "invoice_number": "62918",
         "created_at": "2026-10-21T14:48:36Z"
       },
@@ -622296,7 +622523,7 @@
       {
         "id": "job_051e2a22539f4a079b94da28ea0a3aa9",
         "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Kenneth H.",
         "city": "Hummelstown",
         "state": "PA",
@@ -622319,7 +622546,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-25T16:07:34Z",
-        "updated_at": "2026-10-27T16:12:40Z",
+        "updated_at": "2026-10-30T18:50:03Z",
         "invoice_number": "63011-2",
         "created_at": "2026-10-25T12:58:32Z"
       },
@@ -630202,7 +630429,7 @@
       {
         "id": "job_d07ec358e9a3470db69e77a64e90df3e",
         "description": "",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Kenneth H.",
         "city": "Hummelstown",
         "state": "PA",
@@ -630226,8 +630453,8 @@
         "lead_source": "Google",
         "total_amount": 0,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T15:39:34Z",
+        "completed_at": "2026-10-30T18:50:03Z",
+        "updated_at": "2026-10-30T18:50:04Z",
         "invoice_number": "63008-3",
         "created_at": "2026-10-28T17:27:08Z"
       }
@@ -653921,7 +654148,7 @@
       {
         "id": "job_6668858333aa46c3ab41c6d70ad6f76a",
         "description": "Visit #2; Plumbing",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Zoe J.",
         "city": "Seven Valleys",
         "state": "PA",
@@ -653949,7 +654176,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-16T13:15:33Z",
-        "updated_at": "2026-10-22T13:02:14Z",
+        "updated_at": "2026-10-30T19:01:10Z",
         "invoice_number": "61413",
         "created_at": "2026-09-09T15:52:21Z"
       },
@@ -655623,7 +655850,7 @@
       {
         "id": "job_eebb910850874af1b58cc62d0cbeadbb",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Zoe J.",
         "city": "Seven Valleys",
         "state": "PA",
@@ -655648,8 +655875,8 @@
         "lead_source": null,
         "total_amount": 73651,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:42:58Z",
+        "completed_at": "2026-10-30T19:01:10Z",
+        "updated_at": "2026-10-30T19:01:11Z",
         "invoice_number": "63114",
         "created_at": "2026-10-27T17:26:13Z"
       },
@@ -656086,6 +656313,42 @@
         "updated_at": "2026-10-30T13:58:26Z",
         "invoice_number": "63198",
         "created_at": "2026-10-30T13:56:42Z"
+      },
+      {
+        "id": "job_b8e13e49215b4b35b0086f881d8c03cc",
+        "description": "70 - Initial Service Fee",
+        "work_status": "in progress",
+        "customer_label": "Roger M.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-10-30T17:30:00Z",
+          "scheduled_end": "2026-10-30T18:30:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-10-30T13:30:00-04:00",
+          "scheduled_end_local": "2026-10-30T14:30:00-04:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_9a3f2249ef464465a1522f4a3ccfef5a",
+          "pro_8fc589c75489437bb66ff45ca0aea7ac",
+          "pro_06aeac3b71a24c60a826c7e11499d8b5"
+        ],
+        "tags": [
+          "70",
+          "Opportunity",
+          "Non-Member"
+        ],
+        "business_unit": "70 PLUMBING SERVICE",
+        "lead_source": null,
+        "total_amount": 54651,
+        "outstanding_balance": 54651,
+        "completed_at": null,
+        "updated_at": "2026-10-30T20:45:16Z",
+        "invoice_number": "63202",
+        "created_at": "2026-10-30T15:49:01Z"
       },
       {
         "id": "job_8ddb0a7690df45f0a7af13bf3d03958b",
@@ -681248,7 +681511,7 @@
       {
         "id": "job_d610fc5aff9640c086b9e1920c4b21fe",
         "description": "70 - Plumbing Service",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Roy R.",
         "city": "York",
         "state": "PA",
@@ -681273,7 +681536,7 @@
         "total_amount": 82130,
         "outstanding_balance": 0,
         "completed_at": "2026-10-21T13:39:17Z",
-        "updated_at": "2026-10-21T13:39:17Z",
+        "updated_at": "2026-10-30T18:55:02Z",
         "invoice_number": "62743-3",
         "created_at": "2026-10-20T17:59:37Z"
       },
@@ -681580,7 +681843,7 @@
       {
         "id": "job_0f2d37ae3c014f3e9b1f832be9bf3b4e",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Roy R.",
         "city": "York",
         "state": "PA",
@@ -681603,10 +681866,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 0,
+        "total_amount": 23846,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T18:13:49Z",
+        "completed_at": "2026-10-30T18:55:02Z",
+        "updated_at": "2026-10-30T18:55:02Z",
         "invoice_number": "63117",
         "created_at": "2026-10-27T18:37:33Z"
       },
@@ -697435,7 +697698,7 @@
       {
         "id": "job_aaf96eaf480a42dd8ce835f4a62cbd9f",
         "description": "30 HVAC Service",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Thomas R.",
         "city": "Etters",
         "state": "PA",
@@ -697458,7 +697721,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-06-22T19:20:04Z",
-        "updated_at": "2026-06-22T19:20:04Z",
+        "updated_at": "2026-10-30T18:54:42Z",
         "invoice_number": "58076-4",
         "created_at": "2026-06-22T18:36:52Z"
       },
@@ -709442,8 +709705,8 @@
       },
       {
         "id": "job_dbfe1dffcd7b46f992f352524707cafe",
-        "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "description": "30 HVAC Service",
+        "work_status": "complete unrated",
         "customer_label": "Thomas R.",
         "city": "Etters",
         "state": "PA",
@@ -709467,10 +709730,10 @@
         ],
         "business_unit": "30 HVAC SERVICE",
         "lead_source": null,
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:50:28Z",
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-30T18:54:42Z",
+        "updated_at": "2026-10-30T18:54:42Z",
         "invoice_number": "63059",
         "created_at": "2026-10-26T16:22:30Z"
       },
@@ -710332,6 +710595,39 @@
         "updated_at": "2026-10-30T17:52:51Z",
         "invoice_number": "63209",
         "created_at": "2026-10-30T17:36:02Z"
+      },
+      {
+        "id": "job_43b36a88612746d7bff6a85c7e7a6e58",
+        "description": "30 - RCC Whole Home Waived Initial Service Fee",
+        "work_status": "scheduled",
+        "customer_label": "Patricia K.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-11-05T16:00:00Z",
+          "scheduled_end": "2026-11-05T18:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-05T11:00:00-05:00",
+          "scheduled_end_local": "2026-11-05T13:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_e328d4cad27249d48750d091fd1faa3b"
+        ],
+        "tags": [
+          "30",
+          "Opportunity"
+        ],
+        "business_unit": "30 HVAC SERVICE",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-10-30T19:00:15Z",
+        "invoice_number": "63213",
+        "created_at": "2026-10-30T18:58:52Z"
       }
     ],
     "pro_878f7465a7ae48a39312d99aedaa3fd1": [
@@ -732926,7 +733222,7 @@
       {
         "id": "job_fd2ba0274dff48efa2659f787918d8f7",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Susan L.",
         "city": "York",
         "state": "PA",
@@ -732952,7 +733248,7 @@
         "total_amount": 25947,
         "outstanding_balance": 0,
         "completed_at": "2026-06-11T19:12:25Z",
-        "updated_at": "2026-06-11T19:12:25Z",
+        "updated_at": "2026-10-30T19:20:17Z",
         "invoice_number": "57906",
         "created_at": "2026-06-08T12:29:59Z"
       },
@@ -740992,7 +741288,7 @@
       {
         "id": "job_5fef5e37fdc3443f895313969225d58e",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Linda A.",
         "city": "York",
         "state": "PA",
@@ -741018,7 +741314,7 @@
         "total_amount": 13644,
         "outstanding_balance": 0,
         "completed_at": "2026-09-23T19:20:48Z",
-        "updated_at": "2026-09-23T19:20:48Z",
+        "updated_at": "2026-10-30T18:43:28Z",
         "invoice_number": "61208",
         "created_at": "2026-09-03T12:36:43Z"
       },
@@ -743295,15 +743591,14 @@
         "tags": [
           "70",
           "Opportunity",
-          "Parts Ordered",
-          "Plumbing Attention"
+          "Parts Ordered"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 45414,
         "outstanding_balance": 0,
         "completed_at": "2026-10-26T18:35:40Z",
-        "updated_at": "2026-10-30T15:55:40Z",
+        "updated_at": "2026-10-30T18:37:56Z",
         "invoice_number": "61863",
         "created_at": "2026-09-22T15:10:11Z"
       },
@@ -743782,7 +744077,7 @@
       {
         "id": "job_acf3757d12ab4ea79ba9c35382c0d690",
         "description": "70 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Clint S.",
         "city": "Dallastown",
         "state": "PA",
@@ -743806,10 +744101,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:43:34Z",
+        "total_amount": 68440,
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-30T19:35:31Z",
+        "updated_at": "2026-10-30T19:35:48Z",
         "invoice_number": "63048",
         "created_at": "2026-10-26T14:16:55Z"
       },
@@ -743975,10 +744270,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 50615,
-        "outstanding_balance": 50615,
+        "total_amount": 8900,
+        "outstanding_balance": 8900,
         "completed_at": null,
-        "updated_at": "2026-10-30T18:09:36Z",
+        "updated_at": "2026-10-30T18:38:55Z",
         "invoice_number": "63183",
         "created_at": "2026-10-29T18:24:45Z"
       },
@@ -744213,6 +744508,39 @@
         "updated_at": "2026-10-29T16:32:32Z",
         "invoice_number": "61856-3",
         "created_at": "2026-10-23T15:53:27Z"
+      },
+      {
+        "id": "job_b356c13a1df0465eb0909c56de5697c7",
+        "description": "70 - Initial Service Fee",
+        "work_status": "scheduled",
+        "customer_label": "Kim H.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-11-04T12:00:00Z",
+          "scheduled_end": "2026-11-04T14:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-04T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-04T09:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_7ccf9b4457bb40ecbb84540d250950e1"
+        ],
+        "tags": [
+          "70",
+          "Non-Member"
+        ],
+        "business_unit": "70 PLUMBING SERVICE",
+        "lead_source": null,
+        "total_amount": 46849,
+        "outstanding_balance": 46849,
+        "completed_at": null,
+        "updated_at": "2026-10-30T18:47:32Z",
+        "invoice_number": "63154-2",
+        "created_at": "2026-10-30T18:45:48Z"
       }
     ],
     "pro_275a4180be774faa8606cf065969a962": [
@@ -774393,7 +774721,7 @@
       {
         "id": "job_ecbeac550a894405a7885e395fc05718",
         "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Sara H.",
         "city": "York",
         "state": "PA",
@@ -774420,8 +774748,8 @@
         "lead_source": null,
         "total_amount": 50080,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T18:29:05Z",
+        "completed_at": "2026-10-30T18:41:50Z",
+        "updated_at": "2026-10-30T18:41:50Z",
         "invoice_number": "63162",
         "created_at": "2026-10-29T12:11:43Z"
       },
@@ -810736,39 +811064,6 @@
         "created_at": "2026-08-18T15:30:26Z"
       },
       {
-        "id": "job_016ffbab94bf48d799341bee9fffc2b2",
-        "description": "Visit #1; Plumbing",
-        "work_status": "scheduled",
-        "customer_label": "Sebastian Z.",
-        "city": "York",
-        "state": "PA",
-        "zip": "17408",
-        "schedule": {
-          "scheduled_start": "2026-10-30T17:00:00Z",
-          "scheduled_end": "2026-10-30T19:00:00Z",
-          "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-10-30T13:00:00-04:00",
-          "scheduled_end_local": "2026-10-30T15:00:00-04:00",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_d67d4e694a8c4bbdaba6801433d3bc20"
-        ],
-        "tags": [
-          "80",
-          "Opportunity"
-        ],
-        "business_unit": "80 PLUMBING MAINT",
-        "lead_source": null,
-        "total_amount": 0,
-        "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-23T13:27:46Z",
-        "invoice_number": "60878",
-        "created_at": "2026-08-27T15:00:13Z"
-      },
-      {
         "id": "job_b5c4180cd1124c3e8f52e36a33750e51",
         "description": "Visit #2 plumbing",
         "work_status": "complete unrated",
@@ -811983,7 +812278,7 @@
       {
         "id": "job_00a9e9faf97e41b9adf3262f6c117014",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Susan L.",
         "city": "York",
         "state": "PA",
@@ -812007,9 +812302,9 @@
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 26942,
-        "outstanding_balance": 26942,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:32:59Z",
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-30T19:20:17Z",
+        "updated_at": "2026-10-30T19:20:17Z",
         "invoice_number": "63164",
         "created_at": "2026-10-29T12:31:30Z"
       },
@@ -836941,14 +837236,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": "FF Kling",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T13:15:18Z",
-        "updated_at": "2026-10-30T13:15:18Z",
+        "updated_at": "2026-10-30T18:51:35Z",
         "invoice_number": "61497",
         "created_at": "2026-09-10T18:00:34Z"
       },
@@ -837216,9 +837512,9 @@
         "business_unit": "40 HVAC MAINT",
         "lead_source": "FF Kling",
         "total_amount": 8900,
-        "outstanding_balance": 8900,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-28T10:30:40Z",
-        "updated_at": "2026-10-30T12:55:31Z",
+        "updated_at": "2026-10-30T20:12:16Z",
         "invoice_number": "62352",
         "created_at": "2026-10-05T15:28:15Z"
       },
@@ -837793,7 +838089,7 @@
       {
         "id": "job_60e855c5a6d844c4a1881e17b60260d4",
         "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Megan H.",
         "city": "Shrewsbury",
         "state": "PA",
@@ -837812,15 +838108,14 @@
         ],
         "tags": [
           "30",
-          "Opportunity",
           "Non-Member"
         ],
         "business_unit": "30 HVAC SERVICE",
         "lead_source": null,
         "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "completed_at": null,
-        "updated_at": "2026-10-30T17:24:18Z",
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-30T18:38:58Z",
+        "updated_at": "2026-10-30T18:43:32Z",
         "invoice_number": "63173",
         "created_at": "2026-10-29T15:05:24Z"
       },
@@ -855034,9 +855329,9 @@
         "business_unit": "50 PLUMBING AOR",
         "lead_source": null,
         "total_amount": 815200,
-        "outstanding_balance": 815200,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-30T16:23:52Z",
-        "updated_at": "2026-10-30T16:25:35Z",
+        "updated_at": "2026-10-30T20:50:16Z",
         "invoice_number": "62713-1",
         "created_at": "2026-10-15T12:44:26Z"
       },
@@ -855652,7 +855947,9 @@
           "appointments": []
         },
         "assigned_employee_ids": [
-          "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+          "pro_9a3f2249ef464465a1522f4a3ccfef5a",
+          "pro_8fc589c75489437bb66ff45ca0aea7ac",
+          "pro_06aeac3b71a24c60a826c7e11499d8b5"
         ],
         "tags": [
           "70",
@@ -855661,10 +855958,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
+        "total_amount": 54651,
+        "outstanding_balance": 54651,
         "completed_at": null,
-        "updated_at": "2026-10-30T18:22:07Z",
+        "updated_at": "2026-10-30T20:45:16Z",
         "invoice_number": "63202",
         "created_at": "2026-10-30T15:49:01Z"
       },
@@ -877067,6 +877364,40 @@
         "created_at": "2026-10-16T11:17:04Z"
       },
       {
+        "id": "job_016ffbab94bf48d799341bee9fffc2b2",
+        "description": "Visit #1; Plumbing",
+        "work_status": "complete unrated",
+        "customer_label": "Sebastian Z.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17408",
+        "schedule": {
+          "scheduled_start": "2026-10-30T18:30:00Z",
+          "scheduled_end": "2026-10-30T20:30:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-10-30T14:30:00-04:00",
+          "scheduled_end_local": "2026-10-30T16:30:00-04:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_a147eea604e04ccfa458813cf1b374f0"
+        ],
+        "tags": [
+          "80",
+          "Opportunity",
+          "Plumbing Attention"
+        ],
+        "business_unit": "80 PLUMBING MAINT",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": "2026-10-30T19:26:33Z",
+        "updated_at": "2026-10-30T19:26:33Z",
+        "invoice_number": "60878",
+        "created_at": "2026-08-27T15:00:13Z"
+      },
+      {
         "id": "job_e650489cb60f4617a8718940ad8136ac",
         "description": "Visit #2",
         "work_status": "complete unrated",
@@ -892728,9 +893059,9 @@
         "business_unit": "50 PLUMBING AOR",
         "lead_source": null,
         "total_amount": 815200,
-        "outstanding_balance": 815200,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-30T16:23:52Z",
-        "updated_at": "2026-10-30T16:25:35Z",
+        "updated_at": "2026-10-30T20:50:16Z",
         "invoice_number": "62713-1",
         "created_at": "2026-10-15T12:44:26Z"
       },
@@ -893121,8 +893452,8 @@
         "total_amount": 8900,
         "outstanding_balance": 8900,
         "completed_at": null,
-        "updated_at": "2026-10-30T18:11:50Z",
-        "invoice_number": "63154",
+        "updated_at": "2026-10-30T18:45:59Z",
+        "invoice_number": "63154-1",
         "created_at": "2026-10-28T18:30:12Z"
       },
       {
@@ -894456,14 +894787,15 @@
           "pro_5048a923ca8a47a5bd4cc2bbe40c4faa"
         ],
         "tags": [
-          "OnCall Air"
+          "OnCall Air",
+          "HVAC Installation"
         ],
         "business_unit": "10 HVAC AOR",
         "lead_source": null,
         "total_amount": 650300,
         "outstanding_balance": 650300,
         "completed_at": null,
-        "updated_at": "2026-10-30T18:27:43Z",
+        "updated_at": "2026-10-30T18:37:23Z",
         "invoice_number": "63211",
         "created_at": "2026-10-30T18:12:54Z"
       }
@@ -895533,7 +895865,7 @@
       {
         "id": "job_6f4c701abc9e4a9cb4bcbd596d766e8a",
         "description": "OnCallair Consultation",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Sebastian Z.",
         "city": "York",
         "state": "PA",
@@ -895558,7 +895890,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-06-26T12:42:59Z",
-        "updated_at": "2026-06-29T12:05:35Z",
+        "updated_at": "2026-10-30T19:26:33Z",
         "invoice_number": "58572",
         "created_at": "2026-06-26T12:42:39Z"
       },
@@ -906628,7 +906960,7 @@
       {
         "id": "job_d07ec358e9a3470db69e77a64e90df3e",
         "description": "",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Kenneth H.",
         "city": "Hummelstown",
         "state": "PA",
@@ -906652,8 +906984,8 @@
         "lead_source": "Google",
         "total_amount": 0,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-10-30T15:39:34Z",
+        "completed_at": "2026-10-30T18:50:03Z",
+        "updated_at": "2026-10-30T18:50:04Z",
         "invoice_number": "63008-3",
         "created_at": "2026-10-28T17:27:08Z"
       },
@@ -920454,7 +920786,7 @@
       {
         "id": "job_9fb2474fedc24b5aa3dde0186228586b",
         "description": "Billing - 10 HVAC AOR",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Clint S.",
         "city": "Dallastown",
         "state": "PA",
@@ -920480,7 +920812,7 @@
         "total_amount": 674100,
         "outstanding_balance": 674100,
         "completed_at": "2026-10-30T18:24:17Z",
-        "updated_at": "2026-10-30T18:24:17Z",
+        "updated_at": "2026-10-30T19:35:31Z",
         "invoice_number": "62993",
         "created_at": "2026-10-23T15:26:21Z"
       },
