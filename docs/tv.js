@@ -661,7 +661,21 @@ function render() {
   const jobs = latestData.jobs || [];
   const buConfig = BU_DEPTS[DEPT];
   const rosterTag = buConfig ? buConfig.rosterTag : DEPT;
-  const deptTechs = latestData.technicians.filter((t) => departmentOf(t) === rosterTag);
+  let deptTechs = latestData.technicians.filter((t) => departmentOf(t) === rosterTag);
+
+  // "HVAC Maintenance"-tagged techs (Hector Rivera, Landen Garee) move between
+  // BU 30 and BU 40 depending on the work (Michael, 2026-10-30): show them on a
+  // BU screen only when they actually have jobs in that BU for this PERIOD,
+  // instead of on both all the time. Techs carrying a real field tag (the
+  // HVAC Service crew) are unchanged -- always on both screens, as before.
+  if (DEPT === "30" || DEPT === "40") {
+    const floatsBetweenBus = (t) => (t.tags || []).includes("HVAC Maintenance") && !(t.tags || []).some((tag) => FIELD_DEPT_TAGS.includes(tag));
+    deptTechs = deptTechs.filter(
+      (t) =>
+        !floatsBetweenBus(t) ||
+        jobs.some((j) => (j.assigned_employee_ids || []).includes(t.id) && jobInPeriod(j, PERIOD) && businessUnitCode(j.business_unit) === DEPT)
+    );
+  }
 
   const screenLabel = buConfig ? businessUnitLabelForCode(jobs, DEPT, buConfig.fallbackLabel) : DEPT;
   deptNameEl.textContent = screenLabel;

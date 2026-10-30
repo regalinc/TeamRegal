@@ -143,6 +143,7 @@ const MANUAL_AVATAR_OVERRIDES = {
 const APPRENTICE_TECH_IDS = new Set([
   "pro_b5ab5cc9e362414cb376d0a02d64bef8", // Trevor McWilliams
   "pro_06aeac3b71a24c60a826c7e11499d8b5", // Jaylees Vazquez
+  "pro_955f20bd38cf4a65ad98bd329dd32e2f", // Landen Garee -- HVAC Maintenance apprentice (Michael, 2026-10-30)
 ]);
 
 function isApprentice(tech) {
