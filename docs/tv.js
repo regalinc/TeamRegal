@@ -625,10 +625,9 @@ const BU_DEPARTMENT_PANEL_CODES = new Set(["30"]);
 // Housecall Pro's colour for the HVAC Service crew (#b71d1b, the techs' avatar
 // colour), per Michael 2026-10-30. A BU with no entry falls back to the blue accent.
 const BU_TV_COLORS = { 30: "#b71d1b" };
-// PREVIEW ONLY until Michael signs off: the live TVs keep the old layout unless
-// the URL carries &panel=1 (e.g. tv.html?dept=30&panel=1). Flip this to true
-// (or drop the check) to make it the default.
-const SHOW_DEPARTMENT_PANEL = urlParams.get("panel") === "1";
+// ON by default for the BU screens in BU_DEPARTMENT_PANEL_CODES (Michael approved BU 30,
+// 2026-10-30). Add &panel=0 to the URL to get the old full-size-leader layout back.
+const SHOW_DEPARTMENT_PANEL = urlParams.get("panel") !== "0";
 
 // The department-wide version of the per-tech tiles: every job in this BU for
 // the period, whoever worked it (so a call a manager like Devin runs by himself
