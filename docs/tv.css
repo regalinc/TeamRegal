@@ -637,3 +637,8 @@ body {
 .tv-dept-panel .tv-tile { padding: 0.6vh 0.2vw; }
 .tv-dept-panel .tv-tile .tv-tile-label { font-size: clamp(8px, 1.15vh, 16px); }
 .tv-dept-panel .tv-tile .tv-tile-value { font-size: clamp(13px, 2.3vh, 34px); }
+
+/* Seven tiles on a four-column card (BU 70/80 once Completion is hidden): the last one takes the
+   two leftover columns instead of leaving a hole. */
+.tv-fc-tiles > .tv-tile:last-child:nth-child(4n + 3),
+.tv-dept-panel .tv-tile-grid > .tv-tile:last-child:nth-child(4n + 3) { grid-column: span 2; }

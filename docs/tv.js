@@ -185,8 +185,8 @@ const BU_HIDDEN_TV_TILES = {
   // BU 30: no Completion tile (Michael, 2026-10-30; wanted everywhere eventually, BU 30 first).
   30: new Set(["Completion"]),
   40: new Set(["Completion"]),
-  70: new Set(["Leads", "Leads sold"]),
-  80: new Set(["Leads", "Leads sold"]),
+  70: new Set(["Leads", "Leads sold", "Completion"]),
+  80: new Set(["Leads", "Leads sold", "Completion"]),
 };
 
 // The two tile slots Leads/Leads sold freed up on BU 70/80 (above), filled
@@ -208,7 +208,7 @@ const BU_LEAD_SALES_TV_CODES = new Set(["30", "40"]);
 const BU_SEPARATE_LEADS_TV_CODES = new Set(["30", "40"]);
 // BU screens whose Revenue tile gets a slight green outline (Michael, 2026-10-30) -- Revenue has no
 // target to turn it red/green, so the outline just marks it as the headline number.
-const REVENUE_OUTLINE_BU_CODES = new Set(["30", "40"]);
+const REVENUE_OUTLINE_BU_CODES = new Set(["30", "40", "70", "80"]);
 
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
@@ -621,11 +621,11 @@ let latestData = null;
 // BU screens whose left column is a department panel with a shrunken #1 card
 // above it, instead of the #1 tech's full-size card (Michael, 2026-10-30; BU
 // 30 first -- add a code here to roll it out to another BU screen).
-const BU_DEPARTMENT_PANEL_CODES = new Set(["30", "40"]);
+const BU_DEPARTMENT_PANEL_CODES = new Set(["30", "40", "70", "80"]);
 // Each BU's own colour for its department outline/banner. BU 30 is red --
 // Housecall Pro's colour for the HVAC Service crew (#b71d1b, the techs' avatar
 // colour), per Michael 2026-10-30. A BU with no entry falls back to the blue accent.
-const BU_TV_COLORS = { 30: "#b71d1b", 40: "#8f25aa" }; // 40 = HVAC Maintenance purple (the colour HCP gives that crew)
+const BU_TV_COLORS = { 30: "#b71d1b", 40: "#8f25aa", 70: "#0d47a2", 80: "#0d47a2" }; // 40 = HVAC Maintenance purple (the colour HCP gives that crew)
 // ON by default for the BU screens in BU_DEPARTMENT_PANEL_CODES (Michael approved BU 30,
 // 2026-10-30). Add &panel=0 to the URL to get the old full-size-leader layout back.
 const SHOW_DEPARTMENT_PANEL = urlParams.get("panel") !== "0";
@@ -635,7 +635,7 @@ const SHOW_DEPARTMENT_PANEL = urlParams.get("panel") !== "0";
 // counts), full job amounts with no revenue splitting -- same basis as the
 // company scorecard's department numbers. The sold-lead handling mirrors
 // buildBuRanked, just over all of the BU's calls instead of one tech's.
-function buildDepartmentStats(jobs, code) {
+function buildDepartmentStats(jobs, code, deptTechs = []) {
   const deptJobs = jobs.filter((j) => jobInPeriod(j, PERIOD) && businessUnitCode(j.business_unit) === code);
   const stats = computeScorecardStats(deptJobs, { splitRevenue: false });
   if (BU_LEAD_SALES_TV_CODES.has(code)) {
@@ -659,6 +659,26 @@ function buildDepartmentStats(jobs, code) {
     stats.soldLeadInstallRevenue = inPeriod.reduce((sum, p) => sum + p.sale.total_amount / CENTS_PER_DOLLAR, 0);
     stats.soldLeadMatched = inPeriod.length;
     stats.soldLeadUnmatched = Math.max(0, stats.leadsSold - inPeriod.length);
+  }
+  // BU 70/80: Estimates given / approved for the whole department -- the estimates of any tech on this
+  // screen's roster, each counted once (several techs can share one). Same not-BU-scoped basis as the
+  // per-tech Estimates tiles (an estimate's own business_unit is blank on ~80%; see buildBuRanked).
+  if (BU_SHOWN_ESTIMATE_TV_TILES.has(code)) {
+    const rosterById = new Map(deptTechs.map((t) => [t.id, t]));
+    const seen = new Set();
+    let given = 0;
+    let approved = 0;
+    for (const est of latestData.estimates || []) {
+      if (isCanceledEstimate(est) || seen.has(est.id)) continue;
+      const owner = (est.assigned_employee_ids || []).map((id) => rosterById.get(id)).find(Boolean);
+      if (!owner) continue;
+      seen.add(est.id);
+      if (dateInPeriod(estimateGivenDate(est, owner), PERIOD)) given++;
+      if (est.approved && dateInPeriod(est.approved_at, PERIOD)) approved++;
+    }
+    stats.estimatesGiven = given;
+    stats.estimatesApproved = approved;
+    stats.estimateClosingRate = given ? approved / given : null;
   }
   return stats;
 }
@@ -777,7 +797,7 @@ function render() {
   // every data refresh; render() just always reads the current #1.
   if (buConfig) {
     const entries = buildBuRanked(deptTechs, jobs, DEPT);
-    renderRoster(entries, screenLabel, SHOW_DEPARTMENT_PANEL && BU_DEPARTMENT_PANEL_CODES.has(DEPT) ? buildDepartmentStats(jobs, DEPT) : null);
+    renderRoster(entries, screenLabel, SHOW_DEPARTMENT_PANEL && BU_DEPARTMENT_PANEL_CODES.has(DEPT) ? buildDepartmentStats(jobs, DEPT, deptTechs) : null);
     return;
   }
 
