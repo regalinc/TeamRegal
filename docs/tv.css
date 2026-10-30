@@ -642,3 +642,11 @@ body {
    two leftover columns instead of leaving a hole. */
 .tv-fc-tiles > .tv-tile:last-child:nth-child(4n + 3),
 .tv-dept-panel .tv-tile-grid > .tv-tile:last-child:nth-child(4n + 3) { grid-column: span 2; }
+
+/* Nine tiles (BU 30/40 with RCC Sold): a 3x3 block on the leader card and department panel, and
+   5 + 4 on each tech row, instead of a lone tile spilling onto an extra row. */
+.tv-main.tv-nine .tv-fc-tiles,
+.tv-main.tv-nine .tv-dept-panel .tv-tile-grid { grid-template-columns: repeat(3, 1fr); }
+.tv-main.tv-nine .tv-fc-tiles > .tv-tile:last-child,
+.tv-main.tv-nine .tv-dept-panel .tv-tile-grid > .tv-tile:last-child { grid-column: auto; }
+.tv-main.tv-nine .tv-row-metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5vw; max-width: 66%; }

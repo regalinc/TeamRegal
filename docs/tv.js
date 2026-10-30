@@ -210,8 +210,8 @@ const BU_SEPARATE_LEADS_TV_CODES = new Set(["30", "40"]);
 // target to turn it red/green, so the outline just marks it as the headline number.
 const REVENUE_OUTLINE_BU_CODES = new Set(["30", "40", "70", "80"]);
 // BU screens with an "RCC Sold" tile, linked to the Housecall Pro "Membership Sold" job tag (Michael,
-// 2026-10-30; BU 70 first).
-const BU_RCC_SOLD_TV_CODES = new Set(["70"]);
+// 2026-10-30; BU 70 first, then 30/40 -- the Non-Member tag only started ~Aug 2026, so early numbers run low).
+const BU_RCC_SOLD_TV_CODES = new Set(["30", "40", "70"]);
 
 const RCC_SOLD_TARGET = { goal: 0.5, direction: "min", buffer: 0 };
 
@@ -735,6 +735,8 @@ function renderRoster(entries, screenLabel, deptStats) {
 
   mainEl.innerHTML = deptStats ? renderLeftColumnWithDepartment(featured, screenLabel, deptStats) : renderFeatured(featured, screenLabel);
   if (deptStats) mainEl.classList.add("tv-has-dept");
+  // BU 30/40 carry nine tiles once RCC Sold is added -- 3x3 on the cards, 5+4 on the tech rows.
+  if (BU_RCC_SOLD_TV_CODES.has(DEPT) && !BU_SHOWN_ESTIMATE_TV_TILES.has(DEPT)) mainEl.classList.add("tv-nine");
   const list = document.createElement("div");
   list.className = "tv-list";
   // Row/tile sizing in tv.css reads this to scale down as more people need
