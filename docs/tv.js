@@ -659,10 +659,14 @@ function renderLeftColumnWithDepartment(featured, screenLabel, deptStats) {
           ${small("Revenue", formatMoney(stats.totalRevenue), kpiClass("revenue", stats))}
           ${small("Avg ticket", formatMoney(stats.avgTicket), kpiClass("avgTicket", stats))}
           ${small("Jobs", stats.totalJobs.toLocaleString(), kpiClass("jobs", stats))}
+          ${small("Completion", `${stats.completionRate.toFixed(0)}%`, kpiClass("completion", stats))}
         </div>
       </div>
       <div class="tv-dept-panel">
-        <div class="tv-dept-title">Department · ${escapeHtml(screenLabel)}</div>
+        <div class="tv-dept-banner">
+          <div class="tv-dept-banner-label">Department</div>
+          <div class="tv-dept-banner-sub">${escapeHtml(screenLabel)} &middot; all technicians</div>
+        </div>
         <div class="tv-tile-grid">
           ${metricTiles(deptStats)}
         </div>
