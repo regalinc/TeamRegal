@@ -268,6 +268,11 @@ const INSTALLATION_TEAM_HIDDEN_TILES = new Set(["leads", "leadsSold", "rccSold",
 const INSTALLATION_TEAM_MANAGER_ID = "pro_3f2297b66a9742d09eaf20976a20183a"; // Rodney Glatfelter
 const INSTALLATION_TEAM_REVENUE_TECH_IDS = new Set([...INSTALLATION_TEAM_TECH_IDS, INSTALLATION_TEAM_MANAGER_ID]);
 
+// Installers who have left: no longer in the team photo strip, but they stay in INSTALLATION_TEAM_TECH_IDS so
+// the work they did while here keeps counting in the team's revenue/job totals and they don't turn into a
+// stray individual scorecard (Mark Zink -- last scheduled job 2026-10-09, removed 2026-10-30).
+const INSTALLATION_TEAM_FORMER_TECH_IDS = new Set(["pro_048a0f2df6b2480aaa1a1ae03924fa9e"]); // Mark Zink
+
 // Maps a Bouncie-tracked vehicle (by IMEI) to the Housecall Pro technician
 // who drives it, so fleet.js can show driving-behavior stats grouped by
 // tech instead of by vehicle. Bouncie has no concept of "employee" at all —

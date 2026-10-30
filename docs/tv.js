@@ -379,7 +379,9 @@ function renderInstallationTeamScreen() {
 
   const screenStats = computeScorecardStats(teamJobsInPeriod(PERIOD), { splitRevenue: false, rawJobCount: true });
 
-  const teamTechs = (latestData.technicians || []).filter((t) => INSTALLATION_TEAM_TECH_IDS.has(t.id));
+  const teamTechs = (latestData.technicians || []).filter(
+    (t) => INSTALLATION_TEAM_TECH_IDS.has(t.id) && !INSTALLATION_TEAM_FORMER_TECH_IDS.has(t.id)
+  );
 
   mainEl.innerHTML = `
     <div class="tv-team">
