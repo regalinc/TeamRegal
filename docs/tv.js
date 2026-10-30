@@ -213,6 +213,13 @@ const REVENUE_OUTLINE_BU_CODES = new Set(["30", "40", "70", "80"]);
 // 2026-10-30; BU 70 first).
 const BU_RCC_SOLD_TV_CODES = new Set(["70"]);
 
+const RCC_SOLD_TARGET = { goal: 0.5, direction: "min", buffer: 0 };
+
+function rccSoldClass(stats) {
+  if (!stats.memberPitchCalls) return null;
+  return TIER_CLASS[tier(stats.servicePlansSold / stats.memberPitchCalls, RCC_SOLD_TARGET)];
+}
+
 // The full metric set shown per technician, in display order. sizeClass
 // picks the tile styling ("tv-tile" for the big featured card, "tv-row-tile"
 // for a compact list row).
@@ -241,9 +248,11 @@ function metricTiles(stats, sizeClass) {
         ]),
     ["$0 Call", stats.ifo.toLocaleString(), kpiClass("ifo", stats)],
     ["Accessory sold", stats.accessorySold.toLocaleString(), kpiClass("accessorySold", stats)],
-    // RCC Sold = jobs tagged "Membership Sold" (stats.servicePlansSold, shared.js). No per-tech target exists
-    // for it, so the tile stays neutral.
-    ...(BU_RCC_SOLD_TV_CODES.has(DEPT) ? [["RCC Sold", stats.servicePlansSold.toLocaleString(), null]] : []),
+    // RCC Sold = "Membership Sold" jobs out of the calls tagged Non-Member (or sold), shown as 2/40 and graded
+    // green at 50%+, red below -- no yellow band (Michael, 2026-10-30).
+    ...(BU_RCC_SOLD_TV_CODES.has(DEPT)
+      ? [["RCC Sold", `${stats.servicePlansSold}/${stats.memberPitchCalls}`, rccSoldClass(stats)]]
+      : []),
   ].filter(([label]) => !hidden.has(label));
 
   // No target exists for the raw "given" count (same as the Flex screen's

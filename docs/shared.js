@@ -819,6 +819,9 @@ function computeScorecardStats(allJobs, { splitRevenue = false, rawJobCount = fa
   const leadsSoldJobs = leadJobs.filter((j) => hasTag(j, "TGL Sold"));
 
   const servicePlansSoldJobs = completedJobs.filter((j) => hasTag(j, "Membership Sold"));
+  // Calls where a membership was on the table: tagged "Non-Member", or sold one. HCP keeps Non-Member on
+  // a job after "Membership Sold" is added, but plenty of sold jobs never carried it -- the union counts each once.
+  const memberPitchJobs = completedJobs.filter((j) => hasTag(j, "Non-Member") || hasTag(j, "Membership Sold"));
 
   // Housecall Pro's tag is "IFO" and stays that way here (stats.ifo) since
   // it has to match the real tag on synced jobs — only the on-screen tile
@@ -835,6 +838,7 @@ function computeScorecardStats(allJobs, { splitRevenue = false, rawJobCount = fa
     leads: leadJobs.length,
     leadsSold: leadsSoldJobs.length,
     servicePlansSold: servicePlansSoldJobs.length,
+    memberPitchCalls: memberPitchJobs.length,
     ifo: ifoJobs.length,
     accessorySold: accessorySoldJobs.length,
   };
