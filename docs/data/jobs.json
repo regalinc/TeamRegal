@@ -393188,7 +393188,7 @@
     "total_amount": 108998,
     "outstanding_balance": 108998,
     "completed_at": null,
-    "updated_at": "2026-10-31T13:29:43Z",
+    "updated_at": "2026-10-31T14:31:45Z",
     "invoice_number": "63217",
     "created_at": "2026-10-31T12:13:32Z"
   },
@@ -393225,6 +393225,40 @@
     "updated_at": "2026-10-31T12:15:15Z",
     "invoice_number": "63218",
     "created_at": "2026-10-31T12:15:13Z"
+  },
+  {
+    "id": "job_53cbe967a34e4fb89a94b2ad0d01689e",
+    "description": "70 - Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Michael S.",
+    "city": "Hallam",
+    "state": "PA",
+    "zip": "17406",
+    "schedule": {
+      "scheduled_start": "2026-10-31T15:30:00Z",
+      "scheduled_end": "2026-10-31T17:30:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-31T11:30:00-04:00",
+      "scheduled_end_local": "2026-10-31T13:30:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7ccf9b4457bb40ecbb84540d250950e1"
+    ],
+    "tags": [
+      "70",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 23900,
+    "outstanding_balance": 23900,
+    "completed_at": null,
+    "updated_at": "2026-10-31T14:49:48Z",
+    "invoice_number": "63219",
+    "created_at": "2026-10-31T14:05:39Z"
   },
   {
     "id": "job_b732977f0ace465894fb98d9998d6392",
