@@ -393160,6 +393160,73 @@
     "created_at": "2026-10-30T19:12:27Z"
   },
   {
+    "id": "job_029014b1a96f43bd8e05ea4b8f8d3af0",
+    "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+    "work_status": "in progress",
+    "customer_label": "Larry T.",
+    "city": "East York",
+    "state": "PA",
+    "zip": "17402",
+    "schedule": {
+      "scheduled_start": "2026-10-31T13:00:00Z",
+      "scheduled_end": "2026-10-31T14:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-31T09:00:00-04:00",
+      "scheduled_end_local": "2026-10-31T10:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7ccf9b4457bb40ecbb84540d250950e1"
+    ],
+    "tags": [
+      "70",
+      "Opportunity"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 108998,
+    "outstanding_balance": 108998,
+    "completed_at": null,
+    "updated_at": "2026-10-31T13:29:43Z",
+    "invoice_number": "63217",
+    "created_at": "2026-10-31T12:13:32Z"
+  },
+  {
+    "id": "job_63518a04f8244e98bc937b532937cc22",
+    "description": "70 - Initial Service Fee After Hours",
+    "work_status": "scheduled",
+    "customer_label": "Rutters C.",
+    "city": "Dallastown",
+    "state": "PA",
+    "zip": "17313",
+    "schedule": {
+      "scheduled_start": "2026-10-31T14:00:00Z",
+      "scheduled_end": "2026-10-31T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-10-31T10:00:00-04:00",
+      "scheduled_end_local": "2026-10-31T12:00:00-04:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_7ccf9b4457bb40ecbb84540d250950e1"
+    ],
+    "tags": [
+      "70",
+      "Opportunity",
+      "Non-Member"
+    ],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 23900,
+    "outstanding_balance": 23900,
+    "completed_at": null,
+    "updated_at": "2026-10-31T12:15:15Z",
+    "invoice_number": "63218",
+    "created_at": "2026-10-31T12:15:13Z"
+  },
+  {
     "id": "job_b732977f0ace465894fb98d9998d6392",
     "description": "Visit #3",
     "work_status": "scheduled",
