@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-10-30T23:08:30.962Z",
+    "last_synced_at": "2026-10-31T02:40:57.408Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 36,
-    "trip_count": 9623
+    "trip_count": 9627
   },
   "vehicles": [
     {
@@ -71,7 +71,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 72529.29999999973
+      "odometer": 72542.09999999973
     },
     {
       "imei": "862255068923033",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 83025
+      "odometer": 83066
     },
     {
       "imei": "868199050033175",
@@ -390,7 +390,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 49862.2034043996
+      "odometer": 49865.9034043996
     },
     {
       "imei": "868923055442135",
@@ -405,6 +405,54 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "862255068902755-4350-202610",
+      "imei": "862255068902755",
+      "startTime": "2026-10-31T01:10:56.000Z",
+      "endTime": "2026-10-31T01:47:40.000Z",
+      "distance": 11.2,
+      "averageSpeed": 34.1,
+      "maxSpeed": 55.92339,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1006
+    },
+    {
+      "transactionId": "868923055438364-10366-202610",
+      "imei": "868923055438364",
+      "startTime": "2026-10-31T01:10:52.000Z",
+      "endTime": "2026-10-31T01:20:54.000Z",
+      "distance": 2.2,
+      "averageSpeed": 27.3,
+      "maxSpeed": 41.631857000000004,
+      "hardBrakingCount": 7,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 4
+    },
+    {
+      "transactionId": "868923055438364-10365-202610",
+      "imei": "868923055438364",
+      "startTime": "2026-10-31T00:23:55.000Z",
+      "endTime": "2026-10-31T00:32:33.000Z",
+      "distance": 1.5,
+      "averageSpeed": 25.4,
+      "maxSpeed": 45.981454,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 0
+    },
+    {
+      "transactionId": "862255068902755-4349-202610",
+      "imei": "862255068902755",
+      "startTime": "2026-10-31T00:19:41.000Z",
+      "endTime": "2026-10-31T00:28:34.000Z",
+      "distance": 1.6,
+      "averageSpeed": 22.9,
+      "maxSpeed": 56.544761,
+      "hardBrakingCount": 2,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 296
+    },
     {
       "transactionId": "868199050185405-14864-202610",
       "imei": "868199050185405",
