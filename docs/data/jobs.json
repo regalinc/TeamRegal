@@ -197472,7 +197472,7 @@
   {
     "id": "job_aed859c55f21481090783b41876d2314",
     "description": "Billing - 70 - Plumbing Service",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Larry T.",
     "city": "East York",
     "state": "PA",
@@ -197499,7 +197499,7 @@
     "total_amount": 506450,
     "outstanding_balance": 0,
     "completed_at": "2026-06-09T19:18:23Z",
-    "updated_at": "2026-06-11T02:14:31Z",
+    "updated_at": "2026-10-31T20:36:44Z",
     "invoice_number": "57939",
     "created_at": "2026-06-08T18:24:23Z"
   },
@@ -392396,7 +392396,7 @@
   {
     "id": "job_7bb95cd5be1e491689523a50e8c86b58",
     "description": "70 - Initial Service Fee",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Rutters C.",
     "city": "Spring Grove",
     "state": "PA",
@@ -392423,7 +392423,7 @@
     "total_amount": 42565,
     "outstanding_balance": 42565,
     "completed_at": "2026-10-30T12:09:17Z",
-    "updated_at": "2026-10-30T12:53:06Z",
+    "updated_at": "2026-10-31T21:20:37Z",
     "invoice_number": "63178",
     "created_at": "2026-10-29T16:11:28Z"
   },
@@ -393162,7 +393162,7 @@
   {
     "id": "job_029014b1a96f43bd8e05ea4b8f8d3af0",
     "description": "70 - RCC Whole Home Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Larry T.",
     "city": "East York",
     "state": "PA",
@@ -393187,15 +393187,15 @@
     "lead_source": null,
     "total_amount": 108998,
     "outstanding_balance": 108998,
-    "completed_at": null,
-    "updated_at": "2026-10-31T14:31:45Z",
+    "completed_at": "2026-10-31T20:36:44Z",
+    "updated_at": "2026-10-31T20:37:01Z",
     "invoice_number": "63217",
     "created_at": "2026-10-31T12:13:32Z"
   },
   {
     "id": "job_63518a04f8244e98bc937b532937cc22",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "scheduled",
+    "work_status": "complete unrated",
     "customer_label": "Rutters C.",
     "city": "Dallastown",
     "state": "PA",
@@ -393219,17 +393219,17 @@
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
-    "total_amount": 23900,
-    "outstanding_balance": 23900,
-    "completed_at": null,
-    "updated_at": "2026-10-31T12:15:15Z",
+    "total_amount": 51515,
+    "outstanding_balance": 51515,
+    "completed_at": "2026-10-31T21:20:37Z",
+    "updated_at": "2026-10-31T21:20:38Z",
     "invoice_number": "63218",
     "created_at": "2026-10-31T12:15:13Z"
   },
   {
     "id": "job_53cbe967a34e4fb89a94b2ad0d01689e",
     "description": "70 - Initial Service Fee After Hours",
-    "work_status": "in progress",
+    "work_status": "complete unrated",
     "customer_label": "Michael S.",
     "city": "Hallam",
     "state": "PA",
@@ -393249,14 +393249,16 @@
     "tags": [
       "70",
       "Opportunity",
-      "Non-Member"
+      "Non-Member",
+      "Plumbing Attention",
+      "Plumbing Parts"
     ],
     "business_unit": "70 PLUMBING SERVICE",
     "lead_source": null,
     "total_amount": 23900,
     "outstanding_balance": 23900,
-    "completed_at": null,
-    "updated_at": "2026-10-31T14:49:48Z",
+    "completed_at": "2026-10-31T19:10:54Z",
+    "updated_at": "2026-10-31T19:10:54Z",
     "invoice_number": "63219",
     "created_at": "2026-10-31T14:05:39Z"
   },
