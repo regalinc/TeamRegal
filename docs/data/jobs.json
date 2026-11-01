@@ -365543,7 +365543,7 @@
   {
     "id": "job_98920f219c0740f3b8d6226823463443",
     "description": "80 - Plumbing Maintenance",
-    "work_status": "complete unrated",
+    "work_status": "complete rated",
     "customer_label": "Mary A.",
     "city": "York",
     "state": "PA",
@@ -365568,7 +365568,7 @@
     "total_amount": 29143,
     "outstanding_balance": 0,
     "completed_at": "2026-10-15T18:35:03Z",
-    "updated_at": "2026-10-15T18:35:03Z",
+    "updated_at": "2026-11-01T15:45:20Z",
     "invoice_number": "62397",
     "created_at": "2026-10-06T13:52:28Z"
   },
@@ -371647,9 +371647,9 @@
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 8900,
-    "outstanding_balance": 8900,
+    "outstanding_balance": 0,
     "completed_at": "2026-10-19T17:26:25Z",
-    "updated_at": "2026-10-28T18:34:10Z",
+    "updated_at": "2026-11-01T15:40:34Z",
     "invoice_number": "62699-1",
     "created_at": "2026-10-14T16:37:08Z"
   },
@@ -383896,9 +383896,9 @@
     "business_unit": "30 HVAC SERVICE",
     "lead_source": null,
     "total_amount": 34425,
-    "outstanding_balance": 34425,
+    "outstanding_balance": 0,
     "completed_at": "2026-10-28T16:05:29Z",
-    "updated_at": "2026-10-28T18:34:02Z",
+    "updated_at": "2026-11-01T15:39:28Z",
     "invoice_number": "62699-2",
     "created_at": "2026-10-19T17:31:26Z"
   },
@@ -393261,6 +393261,40 @@
     "updated_at": "2026-10-31T19:10:54Z",
     "invoice_number": "63219",
     "created_at": "2026-10-31T14:05:39Z"
+  },
+  {
+    "id": "job_59386ed4b8bf4aed876120171c0a1e84",
+    "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Mary A.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17404",
+    "schedule": {
+      "scheduled_start": "2026-11-01T14:00:00Z",
+      "scheduled_end": "2026-11-01T16:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-01T09:00:00-05:00",
+      "scheduled_end_local": "2026-11-01T11:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_0c24f7fb4b534fde920650a76dc8365f"
+    ],
+    "tags": [
+      "30",
+      "Opportunity",
+      "HVAC Parts"
+    ],
+    "business_unit": "30 HVAC SERVICE",
+    "lead_source": null,
+    "total_amount": 56840,
+    "outstanding_balance": 0,
+    "completed_at": "2026-11-01T15:45:20Z",
+    "updated_at": "2026-11-01T15:45:20Z",
+    "invoice_number": "63220",
+    "created_at": "2026-11-01T13:31:10Z"
   },
   {
     "id": "job_b732977f0ace465894fb98d9998d6392",
