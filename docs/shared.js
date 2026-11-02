@@ -674,7 +674,10 @@ function hcpMetricValue(key, stats) {
       return stats.leads ? stats.leadsSold / stats.leads : null;
     case "accessorySold":
       return stats.totalJobs ? stats.accessorySold / stats.totalJobs : null;
-    case "clubConversion": {
+    // BU 40's "New-customer club conversion" is the same math: Membership
+    // Sold vs the Non-Member-tagged calls it could have converted.
+    case "clubConversion":
+    case "newCustClubConversion": {
       const pool = (stats.servicePlansSold || 0) + (stats.nonMemberCount || 0);
       return pool ? stats.servicePlansSold / pool : null;
     }

@@ -209,6 +209,11 @@ const DEPARTMENTS = {
       // yet (see README), so this is the same conversion math as BU 30's
       // shown with no target until that's resolved, as a placeholder.
       { key: "clubConversion", label: "Club agreement conversion", type: "pct", target: null },
+      // Live (was hand-entered, never filled in): Membership Sold calls vs
+      // Non-Member-tagged calls, same math as clubConversion above -- the
+      // non-member tag is the pool of new customers, Membership Sold is who
+      // converted. Michael, 2026-11-03. Target >= 50%.
+      { key: "newCustClubConversion", label: "New-customer club conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
       { key: "totalClubAgreements", label: "Total club agreements", type: "count", target: null },
       // See BU 30's identical entry above for why this is scoped by the
       // estimate's own Business Unit field, not the assigned tech.
@@ -290,11 +295,10 @@ const DEPARTMENTS = {
       // confirmed number (3, not 2): 1:3 support:production is the same
       // statement as production:support >= 3.
       { key: "productionToSupportRatio", label: "Production to support ratio", type: "ratio", target: { goal: 3, direction: "min" }, compute: (m) => (m.supportCount ? m.productionCount / m.supportCount : null) },
-      // Added for the revamped `scorecard` list below — the new-vs-renewal
-      // club split Housecall Pro doesn't expose, so both are hand-entered
-      // (from wherever the club program tracks them). Targets: new-customer
-      // conversion >= 50%, existing-customer renewal >= 85%.
-      { key: "newCustClubConversion", label: "New-customer club conversion", type: "pct", target: { goal: 0.5, direction: "min" } },
+      // Added for the revamped `scorecard` list below — Housecall Pro doesn't
+      // expose renewals, so this one is hand-entered (from wherever the club
+      // program tracks it). Target: existing-customer renewal >= 85%. The
+      // new-customer conversion half of the split is live in `hcp` above.
       { key: "renewalRate", label: "Existing-customer renewal rate", type: "pct", target: { goal: 0.85, direction: "min" } },
       // Added once the separate Company Callback Report started tracking
       // every department (not just 30/70/80) -- same denominator/compute
@@ -312,7 +316,7 @@ const DEPARTMENTS = {
       // confirmed by Michael 2026-10-14.
       { source: "hcp", key: "avgTicket", label: "Avg ticket (no sales)" },
       { source: "hcp", key: "avgTicketWithSales", label: "Avg ticket with sales" },
-      { source: "manual", key: "newCustClubConversion", label: "New-customer club conversion" },
+      { source: "hcp", key: "newCustClubConversion", label: "New-customer club conversion" },
       { source: "manual", key: "renewalRate", label: "Existing-customer renewal rate" },
       { source: "manual", key: "ptuConversionPct", label: "PTU marketing conversion" },
       { source: "hcp", key: "totalClubAgreements", label: "Total club agreements" },
