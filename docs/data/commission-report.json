@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-11-02T17:35:05.200Z",
+                 "generated_at":  "2026-11-02T21:05:05.033Z",
                  "month":  "2026-11"
              },
     "weeks":  [
@@ -9,11 +9,17 @@
                       "weekStart":  "2026-10-28",
                       "weekEnd":  "2026-11-03",
                       "totals":  {
-                                     "Josh":  331.5,
+                                     "Josh":  1189.69,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
+                                                 {
+                                                     "customerName":  "Tim Golden",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  858.19
+                                                 },
                                                  {
                                                      "customerName":  "Sidney Doll",
                                                      "systemType":  "Legacy",
@@ -27,10 +33,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Tim Golden",
-                                                       "reason":  "System Type not entered yet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
