@@ -41,28 +41,11 @@ jobs:
           HCP_API_KEY: ${{ secrets.HCP_API_KEY }}
         run: node scripts/sync.js
 
+      # The sync above takes ~20 minutes; if anything else pushed to main in
+      # that time (the Bouncie bot, the local refresh scripts, a human), a plain
+      # push was rejected and the whole run's data was thrown away -- ~13 of
+      # every 100 runs failed this way (found 2026-11-02). The script re-bases
+      # this run's data files onto the newest main and retries the push. It
+      # also keeps the amend-vs-fresh-commit convention (see the script).
       - name: Commit updated data
-        run: |
-          git config user.name "hcp-sync-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add docs/data
-          if git diff --cached --quiet; then
-            echo "No data changes."
-            exit 0
-          fi
-
-          # The synced data file is a few MB and changes on every run. A new
-          # commit each time would bloat the repo's git history fast at a
-          # 15-minute cadence, so consecutive bot-only data commits are
-          # collapsed into one via amend + force-push instead of stacking.
-          # Any real (human) commit in between breaks the chain and gets a
-          # fresh data commit on top, never amended.
-          # Belt-and-suspenders: only amend if HEAD actually has a parent.
-          # Amending a parentless HEAD would silently orphan the branch.
-          if [ "$(git log -1 --pretty=%s)" = "Sync Housecall Pro data [skip ci]" ] && git rev-parse -q --verify HEAD^ >/dev/null; then
-            git commit --amend -q -m "Sync Housecall Pro data [skip ci]"
-            git push --force-with-lease origin HEAD:main
-          else
-            git commit -q -m "Sync Housecall Pro data [skip ci]"
-            git push origin HEAD:main
-          fi
+        run: bash scripts/commit-hcp-data.sh
