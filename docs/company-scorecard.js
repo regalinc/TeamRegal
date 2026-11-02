@@ -48,16 +48,58 @@ function populateDeptSelect() {
 // One "YTD-<year>" option per year that has at least one month of P&L
 // data, newest year first — isYtd()/ytdYear()/monthLabel() live in
 // shared.js now (a second page needs the exact same YTD semantics).
+//
+// A month is selectable once it's OVER (not just once its P&L is in) — the
+// P&L lands about a week into the following month, but the Housecall Pro
+// tiles are ready the moment the month ends. Until the P&L is uploaded, a
+// month is "pending": it's labeled that way in the dropdown and any tile
+// that needs the P&L or a hand-entered figure says "Not ready yet" (see
+// isMonthPending / tileFor) instead of silently showing a blank.
+function monthKey(year, monthIndex) {
+  return `${year}-${String(monthIndex + 1).padStart(2, "0")}`;
+}
+
+// Every calendar month from the earliest one with any P&L/manual data
+// through the last COMPLETED month (or the latest P&L month, if that's
+// somehow later), newest first.
+function availableMonths() {
+  const known = [...Object.keys(pnlData || {}), ...Object.keys(manualData || {})].sort();
+  if (!known.length) return [];
+  const [startY, startM] = known[0].split("-").map(Number);
+  const now = new Date();
+  const lastCompleted = monthKey(now.getFullYear(), now.getMonth() - 1); // JS rolls month -1 into the prior year
+  const latestPnl = Object.keys(pnlData || {}).sort().pop() || "";
+  const last = latestPnl > lastCompleted ? latestPnl : lastCompleted;
+  const [endY, endM] = last.split("-").map(Number);
+  const months = [];
+  for (let y = startY, m = startM; y < endY || (y === endY && m <= endM); m++) {
+    if (m > 12) {
+      y++;
+      m = 1;
+    }
+    months.push(`${y}-${String(m).padStart(2, "0")}`);
+  }
+  return months.reverse();
+}
+
+// True when a single month has no P&L yet. (YTD is never "pending" — it
+// sums whichever P&L months exist.)
+function isMonthPending(monthStr) {
+  return !isYtd(monthStr) && !(pnlData && pnlData[monthStr]);
+}
+
 function populateMonthSelect() {
-  const months = Object.keys(pnlData || {}).sort().reverse();
+  const months = availableMonths();
   const years = [...new Set(months.map((m) => m.slice(0, 4)))]; // already newest-first, since months is
   const options = years.flatMap((year) => [
     { value: `YTD-${year}`, label: `${year} Year to date` },
-    ...months.filter((m) => m.startsWith(year)).map((m) => ({ value: m, label: monthLabel(m) })),
+    ...months
+      .filter((m) => m.startsWith(year))
+      .map((m) => ({ value: m, label: isMonthPending(m) ? `${monthLabel(m)} (P&L pending)` : monthLabel(m) })),
   ]);
   monthSelect.innerHTML = options.map((o) => `<option value="${o.value}">${escapeHtml(o.label)}</option>`).join("");
-  // Default stays the latest real month, not YTD — least surprise for
-  // existing behavior; YTD is an explicit extra choice, not the default.
+  // Default is the latest completed month, not YTD — YTD is an explicit
+  // extra choice. That month may still be waiting on its P&L.
   currentMonth = months[0] || null;
   if (currentMonth) monthSelect.value = currentMonth;
 }
@@ -124,9 +166,13 @@ function formatTargetCaption(type, target) {
   return `Target ${symbol} ${goalStr}`;
 }
 
-function tileFor(label, type, value, target) {
+// `pending` marks a tile whose source (the P&L, or a hand-entered figure)
+// isn't in yet for a finished month: with no value it reads "Not ready yet"
+// instead of "—", so a blank means "waiting", not "no data exists".
+function tileFor(label, type, value, target, pending = false) {
   const sub = formatTargetCaption(type, target);
   if (value === null || value === undefined || Number.isNaN(value)) {
+    if (pending) return renderMiniStat(label, "Not ready yet", null, sub).replace('class="tech-mini-stat ', 'class="tech-mini-stat not-ready ');
     return renderMiniStat(label, "—", null, sub);
   }
   const t = target ? tier(value, target) : null;
@@ -159,8 +205,11 @@ function renderHcpSection(dept, stats) {
 
 function renderPnlSection(dept, pnl) {
   if (!pnl) {
-    const msg = isYtd(currentMonth) ? "No P&L uploaded yet this year." : "No P&L uploaded for this month yet.";
-    return sectionHtml("From the P&L", msg, "");
+    const msg = isYtd(currentMonth)
+      ? "No P&L uploaded yet this year."
+      : "The P&L for this month isn't uploaded yet — these tiles fill in once it is.";
+    const pendingTiles = dept.pnl.map((m) => tileFor(m.label, m.type || "pct", null, m.target, true)).join("");
+    return sectionHtml("From the P&L", msg, pendingTiles);
   }
   const inc = pnl.totalIncome || 0;
   // pnlMetricValue() (shared.js) does the "÷ Total Income, unless this
@@ -176,7 +225,7 @@ function renderManualSection(dept, manual, stats, pnl) {
   const tiles = dept.manual
     .map((f) => {
       const value = f.compute ? f.compute(m, stats, pnl) : m[f.key];
-      return tileFor(f.label, f.type, value === undefined ? null : value, f.target);
+      return tileFor(f.label, f.type, value === undefined ? null : value, f.target, isMonthPending(currentMonth));
     })
     .join("");
   const note = isYtd(currentMonth)
@@ -222,13 +271,19 @@ function renderScorecardSection(dept, stats, pnl, manual) {
       const type = item.type || base.type || "pct";
       const target = "target" in item ? item.target : base.target;
       const value = scorecardItemValue(item, dept, stats, pnl, manual);
-      return tileFor(label, type, value === undefined ? null : value, target);
+      // Housecall Pro tiles are always live; only P&L / hand-entered tiles
+      // can be waiting on a month's P&L.
+      const pending = item.source !== "hcp" && isMonthPending(currentMonth);
+      return tileFor(label, type, value === undefined ? null : value, target, pending);
     })
     .join("");
   const scope = isYtd(currentMonth)
     ? `Jan 1 through the latest month with a P&L uploaded, ${ytdYear(currentMonth)}`
     : monthLabel(currentMonth);
-  const note = `A mix of live Housecall Pro data, this period's P&L, and hand-entered figures — scoped to this department and ${escapeHtml(scope)}. A blank tile ("—") is a metric with no data fed to it yet.`;
+  const pendingNote = isMonthPending(currentMonth)
+    ? ` The P&L for ${escapeHtml(monthLabel(currentMonth))} isn't uploaded yet, so tiles that need it (or hand-entered figures) read "Not ready yet" and fill in once it is.`
+    : "";
+  const note = `A mix of live Housecall Pro data, this period's P&L, and hand-entered figures — scoped to this department and ${escapeHtml(scope)}. A blank tile ("—") is a metric with no data fed to it yet.${pendingNote}`;
   return sectionHtml("Scorecard", note, tiles);
 }
 

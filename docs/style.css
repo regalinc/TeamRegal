@@ -508,3 +508,11 @@ img.avatar { object-fit: cover; }
   color: var(--text);
   font: inherit;
 }
+
+/* A scorecard tile waiting on a month's P&L / hand entry ("Not ready yet"). */
+.tech-mini-stat.not-ready .tech-mini-stat-value {
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-muted);
+}
