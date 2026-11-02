@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  653
+                 "record_count":  655
              },
     "records":  [
                     {
@@ -6277,12 +6277,12 @@
                         "ca":  "Nick",
                         "date":  "2026-09-28",
                         "customerName":  "Gregorio Paredes",
-                        "job":  "62134",
-                        "systemType":  "Mini-Split",
+                        "job":  "",
+                        "systemType":  "",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  true
+                        "sold":  false
                     },
                     {
                         "ca":  "Josh",
@@ -7113,12 +7113,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-30",
                         "customerName":  "Sidney Doll",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "63211",
+                        "systemType":  "Legacy",
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Josh",
@@ -7165,6 +7165,17 @@
                         "sold":  false
                     },
                     {
+                        "ca":  "Josh",
+                        "date":  "2026-11-03",
+                        "customerName":  "Arthur Milam",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "Yes",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
                         "ca":  "Nick",
                         "date":  "2026-11-04",
                         "customerName":  "Michael Albert",
@@ -7179,6 +7190,17 @@
                         "ca":  "Nick",
                         "date":  "2026-11-04",
                         "customerName":  "Donna Vasquez",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Marketed",
+                        "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-11-06",
+                        "customerName":  "Mary Green",
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "No",
