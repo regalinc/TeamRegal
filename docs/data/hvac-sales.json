@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  655
+                 "record_count":  656
              },
     "records":  [
                     {
@@ -7069,12 +7069,12 @@
                         "ca":  "Josh",
                         "date":  "2026-10-28",
                         "customerName":  "Tim Golden",
-                        "job":  "",
-                        "systemType":  "",
+                        "job":  "63275",
+                        "systemType":  "Legacy",
                         "clubMember":  "Yes",
                         "lead":  "Tech",
                         "customerType":  "Existing",
-                        "sold":  false
+                        "sold":  true
                     },
                     {
                         "ca":  "Nick",
@@ -7146,6 +7146,17 @@
                         "ca":  "Josh",
                         "date":  "2026-11-02",
                         "customerName":  "Margie McElhaney",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "Tech",
+                        "customerType":  "Existing",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-11-02",
+                        "customerName":  "Daniel Ivovich",
                         "job":  "",
                         "systemType":  "",
                         "clubMember":  "No",
