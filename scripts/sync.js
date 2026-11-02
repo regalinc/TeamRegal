@@ -35,6 +35,80 @@ function assertApiKey() {
   }
 }
 
+// Request timing / rate-limit telemetry, printed at the end of every run
+// (see logRequestStats). Added 2026-11-02 to size a possible parallel-fetch
+// speedup: a run is ~200 sequential requests taking ~20 minutes, and we don't
+// know how fast HCP answers or how much concurrency it tolerates. Purely
+// observational -- nothing here changes what the sync fetches or writes, and
+// it never logs the Authorization header.
+// totalMs/minMs/maxMs = time until HCP starts answering (headers); totalBodyMs =
+// time spent downloading + parsing the JSON bodies afterwards.
+const requestStats = {
+  count: 0,
+  totalMs: 0,
+  totalBodyMs: 0,
+  minMs: Infinity,
+  maxMs: 0,
+  slowest: null,
+  byStatus: {},
+  byEndpoint: {},
+  rateLimitHeaders: {},
+};
+const RATE_LIMIT_HEADER = /rate|limit|retry|remaining|throttle/i;
+
+function recordRequest(pathname, ms, res) {
+  try {
+    requestStats.count += 1;
+    requestStats.totalMs += ms;
+    requestStats.minMs = Math.min(requestStats.minMs, ms);
+    if (ms > requestStats.maxMs) {
+      requestStats.maxMs = ms;
+      requestStats.slowest = `${pathname} (${Math.round(ms)}ms)`;
+    }
+    requestStats.byStatus[res.status] = (requestStats.byStatus[res.status] || 0) + 1;
+    const ep = (requestStats.byEndpoint[pathname] ||= { count: 0, totalMs: 0 });
+    ep.count += 1;
+    ep.totalMs += ms;
+    for (const [name, value] of res.headers) {
+      if (RATE_LIMIT_HEADER.test(name)) requestStats.rateLimitHeaders[name] = value; // last value seen
+    }
+    if (!res.ok) console.warn(`HCP ${res.status} on ${pathname} after ${Math.round(ms)}ms`);
+  } catch (e) {
+    // telemetry must never break a sync
+  }
+}
+
+function logRequestStats() {
+  try {
+    const s = requestStats;
+    if (!s.count) return;
+    const endpoints = Object.fromEntries(
+      Object.entries(s.byEndpoint).map(([p, v]) => [p, `${v.count} req, avg ${Math.round(v.totalMs / v.count)}ms`])
+    );
+    console.log(
+      "HCP request stats: " +
+        JSON.stringify(
+          {
+            requests: s.count,
+            wait_for_response_seconds: Math.round(s.totalMs / 1000),
+            body_download_seconds: Math.round(s.totalBodyMs / 1000),
+            avg_response_ms: Math.round(s.totalMs / s.count),
+            min_response_ms: Math.round(s.minMs),
+            max_response_ms: Math.round(s.maxMs),
+            slowest: s.slowest,
+            by_status: s.byStatus,
+            by_endpoint: endpoints,
+            rate_limit_headers: s.rateLimitHeaders,
+          },
+          null,
+          2
+        )
+    );
+  } catch (e) {
+    // telemetry must never break a sync
+  }
+}
+
 async function hcpGet(pathname, params) {
   const url = new URL(API_BASE + pathname);
   for (const [key, value] of Object.entries(params || {})) {
@@ -42,12 +116,14 @@ async function hcpGet(pathname, params) {
     url.searchParams.set(key, value);
   }
 
+  const startedAt = performance.now();
   const res = await fetch(url, {
     headers: {
       Accept: "application/json",
       Authorization: `Token ${API_KEY}`,
     },
   });
+  recordRequest(url.pathname, performance.now() - startedAt, res);
 
   if (!res.ok) {
     const body = await res.text().catch(() => "");
@@ -56,7 +132,10 @@ async function hcpGet(pathname, params) {
     );
   }
 
-  return res.json();
+  const bodyStartedAt = performance.now();
+  const body = await res.json();
+  requestStats.totalBodyMs += performance.now() - bodyStartedAt;
+  return body;
 }
 
 // Fetches every page of a paginated HCP list endpoint and returns the
@@ -484,9 +563,11 @@ async function main() {
   );
 
   console.log(`Wrote data to ${OUT_DIR}`);
+  logRequestStats();
 }
 
 main().catch((err) => {
   console.error(err);
+  logRequestStats(); // a failed run's numbers (e.g. a 429) are the most useful ones
   process.exit(1);
 });
