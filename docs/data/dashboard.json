@@ -1,11 +1,11 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-02T00:39:25.433Z",
+    "last_synced_at": "2026-11-02T07:38:25.732Z",
     "window_days_back": 306,
     "window_days_forward": 13,
     "technician_count": 47,
     "job_count": 12465,
-    "estimate_count": 3832
+    "estimate_count": 3834
   },
   "technicians": [
     {
@@ -375861,14 +375861,15 @@
       "tags": [
         "40",
         "Opportunity",
-        "HVAC Parts"
+        "HVAC Parts",
+        "IFO"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T17:18:52Z",
-      "updated_at": "2026-10-30T17:18:52Z",
+      "updated_at": "2026-11-02T01:03:31Z",
       "invoice_number": "58211",
       "created_at": "2026-06-16T19:23:54Z"
     },
@@ -377614,7 +377615,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T18:43:28Z",
-      "updated_at": "2026-10-30T18:44:09Z",
+      "updated_at": "2026-11-02T00:58:12Z",
       "invoice_number": "61206",
       "created_at": "2026-09-03T12:34:46Z"
     },
@@ -380366,14 +380367,15 @@
       ],
       "tags": [
         "40",
-        "Opportunity"
+        "Opportunity",
+        "HVAC Parts"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-29T18:25:05Z",
-      "updated_at": "2026-10-29T18:25:05Z",
+      "updated_at": "2026-11-02T01:07:35Z",
       "invoice_number": "61652",
       "created_at": "2026-09-15T15:28:27Z"
     },
@@ -384197,7 +384199,7 @@
       "total_amount": 21782,
       "outstanding_balance": 0,
       "completed_at": "2026-10-29T18:28:00Z",
-      "updated_at": "2026-10-29T18:28:00Z",
+      "updated_at": "2026-11-02T03:01:44Z",
       "invoice_number": "62826",
       "created_at": "2026-10-19T16:31:47Z"
     },
@@ -389858,14 +389860,15 @@
       "tags": [
         "30",
         "Opportunity",
-        "Non-Member"
+        "Non-Member",
+        "IFO"
       ],
       "business_unit": "30 HVAC SERVICE",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T18:54:42Z",
-      "updated_at": "2026-10-30T18:54:42Z",
+      "updated_at": "2026-11-02T00:59:36Z",
       "invoice_number": "63059",
       "created_at": "2026-10-26T16:22:30Z"
     },
@@ -399597,6 +399600,52 @@
     }
   ],
   "estimates": [
+    {
+      "id": "csr_8dcedad43e3745de9458655f7b21ef67",
+      "estimate_number": "14052",
+      "customer_label": "Colleen S.",
+      "created_at": "2026-11-02T01:07:23Z",
+      "schedule": {
+        "scheduled_start": null,
+        "scheduled_end": null,
+        "time_zone": "America/New_York",
+        "scheduled_start_local": null,
+        "scheduled_end_local": null,
+        "arrival_window": 0,
+        "appointments": []
+      },
+      "business_unit": null,
+      "assigned_employee_ids": [
+        "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+      ],
+      "work_status": "needs scheduling",
+      "approved": false,
+      "approved_at": null,
+      "approved_amount": 0
+    },
+    {
+      "id": "csr_42b4d9f1d4f54368b10fc2e1888b9f11",
+      "estimate_number": "14051",
+      "customer_label": "Gina S.",
+      "created_at": "2026-11-02T01:02:38Z",
+      "schedule": {
+        "scheduled_start": null,
+        "scheduled_end": null,
+        "time_zone": "America/New_York",
+        "scheduled_start_local": null,
+        "scheduled_end_local": null,
+        "arrival_window": 0,
+        "appointments": []
+      },
+      "business_unit": null,
+      "assigned_employee_ids": [
+        "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+      ],
+      "work_status": "needs scheduling",
+      "approved": false,
+      "approved_at": null,
+      "approved_amount": 0
+    },
     {
       "id": "csr_3e1f3e021f9a4037b1d97079e2f4e952",
       "estimate_number": "14050",
@@ -554169,7 +554218,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T18:43:28Z",
-        "updated_at": "2026-10-30T18:44:09Z",
+        "updated_at": "2026-11-02T00:58:12Z",
         "invoice_number": "61206",
         "created_at": "2026-09-03T12:34:46Z"
       },
@@ -683127,7 +683176,7 @@
         "total_amount": 21782,
         "outstanding_balance": 0,
         "completed_at": "2026-10-29T18:28:00Z",
-        "updated_at": "2026-10-29T18:28:00Z",
+        "updated_at": "2026-11-02T03:01:44Z",
         "invoice_number": "62826",
         "created_at": "2026-10-19T16:31:47Z"
       },
@@ -711512,14 +711561,15 @@
         "tags": [
           "30",
           "Opportunity",
-          "Non-Member"
+          "Non-Member",
+          "IFO"
         ],
         "business_unit": "30 HVAC SERVICE",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T18:54:42Z",
-        "updated_at": "2026-10-30T18:54:42Z",
+        "updated_at": "2026-11-02T00:59:36Z",
         "invoice_number": "63059",
         "created_at": "2026-10-26T16:22:30Z"
       },
@@ -839027,14 +839077,15 @@
         "tags": [
           "40",
           "Opportunity",
-          "HVAC Parts"
+          "HVAC Parts",
+          "IFO"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T17:18:52Z",
-        "updated_at": "2026-10-30T17:18:52Z",
+        "updated_at": "2026-11-02T01:03:31Z",
         "invoice_number": "58211",
         "created_at": "2026-06-16T19:23:54Z"
       },
@@ -839761,14 +839812,15 @@
         ],
         "tags": [
           "40",
-          "Opportunity"
+          "Opportunity",
+          "HVAC Parts"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-29T18:25:05Z",
-        "updated_at": "2026-10-29T18:25:05Z",
+        "updated_at": "2026-11-02T01:07:35Z",
         "invoice_number": "61652",
         "created_at": "2026-09-15T15:28:27Z"
       },
