@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-11-02T09:35:11.710Z",
+                 "generated_at":  "2026-11-02T17:35:05.200Z",
                  "month":  "2026-11"
              },
     "weeks":  [
@@ -9,12 +9,17 @@
                       "weekStart":  "2026-10-28",
                       "weekEnd":  "2026-11-03",
                       "totals":  {
-                                     "Josh":  0,
+                                     "Josh":  331.5,
                                      "Nick":  0
                                  },
                       "sales":  {
                                     "Josh":  [
-
+                                                 {
+                                                     "customerName":  "Sidney Doll",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  331.5
+                                                 }
                                              ],
                                     "Nick":  [
 
@@ -23,7 +28,7 @@
                       "pending":  {
                                       "Josh":  [
                                                    {
-                                                       "customerName":  "Sidney Doll",
+                                                       "customerName":  "Tim Golden",
                                                        "reason":  "System Type not entered yet"
                                                    }
                                                ],
@@ -43,11 +48,11 @@
                                       "Nick":  45884
                                   },
                     "mtd":  {
-                                "Josh":  0,
+                                "Josh":  16992,
                                 "Nick":  0
                             },
                     "ytd":  {
-                                "Josh":  4067856.8,
+                                "Josh":  4084848.8,
                                 "Nick":  644610.88
                             }
                 },
