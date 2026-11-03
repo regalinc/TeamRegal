@@ -377,10 +377,12 @@ function renderInstallationTeamScreen() {
   // The goal is always this calendar month's revenue, regardless of
   // whatever ?period= this screen's own tiles are showing — a monthly goal
   // doesn't mean anything scoped to "this week" or "YTD".
-  const monthRevenue = computeScorecardStats(teamJobsInPeriod("month"), { splitRevenue: false, rawJobCount: true }).totalRevenue;
+  const monthRevenue = computeScorecardStats(teamJobsInPeriod("month"), { splitRevenue: false }).totalRevenue;
   const goal = currentMonthGoal();
 
-  const screenStats = computeScorecardStats(teamJobsInPeriod(PERIOD), { splitRevenue: false, rawJobCount: true });
+  // Jobs counts only OnCall Air-tagged jobs (countsTowardJobs, BU 10): one per accepted sale, not every follow-up
+  // visit or $0 job (Michael, 2026-11-03). Revenue still sums every completed job.
+  const screenStats = computeScorecardStats(teamJobsInPeriod(PERIOD), { splitRevenue: false });
 
   const teamTechs = (latestData.technicians || []).filter(
     (t) => INSTALLATION_TEAM_TECH_IDS.has(t.id) && !INSTALLATION_TEAM_FORMER_TECH_IDS.has(t.id)

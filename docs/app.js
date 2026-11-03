@@ -64,10 +64,10 @@ function renderTechCard(tech, jobs, extraStats, kpiBuCode) {
 // individual ones — see INSTALLATION_TEAM_TECH_IDS in shared.js for why. Revenue
 // is unsplit (full job amounts, not divided by assignee count) since this
 // is a team total, not a personal attribution — same convention
-// admin.html's department cards use. Jobs is a raw count (rawJobCount),
-// same reasoning as the department's own BU 10 card would need if it
-// weren't already using the Oncall Air tag: these jobs aren't reliably
-// tagged Opportunity.
+// admin.html's department cards use. Jobs counts only OnCall Air-tagged jobs
+// (one per accepted sale, not every follow-up visit or $0 job -- Michael,
+// 2026-11-03), same as the department's own BU 10 card: these jobs aren't
+// reliably tagged Opportunity.
 function renderInstallationTeamCard(periodJobs) {
   const teamJobs = periodJobs.filter(
     (j) =>
@@ -86,7 +86,6 @@ function renderInstallationTeamCard(periodJobs) {
     jobs: teamJobs,
     splitRevenue: false,
     hiddenTiles: INSTALLATION_TEAM_HIDDEN_TILES,
-    rawJobCount: true,
   });
   card.classList.add("installation-team-card");
   return card;
