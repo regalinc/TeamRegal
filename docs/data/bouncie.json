@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-02T21:53:49.647Z",
+    "last_synced_at": "2026-11-03T03:40:13.183Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 36,
-    "trip_count": 9881
+    "trip_count": 9887
   },
   "vehicles": [
     {
@@ -49,7 +49,7 @@
         "name": "Maverick",
         "year": 2024
       },
-      "odometer": 16020.8
+      "odometer": 16024.5
     },
     {
       "imei": "862255068864591",
@@ -71,7 +71,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 72566.29999999971
+      "odometer": 72582.19999999972
     },
     {
       "imei": "862255068923033",
@@ -93,7 +93,7 @@
         "name": "ProMaster 2500",
         "year": 2024
       },
-      "odometer": 26298.3
+      "odometer": 26314.4
     },
     {
       "imei": "864486066579554",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 83148
+      "odometer": 83189
     },
     {
       "imei": "868199050033175",
@@ -390,7 +390,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 49959.803404399594
+      "odometer": 49962.703404399595
     },
     {
       "imei": "868923055442135",
@@ -405,6 +405,78 @@
     }
   ],
   "trips": [
+    {
+      "transactionId": "868923055438364-10392-202611",
+      "imei": "868923055438364",
+      "startTime": "2026-11-03T01:05:42.000Z",
+      "endTime": "2026-11-03T01:18:43.000Z",
+      "distance": 2.9,
+      "averageSpeed": 21.1,
+      "maxSpeed": 37.903631,
+      "hardBrakingCount": 16,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 5
+    },
+    {
+      "transactionId": "862255068902755-4362-202611",
+      "imei": "862255068902755",
+      "startTime": "2026-11-03T01:01:57.000Z",
+      "endTime": "2026-11-03T01:31:20.000Z",
+      "distance": 11.8,
+      "averageSpeed": 31,
+      "maxSpeed": 46,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 388
+    },
+    {
+      "transactionId": "862255068902755-4361-202611",
+      "imei": "862255068902755",
+      "startTime": "2026-11-02T23:06:30.000Z",
+      "endTime": "2026-11-02T23:16:54.000Z",
+      "distance": 0,
+      "averageSpeed": 0,
+      "maxSpeed": 0,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 614
+    },
+    {
+      "transactionId": "864486066508249-4275-202611",
+      "imei": "864486066508249",
+      "startTime": "2026-11-02T22:29:20.000Z",
+      "endTime": "2026-11-02T22:54:45.000Z",
+      "distance": 16.3,
+      "averageSpeed": 41,
+      "maxSpeed": 68.972181,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 94
+    },
+    {
+      "transactionId": "862255068857876-3688-202611",
+      "imei": "862255068857876",
+      "startTime": "2026-11-02T22:14:25.000Z",
+      "endTime": "2026-11-02T22:21:42.000Z",
+      "distance": 3.3,
+      "averageSpeed": 28.5,
+      "maxSpeed": 39.146373,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 4
+    },
+    {
+      "transactionId": "862255068857876-3687-202611",
+      "imei": "862255068857876",
+      "startTime": "2026-11-02T22:06:18.000Z",
+      "endTime": "2026-11-02T22:11:36.000Z",
+      "distance": 1.7,
+      "averageSpeed": 24.8,
+      "maxSpeed": 45.981454,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 64
+    },
     {
       "transactionId": "868199050016543-10836-202611",
       "imei": "868199050016543",
@@ -529,8 +601,13 @@
       "transactionId": "862255068902755-4360-202611",
       "imei": "862255068902755",
       "startTime": "2026-11-02T20:33:05.000Z",
+      "endTime": "2026-11-02T21:59:09.000Z",
+      "distance": 4.1,
+      "averageSpeed": 21.1,
+      "maxSpeed": 47.224196,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 4467
     },
     {
       "transactionId": "352602114569707-1120-202611",
