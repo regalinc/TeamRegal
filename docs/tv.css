@@ -650,3 +650,52 @@ body {
 .tv-main.tv-nine .tv-fc-tiles > .tv-tile:last-child,
 .tv-main.tv-nine .tv-dept-panel .tv-tile-grid > .tv-tile:last-child { grid-column: auto; }
 .tv-main.tv-nine .tv-row-metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5vw; max-width: 66%; }
+
+/* HVAC Installation screen (renderInstallationTeamScreen, tv.js): green department block on the left like the BU
+   30/40/70/80 screens, big crew photos and the next scheduled jobs on the right. */
+.tv-install { flex: 1; display: grid; grid-template-columns: 41% 1fr; gap: 1.6vw; min-height: 0; }
+.tv-install-dept { min-height: 0; }
+.tv-install-goal { padding: 0.4vh 0 1vh; text-align: center; }
+.tv-install-goal-label { font-size: clamp(12px, 1.9vh, 26px); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600; }
+.tv-install-goal-value { font-size: clamp(30px, 6.4vh, 90px); font-weight: 700; line-height: 1.1; }
+.tv-install-track { position: relative; height: 2.6vh; border-radius: 999px; background: var(--tile-bg); margin: 1.4vh 0.6vw 0; }
+.tv-install-fill { height: 100%; border-radius: 999px; background: var(--dept-color); }
+.tv-install-marker { position: absolute; top: -0.7vh; bottom: -0.7vh; width: 0.3vh; background: #fff; border-radius: 2px; transform: translateX(-50%); }
+.tv-install-pace { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.8vw; margin-top: 1.4vh; font-size: clamp(11px, 1.7vh, 24px); color: var(--text-muted); }
+.tv-install-pill { padding: 0.5vh 1vw; border-radius: 999px; font-weight: 700; font-size: clamp(12px, 2vh, 28px); }
+.tv-install-pill.tv-good { background: var(--good-bg); color: var(--good-text); }
+.tv-install-pill.tv-warn { background: var(--warn-bg); color: var(--warn-text); }
+.tv-install-pill.tv-bad { background: var(--bad-bg); color: var(--bad-text); }
+.tv-install-dept .tv-tile-grid { grid-template-columns: repeat(3, 1fr); }
+.tv-install-dept .tv-tile-grid > .tv-tile:last-child { grid-column: auto; }
+
+.tv-install-right { display: flex; flex-direction: column; gap: 1.6vh; min-height: 0; }
+.tv-install-crew, .tv-install-coming { background: var(--card-bg); border: 0.3vh solid #4b525e; border-radius: var(--radius); padding: 1.6vh 1.6vw; min-height: 0; }
+.tv-install-crew { flex: 1 1 auto; display: flex; flex-direction: column; }
+.tv-install-coming { flex: 0 0 auto; border-width: 1px; border-color: var(--border); }
+.tv-install-h { font-size: clamp(12px, 1.9vh, 26px); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; }
+.tv-install-h span { text-transform: none; letter-spacing: 0; margin-left: 0.8vw; opacity: 0.85; }
+.tv-install-crew-grid { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 1vh 1vw; margin-top: 1vh; min-height: 0; }
+.tv-install-person { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 0; }
+.tv-install-photo-wrap { position: relative; }
+.tv-install-photo, .tv-install-photo-fallback {
+  width: min(17.5vh, 9.5vw);
+  height: min(17.5vh, 9.5vw);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.tv-install-photo-fallback { display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: clamp(20px, 4.4vh, 60px); }
+.tv-install-dot { position: absolute; right: 0.4vh; top: 0.4vh; width: 2.4vh; height: 2.4vh; border-radius: 50%; border: 0.45vh solid var(--card-bg); }
+.tv-install-dot.on { background: #22c55e; }
+.tv-install-dot.off { background: #6b7280; }
+.tv-install-name { font-size: clamp(13px, 2.2vh, 30px); font-weight: 600; margin-top: 0.8vh; text-align: center; }
+
+.tv-install-job { display: flex; align-items: center; gap: 1.2vw; background: var(--tile-bg); border-radius: calc(var(--radius) * 0.6); padding: 1vh 1.4vw; margin-top: 0.9vh; font-size: clamp(13px, 2.2vh, 30px); }
+.tv-install-when { width: 9vw; color: var(--text-muted); flex-shrink: 0; }
+.tv-install-cust { flex: 1; font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tv-install-amt { font-weight: 700; }
+.tv-install-empty { color: var(--text-muted); font-size: clamp(13px, 2vh, 28px); margin-top: 1vh; }
+.tv-install-dept .tv-tile .tv-tile-label { font-size: clamp(11px, 1.9vh, 26px); }
+.tv-install-dept .tv-tile .tv-tile-value { font-size: clamp(22px, 5vh, 70px); margin-top: 0.6vh; }

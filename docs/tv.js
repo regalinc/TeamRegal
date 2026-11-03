@@ -160,6 +160,9 @@ const INSTALLATION_MONTHLY_GOALS = {
   "2026-12": 415000,
 };
 
+// HVAC Installation's department colour (green) on its department block.
+const INSTALLATION_TV_COLOR = "#15803d";
+
 function currentMonthKey() {
   const now = new Date();
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
@@ -383,13 +386,153 @@ function renderInstallationTeamScreen() {
     (t) => INSTALLATION_TEAM_TECH_IDS.has(t.id) && !INSTALLATION_TEAM_FORMER_TECH_IDS.has(t.id)
   );
 
+  // Booked ahead: team BU 10 jobs still on the calendar (scheduled from today on, or in progress).
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const bookedJobs = jobs
+    .filter(
+      (j) =>
+        (j.assigned_employee_ids || []).some((id) => INSTALLATION_TEAM_REVENUE_TECH_IDS.has(id)) &&
+        businessUnitCode(j.business_unit) === "10" &&
+        (j.total_amount || 0) > 0 &&
+        (j.work_status === "in progress" ||
+          (j.work_status === "scheduled" && j.schedule?.scheduled_start && new Date(j.schedule.scheduled_start) >= todayStart))
+    )
+    .sort((a, b) => new Date(a.schedule?.scheduled_start || 0) - new Date(b.schedule?.scheduled_start || 0));
+  const bookedCents = bookedJobs.reduce((sum, j) => sum + (j.total_amount || 0), 0);
+
+  // On a job today: assigned to anything scheduled for today that isn't canceled/complete-less-than-started.
+  const tomorrowStart = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000);
+  const busyToday = new Set();
+  for (const j of jobs) {
+    const start = j.schedule?.scheduled_start && new Date(j.schedule.scheduled_start);
+    if (!start || start < todayStart || start >= tomorrowStart || CANCELED_STATUSES.has(j.work_status)) continue;
+    (j.assigned_employee_ids || []).forEach((id) => busyToday.add(id));
+  }
+
+  mainEl.classList.add("tv-install-main");
   mainEl.innerHTML = `
-    <div class="tv-team">
-      ${renderInstallationTeamPhotos(teamTechs)}
-      ${renderInstallationGoal(monthRevenue, goal)}
-      <div class="tv-team-tiles">
-        ${installationTiles(screenStats)}
+    <div class="tv-install">
+      ${renderInstallationDepartment(monthRevenue, goal, screenStats, bookedJobs.length, bookedCents)}
+      <div class="tv-install-right">
+        ${renderInstallationCrew(teamTechs, busyToday)}
+        ${renderInstallationComing(bookedJobs.filter((j) => j.work_status === "scheduled").slice(0, 4))}
       </div>
+    </div>
+  `;
+}
+
+// Monday-Friday days in this calendar month: total, how many are done counting today, and how many remain after
+// today. Holidays aren't known, so a day off still counts as a workday.
+function installationWorkdays() {
+  const now = new Date();
+  const last = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  let total = 0;
+  let elapsed = 0;
+  for (let d = 1; d <= last; d++) {
+    const dow = new Date(now.getFullYear(), now.getMonth(), d).getDay();
+    if (dow === 0 || dow === 6) continue;
+    total++;
+    if (d <= now.getDate()) elapsed++;
+  }
+  return { total, elapsed, left: total - elapsed };
+}
+
+// The department block, laid out like the BU 30/40/70/80 screens: green banner, the month's revenue goal with a
+// where-we-should-be-today marker, a booked-ahead strip, then the tile grid. No individual installer numbers --
+// see INSTALLATION_TEAM_TECH_IDS in shared.js.
+function renderInstallationDepartment(monthRevenue, goal, stats, bookedCount, bookedCents) {
+  const wd = installationWorkdays();
+  let goalHtml;
+  if (goal === null) {
+    goalHtml = `<div class="tv-goal-missing">No revenue goal set for ${escapeHtml(currentMonthName())} yet.</div>`;
+  } else {
+    const pct = goal > 0 ? Math.min(100, (monthRevenue / goal) * 100) : 0;
+    const expected = wd.total ? wd.elapsed / wd.total : 0;
+    const expectedRevenue = goal * expected;
+    const ratio = expectedRevenue > 0 ? monthRevenue / expectedRevenue : 1;
+    const paceCls = ratio >= 1 ? "tv-good" : ratio >= 0.9 ? "tv-warn" : "tv-bad";
+    const paceText =
+      monthRevenue >= goal
+        ? "Goal hit"
+        : ratio >= 1
+        ? `${formatMoney(monthRevenue - expectedRevenue)} ahead of pace`
+        : `${formatMoney(expectedRevenue - monthRevenue)} behind pace`;
+    const needed =
+      monthRevenue < goal && wd.left > 0 ? ` &middot; ${escapeHtml(formatMoney((goal - monthRevenue) / wd.left))} per workday to finish` : "";
+    goalHtml = `
+      <div class="tv-install-goal-label">${escapeHtml(currentMonthName())} revenue goal</div>
+      <div class="tv-install-goal-value">${escapeHtml(formatMoney(monthRevenue))} <span class="tv-goal-of">of ${escapeHtml(formatMoney(goal))}</span></div>
+      <div class="tv-install-track">
+        <div class="tv-install-fill" style="width:${pct}%"></div>
+        <div class="tv-install-marker" style="left:${(expected * 100).toFixed(1)}%" title="Where the month should be today"></div>
+      </div>
+      <div class="tv-install-pace"><span class="tv-install-pill ${paceCls}">${escapeHtml(paceText)}</span><span>${pct.toFixed(0)}% of goal${needed}</span></div>
+    `;
+  }
+
+  const tile = (label, value, cls) => tvTile(label, value, cls, "tv-tile");
+  return `
+    <div class="tv-dept-panel tv-install-dept" style="--dept-color:${INSTALLATION_TV_COLOR}">
+      <div class="tv-dept-banner">
+        <div class="tv-dept-banner-label">Department</div>
+        <div class="tv-dept-banner-sub">10 HVAC Installation</div>
+      </div>
+      <div class="tv-install-goal">${goalHtml}</div>
+      <div class="tv-dept-soldline"><span class="tv-dept-soldline-n">Booked ahead</span><span class="tv-dept-soldline-arrow">&rarr;</span><span class="tv-dept-soldline-money">${escapeHtml(formatMoney(bookedCents / CENTS_PER_DOLLAR))}</span><span class="tv-dept-soldline-label">across ${bookedCount} job${bookedCount === 1 ? "" : "s"}</span></div>
+      <div class="tv-tile-grid">
+        ${tile("Revenue", formatMoney(stats.totalRevenue), "tv-outline-good")}
+        ${tile("Jobs done", stats.totalJobs.toLocaleString(), null)}
+        ${tile("Avg job value", formatMoney(stats.avgTicket), null)}
+        ${tile("Completion", `${stats.completionRate.toFixed(0)}%`, null)}
+        ${tile("Accessory sold", stats.accessorySold.toLocaleString(), null)}
+        ${tile("Workdays left", wd.left.toLocaleString(), null)}
+      </div>
+    </div>
+  `;
+}
+
+// Big faces for the install crew (alphabetical -- nothing to rank), with a green dot on whoever has a job on
+// today's schedule.
+function renderInstallationCrew(techs, busyToday) {
+  const sorted = [...techs].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  const working = sorted.filter((t) => busyToday.has(t.id)).length;
+  return `
+    <div class="tv-install-crew">
+      <div class="tv-install-h">Install crew <span>${working} of ${sorted.length} on a job today</span></div>
+      <div class="tv-install-crew-grid">
+        ${sorted
+          .map(
+            (tech) => `
+          <div class="tv-install-person">
+            <div class="tv-install-photo-wrap">
+              ${renderAvatarBlock(tech, "tv-install-photo", "tv-install-photo-fallback", { large: true })}
+              <span class="tv-install-dot ${busyToday.has(tech.id) ? "on" : "off"}"></span>
+            </div>
+            <div class="tv-install-name">${escapeHtml(tech.name || "Unknown")}</div>
+          </div>`
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderInstallationComing(jobsList) {
+  const rows = jobsList.length
+    ? jobsList
+        .map((j) => {
+          const when = new Date(j.schedule.scheduled_start).toLocaleDateString([], { weekday: "short", month: "numeric", day: "numeric" });
+          return `<div class="tv-install-job"><span class="tv-install-when">${escapeHtml(when)}</span><span class="tv-install-cust">${escapeHtml(
+            j.customer_label || "Customer"
+          )}</span><span class="tv-install-amt">${escapeHtml(formatMoney((j.total_amount || 0) / CENTS_PER_DOLLAR))}</span></div>`;
+        })
+        .join("")
+    : `<div class="tv-install-empty">Nothing scheduled yet</div>`;
+  return `
+    <div class="tv-install-coming">
+      <div class="tv-install-h">Coming up</div>
+      ${rows}
     </div>
   `;
 }

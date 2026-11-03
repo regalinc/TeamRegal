@@ -119,6 +119,7 @@ const MANUAL_AVATAR_OVERRIDES = {
   "pro_add4ba12688e47c696e827fb91a7d9fd": "assets/tech-photos/josh-miller.jpg", // Josh Miller
   "pro_1b87fcb406c9484b84e8fccd6f2c777b": "assets/tech-photos/benjamin-murphy.jpg", // Benjamin Murphy
   "pro_5c675ceab86d44cfbe75a1bfe6ecb25d": "assets/tech-photos/dakota-shelley.jpg", // Dakota Shelley
+  "pro_86c3193093ac454e801f62babb7cf494": "assets/tech-photos/jack-tomlinson.jpg", // Jack Tomlinson
   "pro_8a84b31fc8b64893b17a0ca1bc133778": "assets/tech-photos/damien-cedrone.jpg", // Damien Cedrone
   "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68": "assets/tech-photos/jacob-harvey.jpg", // Jacob Harvey
   "pro_048a0f2df6b2480aaa1a1ae03924fa9e": "assets/tech-photos/mark-zink.jpg", // Mark Zink
