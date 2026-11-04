@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-11-04T10:50:56.898Z",
+                 "generated_at":  "2026-11-04T17:35:04.905Z",
                  "month":  "2026-11"
              },
     "weeks":  [
@@ -39,11 +39,41 @@
 
                                                ]
                                   }
+                  },
+                  {
+                      "label":  "Current Week",
+                      "weekStart":  "2026-11-04",
+                      "weekEnd":  "2026-11-10",
+                      "totals":  {
+                                     "Josh":  0,
+                                     "Nick":  194.91
+                                 },
+                      "sales":  {
+                                    "Josh":  [
+
+                                             ],
+                                    "Nick":  [
+                                                 {
+                                                     "customerName":  "Evelyn Shaffer",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.04,
+                                                     "commission":  194.91
+                                                 }
+                                             ]
+                                },
+                      "pending":  {
+                                      "Josh":  [
+
+                                               ],
+                                      "Nick":  [
+
+                                               ]
+                                  }
                   }
               ],
     "mtd":  {
                 "Josh":  0,
-                "Nick":  0
+                "Nick":  194.91
             },
     "revenue":  {
                     "lastMonth":  {
@@ -52,11 +82,11 @@
                                   },
                     "mtd":  {
                                 "Josh":  16992,
-                                "Nick":  0
+                                "Nick":  5360
                             },
                     "ytd":  {
                                 "Josh":  4084848.8,
-                                "Nick":  644610.88
+                                "Nick":  649970.88
                             }
                 },
     "closingStats":  {
@@ -70,13 +100,13 @@
                                       "discountSample":  0
                                   },
                          "Nick":  {
-                                      "sameDayRate":  null,
+                                      "sameDayRate":  0,
                                       "sameDayCount":  0,
-                                      "sameDaySample":  0,
-                                      "avgDaysToClose":  null,
-                                      "daysSample":  0,
-                                      "avgDiscountPct":  null,
-                                      "discountSample":  0
+                                      "sameDaySample":  1,
+                                      "avgDaysToClose":  1.2,
+                                      "daysSample":  1,
+                                      "avgDiscountPct":  0.0694,
+                                      "discountSample":  1
                                   }
                      }
 }
