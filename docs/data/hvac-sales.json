@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "record_count":  654
+                 "record_count":  655
              },
     "records":  [
                     {
@@ -7195,6 +7195,17 @@
                         "clubMember":  "No",
                         "lead":  "Marketed",
                         "customerType":  "New",
+                        "sold":  false
+                    },
+                    {
+                        "ca":  "Josh",
+                        "date":  "2026-11-10",
+                        "customerName":  "Grace Manor B\u0026B",
+                        "job":  "",
+                        "systemType":  "",
+                        "clubMember":  "No",
+                        "lead":  "EC",
+                        "customerType":  "Existing",
                         "sold":  false
                     }
                 ]
