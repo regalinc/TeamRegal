@@ -1,10 +1,10 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-04T22:07:12.517Z",
+    "last_synced_at": "2026-11-05T02:43:18.170Z",
     "lookback_days": 3,
     "retention_days": 180,
     "vehicle_count": 36,
-    "trip_count": 10341
+    "trip_count": 10346
   },
   "vehicles": [
     {
@@ -115,7 +115,7 @@
         "name": "ProMaster 2500",
         "year": 2025
       },
-      "odometer": 13031.800000000025
+      "odometer": 13038.800000000025
     },
     {
       "imei": "864486067735866",
@@ -247,7 +247,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 44687.19999999921
+      "odometer": 44694.899999999216
     },
     {
       "imei": "868199050016543",
@@ -280,7 +280,7 @@
         "name": "Express",
         "year": 2020
       },
-      "odometer": 83230
+      "odometer": 83271
     },
     {
       "imei": "868199050033175",
@@ -368,7 +368,7 @@
         "name": "ProMaster 2500",
         "year": 2024
       },
-      "odometer": 20846.4
+      "odometer": 20847.6
     },
     {
       "imei": "868923055376903",
@@ -390,7 +390,7 @@
         "name": "Promaster 2500",
         "year": 2021
       },
-      "odometer": 50051.30340439961
+      "odometer": 50054.20340439961
     },
     {
       "imei": "868923055442135",
@@ -406,18 +406,88 @@
   ],
   "trips": [
     {
+      "transactionId": "868199050012070-8373-202611",
+      "imei": "868199050012070",
+      "startTime": "2026-11-05T01:04:18.000Z",
+      "endTime": "2026-11-05T01:15:21.000Z",
+      "distance": 3.8,
+      "averageSpeed": 26,
+      "maxSpeed": 45.360083,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 137
+    },
+    {
+      "transactionId": "868923055438364-10409-202611",
+      "imei": "868923055438364",
+      "startTime": "2026-11-05T01:01:47.000Z",
+      "endTime": "2026-11-05T01:14:01.000Z",
+      "distance": 2.9,
+      "averageSpeed": 24.2,
+      "maxSpeed": 40.389115000000004,
+      "hardBrakingCount": 1,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 1
+    },
+    {
+      "transactionId": "864486067218087-2055-202611",
+      "imei": "864486067218087",
+      "startTime": "2026-11-05T00:04:42.000Z",
+      "endTime": "2026-11-05T00:05:14.000Z",
+      "distance": 0,
+      "averageSpeed": 3.1,
+      "maxSpeed": 7.4564520000000005,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 7
+    },
+    {
+      "transactionId": "868199050185405-14917-202611",
+      "imei": "868199050185405",
+      "startTime": "2026-11-04T22:57:56.000Z",
+      "endTime": "2026-11-04T23:00:10.000Z",
+      "distance": 0.1,
+      "averageSpeed": 7.4,
+      "maxSpeed": 13.7,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 66
+    },
+    {
+      "transactionId": "864486067218087-2054-202611",
+      "imei": "864486067218087",
+      "startTime": "2026-11-04T22:09:41.000Z",
+      "endTime": "2026-11-04T22:34:11.000Z",
+      "distance": 7,
+      "averageSpeed": 20.5,
+      "maxSpeed": 42.3,
+      "hardBrakingCount": 0,
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 243
+    },
+    {
       "transactionId": "868199050185405-14916-202611",
       "imei": "868199050185405",
       "startTime": "2026-11-04T22:04:01.000Z",
+      "endTime": "2026-11-04T22:07:43.000Z",
+      "distance": 0.1,
+      "averageSpeed": 6.8,
+      "maxSpeed": 13.7,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 139
     },
     {
       "transactionId": "868199050012070-8372-202611",
       "imei": "868199050012070",
       "startTime": "2026-11-04T21:52:30.000Z",
+      "endTime": "2026-11-04T22:42:38.000Z",
+      "distance": 3.9,
+      "averageSpeed": 22.9,
+      "maxSpeed": 39.146373,
       "hardBrakingCount": 0,
-      "hardAccelerationCount": 0
+      "hardAccelerationCount": 0,
+      "totalIdleDuration": 2379
     },
     {
       "transactionId": "862255068902755-4380-202611",
