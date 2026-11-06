@@ -384,6 +384,11 @@ function toPublicJob(job) {
 // represent a real conversion.
 const APPROVED_OPTION_STATUSES = new Set(["approved", "pro approved"]);
 
+// Commit fd87ff5 (2026-07-22) started deriving approved_at by diffing syncs.
+// Estimates created after this have been observed since creation, so a null
+// approved_at on one of them means "created and approved within one sync".
+const APPROVED_AT_DIFFING_SHIPPED = "2026-07-22T20:00:00Z";
+
 // There's no dedicated "approved at" field on an estimate, and the obvious
 // stand-in — the approved option's own updated_at — turned out to be
 // unreliable: it bumps on *any* change to the option, including the
@@ -426,6 +431,22 @@ function toPublicEstimate(estimate, previousRecord, syncedAtIso) {
   let approvedAt = null;
   if (approved && previousRecord) {
     approvedAt = previousRecord.approved ? previousRecord.approved_at : syncedAtIso;
+  }
+  // Same-interval approvals: an estimate created AND approved between two
+  // syncs (a comfort advisor / tech selling on the spot) is first observed
+  // already approved with no previous record, so the diff above can't stamp
+  // it — and it silently vanished from every approval-date-scoped stat
+  // (found 2026-11-06 via Korry Dunkle's estimate 14072; ~250 estimates
+  // since August were affected). Diffing has existed since
+  // APPROVED_AT_DIFFING_SHIPPED, so any estimate created after that was
+  // watched from birth: if its first sighting is already approved, the
+  // approval happened between creation and that sighting (hours), and
+  // created_at is the best available stand-in. Pre-diffing estimates (the
+  // README's "unavoidable gap") are left null on purpose. This also
+  // self-heals existing null records on the next sync, since it re-derives
+  // from created_at rather than relying on carried-forward state.
+  if (approved && !approvedAt && estimate.created_at && estimate.created_at >= APPROVED_AT_DIFFING_SHIPPED) {
+    approvedAt = estimate.created_at;
   }
 
   // Revenue an estimator actually closed — sum of the approved option(s)'
