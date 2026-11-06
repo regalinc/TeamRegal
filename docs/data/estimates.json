@@ -1,5 +1,97 @@
 [
   {
+    "id": "csr_f72d7f5c2ac5488e858973bfa26c7fed",
+    "estimate_number": "14122",
+    "customer_label": "Brian M.",
+    "created_at": "2026-11-06T20:52:06Z",
+    "schedule": {
+      "scheduled_start": "2026-11-20T18:00:00Z",
+      "scheduled_end": "2026-11-20T20:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-20T13:00:00-05:00",
+      "scheduled_end_local": "2026-11-20T15:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": "10 HVAC AOR",
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_13f1b2ebdbdb4d3785f5fd528d31a4cf",
+    "estimate_number": "14121",
+    "customer_label": "Betty R.",
+    "created_at": "2026-11-06T19:32:16Z",
+    "schedule": {
+      "scheduled_start": "2026-11-06T20:00:00Z",
+      "scheduled_end": "2026-11-06T21:30:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-06T15:00:00-05:00",
+      "scheduled_end_local": "2026-11-06T16:30:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_62aa1ba4432340829b0aba02abd1d307"
+    ],
+    "work_status": "in progress",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_7c275e32ceea41f384b5776ec54f9e78",
+    "estimate_number": "14120",
+    "customer_label": "Mary & Robert S.",
+    "created_at": "2026-11-06T19:10:17Z",
+    "schedule": {
+      "scheduled_start": "2026-11-11T17:00:00Z",
+      "scheduled_end": "2026-11-11T19:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-11T12:00:00-05:00",
+      "scheduled_end_local": "2026-11-11T14:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_eb35c4da7a0c4a41bc3936da4d71da20"
+    ],
+    "work_status": "scheduled",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
+    "id": "csr_dd31fb8c4c294477a10a7d01adfef8d9",
+    "estimate_number": "14119",
+    "customer_label": "Kelly O.",
+    "created_at": "2026-11-06T18:13:48Z",
+    "schedule": {
+      "scheduled_start": null,
+      "scheduled_end": null,
+      "time_zone": "America/New_York",
+      "scheduled_start_local": null,
+      "scheduled_end_local": null,
+      "arrival_window": 0,
+      "appointments": []
+    },
+    "business_unit": null,
+    "assigned_employee_ids": [
+      "pro_9b6be6b8146547fabe281dac539e3f28"
+    ],
+    "work_status": "needs scheduling",
+    "approved": false,
+    "approved_at": null,
+    "approved_amount": 0
+  },
+  {
     "id": "csr_a34f8e5581cb44ed985aa18d9536b386",
     "estimate_number": "14118",
     "customer_label": "Theresa F.",
@@ -1099,10 +1191,10 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "in progress",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-11-06T23:04:53.973Z",
+    "approved_amount": 623120
   },
   {
     "id": "csr_66cc384cc09c49f2a1dceae66462419c",
