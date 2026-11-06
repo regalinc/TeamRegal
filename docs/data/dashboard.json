@@ -1,11 +1,11 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-06T12:25:19.753Z",
+    "last_synced_at": "2026-11-06T14:16:34.562Z",
     "window_days_back": 310,
     "window_days_forward": 13,
     "technician_count": 47,
-    "job_count": 12644,
-    "estimate_count": 3895
+    "job_count": 12652,
+    "estimate_count": 3893
   },
   "technicians": [
     {
@@ -162772,7 +162772,7 @@
     {
       "id": "job_2c20fa2ccaf24d28aad70d9d8801046e",
       "description": "70 - Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Indulge Salon",
       "city": "York",
       "state": "PA",
@@ -162799,7 +162799,7 @@
       "total_amount": 32230,
       "outstanding_balance": 0,
       "completed_at": "2026-05-20T12:07:49Z",
-      "updated_at": "2026-07-08T16:33:45Z",
+      "updated_at": "2026-11-06T13:31:47Z",
       "invoice_number": "57244",
       "created_at": "2026-05-19T15:00:10Z"
     },
@@ -289498,15 +289498,14 @@
         "pro_878f7465a7ae48a39312d99aedaa3fd1"
       ],
       "tags": [
-        "50",
-        "Plumbing Installation"
+        "50"
       ],
       "business_unit": "50 PLUMBING AOR",
       "lead_source": null,
       "total_amount": 1028204,
       "outstanding_balance": 514102,
       "completed_at": "2026-11-03T18:00:49Z",
-      "updated_at": "2026-11-05T18:11:11Z",
+      "updated_at": "2026-11-06T13:30:55Z",
       "invoice_number": "59904-1",
       "created_at": "2026-08-04T12:43:18Z"
     },
@@ -306942,7 +306941,7 @@
     {
       "id": "job_934b0d9a27d342e386fd21ee3dc8617c",
       "description": "Visit #9; Cooling",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Lance S.",
       "city": "York",
       "state": "PA",
@@ -306969,7 +306968,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-08-27T12:51:14Z",
-      "updated_at": "2026-08-27T15:08:16Z",
+      "updated_at": "2026-11-06T12:46:21Z",
       "invoice_number": "60201",
       "created_at": "2026-08-11T15:10:50Z"
     },
@@ -336339,7 +336338,7 @@
     {
       "id": "job_0a3506f48bd74b40b2fa54d22728ab3c",
       "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Ann Z.",
       "city": "Dover",
       "state": "PA",
@@ -336365,7 +336364,7 @@
       "total_amount": 32664,
       "outstanding_balance": 0,
       "completed_at": "2026-09-18T20:57:51Z",
-      "updated_at": "2026-09-18T20:57:51Z",
+      "updated_at": "2026-11-06T13:22:17Z",
       "invoice_number": "61770",
       "created_at": "2026-09-18T19:10:13Z"
     },
@@ -368757,9 +368756,9 @@
       "business_unit": "50 PLUMBING AOR",
       "lead_source": null,
       "total_amount": 23314,
-      "outstanding_balance": 23314,
+      "outstanding_balance": 0,
       "completed_at": "2026-10-16T16:34:24Z",
-      "updated_at": "2026-10-16T16:48:47Z",
+      "updated_at": "2026-11-06T14:22:26Z",
       "invoice_number": "62552",
       "created_at": "2026-10-09T14:35:34Z"
     },
@@ -370308,16 +370307,16 @@
       "business_unit": "40 HVAC MAINT",
       "lead_source": "FF Kling",
       "total_amount": 102512,
-      "outstanding_balance": 51212,
+      "outstanding_balance": 0,
       "completed_at": "2026-10-21T10:29:44Z",
-      "updated_at": "2026-10-21T22:59:30Z",
+      "updated_at": "2026-11-06T13:47:37Z",
       "invoice_number": "62630",
       "created_at": "2026-10-12T19:30:34Z"
     },
     {
       "id": "job_fc6d39810af64d0ab38717ba4f0966a1",
       "description": "70 - Plumbing Service",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Gail K.",
       "city": "York",
       "state": "PA",
@@ -370343,7 +370342,7 @@
       "total_amount": 69522,
       "outstanding_balance": 0,
       "completed_at": "2026-10-20T17:09:59Z",
-      "updated_at": "2026-10-20T17:10:00Z",
+      "updated_at": "2026-11-06T13:19:49Z",
       "invoice_number": "62631",
       "created_at": "2026-10-12T19:38:39Z"
     },
@@ -371829,7 +371828,7 @@
       "total_amount": 8500,
       "outstanding_balance": 8500,
       "completed_at": "2026-10-20T12:16:57Z",
-      "updated_at": "2026-10-22T17:07:27Z",
+      "updated_at": "2026-11-06T13:11:50Z",
       "invoice_number": "62690",
       "created_at": "2026-10-14T15:39:29Z"
     },
@@ -376646,14 +376645,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-10-30T19:26:33Z",
-      "updated_at": "2026-11-02T19:40:42Z",
+      "updated_at": "2026-11-06T13:11:12Z",
       "invoice_number": "60878-1",
       "created_at": "2026-08-27T15:00:13Z"
     },
@@ -378560,14 +378560,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": "FF Kling",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T15:57:35Z",
-      "updated_at": "2026-11-03T15:57:35Z",
+      "updated_at": "2026-11-06T13:03:02Z",
       "invoice_number": "61395",
       "created_at": "2026-09-09T14:28:00Z"
     },
@@ -380479,14 +380480,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T13:03:38Z",
-      "updated_at": "2026-11-03T13:54:49Z",
+      "updated_at": "2026-11-06T13:53:46Z",
       "invoice_number": "61675",
       "created_at": "2026-09-16T14:34:36Z"
     },
@@ -380918,14 +380920,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": "FF Kling",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-02T13:46:28Z",
-      "updated_at": "2026-11-02T13:46:28Z",
+      "updated_at": "2026-11-06T13:55:03Z",
       "invoice_number": "62031",
       "created_at": "2026-09-25T13:38:14Z"
     },
@@ -381253,14 +381256,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T20:20:55Z",
-      "updated_at": "2026-11-03T20:20:56Z",
+      "updated_at": "2026-11-06T13:02:29Z",
       "invoice_number": "62277",
       "created_at": "2026-10-02T13:01:24Z"
     },
@@ -381561,7 +381565,7 @@
       "outstanding_balance": 478297,
       "completed_at": "2026-11-02T19:37:49Z",
       "updated_at": "2026-11-02T20:09:29Z",
-      "invoice_number": "62409",
+      "invoice_number": "62409-1",
       "created_at": "2026-10-06T15:20:54Z"
     },
     {
@@ -381713,14 +381717,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T14:57:22Z",
-      "updated_at": "2026-11-03T14:57:22Z",
+      "updated_at": "2026-11-06T13:52:52Z",
       "invoice_number": "62458",
       "created_at": "2026-10-07T13:55:01Z"
     },
@@ -381779,14 +381784,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T14:15:18Z",
-      "updated_at": "2026-11-03T14:15:18Z",
+      "updated_at": "2026-11-06T13:04:30Z",
       "invoice_number": "62469",
       "created_at": "2026-10-07T14:54:43Z"
     },
@@ -381812,14 +381818,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T15:18:54Z",
-      "updated_at": "2026-11-03T18:33:36Z",
+      "updated_at": "2026-11-06T13:03:30Z",
       "invoice_number": "62480",
       "created_at": "2026-10-07T16:59:44Z"
     },
@@ -382043,14 +382050,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-02T14:57:53Z",
-      "updated_at": "2026-11-02T14:57:53Z",
+      "updated_at": "2026-11-06T13:07:51Z",
       "invoice_number": "62493",
       "created_at": "2026-10-07T18:41:34Z"
     },
@@ -382239,14 +382247,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": "FF Kling",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-02T18:06:20Z",
-      "updated_at": "2026-11-02T18:06:20Z",
+      "updated_at": "2026-11-06T13:07:05Z",
       "invoice_number": "62570",
       "created_at": "2026-10-09T17:55:19Z"
     },
@@ -384481,7 +384490,7 @@
     {
       "id": "job_596ff01f57fc48459a017a9786fe3895",
       "description": "70 - Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Russell T.",
       "city": "York",
       "state": "PA",
@@ -384508,7 +384517,7 @@
       "total_amount": 128325,
       "outstanding_balance": 0,
       "completed_at": "2026-10-23T16:18:18Z",
-      "updated_at": "2026-10-30T17:58:58Z",
+      "updated_at": "2026-11-06T13:12:26Z",
       "invoice_number": "62864",
       "created_at": "2026-10-20T13:02:13Z"
     },
@@ -386852,17 +386861,15 @@
         "pro_aab24498cf6e4c46844bddcbc7161f26"
       ],
       "tags": [
-        "40",
-        "HVAC Attention",
-        "HVAC Parts"
+        "40"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 56705,
       "outstanding_balance": 0,
       "completed_at": "2026-11-02T18:33:19Z",
-      "updated_at": "2026-11-05T14:53:43Z",
-      "invoice_number": "62972",
+      "updated_at": "2026-11-06T13:13:00Z",
+      "invoice_number": "62972-1",
       "created_at": "2026-10-22T17:40:40Z"
     },
     {
@@ -387135,7 +387142,7 @@
     {
       "id": "job_ef0f0be6e1ba4af9ac5cbd1614424c8a",
       "description": "70 - Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Michelle M.",
       "city": "York",
       "state": "PA",
@@ -387162,7 +387169,7 @@
       "total_amount": 23314,
       "outstanding_balance": 0,
       "completed_at": "2026-10-23T15:19:43Z",
-      "updated_at": "2026-10-23T15:19:43Z",
+      "updated_at": "2026-11-06T13:38:43Z",
       "invoice_number": "62779-3",
       "created_at": "2026-10-23T11:24:41Z"
     },
@@ -392454,14 +392461,15 @@
       "tags": [
         "70",
         "Opportunity",
-        "Non-Member"
+        "Non-Member",
+        "IFO"
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T15:18:43Z",
-      "updated_at": "2026-11-05T15:16:20Z",
+      "updated_at": "2026-11-06T13:04:08Z",
       "invoice_number": "63170",
       "created_at": "2026-10-29T14:33:08Z"
     },
@@ -392631,7 +392639,7 @@
       "total_amount": 42565,
       "outstanding_balance": 42565,
       "completed_at": "2026-10-30T12:09:17Z",
-      "updated_at": "2026-10-31T21:20:37Z",
+      "updated_at": "2026-11-06T13:00:24Z",
       "invoice_number": "63178",
       "created_at": "2026-10-29T16:11:28Z"
     },
@@ -393167,7 +393175,7 @@
       "total_amount": 90133,
       "outstanding_balance": 90133,
       "completed_at": "2026-10-31T00:25:49Z",
-      "updated_at": "2026-10-31T00:25:49Z",
+      "updated_at": "2026-11-06T13:09:09Z",
       "invoice_number": "63202",
       "created_at": "2026-10-30T15:49:01Z"
     },
@@ -393300,7 +393308,7 @@
       "outstanding_balance": 0,
       "completed_at": "2026-11-03T15:24:49Z",
       "updated_at": "2026-11-06T11:48:00Z",
-      "invoice_number": "63211",
+      "invoice_number": "63211-1",
       "created_at": "2026-10-30T18:12:54Z"
     },
     {
@@ -393434,7 +393442,7 @@
       "total_amount": 51515,
       "outstanding_balance": 51515,
       "completed_at": "2026-10-31T21:20:37Z",
-      "updated_at": "2026-10-31T21:20:38Z",
+      "updated_at": "2026-11-06T13:08:33Z",
       "invoice_number": "63218",
       "created_at": "2026-10-31T12:15:13Z"
     },
@@ -393466,9 +393474,9 @@
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 23900,
-      "outstanding_balance": 23900,
+      "outstanding_balance": 0,
       "completed_at": "2026-10-31T19:10:54Z",
-      "updated_at": "2026-11-03T18:51:02Z",
+      "updated_at": "2026-11-06T14:08:57Z",
       "invoice_number": "63219-1",
       "created_at": "2026-10-31T14:05:39Z"
     },
@@ -393789,14 +393797,15 @@
       ],
       "tags": [
         "70",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-02T20:33:32Z",
-      "updated_at": "2026-11-03T13:00:18Z",
+      "updated_at": "2026-11-06T13:06:00Z",
       "invoice_number": "63235",
       "created_at": "2026-11-02T12:56:17Z"
     },
@@ -393894,7 +393903,7 @@
       "total_amount": 51400,
       "outstanding_balance": 51400,
       "completed_at": "2026-11-02T19:31:21Z",
-      "updated_at": "2026-11-02T19:31:21Z",
+      "updated_at": "2026-11-06T13:06:33Z",
       "invoice_number": "63238",
       "created_at": "2026-11-02T13:07:20Z"
     },
@@ -393961,9 +393970,9 @@
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 135353,
-      "outstanding_balance": 135353,
+      "outstanding_balance": 0,
       "completed_at": "2026-11-02T17:16:37Z",
-      "updated_at": "2026-11-03T18:51:02Z",
+      "updated_at": "2026-11-06T14:08:57Z",
       "invoice_number": "63219-2",
       "created_at": "2026-11-02T13:13:04Z"
     },
@@ -394587,15 +394596,14 @@
       "tags": [
         "70",
         "Opportunity",
-        "Non-Member",
-        "Plumbing Parts"
+        "Non-Member"
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 11687,
       "outstanding_balance": 11687,
       "completed_at": "2026-11-03T13:08:01Z",
-      "updated_at": "2026-11-03T15:18:03Z",
+      "updated_at": "2026-11-06T13:53:22Z",
       "invoice_number": "63301",
       "created_at": "2026-11-03T12:20:50Z"
     },
@@ -396010,14 +396018,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T16:48:05Z",
-      "updated_at": "2026-11-05T16:50:59Z",
+      "updated_at": "2026-11-06T13:46:30Z",
       "invoice_number": "61015",
       "created_at": "2026-08-31T18:21:44Z"
     },
@@ -396176,14 +396185,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T20:48:05Z",
-      "updated_at": "2026-11-04T20:48:48Z",
+      "updated_at": "2026-11-06T13:48:04Z",
       "invoice_number": "61171",
       "created_at": "2026-09-02T16:49:35Z"
     },
@@ -396507,14 +396517,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T14:51:50Z",
-      "updated_at": "2026-11-04T14:51:50Z",
+      "updated_at": "2026-11-06T13:02:05Z",
       "invoice_number": "61411",
       "created_at": "2026-09-09T15:36:49Z"
     },
@@ -396540,14 +396551,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T14:52:08Z",
-      "updated_at": "2026-11-04T14:52:08Z",
+      "updated_at": "2026-11-06T13:01:46Z",
       "invoice_number": "61414",
       "created_at": "2026-09-09T16:01:58Z"
     },
@@ -396755,7 +396767,7 @@
     {
       "id": "job_54f763a5645b4341b029df83dc817952",
       "description": "Visit #6; Tankless only",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Ken P.",
       "city": "York",
       "state": "PA",
@@ -396781,7 +396793,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-09-11T15:36:47Z",
+      "updated_at": "2026-11-06T13:21:49Z",
       "invoice_number": "61524",
       "created_at": "2026-09-11T15:08:18Z"
     },
@@ -397222,7 +397234,7 @@
     {
       "id": "job_bee93f61b0644b03b8001aa334d90559",
       "description": "Visit #12",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Lori W.",
       "city": "Dover",
       "state": "PA",
@@ -397249,7 +397261,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-04T18:38:42Z",
+      "updated_at": "2026-11-06T13:57:13Z",
       "invoice_number": "61677",
       "created_at": "2026-09-16T14:50:21Z"
     },
@@ -397411,16 +397423,14 @@
       ],
       "tags": [
         "40",
-        "Opportunity",
-        "HVAC Parts",
-        "Please order part."
+        "Opportunity"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 6718,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T13:57:03Z",
-      "updated_at": "2026-11-05T21:06:35Z",
+      "updated_at": "2026-11-06T13:37:33Z",
       "invoice_number": "61713",
       "created_at": "2026-09-17T16:11:19Z"
     },
@@ -397825,7 +397835,7 @@
     {
       "id": "job_dcf5e3c75c3d405b96f7e5ed299a0960",
       "description": "Visit #3",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Jay B.",
       "city": "Manchester",
       "state": "PA",
@@ -397851,14 +397861,14 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-09-23T16:47:02Z",
+      "updated_at": "2026-11-06T13:52:32Z",
       "invoice_number": "61745",
       "created_at": "2026-09-18T13:42:21Z"
     },
     {
       "id": "job_12067d83ba0040d6b77537f10497da0b",
       "description": "Visit #2",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Paul M.",
       "city": "Abbottstown",
       "state": "PA",
@@ -397884,7 +397894,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-09-18T14:03:21Z",
+      "updated_at": "2026-11-06T13:26:57Z",
       "invoice_number": "61747",
       "created_at": "2026-09-18T14:01:11Z"
     },
@@ -398458,7 +398468,7 @@
     {
       "id": "job_8907a949f9894a03b736a21829260ea9",
       "description": "Visit #1",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Robert B.",
       "city": "York",
       "state": "PA",
@@ -398484,7 +398494,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-09-22T13:37:19Z",
+      "updated_at": "2026-11-06T13:35:49Z",
       "invoice_number": "61847",
       "created_at": "2026-09-22T13:33:06Z"
     },
@@ -399235,14 +399245,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": "Google",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T15:20:17Z",
-      "updated_at": "2026-11-04T15:20:17Z",
+      "updated_at": "2026-11-06T13:00:42Z",
       "invoice_number": "62234",
       "created_at": "2026-10-01T16:26:05Z"
     },
@@ -399315,7 +399326,7 @@
     {
       "id": "job_02d3ec2e9dda48b28fadd3424eb9a394",
       "description": "Visit #6; Plumbing",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Ann Z.",
       "city": "Dover",
       "state": "PA",
@@ -399340,15 +399351,15 @@
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-11-06T12:22:18Z",
+      "completed_at": "2026-11-06T13:22:17Z",
+      "updated_at": "2026-11-06T13:22:17Z",
       "invoice_number": "62276",
       "created_at": "2026-10-02T13:00:55Z"
     },
     {
       "id": "job_6f6c551ac58d45efb0cdbca27686c8a2",
       "description": "80 - Plumbing Maintenance",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Vicki D.",
       "city": "Dover",
       "state": "PA",
@@ -399373,7 +399384,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-10-05T12:37:09Z",
+      "updated_at": "2026-11-06T13:40:13Z",
       "invoice_number": "62332",
       "created_at": "2026-10-05T12:35:39Z"
     },
@@ -399464,14 +399475,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T18:34:09Z",
-      "updated_at": "2026-11-05T18:34:10Z",
+      "updated_at": "2026-11-06T13:13:28Z",
       "invoice_number": "62360",
       "created_at": "2026-10-05T16:42:47Z"
     },
@@ -399512,7 +399524,7 @@
     {
       "id": "job_ccdeb279e7a34f359089d6c1b482cbb2",
       "description": "Visit #10; Plumbing",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Robert S.",
       "city": "Dallastown",
       "state": "PA",
@@ -399539,7 +399551,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-05T19:05:01Z",
+      "updated_at": "2026-11-06T14:20:02Z",
       "invoice_number": "62392",
       "created_at": "2026-10-06T12:55:02Z"
     },
@@ -399794,14 +399806,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T17:56:25Z",
-      "updated_at": "2026-11-04T17:56:25Z",
+      "updated_at": "2026-11-06T13:48:37Z",
       "invoice_number": "62449",
       "created_at": "2026-10-07T12:58:38Z"
     },
@@ -399827,14 +399840,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": "FF Kling",
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T13:33:34Z",
-      "updated_at": "2026-11-04T13:33:34Z",
+      "updated_at": "2026-11-06T13:50:10Z",
       "invoice_number": "62452",
       "created_at": "2026-10-07T13:05:05Z"
     },
@@ -400092,14 +400106,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T15:14:17Z",
-      "updated_at": "2026-11-05T15:14:18Z",
+      "updated_at": "2026-11-06T12:57:22Z",
       "invoice_number": "62492",
       "created_at": "2026-10-07T18:37:20Z"
     },
@@ -400139,7 +400154,7 @@
     {
       "id": "job_9a00f66be03c400b8814272ff85bae80",
       "description": "Visit #10; Plumbing",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Lance S.",
       "city": "York",
       "state": "PA",
@@ -400158,14 +400173,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-11-06T12:22:10Z",
+      "completed_at": "2026-11-06T12:46:21Z",
+      "updated_at": "2026-11-06T13:12:42Z",
       "invoice_number": "62547",
       "created_at": "2026-10-09T12:15:40Z"
     },
@@ -400191,14 +400207,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-04T15:29:03Z",
-      "updated_at": "2026-11-04T15:29:03Z",
+      "updated_at": "2026-11-06T13:49:49Z",
       "invoice_number": "62564",
       "created_at": "2026-10-09T17:27:42Z"
     },
@@ -400443,11 +400460,11 @@
       "state": "PA",
       "zip": "17347",
       "schedule": {
-        "scheduled_start": "2026-11-13T16:00:00Z",
-        "scheduled_end": "2026-11-13T18:00:00Z",
+        "scheduled_start": "2026-11-13T17:00:00Z",
+        "scheduled_end": "2026-11-13T19:00:00Z",
         "time_zone": "America/New_York",
-        "scheduled_start_local": "2026-11-13T11:00:00-05:00",
-        "scheduled_end_local": "2026-11-13T13:00:00-05:00",
+        "scheduled_start_local": "2026-11-13T12:00:00-05:00",
+        "scheduled_end_local": "2026-11-13T14:00:00-05:00",
         "arrival_window": 120,
         "appointments": []
       },
@@ -400463,7 +400480,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-02T19:28:28Z",
+      "updated_at": "2026-11-06T13:10:56Z",
       "invoice_number": "62736",
       "created_at": "2026-10-15T17:08:02Z"
     },
@@ -400691,9 +400708,9 @@
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 16936,
-      "outstanding_balance": 16936,
+      "outstanding_balance": 0,
       "completed_at": "2026-11-05T16:45:55Z",
-      "updated_at": "2026-11-05T19:00:32Z",
+      "updated_at": "2026-11-06T13:31:29Z",
       "invoice_number": "62914",
       "created_at": "2026-10-21T13:28:31Z"
     },
@@ -401378,14 +401395,15 @@
       ],
       "tags": [
         "80",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "80 PLUMBING MAINT",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T14:56:54Z",
-      "updated_at": "2026-11-05T14:56:54Z",
+      "updated_at": "2026-11-06T13:47:17Z",
       "invoice_number": "63138",
       "created_at": "2026-10-28T15:49:56Z"
     },
@@ -401492,23 +401510,22 @@
     {
       "id": "job_9f6c52435aba4f879915a46e6fa130b0",
       "description": "Washer Box Re-Location",
-      "work_status": "in progress",
+      "work_status": "scheduled",
       "customer_label": "Elyse B.",
       "city": "Dallastown",
       "state": "PA",
       "zip": "17313",
       "schedule": {
-        "scheduled_start": "2026-11-06T12:00:00Z",
-        "scheduled_end": "2026-11-06T18:00:00Z",
+        "scheduled_start": "2026-11-13T12:00:00Z",
+        "scheduled_end": "2026-11-13T17:00:00Z",
         "time_zone": "America/New_York",
-        "scheduled_start_local": "2026-11-06T07:00:00-05:00",
-        "scheduled_end_local": "2026-11-06T13:00:00-05:00",
+        "scheduled_start_local": "2026-11-13T07:00:00-05:00",
+        "scheduled_end_local": "2026-11-13T12:00:00-05:00",
         "arrival_window": 120,
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_878f7465a7ae48a39312d99aedaa3fd1",
-        "pro_b5ab5cc9e362414cb376d0a02d64bef8"
+        "pro_878f7465a7ae48a39312d99aedaa3fd1"
       ],
       "tags": [],
       "business_unit": "50 PLUMBING AOR",
@@ -401516,7 +401533,7 @@
       "total_amount": 130000,
       "outstanding_balance": 130000,
       "completed_at": null,
-      "updated_at": "2026-11-06T12:19:16Z",
+      "updated_at": "2026-11-06T13:02:49Z",
       "invoice_number": "63153",
       "created_at": "2026-10-28T18:29:41Z"
     },
@@ -401556,7 +401573,7 @@
     {
       "id": "job_37fd2e49c48f4e83868a97ebbfcb8da2",
       "description": "30 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Indulge Salon",
       "city": "York",
       "state": "PA",
@@ -401576,15 +401593,14 @@
       "tags": [
         "30",
         "Opportunity",
-        "Non-Member",
-        "HVAC Attention"
+        "Non-Member"
       ],
       "business_unit": "30 HVAC SERVICE",
       "lead_source": null,
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
-      "completed_at": null,
-      "updated_at": "2026-11-05T21:07:23Z",
+      "total_amount": 20322,
+      "outstanding_balance": 0,
+      "completed_at": "2026-11-05T20:32:37Z",
+      "updated_at": "2026-11-06T13:32:09Z",
       "invoice_number": "63168",
       "created_at": "2026-10-29T13:42:53Z"
     },
@@ -402139,9 +402155,9 @@
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 19525,
-      "outstanding_balance": 19525,
+      "outstanding_balance": 0,
       "completed_at": "2026-11-04T16:50:57Z",
-      "updated_at": "2026-11-04T16:50:57Z",
+      "updated_at": "2026-11-06T14:06:29Z",
       "invoice_number": "63226",
       "created_at": "2026-11-02T12:29:35Z"
     },
@@ -402319,7 +402335,7 @@
     {
       "id": "job_ac9da64db4034c25bd35d4a786e35bf8",
       "description": "70 - Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Michelle M.",
       "city": "York",
       "state": "PA",
@@ -402344,9 +402360,9 @@
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 37855,
-      "outstanding_balance": 37855,
-      "completed_at": null,
-      "updated_at": "2026-11-06T12:14:49Z",
+      "outstanding_balance": 0,
+      "completed_at": "2026-11-06T13:38:43Z",
+      "updated_at": "2026-11-06T13:38:43Z",
       "invoice_number": "63262",
       "created_at": "2026-11-02T15:18:34Z"
     },
@@ -402709,7 +402725,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-06T12:18:07Z",
+      "updated_at": "2026-11-06T12:33:43Z",
       "invoice_number": "63012-2",
       "created_at": "2026-11-03T12:50:39Z"
     },
@@ -402749,7 +402765,7 @@
     {
       "id": "job_169b5c8a5c8f426dad24e2897744448c",
       "description": "Billing - 80 - Plumbing Maintenance",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Sandra B.",
       "city": "York",
       "state": "PA",
@@ -402774,7 +402790,7 @@
       "total_amount": 49009,
       "outstanding_balance": 49009,
       "completed_at": null,
-      "updated_at": "2026-11-03T14:45:12Z",
+      "updated_at": "2026-11-06T14:16:48Z",
       "invoice_number": "63313",
       "created_at": "2026-11-03T14:42:51Z"
     },
@@ -403240,7 +403256,7 @@
       "total_amount": 8900,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T15:44:12Z",
-      "updated_at": "2026-11-05T16:05:09Z",
+      "updated_at": "2026-11-06T13:31:27Z",
       "invoice_number": "63334",
       "created_at": "2026-11-03T20:18:38Z"
     },
@@ -403574,7 +403590,7 @@
     {
       "id": "job_ba43f8d4934242a88a6e0a52e57e4d0c",
       "description": "70 - Initial Service Fee",
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "customer_label": "Mike F.",
       "city": "Manchester",
       "state": "PA",
@@ -403598,10 +403614,10 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 8900,
-      "outstanding_balance": 8900,
+      "total_amount": 38708,
+      "outstanding_balance": 38708,
       "completed_at": null,
-      "updated_at": "2026-11-04T16:45:51Z",
+      "updated_at": "2026-11-06T14:08:05Z",
       "invoice_number": "63355",
       "created_at": "2026-11-04T16:41:53Z"
     },
@@ -403761,14 +403777,14 @@
       ],
       "tags": [
         "40",
-        "HVAC Parts"
+        "Parts Ordered"
       ],
       "business_unit": "40 HVAC MAINT",
       "lead_source": null,
       "total_amount": 66197,
       "outstanding_balance": 33097,
       "completed_at": null,
-      "updated_at": "2026-11-05T20:35:39Z",
+      "updated_at": "2026-11-06T13:33:36Z",
       "invoice_number": "63367",
       "created_at": "2026-11-04T20:49:00Z"
     },
@@ -403975,17 +403991,17 @@
     {
       "id": "job_8cad80557ee84bb2a26d26d548c86be7",
       "description": "Billing - 70 - Plumbing Service",
-      "work_status": "in progress",
+      "work_status": "scheduled",
       "customer_label": "Jesse And Ginger W.",
       "city": "York",
       "state": "PA",
       "zip": "17403",
       "schedule": {
-        "scheduled_start": "2026-11-06T12:00:00Z",
-        "scheduled_end": "2026-11-06T16:00:00Z",
+        "scheduled_start": "2026-11-06T13:00:00Z",
+        "scheduled_end": "2026-11-06T17:00:00Z",
         "time_zone": "America/New_York",
-        "scheduled_start_local": "2026-11-06T07:00:00-05:00",
-        "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+        "scheduled_start_local": "2026-11-06T08:00:00-05:00",
+        "scheduled_end_local": "2026-11-06T12:00:00-05:00",
         "arrival_window": 120,
         "appointments": []
       },
@@ -404000,7 +404016,7 @@
       "total_amount": 537148,
       "outstanding_balance": 268574,
       "completed_at": null,
-      "updated_at": "2026-11-06T12:07:23Z",
+      "updated_at": "2026-11-06T13:04:06Z",
       "invoice_number": "63373",
       "created_at": "2026-11-05T12:28:26Z"
     },
@@ -404031,7 +404047,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-06T12:29:12Z",
+      "updated_at": "2026-11-06T13:11:09Z",
       "invoice_number": "63008-6",
       "created_at": "2026-11-05T12:39:35Z"
     },
@@ -404165,7 +404181,7 @@
     {
       "id": "job_4084121b78994028b86fd9063313ec66",
       "description": "70 - RCC Whole Home Initial Service Fee",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Gail K.",
       "city": "York",
       "state": "PA",
@@ -404189,10 +404205,10 @@
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
-      "total_amount": 0,
+      "total_amount": 8500,
       "outstanding_balance": 0,
-      "completed_at": null,
-      "updated_at": "2026-11-06T12:24:20Z",
+      "completed_at": "2026-11-06T13:19:49Z",
+      "updated_at": "2026-11-06T13:20:20Z",
       "invoice_number": "63376",
       "created_at": "2026-11-05T13:17:46Z"
     },
@@ -404350,14 +404366,15 @@
       ],
       "tags": [
         "70",
-        "Opportunity"
+        "Opportunity",
+        "IFO"
       ],
       "business_unit": "70 PLUMBING SERVICE",
       "lead_source": null,
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": "2026-11-05T17:39:11Z",
-      "updated_at": "2026-11-05T17:39:11Z",
+      "updated_at": "2026-11-06T13:46:04Z",
       "invoice_number": "63382",
       "created_at": "2026-11-05T14:02:33Z"
     },
@@ -404491,7 +404508,7 @@
       "total_amount": 19525,
       "outstanding_balance": 19525,
       "completed_at": "2026-11-05T17:31:49Z",
-      "updated_at": "2026-11-05T17:31:49Z",
+      "updated_at": "2026-11-06T12:52:36Z",
       "invoice_number": "63388",
       "created_at": "2026-11-05T15:33:10Z"
     },
@@ -404756,7 +404773,7 @@
       "total_amount": 19525,
       "outstanding_balance": 19525,
       "completed_at": "2026-11-05T18:43:46Z",
-      "updated_at": "2026-11-05T18:43:47Z",
+      "updated_at": "2026-11-06T12:51:15Z",
       "invoice_number": "63404",
       "created_at": "2026-11-05T17:37:53Z"
     },
@@ -404978,17 +404995,272 @@
         "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
         "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68"
       ],
-      "tags": [
-        "HVAC Attention"
-      ],
+      "tags": [],
       "business_unit": "10 HVAC AOR",
       "lead_source": null,
       "total_amount": 151168,
       "outstanding_balance": 151168,
       "completed_at": null,
-      "updated_at": "2026-11-06T12:13:16Z",
+      "updated_at": "2026-11-06T12:50:43Z",
       "invoice_number": "63411",
       "created_at": "2026-11-05T20:26:04Z"
+    },
+    {
+      "id": "job_86966ca703794e95b4feb98f521a94e1",
+      "description": "40 HVAC Maintenance",
+      "work_status": "scheduled",
+      "customer_label": "Larry S.",
+      "city": "Dover",
+      "state": "PA",
+      "zip": "17315",
+      "schedule": {
+        "scheduled_start": "2026-11-13T16:00:00Z",
+        "scheduled_end": "2026-11-13T17:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-13T11:00:00-05:00",
+        "scheduled_end_local": "2026-11-13T12:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_aab24498cf6e4c46844bddcbc7161f26"
+      ],
+      "tags": [
+        "40"
+      ],
+      "business_unit": "40 HVAC MAINT",
+      "lead_source": null,
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "completed_at": null,
+      "updated_at": "2026-11-06T13:11:00Z",
+      "invoice_number": "62972-2",
+      "created_at": "2026-11-06T13:07:26Z"
+    },
+    {
+      "id": "job_2fb32ef487c241a6987c4f5291f47c8c",
+      "description": "Tub to Shower Converrsion",
+      "work_status": "scheduled",
+      "customer_label": "Virginia B.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17406",
+      "schedule": {
+        "scheduled_start": "2026-11-06T13:45:00Z",
+        "scheduled_end": "2026-11-06T14:45:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-06T08:45:00-05:00",
+        "scheduled_end_local": "2026-11-06T09:45:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_c3ff6948fe0c4109ad9f1fcb627850cf"
+      ],
+      "tags": [
+        "Plumbing Installation"
+      ],
+      "business_unit": "50 PLUMBING AOR",
+      "lead_source": null,
+      "total_amount": 1136640,
+      "outstanding_balance": 568320,
+      "completed_at": null,
+      "updated_at": "2026-11-06T13:31:12Z",
+      "invoice_number": "63414",
+      "created_at": "2026-11-06T13:28:19Z"
+    },
+    {
+      "id": "job_1824916118a34f81851d25ab688a1a83",
+      "description": "40 HVAC Maintenance",
+      "work_status": "scheduled",
+      "customer_label": "Ryan V.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17403",
+      "schedule": {
+        "scheduled_start": "2026-11-06T14:00:00Z",
+        "scheduled_end": "2026-11-06T16:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+        "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_5048a923ca8a47a5bd4cc2bbe40c4faa"
+      ],
+      "tags": [
+        "40"
+      ],
+      "business_unit": "40 HVAC MAINT",
+      "lead_source": null,
+      "total_amount": 56238,
+      "outstanding_balance": 56238,
+      "completed_at": null,
+      "updated_at": "2026-11-06T13:40:18Z",
+      "invoice_number": "63415",
+      "created_at": "2026-11-06T13:38:01Z"
+    },
+    {
+      "id": "job_9244afc685ae4a6ca31b801d7c836eee",
+      "description": "Billing - 70 - Plumbing Service",
+      "work_status": "scheduled",
+      "customer_label": "Joel W.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17406",
+      "schedule": {
+        "scheduled_start": "2026-11-11T16:00:00Z",
+        "scheduled_end": "2026-11-11T20:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-11T11:00:00-05:00",
+        "scheduled_end_local": "2026-11-11T15:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+      ],
+      "tags": [
+        "70"
+      ],
+      "business_unit": "70 PLUMBING SERVICE",
+      "lead_source": null,
+      "total_amount": 66560,
+      "outstanding_balance": 66560,
+      "completed_at": null,
+      "updated_at": "2026-11-06T13:41:23Z",
+      "invoice_number": "63416",
+      "created_at": "2026-11-06T13:39:10Z"
+    },
+    {
+      "id": "job_652568769f214bd09f80cd031deaeab9",
+      "description": "Billing - Plumbing Contract Installation",
+      "work_status": "scheduled",
+      "customer_label": "Dick P.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17402",
+      "schedule": {
+        "scheduled_start": "2026-11-11T12:00:00Z",
+        "scheduled_end": "2026-11-11T20:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-11T07:00:00-05:00",
+        "scheduled_end_local": "2026-11-11T15:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_1526b39a952147619f19902966416543",
+        "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+      ],
+      "tags": [
+        "Plumbing Installation"
+      ],
+      "business_unit": "50 PLUMBING AOR",
+      "lead_source": null,
+      "total_amount": 549260,
+      "outstanding_balance": 274630,
+      "completed_at": null,
+      "updated_at": "2026-11-06T14:05:00Z",
+      "invoice_number": "63417",
+      "created_at": "2026-11-06T13:40:46Z"
+    },
+    {
+      "id": "job_12e8c6dae716496dacefd2671f6c68bc",
+      "description": "Billing - 10 HVAC AOR",
+      "work_status": "scheduled",
+      "customer_label": "Sidney D.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17404",
+      "schedule": {
+        "scheduled_start": "2026-11-06T17:00:00Z",
+        "scheduled_end": "2026-11-06T18:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-06T12:00:00-05:00",
+        "scheduled_end_local": "2026-11-06T13:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_5c675ceab86d44cfbe75a1bfe6ecb25d"
+      ],
+      "tags": [
+        "OnCall Air"
+      ],
+      "business_unit": "10 HVAC AOR",
+      "lead_source": null,
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "completed_at": null,
+      "updated_at": "2026-11-06T13:49:40Z",
+      "invoice_number": "63211-2",
+      "created_at": "2026-11-06T13:44:58Z"
+    },
+    {
+      "id": "job_0ef271381381405d90d34075508c31a0",
+      "description": "Tub wall and Fixture Replacement",
+      "work_status": "scheduled",
+      "customer_label": "Russell T.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17403",
+      "schedule": {
+        "scheduled_start": "2026-11-06T14:00:00Z",
+        "scheduled_end": "2026-11-06T15:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+        "scheduled_end_local": "2026-11-06T10:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_c3ff6948fe0c4109ad9f1fcb627850cf"
+      ],
+      "tags": [
+        "Plumbing Installation"
+      ],
+      "business_unit": "50 PLUMBING AOR",
+      "lead_source": null,
+      "total_amount": 1621650,
+      "outstanding_balance": 1621650,
+      "completed_at": null,
+      "updated_at": "2026-11-06T13:48:39Z",
+      "invoice_number": "63418",
+      "created_at": "2026-11-06T13:46:50Z"
+    },
+    {
+      "id": "job_94742fb84d604c3496adb08650c478a8",
+      "description": "",
+      "work_status": "scheduled",
+      "customer_label": "Jolene T.",
+      "city": "York",
+      "state": "PA",
+      "zip": "17403",
+      "schedule": {
+        "scheduled_start": "2026-11-06T12:30:00Z",
+        "scheduled_end": "2026-11-06T13:30:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-06T07:30:00-05:00",
+        "scheduled_end_local": "2026-11-06T08:30:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_a66fbc5ec25d48bb8db8a93609a0654f"
+      ],
+      "tags": [
+        "30"
+      ],
+      "business_unit": "30 HVAC SERVICE",
+      "lead_source": null,
+      "total_amount": 0,
+      "outstanding_balance": 0,
+      "completed_at": null,
+      "updated_at": "2026-11-06T14:23:02Z",
+      "invoice_number": "62409-3",
+      "created_at": "2026-11-06T14:04:04Z"
     },
     {
       "id": "job_57a9c1de7e0947d1832bd81351561bb2",
@@ -405633,7 +405905,7 @@
       "assigned_employee_ids": [
         "pro_62aa1ba4432340829b0aba02abd1d307"
       ],
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "approved": false,
       "approved_at": null,
       "approved_amount": 0
@@ -405656,10 +405928,10 @@
       "assigned_employee_ids": [
         "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
       ],
-      "work_status": "needs scheduling",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
+      "work_status": "created job from estimate",
+      "approved": true,
+      "approved_at": "2026-11-06T14:16:34.562Z",
+      "approved_amount": 66560
     },
     {
       "id": "csr_d7b89c62e71f4821bce59f868f98d9b2",
@@ -405817,9 +406089,9 @@
       "assigned_employee_ids": [
         "pro_8d943eadd54f485b9dba4296c807fb8f"
       ],
-      "work_status": "needs scheduling",
+      "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-05T13:42:21Z",
       "approved_amount": 56238
     },
     {
@@ -405842,7 +406114,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-05T13:16:26Z",
       "approved_amount": 48430
     },
     {
@@ -405888,7 +406160,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-05T11:31:16Z",
       "approved_amount": 70718
     },
     {
@@ -405911,7 +406183,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-04T19:44:41Z",
       "approved_amount": 66197
     },
     {
@@ -405980,7 +406252,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-04T19:02:26Z",
       "approved_amount": 186468
     },
     {
@@ -406142,7 +406414,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-04T16:00:58Z",
       "approved_amount": 67530
     },
     {
@@ -406510,7 +406782,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-03T13:24:58Z",
       "approved_amount": 55720
     },
     {
@@ -406531,7 +406803,7 @@
       "assigned_employee_ids": [
         "pro_ca120cbb55fa40fe9361d492161b101f"
       ],
-      "work_status": "scheduled",
+      "work_status": "in progress",
       "approved": false,
       "approved_at": null,
       "approved_amount": 0
@@ -406740,7 +407012,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-11-02T15:17:49Z",
       "approved_amount": 55692
     },
     {
@@ -407012,7 +407284,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-30T19:14:14Z",
       "approved_amount": 92877
     },
     {
@@ -407173,7 +407445,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-30T15:27:36Z",
       "approved_amount": 115205
     },
     {
@@ -407196,7 +407468,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-30T15:16:46Z",
       "approved_amount": 31298
     },
     {
@@ -407265,7 +407537,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-30T14:47:58Z",
       "approved_amount": 186131
     },
     {
@@ -407470,10 +407742,10 @@
       "assigned_employee_ids": [
         "pro_ca120cbb55fa40fe9361d492161b101f"
       ],
-      "work_status": "complete unrated",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
+      "work_status": "created job from estimate",
+      "approved": true,
+      "approved_at": "2026-11-06T14:16:34.562Z",
+      "approved_amount": 549260
     },
     {
       "id": "csr_bae2ff08065d4a038797c13546af7990",
@@ -407516,10 +407788,10 @@
       "assigned_employee_ids": [
         "pro_ca120cbb55fa40fe9361d492161b101f"
       ],
-      "work_status": "complete rated",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
+      "work_status": "created job from estimate",
+      "approved": true,
+      "approved_at": "2026-11-06T14:16:34.562Z",
+      "approved_amount": 1136640
     },
     {
       "id": "csr_c51ee42d5c3f4fd1806c654ec6df9495",
@@ -407608,7 +407880,7 @@
       "assigned_employee_ids": [],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-29T14:58:29Z",
       "approved_amount": 181654
     },
     {
@@ -407654,7 +407926,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-29T13:25:02Z",
       "approved_amount": 370499
     },
     {
@@ -407746,7 +408018,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-29T12:01:31Z",
       "approved_amount": 250920
     },
     {
@@ -407769,7 +408041,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-28T18:44:55Z",
       "approved_amount": 58180
     },
     {
@@ -407884,7 +408156,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-28T15:56:01Z",
       "approved_amount": 34425
     },
     {
@@ -407907,7 +408179,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-28T15:48:12Z",
       "approved_amount": 56365
     },
     {
@@ -407976,7 +408248,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-28T14:25:18Z",
       "approved_amount": 30196
     },
     {
@@ -408160,7 +408432,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-28T12:03:51Z",
       "approved_amount": 118933
     },
     {
@@ -408298,7 +408570,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-27T18:38:19Z",
       "approved_amount": 43242
     },
     {
@@ -408367,7 +408639,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-27T17:46:49Z",
       "approved_amount": 34425
     },
     {
@@ -408436,7 +408708,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-27T16:08:13Z",
       "approved_amount": 183248
     },
     {
@@ -408482,7 +408754,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-27T13:55:14Z",
       "approved_amount": 15689
     },
     {
@@ -408574,7 +408846,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-27T11:42:38Z",
       "approved_amount": 118654
     },
     {
@@ -408688,7 +408960,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-26T21:29:39Z",
       "approved_amount": 60144
     },
     {
@@ -409010,7 +409282,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-26T14:30:10Z",
       "approved_amount": 173760
     },
     {
@@ -409171,7 +409443,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-23T17:50:23Z",
       "approved_amount": 249500
     },
     {
@@ -409399,10 +409671,10 @@
       "assigned_employee_ids": [
         "pro_ca120cbb55fa40fe9361d492161b101f"
       ],
-      "work_status": "in progress",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
+      "work_status": "created job from estimate",
+      "approved": true,
+      "approved_at": "2026-11-06T14:16:34.562Z",
+      "approved_amount": 1621650
     },
     {
       "id": "csr_7099c390d72d4019af63458777639ace",
@@ -409655,7 +409927,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-22T18:30:56Z",
       "approved_amount": 61304
     },
     {
@@ -409747,7 +410019,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-22T17:12:23Z",
       "approved_amount": 39026
     },
     {
@@ -409885,7 +410157,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-22T12:52:03Z",
       "approved_amount": 0
     },
     {
@@ -409954,7 +410226,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-22T12:15:27Z",
       "approved_amount": 93183
     },
     {
@@ -410070,7 +410342,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-21T19:39:20Z",
       "approved_amount": 271607
     },
     {
@@ -410206,7 +410478,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-21T14:28:06Z",
       "approved_amount": 93925
     },
     {
@@ -410252,7 +410524,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-21T13:17:34Z",
       "approved_amount": 98260
     },
     {
@@ -410275,7 +410547,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-21T12:26:56Z",
       "approved_amount": 33399
     },
     {
@@ -410344,7 +410616,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-20T18:20:48Z",
       "approved_amount": 393683
     },
     {
@@ -410551,7 +410823,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-20T15:51:18Z",
       "approved_amount": 160546
     },
     {
@@ -410712,7 +410984,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-20T13:01:27Z",
       "approved_amount": 122400
     },
     {
@@ -410758,7 +411030,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-19T19:34:17Z",
       "approved_amount": 52360
     },
     {
@@ -410940,7 +411212,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-19T16:36:36Z",
       "approved_amount": 52360
     },
     {
@@ -411078,7 +411350,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-19T15:22:36Z",
       "approved_amount": 48782
     },
     {
@@ -411329,7 +411601,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-18T13:16:07Z",
       "approved_amount": 47228
     },
     {
@@ -411444,7 +411716,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-16T15:30:39Z",
       "approved_amount": 53720
     },
     {
@@ -411559,7 +411831,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-16T14:40:07Z",
       "approved_amount": 0
     },
     {
@@ -411812,7 +412084,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-15T18:54:35Z",
       "approved_amount": 63750
     },
     {
@@ -411858,7 +412130,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-15T14:48:27Z",
       "approved_amount": 99376
     },
     {
@@ -411881,7 +412153,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-15T14:20:10Z",
       "approved_amount": 35804
     },
     {
@@ -411927,7 +412199,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-15T13:31:33Z",
       "approved_amount": 99376
     },
     {
@@ -412157,7 +412429,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-14T18:13:05Z",
       "approved_amount": 159070
     },
     {
@@ -412410,7 +412682,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-14T14:11:01Z",
       "approved_amount": 291881
     },
     {
@@ -412479,7 +412751,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-14T12:44:44Z",
       "approved_amount": 10317
     },
     {
@@ -412502,7 +412774,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-14T12:43:02Z",
       "approved_amount": 6718
     },
     {
@@ -412571,7 +412843,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-13T19:00:02Z",
       "approved_amount": 145207
     },
     {
@@ -412594,7 +412866,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-13T18:58:53Z",
       "approved_amount": 39404
     },
     {
@@ -412617,7 +412889,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-13T18:43:56Z",
       "approved_amount": 62462
     },
     {
@@ -412757,7 +413029,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-13T16:21:35Z",
       "approved_amount": 128354
     },
     {
@@ -413401,7 +413673,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-12T15:41:04Z",
       "approved_amount": 17710
     },
     {
@@ -413493,7 +413765,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-12T14:26:10Z",
       "approved_amount": 59207
     },
     {
@@ -413608,7 +413880,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-10T18:07:01Z",
       "approved_amount": 570059
     },
     {
@@ -413631,7 +413903,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-09T19:09:32Z",
       "approved_amount": 23800
     },
     {
@@ -413746,7 +414018,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-09T17:36:47Z",
       "approved_amount": 82405
     },
     {
@@ -413838,7 +414110,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-09T16:36:51Z",
       "approved_amount": 70792
     },
     {
@@ -414068,7 +414340,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-09T12:35:22Z",
       "approved_amount": 638306
     },
     {
@@ -414091,7 +414363,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-09T12:29:23Z",
       "approved_amount": 9592
     },
     {
@@ -414273,7 +414545,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-08T18:30:43Z",
       "approved_amount": 165219
     },
     {
@@ -414319,7 +414591,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-08T17:45:27Z",
       "approved_amount": 51984
     },
     {
@@ -414526,7 +414798,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-08T13:10:41Z",
       "approved_amount": 87978
     },
     {
@@ -414549,7 +414821,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-08T13:08:52Z",
       "approved_amount": 39026
     },
     {
@@ -414618,7 +414890,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-08T12:32:49Z",
       "approved_amount": 30915
     },
     {
@@ -414871,7 +415143,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-07T18:49:37Z",
       "approved_amount": 121638
     },
     {
@@ -414917,7 +415189,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-07T18:05:44Z",
       "approved_amount": 336700
     },
     {
@@ -414963,7 +415235,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-07T17:00:46Z",
       "approved_amount": 236470
     },
     {
@@ -415216,7 +415488,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-07T12:33:35Z",
       "approved_amount": 61150
     },
     {
@@ -415377,7 +415649,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-06T17:19:30Z",
       "approved_amount": 364092
     },
     {
@@ -415469,7 +415741,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-06T16:37:09Z",
       "approved_amount": 123506
     },
     {
@@ -415492,7 +415764,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-06T16:27:37Z",
       "approved_amount": 34535
     },
     {
@@ -415607,7 +415879,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-06T13:48:41Z",
       "approved_amount": 29143
     },
     {
@@ -415860,7 +416132,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-05T17:52:10Z",
       "approved_amount": 97310
     },
     {
@@ -416021,7 +416293,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-05T14:43:59Z",
       "approved_amount": 158790
     },
     {
@@ -416113,7 +416385,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-05T13:16:26Z",
       "approved_amount": 296840
     },
     {
@@ -416205,7 +416477,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-05T11:53:25Z",
       "approved_amount": 128377
     },
     {
@@ -416548,7 +416820,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-02T12:54:39Z",
       "approved_amount": 191001
     },
     {
@@ -416640,7 +416912,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-01T17:23:14Z",
       "approved_amount": 91211
     },
     {
@@ -416686,7 +416958,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-01T16:16:27Z",
       "approved_amount": 99376
     },
     {
@@ -416778,7 +417050,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-10-01T14:56:22Z",
       "approved_amount": 32888
     },
     {
@@ -416939,7 +417211,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-30T18:51:35Z",
       "approved_amount": 511934
     },
     {
@@ -416962,7 +417234,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-30T17:52:51Z",
       "approved_amount": 243000
     },
     {
@@ -417163,7 +417435,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-30T17:06:30Z",
       "approved_amount": 380000
     },
     {
@@ -417301,7 +417573,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-30T14:17:47Z",
       "approved_amount": 170666
     },
     {
@@ -417393,7 +417665,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-30T12:25:53Z",
       "approved_amount": 48198
     },
     {
@@ -417439,7 +417711,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-30T12:06:16Z",
       "approved_amount": 29705
     },
     {
@@ -417669,7 +417941,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-29T16:08:55Z",
       "approved_amount": 222962
     },
     {
@@ -417739,7 +418011,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-29T14:57:27Z",
       "approved_amount": 173986
     },
     {
@@ -417854,7 +418126,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-29T12:49:26Z",
       "approved_amount": 69337
     },
     {
@@ -417923,7 +418195,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-28T19:32:39Z",
       "approved_amount": 370499
     },
     {
@@ -417969,7 +418241,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-28T17:59:13Z",
       "approved_amount": 327475
     },
     {
@@ -418061,7 +418333,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-28T16:15:37Z",
       "approved_amount": 52360
     },
     {
@@ -418084,7 +418356,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-28T16:05:33Z",
       "approved_amount": 42880
     },
     {
@@ -418268,7 +418540,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-25T18:45:22Z",
       "approved_amount": 61535
     },
     {
@@ -418291,7 +418563,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-25T17:54:51Z",
       "approved_amount": 39744
     },
     {
@@ -418314,7 +418586,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-25T17:01:35Z",
       "approved_amount": 82926
     },
     {
@@ -418383,7 +418655,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-25T15:47:24Z",
       "approved_amount": 97310
     },
     {
@@ -418406,7 +418678,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-25T15:43:37Z",
       "approved_amount": 113390
     },
     {
@@ -418706,7 +418978,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-25T12:31:46Z",
       "approved_amount": 30727
     },
     {
@@ -418983,7 +419255,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-24T14:02:36Z",
       "approved_amount": 71144
     },
     {
@@ -419052,7 +419324,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-24T12:22:13Z",
       "approved_amount": 34304
     },
     {
@@ -419144,7 +419416,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-23T18:37:29Z",
       "approved_amount": 42075
     },
     {
@@ -419259,7 +419531,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-23T16:13:28Z",
       "approved_amount": 114964
     },
     {
@@ -419282,7 +419554,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-23T15:00:01Z",
       "approved_amount": 58395
     },
     {
@@ -419443,7 +419715,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-23T12:02:49Z",
       "approved_amount": 223640
     },
     {
@@ -419535,7 +419807,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-22T17:58:49Z",
       "approved_amount": 62177
     },
     {
@@ -419558,7 +419830,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-22T17:58:23Z",
       "approved_amount": 279231
     },
     {
@@ -419673,7 +419945,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-22T16:20:30Z",
       "approved_amount": 19040
     },
     {
@@ -419903,7 +420175,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-21T19:32:08Z",
       "approved_amount": 32071
     },
     {
@@ -420018,7 +420290,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-21T16:31:21Z",
       "approved_amount": 51340
     },
     {
@@ -420156,7 +420428,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-21T13:28:46Z",
       "approved_amount": 169040
     },
     {
@@ -420271,7 +420543,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-18T17:01:27Z",
       "approved_amount": 97538
     },
     {
@@ -420341,7 +420613,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-18T16:13:36Z",
       "approved_amount": 54368
     },
     {
@@ -420410,7 +420682,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-18T14:42:14Z",
       "approved_amount": 7949
     },
     {
@@ -420548,7 +420820,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-18T12:48:11Z",
       "approved_amount": 256574
     },
     {
@@ -420935,7 +421207,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-17T13:57:43Z",
       "approved_amount": 59807
     },
     {
@@ -421027,7 +421299,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-17T12:33:45Z",
       "approved_amount": 65202
     },
     {
@@ -421096,7 +421368,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-17T11:58:52Z",
       "approved_amount": 32888
     },
     {
@@ -421322,7 +421594,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-16T17:01:30Z",
       "approved_amount": 8500
     },
     {
@@ -421437,7 +421709,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-16T15:16:33Z",
       "approved_amount": 50880
     },
     {
@@ -421667,7 +421939,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-16T12:29:47Z",
       "approved_amount": 38290
     },
     {
@@ -421874,7 +422146,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-15T16:31:19Z",
       "approved_amount": 29705
     },
     {
@@ -422104,7 +422376,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-14T18:53:53Z",
       "approved_amount": 90170
     },
     {
@@ -422519,7 +422791,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-11T16:40:18Z",
       "approved_amount": 104041
     },
     {
@@ -422770,7 +423042,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-11T12:56:11Z",
       "approved_amount": 97988
     },
     {
@@ -423274,7 +423546,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-09T17:20:29Z",
       "approved_amount": 326818
     },
     {
@@ -423826,7 +424098,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-08T19:07:57Z",
       "approved_amount": 210924
     },
     {
@@ -423849,7 +424121,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-08T16:56:18Z",
       "approved_amount": 204994
     },
     {
@@ -423965,7 +424237,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-08T16:05:58Z",
       "approved_amount": 157430
     },
     {
@@ -424011,7 +424283,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-08T14:34:46Z",
       "approved_amount": 75650
     },
     {
@@ -424333,7 +424605,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-04T15:36:08Z",
       "approved_amount": 30425
     },
     {
@@ -424356,7 +424628,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-04T15:25:19Z",
       "approved_amount": 25388
     },
     {
@@ -424517,7 +424789,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-03T18:49:07Z",
       "approved_amount": 208552
     },
     {
@@ -424770,7 +425042,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-03T13:12:05Z",
       "approved_amount": 495230
     },
     {
@@ -424931,7 +425203,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-02T17:17:12Z",
       "approved_amount": 70991
     },
     {
@@ -425046,7 +425318,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-02T12:09:17Z",
       "approved_amount": 32888
     },
     {
@@ -425115,7 +425387,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-01T18:22:39Z",
       "approved_amount": 47550
     },
     {
@@ -425161,7 +425433,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-01T17:34:52Z",
       "approved_amount": 75138
     },
     {
@@ -425207,7 +425479,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-01T16:18:00Z",
       "approved_amount": 93683
     },
     {
@@ -425253,7 +425525,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-01T15:31:02Z",
       "approved_amount": 13017
     },
     {
@@ -425345,7 +425617,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-01T13:59:53Z",
       "approved_amount": 23764
     },
     {
@@ -425368,7 +425640,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-09-01T13:57:18Z",
       "approved_amount": 74905
     },
     {
@@ -425667,7 +425939,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-31T15:55:15Z",
       "approved_amount": 238440
     },
     {
@@ -425828,7 +426100,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-31T13:33:59Z",
       "approved_amount": 40721
     },
     {
@@ -426035,7 +426307,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-28T16:16:34Z",
       "approved_amount": 196605
     },
     {
@@ -426104,7 +426376,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-28T15:53:42Z",
       "approved_amount": 19611
     },
     {
@@ -426150,7 +426422,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-28T14:49:05Z",
       "approved_amount": 53180
     },
     {
@@ -426219,7 +426491,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-28T14:36:01Z",
       "approved_amount": 94161
     },
     {
@@ -426265,7 +426537,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-28T14:02:04Z",
       "approved_amount": 33660
     },
     {
@@ -426335,7 +426607,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-28T13:33:23Z",
       "approved_amount": 77612
     },
     {
@@ -426450,7 +426722,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-27T17:57:13Z",
       "approved_amount": 27670
     },
     {
@@ -426680,7 +426952,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-27T16:44:57Z",
       "approved_amount": 152446
     },
     {
@@ -426772,7 +427044,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-27T14:20:45Z",
       "approved_amount": 11220
     },
     {
@@ -427136,7 +427408,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-26T15:30:59Z",
       "approved_amount": 426213
     },
     {
@@ -427159,7 +427431,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-26T15:06:20Z",
       "approved_amount": 676262
     },
     {
@@ -427274,7 +427546,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-26T12:47:42Z",
       "approved_amount": 382000
     },
     {
@@ -427321,7 +427593,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-25T18:18:18Z",
       "approved_amount": 139610
     },
     {
@@ -427367,7 +427639,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-25T17:28:40Z",
       "approved_amount": 585485
     },
     {
@@ -427390,7 +427662,7 @@
       ],
       "work_status": "user canceled",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-25T16:34:05Z",
       "approved_amount": 54935
     },
     {
@@ -427413,7 +427685,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-25T16:31:47Z",
       "approved_amount": 629006
     },
     {
@@ -427459,7 +427731,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-25T16:24:24Z",
       "approved_amount": 91935
     },
     {
@@ -427528,7 +427800,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-25T15:08:37Z",
       "approved_amount": 26484
     },
     {
@@ -427711,7 +427983,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-24T18:56:14Z",
       "approved_amount": 178400
     },
     {
@@ -427757,7 +428029,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-24T17:40:00Z",
       "approved_amount": 131325
     },
     {
@@ -427780,7 +428052,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-24T17:34:15Z",
       "approved_amount": 500056
     },
     {
@@ -427826,7 +428098,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-24T16:15:22Z",
       "approved_amount": 298108
     },
     {
@@ -427849,7 +428121,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-24T15:40:02Z",
       "approved_amount": 48979
     },
     {
@@ -427918,7 +428190,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-24T14:29:44Z",
       "approved_amount": 30915
     },
     {
@@ -428103,7 +428375,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-21T17:02:37Z",
       "approved_amount": 284225
     },
     {
@@ -428126,7 +428398,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-21T16:22:01Z",
       "approved_amount": 45257
     },
     {
@@ -428149,7 +428421,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-21T15:09:01Z",
       "approved_amount": 159316
     },
     {
@@ -428287,7 +428559,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-21T13:45:31Z",
       "approved_amount": 33955
     },
     {
@@ -428356,7 +428628,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-21T13:01:42Z",
       "approved_amount": 141802
     },
     {
@@ -428587,7 +428859,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-20T14:34:31Z",
       "approved_amount": 90365
     },
     {
@@ -428633,7 +428905,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-20T13:42:56Z",
       "approved_amount": 177908
     },
     {
@@ -428656,7 +428928,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-20T12:47:03Z",
       "approved_amount": 162743
     },
     {
@@ -428679,7 +428951,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-20T12:27:27Z",
       "approved_amount": 74076
     },
     {
@@ -428702,7 +428974,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-20T12:19:28Z",
       "approved_amount": 107064
     },
     {
@@ -428725,7 +428997,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-20T12:06:48Z",
       "approved_amount": 99644
     },
     {
@@ -428771,7 +429043,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-19T17:58:08Z",
       "approved_amount": 123008
     },
     {
@@ -428838,7 +429110,7 @@
       "assigned_employee_ids": [],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-19T15:43:31Z",
       "approved_amount": 23500
     },
     {
@@ -428882,7 +429154,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-19T14:12:15Z",
       "approved_amount": 39932
     },
     {
@@ -428928,7 +429200,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-19T12:14:52Z",
       "approved_amount": 50996
     },
     {
@@ -429018,7 +429290,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-18T20:07:58Z",
       "approved_amount": 47260
     },
     {
@@ -429064,7 +429336,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-18T19:23:57Z",
       "approved_amount": 195543
     },
     {
@@ -429133,7 +429405,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-18T18:09:50Z",
       "approved_amount": 48086
     },
     {
@@ -429179,7 +429451,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-18T17:10:37Z",
       "approved_amount": 42202
     },
     {
@@ -429202,7 +429474,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-18T15:02:33Z",
       "approved_amount": 54093
     },
     {
@@ -429294,7 +429566,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-18T13:18:43Z",
       "approved_amount": 143050
     },
     {
@@ -429409,7 +429681,7 @@
       ],
       "work_status": "complete rated",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T18:43:48Z",
       "approved_amount": 250700
     },
     {
@@ -429455,7 +429727,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T18:08:57Z",
       "approved_amount": 262000
     },
     {
@@ -429478,7 +429750,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T17:40:09Z",
       "approved_amount": 298050
     },
     {
@@ -429501,7 +429773,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T17:38:08Z",
       "approved_amount": 1033415
     },
     {
@@ -429639,7 +429911,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T13:43:27Z",
       "approved_amount": 184503
     },
     {
@@ -429708,7 +429980,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T12:42:56Z",
       "approved_amount": 38431
     },
     {
@@ -429754,7 +430026,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-17T12:23:15Z",
       "approved_amount": 480843
     },
     {
@@ -429962,7 +430234,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-14T17:21:17Z",
       "approved_amount": 31025
     },
     {
@@ -430077,7 +430349,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-14T15:01:27Z",
       "approved_amount": 82852
     },
     {
@@ -430146,7 +430418,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-14T13:36:25Z",
       "approved_amount": 104941
     },
     {
@@ -430238,7 +430510,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-14T10:33:55Z",
       "approved_amount": 459173
     },
     {
@@ -430261,7 +430533,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-14T10:18:27Z",
       "approved_amount": 143953
     },
     {
@@ -430284,7 +430556,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T18:21:22Z",
       "approved_amount": 647500
     },
     {
@@ -430376,7 +430648,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T17:16:30Z",
       "approved_amount": 257526
     },
     {
@@ -430445,7 +430717,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T16:09:00Z",
       "approved_amount": 180030
     },
     {
@@ -430492,7 +430764,7 @@
       ],
       "work_status": "user canceled",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T15:50:01Z",
       "approved_amount": 37800
     },
     {
@@ -430722,7 +430994,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T13:44:31Z",
       "approved_amount": 110958
     },
     {
@@ -430745,7 +431017,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T13:37:20Z",
       "approved_amount": 190301
     },
     {
@@ -430791,7 +431063,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T13:05:25Z",
       "approved_amount": 33399
     },
     {
@@ -430814,7 +431086,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T12:48:06Z",
       "approved_amount": 17782
     },
     {
@@ -430837,7 +431109,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-13T12:20:09Z",
       "approved_amount": 238440
     },
     {
@@ -430860,7 +431132,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T19:20:02Z",
       "approved_amount": 49009
     },
     {
@@ -430906,7 +431178,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T19:12:20Z",
       "approved_amount": 744065
     },
     {
@@ -431044,7 +431316,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T15:14:31Z",
       "approved_amount": 647325
     },
     {
@@ -431088,7 +431360,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T15:04:42Z",
       "approved_amount": 51739
     },
     {
@@ -431180,7 +431452,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T12:53:53Z",
       "approved_amount": 550000
     },
     {
@@ -431226,7 +431498,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T12:32:18Z",
       "approved_amount": 298050
     },
     {
@@ -431249,7 +431521,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T12:24:26Z",
       "approved_amount": 41110
     },
     {
@@ -431318,7 +431590,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-12T11:41:05Z",
       "approved_amount": 26940
     },
     {
@@ -431433,7 +431705,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-11T17:45:11Z",
       "approved_amount": 59075
     },
     {
@@ -431502,7 +431774,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-11T17:22:39Z",
       "approved_amount": 187000
     },
     {
@@ -431709,7 +431981,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-11T14:28:24Z",
       "approved_amount": 23764
     },
     {
@@ -431778,7 +432050,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-11T13:00:10Z",
       "approved_amount": 79652
     },
     {
@@ -431893,7 +432165,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-10T19:12:13Z",
       "approved_amount": 509675
     },
     {
@@ -431962,7 +432234,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-10T18:35:38Z",
       "approved_amount": 120000
     },
     {
@@ -432054,7 +432326,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-10T15:39:57Z",
       "approved_amount": 58957
     },
     {
@@ -432169,7 +432441,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-10T13:50:45Z",
       "approved_amount": 51942
     },
     {
@@ -432238,7 +432510,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-10T12:33:05Z",
       "approved_amount": 111937
     },
     {
@@ -432284,7 +432556,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-08T17:24:47Z",
       "approved_amount": 54549
     },
     {
@@ -432307,7 +432579,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-07T17:21:06Z",
       "approved_amount": 115006
     },
     {
@@ -432376,7 +432648,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-07T16:01:20Z",
       "approved_amount": 225381
     },
     {
@@ -432468,7 +432740,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-07T14:03:53Z",
       "approved_amount": 27929
     },
     {
@@ -432514,7 +432786,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-07T13:16:05Z",
       "approved_amount": 143758
     },
     {
@@ -432607,7 +432879,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-07T13:09:04Z",
       "approved_amount": 585562
     },
     {
@@ -432743,7 +433015,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-06T17:24:20Z",
       "approved_amount": 18745
     },
     {
@@ -432836,7 +433108,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-06T16:21:30Z",
       "approved_amount": 96652
     },
     {
@@ -432882,7 +433154,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-06T15:44:42Z",
       "approved_amount": 61128
     },
     {
@@ -433043,7 +433315,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-06T13:16:35Z",
       "approved_amount": 105070
     },
     {
@@ -433135,7 +433407,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-06T12:24:51Z",
       "approved_amount": 127607
     },
     {
@@ -433342,7 +433614,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-05T11:35:29Z",
       "approved_amount": 212296
     },
     {
@@ -433365,7 +433637,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-04T19:08:05Z",
       "approved_amount": 38151
     },
     {
@@ -433388,7 +433660,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-04T18:51:31Z",
       "approved_amount": 61502
     },
     {
@@ -433480,7 +433752,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-04T17:10:23Z",
       "approved_amount": 997500
     },
     {
@@ -433526,7 +433798,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-04T14:48:34Z",
       "approved_amount": 111937
     },
     {
@@ -433549,7 +433821,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-04T14:45:46Z",
       "approved_amount": 152365
     },
     {
@@ -433618,7 +433890,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-04T12:11:28Z",
       "approved_amount": 51942
     },
     {
@@ -433733,7 +434005,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T18:34:33Z",
       "approved_amount": 470553
     },
     {
@@ -433779,7 +434051,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T17:59:09Z",
       "approved_amount": 47600
     },
     {
@@ -433825,7 +434097,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T16:57:24Z",
       "approved_amount": 1028204
     },
     {
@@ -433871,7 +434143,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T15:04:07Z",
       "approved_amount": 242472
     },
     {
@@ -433917,7 +434189,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T13:58:29Z",
       "approved_amount": 40432
     },
     {
@@ -433986,7 +434258,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T11:56:29Z",
       "approved_amount": 65314
     },
     {
@@ -434009,7 +434281,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-08-03T11:36:20Z",
       "approved_amount": 191830
     },
     {
@@ -434124,7 +434396,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-31T14:54:06Z",
       "approved_amount": 1501500
     },
     {
@@ -434239,7 +434511,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T17:20:48Z",
       "approved_amount": 984960
     },
     {
@@ -434262,7 +434534,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T17:19:16Z",
       "approved_amount": 97538
     },
     {
@@ -434331,7 +434603,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T16:05:32Z",
       "approved_amount": 111937
     },
     {
@@ -434469,7 +434741,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T14:59:19Z",
       "approved_amount": 234585
     },
     {
@@ -434559,7 +434831,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T14:04:37Z",
       "approved_amount": 556207
     },
     {
@@ -434605,7 +434877,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T13:50:18Z",
       "approved_amount": 385897
     },
     {
@@ -434743,7 +435015,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-30T11:14:51Z",
       "approved_amount": 259525
     },
     {
@@ -434833,7 +435105,7 @@
       "assigned_employee_ids": [],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T16:33:07Z",
       "approved_amount": 83707
     },
     {
@@ -434925,7 +435197,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T15:35:59Z",
       "approved_amount": 75949
     },
     {
@@ -434948,7 +435220,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T15:32:28Z",
       "approved_amount": 803970
     },
     {
@@ -435109,7 +435381,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T13:14:53Z",
       "approved_amount": 125145
     },
     {
@@ -435178,7 +435450,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T12:38:30Z",
       "approved_amount": 24580
     },
     {
@@ -435293,7 +435565,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T12:04:53Z",
       "approved_amount": 436479
     },
     {
@@ -435316,7 +435588,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T12:04:36Z",
       "approved_amount": 37459
     },
     {
@@ -435339,7 +435611,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-29T11:58:54Z",
       "approved_amount": 22404
     },
     {
@@ -435408,7 +435680,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-28T18:28:36Z",
       "approved_amount": 142979
     },
     {
@@ -435431,7 +435703,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-28T18:20:56Z",
       "approved_amount": 80560
     },
     {
@@ -435454,7 +435726,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-28T17:57:38Z",
       "approved_amount": 300115
     },
     {
@@ -435500,7 +435772,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-28T17:45:57Z",
       "approved_amount": 146510
     },
     {
@@ -435707,7 +435979,7 @@
       ],
       "work_status": "needs scheduling",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-28T13:36:28Z",
       "approved_amount": 23468
     },
     {
@@ -435983,7 +436255,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T15:01:44Z",
       "approved_amount": 797700
     },
     {
@@ -436006,7 +436278,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T14:58:28Z",
       "approved_amount": 92800
     },
     {
@@ -436052,7 +436324,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T14:47:04Z",
       "approved_amount": 15689
     },
     {
@@ -436167,7 +436439,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T13:54:50Z",
       "approved_amount": 239592
     },
     {
@@ -436213,7 +436485,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T13:10:08Z",
       "approved_amount": 20446
     },
     {
@@ -436259,7 +436531,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T13:03:46Z",
       "approved_amount": 111937
     },
     {
@@ -436305,7 +436577,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T12:54:47Z",
       "approved_amount": 128000
     },
     {
@@ -436328,7 +436600,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-27T12:48:59Z",
       "approved_amount": 23764
     },
     {
@@ -436535,7 +436807,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-24T17:43:07Z",
       "approved_amount": 111937
     },
     {
@@ -436627,7 +436899,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-24T13:03:17Z",
       "approved_amount": 201738
     },
     {
@@ -436650,7 +436922,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-24T12:36:18Z",
       "approved_amount": 133175
     },
     {
@@ -436742,7 +437014,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-23T17:21:19Z",
       "approved_amount": 122771
     },
     {
@@ -436788,7 +437060,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-23T17:06:38Z",
       "approved_amount": 121856
     },
     {
@@ -436949,7 +437221,7 @@
       ],
       "work_status": "complete unrated",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-23T13:10:24Z",
       "approved_amount": 97538
     },
     {
@@ -436972,7 +437244,7 @@
       ],
       "work_status": "created job from estimate",
       "approved": true,
-      "approved_at": null,
+      "approved_at": "2026-07-23T13:07:58Z",
       "approved_amount": 51942
     },
     {
@@ -495037,52 +495309,6 @@
       "approved": false,
       "approved_at": null,
       "approved_amount": 0
-    },
-    {
-      "id": "csr_14c68e6a11c242f89b2d434e3fbf41d9",
-      "estimate_number": "10221",
-      "customer_label": "Sandra T.",
-      "created_at": "2025-12-31T13:34:19Z",
-      "schedule": {
-        "scheduled_start": null,
-        "scheduled_end": null,
-        "time_zone": "America/New_York",
-        "scheduled_start_local": null,
-        "scheduled_end_local": null,
-        "arrival_window": 0,
-        "appointments": []
-      },
-      "business_unit": null,
-      "assigned_employee_ids": [
-        "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
-      ],
-      "work_status": "created job from estimate",
-      "approved": true,
-      "approved_at": null,
-      "approved_amount": 90064
-    },
-    {
-      "id": "csr_a3ee9b5cdc1f4b9b9d630177bb67678a",
-      "estimate_number": "10220",
-      "customer_label": "Brian K.",
-      "created_at": "2025-12-31T12:54:26Z",
-      "schedule": {
-        "scheduled_start": "2026-01-06T20:00:00Z",
-        "scheduled_end": "2026-01-06T21:00:00Z",
-        "time_zone": "America/New_York",
-        "scheduled_start_local": "2026-01-06T15:00:00-05:00",
-        "scheduled_end_local": "2026-01-06T16:00:00-05:00",
-        "arrival_window": 120,
-        "appointments": []
-      },
-      "business_unit": null,
-      "assigned_employee_ids": [
-        "pro_62aa1ba4432340829b0aba02abd1d307"
-      ],
-      "work_status": "user canceled",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
     }
   ],
   "by_technician": {
@@ -496119,7 +496345,7 @@
       {
         "id": "job_bee93f61b0644b03b8001aa334d90559",
         "description": "Visit #12",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Lori W.",
         "city": "Dover",
         "state": "PA",
@@ -496146,7 +496372,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-04T18:38:42Z",
+        "updated_at": "2026-11-06T13:57:13Z",
         "invoice_number": "61677",
         "created_at": "2026-09-16T14:50:21Z"
       },
@@ -496209,16 +496435,14 @@
         ],
         "tags": [
           "40",
-          "Opportunity",
-          "HVAC Parts",
-          "Please order part."
+          "Opportunity"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 6718,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T13:57:03Z",
-        "updated_at": "2026-11-05T21:06:35Z",
+        "updated_at": "2026-11-06T13:37:33Z",
         "invoice_number": "61713",
         "created_at": "2026-09-17T16:11:19Z"
       },
@@ -508288,37 +508512,6 @@
         "created_at": "2026-10-27T16:51:41Z"
       },
       {
-        "id": "job_9f6c52435aba4f879915a46e6fa130b0",
-        "description": "Washer Box Re-Location",
-        "work_status": "in progress",
-        "customer_label": "Elyse B.",
-        "city": "Dallastown",
-        "state": "PA",
-        "zip": "17313",
-        "schedule": {
-          "scheduled_start": "2026-11-06T12:00:00Z",
-          "scheduled_end": "2026-11-06T18:00:00Z",
-          "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-11-06T07:00:00-05:00",
-          "scheduled_end_local": "2026-11-06T13:00:00-05:00",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_878f7465a7ae48a39312d99aedaa3fd1",
-          "pro_b5ab5cc9e362414cb376d0a02d64bef8"
-        ],
-        "tags": [],
-        "business_unit": "50 PLUMBING AOR",
-        "lead_source": "FF Kling",
-        "total_amount": 130000,
-        "outstanding_balance": 130000,
-        "completed_at": null,
-        "updated_at": "2026-11-06T12:19:16Z",
-        "invoice_number": "63153",
-        "created_at": "2026-10-28T18:29:41Z"
-      },
-      {
         "id": "job_f6573d48fda54f0ca381e3b12e049782",
         "description": "Water Service Repair",
         "work_status": "complete unrated",
@@ -509458,14 +509651,14 @@
         ],
         "tags": [
           "40",
-          "HVAC Parts"
+          "Parts Ordered"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 66197,
         "outstanding_balance": 33097,
         "completed_at": null,
-        "updated_at": "2026-11-05T20:35:39Z",
+        "updated_at": "2026-11-06T13:33:36Z",
         "invoice_number": "63367",
         "created_at": "2026-11-04T20:49:00Z"
       }
@@ -523106,7 +523299,7 @@
       {
         "id": "job_0a3506f48bd74b40b2fa54d22728ab3c",
         "description": "30 - RCC Whole Home Reduced Initial Service Fee After Hours",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Ann Z.",
         "city": "Dover",
         "state": "PA",
@@ -523132,7 +523325,7 @@
         "total_amount": 32664,
         "outstanding_balance": 0,
         "completed_at": "2026-09-18T20:57:51Z",
-        "updated_at": "2026-09-18T20:57:51Z",
+        "updated_at": "2026-11-06T13:22:17Z",
         "invoice_number": "61770",
         "created_at": "2026-09-18T19:10:13Z"
       },
@@ -527414,7 +527607,7 @@
       {
         "id": "job_dcf5e3c75c3d405b96f7e5ed299a0960",
         "description": "Visit #3",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Jay B.",
         "city": "Manchester",
         "state": "PA",
@@ -527440,7 +527633,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-09-23T16:47:02Z",
+        "updated_at": "2026-11-06T13:52:32Z",
         "invoice_number": "61745",
         "created_at": "2026-09-18T13:42:21Z"
       },
@@ -539490,7 +539683,7 @@
         "total_amount": 8500,
         "outstanding_balance": 8500,
         "completed_at": "2026-10-20T12:16:57Z",
-        "updated_at": "2026-10-22T17:07:27Z",
+        "updated_at": "2026-11-06T13:11:50Z",
         "invoice_number": "62690",
         "created_at": "2026-10-14T15:39:29Z"
       },
@@ -540379,7 +540572,7 @@
         "total_amount": 90133,
         "outstanding_balance": 90133,
         "completed_at": "2026-10-31T00:25:49Z",
-        "updated_at": "2026-10-31T00:25:49Z",
+        "updated_at": "2026-11-06T13:09:09Z",
         "invoice_number": "63202",
         "created_at": "2026-10-30T15:49:01Z"
       },
@@ -540446,9 +540639,9 @@
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 135353,
-        "outstanding_balance": 135353,
+        "outstanding_balance": 0,
         "completed_at": "2026-11-02T17:16:37Z",
-        "updated_at": "2026-11-03T18:51:02Z",
+        "updated_at": "2026-11-06T14:08:57Z",
         "invoice_number": "63219-2",
         "created_at": "2026-11-02T13:13:04Z"
       },
@@ -540475,14 +540668,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T16:48:05Z",
-        "updated_at": "2026-11-05T16:50:59Z",
+        "updated_at": "2026-11-06T13:46:30Z",
         "invoice_number": "61015",
         "created_at": "2026-08-31T18:21:44Z"
       },
@@ -540509,14 +540703,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T20:48:05Z",
-        "updated_at": "2026-11-04T20:48:48Z",
+        "updated_at": "2026-11-06T13:48:04Z",
         "invoice_number": "61171",
         "created_at": "2026-09-02T16:49:35Z"
       },
@@ -540543,21 +540738,22 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T18:34:09Z",
-        "updated_at": "2026-11-05T18:34:10Z",
+        "updated_at": "2026-11-06T13:13:28Z",
         "invoice_number": "62360",
         "created_at": "2026-10-05T16:42:47Z"
       },
       {
         "id": "job_ccdeb279e7a34f359089d6c1b482cbb2",
         "description": "Visit #10; Plumbing",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Robert S.",
         "city": "Dallastown",
         "state": "PA",
@@ -540584,7 +540780,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-05T19:05:01Z",
+        "updated_at": "2026-11-06T14:20:02Z",
         "invoice_number": "62392",
         "created_at": "2026-10-06T12:55:02Z"
       },
@@ -540611,14 +540807,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T17:56:25Z",
-        "updated_at": "2026-11-04T17:56:25Z",
+        "updated_at": "2026-11-06T13:48:37Z",
         "invoice_number": "62449",
         "created_at": "2026-10-07T12:58:38Z"
       },
@@ -540893,14 +541090,14 @@
         "total_amount": 8900,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T15:44:12Z",
-        "updated_at": "2026-11-05T16:05:09Z",
+        "updated_at": "2026-11-06T13:31:27Z",
         "invoice_number": "63334",
         "created_at": "2026-11-03T20:18:38Z"
       },
       {
         "id": "job_4084121b78994028b86fd9063313ec66",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Gail K.",
         "city": "York",
         "state": "PA",
@@ -540924,10 +541121,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 0,
+        "total_amount": 8500,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-11-06T12:24:20Z",
+        "completed_at": "2026-11-06T13:19:49Z",
+        "updated_at": "2026-11-06T13:20:20Z",
         "invoice_number": "63376",
         "created_at": "2026-11-05T13:17:46Z"
       }
@@ -558432,7 +558629,7 @@
       {
         "id": "job_934b0d9a27d342e386fd21ee3dc8617c",
         "description": "Visit #9; Cooling",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Lance S.",
         "city": "York",
         "state": "PA",
@@ -558459,7 +558656,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-08-27T12:51:14Z",
-        "updated_at": "2026-08-27T15:08:16Z",
+        "updated_at": "2026-11-06T12:46:21Z",
         "invoice_number": "60201",
         "created_at": "2026-08-11T15:10:50Z"
       },
@@ -564841,7 +565038,7 @@
       {
         "id": "job_8907a949f9894a03b736a21829260ea9",
         "description": "Visit #1",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Robert B.",
         "city": "York",
         "state": "PA",
@@ -564867,7 +565064,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-09-22T13:37:19Z",
+        "updated_at": "2026-11-06T13:35:49Z",
         "invoice_number": "61847",
         "created_at": "2026-09-22T13:33:06Z"
       },
@@ -571800,7 +571997,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:29:12Z",
+        "updated_at": "2026-11-06T13:11:09Z",
         "invoice_number": "63008-6",
         "created_at": "2026-11-05T12:39:35Z"
       }
@@ -587079,7 +587276,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:18:07Z",
+        "updated_at": "2026-11-06T12:33:43Z",
         "invoice_number": "63012-2",
         "created_at": "2026-11-03T12:50:39Z"
       },
@@ -612497,14 +612694,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T13:03:38Z",
-        "updated_at": "2026-11-03T13:54:49Z",
+        "updated_at": "2026-11-06T13:53:46Z",
         "invoice_number": "61675",
         "created_at": "2026-09-16T14:34:36Z"
       },
@@ -612530,14 +612728,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": "FF Kling",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-02T13:46:28Z",
-        "updated_at": "2026-11-02T13:46:28Z",
+        "updated_at": "2026-11-06T13:55:03Z",
         "invoice_number": "62031",
         "created_at": "2026-09-25T13:38:14Z"
       },
@@ -612563,14 +612762,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T14:57:22Z",
-        "updated_at": "2026-11-03T14:57:22Z",
+        "updated_at": "2026-11-06T13:52:52Z",
         "invoice_number": "62458",
         "created_at": "2026-10-07T13:55:01Z"
       },
@@ -613268,14 +613468,15 @@
         "tags": [
           "70",
           "Opportunity",
-          "Non-Member"
+          "Non-Member",
+          "IFO"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T15:18:43Z",
-        "updated_at": "2026-11-05T15:16:20Z",
+        "updated_at": "2026-11-06T13:04:08Z",
         "invoice_number": "63170",
         "created_at": "2026-10-29T14:33:08Z"
       },
@@ -613503,14 +613704,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": "FF Kling",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T13:33:34Z",
-        "updated_at": "2026-11-04T13:33:34Z",
+        "updated_at": "2026-11-06T13:50:10Z",
         "invoice_number": "62452",
         "created_at": "2026-10-07T13:05:05Z"
       },
@@ -613550,7 +613752,7 @@
       {
         "id": "job_9a00f66be03c400b8814272ff85bae80",
         "description": "Visit #10; Plumbing",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Lance S.",
         "city": "York",
         "state": "PA",
@@ -613569,14 +613771,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-11-06T12:22:10Z",
+        "completed_at": "2026-11-06T12:46:21Z",
+        "updated_at": "2026-11-06T13:12:42Z",
         "invoice_number": "62547",
         "created_at": "2026-10-09T12:15:40Z"
       },
@@ -613602,14 +613805,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T15:29:03Z",
-        "updated_at": "2026-11-04T15:29:03Z",
+        "updated_at": "2026-11-06T13:49:49Z",
         "invoice_number": "62564",
         "created_at": "2026-10-09T17:27:42Z"
       },
@@ -613673,9 +613877,9 @@
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 16936,
-        "outstanding_balance": 16936,
+        "outstanding_balance": 0,
         "completed_at": "2026-11-05T16:45:55Z",
-        "updated_at": "2026-11-05T19:00:32Z",
+        "updated_at": "2026-11-06T13:31:29Z",
         "invoice_number": "62914",
         "created_at": "2026-10-21T13:28:31Z"
       },
@@ -613701,14 +613905,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T14:56:54Z",
-        "updated_at": "2026-11-05T14:56:54Z",
+        "updated_at": "2026-11-06T13:47:17Z",
         "invoice_number": "63138",
         "created_at": "2026-10-28T15:49:56Z"
       },
@@ -613850,7 +614055,7 @@
       {
         "id": "job_169b5c8a5c8f426dad24e2897744448c",
         "description": "Billing - 80 - Plumbing Maintenance",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Sandra B.",
         "city": "York",
         "state": "PA",
@@ -613875,7 +614080,7 @@
         "total_amount": 49009,
         "outstanding_balance": 49009,
         "completed_at": null,
-        "updated_at": "2026-11-03T14:45:12Z",
+        "updated_at": "2026-11-06T14:16:48Z",
         "invoice_number": "63313",
         "created_at": "2026-11-03T14:42:51Z"
       },
@@ -613935,14 +614140,15 @@
         ],
         "tags": [
           "70",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T17:39:11Z",
-        "updated_at": "2026-11-05T17:39:11Z",
+        "updated_at": "2026-11-06T13:46:04Z",
         "invoice_number": "63382",
         "created_at": "2026-11-05T14:02:33Z"
       },
@@ -613978,6 +614184,38 @@
         "updated_at": "2026-11-05T14:29:45Z",
         "invoice_number": "63385",
         "created_at": "2026-11-05T14:24:37Z"
+      },
+      {
+        "id": "job_9244afc685ae4a6ca31b801d7c836eee",
+        "description": "Billing - 70 - Plumbing Service",
+        "work_status": "scheduled",
+        "customer_label": "Joel W.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17406",
+        "schedule": {
+          "scheduled_start": "2026-11-11T16:00:00Z",
+          "scheduled_end": "2026-11-11T20:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-11T11:00:00-05:00",
+          "scheduled_end_local": "2026-11-11T15:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
+        ],
+        "tags": [
+          "70"
+        ],
+        "business_unit": "70 PLUMBING SERVICE",
+        "lead_source": null,
+        "total_amount": 66560,
+        "outstanding_balance": 66560,
+        "completed_at": null,
+        "updated_at": "2026-11-06T13:41:23Z",
+        "invoice_number": "63416",
+        "created_at": "2026-11-06T13:39:10Z"
       },
       {
         "id": "job_75724c92d7db4fbd91996a8821dc0743",
@@ -642209,15 +642447,13 @@
           "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
           "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68"
         ],
-        "tags": [
-          "HVAC Attention"
-        ],
+        "tags": [],
         "business_unit": "10 HVAC AOR",
         "lead_source": null,
         "total_amount": 151168,
         "outstanding_balance": 151168,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:13:16Z",
+        "updated_at": "2026-11-06T12:50:43Z",
         "invoice_number": "63411",
         "created_at": "2026-11-05T20:26:04Z"
       }
@@ -668010,7 +668246,7 @@
         "total_amount": 90133,
         "outstanding_balance": 90133,
         "completed_at": "2026-10-31T00:25:49Z",
-        "updated_at": "2026-10-31T00:25:49Z",
+        "updated_at": "2026-11-06T13:09:09Z",
         "invoice_number": "63202",
         "created_at": "2026-10-30T15:49:01Z"
       },
@@ -668198,14 +668434,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T16:48:05Z",
-        "updated_at": "2026-11-05T16:50:59Z",
+        "updated_at": "2026-11-06T13:46:30Z",
         "invoice_number": "61015",
         "created_at": "2026-08-31T18:21:44Z"
       },
@@ -668265,14 +668502,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T20:48:05Z",
-        "updated_at": "2026-11-04T20:48:48Z",
+        "updated_at": "2026-11-06T13:48:04Z",
         "invoice_number": "61171",
         "created_at": "2026-09-02T16:49:35Z"
       },
@@ -668365,14 +668603,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T18:34:09Z",
-        "updated_at": "2026-11-05T18:34:10Z",
+        "updated_at": "2026-11-06T13:13:28Z",
         "invoice_number": "62360",
         "created_at": "2026-10-05T16:42:47Z"
       },
@@ -668399,14 +668638,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T17:56:25Z",
-        "updated_at": "2026-11-04T17:56:25Z",
+        "updated_at": "2026-11-06T13:48:37Z",
         "invoice_number": "62449",
         "created_at": "2026-10-07T12:58:38Z"
       },
@@ -668616,7 +668856,7 @@
       {
         "id": "job_ac9da64db4034c25bd35d4a786e35bf8",
         "description": "70 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Michelle M.",
         "city": "York",
         "state": "PA",
@@ -668641,9 +668881,9 @@
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 37855,
-        "outstanding_balance": 37855,
-        "completed_at": null,
-        "updated_at": "2026-11-06T12:14:49Z",
+        "outstanding_balance": 0,
+        "completed_at": "2026-11-06T13:38:43Z",
+        "updated_at": "2026-11-06T13:38:43Z",
         "invoice_number": "63262",
         "created_at": "2026-11-02T15:18:34Z"
       },
@@ -668748,7 +668988,7 @@
         "total_amount": 8900,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T15:44:12Z",
-        "updated_at": "2026-11-05T16:05:09Z",
+        "updated_at": "2026-11-06T13:31:27Z",
         "invoice_number": "63334",
         "created_at": "2026-11-03T20:18:38Z"
       },
@@ -668788,7 +669028,7 @@
       {
         "id": "job_ba43f8d4934242a88a6e0a52e57e4d0c",
         "description": "70 - Initial Service Fee",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Mike F.",
         "city": "Manchester",
         "state": "PA",
@@ -668812,10 +669052,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
+        "total_amount": 38708,
+        "outstanding_balance": 38708,
         "completed_at": null,
-        "updated_at": "2026-11-04T16:45:51Z",
+        "updated_at": "2026-11-06T14:08:05Z",
         "invoice_number": "63355",
         "created_at": "2026-11-04T16:41:53Z"
       },
@@ -692824,7 +693064,7 @@
       {
         "id": "job_fc6d39810af64d0ab38717ba4f0966a1",
         "description": "70 - Plumbing Service",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Gail K.",
         "city": "York",
         "state": "PA",
@@ -692850,7 +693090,7 @@
         "total_amount": 69522,
         "outstanding_balance": 0,
         "completed_at": "2026-10-20T17:09:59Z",
-        "updated_at": "2026-10-20T17:10:00Z",
+        "updated_at": "2026-11-06T13:19:49Z",
         "invoice_number": "62631",
         "created_at": "2026-10-12T19:38:39Z"
       },
@@ -693307,14 +693547,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": "FF Kling",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T15:57:35Z",
-        "updated_at": "2026-11-03T15:57:35Z",
+        "updated_at": "2026-11-06T13:03:02Z",
         "invoice_number": "61395",
         "created_at": "2026-09-09T14:28:00Z"
       },
@@ -693439,14 +693680,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T14:15:18Z",
-        "updated_at": "2026-11-03T14:15:18Z",
+        "updated_at": "2026-11-06T13:04:30Z",
         "invoice_number": "62469",
         "created_at": "2026-10-07T14:54:43Z"
       },
@@ -693505,14 +693747,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-02T14:57:53Z",
-        "updated_at": "2026-11-02T14:57:53Z",
+        "updated_at": "2026-11-06T13:07:51Z",
         "invoice_number": "62493",
         "created_at": "2026-10-07T18:41:34Z"
       },
@@ -694299,14 +694542,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T14:51:50Z",
-        "updated_at": "2026-11-04T14:51:50Z",
+        "updated_at": "2026-11-06T13:02:05Z",
         "invoice_number": "61411",
         "created_at": "2026-09-09T15:36:49Z"
       },
@@ -694464,14 +694708,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T15:14:17Z",
-        "updated_at": "2026-11-05T15:14:18Z",
+        "updated_at": "2026-11-06T12:57:22Z",
         "invoice_number": "62492",
         "created_at": "2026-10-07T18:37:20Z"
       },
@@ -694841,17 +695086,17 @@
       {
         "id": "job_8cad80557ee84bb2a26d26d548c86be7",
         "description": "Billing - 70 - Plumbing Service",
-        "work_status": "in progress",
+        "work_status": "scheduled",
         "customer_label": "Jesse And Ginger W.",
         "city": "York",
         "state": "PA",
         "zip": "17403",
         "schedule": {
-          "scheduled_start": "2026-11-06T12:00:00Z",
-          "scheduled_end": "2026-11-06T16:00:00Z",
+          "scheduled_start": "2026-11-06T13:00:00Z",
+          "scheduled_end": "2026-11-06T17:00:00Z",
           "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-11-06T07:00:00-05:00",
-          "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+          "scheduled_start_local": "2026-11-06T08:00:00-05:00",
+          "scheduled_end_local": "2026-11-06T12:00:00-05:00",
           "arrival_window": 120,
           "appointments": []
         },
@@ -694866,7 +695111,7 @@
         "total_amount": 537148,
         "outstanding_balance": 268574,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:07:23Z",
+        "updated_at": "2026-11-06T13:04:06Z",
         "invoice_number": "63373",
         "created_at": "2026-11-05T12:28:26Z"
       },
@@ -721664,7 +721909,7 @@
         "outstanding_balance": 478297,
         "completed_at": "2026-11-02T19:37:49Z",
         "updated_at": "2026-11-02T20:09:29Z",
-        "invoice_number": "62409",
+        "invoice_number": "62409-1",
         "created_at": "2026-10-06T15:20:54Z"
       },
       {
@@ -723201,7 +723446,7 @@
       {
         "id": "job_12067d83ba0040d6b77537f10497da0b",
         "description": "Visit #2",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Paul M.",
         "city": "Abbottstown",
         "state": "PA",
@@ -723227,7 +723472,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-09-18T14:03:21Z",
+        "updated_at": "2026-11-06T13:26:57Z",
         "invoice_number": "61747",
         "created_at": "2026-09-18T14:01:11Z"
       },
@@ -732154,15 +732399,14 @@
           "pro_878f7465a7ae48a39312d99aedaa3fd1"
         ],
         "tags": [
-          "50",
-          "Plumbing Installation"
+          "50"
         ],
         "business_unit": "50 PLUMBING AOR",
         "lead_source": null,
         "total_amount": 1028204,
         "outstanding_balance": 514102,
         "completed_at": "2026-11-03T18:00:49Z",
-        "updated_at": "2026-11-05T18:11:11Z",
+        "updated_at": "2026-11-06T13:30:55Z",
         "invoice_number": "59904-1",
         "created_at": "2026-08-04T12:43:18Z"
       },
@@ -733848,9 +734092,9 @@
         "business_unit": "50 PLUMBING AOR",
         "lead_source": null,
         "total_amount": 23314,
-        "outstanding_balance": 23314,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-16T16:34:24Z",
-        "updated_at": "2026-10-16T16:48:47Z",
+        "updated_at": "2026-11-06T14:22:26Z",
         "invoice_number": "62552",
         "created_at": "2026-10-09T14:35:34Z"
       },
@@ -734604,23 +734848,22 @@
       {
         "id": "job_9f6c52435aba4f879915a46e6fa130b0",
         "description": "Washer Box Re-Location",
-        "work_status": "in progress",
+        "work_status": "scheduled",
         "customer_label": "Elyse B.",
         "city": "Dallastown",
         "state": "PA",
         "zip": "17313",
         "schedule": {
-          "scheduled_start": "2026-11-06T12:00:00Z",
-          "scheduled_end": "2026-11-06T18:00:00Z",
+          "scheduled_start": "2026-11-13T12:00:00Z",
+          "scheduled_end": "2026-11-13T17:00:00Z",
           "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-11-06T07:00:00-05:00",
-          "scheduled_end_local": "2026-11-06T13:00:00-05:00",
+          "scheduled_start_local": "2026-11-13T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-13T12:00:00-05:00",
           "arrival_window": 120,
           "appointments": []
         },
         "assigned_employee_ids": [
-          "pro_878f7465a7ae48a39312d99aedaa3fd1",
-          "pro_b5ab5cc9e362414cb376d0a02d64bef8"
+          "pro_878f7465a7ae48a39312d99aedaa3fd1"
         ],
         "tags": [],
         "business_unit": "50 PLUMBING AOR",
@@ -734628,7 +734871,7 @@
         "total_amount": 130000,
         "outstanding_balance": 130000,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:19:16Z",
+        "updated_at": "2026-11-06T13:02:49Z",
         "invoice_number": "63153",
         "created_at": "2026-10-28T18:29:41Z"
       },
@@ -756844,7 +757087,7 @@
         "total_amount": 8500,
         "outstanding_balance": 8500,
         "completed_at": "2026-10-20T12:16:57Z",
-        "updated_at": "2026-10-22T17:07:27Z",
+        "updated_at": "2026-11-06T13:11:50Z",
         "invoice_number": "62690",
         "created_at": "2026-10-14T15:39:29Z"
       },
@@ -757205,14 +757448,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T15:18:54Z",
-        "updated_at": "2026-11-03T18:33:36Z",
+        "updated_at": "2026-11-06T13:03:30Z",
         "invoice_number": "62480",
         "created_at": "2026-10-07T16:59:44Z"
       },
@@ -757423,7 +757667,7 @@
       {
         "id": "job_596ff01f57fc48459a017a9786fe3895",
         "description": "70 - Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Russell T.",
         "city": "York",
         "state": "PA",
@@ -757450,7 +757694,7 @@
         "total_amount": 128325,
         "outstanding_balance": 0,
         "completed_at": "2026-10-23T16:18:18Z",
-        "updated_at": "2026-10-30T17:58:58Z",
+        "updated_at": "2026-11-06T13:12:26Z",
         "invoice_number": "62864",
         "created_at": "2026-10-20T13:02:13Z"
       },
@@ -757957,7 +758201,7 @@
         "total_amount": 90133,
         "outstanding_balance": 90133,
         "completed_at": "2026-10-31T00:25:49Z",
-        "updated_at": "2026-10-31T00:25:49Z",
+        "updated_at": "2026-11-06T13:09:09Z",
         "invoice_number": "63202",
         "created_at": "2026-10-30T15:49:01Z"
       },
@@ -758058,7 +758302,7 @@
         "total_amount": 51515,
         "outstanding_balance": 51515,
         "completed_at": "2026-10-31T21:20:37Z",
-        "updated_at": "2026-10-31T21:20:38Z",
+        "updated_at": "2026-11-06T13:08:33Z",
         "invoice_number": "63218",
         "created_at": "2026-10-31T12:15:13Z"
       },
@@ -758090,9 +758334,9 @@
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 23900,
-        "outstanding_balance": 23900,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-31T19:10:54Z",
-        "updated_at": "2026-11-03T18:51:02Z",
+        "updated_at": "2026-11-06T14:08:57Z",
         "invoice_number": "63219-1",
         "created_at": "2026-10-31T14:05:39Z"
       },
@@ -758193,9 +758437,9 @@
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 135353,
-        "outstanding_balance": 135353,
+        "outstanding_balance": 0,
         "completed_at": "2026-11-02T17:16:37Z",
-        "updated_at": "2026-11-03T18:51:02Z",
+        "updated_at": "2026-11-06T14:08:57Z",
         "invoice_number": "63219-2",
         "created_at": "2026-11-02T13:13:04Z"
       },
@@ -758320,14 +758564,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T14:52:08Z",
-        "updated_at": "2026-11-04T14:52:08Z",
+        "updated_at": "2026-11-06T13:01:46Z",
         "invoice_number": "61414",
         "created_at": "2026-09-09T16:01:58Z"
       },
@@ -758367,7 +758612,7 @@
       {
         "id": "job_ccdeb279e7a34f359089d6c1b482cbb2",
         "description": "Visit #10; Plumbing",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Robert S.",
         "city": "Dallastown",
         "state": "PA",
@@ -758394,7 +758639,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-05T19:05:01Z",
+        "updated_at": "2026-11-06T14:20:02Z",
         "invoice_number": "62392",
         "created_at": "2026-10-06T12:55:02Z"
       },
@@ -758524,9 +758769,9 @@
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 19525,
-        "outstanding_balance": 19525,
+        "outstanding_balance": 0,
         "completed_at": "2026-11-04T16:50:57Z",
-        "updated_at": "2026-11-04T16:50:57Z",
+        "updated_at": "2026-11-06T14:06:29Z",
         "invoice_number": "63226",
         "created_at": "2026-11-02T12:29:35Z"
       },
@@ -758667,7 +758912,7 @@
       {
         "id": "job_4084121b78994028b86fd9063313ec66",
         "description": "70 - RCC Whole Home Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Gail K.",
         "city": "York",
         "state": "PA",
@@ -758691,10 +758936,10 @@
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
-        "total_amount": 0,
+        "total_amount": 8500,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-11-06T12:24:20Z",
+        "completed_at": "2026-11-06T13:19:49Z",
+        "updated_at": "2026-11-06T13:20:20Z",
         "invoice_number": "63376",
         "created_at": "2026-11-05T13:17:46Z"
       },
@@ -764361,6 +764606,38 @@
         "updated_at": "2026-10-29T18:31:24Z",
         "invoice_number": "63086-2",
         "created_at": "2026-10-27T11:33:31Z"
+      },
+      {
+        "id": "job_94742fb84d604c3496adb08650c478a8",
+        "description": "",
+        "work_status": "scheduled",
+        "customer_label": "Jolene T.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-11-06T12:30:00Z",
+          "scheduled_end": "2026-11-06T13:30:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-06T07:30:00-05:00",
+          "scheduled_end_local": "2026-11-06T08:30:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_a66fbc5ec25d48bb8db8a93609a0654f"
+        ],
+        "tags": [
+          "30"
+        ],
+        "business_unit": "30 HVAC SERVICE",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-11-06T14:23:02Z",
+        "invoice_number": "62409-3",
+        "created_at": "2026-11-06T14:04:04Z"
       }
     ],
     "pro_8d943eadd54f485b9dba4296c807fb8f": [
@@ -789424,7 +789701,7 @@
       {
         "id": "job_bee93f61b0644b03b8001aa334d90559",
         "description": "Visit #12",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Lori W.",
         "city": "Dover",
         "state": "PA",
@@ -789451,7 +789728,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-04T18:38:42Z",
+        "updated_at": "2026-11-06T13:57:13Z",
         "invoice_number": "61677",
         "created_at": "2026-09-16T14:50:21Z"
       },
@@ -789514,16 +789791,14 @@
         ],
         "tags": [
           "40",
-          "Opportunity",
-          "HVAC Parts",
-          "Please order part."
+          "Opportunity"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 6718,
         "outstanding_balance": 0,
         "completed_at": "2026-11-05T13:57:03Z",
-        "updated_at": "2026-11-05T21:06:35Z",
+        "updated_at": "2026-11-06T13:37:33Z",
         "invoice_number": "61713",
         "created_at": "2026-09-17T16:11:19Z"
       },
@@ -798646,15 +798921,14 @@
           "pro_878f7465a7ae48a39312d99aedaa3fd1"
         ],
         "tags": [
-          "50",
-          "Plumbing Installation"
+          "50"
         ],
         "business_unit": "50 PLUMBING AOR",
         "lead_source": null,
         "total_amount": 1028204,
         "outstanding_balance": 514102,
         "completed_at": "2026-11-03T18:00:49Z",
-        "updated_at": "2026-11-05T18:11:11Z",
+        "updated_at": "2026-11-06T13:30:55Z",
         "invoice_number": "59904-1",
         "created_at": "2026-08-04T12:43:18Z"
       },
@@ -812857,7 +813131,7 @@
       {
         "id": "job_2c20fa2ccaf24d28aad70d9d8801046e",
         "description": "70 - Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Indulge Salon",
         "city": "York",
         "state": "PA",
@@ -812884,7 +813158,7 @@
         "total_amount": 32230,
         "outstanding_balance": 0,
         "completed_at": "2026-05-20T12:07:49Z",
-        "updated_at": "2026-07-08T16:33:45Z",
+        "updated_at": "2026-11-06T13:31:47Z",
         "invoice_number": "57244",
         "created_at": "2026-05-19T15:00:10Z"
       },
@@ -826487,14 +826761,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T20:20:55Z",
-        "updated_at": "2026-11-03T20:20:56Z",
+        "updated_at": "2026-11-06T13:02:29Z",
         "invoice_number": "62277",
         "created_at": "2026-10-02T13:01:24Z"
       },
@@ -826586,14 +826861,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": "FF Kling",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-02T18:06:20Z",
-        "updated_at": "2026-11-02T18:06:20Z",
+        "updated_at": "2026-11-06T13:07:05Z",
         "invoice_number": "62570",
         "created_at": "2026-10-09T17:55:19Z"
       },
@@ -826864,7 +827140,7 @@
       {
         "id": "job_ef0f0be6e1ba4af9ac5cbd1614424c8a",
         "description": "70 - Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Michelle M.",
         "city": "York",
         "state": "PA",
@@ -826891,7 +827167,7 @@
         "total_amount": 23314,
         "outstanding_balance": 0,
         "completed_at": "2026-10-23T15:19:43Z",
-        "updated_at": "2026-10-23T15:19:43Z",
+        "updated_at": "2026-11-06T13:38:43Z",
         "invoice_number": "62779-3",
         "created_at": "2026-10-23T11:24:41Z"
       },
@@ -827465,7 +827741,7 @@
         "total_amount": 42565,
         "outstanding_balance": 42565,
         "completed_at": "2026-10-30T12:09:17Z",
-        "updated_at": "2026-10-31T21:20:37Z",
+        "updated_at": "2026-11-06T13:00:24Z",
         "invoice_number": "63178",
         "created_at": "2026-10-29T16:11:28Z"
       },
@@ -827624,14 +827900,15 @@
         ],
         "tags": [
           "70",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-02T20:33:32Z",
-        "updated_at": "2026-11-03T13:00:18Z",
+        "updated_at": "2026-11-06T13:06:00Z",
         "invoice_number": "63235",
         "created_at": "2026-11-02T12:56:17Z"
       },
@@ -827723,21 +828000,22 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": "Google",
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-11-04T15:20:17Z",
-        "updated_at": "2026-11-04T15:20:17Z",
+        "updated_at": "2026-11-06T13:00:42Z",
         "invoice_number": "62234",
         "created_at": "2026-10-01T16:26:05Z"
       },
       {
         "id": "job_02d3ec2e9dda48b28fadd3424eb9a394",
         "description": "Visit #6; Plumbing",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Ann Z.",
         "city": "Dover",
         "state": "PA",
@@ -827762,15 +828040,15 @@
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
-        "completed_at": null,
-        "updated_at": "2026-11-06T12:22:18Z",
+        "completed_at": "2026-11-06T13:22:17Z",
+        "updated_at": "2026-11-06T13:22:17Z",
         "invoice_number": "62276",
         "created_at": "2026-10-02T13:00:55Z"
       },
       {
         "id": "job_6f6c551ac58d45efb0cdbca27686c8a2",
         "description": "80 - Plumbing Maintenance",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Vicki D.",
         "city": "Dover",
         "state": "PA",
@@ -827795,7 +828073,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-10-05T12:37:09Z",
+        "updated_at": "2026-11-06T13:40:13Z",
         "invoice_number": "62332",
         "created_at": "2026-10-05T12:35:39Z"
       },
@@ -852065,9 +852343,9 @@
         "business_unit": "40 HVAC MAINT",
         "lead_source": "FF Kling",
         "total_amount": 102512,
-        "outstanding_balance": 51212,
+        "outstanding_balance": 0,
         "completed_at": "2026-10-21T10:29:44Z",
-        "updated_at": "2026-10-21T22:59:30Z",
+        "updated_at": "2026-11-06T13:47:37Z",
         "invoice_number": "62630",
         "created_at": "2026-10-12T19:30:34Z"
       },
@@ -853391,17 +853669,15 @@
           "pro_aab24498cf6e4c46844bddcbc7161f26"
         ],
         "tags": [
-          "40",
-          "HVAC Attention",
-          "HVAC Parts"
+          "40"
         ],
         "business_unit": "40 HVAC MAINT",
         "lead_source": null,
         "total_amount": 56705,
         "outstanding_balance": 0,
         "completed_at": "2026-11-02T18:33:19Z",
-        "updated_at": "2026-11-05T14:53:43Z",
-        "invoice_number": "62972",
+        "updated_at": "2026-11-06T13:13:00Z",
+        "invoice_number": "62972-1",
         "created_at": "2026-10-22T17:40:40Z"
       },
       {
@@ -854243,7 +854519,7 @@
       {
         "id": "job_54f763a5645b4341b029df83dc817952",
         "description": "Visit #6; Tankless only",
-        "work_status": "scheduled",
+        "work_status": "in progress",
         "customer_label": "Ken P.",
         "city": "York",
         "state": "PA",
@@ -854269,7 +854545,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-09-11T15:36:47Z",
+        "updated_at": "2026-11-06T13:21:49Z",
         "invoice_number": "61524",
         "created_at": "2026-09-11T15:08:18Z"
       },
@@ -854848,11 +855124,11 @@
         "state": "PA",
         "zip": "17347",
         "schedule": {
-          "scheduled_start": "2026-11-13T16:00:00Z",
-          "scheduled_end": "2026-11-13T18:00:00Z",
+          "scheduled_start": "2026-11-13T17:00:00Z",
+          "scheduled_end": "2026-11-13T19:00:00Z",
           "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-11-13T11:00:00-05:00",
-          "scheduled_end_local": "2026-11-13T13:00:00-05:00",
+          "scheduled_start_local": "2026-11-13T12:00:00-05:00",
+          "scheduled_end_local": "2026-11-13T14:00:00-05:00",
           "arrival_window": 120,
           "appointments": []
         },
@@ -854868,7 +855144,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-02T19:28:28Z",
+        "updated_at": "2026-11-06T13:10:56Z",
         "invoice_number": "62736",
         "created_at": "2026-10-15T17:08:02Z"
       },
@@ -854909,7 +855185,7 @@
       {
         "id": "job_37fd2e49c48f4e83868a97ebbfcb8da2",
         "description": "30 - Initial Service Fee",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Indulge Salon",
         "city": "York",
         "state": "PA",
@@ -854929,15 +855205,14 @@
         "tags": [
           "30",
           "Opportunity",
-          "Non-Member",
-          "HVAC Attention"
+          "Non-Member"
         ],
         "business_unit": "30 HVAC SERVICE",
         "lead_source": null,
-        "total_amount": 8900,
-        "outstanding_balance": 8900,
-        "completed_at": null,
-        "updated_at": "2026-11-05T21:07:23Z",
+        "total_amount": 20322,
+        "outstanding_balance": 0,
+        "completed_at": "2026-11-05T20:32:37Z",
+        "updated_at": "2026-11-06T13:32:09Z",
         "invoice_number": "63168",
         "created_at": "2026-10-29T13:42:53Z"
       },
@@ -855139,6 +855414,38 @@
         "updated_at": "2026-11-05T20:10:52Z",
         "invoice_number": "63141-2",
         "created_at": "2026-11-05T18:21:07Z"
+      },
+      {
+        "id": "job_86966ca703794e95b4feb98f521a94e1",
+        "description": "40 HVAC Maintenance",
+        "work_status": "scheduled",
+        "customer_label": "Larry S.",
+        "city": "Dover",
+        "state": "PA",
+        "zip": "17315",
+        "schedule": {
+          "scheduled_start": "2026-11-13T16:00:00Z",
+          "scheduled_end": "2026-11-13T17:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-13T11:00:00-05:00",
+          "scheduled_end_local": "2026-11-13T12:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_aab24498cf6e4c46844bddcbc7161f26"
+        ],
+        "tags": [
+          "40"
+        ],
+        "business_unit": "40 HVAC MAINT",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-11-06T13:11:00Z",
+        "invoice_number": "62972-2",
+        "created_at": "2026-11-06T13:07:26Z"
       },
       {
         "id": "job_1c11824f2cbe4be6a67b3a4664207715",
@@ -872450,7 +872757,7 @@
         "total_amount": 90133,
         "outstanding_balance": 90133,
         "completed_at": "2026-10-31T00:25:49Z",
-        "updated_at": "2026-10-31T00:25:49Z",
+        "updated_at": "2026-11-06T13:09:09Z",
         "invoice_number": "63202",
         "created_at": "2026-10-30T15:49:01Z"
       },
@@ -872485,7 +872792,7 @@
         "total_amount": 51400,
         "outstanding_balance": 51400,
         "completed_at": "2026-11-02T19:31:21Z",
-        "updated_at": "2026-11-02T19:31:21Z",
+        "updated_at": "2026-11-06T13:06:33Z",
         "invoice_number": "63238",
         "created_at": "2026-11-02T13:07:20Z"
       },
@@ -872752,6 +873059,39 @@
         "updated_at": "2026-11-05T18:57:09Z",
         "invoice_number": "63377-2",
         "created_at": "2026-11-05T18:47:42Z"
+      },
+      {
+        "id": "job_652568769f214bd09f80cd031deaeab9",
+        "description": "Billing - Plumbing Contract Installation",
+        "work_status": "scheduled",
+        "customer_label": "Dick P.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-11-11T12:00:00Z",
+          "scheduled_end": "2026-11-11T20:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-11T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-11T15:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_1526b39a952147619f19902966416543",
+          "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+        ],
+        "tags": [
+          "Plumbing Installation"
+        ],
+        "business_unit": "50 PLUMBING AOR",
+        "lead_source": null,
+        "total_amount": 549260,
+        "outstanding_balance": 274630,
+        "completed_at": null,
+        "updated_at": "2026-11-06T14:05:00Z",
+        "invoice_number": "63417",
+        "created_at": "2026-11-06T13:40:46Z"
       }
     ],
     "pro_a147eea604e04ccfa458813cf1b374f0": [
@@ -894041,14 +894381,15 @@
         ],
         "tags": [
           "80",
-          "Opportunity"
+          "Opportunity",
+          "IFO"
         ],
         "business_unit": "80 PLUMBING MAINT",
         "lead_source": null,
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": "2026-10-30T19:26:33Z",
-        "updated_at": "2026-11-02T19:40:42Z",
+        "updated_at": "2026-11-06T13:11:12Z",
         "invoice_number": "60878-1",
         "created_at": "2026-08-27T15:00:13Z"
       },
@@ -895012,15 +895353,14 @@
         "tags": [
           "70",
           "Opportunity",
-          "Non-Member",
-          "Plumbing Parts"
+          "Non-Member"
         ],
         "business_unit": "70 PLUMBING SERVICE",
         "lead_source": null,
         "total_amount": 11687,
         "outstanding_balance": 11687,
         "completed_at": "2026-11-03T13:08:01Z",
-        "updated_at": "2026-11-03T15:18:03Z",
+        "updated_at": "2026-11-06T13:53:22Z",
         "invoice_number": "63301",
         "created_at": "2026-11-03T12:20:50Z"
       },
@@ -910369,7 +910709,7 @@
         "total_amount": 51400,
         "outstanding_balance": 51400,
         "completed_at": "2026-11-02T19:31:21Z",
-        "updated_at": "2026-11-02T19:31:21Z",
+        "updated_at": "2026-11-06T13:06:33Z",
         "invoice_number": "63238",
         "created_at": "2026-11-02T13:07:20Z"
       },
@@ -910767,7 +911107,7 @@
         "total_amount": 19525,
         "outstanding_balance": 19525,
         "completed_at": "2026-11-05T17:31:49Z",
-        "updated_at": "2026-11-05T17:31:49Z",
+        "updated_at": "2026-11-06T12:52:36Z",
         "invoice_number": "63388",
         "created_at": "2026-11-05T15:33:10Z"
       },
@@ -910868,9 +911208,42 @@
         "total_amount": 19525,
         "outstanding_balance": 19525,
         "completed_at": "2026-11-05T18:43:46Z",
-        "updated_at": "2026-11-05T18:43:47Z",
+        "updated_at": "2026-11-06T12:51:15Z",
         "invoice_number": "63404",
         "created_at": "2026-11-05T17:37:53Z"
+      },
+      {
+        "id": "job_652568769f214bd09f80cd031deaeab9",
+        "description": "Billing - Plumbing Contract Installation",
+        "work_status": "scheduled",
+        "customer_label": "Dick P.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-11-11T12:00:00Z",
+          "scheduled_end": "2026-11-11T20:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-11T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-11T15:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_1526b39a952147619f19902966416543",
+          "pro_9a3f2249ef464465a1522f4a3ccfef5a"
+        ],
+        "tags": [
+          "Plumbing Installation"
+        ],
+        "business_unit": "50 PLUMBING AOR",
+        "lead_source": null,
+        "total_amount": 549260,
+        "outstanding_balance": 274630,
+        "completed_at": null,
+        "updated_at": "2026-11-06T14:05:00Z",
+        "invoice_number": "63417",
+        "created_at": "2026-11-06T13:40:46Z"
       }
     ],
     "pro_5048a923ca8a47a5bd4cc2bbe40c4faa": [
@@ -912015,6 +912388,38 @@
         "updated_at": "2026-11-04T20:17:15Z",
         "invoice_number": "63344",
         "created_at": "2026-11-04T14:46:03Z"
+      },
+      {
+        "id": "job_1824916118a34f81851d25ab688a1a83",
+        "description": "40 HVAC Maintenance",
+        "work_status": "scheduled",
+        "customer_label": "Ryan V.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-11-06T14:00:00Z",
+          "scheduled_end": "2026-11-06T16:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+          "scheduled_end_local": "2026-11-06T11:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_5048a923ca8a47a5bd4cc2bbe40c4faa"
+        ],
+        "tags": [
+          "40"
+        ],
+        "business_unit": "40 HVAC MAINT",
+        "lead_source": null,
+        "total_amount": 56238,
+        "outstanding_balance": 56238,
+        "completed_at": null,
+        "updated_at": "2026-11-06T13:40:18Z",
+        "invoice_number": "63415",
+        "created_at": "2026-11-06T13:38:01Z"
       }
     ],
     "pro_a22d9b3f0cce4ad68f0e8d078b53d69a": [
@@ -917061,6 +917466,70 @@
         "updated_at": "2026-11-04T19:36:41Z",
         "invoice_number": "63361",
         "created_at": "2026-11-04T19:36:15Z"
+      },
+      {
+        "id": "job_2fb32ef487c241a6987c4f5291f47c8c",
+        "description": "Tub to Shower Converrsion",
+        "work_status": "scheduled",
+        "customer_label": "Virginia B.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17406",
+        "schedule": {
+          "scheduled_start": "2026-11-06T13:45:00Z",
+          "scheduled_end": "2026-11-06T14:45:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-06T08:45:00-05:00",
+          "scheduled_end_local": "2026-11-06T09:45:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_c3ff6948fe0c4109ad9f1fcb627850cf"
+        ],
+        "tags": [
+          "Plumbing Installation"
+        ],
+        "business_unit": "50 PLUMBING AOR",
+        "lead_source": null,
+        "total_amount": 1136640,
+        "outstanding_balance": 568320,
+        "completed_at": null,
+        "updated_at": "2026-11-06T13:31:12Z",
+        "invoice_number": "63414",
+        "created_at": "2026-11-06T13:28:19Z"
+      },
+      {
+        "id": "job_0ef271381381405d90d34075508c31a0",
+        "description": "Tub wall and Fixture Replacement",
+        "work_status": "scheduled",
+        "customer_label": "Russell T.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17403",
+        "schedule": {
+          "scheduled_start": "2026-11-06T14:00:00Z",
+          "scheduled_end": "2026-11-06T15:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-06T09:00:00-05:00",
+          "scheduled_end_local": "2026-11-06T10:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_c3ff6948fe0c4109ad9f1fcb627850cf"
+        ],
+        "tags": [
+          "Plumbing Installation"
+        ],
+        "business_unit": "50 PLUMBING AOR",
+        "lead_source": null,
+        "total_amount": 1621650,
+        "outstanding_balance": 1621650,
+        "completed_at": null,
+        "updated_at": "2026-11-06T13:48:39Z",
+        "invoice_number": "63418",
+        "created_at": "2026-11-06T13:46:50Z"
       }
     ],
     "pro_23fac61aafad4b4fa31992b5efaafae9": [
@@ -924482,7 +924951,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:29:12Z",
+        "updated_at": "2026-11-06T13:11:09Z",
         "invoice_number": "63008-6",
         "created_at": "2026-11-05T12:39:35Z"
       }
@@ -931395,7 +931864,7 @@
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T15:24:49Z",
         "updated_at": "2026-11-06T11:48:00Z",
-        "invoice_number": "63211",
+        "invoice_number": "63211-1",
         "created_at": "2026-10-30T18:12:54Z"
       },
       {
@@ -931522,7 +931991,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:18:07Z",
+        "updated_at": "2026-11-06T12:33:43Z",
         "invoice_number": "63012-2",
         "created_at": "2026-11-03T12:50:39Z"
       },
@@ -931547,17 +932016,47 @@
           "pro_5c675ceab86d44cfbe75a1bfe6ecb25d",
           "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68"
         ],
-        "tags": [
-          "HVAC Attention"
-        ],
+        "tags": [],
         "business_unit": "10 HVAC AOR",
         "lead_source": null,
         "total_amount": 151168,
         "outstanding_balance": 151168,
         "completed_at": null,
-        "updated_at": "2026-11-06T12:13:16Z",
+        "updated_at": "2026-11-06T12:50:43Z",
         "invoice_number": "63411",
         "created_at": "2026-11-05T20:26:04Z"
+      },
+      {
+        "id": "job_12e8c6dae716496dacefd2671f6c68bc",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Sidney D.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17404",
+        "schedule": {
+          "scheduled_start": "2026-11-06T17:00:00Z",
+          "scheduled_end": "2026-11-06T18:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-06T12:00:00-05:00",
+          "scheduled_end_local": "2026-11-06T13:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "business_unit": "10 HVAC AOR",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-11-06T13:49:40Z",
+        "invoice_number": "63211-2",
+        "created_at": "2026-11-06T13:44:58Z"
       }
     ],
     "pro_c45a8b2541c64ac4b0f305364c5f5295": [
@@ -938571,7 +939070,7 @@
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T15:24:49Z",
         "updated_at": "2026-11-06T11:48:00Z",
-        "invoice_number": "63211",
+        "invoice_number": "63211-1",
         "created_at": "2026-10-30T18:12:54Z"
       },
       {
@@ -946043,7 +946542,7 @@
         "outstanding_balance": 0,
         "completed_at": "2026-11-03T15:24:49Z",
         "updated_at": "2026-11-06T11:48:00Z",
-        "invoice_number": "63211",
+        "invoice_number": "63211-1",
         "created_at": "2026-10-30T18:12:54Z"
       },
       {
@@ -950249,7 +950748,7 @@
         "outstanding_balance": 478297,
         "completed_at": "2026-11-02T19:37:49Z",
         "updated_at": "2026-11-02T20:09:29Z",
-        "invoice_number": "62409",
+        "invoice_number": "62409-1",
         "created_at": "2026-10-06T15:20:54Z"
       },
       {

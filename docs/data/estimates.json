@@ -109,7 +109,7 @@
     "assigned_employee_ids": [
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -132,10 +132,10 @@
     "assigned_employee_ids": [
       "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
     ],
-    "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-11-06T14:16:34.562Z",
+    "approved_amount": 66560
   },
   {
     "id": "csr_d7b89c62e71f4821bce59f868f98d9b2",
@@ -293,9 +293,9 @@
     "assigned_employee_ids": [
       "pro_8d943eadd54f485b9dba4296c807fb8f"
     ],
-    "work_status": "needs scheduling",
+    "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-05T13:42:21Z",
     "approved_amount": 56238
   },
   {
@@ -318,7 +318,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-05T13:16:26Z",
     "approved_amount": 48430
   },
   {
@@ -364,7 +364,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-05T11:31:16Z",
     "approved_amount": 70718
   },
   {
@@ -387,7 +387,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-04T19:44:41Z",
     "approved_amount": 66197
   },
   {
@@ -456,7 +456,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-04T19:02:26Z",
     "approved_amount": 186468
   },
   {
@@ -618,7 +618,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-04T16:00:58Z",
     "approved_amount": 67530
   },
   {
@@ -986,7 +986,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-03T13:24:58Z",
     "approved_amount": 55720
   },
   {
@@ -1007,7 +1007,7 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "scheduled",
+    "work_status": "in progress",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
@@ -1216,7 +1216,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-11-02T15:17:49Z",
     "approved_amount": 55692
   },
   {
@@ -1488,7 +1488,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-30T19:14:14Z",
     "approved_amount": 92877
   },
   {
@@ -1649,7 +1649,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-30T15:27:36Z",
     "approved_amount": 115205
   },
   {
@@ -1672,7 +1672,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-30T15:16:46Z",
     "approved_amount": 31298
   },
   {
@@ -1741,7 +1741,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-30T14:47:58Z",
     "approved_amount": 186131
   },
   {
@@ -1946,10 +1946,10 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "complete unrated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-11-06T14:16:34.562Z",
+    "approved_amount": 549260
   },
   {
     "id": "csr_bae2ff08065d4a038797c13546af7990",
@@ -1992,10 +1992,10 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "complete rated",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-11-06T14:16:34.562Z",
+    "approved_amount": 1136640
   },
   {
     "id": "csr_c51ee42d5c3f4fd1806c654ec6df9495",
@@ -2084,7 +2084,7 @@
     "assigned_employee_ids": [],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-29T14:58:29Z",
     "approved_amount": 181654
   },
   {
@@ -2130,7 +2130,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-29T13:25:02Z",
     "approved_amount": 370499
   },
   {
@@ -2222,7 +2222,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-29T12:01:31Z",
     "approved_amount": 250920
   },
   {
@@ -2245,7 +2245,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-28T18:44:55Z",
     "approved_amount": 58180
   },
   {
@@ -2360,7 +2360,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-28T15:56:01Z",
     "approved_amount": 34425
   },
   {
@@ -2383,7 +2383,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-28T15:48:12Z",
     "approved_amount": 56365
   },
   {
@@ -2452,7 +2452,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-28T14:25:18Z",
     "approved_amount": 30196
   },
   {
@@ -2636,7 +2636,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-28T12:03:51Z",
     "approved_amount": 118933
   },
   {
@@ -2774,7 +2774,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-27T18:38:19Z",
     "approved_amount": 43242
   },
   {
@@ -2843,7 +2843,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-27T17:46:49Z",
     "approved_amount": 34425
   },
   {
@@ -2912,7 +2912,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-27T16:08:13Z",
     "approved_amount": 183248
   },
   {
@@ -2958,7 +2958,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-27T13:55:14Z",
     "approved_amount": 15689
   },
   {
@@ -3050,7 +3050,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-27T11:42:38Z",
     "approved_amount": 118654
   },
   {
@@ -3164,7 +3164,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-26T21:29:39Z",
     "approved_amount": 60144
   },
   {
@@ -3486,7 +3486,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-26T14:30:10Z",
     "approved_amount": 173760
   },
   {
@@ -3647,7 +3647,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-23T17:50:23Z",
     "approved_amount": 249500
   },
   {
@@ -3875,10 +3875,10 @@
     "assigned_employee_ids": [
       "pro_ca120cbb55fa40fe9361d492161b101f"
     ],
-    "work_status": "in progress",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "work_status": "created job from estimate",
+    "approved": true,
+    "approved_at": "2026-11-06T14:16:34.562Z",
+    "approved_amount": 1621650
   },
   {
     "id": "csr_7099c390d72d4019af63458777639ace",
@@ -4131,7 +4131,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-22T18:30:56Z",
     "approved_amount": 61304
   },
   {
@@ -4223,7 +4223,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-22T17:12:23Z",
     "approved_amount": 39026
   },
   {
@@ -4361,7 +4361,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-22T12:52:03Z",
     "approved_amount": 0
   },
   {
@@ -4430,7 +4430,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-22T12:15:27Z",
     "approved_amount": 93183
   },
   {
@@ -4546,7 +4546,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-21T19:39:20Z",
     "approved_amount": 271607
   },
   {
@@ -4682,7 +4682,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-21T14:28:06Z",
     "approved_amount": 93925
   },
   {
@@ -4728,7 +4728,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-21T13:17:34Z",
     "approved_amount": 98260
   },
   {
@@ -4751,7 +4751,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-21T12:26:56Z",
     "approved_amount": 33399
   },
   {
@@ -4820,7 +4820,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-20T18:20:48Z",
     "approved_amount": 393683
   },
   {
@@ -5027,7 +5027,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-20T15:51:18Z",
     "approved_amount": 160546
   },
   {
@@ -5188,7 +5188,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-20T13:01:27Z",
     "approved_amount": 122400
   },
   {
@@ -5234,7 +5234,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-19T19:34:17Z",
     "approved_amount": 52360
   },
   {
@@ -5416,7 +5416,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-19T16:36:36Z",
     "approved_amount": 52360
   },
   {
@@ -5554,7 +5554,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-19T15:22:36Z",
     "approved_amount": 48782
   },
   {
@@ -5805,7 +5805,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-18T13:16:07Z",
     "approved_amount": 47228
   },
   {
@@ -5920,7 +5920,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-16T15:30:39Z",
     "approved_amount": 53720
   },
   {
@@ -6035,7 +6035,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-16T14:40:07Z",
     "approved_amount": 0
   },
   {
@@ -6288,7 +6288,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-15T18:54:35Z",
     "approved_amount": 63750
   },
   {
@@ -6334,7 +6334,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-15T14:48:27Z",
     "approved_amount": 99376
   },
   {
@@ -6357,7 +6357,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-15T14:20:10Z",
     "approved_amount": 35804
   },
   {
@@ -6403,7 +6403,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-15T13:31:33Z",
     "approved_amount": 99376
   },
   {
@@ -6633,7 +6633,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-14T18:13:05Z",
     "approved_amount": 159070
   },
   {
@@ -6886,7 +6886,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-14T14:11:01Z",
     "approved_amount": 291881
   },
   {
@@ -6955,7 +6955,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-14T12:44:44Z",
     "approved_amount": 10317
   },
   {
@@ -6978,7 +6978,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-14T12:43:02Z",
     "approved_amount": 6718
   },
   {
@@ -7047,7 +7047,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-13T19:00:02Z",
     "approved_amount": 145207
   },
   {
@@ -7070,7 +7070,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-13T18:58:53Z",
     "approved_amount": 39404
   },
   {
@@ -7093,7 +7093,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-13T18:43:56Z",
     "approved_amount": 62462
   },
   {
@@ -7233,7 +7233,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-13T16:21:35Z",
     "approved_amount": 128354
   },
   {
@@ -7877,7 +7877,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-12T15:41:04Z",
     "approved_amount": 17710
   },
   {
@@ -7969,7 +7969,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-12T14:26:10Z",
     "approved_amount": 59207
   },
   {
@@ -8084,7 +8084,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-10T18:07:01Z",
     "approved_amount": 570059
   },
   {
@@ -8107,7 +8107,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-09T19:09:32Z",
     "approved_amount": 23800
   },
   {
@@ -8222,7 +8222,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-09T17:36:47Z",
     "approved_amount": 82405
   },
   {
@@ -8314,7 +8314,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-09T16:36:51Z",
     "approved_amount": 70792
   },
   {
@@ -8544,7 +8544,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-09T12:35:22Z",
     "approved_amount": 638306
   },
   {
@@ -8567,7 +8567,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-09T12:29:23Z",
     "approved_amount": 9592
   },
   {
@@ -8749,7 +8749,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-08T18:30:43Z",
     "approved_amount": 165219
   },
   {
@@ -8795,7 +8795,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-08T17:45:27Z",
     "approved_amount": 51984
   },
   {
@@ -9002,7 +9002,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-08T13:10:41Z",
     "approved_amount": 87978
   },
   {
@@ -9025,7 +9025,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-08T13:08:52Z",
     "approved_amount": 39026
   },
   {
@@ -9094,7 +9094,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-08T12:32:49Z",
     "approved_amount": 30915
   },
   {
@@ -9347,7 +9347,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-07T18:49:37Z",
     "approved_amount": 121638
   },
   {
@@ -9393,7 +9393,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-07T18:05:44Z",
     "approved_amount": 336700
   },
   {
@@ -9439,7 +9439,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-07T17:00:46Z",
     "approved_amount": 236470
   },
   {
@@ -9692,7 +9692,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-07T12:33:35Z",
     "approved_amount": 61150
   },
   {
@@ -9853,7 +9853,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-06T17:19:30Z",
     "approved_amount": 364092
   },
   {
@@ -9945,7 +9945,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-06T16:37:09Z",
     "approved_amount": 123506
   },
   {
@@ -9968,7 +9968,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-06T16:27:37Z",
     "approved_amount": 34535
   },
   {
@@ -10083,7 +10083,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-06T13:48:41Z",
     "approved_amount": 29143
   },
   {
@@ -10336,7 +10336,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-05T17:52:10Z",
     "approved_amount": 97310
   },
   {
@@ -10497,7 +10497,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-05T14:43:59Z",
     "approved_amount": 158790
   },
   {
@@ -10589,7 +10589,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-05T13:16:26Z",
     "approved_amount": 296840
   },
   {
@@ -10681,7 +10681,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-05T11:53:25Z",
     "approved_amount": 128377
   },
   {
@@ -11024,7 +11024,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-02T12:54:39Z",
     "approved_amount": 191001
   },
   {
@@ -11116,7 +11116,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-01T17:23:14Z",
     "approved_amount": 91211
   },
   {
@@ -11162,7 +11162,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-01T16:16:27Z",
     "approved_amount": 99376
   },
   {
@@ -11254,7 +11254,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-10-01T14:56:22Z",
     "approved_amount": 32888
   },
   {
@@ -11415,7 +11415,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-30T18:51:35Z",
     "approved_amount": 511934
   },
   {
@@ -11438,7 +11438,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-30T17:52:51Z",
     "approved_amount": 243000
   },
   {
@@ -11639,7 +11639,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-30T17:06:30Z",
     "approved_amount": 380000
   },
   {
@@ -11777,7 +11777,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-30T14:17:47Z",
     "approved_amount": 170666
   },
   {
@@ -11869,7 +11869,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-30T12:25:53Z",
     "approved_amount": 48198
   },
   {
@@ -11915,7 +11915,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-30T12:06:16Z",
     "approved_amount": 29705
   },
   {
@@ -12145,7 +12145,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-29T16:08:55Z",
     "approved_amount": 222962
   },
   {
@@ -12215,7 +12215,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-29T14:57:27Z",
     "approved_amount": 173986
   },
   {
@@ -12330,7 +12330,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-29T12:49:26Z",
     "approved_amount": 69337
   },
   {
@@ -12399,7 +12399,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-28T19:32:39Z",
     "approved_amount": 370499
   },
   {
@@ -12445,7 +12445,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-28T17:59:13Z",
     "approved_amount": 327475
   },
   {
@@ -12537,7 +12537,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-28T16:15:37Z",
     "approved_amount": 52360
   },
   {
@@ -12560,7 +12560,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-28T16:05:33Z",
     "approved_amount": 42880
   },
   {
@@ -12744,7 +12744,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-25T18:45:22Z",
     "approved_amount": 61535
   },
   {
@@ -12767,7 +12767,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-25T17:54:51Z",
     "approved_amount": 39744
   },
   {
@@ -12790,7 +12790,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-25T17:01:35Z",
     "approved_amount": 82926
   },
   {
@@ -12859,7 +12859,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-25T15:47:24Z",
     "approved_amount": 97310
   },
   {
@@ -12882,7 +12882,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-25T15:43:37Z",
     "approved_amount": 113390
   },
   {
@@ -13182,7 +13182,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-25T12:31:46Z",
     "approved_amount": 30727
   },
   {
@@ -13459,7 +13459,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-24T14:02:36Z",
     "approved_amount": 71144
   },
   {
@@ -13528,7 +13528,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-24T12:22:13Z",
     "approved_amount": 34304
   },
   {
@@ -13620,7 +13620,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-23T18:37:29Z",
     "approved_amount": 42075
   },
   {
@@ -13735,7 +13735,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-23T16:13:28Z",
     "approved_amount": 114964
   },
   {
@@ -13758,7 +13758,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-23T15:00:01Z",
     "approved_amount": 58395
   },
   {
@@ -13919,7 +13919,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-23T12:02:49Z",
     "approved_amount": 223640
   },
   {
@@ -14011,7 +14011,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-22T17:58:49Z",
     "approved_amount": 62177
   },
   {
@@ -14034,7 +14034,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-22T17:58:23Z",
     "approved_amount": 279231
   },
   {
@@ -14149,7 +14149,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-22T16:20:30Z",
     "approved_amount": 19040
   },
   {
@@ -14379,7 +14379,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-21T19:32:08Z",
     "approved_amount": 32071
   },
   {
@@ -14494,7 +14494,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-21T16:31:21Z",
     "approved_amount": 51340
   },
   {
@@ -14632,7 +14632,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-21T13:28:46Z",
     "approved_amount": 169040
   },
   {
@@ -14747,7 +14747,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-18T17:01:27Z",
     "approved_amount": 97538
   },
   {
@@ -14817,7 +14817,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-18T16:13:36Z",
     "approved_amount": 54368
   },
   {
@@ -14886,7 +14886,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-18T14:42:14Z",
     "approved_amount": 7949
   },
   {
@@ -15024,7 +15024,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-18T12:48:11Z",
     "approved_amount": 256574
   },
   {
@@ -15411,7 +15411,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-17T13:57:43Z",
     "approved_amount": 59807
   },
   {
@@ -15503,7 +15503,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-17T12:33:45Z",
     "approved_amount": 65202
   },
   {
@@ -15572,7 +15572,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-17T11:58:52Z",
     "approved_amount": 32888
   },
   {
@@ -15798,7 +15798,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-16T17:01:30Z",
     "approved_amount": 8500
   },
   {
@@ -15913,7 +15913,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-16T15:16:33Z",
     "approved_amount": 50880
   },
   {
@@ -16143,7 +16143,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-16T12:29:47Z",
     "approved_amount": 38290
   },
   {
@@ -16350,7 +16350,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-15T16:31:19Z",
     "approved_amount": 29705
   },
   {
@@ -16580,7 +16580,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-14T18:53:53Z",
     "approved_amount": 90170
   },
   {
@@ -16995,7 +16995,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-11T16:40:18Z",
     "approved_amount": 104041
   },
   {
@@ -17246,7 +17246,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-11T12:56:11Z",
     "approved_amount": 97988
   },
   {
@@ -17750,7 +17750,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-09T17:20:29Z",
     "approved_amount": 326818
   },
   {
@@ -18302,7 +18302,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-08T19:07:57Z",
     "approved_amount": 210924
   },
   {
@@ -18325,7 +18325,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-08T16:56:18Z",
     "approved_amount": 204994
   },
   {
@@ -18441,7 +18441,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-08T16:05:58Z",
     "approved_amount": 157430
   },
   {
@@ -18487,7 +18487,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-08T14:34:46Z",
     "approved_amount": 75650
   },
   {
@@ -18809,7 +18809,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-04T15:36:08Z",
     "approved_amount": 30425
   },
   {
@@ -18832,7 +18832,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-04T15:25:19Z",
     "approved_amount": 25388
   },
   {
@@ -18993,7 +18993,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-03T18:49:07Z",
     "approved_amount": 208552
   },
   {
@@ -19246,7 +19246,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-03T13:12:05Z",
     "approved_amount": 495230
   },
   {
@@ -19407,7 +19407,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-02T17:17:12Z",
     "approved_amount": 70991
   },
   {
@@ -19522,7 +19522,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-02T12:09:17Z",
     "approved_amount": 32888
   },
   {
@@ -19591,7 +19591,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-01T18:22:39Z",
     "approved_amount": 47550
   },
   {
@@ -19637,7 +19637,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-01T17:34:52Z",
     "approved_amount": 75138
   },
   {
@@ -19683,7 +19683,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-01T16:18:00Z",
     "approved_amount": 93683
   },
   {
@@ -19729,7 +19729,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-01T15:31:02Z",
     "approved_amount": 13017
   },
   {
@@ -19821,7 +19821,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-01T13:59:53Z",
     "approved_amount": 23764
   },
   {
@@ -19844,7 +19844,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-09-01T13:57:18Z",
     "approved_amount": 74905
   },
   {
@@ -20143,7 +20143,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-31T15:55:15Z",
     "approved_amount": 238440
   },
   {
@@ -20304,7 +20304,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-31T13:33:59Z",
     "approved_amount": 40721
   },
   {
@@ -20511,7 +20511,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-28T16:16:34Z",
     "approved_amount": 196605
   },
   {
@@ -20580,7 +20580,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-28T15:53:42Z",
     "approved_amount": 19611
   },
   {
@@ -20626,7 +20626,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-28T14:49:05Z",
     "approved_amount": 53180
   },
   {
@@ -20695,7 +20695,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-28T14:36:01Z",
     "approved_amount": 94161
   },
   {
@@ -20741,7 +20741,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-28T14:02:04Z",
     "approved_amount": 33660
   },
   {
@@ -20811,7 +20811,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-28T13:33:23Z",
     "approved_amount": 77612
   },
   {
@@ -20926,7 +20926,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-27T17:57:13Z",
     "approved_amount": 27670
   },
   {
@@ -21156,7 +21156,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-27T16:44:57Z",
     "approved_amount": 152446
   },
   {
@@ -21248,7 +21248,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-27T14:20:45Z",
     "approved_amount": 11220
   },
   {
@@ -21612,7 +21612,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-26T15:30:59Z",
     "approved_amount": 426213
   },
   {
@@ -21635,7 +21635,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-26T15:06:20Z",
     "approved_amount": 676262
   },
   {
@@ -21750,7 +21750,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-26T12:47:42Z",
     "approved_amount": 382000
   },
   {
@@ -21797,7 +21797,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-25T18:18:18Z",
     "approved_amount": 139610
   },
   {
@@ -21843,7 +21843,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-25T17:28:40Z",
     "approved_amount": 585485
   },
   {
@@ -21866,7 +21866,7 @@
     ],
     "work_status": "user canceled",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-25T16:34:05Z",
     "approved_amount": 54935
   },
   {
@@ -21889,7 +21889,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-25T16:31:47Z",
     "approved_amount": 629006
   },
   {
@@ -21935,7 +21935,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-25T16:24:24Z",
     "approved_amount": 91935
   },
   {
@@ -22004,7 +22004,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-25T15:08:37Z",
     "approved_amount": 26484
   },
   {
@@ -22187,7 +22187,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-24T18:56:14Z",
     "approved_amount": 178400
   },
   {
@@ -22233,7 +22233,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-24T17:40:00Z",
     "approved_amount": 131325
   },
   {
@@ -22256,7 +22256,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-24T17:34:15Z",
     "approved_amount": 500056
   },
   {
@@ -22302,7 +22302,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-24T16:15:22Z",
     "approved_amount": 298108
   },
   {
@@ -22325,7 +22325,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-24T15:40:02Z",
     "approved_amount": 48979
   },
   {
@@ -22394,7 +22394,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-24T14:29:44Z",
     "approved_amount": 30915
   },
   {
@@ -22579,7 +22579,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-21T17:02:37Z",
     "approved_amount": 284225
   },
   {
@@ -22602,7 +22602,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-21T16:22:01Z",
     "approved_amount": 45257
   },
   {
@@ -22625,7 +22625,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-21T15:09:01Z",
     "approved_amount": 159316
   },
   {
@@ -22763,7 +22763,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-21T13:45:31Z",
     "approved_amount": 33955
   },
   {
@@ -22832,7 +22832,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-21T13:01:42Z",
     "approved_amount": 141802
   },
   {
@@ -23063,7 +23063,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-20T14:34:31Z",
     "approved_amount": 90365
   },
   {
@@ -23109,7 +23109,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-20T13:42:56Z",
     "approved_amount": 177908
   },
   {
@@ -23132,7 +23132,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-20T12:47:03Z",
     "approved_amount": 162743
   },
   {
@@ -23155,7 +23155,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-20T12:27:27Z",
     "approved_amount": 74076
   },
   {
@@ -23178,7 +23178,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-20T12:19:28Z",
     "approved_amount": 107064
   },
   {
@@ -23201,7 +23201,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-20T12:06:48Z",
     "approved_amount": 99644
   },
   {
@@ -23247,7 +23247,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-19T17:58:08Z",
     "approved_amount": 123008
   },
   {
@@ -23314,7 +23314,7 @@
     "assigned_employee_ids": [],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-19T15:43:31Z",
     "approved_amount": 23500
   },
   {
@@ -23358,7 +23358,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-19T14:12:15Z",
     "approved_amount": 39932
   },
   {
@@ -23404,7 +23404,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-19T12:14:52Z",
     "approved_amount": 50996
   },
   {
@@ -23494,7 +23494,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-18T20:07:58Z",
     "approved_amount": 47260
   },
   {
@@ -23540,7 +23540,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-18T19:23:57Z",
     "approved_amount": 195543
   },
   {
@@ -23609,7 +23609,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-18T18:09:50Z",
     "approved_amount": 48086
   },
   {
@@ -23655,7 +23655,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-18T17:10:37Z",
     "approved_amount": 42202
   },
   {
@@ -23678,7 +23678,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-18T15:02:33Z",
     "approved_amount": 54093
   },
   {
@@ -23770,7 +23770,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-18T13:18:43Z",
     "approved_amount": 143050
   },
   {
@@ -23885,7 +23885,7 @@
     ],
     "work_status": "complete rated",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T18:43:48Z",
     "approved_amount": 250700
   },
   {
@@ -23931,7 +23931,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T18:08:57Z",
     "approved_amount": 262000
   },
   {
@@ -23954,7 +23954,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T17:40:09Z",
     "approved_amount": 298050
   },
   {
@@ -23977,7 +23977,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T17:38:08Z",
     "approved_amount": 1033415
   },
   {
@@ -24115,7 +24115,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T13:43:27Z",
     "approved_amount": 184503
   },
   {
@@ -24184,7 +24184,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T12:42:56Z",
     "approved_amount": 38431
   },
   {
@@ -24230,7 +24230,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-17T12:23:15Z",
     "approved_amount": 480843
   },
   {
@@ -24438,7 +24438,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-14T17:21:17Z",
     "approved_amount": 31025
   },
   {
@@ -24553,7 +24553,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-14T15:01:27Z",
     "approved_amount": 82852
   },
   {
@@ -24622,7 +24622,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-14T13:36:25Z",
     "approved_amount": 104941
   },
   {
@@ -24714,7 +24714,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-14T10:33:55Z",
     "approved_amount": 459173
   },
   {
@@ -24737,7 +24737,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-14T10:18:27Z",
     "approved_amount": 143953
   },
   {
@@ -24760,7 +24760,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T18:21:22Z",
     "approved_amount": 647500
   },
   {
@@ -24852,7 +24852,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T17:16:30Z",
     "approved_amount": 257526
   },
   {
@@ -24921,7 +24921,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T16:09:00Z",
     "approved_amount": 180030
   },
   {
@@ -24968,7 +24968,7 @@
     ],
     "work_status": "user canceled",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T15:50:01Z",
     "approved_amount": 37800
   },
   {
@@ -25198,7 +25198,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T13:44:31Z",
     "approved_amount": 110958
   },
   {
@@ -25221,7 +25221,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T13:37:20Z",
     "approved_amount": 190301
   },
   {
@@ -25267,7 +25267,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T13:05:25Z",
     "approved_amount": 33399
   },
   {
@@ -25290,7 +25290,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T12:48:06Z",
     "approved_amount": 17782
   },
   {
@@ -25313,7 +25313,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-13T12:20:09Z",
     "approved_amount": 238440
   },
   {
@@ -25336,7 +25336,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T19:20:02Z",
     "approved_amount": 49009
   },
   {
@@ -25382,7 +25382,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T19:12:20Z",
     "approved_amount": 744065
   },
   {
@@ -25520,7 +25520,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T15:14:31Z",
     "approved_amount": 647325
   },
   {
@@ -25564,7 +25564,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T15:04:42Z",
     "approved_amount": 51739
   },
   {
@@ -25656,7 +25656,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T12:53:53Z",
     "approved_amount": 550000
   },
   {
@@ -25702,7 +25702,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T12:32:18Z",
     "approved_amount": 298050
   },
   {
@@ -25725,7 +25725,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T12:24:26Z",
     "approved_amount": 41110
   },
   {
@@ -25794,7 +25794,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-12T11:41:05Z",
     "approved_amount": 26940
   },
   {
@@ -25909,7 +25909,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-11T17:45:11Z",
     "approved_amount": 59075
   },
   {
@@ -25978,7 +25978,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-11T17:22:39Z",
     "approved_amount": 187000
   },
   {
@@ -26185,7 +26185,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-11T14:28:24Z",
     "approved_amount": 23764
   },
   {
@@ -26254,7 +26254,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-11T13:00:10Z",
     "approved_amount": 79652
   },
   {
@@ -26369,7 +26369,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-10T19:12:13Z",
     "approved_amount": 509675
   },
   {
@@ -26438,7 +26438,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-10T18:35:38Z",
     "approved_amount": 120000
   },
   {
@@ -26530,7 +26530,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-10T15:39:57Z",
     "approved_amount": 58957
   },
   {
@@ -26645,7 +26645,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-10T13:50:45Z",
     "approved_amount": 51942
   },
   {
@@ -26714,7 +26714,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-10T12:33:05Z",
     "approved_amount": 111937
   },
   {
@@ -26760,7 +26760,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-08T17:24:47Z",
     "approved_amount": 54549
   },
   {
@@ -26783,7 +26783,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-07T17:21:06Z",
     "approved_amount": 115006
   },
   {
@@ -26852,7 +26852,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-07T16:01:20Z",
     "approved_amount": 225381
   },
   {
@@ -26944,7 +26944,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-07T14:03:53Z",
     "approved_amount": 27929
   },
   {
@@ -26990,7 +26990,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-07T13:16:05Z",
     "approved_amount": 143758
   },
   {
@@ -27083,7 +27083,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-07T13:09:04Z",
     "approved_amount": 585562
   },
   {
@@ -27219,7 +27219,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-06T17:24:20Z",
     "approved_amount": 18745
   },
   {
@@ -27312,7 +27312,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-06T16:21:30Z",
     "approved_amount": 96652
   },
   {
@@ -27358,7 +27358,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-06T15:44:42Z",
     "approved_amount": 61128
   },
   {
@@ -27519,7 +27519,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-06T13:16:35Z",
     "approved_amount": 105070
   },
   {
@@ -27611,7 +27611,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-06T12:24:51Z",
     "approved_amount": 127607
   },
   {
@@ -27818,7 +27818,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-05T11:35:29Z",
     "approved_amount": 212296
   },
   {
@@ -27841,7 +27841,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-04T19:08:05Z",
     "approved_amount": 38151
   },
   {
@@ -27864,7 +27864,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-04T18:51:31Z",
     "approved_amount": 61502
   },
   {
@@ -27956,7 +27956,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-04T17:10:23Z",
     "approved_amount": 997500
   },
   {
@@ -28002,7 +28002,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-04T14:48:34Z",
     "approved_amount": 111937
   },
   {
@@ -28025,7 +28025,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-04T14:45:46Z",
     "approved_amount": 152365
   },
   {
@@ -28094,7 +28094,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-04T12:11:28Z",
     "approved_amount": 51942
   },
   {
@@ -28209,7 +28209,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T18:34:33Z",
     "approved_amount": 470553
   },
   {
@@ -28255,7 +28255,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T17:59:09Z",
     "approved_amount": 47600
   },
   {
@@ -28301,7 +28301,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T16:57:24Z",
     "approved_amount": 1028204
   },
   {
@@ -28347,7 +28347,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T15:04:07Z",
     "approved_amount": 242472
   },
   {
@@ -28393,7 +28393,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T13:58:29Z",
     "approved_amount": 40432
   },
   {
@@ -28462,7 +28462,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T11:56:29Z",
     "approved_amount": 65314
   },
   {
@@ -28485,7 +28485,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-08-03T11:36:20Z",
     "approved_amount": 191830
   },
   {
@@ -28600,7 +28600,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-31T14:54:06Z",
     "approved_amount": 1501500
   },
   {
@@ -28715,7 +28715,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T17:20:48Z",
     "approved_amount": 984960
   },
   {
@@ -28738,7 +28738,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T17:19:16Z",
     "approved_amount": 97538
   },
   {
@@ -28807,7 +28807,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T16:05:32Z",
     "approved_amount": 111937
   },
   {
@@ -28945,7 +28945,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T14:59:19Z",
     "approved_amount": 234585
   },
   {
@@ -29035,7 +29035,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T14:04:37Z",
     "approved_amount": 556207
   },
   {
@@ -29081,7 +29081,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T13:50:18Z",
     "approved_amount": 385897
   },
   {
@@ -29219,7 +29219,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-30T11:14:51Z",
     "approved_amount": 259525
   },
   {
@@ -29309,7 +29309,7 @@
     "assigned_employee_ids": [],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T16:33:07Z",
     "approved_amount": 83707
   },
   {
@@ -29401,7 +29401,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T15:35:59Z",
     "approved_amount": 75949
   },
   {
@@ -29424,7 +29424,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T15:32:28Z",
     "approved_amount": 803970
   },
   {
@@ -29585,7 +29585,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T13:14:53Z",
     "approved_amount": 125145
   },
   {
@@ -29654,7 +29654,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T12:38:30Z",
     "approved_amount": 24580
   },
   {
@@ -29769,7 +29769,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T12:04:53Z",
     "approved_amount": 436479
   },
   {
@@ -29792,7 +29792,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T12:04:36Z",
     "approved_amount": 37459
   },
   {
@@ -29815,7 +29815,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-29T11:58:54Z",
     "approved_amount": 22404
   },
   {
@@ -29884,7 +29884,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-28T18:28:36Z",
     "approved_amount": 142979
   },
   {
@@ -29907,7 +29907,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-28T18:20:56Z",
     "approved_amount": 80560
   },
   {
@@ -29930,7 +29930,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-28T17:57:38Z",
     "approved_amount": 300115
   },
   {
@@ -29976,7 +29976,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-28T17:45:57Z",
     "approved_amount": 146510
   },
   {
@@ -30183,7 +30183,7 @@
     ],
     "work_status": "needs scheduling",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-28T13:36:28Z",
     "approved_amount": 23468
   },
   {
@@ -30459,7 +30459,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T15:01:44Z",
     "approved_amount": 797700
   },
   {
@@ -30482,7 +30482,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T14:58:28Z",
     "approved_amount": 92800
   },
   {
@@ -30528,7 +30528,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T14:47:04Z",
     "approved_amount": 15689
   },
   {
@@ -30643,7 +30643,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T13:54:50Z",
     "approved_amount": 239592
   },
   {
@@ -30689,7 +30689,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T13:10:08Z",
     "approved_amount": 20446
   },
   {
@@ -30735,7 +30735,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T13:03:46Z",
     "approved_amount": 111937
   },
   {
@@ -30781,7 +30781,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T12:54:47Z",
     "approved_amount": 128000
   },
   {
@@ -30804,7 +30804,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-27T12:48:59Z",
     "approved_amount": 23764
   },
   {
@@ -31011,7 +31011,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-24T17:43:07Z",
     "approved_amount": 111937
   },
   {
@@ -31103,7 +31103,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-24T13:03:17Z",
     "approved_amount": 201738
   },
   {
@@ -31126,7 +31126,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-24T12:36:18Z",
     "approved_amount": 133175
   },
   {
@@ -31218,7 +31218,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-23T17:21:19Z",
     "approved_amount": 122771
   },
   {
@@ -31264,7 +31264,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-23T17:06:38Z",
     "approved_amount": 121856
   },
   {
@@ -31425,7 +31425,7 @@
     ],
     "work_status": "complete unrated",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-23T13:10:24Z",
     "approved_amount": 97538
   },
   {
@@ -31448,7 +31448,7 @@
     ],
     "work_status": "created job from estimate",
     "approved": true,
-    "approved_at": null,
+    "approved_at": "2026-07-23T13:07:58Z",
     "approved_amount": 51942
   },
   {
@@ -89510,52 +89510,6 @@
       "pro_62aa1ba4432340829b0aba02abd1d307"
     ],
     "work_status": "in progress",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
-  },
-  {
-    "id": "csr_14c68e6a11c242f89b2d434e3fbf41d9",
-    "estimate_number": "10221",
-    "customer_label": "Sandra T.",
-    "created_at": "2025-12-31T13:34:19Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_4a63b04bb5a64d97b8e1728dd8ea77fb"
-    ],
-    "work_status": "created job from estimate",
-    "approved": true,
-    "approved_at": null,
-    "approved_amount": 90064
-  },
-  {
-    "id": "csr_a3ee9b5cdc1f4b9b9d630177bb67678a",
-    "estimate_number": "10220",
-    "customer_label": "Brian K.",
-    "created_at": "2025-12-31T12:54:26Z",
-    "schedule": {
-      "scheduled_start": "2026-01-06T20:00:00Z",
-      "scheduled_end": "2026-01-06T21:00:00Z",
-      "time_zone": "America/New_York",
-      "scheduled_start_local": "2026-01-06T15:00:00-05:00",
-      "scheduled_end_local": "2026-01-06T16:00:00-05:00",
-      "arrival_window": 120,
-      "appointments": []
-    },
-    "business_unit": null,
-    "assigned_employee_ids": [
-      "pro_62aa1ba4432340829b0aba02abd1d307"
-    ],
-    "work_status": "user canceled",
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
