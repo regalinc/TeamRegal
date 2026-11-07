@@ -1556,9 +1556,9 @@
       "pro_7ccf9b4457bb40ecbb84540d250950e1"
     ],
     "work_status": "needs scheduling",
-    "approved": false,
-    "approved_at": null,
-    "approved_amount": 0
+    "approved": true,
+    "approved_at": "2026-11-07T20:51:29.660Z",
+    "approved_amount": 22136
   },
   {
     "id": "csr_e27f6a6439be4075b855dd4a034dd39f",
@@ -89582,28 +89582,5 @@
     "approved": false,
     "approved_at": null,
     "approved_amount": 0
-  },
-  {
-    "id": "csr_56ca2300f8944b978bdd98859b7dd8a7",
-    "estimate_number": "10226",
-    "customer_label": "Dylon J.",
-    "created_at": "2025-12-31T16:57:45Z",
-    "schedule": {
-      "scheduled_start": null,
-      "scheduled_end": null,
-      "time_zone": "America/New_York",
-      "scheduled_start_local": null,
-      "scheduled_end_local": null,
-      "arrival_window": 0,
-      "appointments": []
-    },
-    "business_unit": "50 PLUMBING AOR",
-    "assigned_employee_ids": [
-      "pro_ca120cbb55fa40fe9361d492161b101f"
-    ],
-    "work_status": "created job from estimate",
-    "approved": true,
-    "approved_at": null,
-    "approved_amount": 745000
   }
 ]

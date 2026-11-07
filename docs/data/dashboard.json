@@ -1,11 +1,11 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-07T16:23:51.475Z",
+    "last_synced_at": "2026-11-07T20:51:29.660Z",
     "window_days_back": 311,
     "window_days_forward": 13,
     "technician_count": 47,
-    "job_count": 12698,
-    "estimate_count": 3897
+    "job_count": 12699,
+    "estimate_count": 3896
   },
   "technicians": [
     {
@@ -392573,7 +392573,7 @@
     {
       "id": "job_7b8b4bfcacbe4dbf89f0bdab292c2806",
       "description": "30 - Initial Service Fee",
-      "work_status": "complete unrated",
+      "work_status": "complete rated",
       "customer_label": "Colin W.",
       "city": "Manchester",
       "state": "PA",
@@ -392600,7 +392600,7 @@
       "total_amount": 39323,
       "outstanding_balance": 0,
       "completed_at": "2026-10-29T19:18:33Z",
-      "updated_at": "2026-11-07T15:07:42Z",
+      "updated_at": "2026-11-07T17:29:02Z",
       "invoice_number": "63176",
       "created_at": "2026-10-29T15:32:01Z"
     },
@@ -406057,7 +406057,7 @@
     {
       "id": "job_6a2314b34bca4e17b49252429dd9df0c",
       "description": "30 - Initial Service Fee After Hours",
-      "work_status": "in progress",
+      "work_status": "complete unrated",
       "customer_label": "Colin W.",
       "city": "Manchester",
       "state": "PA",
@@ -406077,16 +406077,48 @@
       "tags": [
         "30",
         "Opportunity",
-        "Non-Member"
+        "Non-Member",
+        "HVAC Call Back",
+        "HVAC Attention"
       ],
       "business_unit": "30 HVAC SERVICE",
       "lead_source": "FF Kling",
       "total_amount": 23900,
       "outstanding_balance": 23900,
-      "completed_at": null,
-      "updated_at": "2026-11-07T16:19:05Z",
+      "completed_at": "2026-11-07T17:29:02Z",
+      "updated_at": "2026-11-07T17:29:03Z",
       "invoice_number": "63453",
       "created_at": "2026-11-07T15:09:46Z"
+    },
+    {
+      "id": "job_29ef654889464449a66d54cd1229cd0c",
+      "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+      "work_status": "in progress",
+      "customer_label": "Mt Airy J.",
+      "city": "New Freedom",
+      "state": "PA",
+      "zip": "17349",
+      "schedule": {
+        "scheduled_start": "2026-11-07T18:00:00Z",
+        "scheduled_end": "2026-11-07T20:00:00Z",
+        "time_zone": "America/New_York",
+        "scheduled_start_local": "2026-11-07T13:00:00-05:00",
+        "scheduled_end_local": "2026-11-07T15:00:00-05:00",
+        "arrival_window": 120,
+        "appointments": []
+      },
+      "assigned_employee_ids": [
+        "pro_8fc589c75489437bb66ff45ca0aea7ac"
+      ],
+      "tags": [],
+      "business_unit": "70 PLUMBING SERVICE",
+      "lead_source": null,
+      "total_amount": 17400,
+      "outstanding_balance": 17400,
+      "completed_at": null,
+      "updated_at": "2026-11-07T20:14:47Z",
+      "invoice_number": "63454",
+      "created_at": "2026-11-07T17:32:06Z"
     },
     {
       "id": "job_acbb9d570460469bbab3813d8f3cf14a",
@@ -408869,9 +408901,9 @@
         "pro_7ccf9b4457bb40ecbb84540d250950e1"
       ],
       "work_status": "needs scheduling",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
+      "approved": true,
+      "approved_at": "2026-11-07T20:51:29.660Z",
+      "approved_amount": 22136
     },
     {
       "id": "csr_e27f6a6439be4075b855dd4a034dd39f",
@@ -496895,29 +496927,6 @@
       "approved": false,
       "approved_at": null,
       "approved_amount": 0
-    },
-    {
-      "id": "csr_56ca2300f8944b978bdd98859b7dd8a7",
-      "estimate_number": "10226",
-      "customer_label": "Dylon J.",
-      "created_at": "2025-12-31T16:57:45Z",
-      "schedule": {
-        "scheduled_start": null,
-        "scheduled_end": null,
-        "time_zone": "America/New_York",
-        "scheduled_start_local": null,
-        "scheduled_end_local": null,
-        "arrival_window": 0,
-        "appointments": []
-      },
-      "business_unit": "50 PLUMBING AOR",
-      "assigned_employee_ids": [
-        "pro_ca120cbb55fa40fe9361d492161b101f"
-      ],
-      "work_status": "created job from estimate",
-      "approved": true,
-      "approved_at": null,
-      "approved_amount": 745000
     }
   ],
   "by_technician": {
@@ -665005,6 +665014,36 @@
         "created_at": "2026-11-06T19:23:37Z"
       },
       {
+        "id": "job_29ef654889464449a66d54cd1229cd0c",
+        "description": "70 - RCC Whole Home Initial Service Fee After Hours",
+        "work_status": "in progress",
+        "customer_label": "Mt Airy J.",
+        "city": "New Freedom",
+        "state": "PA",
+        "zip": "17349",
+        "schedule": {
+          "scheduled_start": "2026-11-07T18:00:00Z",
+          "scheduled_end": "2026-11-07T20:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-07T13:00:00-05:00",
+          "scheduled_end_local": "2026-11-07T15:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_8fc589c75489437bb66ff45ca0aea7ac"
+        ],
+        "tags": [],
+        "business_unit": "70 PLUMBING SERVICE",
+        "lead_source": null,
+        "total_amount": 17400,
+        "outstanding_balance": 17400,
+        "completed_at": null,
+        "updated_at": "2026-11-07T20:14:47Z",
+        "invoice_number": "63454",
+        "created_at": "2026-11-07T17:32:06Z"
+      },
+      {
         "id": "job_75724c92d7db4fbd91996a8821dc0743",
         "description": "70 - RCC Whole Home Initial Service Fee",
         "work_status": "scheduled",
@@ -718857,7 +718896,7 @@
       {
         "id": "job_7b8b4bfcacbe4dbf89f0bdab292c2806",
         "description": "30 - Initial Service Fee",
-        "work_status": "complete unrated",
+        "work_status": "complete rated",
         "customer_label": "Colin W.",
         "city": "Manchester",
         "state": "PA",
@@ -718884,7 +718923,7 @@
         "total_amount": 39323,
         "outstanding_balance": 0,
         "completed_at": "2026-10-29T19:18:33Z",
-        "updated_at": "2026-11-07T15:07:42Z",
+        "updated_at": "2026-11-07T17:29:02Z",
         "invoice_number": "63176",
         "created_at": "2026-10-29T15:32:01Z"
       },
@@ -786822,7 +786861,7 @@
       {
         "id": "job_6a2314b34bca4e17b49252429dd9df0c",
         "description": "30 - Initial Service Fee After Hours",
-        "work_status": "in progress",
+        "work_status": "complete unrated",
         "customer_label": "Colin W.",
         "city": "Manchester",
         "state": "PA",
@@ -786842,14 +786881,16 @@
         "tags": [
           "30",
           "Opportunity",
-          "Non-Member"
+          "Non-Member",
+          "HVAC Call Back",
+          "HVAC Attention"
         ],
         "business_unit": "30 HVAC SERVICE",
         "lead_source": "FF Kling",
         "total_amount": 23900,
         "outstanding_balance": 23900,
-        "completed_at": null,
-        "updated_at": "2026-11-07T16:19:05Z",
+        "completed_at": "2026-11-07T17:29:02Z",
+        "updated_at": "2026-11-07T17:29:03Z",
         "invoice_number": "63453",
         "created_at": "2026-11-07T15:09:46Z"
       },
