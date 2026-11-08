@@ -405660,6 +405660,36 @@
     "created_at": "2026-11-07T17:32:06Z"
   },
   {
+    "id": "job_c939ec546e7b44948b7c294673188a6b",
+    "description": "70 - Initial Service Fee After Hours",
+    "work_status": "complete unrated",
+    "customer_label": "Jeff and Linda H.",
+    "city": "York",
+    "state": "PA",
+    "zip": "17403",
+    "schedule": {
+      "scheduled_start": "2026-11-08T19:00:00Z",
+      "scheduled_end": "2026-11-08T21:00:00Z",
+      "time_zone": "America/New_York",
+      "scheduled_start_local": "2026-11-08T14:00:00-05:00",
+      "scheduled_end_local": "2026-11-08T16:00:00-05:00",
+      "arrival_window": 120,
+      "appointments": []
+    },
+    "assigned_employee_ids": [
+      "pro_8fc589c75489437bb66ff45ca0aea7ac"
+    ],
+    "tags": [],
+    "business_unit": "70 PLUMBING SERVICE",
+    "lead_source": null,
+    "total_amount": 23900,
+    "outstanding_balance": 23900,
+    "completed_at": "2026-11-08T19:15:34Z",
+    "updated_at": "2026-11-08T19:15:34Z",
+    "invoice_number": "63456",
+    "created_at": "2026-11-08T18:06:36Z"
+  },
+  {
     "id": "job_a37de192eb5547aaaf7bc8b6e7500770",
     "description": "Visit #3",
     "work_status": "scheduled",
