@@ -599,17 +599,18 @@ function renderFlexCard(entry) {
 //
 // Avatar: an apprentice's Housecall Pro photo is only the 40x40 thumbnail
 // (every larger variant 403s, same gap as the crew in
-// MANUAL_AVATAR_OVERRIDES), so at this size it just upscales to a blur.
-// Use the crisp colour-initials circle unless a full-res local photo has
-// been dropped in assets/tech-photos/ and wired into
-// MANUAL_AVATAR_OVERRIDES, in which case use that.
+// MANUAL_AVATAR_OVERRIDES), so at this size it upscales soft. Preference:
+// a full-res local photo in assets/tech-photos/ wired into
+// MANUAL_AVATAR_OVERRIDES (crisp), else the HCP thumb (soft, but it's their
+// actual face -- added 2026-11-10 when Trevor McWilliams showed initials
+// despite having an HCP photo), else the colour-initials circle.
 function renderApprenticeStrip(apprentices) {
   if (!apprentices.length) return "";
   const people = apprentices
     .map((tech) => {
       const bg = tech.color_hex ? "#" + tech.color_hex.replace(/^#/, "") : "";
       const initialsText = escapeHtml(initials(tech.name || "?"));
-      const localPhoto = MANUAL_AVATAR_OVERRIDES[tech.id];
+      const localPhoto = MANUAL_AVATAR_OVERRIDES[tech.id] || (hasRealAvatar(tech) ? tech.avatar_url : null);
       const avatar = localPhoto
         ? `<img class="tv-flex-appr-photo" src="${escapeHtml(localPhoto)}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
            <div class="tv-flex-appr-fallback" style="background:${bg};display:none">${initialsText}</div>`
