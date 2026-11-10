@@ -80,17 +80,18 @@ $RATE_GROUPS = @{
 }
 
 # --- Work out the target week (Wed 00:00:00 -> Tue 23:59:59) ---------------
+# Normally Wed-Tue, but commission-overrides.ps1 can define a one-off week
+# (e.g. the Veterans Day early-payroll weeks) -- PayWeekFor knows about them.
+. (Join-Path $PSScriptRoot "commission-overrides.ps1")
 if (-not $WeekStart) {
-  $today = (Get-Date).Date
-  $daysSinceTuesday = (([int]$today.DayOfWeek) - [int][DayOfWeek]::Tuesday + 7) % 7
-  if ($daysSinceTuesday -eq 0) { $daysSinceTuesday = 7 }  # today IS Tuesday -> that week isn't over yet
-  $weekEnd = $today.AddDays(-$daysSinceTuesday)            # most recent completed Tuesday
-  $WeekStart = $weekEnd.AddDays(-6)                        # the Wednesday 6 days before it
+  $pw = LastCompletedPayWeek (Get-Date).Date   # today IS the last day -> that week isn't over yet
 } else {
-  $weekEnd = $WeekStart.AddDays(6)
+  $pw = PayWeekFor $WeekStart
 }
-$weekEndExclusive = $weekEnd.AddDays(1)  # < this, so all of Tuesday is included regardless of time-of-day
-Write-Host "Commission week: $($WeekStart.ToString('yyyy-MM-dd')) (Wed) through $($weekEnd.ToString('yyyy-MM-dd')) (Tue)`n"
+$WeekStart = $pw.Start
+$weekEnd = $pw.End
+$weekEndExclusive = $weekEnd.AddDays(1)  # < this, so all of the last day is included regardless of time-of-day
+Write-Host "Commission week: $($WeekStart.ToString('yyyy-MM-dd')) ($($WeekStart.ToString('ddd'))) through $($weekEnd.ToString('yyyy-MM-dd')) ($($weekEnd.ToString('ddd')))`n"
 
 function NormalizeName($s) {
   if (-not $s) { return "" }

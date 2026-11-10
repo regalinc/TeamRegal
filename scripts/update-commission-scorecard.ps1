@@ -104,10 +104,11 @@ $MANUAL_SYSTEM_TYPE_OVERRIDES = @{
   "5780155" = "Legacy"  # Judy Bakk
 }
 
-# Wednesday-of-the-week a given date falls in (the pay week's start).
+# Start of the pay week a given date falls in -- normally the Wednesday, but
+# $PAY_WEEK_OVERRIDES (commission-overrides.ps1, dot-sourced below) can make a
+# week start/end on other days (e.g. the early-payroll Veterans Day weeks).
 function WeekStartFor([datetime]$date) {
-  $daysSinceWednesday = (([int]$date.DayOfWeek) - [int][DayOfWeek]::Wednesday + 7) % 7
-  return $date.Date.AddDays(-$daysSinceWednesday)
+  return (PayWeekFor $date).Start
 }
 
 $hvacSales = (Get-Content $HvacSalesJson -Raw | ConvertFrom-Json).records
@@ -140,7 +141,7 @@ foreach ($p in $allPayloads) {
   if (-not $p.timestamps.accepted_at) { continue }
   $acceptedAt = [datetime]$p.timestamps.accepted_at
   $weekStart = WeekStartFor $acceptedAt
-  $weekEndExclusive = $weekStart.AddDays(7)
+  $weekEndExclusive = (PayWeekFor $acceptedAt).End.AddDays(1)
 
   $firstName = $p.assigned_consultant.first_name
   $ca = if ($firstName -eq "Josh") { "Josh" } elseif ($firstName -eq "Nick") { "Nick" } else { $null }
@@ -413,10 +414,10 @@ $manualSupplementRows = @(
 # A week can straddle at most one boundary (every month is >= 28 days), so
 # "how many of its days are >= monthStart" is enough to decide majority.
 function DaysInNewMonth($weekStart, [datetime]$newMonthStart) {
-  $weekEnd = $weekStart.AddDays(6)
+  $weekEnd = (PayWeekFor $weekStart).End
   if ($weekEnd -lt $newMonthStart) { return 0 }
   $days = ($weekEnd - $newMonthStart).Days + 1
-  return [Math]::Min($days, 7)
+  return [Math]::Min($days, 8)
 }
 $displayRows = @($computed | Where-Object { $_.WeekStart -ge $windowStart -and $_.WeekStart -lt $monthEndExclusive }) + $manualSupplementRows
 $thisMonth = @($displayRows | Where-Object { $_.WeekStart -ge $monthStart -or (DaysInNewMonth $_.WeekStart $monthStart) -ge 4 })
@@ -426,12 +427,12 @@ $weeks = @()
 $weekNum = 0
 foreach ($g in $weekGroups) {
   $ws = [datetime]$g.Name
-  $we = $ws.AddDays(6)
+  $we = (PayWeekFor $ws).End
   # The week containing today reads "Current Week" instead of a sequential
   # number -- it's always the last one chronologically (a sale can't land
   # in a future week), so numbering only advances for the completed weeks
   # before it.
-  $isCurrent = $today -ge $ws -and $today -lt $ws.AddDays(7)
+  $isCurrent = $today -ge $ws -and $today -lt $we.AddDays(1)
   $label = if ($isCurrent) { "Current Week" } else { $weekNum++; "Week $weekNum" }
   $totals = @{ Josh = 0.0; Nick = 0.0 }
   foreach ($row in $g.Group) { $totals[$row.CA] += [double]$row.Commission }

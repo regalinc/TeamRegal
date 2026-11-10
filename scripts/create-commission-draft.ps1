@@ -55,17 +55,22 @@ try {
   Log "--- draft start ---"
   Log "env: user=$([Environment]::UserName) profile=$env:USERPROFILE localapp=$LocalApp logdir=$LogDir cwd=$((Get-Location).Path)"
 
-  # Most recently completed Wed-Tue week (same rule as generate-commission-report.ps1).
-  if (-not $WeekStart) {
-    $today = (Get-Date).Date
-    $daysSinceTuesday = (([int]$today.DayOfWeek) - [int][DayOfWeek]::Tuesday + 7) % 7
-    if ($daysSinceTuesday -eq 0) { $daysSinceTuesday = 7 }
-    $WeekStart = $today.AddDays(-$daysSinceTuesday - 6)
+  # Most recently completed pay week (normally Wed-Tue; same rule as
+  # generate-commission-report.ps1, including any one-off weeks defined in
+  # commission-overrides.ps1).
+  . (Join-Path $PSScriptRoot "commission-overrides.ps1")
+  $autoWeek = -not $WeekStart
+  $pw = if ($autoWeek) { LastCompletedPayWeek (Get-Date).Date } else { PayWeekFor $WeekStart }
+  if ($autoWeek -and $pw.Paid) {
+    Log "most recent completed pay week ($($pw.Start.ToString('yyyy-MM-dd')) to $($pw.End.ToString('yyyy-MM-dd'))) was already paid early -- no draft needed (use -WeekStart to rebuild it)"
+    Log "--- draft end (skipped) ---"
+    return
   }
-  $WeekStart = $WeekStart.Date
-  $weekEnd = $WeekStart.AddDays(6)
+  $WeekStart = $pw.Start
+  $weekEnd = $pw.End
+  $weekNote = $pw.Note
   $rangeText = if ($WeekStart.Month -eq $weekEnd.Month) { "$($WeekStart.ToString('MMM d'))-$($weekEnd.ToString('%d')), $($weekEnd.Year)" } else { "$($WeekStart.ToString('MMM d'))-$($weekEnd.ToString('MMM d')), $($weekEnd.Year)" }
-  $longRange = "Wednesday, $($WeekStart.ToString('MMM d')) - Tuesday, $($weekEnd.ToString('MMM d, yyyy'))"
+  $longRange = "$($WeekStart.ToString('dddd, MMM d')) - $($weekEnd.ToString('dddd, MMM d, yyyy'))"
 
   if (-not $SkipRefresh) {
     foreach ($s in "refresh-hvac-sales.ps1", "refresh-commission-report.ps1") {
@@ -148,6 +153,7 @@ try {
       }) -join ""
     $flagHtml += "<div class='review'><b>Possible duplicate &ndash; counted TWICE in the totals below until you confirm:</b><ul>$items</ul>Same customer, more than one proposal accepted. If one was accepted by mistake, tell Claude which one to drop; if both are real sales, no change is needed.</div>"
   }
+  if ($weekNote) { $flagHtml = "<p><b>Note:</b> $(Esc $weekNote)</p>" + $flagHtml }
   $reacceptedNote = ""
   if ($reaccepted.Count) {
     $items = ($reaccepted | ForEach-Object { "$(Esc $_.customer) (" + (($_.versions | ForEach-Object { M $_.subtotal }) -join " &rarr; ") + ")" }) -join "; "
