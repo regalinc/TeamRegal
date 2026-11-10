@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-11-06T21:05:06.057Z",
+                 "generated_at":  "2026-11-10T14:35:02.645Z",
                  "month":  "2026-11"
              },
     "weeks":  [
@@ -45,11 +45,35 @@
                       "weekStart":  "2026-11-04",
                       "weekEnd":  "2026-11-10",
                       "totals":  {
-                                     "Josh":  1023.71,
+                                     "Josh":  4096.06,
                                      "Nick":  194.91
                                  },
                       "sales":  {
                                     "Josh":  [
+                                                 {
+                                                     "customerName":  "Diane Schaefer",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  760.8
+                                                 },
+                                                 {
+                                                     "customerName":  "Jenny Lagowski",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  657.49
+                                                 },
+                                                 {
+                                                     "customerName":  "Margie McElhaney",
+                                                     "systemType":  "Navien",
+                                                     "rate":  0.08,
+                                                     "commission":  951.93
+                                                 },
+                                                 {
+                                                     "customerName":  "Arthur Milam",
+                                                     "systemType":  "Boiler",
+                                                     "rate":  0.06,
+                                                     "commission":  702.12
+                                                 },
                                                  {
                                                      "customerName":  "James Bovender",
                                                      "systemType":  "Flex",
@@ -86,7 +110,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  1023.71,
+                "Josh":  4096.06,
                 "Nick":  194.91
             },
     "revenue":  {
@@ -95,29 +119,29 @@
                                       "Nick":  45884
                                   },
                     "mtd":  {
-                                "Josh":  54710,
+                                "Josh":  108500,
                                 "Nick":  5360
                             },
                     "ytd":  {
-                                "Josh":  4122566.8,
+                                "Josh":  4176356.8,
                                 "Nick":  649970.88
                             }
                 },
     "closingStats":  {
                          "Josh":  {
-                                      "sameDayRate":  1,
-                                      "sameDayCount":  3,
-                                      "sameDaySample":  3,
-                                      "avgDaysToClose":  0.5,
-                                      "daysSample":  3,
-                                      "avgDiscountPct":  0.0536,
-                                      "discountSample":  3
+                                      "sameDayRate":  0.7143,
+                                      "sameDayCount":  5,
+                                      "sameDaySample":  7,
+                                      "avgDaysToClose":  8.9,
+                                      "daysSample":  7,
+                                      "avgDiscountPct":  0.0704,
+                                      "discountSample":  7
                                   },
                          "Nick":  {
                                       "sameDayRate":  0,
                                       "sameDayCount":  0,
                                       "sameDaySample":  1,
-                                      "avgDaysToClose":  1.2,
+                                      "avgDaysToClose":  1.1,
                                       "daysSample":  1,
                                       "avgDiscountPct":  0.0694,
                                       "discountSample":  1
