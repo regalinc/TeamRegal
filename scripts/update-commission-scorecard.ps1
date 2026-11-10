@@ -78,6 +78,7 @@ $NAME_ALIASES = @{
   "out house storage" = "Outhouse Storage"  # OnCall Air has this commercial account as "Out House Storage" (two words); the sheet has it as one word, "Outhouse Storage" -- confirmed by Michael 2026-09-17.
   "typical life corporation" = "Typical Life"  # OnCall Air has this commercial account's full legal name; the sheet shortens it to "Typical Life" -- confirmed by Michael 2026-10-01 (hvac-sales.json Job #62179).
   "susquehanna micro inc." = "Susquehanna Micro"  # OnCall Air has the commercial account as "Susquehanna Micro Inc."; the sheet has "Susquehanna Micro" -- confirmed by Michael 2026-10-21 (hvac-sales.json Job #62866).
+  "jim oneill" = "Jim Oneil"  # OnCall Air has "Oneill" (two L's); the sheet has "Oneil" -- same sale (Josh, 11/5, $18,950 Legacy), confirmed by Michael 2026-11-10 (hvac-sales.json Job #63410).
 }
 function ResolveAliasedName($s) {
   $key = NormalizeName $s
