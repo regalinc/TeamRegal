@@ -1,6 +1,6 @@
 ﻿{
     "meta":  {
-                 "generated_at":  "2026-11-10T14:35:02.645Z",
+                 "generated_at":  "2026-11-10T14:36:35.313Z",
                  "month":  "2026-11"
              },
     "weeks":  [
@@ -45,7 +45,7 @@
                       "weekStart":  "2026-11-04",
                       "weekEnd":  "2026-11-10",
                       "totals":  {
-                                     "Josh":  4096.06,
+                                     "Josh":  5053.14,
                                      "Nick":  194.91
                                  },
                       "sales":  {
@@ -85,6 +85,12 @@
                                                      "systemType":  "Legacy",
                                                      "rate":  0.06,
                                                      "commission":  779.4
+                                                 },
+                                                 {
+                                                     "customerName":  "Jim Oneil",
+                                                     "systemType":  "Legacy",
+                                                     "rate":  0.06,
+                                                     "commission":  957.08
                                                  }
                                              ],
                                     "Nick":  [
@@ -98,10 +104,7 @@
                                 },
                       "pending":  {
                                       "Josh":  [
-                                                   {
-                                                       "customerName":  "Jim Oneill",
-                                                       "reason":  "not yet logged in the sheet"
-                                                   }
+
                                                ],
                                       "Nick":  [
 
@@ -110,7 +113,7 @@
                   }
               ],
     "mtd":  {
-                "Josh":  4096.06,
+                "Josh":  5053.14,
                 "Nick":  194.91
             },
     "revenue":  {
@@ -132,7 +135,7 @@
                                       "sameDayRate":  0.7143,
                                       "sameDayCount":  5,
                                       "sameDaySample":  7,
-                                      "avgDaysToClose":  8.9,
+                                      "avgDaysToClose":  9,
                                       "daysSample":  7,
                                       "avgDiscountPct":  0.0704,
                                       "discountSample":  7
