@@ -1,0 +1,39 @@
+name: Publish old-link redirect pages
+
+# The old public address (regalinc.github.io/TeamRegal) now only serves tiny
+# redirect pages that send people (and the office TVs) to the private
+# Cloudflare site. They live on the `redirect` branch and contain NO data.
+# Run this manually (Run workflow) after changing that branch; it is not
+# needed for normal data updates.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-redirect
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: redirect
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
