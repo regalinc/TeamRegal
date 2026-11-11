@@ -134,6 +134,22 @@ async function mapLimit(items, limit, fn) {
   return results;
 }
 
+// Global cap on requests in flight, however many crawls run at once.
+let inFlight = 0;
+const waiting = [];
+async function acquireSlot() {
+  if (inFlight < HCP_CONCURRENCY) {
+    inFlight += 1;
+    return;
+  }
+  await new Promise((resolve) => waiting.push(resolve));
+}
+function releaseSlot() {
+  const next = waiting.shift();
+  if (next) next(); // hand the slot straight to the next waiter
+  else inFlight -= 1;
+}
+
 async function hcpGet(pathname, params) {
   const url = new URL(API_BASE + pathname);
   for (const [key, value] of Object.entries(params || {})) {
@@ -142,15 +158,21 @@ async function hcpGet(pathname, params) {
   }
 
   for (let attempt = 1; ; attempt++) {
-    const startedAt = performance.now();
+    let startedAt = performance.now();
     let res;
     try {
-      res = await fetch(url, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Token ${API_KEY}`,
-        },
-      });
+      await acquireSlot();
+      startedAt = performance.now(); // time the request itself, not the wait for a slot
+      try {
+        res = await fetch(url, {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Token ${API_KEY}`,
+          },
+        });
+      } finally {
+        releaseSlot();
+      }
     } catch (err) {
       // network hiccup (reset, DNS, timeout) -- retry like a 5xx
       if (attempt >= MAX_ATTEMPTS) throw err;
@@ -299,18 +321,17 @@ async function fetchEstimatesInWindow() {
   // pages stay sequential -- it stops early once it passes the cutoff).
   async function crawlStatus(workStatus) {
     const found = [];
-    let page = 1;
-    let totalPages = 1;
-
-    do {
-      const data = await hcpGet("/estimates", {
+    const fetchPage = (p) =>
+      hcpGet("/estimates", {
         work_status: workStatus,
         sort_by: "created_at",
         sort_direction: "desc",
-        page,
+        page: p,
         page_size: PAGE_SIZE,
       });
-
+    // Returns true once a page contains an estimate older than the cutoff
+    // (results are newest-first, so nothing after it can be in range).
+    const consume = (data) => {
       let reachedCutoff = false;
       for (const est of data.estimates || []) {
         if (new Date(est.created_at) < cutoff) {
@@ -319,11 +340,32 @@ async function fetchEstimatesInWindow() {
         }
         found.push(est);
       }
+      return reachedCutoff;
+    };
 
-      totalPages = data.total_pages || 1;
-      page += 1;
-      if (reachedCutoff) break;
-    } while (page <= totalPages && page <= MAX_PAGES);
+    // Page 1 tells us how many pages there are; the rest are fetched a batch
+    // at a time and consumed strictly in page order, so the result is the same
+    // as the old one-page-at-a-time crawl (at worst a batch of extra pages is
+    // fetched past the cutoff and ignored).
+    const first = await fetchPage(1);
+    const totalPages = first.total_pages || 1;
+    if (consume(first)) return found;
+
+    let page = 2;
+    while (page <= totalPages && page <= MAX_PAGES) {
+      const batch = [];
+      for (let p = page; p < page + HCP_CONCURRENCY && p <= totalPages && p <= MAX_PAGES; p++) batch.push(p);
+      const datas = await Promise.all(batch.map(fetchPage));
+      let done = false;
+      for (const data of datas) {
+        if (consume(data)) {
+          done = true;
+          break;
+        }
+      }
+      if (done) break;
+      page += batch.length;
+    }
 
     return found;
   }
