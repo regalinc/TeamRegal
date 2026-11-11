@@ -19,6 +19,10 @@ const WARN_AT = 22 * 1024 * 1024; // start worrying well before the limit
 
 fs.rmSync(OUT, { recursive: true, force: true });
 
+// Data files no page loads (only the sync scripts use them). Keeping them off the
+// deployed site means less data exposed and smaller uploads.
+const EXCLUDE = new Set(["data/jobs.json", "data/estimates.json"]);
+
 let failed = false;
 const bigFiles = [];
 
@@ -30,6 +34,7 @@ function copyDir(from, to) {
     if (entry.isDirectory()) {
       copyDir(src, dst);
     } else if (entry.isFile()) {
+      if (EXCLUDE.has(path.relative(SRC, src).split(path.sep).join("/"))) continue;
       if (/\.json$/i.test(entry.name)) {
         try {
           const text = fs.readFileSync(src, "utf8").replace(/^﻿/, "");
