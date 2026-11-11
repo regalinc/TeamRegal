@@ -17,7 +17,9 @@ name: Sync sheets and commissions
 on:
   schedule:
     # Off the :00/:30 congestion peaks, like the other bots.
-    - cron: "41 * * * *"
+    # Business hours hourly, every 3 hours overnight (same hours as sync.yml).
+    - cron: "41 11-23,0 * * *"
+    - cron: "41 3,6,9 * * *"
   workflow_dispatch:
     inputs:
       test_alert:

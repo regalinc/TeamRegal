@@ -9,7 +9,13 @@ on:
     # hourly setting. An off-the-hour minute avoids that congestion peak;
     # it won't guarantee exact hourly delivery (schedule stays best-effort),
     # but should land far closer to it than :00 did.
-    - cron: "17 * * * *"
+    #
+    # Since 2026-11-11 (repo is private, Actions minutes are metered): hourly
+    # only in business hours (11:00-01:59 UTC = 6/7 am - 8/9 pm Eastern), every
+    # 3 hours overnight. Keep the sync-bouncie / sync-sheets / deploy-cloudflare
+    # schedules on the same hours.
+    - cron: "17 11-23,0 * * *"
+    - cron: "17 3,6,9 * * *"
   workflow_dispatch: {}
 
 permissions:

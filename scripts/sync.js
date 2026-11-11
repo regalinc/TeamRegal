@@ -109,6 +109,31 @@ function logRequestStats() {
   }
 }
 
+// Parallel fetching (added 2026-11-11 to cut the run from ~20 minutes to a few:
+// it was ~200 requests one after another at ~6 s each). HCP_CONCURRENCY caps how
+// many requests are in flight at once; set it to 1 to get the old behaviour.
+// Results are always put back in their original order, so the output files
+// are identical to what a sequential run produces.
+const HCP_CONCURRENCY = Math.max(1, Number(process.env.HCP_CONCURRENCY) || 4);
+const MAX_ATTEMPTS = 6; // per request, for 429 / 5xx / network errors
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Runs fn over items with at most `limit` in flight; returns results in item order.
+async function mapLimit(items, limit, fn) {
+  const results = new Array(items.length);
+  let next = 0;
+  async function worker() {
+    while (true) {
+      const i = next++;
+      if (i >= items.length) return;
+      results[i] = await fn(items[i], i);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
+}
+
 async function hcpGet(pathname, params) {
   const url = new URL(API_BASE + pathname);
   for (const [key, value] of Object.entries(params || {})) {
@@ -116,26 +141,49 @@ async function hcpGet(pathname, params) {
     url.searchParams.set(key, value);
   }
 
-  const startedAt = performance.now();
-  const res = await fetch(url, {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Token ${API_KEY}`,
-    },
-  });
-  recordRequest(url.pathname, performance.now() - startedAt, res);
+  for (let attempt = 1; ; attempt++) {
+    const startedAt = performance.now();
+    let res;
+    try {
+      res = await fetch(url, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Token ${API_KEY}`,
+        },
+      });
+    } catch (err) {
+      // network hiccup (reset, DNS, timeout) -- retry like a 5xx
+      if (attempt >= MAX_ATTEMPTS) throw err;
+      const wait = Math.min(30000, 1000 * 2 ** attempt) + Math.random() * 500;
+      console.warn(`HCP network error on ${url.pathname} (attempt ${attempt}): ${err.message}; retrying in ${Math.round(wait)}ms`);
+      await sleep(wait);
+      continue;
+    }
+    recordRequest(url.pathname, performance.now() - startedAt, res);
 
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(
-      `Housecall Pro API ${res.status} ${res.statusText} for ${url.pathname}${url.search}: ${body.slice(0, 500)}`
-    );
+    if (res.status === 429 || res.status >= 500) {
+      if (attempt < MAX_ATTEMPTS) {
+        const retryAfter = Number(res.headers.get("retry-after"));
+        const wait = (retryAfter > 0 ? retryAfter * 1000 : Math.min(30000, 2000 * 2 ** attempt)) + Math.random() * 500;
+        console.warn(`HCP ${res.status} on ${url.pathname} (attempt ${attempt}); retrying in ${Math.round(wait)}ms`);
+        await res.text().catch(() => "");
+        await sleep(wait);
+        continue;
+      }
+    }
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(
+        `Housecall Pro API ${res.status} ${res.statusText} for ${url.pathname}${url.search}: ${body.slice(0, 500)}`
+      );
+    }
+
+    const bodyStartedAt = performance.now();
+    const body = await res.json();
+    requestStats.totalBodyMs += performance.now() - bodyStartedAt;
+    return body;
   }
-
-  const bodyStartedAt = performance.now();
-  const body = await res.json();
-  requestStats.totalBodyMs += performance.now() - bodyStartedAt;
-  return body;
 }
 
 // Fetches every page of a paginated HCP list endpoint and returns the
@@ -188,36 +236,42 @@ async function fetchJobsInWindow() {
   const windowEnd = new Date(now);
   windowEnd.setUTCDate(windowEnd.getUTCDate() + WINDOW_DAYS_FORWARD);
 
-  const jobs = [];
-  const seenIds = new Set();
+  // Work out the date chunks first, then fetch them in parallel (see
+  // HCP_CONCURRENCY); each chunk's own pages are still fetched in order.
+  const chunks = [];
   let chunkStart = windowStart;
-
   while (chunkStart < windowEnd) {
     const chunkEnd = new Date(chunkStart);
     chunkEnd.setUTCDate(chunkEnd.getUTCDate() + JOB_FETCH_CHUNK_DAYS);
     if (chunkEnd > windowEnd) chunkEnd.setTime(windowEnd.getTime());
+    chunks.push({ start: chunkStart, end: chunkEnd });
+    chunkStart = chunkEnd;
+  }
 
-    const chunkJobs = await fetchAllPages(
+  const perChunk = await mapLimit(chunks, HCP_CONCURRENCY, (chunk) =>
+    fetchAllPages(
       "/jobs",
       {
-        scheduled_start_min: isoStartOfDay(chunkStart),
-        scheduled_start_max: isoStartOfDay(chunkEnd),
+        scheduled_start_min: isoStartOfDay(chunk.start),
+        scheduled_start_max: isoStartOfDay(chunk.end),
         sort_by: "created_at",
         sort_direction: "asc",
       },
       "jobs"
-    );
+    )
+  );
 
-    // Chunk boundaries are date-only (start-of-day), so a job scheduled
-    // exactly at a boundary could in principle appear in two adjacent
-    // chunks — de-dupe defensively by id.
+  // Chunk boundaries are date-only (start-of-day), so a job scheduled
+  // exactly at a boundary could in principle appear in two adjacent
+  // chunks — de-dupe defensively by id (in chunk order, as before).
+  const jobs = [];
+  const seenIds = new Set();
+  for (const chunkJobs of perChunk) {
     for (const job of chunkJobs) {
       if (seenIds.has(job.id)) continue;
       seenIds.add(job.id);
       jobs.push(job);
     }
-
-    chunkStart = chunkEnd;
   }
 
   return jobs;
@@ -241,10 +295,10 @@ async function fetchEstimatesInWindow() {
   const cutoff = new Date(now);
   cutoff.setUTCDate(cutoff.getUTCDate() - windowDaysBack(now));
 
-  const estimates = [];
-  const seenIds = new Set();
-
-  for (const workStatus of ESTIMATE_WORK_STATUSES) {
+  // One independent crawl per work_status, run in parallel (each crawl's own
+  // pages stay sequential -- it stops early once it passes the cutoff).
+  async function crawlStatus(workStatus) {
+    const found = [];
     let page = 1;
     let totalPages = 1;
 
@@ -263,15 +317,28 @@ async function fetchEstimatesInWindow() {
           reachedCutoff = true;
           continue;
         }
-        if (seenIds.has(est.id)) continue;
-        seenIds.add(est.id);
-        estimates.push(est);
+        found.push(est);
       }
 
       totalPages = data.total_pages || 1;
       page += 1;
       if (reachedCutoff) break;
     } while (page <= totalPages && page <= MAX_PAGES);
+
+    return found;
+  }
+
+  const perStatus = await mapLimit(ESTIMATE_WORK_STATUSES, HCP_CONCURRENCY, crawlStatus);
+
+  // De-dupe by id, in status order, exactly as the sequential version did.
+  const estimates = [];
+  const seenIds = new Set();
+  for (const list of perStatus) {
+    for (const est of list) {
+      if (seenIds.has(est.id)) continue;
+      seenIds.add(est.id);
+      estimates.push(est);
+    }
   }
 
   return estimates;

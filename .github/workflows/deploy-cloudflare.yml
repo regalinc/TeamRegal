@@ -1,14 +1,35 @@
 name: Deploy site to Cloudflare Pages
 
-# Builds docs/ (data files minified -- see scripts/prepare-site.js) and uploads
-# it to a Cloudflare Pages project that sits behind Cloudflare Access (login).
+# Builds docs/ (data files minified, and a separate folder per consultant with
+# only their own data -- see scripts/prepare-site.js) and uploads it to the
+# Cloudflare Pages project behind Cloudflare Access (login).
 #
-# MANUAL ONLY FOR NOW: this is the test run against a throwaway project while the
-# private-site move is prepared. At cutover it gets called after each data sync
-# and the GitHub Pages site is turned off. Needs two repository secrets:
+# Runs:
+#   - once an hour, at :55, after the :17 HCP sync, :37 Bouncie sync and :41 sheets
+#     sync have finished (the schedule below matches theirs: hourly in business
+#     hours, every 3 hours overnight). It also picks up data pushed from the
+#     office PCs, whose commits don't trigger anything on their own ([skip ci]).
+#   - whenever someone pushes a change to docs/ or the build script
+#   - on demand (Run workflow)
+# It builds from the newest main every time, so a deploy can never ship stale data.
+#
+# One build step is a safety check: prepare-site.js refuses to produce a site if
+# anything belonging to one consultant is found in another's folder.
+#
+# Needs two repository secrets:
 #   CLOUDFLARE_API_TOKEN   (permission: Account > Cloudflare Pages > Edit)
 #   CLOUDFLARE_ACCOUNT_ID
 on:
+  schedule:
+    # 11:00-01:59 UTC = 6/7 am - 8/9 pm Eastern
+    - cron: "55 11-23,0 * * *"
+    - cron: "55 3,6,9 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "scripts/prepare-site.js"
+      - ".github/workflows/deploy-cloudflare.yml"
   workflow_dispatch:
     inputs:
       project:
@@ -19,6 +40,7 @@ on:
 permissions:
   contents: read
 
+# One deploy at a time; if more arrive while one runs, only the newest waits.
 concurrency:
   group: deploy-cloudflare
   cancel-in-progress: false
@@ -34,19 +56,12 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build site folder (minify data files)
+      - name: Build site folder (minify, per-person folders, isolation check)
         run: node scripts/prepare-site.js dist
-
-      - name: Create Pages project if it does not exist yet
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PROJECT: ${{ inputs.project }}
-        run: npx --yes wrangler@3.99.0 pages project create "$PROJECT" --production-branch=main || echo "project already exists (or create failed; the deploy step will say)"
 
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PROJECT: ${{ inputs.project }}
+          PROJECT: ${{ inputs.project || 'regal-dashboard' }}
         run: npx --yes wrangler@3.99.0 pages deploy dist --project-name="$PROJECT" --branch=main --commit-dirty=true

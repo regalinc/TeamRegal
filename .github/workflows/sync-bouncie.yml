@@ -6,7 +6,11 @@ on:
     # sync.yml) so the two hourly bot jobs don't both land in the same
     # narrow window and contend for the same congested cron minutes GitHub's
     # own docs warn about (see sync.yml's comment for the full context).
-    - cron: "37 * * * *"
+    #
+    # Business hours hourly, every 3 hours overnight (same hours as sync.yml;
+    # the repo is private so Actions minutes are metered).
+    - cron: "37 11-23,0 * * *"
+    - cron: "37 3,6,9 * * *"
   workflow_dispatch: {}
 
 permissions:
