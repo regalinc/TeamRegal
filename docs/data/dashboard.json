@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-12T00:48:07.928Z",
+    "last_synced_at": "2026-11-12T11:17:05.331Z",
     "window_days_back": 316,
     "window_days_forward": 13,
     "technician_count": 47,
@@ -402476,7 +402476,7 @@
       "total_amount": 43183,
       "outstanding_balance": 0,
       "completed_at": "2026-11-09T14:19:16Z",
-      "updated_at": "2026-11-09T14:19:17Z",
+      "updated_at": "2026-11-12T03:09:05Z",
       "invoice_number": "63277",
       "created_at": "2026-11-02T17:39:46Z"
     },
@@ -405423,7 +405423,8 @@
       },
       "assigned_employee_ids": [
         "pro_c45a8b2541c64ac4b0f305364c5f5295",
-        "pro_eb9324081cb94741812e207380d65695"
+        "pro_eb9324081cb94741812e207380d65695",
+        "pro_5c675ceab86d44cfbe75a1bfe6ecb25d"
       ],
       "tags": [],
       "business_unit": "10 HVAC AOR",
@@ -405431,7 +405432,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-06T15:55:58Z",
+      "updated_at": "2026-11-12T10:36:24Z",
       "invoice_number": "63410-2",
       "created_at": "2026-11-06T15:55:16Z"
     },
@@ -407099,7 +407100,7 @@
       "total_amount": 23468,
       "outstanding_balance": 0,
       "completed_at": "2026-11-09T18:23:09Z",
-      "updated_at": "2026-11-09T18:26:19Z",
+      "updated_at": "2026-11-12T03:09:03Z",
       "invoice_number": "63492",
       "created_at": "2026-11-09T16:33:54Z"
     },
@@ -407133,7 +407134,7 @@
       "total_amount": 1205400,
       "outstanding_balance": 602700,
       "completed_at": "2026-11-11T19:54:10Z",
-      "updated_at": "2026-11-11T19:54:10Z",
+      "updated_at": "2026-11-12T03:09:02Z",
       "invoice_number": "63493",
       "created_at": "2026-11-09T16:39:57Z"
     },
@@ -407166,7 +407167,7 @@
       "total_amount": 44239,
       "outstanding_balance": 0,
       "completed_at": "2026-11-09T19:59:55Z",
-      "updated_at": "2026-11-09T19:59:55Z",
+      "updated_at": "2026-11-12T03:09:01Z",
       "invoice_number": "63494",
       "created_at": "2026-11-09T17:01:51Z"
     },
@@ -407905,7 +407906,8 @@
       },
       "assigned_employee_ids": [
         "pro_23fac61aafad4b4fa31992b5efaafae9",
-        "pro_8e95601ea8db4c5193be8f19fb319a44"
+        "pro_8e95601ea8db4c5193be8f19fb319a44",
+        "pro_8a84b31fc8b64893b17a0ca1bc133778"
       ],
       "tags": [],
       "business_unit": "10 HVAC AOR",
@@ -407913,7 +407915,7 @@
       "total_amount": 0,
       "outstanding_balance": 0,
       "completed_at": null,
-      "updated_at": "2026-11-10T14:02:50Z",
+      "updated_at": "2026-11-12T10:38:32Z",
       "invoice_number": "63504-2",
       "created_at": "2026-11-10T14:02:14Z"
     },
@@ -503788,7 +503790,7 @@
         "total_amount": 1205400,
         "outstanding_balance": 602700,
         "completed_at": "2026-11-11T19:54:10Z",
-        "updated_at": "2026-11-11T19:54:10Z",
+        "updated_at": "2026-11-12T03:09:02Z",
         "invoice_number": "63493",
         "created_at": "2026-11-09T16:39:57Z"
       },
@@ -508538,7 +508540,7 @@
         "total_amount": 1205400,
         "outstanding_balance": 602700,
         "completed_at": "2026-11-11T19:54:10Z",
-        "updated_at": "2026-11-11T19:54:10Z",
+        "updated_at": "2026-11-12T03:09:02Z",
         "invoice_number": "63493",
         "created_at": "2026-11-09T16:39:57Z"
       }
@@ -582972,7 +582974,8 @@
         },
         "assigned_employee_ids": [
           "pro_23fac61aafad4b4fa31992b5efaafae9",
-          "pro_8e95601ea8db4c5193be8f19fb319a44"
+          "pro_8e95601ea8db4c5193be8f19fb319a44",
+          "pro_8a84b31fc8b64893b17a0ca1bc133778"
         ],
         "tags": [],
         "business_unit": "10 HVAC AOR",
@@ -582980,7 +582983,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-10T14:02:50Z",
+        "updated_at": "2026-11-12T10:38:32Z",
         "invoice_number": "63504-2",
         "created_at": "2026-11-10T14:02:14Z"
       },
@@ -592162,6 +592165,38 @@
         "updated_at": "2026-11-10T18:47:08Z",
         "invoice_number": "63499-2",
         "created_at": "2026-11-09T20:19:55Z"
+      },
+      {
+        "id": "job_41d226fa17b540ef9275665ae561505c",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Margie M.",
+        "city": "East Prospect",
+        "state": "PA",
+        "zip": "17317",
+        "schedule": {
+          "scheduled_start": "2026-11-12T12:00:00Z",
+          "scheduled_end": "2026-11-12T16:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-12T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-12T11:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_23fac61aafad4b4fa31992b5efaafae9",
+          "pro_8e95601ea8db4c5193be8f19fb319a44",
+          "pro_8a84b31fc8b64893b17a0ca1bc133778"
+        ],
+        "tags": [],
+        "business_unit": "10 HVAC AOR",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-11-12T10:38:32Z",
+        "invoice_number": "63504-2",
+        "created_at": "2026-11-10T14:02:14Z"
       }
     ],
     "pro_ca120cbb55fa40fe9361d492161b101f": [
@@ -647678,7 +647713,7 @@
         "total_amount": 1205400,
         "outstanding_balance": 602700,
         "completed_at": "2026-11-11T19:54:10Z",
-        "updated_at": "2026-11-11T19:54:10Z",
+        "updated_at": "2026-11-12T03:09:02Z",
         "invoice_number": "63493",
         "created_at": "2026-11-09T16:39:57Z"
       },
@@ -741876,7 +741911,7 @@
         "total_amount": 23468,
         "outstanding_balance": 0,
         "completed_at": "2026-11-09T18:23:09Z",
-        "updated_at": "2026-11-09T18:26:19Z",
+        "updated_at": "2026-11-12T03:09:03Z",
         "invoice_number": "63492",
         "created_at": "2026-11-09T16:33:54Z"
       },
@@ -810119,7 +810154,7 @@
         "total_amount": 44239,
         "outstanding_balance": 0,
         "completed_at": "2026-11-09T19:59:55Z",
-        "updated_at": "2026-11-09T19:59:55Z",
+        "updated_at": "2026-11-12T03:09:01Z",
         "invoice_number": "63494",
         "created_at": "2026-11-09T17:01:51Z"
       },
@@ -836881,7 +836916,7 @@
         "total_amount": 43183,
         "outstanding_balance": 0,
         "completed_at": "2026-11-09T14:19:16Z",
-        "updated_at": "2026-11-09T14:19:17Z",
+        "updated_at": "2026-11-12T03:09:05Z",
         "invoice_number": "63277",
         "created_at": "2026-11-02T17:39:46Z"
       },
@@ -935505,7 +935540,8 @@
         },
         "assigned_employee_ids": [
           "pro_23fac61aafad4b4fa31992b5efaafae9",
-          "pro_8e95601ea8db4c5193be8f19fb319a44"
+          "pro_8e95601ea8db4c5193be8f19fb319a44",
+          "pro_8a84b31fc8b64893b17a0ca1bc133778"
         ],
         "tags": [],
         "business_unit": "10 HVAC AOR",
@@ -935513,7 +935549,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-10T14:02:50Z",
+        "updated_at": "2026-11-12T10:38:32Z",
         "invoice_number": "63504-2",
         "created_at": "2026-11-10T14:02:14Z"
       },
@@ -942716,6 +942752,38 @@
         "updated_at": "2026-11-06T17:28:31Z",
         "invoice_number": "63211-2",
         "created_at": "2026-11-06T13:44:58Z"
+      },
+      {
+        "id": "job_e142153e5f864c18a9a6dcbe010f3c2d",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Jim O.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17402",
+        "schedule": {
+          "scheduled_start": "2026-11-12T12:00:00Z",
+          "scheduled_end": "2026-11-12T16:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-12T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-12T11:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_c45a8b2541c64ac4b0f305364c5f5295",
+          "pro_eb9324081cb94741812e207380d65695",
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d"
+        ],
+        "tags": [],
+        "business_unit": "10 HVAC AOR",
+        "lead_source": null,
+        "total_amount": 0,
+        "outstanding_balance": 0,
+        "completed_at": null,
+        "updated_at": "2026-11-12T10:36:24Z",
+        "invoice_number": "63410-2",
+        "created_at": "2026-11-06T15:55:16Z"
       },
       {
         "id": "job_7f5960dbbfd94f0793fa64fa15838ec7",
@@ -949977,7 +950045,8 @@
         },
         "assigned_employee_ids": [
           "pro_c45a8b2541c64ac4b0f305364c5f5295",
-          "pro_eb9324081cb94741812e207380d65695"
+          "pro_eb9324081cb94741812e207380d65695",
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d"
         ],
         "tags": [],
         "business_unit": "10 HVAC AOR",
@@ -949985,7 +950054,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-06T15:55:58Z",
+        "updated_at": "2026-11-12T10:36:24Z",
         "invoice_number": "63410-2",
         "created_at": "2026-11-06T15:55:16Z"
       }
@@ -957483,7 +957552,8 @@
         },
         "assigned_employee_ids": [
           "pro_c45a8b2541c64ac4b0f305364c5f5295",
-          "pro_eb9324081cb94741812e207380d65695"
+          "pro_eb9324081cb94741812e207380d65695",
+          "pro_5c675ceab86d44cfbe75a1bfe6ecb25d"
         ],
         "tags": [],
         "business_unit": "10 HVAC AOR",
@@ -957491,7 +957561,7 @@
         "total_amount": 0,
         "outstanding_balance": 0,
         "completed_at": null,
-        "updated_at": "2026-11-06T15:55:58Z",
+        "updated_at": "2026-11-12T10:36:24Z",
         "invoice_number": "63410-2",
         "created_at": "2026-11-06T15:55:16Z"
       },
