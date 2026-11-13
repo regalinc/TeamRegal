@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_synced_at": "2026-11-13T00:31:13.126Z",
+    "last_synced_at": "2026-11-13T11:02:34.783Z",
     "window_days_back": 317,
     "window_days_forward": 13,
     "technician_count": 47,
@@ -404040,7 +404040,7 @@
       "total_amount": 152848,
       "outstanding_balance": 0,
       "completed_at": "2026-11-10T19:25:08Z",
-      "updated_at": "2026-11-10T19:25:09Z",
+      "updated_at": "2026-11-13T01:34:57Z",
       "invoice_number": "63381",
       "created_at": "2026-11-05T14:01:28Z"
     },
@@ -406657,7 +406657,7 @@
       "total_amount": 15300,
       "outstanding_balance": 0,
       "completed_at": "2026-11-10T13:44:26Z",
-      "updated_at": "2026-11-10T13:44:48Z",
+      "updated_at": "2026-11-13T01:35:00Z",
       "invoice_number": "63484",
       "created_at": "2026-11-09T15:20:01Z"
     },
@@ -409265,8 +409265,8 @@
         "appointments": []
       },
       "assigned_employee_ids": [
-        "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68",
-        "pro_b8e6912c70b445178a5dba915f4b93bd"
+        "pro_b8e6912c70b445178a5dba915f4b93bd",
+        "pro_8e95601ea8db4c5193be8f19fb319a44"
       ],
       "tags": [
         "OnCall Air"
@@ -409276,7 +409276,7 @@
       "total_amount": 626000,
       "outstanding_balance": 626000,
       "completed_at": null,
-      "updated_at": "2026-11-12T18:52:28Z",
+      "updated_at": "2026-11-13T10:41:17Z",
       "invoice_number": "63600",
       "created_at": "2026-11-12T16:52:41Z"
     },
@@ -415211,9 +415211,9 @@
         "pro_ca120cbb55fa40fe9361d492161b101f"
       ],
       "work_status": "complete rated",
-      "approved": false,
-      "approved_at": null,
-      "approved_amount": 0
+      "approved": true,
+      "approved_at": "2026-11-13T11:02:34.783Z",
+      "approved_amount": 378900
     },
     {
       "id": "csr_98d97c1536ca4e9292a575ce13b4cef1",
@@ -505381,8 +505381,8 @@
           "appointments": []
         },
         "assigned_employee_ids": [
-          "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68",
-          "pro_b8e6912c70b445178a5dba915f4b93bd"
+          "pro_b8e6912c70b445178a5dba915f4b93bd",
+          "pro_8e95601ea8db4c5193be8f19fb319a44"
         ],
         "tags": [
           "OnCall Air"
@@ -505392,7 +505392,7 @@
         "total_amount": 626000,
         "outstanding_balance": 626000,
         "completed_at": null,
-        "updated_at": "2026-11-12T18:52:28Z",
+        "updated_at": "2026-11-13T10:41:17Z",
         "invoice_number": "63600",
         "created_at": "2026-11-12T16:52:41Z"
       }
@@ -553283,7 +553283,7 @@
         "total_amount": 15300,
         "outstanding_balance": 0,
         "completed_at": "2026-11-10T13:44:26Z",
-        "updated_at": "2026-11-10T13:44:48Z",
+        "updated_at": "2026-11-13T01:35:00Z",
         "invoice_number": "63484",
         "created_at": "2026-11-09T15:20:01Z"
       },
@@ -585101,6 +585101,39 @@
         "updated_at": "2026-11-12T19:51:58Z",
         "invoice_number": "63504-2",
         "created_at": "2026-11-10T14:02:14Z"
+      },
+      {
+        "id": "job_fd760579cee848638f4d2b7702931126",
+        "description": "Billing - 10 HVAC AOR",
+        "work_status": "scheduled",
+        "customer_label": "Jolene Z.",
+        "city": "York",
+        "state": "PA",
+        "zip": "17408",
+        "schedule": {
+          "scheduled_start": "2026-11-13T12:00:00Z",
+          "scheduled_end": "2026-11-13T20:00:00Z",
+          "time_zone": "America/New_York",
+          "scheduled_start_local": "2026-11-13T07:00:00-05:00",
+          "scheduled_end_local": "2026-11-13T15:00:00-05:00",
+          "arrival_window": 120,
+          "appointments": []
+        },
+        "assigned_employee_ids": [
+          "pro_b8e6912c70b445178a5dba915f4b93bd",
+          "pro_8e95601ea8db4c5193be8f19fb319a44"
+        ],
+        "tags": [
+          "OnCall Air"
+        ],
+        "business_unit": "10 HVAC AOR",
+        "lead_source": null,
+        "total_amount": 626000,
+        "outstanding_balance": 626000,
+        "completed_at": null,
+        "updated_at": "2026-11-13T10:41:17Z",
+        "invoice_number": "63600",
+        "created_at": "2026-11-12T16:52:41Z"
       },
       {
         "id": "job_7b9583868e0748fa82193266f82ff814",
@@ -649934,39 +649967,6 @@
         "created_at": "2026-11-10T17:14:21Z"
       },
       {
-        "id": "job_fd760579cee848638f4d2b7702931126",
-        "description": "Billing - 10 HVAC AOR",
-        "work_status": "scheduled",
-        "customer_label": "Jolene Z.",
-        "city": "York",
-        "state": "PA",
-        "zip": "17408",
-        "schedule": {
-          "scheduled_start": "2026-11-13T12:00:00Z",
-          "scheduled_end": "2026-11-13T20:00:00Z",
-          "time_zone": "America/New_York",
-          "scheduled_start_local": "2026-11-13T07:00:00-05:00",
-          "scheduled_end_local": "2026-11-13T15:00:00-05:00",
-          "arrival_window": 120,
-          "appointments": []
-        },
-        "assigned_employee_ids": [
-          "pro_ece63ff4afeb4b9fa5d9ee78be0c6e68",
-          "pro_b8e6912c70b445178a5dba915f4b93bd"
-        ],
-        "tags": [
-          "OnCall Air"
-        ],
-        "business_unit": "10 HVAC AOR",
-        "lead_source": null,
-        "total_amount": 626000,
-        "outstanding_balance": 626000,
-        "completed_at": null,
-        "updated_at": "2026-11-12T18:52:28Z",
-        "invoice_number": "63600",
-        "created_at": "2026-11-12T16:52:41Z"
-      },
-      {
         "id": "job_a30992476cc34c5296167a36cc18ea87",
         "description": "Billing - 10 HVAC AOR",
         "work_status": "scheduled",
@@ -676728,7 +676728,7 @@
         "total_amount": 15300,
         "outstanding_balance": 0,
         "completed_at": "2026-11-10T13:44:26Z",
-        "updated_at": "2026-11-10T13:44:48Z",
+        "updated_at": "2026-11-13T01:35:00Z",
         "invoice_number": "63484",
         "created_at": "2026-11-09T15:20:01Z"
       },
@@ -703057,7 +703057,7 @@
         "total_amount": 152848,
         "outstanding_balance": 0,
         "completed_at": "2026-11-10T19:25:08Z",
-        "updated_at": "2026-11-10T19:25:09Z",
+        "updated_at": "2026-11-13T01:34:57Z",
         "invoice_number": "63381",
         "created_at": "2026-11-05T14:01:28Z"
       },
